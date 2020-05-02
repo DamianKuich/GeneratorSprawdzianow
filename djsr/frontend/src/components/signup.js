@@ -10,7 +10,8 @@ import {
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import FormikMdInput from "./FormikMDInput";
-import axiosInstance from "./axiosAPI";
+import { axiosInstance, axiosInstanceNoAuth } from "./axiosAPI";
+
 class Signup extends Component {
   constructor(props) {
     super(props);
@@ -49,7 +50,7 @@ class Signup extends Component {
                 onSubmit={(values, helpers) => {
                   setTimeout(() => {
                     helpers.setSubmitting(true);
-                    axiosInstance
+                    axiosInstanceNoAuth
                       .post("/user/create/", {
                         username: values.name,
                         password: values.password,
