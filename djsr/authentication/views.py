@@ -1,15 +1,10 @@
-from django.shortcuts import render
-
-from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import status, permissions
-from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .serializers import CustomUserSerializer, TasksSerializer
-from .models import Tasks
-
+from .serializers import CustomUserSerializer, TaskSerializer, DziałSerializer, UmiejetnośćSerializer
+from .models import Task, Dział, Umiejętność
 
 class CustomUserCreate(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -42,6 +37,17 @@ class LogoutAndBlacklistRefreshTokenForUserView(APIView):
             return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
             return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
-class TasksViewSet(APIView):
-    queryset = Tasks.objects.all()
-    serializer_class = TasksSerializer
+class TaskViewSet(APIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+
+class DziałViewSet(APIView):
+    queryset = Dział.objects.all()
+    serializer_class = DziałSerializer
+
+class UmiejetnośćViewSet(APIView):
+    queryset = Umiejętność.objects.all()
+    serializer_class = DziałSerializer
+
+
+

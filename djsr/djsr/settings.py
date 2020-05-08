@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'frontend',
     'rest_framework_simplejwt.token_blacklist',
-    'django_rest_passwordreset',
+    'six',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -145,3 +145,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = "authentication.CustomUser"
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'youremail@gmail.com'
+EMAIL_HOST_PASSWORD = 'yourpassword'
+EMAIL_PORT = 587
