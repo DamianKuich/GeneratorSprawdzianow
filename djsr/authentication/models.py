@@ -15,6 +15,14 @@ class Umiejętność(models.Model):
     def nasza_nazwa(self):
         return self.Nazwa_umiejetnosci
 
+class Dział(models.Model):
+    Nazwa_dzialu = models.CharField(max_length=500)
+    skill = models.ManyToManyField(Umiejętność)
+    def __str__(self):
+        return self.nasza_nazwa()
+
+    def nasza_nazwa(self):
+        return self.Nazwa_dzialu
 
 class Task(models.Model):
     Text = models.CharField(max_length=500)
@@ -24,6 +32,7 @@ class Task(models.Model):
     level = models.CharField(max_length=100)
     answer = models.CharField(max_length=500)
     skilltask = models.ManyToManyField(Umiejętność)
+    sections = models.ManyToManyField(Dział)
 
     def __str__(self):
         return self.nasza_nazwa()
@@ -31,17 +40,6 @@ class Task(models.Model):
     def nasza_nazwa(self):
         return self.Text
 
-
-
-class Dział(models.Model):
-    Nazwa_dzialu = models.CharField(max_length=500)
-    skill = models.ManyToManyField(Umiejętność)
-    tasks = models.ManyToManyField(Task)
-    def __str__(self):
-        return self.nasza_nazwa()
-
-    def nasza_nazwa(self):
-        return self.Nazwa_dzialu
 
 
 
