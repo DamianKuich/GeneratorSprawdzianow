@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'frontend',
     'rest_framework_simplejwt.token_blacklist',
+    'django_rest_passwordreset',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
