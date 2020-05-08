@@ -2,11 +2,13 @@ from django.shortcuts import render
 
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import status, permissions
+from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .serializers import CustomUserSerializer
+from .serializers import CustomUserSerializer, TasksSerializer
+from .models import Tasks
 
 
 class CustomUserCreate(APIView):
@@ -40,3 +42,6 @@ class LogoutAndBlacklistRefreshTokenForUserView(APIView):
             return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
             return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+class TasksViewSet(APIView):
+    queryset = Tasks.objects.all()
+    serializer_class = TasksSerializer

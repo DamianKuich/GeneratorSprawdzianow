@@ -1,6 +1,6 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
-from .models import CustomUser
+from .models import CustomUser, Tasks
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -25,3 +25,9 @@ class CustomUserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+
+class TasksSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Tasks
+        fields = ('text','add_date','is_open','author','true_false','abcd','difficulty','user_id')

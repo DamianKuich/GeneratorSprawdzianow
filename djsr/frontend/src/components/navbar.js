@@ -132,7 +132,7 @@ class Navbar extends Component {
                         userLogout();
                       }}
                     >
-                      Another Action
+                      Wylogowanie
                     </MDBDropdownItem>
                     <MDBDropdownItem href="#!">
                       Something else here
