@@ -1,4 +1,5 @@
 from rest_framework import status, permissions
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -37,6 +38,28 @@ class LogoutAndBlacklistRefreshTokenForUserView(APIView):
             return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
             return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserRetrieveUpdateAPIView(APIView):
+    # Allow only authenticated users to access this url
+    permission_classes = (IsAuthenticated,)
+    serializer_class = CustomUserSerializer
+
+    def get(self, request, *args, **kwargs):
+        # serializer to handle turning our `User` object into something that
+        # can be JSONified and sent to the client.
+        serializer = self.serializer_class(request.user)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def put(self, request, *args, **kwargs):
+        film = request.user
+        film.username = request.data['username']
+        film.email = request.data['email']
+        film.save()
+
+        serializer = CustomUserSerializer(film, many=False)
+        return Response(serializer.data)
 class TaskViewSet(APIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
