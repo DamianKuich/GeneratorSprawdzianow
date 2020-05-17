@@ -27,7 +27,7 @@ class CustomUserCreate(APIView):
         serializer = CustomUserSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
-            #TODO save token to database
+            # TODO save token to database
             tokenbackend = TokenBackend(algorithm='RS256',
                                         signing_key=getattr(settings, "RS256_PRIVATE_KEY", None),
                                         verifying_key=getattr(settings, "RS256_PUBLIC_KEY", None))
@@ -45,7 +45,7 @@ class HelloWorldView(APIView):
 
     def get(self, request, verify=True, *args, **kwargs, ):
         token = kwargs.pop('token')
-        #TODO check token isnt used
+        # TODO check token isnt used
         tokenbackend = TokenBackend(algorithm='RS256',
                                     signing_key=getattr(settings, "RS256_PRIVATE_KEY", None),
                                     verifying_key=getattr(settings, "RS256_PUBLIC_KEY", None))
