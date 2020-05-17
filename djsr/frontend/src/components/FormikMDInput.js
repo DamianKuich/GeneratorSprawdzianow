@@ -13,6 +13,7 @@ const FormikMdInput = ({
   type,
   hideInput,
   disableAutocomplete,
+  disabled,
 }) => {
   const [active, setActive] = useState(false);
   // console.log("id", id, "active", active, disableAutocomplete);
@@ -47,7 +48,9 @@ const FormikMdInput = ({
           "form-control",
           touched ? (!errors ? "is-valid" : "is-invalid") : "",
           hideInput ? "text-password" : "",
+          disabled ? "disabled":"",
         ].join(" ")}
+        disabled={disabled}
       />
       <label
         htmlFor={id}

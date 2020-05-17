@@ -128,7 +128,6 @@ class Login extends Component {
                         hideInput
                         disableAutocomplete={true}
                       />
-                      {console.log(errors)}
                       {!!errors.general && (
                         <div className="invalid-feedback d-block pb-4">
                           {errors.general}

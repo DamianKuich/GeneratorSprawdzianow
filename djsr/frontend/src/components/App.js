@@ -8,6 +8,8 @@ const Login = lazy(() => import("./login"));
 const Signup = lazy(() => import("./signup"));
 const Navbar = lazy(() => import("./navbar"));
 const MDBContainer = lazy(() => import("./MDBLazy/MDBLazyContainer"));
+const AccountActivation = lazy(() => import("./AccountActivation"));
+const RegisterSuccess = lazy(() => import("./RegisterSuccess"));
 class App extends Component {
   constructor(props) {
     super(props);
@@ -27,7 +29,7 @@ class App extends Component {
       this.setState({ user: false });
     } else {
       axiosInstance
-        .get("/hello/")
+        .get("/user/update")
         .then((response) => {
           this.setState({ user: response.data });
         })
@@ -65,7 +67,6 @@ class App extends Component {
       userLogout: this.userLogout,
     };
     const properties = { ...this.props, ...global };
-    console.log("Appprops", properties);
     return (
       <Suspense fallback={<div>ladowanie</div>}>
         <MDBContainer fluid className="h-100">
@@ -76,12 +77,22 @@ class App extends Component {
               <Route
                 exact
                 path={"/login/"}
-                render={(props) => <Login {...properties} />}
+                render={(props) => <Login {...global} {...props} />}
               />
               <Route
                 exact
                 path={"/signup/"}
-                render={(props) => <Signup {...properties} />}
+                render={(props) => <Signup {...global} {...props} />}
+              />
+              <Route
+                exact
+                path={"/signupsuccess/:token"}
+                render={(props) => <RegisterSuccess {...global} {...props} />}
+              />
+              <Route
+                exact
+                path="/activateaccount/:token/"
+                render={(props) => <AccountActivation {...props} {...global}/>}
               />
               <Route path={"/"} render={(props) => <div>Home again</div>} />
             </Switch>

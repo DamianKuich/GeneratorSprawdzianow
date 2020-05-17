@@ -15,6 +15,9 @@ import { axiosInstance, axiosInstanceNoAuth } from "./axiosAPI";
 class Signup extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      token: null,
+    };
   }
 
   render() {
@@ -58,38 +61,37 @@ class Signup extends Component {
                       })
                       .then((response) => {
                         helpers.setSubmitting(false);
+                        this.setState({
+                          token: response.data.confirmation_token,
+                        });
+                        this.props.history.push(`/signupsuccess/${response.data.confirmation_token}`)
                       })
                       .catch((error) => {
                         // console.log("login error", error.response);
                         const errResponse = error.response;
                         helpers.setSubmitting(false);
-                        if (
-                          errResponse.status === 401 &&
-                          errResponse.statusText === "Unauthorized"
-                        ) {
-                          helpers.setValues(
-                            {
-                              name: "",
-                              password: "",
-                              passwordConfirm: "",
-                              email: "",
-                            },
-                            false
-                          );
-                          helpers.setTouched(
-                            {
-                              name: false,
-                              password: false,
-                              email: false,
-                              passwordConfirm: false,
-                            },
-                            false
-                          );
-                          helpers.setFieldError(
-                            "general",
-                            "Nierpawidłowa nazwa użytkownika lub hasło"
-                          );
-                        }
+                        helpers.setValues(
+                          {
+                            name: "",
+                            password: "",
+                            passwordConfirm: "",
+                            email: "",
+                          },
+                          false
+                        );
+                        helpers.setTouched(
+                          {
+                            name: false,
+                            password: false,
+                            email: false,
+                            passwordConfirm: false,
+                          },
+                          false
+                        );
+                        helpers.setFieldError(
+                          "general",
+                          "Nierpawidłowa nazwa użytkownika lub hasło"
+                        );
                       });
                   }, 5000);
                 }}
@@ -116,6 +118,7 @@ class Signup extends Component {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.name}
+                        disabled={isSubmitting}
                       />
                       <FormikMdInput
                         label="Twój adres E-mail"
@@ -127,6 +130,7 @@ class Signup extends Component {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.email}
+                        disabled={isSubmitting}
                       />
                       <FormikMdInput
                         label="Hasło"
@@ -139,6 +143,7 @@ class Signup extends Component {
                         onBlur={handleBlur}
                         value={values.password}
                         hideInput
+                        disabled={isSubmitting}
                       />
                       <FormikMdInput
                         label="Powtórz hasło"
@@ -151,16 +156,18 @@ class Signup extends Component {
                         onBlur={handleBlur}
                         value={values.passwordConfirm}
                         hideInput
+                        disabled={isSubmitting}
                       />
                     </div>
                     <div className="text-center">
-                      <MDBBtn color="primary" type="submit">
+                      <MDBBtn color="primary" type="submit" disabled={isSubmitting}>
                         Rejestracja
                       </MDBBtn>
                     </div>
                   </Form>
                 )}
               </Formik>
+                {!!this.state.token && <div>{this.state.token}</div>}
             </MDBCardBody>
           </MDBCard>
         </MDBCol>

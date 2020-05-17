@@ -14,5 +14,4 @@ urlpatterns = [
     path('hello/', HelloWorldView.as_view(), name='hello_world'),
     path('blacklist/', LogoutAndBlacklistRefreshTokenForUserView.as_view(), name='blacklist'),
     path('user/update/', UserRetrieveUpdateAPIView.as_view()),
-
 ]
