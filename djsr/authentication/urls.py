@@ -4,6 +4,7 @@ from rest_framework_simplejwt import views as jwt_views
 from .views import CustomUserCreate, HelloWorldView, LogoutAndBlacklistRefreshTokenForUserView, TaskViewSet, \
     UserRetrieveUpdateAPIView
 
+# TODO resend activation token
 urlpatterns = [
     path('taski/', TaskViewSet.as_view(), name="taski"),
     path('user/create/', CustomUserCreate.as_view(), name="create_user"),
