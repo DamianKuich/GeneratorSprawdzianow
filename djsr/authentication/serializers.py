@@ -1,6 +1,6 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
-from .models import CustomUser, Task, Dział, Umiejętność
+from .models import CustomUser, Task, Section, Skill
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -21,26 +21,29 @@ class CustomUserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         password = validated_data.pop('password', None)
         instance = self.Meta.model(**validated_data)  # as long as the fields are the same, we can just use this
+        if CustomUser.objects.filter(email=validated_data.pop('email', None)).exists():
+            raise(serializers.ValidationError('This email already exists'))
         if password is not None:
             instance.set_password(password)
         instance.is_active = False
         instance.save()
         return instance
 
-class TaskSerializer(serializers.ModelSerializer):
+class SkillSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Skill
+        fields = ('id', 'Skill_name')
 
+class SectionSerializer(serializers.ModelSerializer):
+    skill = SkillSerializer(many=True)
+    class Meta:
+        model = Section
+        fields = ('id','Section_name','skill')
+class TaskSerializer(serializers.ModelSerializer):
+    skill = SkillSerializer(many=True)
     class Meta:
         model = Task
-        fields = ('id','add_date','text','typ','author','level')
+        fields = ('id','add_date','text','typ','author','level','skill')
 
-class DziałSerializer(serializers.ModelSerializer):
 
-    class Meta:
-        model = Dział
-        fields = ('nazwa_dzialu')
 
-class UmiejetnośćSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Umiejętność
-        fields = ('nazwa_umiejetności')

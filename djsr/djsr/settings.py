@@ -135,7 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Poland'
 
 USE_I18N = True
 
@@ -150,8 +150,11 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = "authentication.CustomUser"
 
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'youremail@gmail.com'
+EMAIL_HOST_USER = 'yourmail@gmail.com'
 EMAIL_HOST_PASSWORD = 'yourpassword'
 EMAIL_PORT = 587
+
