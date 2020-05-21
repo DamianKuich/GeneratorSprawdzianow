@@ -18,11 +18,10 @@ from django.core.mail import EmailMessage
 from django.db import IntegrityError
 
 from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer
-from .models import Task, Section, Skill, CustomUser
+from .models import Task, Section, Skill, CustomUser, UserActivationToken
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
-
 
 class CustomUserCreate(APIView):
     model = CustomUser.objects.all()
@@ -142,8 +141,6 @@ class TaskViewSet(APIView):
             task = Task.objects.all()
             serializer = TaskSerializer(task, many=True)
             return Response(serializer.data)
-
-
 
 
 class SectionViewSet(APIView):
