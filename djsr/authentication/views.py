@@ -15,6 +15,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.core.mail import EmailMessage
+from django.db import IntegrityError
 
 from .serializers import CustomUserSerializer, TaskSerializer, DziałSerializer, UmiejetnośćSerializer
 from .models import Task, Dział, Umiejętność, CustomUser, UserActivationToken
@@ -57,6 +58,8 @@ class CustomUserCreate(APIView):
             email.send()
             return Response(status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 
 
 class HelloWorldView(APIView):
