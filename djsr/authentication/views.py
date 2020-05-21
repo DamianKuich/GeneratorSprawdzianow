@@ -11,8 +11,8 @@ from rest_framework_jwt.settings import api_settings
 from django.urls import reverse
 from django.conf import settings
 
-from .serializers import CustomUserSerializer, TaskSerializer, DziałSerializer, UmiejetnośćSerializer
-from .models import Task, Dział, Umiejętność, CustomUser
+from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer
+from .models import Task, Section, Skill, CustomUser
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
@@ -99,15 +99,45 @@ class UserRetrieveUpdateAPIView(APIView):
 
 
 class TaskViewSet(APIView):
+    permission_classes = (permissions.AllowAny,)
+    # permission_classes = (IsAuthenticated,)
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+    def get(self, request, format=None):
+        lista=[]
+        if request.data:
+            id_string = request.data['skill']
+        else:
+            id_string = None
+        if id_string is not None:
+            for id in id_string.split(','):
+                task = Task.objects.get(skill=id)
+                lista.append(task)
+            serializer = TaskSerializer(lista, many=True)
+            return Response(serializer.data)
+        else:
+            task = Task.objects.all()
+            serializer = TaskSerializer(task, many=True)
+            return Response(serializer.data)
 
 
-class DziałViewSet(APIView):
-    queryset = Dział.objects.all()
-    serializer_class = DziałSerializer
 
 
-class UmiejetnośćViewSet(APIView):
-    queryset = Umiejętność.objects.all()
-    serializer_class = DziałSerializer
+class SectionViewSet(APIView):
+    permission_classes = (permissions.AllowAny,)
+    queryset = Section.objects.all()
+    serializer_class = SectionSerializer
+    def get(self, request, format=None):
+        dzial = Section.objects.all()
+        serializer = SectionSerializer(dzial, many=True)
+        return Response(serializer.data)
+
+
+class SkillViewSet(APIView):
+    permission_classes = (permissions.AllowAny,)
+    queryset = Skill.objects.all()
+    serializer_class = SkillSerializer
+    def get(self, request, format=None):
+        skill = Skill.objects.all()
+        serializer = SkillSerializer(skill, many=True)
+        return Response(serializer.data)

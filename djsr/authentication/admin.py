@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CustomUser, Task, Dział, Umiejętność
+from .models import CustomUser, Task, Section, Skill
 
 
 class CustomUserAdmin(admin.ModelAdmin):
@@ -8,6 +8,6 @@ class CustomUserAdmin(admin.ModelAdmin):
 
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Task)
-admin.site.register(Dział)
-admin.site.register(Umiejętność)
+admin.site.register(Section)
+admin.site.register(Skill)
 # Register your models here.
