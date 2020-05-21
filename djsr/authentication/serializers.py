@@ -43,7 +43,7 @@ class TaskSerializer(serializers.ModelSerializer):
     skill = SkillSerializer(many=True)
     class Meta:
         model = Task
-        fields = ('id','add_date','text','typ','author','level','skill')
+        fields = ('id','text','add_date','typ','author','level','skill')
 
 
 

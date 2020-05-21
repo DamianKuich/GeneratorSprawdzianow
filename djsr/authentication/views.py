@@ -1,5 +1,5 @@
 import datetime
-
+from itertools import chain
 from rest_framework import status, permissions
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -133,8 +133,6 @@ class UserRetrieveUpdateAPIView(APIView):
 class TaskViewSet(APIView):
     permission_classes = (permissions.AllowAny,)
     # permission_classes = (IsAuthenticated,)
-    queryset = Task.objects.all()
-    serializer_class = TaskSerializer
 
     def get(self, request, format=None):
         lista = []
@@ -144,10 +142,10 @@ class TaskViewSet(APIView):
             id_string = None
         if id_string is not None:
             for id in id_string.split(','):
-                task = Task.objects.get(skill=id)
-                lista.append(task)
-            serializer = TaskSerializer(lista, many=True)
-            return Response(serializer.data)
+                task = Task.objects.filter(skill=id)
+                serializer = TaskSerializer(task, many=True)
+                lista.append(serializer.data)
+            return Response(list(chain(*lista)))
         else:
             task = Task.objects.all()
             serializer = TaskSerializer(task, many=True)

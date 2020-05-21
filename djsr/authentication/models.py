@@ -48,8 +48,7 @@ class Task(models.Model):
     author = models.CharField(max_length=100)
     level = models.IntegerField(choices=RODZAJE2, default=0)
     answer = models.CharField(max_length=500)
-    skill = models.ManyToManyField(Skill,
-                                  null=True, blank=True, related_name='task')
+    skill = models.ManyToManyField(Skill)
 
 
     def __str__(self):
