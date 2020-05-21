@@ -10,6 +10,7 @@ const Navbar = lazy(() => import("./navbar"));
 const MDBContainer = lazy(() => import("./MDBLazy/MDBLazyContainer"));
 const AccountActivation = lazy(() => import("./AccountActivation"));
 const RegisterSuccess = lazy(() => import("./RegisterSuccess"));
+const UserAccountManager = lazy(()=> import("./UserAccountManager"))
 class App extends Component {
   constructor(props) {
     super(props);
@@ -24,20 +25,24 @@ class App extends Component {
   componentDidMount() {
     this.checkUser();
   }
-  checkUser = () => {
+  checkUser = (onUserCheck) => {
     if (!localStorage.getItem("access_token")) {
       this.setState({ user: false });
+      if (!!onUserCheck) onUserCheck(false);
     } else {
       axiosInstance
         .get("/user/update")
         .then((response) => {
-          this.setState({ user: response.data });
+          this.setState({ user: response.data })
+          if (!!onUserCheck) onUserCheck(response.data);
         })
         .catch((error) => {
           this.setState({ user: false });
+          if (!!onUserCheck) onUserCheck(response.data);
         });
     }
   };
+
   userLogout = () => {
     const user = { ...this.state.user };
     this.setState({ user: null });
@@ -94,8 +99,8 @@ class App extends Component {
                 path="/activateaccount/:token/"
                 render={(props) => <AccountActivation {...props} {...global}/>}
               />
+              <Route path={"/myaccount/"} render={(props)=><UserAccountManager {...props} {...global}/>}/>
               <Route path={"/"} render={(props) => <div>Home again</div>} />
-              <Route path={"/myaccount/"} render={(props)=>{<div>Elo</div>}}/>
             </Switch>
           </Suspense>
         </MDBContainer>

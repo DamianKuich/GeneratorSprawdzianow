@@ -14,9 +14,10 @@ const FormikMdInput = ({
   hideInput,
   disableAutocomplete,
   disabled,
+  prepend,
 }) => {
   const [active, setActive] = useState(false);
-  // console.log("id", id, "active", active, disableAutocomplete);
+  //todo repair prepend render
   return (
     <div className="md-form form-group">
       {!!icon && (
@@ -28,6 +29,11 @@ const FormikMdInput = ({
             touched ? (!errors ? "text-success" : "red-text") : "",
           ].join(" ")}
         />
+      )}
+      {!!prepend && (
+        <div className="input-group-prepend">
+          <span className="input-group-text">{prepend}</span>
+        </div>
       )}
       <input
         name={name}
@@ -48,7 +54,7 @@ const FormikMdInput = ({
           "form-control",
           touched ? (!errors ? "is-valid" : "is-invalid") : "",
           hideInput ? "text-password" : "",
-          disabled ? "disabled":"",
+          disabled ? "disabled" : "",
         ].join(" ")}
         disabled={disabled}
       />
@@ -59,7 +65,7 @@ const FormikMdInput = ({
           active || !(value === "" || value === null) ? "active" : "",
         ].join(" ")}
       >
-        {label}
+        {!!label ? label : ""}
       </label>
       {!!errors && !!touched && (
         <div className="invalid-feedback d-block">{errors}</div>

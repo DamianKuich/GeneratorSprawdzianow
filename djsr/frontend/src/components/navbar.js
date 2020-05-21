@@ -53,16 +53,16 @@ class Navbar extends Component {
   // }
 
   render() {
-    console.log("check", {} === null);
-    console.log(
-      "token Storage",
-      localStorage.getItem("access_token"),
-      !localStorage.getItem("access_token")
-    );
-    console.log("navProps", this.props);
+    // console.log("check", {} === null);
+    // console.log(
+    //   "token Storage",
+    //   localStorage.getItem("access_token"),
+    //   !localStorage.getItem("access_token")
+    // );
+    // console.log("navProps", this.props);
     const userInfo = this.props.appState.user;
     const userLogout = this.props.userLogout;
-    console.log("userInfo", userInfo);
+    // console.log("userInfo", userInfo);
     return (
       <MDBNavbar color="default-color" dark expand="md" className="mb-3">
         <MDBNavbarBrand>
