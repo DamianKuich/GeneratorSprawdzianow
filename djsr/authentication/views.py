@@ -122,8 +122,22 @@ class UserRetrieveUpdateAPIView(APIView):
 
     def put(self, request, *args, **kwargs):
         user = request.user
-        user.username = request.data['username']
-        user.email = request.data['email']
+        try:
+            if request.data['password']:
+                starehaslo = request.data['oldpassword']
+                password = request.data['password']
+                user.set_password(password)
+        except:
+            pass
+        try:
+            if request.data['username']:
+                user.username = request.data['username']
+        except:
+            pass
+        try:
+            user.email = request.data['email']
+        except:
+            pass
         user.save()
 
         serializer = CustomUserSerializer(user, many=False)
