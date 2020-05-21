@@ -60,14 +60,14 @@ class CustomUserCreate(APIView):
             message = "Hello {0},\n {1}".format(user.username, activation_link)
             email = EmailMessage(mail_subject, message, to=[user.email])
             email.send()
-            return Response(status=status.HTTP_201_CREATED)
+            return Response(data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class HelloWorldView(APIView):
     permission_classes = (permissions.AllowAny,)
 
-    def get(self, request, activation, verify=True, *args, **kwargs):
+    def get(self, request, verify=True, *args, **kwargs):
         token = kwargs.pop('token')
         # TODO check token isnt used
         tokenbackend = TokenBackend(algorithm='RS256',
