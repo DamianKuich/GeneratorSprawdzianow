@@ -1,8 +1,9 @@
 from django.urls import path, include
 
 from rest_framework_simplejwt import views as jwt_views
-from .views import SkillViewSet, SectionViewSet, CustomUserCreate, HelloWorldView, LogoutAndBlacklistRefreshTokenForUserView, TaskViewSet, \
-    UserRetrieveUpdateAPIView
+from .views import SkillViewSet, SectionViewSet, CustomUserCreate, HelloWorldView, \
+    LogoutAndBlacklistRefreshTokenForUserView, TaskViewSet, \
+    UserRetrieveUpdateAPIView, ReturnUserInfo
 
 # TODO resend activation token
 urlpatterns = [
@@ -13,7 +14,7 @@ urlpatterns = [
     path('user/activate/<token>/$', HelloWorldView.as_view(), name='activate-user'),
     path('token/obtain/', jwt_views.TokenObtainPairView.as_view(), name='token_create'),
     path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
-    path('hello/', HelloWorldView.as_view(), name='hello_world'),
+    path('hello/', ReturnUserInfo.as_view(), name='hello_world'),
     path('blacklist/', LogoutAndBlacklistRefreshTokenForUserView.as_view(), name='blacklist'),
     path('user/update/', UserRetrieveUpdateAPIView.as_view()),
 ]

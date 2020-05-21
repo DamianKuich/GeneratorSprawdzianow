@@ -23,6 +23,7 @@ from .models import Task, Section, Skill, CustomUser, UserActivationToken
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 
+
 class CustomUserCreate(APIView):
     model = CustomUser.objects.all()
     permission_classes = (permissions.AllowAny,)
@@ -38,8 +39,12 @@ class CustomUserCreate(APIView):
 
             # TODO save token to database
             activation = UserActivationToken(user=CustomUser.objects.get(id=user.id),
-                                             expire=datetime.datetime.utcnow() + datetime.timedelta(0, 3600) + datetime.timedelta(0, 3600) + datetime.timedelta(0, 3600),
-                                             created_on=datetime.datetime.utcnow() + datetime.timedelta(0, 3600) + datetime.timedelta(0, 3600),
+                                             expire=datetime.datetime.utcnow() + datetime.timedelta(0,
+                                                                                                    3600) + datetime.timedelta(
+                                                 0, 3600) + datetime.timedelta(0, 3600),
+                                             created_on=datetime.datetime.utcnow() + datetime.timedelta(0,
+                                                                                                        3600) + datetime.timedelta(
+                                                 0, 3600),
                                              used=None
                                              )
             activation.save()
@@ -84,6 +89,11 @@ class HelloWorldView(APIView):
         )
 
 
+class ReturnUserInfo(APIView):
+    def get(self, request):
+        return Response(data={"user": str(request.user)}, status=status.HTTP_200_OK)
+
+
 class LogoutAndBlacklistRefreshTokenForUserView(APIView):
     permission_classes = (permissions.AllowAny,)
     authentication_classes = ()
@@ -125,8 +135,9 @@ class TaskViewSet(APIView):
     # permission_classes = (IsAuthenticated,)
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+
     def get(self, request, format=None):
-        lista=[]
+        lista = []
         if request.data:
             id_string = request.data['skill']
         else:
@@ -147,6 +158,7 @@ class SectionViewSet(APIView):
     permission_classes = (permissions.AllowAny,)
     queryset = Section.objects.all()
     serializer_class = SectionSerializer
+
     def get(self, request, format=None):
         dzial = Section.objects.all()
         serializer = SectionSerializer(dzial, many=True)
@@ -157,6 +169,7 @@ class SkillViewSet(APIView):
     permission_classes = (permissions.AllowAny,)
     queryset = Skill.objects.all()
     serializer_class = SkillSerializer
+
     def get(self, request, format=None):
         skill = Skill.objects.all()
         serializer = SkillSerializer(skill, many=True)
