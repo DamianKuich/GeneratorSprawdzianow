@@ -119,6 +119,7 @@ class Login extends Component {
                         label="Hasło"
                         icon="fa-lock"
                         errors={errors.password}
+                        type="password"
                         name="password"
                         id="password"
                         touched={touched.password}

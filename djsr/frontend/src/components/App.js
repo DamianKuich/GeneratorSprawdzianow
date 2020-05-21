@@ -95,6 +95,7 @@ class App extends Component {
                 render={(props) => <AccountActivation {...props} {...global}/>}
               />
               <Route path={"/"} render={(props) => <div>Home again</div>} />
+              <Route path={"/myaccount/"} render={(props)=>{<div>Elo</div>}}/>
             </Switch>
           </Suspense>
         </MDBContainer>
