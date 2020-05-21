@@ -1,6 +1,6 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
-from .models import CustomUser, Task, Dział, Umiejętność
+from .models import CustomUser, Task, Section, Skill
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -29,20 +29,21 @@ class CustomUserSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
-class TaskSerializer(serializers.ModelSerializer):
+class SkillSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Skill
+        fields = ('id', 'Skill_name')
 
+class SectionSerializer(serializers.ModelSerializer):
+    skill = SkillSerializer(many=True)
+    class Meta:
+        model = Section
+        fields = ('id','Section_name','skill')
+class TaskSerializer(serializers.ModelSerializer):
+    skill = SkillSerializer(many=True)
     class Meta:
         model = Task
-        fields = ('id','add_date','text','typ','author','level')
+        fields = ('id','add_date','text','typ','author','level','skill')
 
-class DziałSerializer(serializers.ModelSerializer):
 
-    class Meta:
-        model = Dział
-        fields = ('nazwa_dzialu')
 
-class UmiejetnośćSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Umiejętność
-        fields = ('nazwa_umiejetności')

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+import datetime
 
 
 # TODO email isn't unique
@@ -10,42 +11,54 @@ class CustomUser(AbstractUser):
 
 # Create your models here.
 
-class Umiejętność(models.Model):
-    Nazwa_umiejetnosci = models.CharField(max_length=500)
+
+class Skill(models.Model):
+    Skill_name = models.CharField(max_length=500)
 
     def __str__(self):
         return self.nasza_nazwa()
 
     def nasza_nazwa(self):
-        return self.Nazwa_umiejetnosci
+        return self.Skill_name
 
+class Section(models.Model):
+    Section_name = models.CharField(max_length=500)
+    skill = models.ManyToManyField(Skill)
+    # tasks = models.ManyToManyField(Task)
 
+    def __str__(self):
+        return self.nasza_nazwa()
+
+    def nasza_nazwa(self):
+        return self.Section_name
 class Task(models.Model):
-    Text = models.CharField(max_length=500)
-    add_date = models.DateField()
-    typ = models.CharField(max_length=50)
+    RODZAJE = {
+        (0, 'Nieznany'),
+        (1, 'Otwarte'),
+        (2, 'Zamknięte'),
+        (3, 'Krótka odpowiedź'),
+    }
+    RODZAJE2 = {
+        (0, 'Nieznany'),
+        (1, 'Podstawowy'),
+        (2, 'Rozszerzony'),
+    }
+    text = models.CharField(max_length=500)
+    add_date = models.DateField(default=datetime.date.today)
+    typ = models.IntegerField(choices=RODZAJE, default=0)
     author = models.CharField(max_length=100)
-    level = models.CharField(max_length=100)
+    level = models.IntegerField(choices=RODZAJE2, default=0)
     answer = models.CharField(max_length=500)
-    skilltask = models.ManyToManyField(Umiejętność)
+    skill = models.ManyToManyField(Skill,
+                                  null=True, blank=True, related_name='task')
+
 
     def __str__(self):
         return self.nasza_nazwa()
 
     def nasza_nazwa(self):
-        return self.Text
+        return self.text
 
-
-class Dział(models.Model):
-    Nazwa_dzialu = models.CharField(max_length=500)
-    skill = models.ManyToManyField(Umiejętność)
-    tasks = models.ManyToManyField(Task)
-
-    def __str__(self):
-        return self.nasza_nazwa()
-
-    def nasza_nazwa(self):
-        return self.Nazwa_dzialu
 
 
 class UserActivationToken(models.Model):
