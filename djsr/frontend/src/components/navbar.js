@@ -121,7 +121,7 @@ class Navbar extends Component {
                 <MDBDropdown>
                   <MDBDropdownToggle nav caret>
                     <MDBIcon icon="user" className="pr-1" />
-                    <strong>{userInfo.user}</strong>
+                    <strong>{userInfo.username}</strong>
                   </MDBDropdownToggle>
                   <MDBDropdownMenu right className="dropdown-default">
                     <MDBDropdownItem href="/myaccount">
