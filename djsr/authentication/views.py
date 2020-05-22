@@ -17,7 +17,8 @@ from django.utils.http import urlsafe_base64_encode
 from django.core.mail import EmailMessage
 from django.db import IntegrityError
 
-from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer
+from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer, \
+    CustomUserSerializerReadOnly
 from .models import Task, Section, Skill, CustomUser, UserActivationToken
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
@@ -140,8 +141,8 @@ class UserRetrieveUpdateAPIView(APIView):
             pass
         user.save()
 
-        serializer = CustomUserSerializer(user, many=False)
-        return Response(serializer.data)
+        serializer = CustomUserSerializerReadOnly(user, many=False)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class TaskViewSet(APIView):

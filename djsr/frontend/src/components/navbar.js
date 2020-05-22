@@ -124,8 +124,8 @@ class Navbar extends Component {
                     <strong>{userInfo.user}</strong>
                   </MDBDropdownToggle>
                   <MDBDropdownMenu right className="dropdown-default">
-                    <MDBDropdownItem href="#!">
-                      Moje sprawdziany
+                    <MDBDropdownItem href="/myaccount">
+                      Zarządzaj kontem
                     </MDBDropdownItem>
                     <MDBDropdownItem
                       onClick={() => {

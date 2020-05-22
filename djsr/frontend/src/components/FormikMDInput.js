@@ -18,6 +18,16 @@ const FormikMdInput = ({
 }) => {
   const [active, setActive] = useState(false);
   //todo repair prepend render
+  // console.log(
+  //   "ninput",
+  //   name,
+  //   active,
+  //   value === "",
+  //   value === null,
+  //   active || !(value == "" || value == null),
+  //     "value",
+  //     value
+  // );
   return (
     <div className="md-form form-group">
       {!!icon && (
@@ -43,6 +53,7 @@ const FormikMdInput = ({
           setActive(false);
         }}
         onFocus={() => {
+            console.log("input focus event",name)
           setActive(true);
         }}
         value={value}

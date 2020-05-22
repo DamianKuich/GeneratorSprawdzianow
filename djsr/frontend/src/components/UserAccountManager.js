@@ -26,12 +26,19 @@ class UserAccountManager extends Component {
       userInfo: null,
       locked: false,
     };
+    this.userDataForm = React.createRef();
+    this.userPasswordForm = React.createRef();
+    this.userEmailForm = React.createRef();
   }
 
-  componentDidMount() {
+  checkUser = () => {
     this.props.checkUser((userData) => {
       this.setState({ isUserChecked: true, userInfo: userData });
     });
+  };
+
+  componentDidMount() {
+    this.checkUser();
   }
 
   // componentWillReceiveProps(nextProps) {
@@ -55,13 +62,30 @@ class UserAccountManager extends Component {
   // }
 
   toggle = (id) => {
+    // console.log(this.userDataForm);
+    this.userDataForm.current.setFieldValue(
+      "name",
+      this.props.appState.user.username,
+      false
+    );
+    this.userDataForm.current.setFieldTouched("name", false, false);
+    this.userPasswordForm.current.setValues(
+      { password: "", passwordConfirm: "", oldPassword: "" },
+      false
+    );
+    this.userPasswordForm.current.setTouched({
+      password: false,
+      passwordConfirm: false,
+      oldPassword: false,
+    });
+    // this.userEmailForm;
     this.setState({ activeItem: id });
   };
   render() {
     let activeItem = this.state.activeItem;
     let locked = this.state.locked;
-    let isUserChecked=this.state.isUserChecked;
-    if (!isUserChecked) return <div>Loading</div>
+    let isUserChecked = this.state.isUserChecked;
+    if (!isUserChecked) return <div>Loading</div>;
     return (
       <MDBContainer>
         <MDBCard>
@@ -80,7 +104,7 @@ class UserAccountManager extends Component {
                       role="tab"
                       disabled={locked}
                     >
-                      Home
+                      Dane podstawowe
                     </MDBNavLink>
                   </MDBNavItem>
                   <MDBNavItem>
@@ -94,7 +118,7 @@ class UserAccountManager extends Component {
                       role="tab"
                       disabled={locked}
                     >
-                      Profile
+                      Zmień hasło
                     </MDBNavLink>
                   </MDBNavItem>
                   <MDBNavItem>
@@ -108,7 +132,7 @@ class UserAccountManager extends Component {
                       role="tab"
                       disabled={locked}
                     >
-                      Profile
+                      Zmień adres E-mail
                     </MDBNavLink>
                   </MDBNavItem>
                 </MDBNav>
@@ -116,134 +140,326 @@ class UserAccountManager extends Component {
               <MDBCol xl={"9"}>
                 <MDBTabContent activeItem={this.state.activeItem}>
                   <MDBTabPane tabId="1" role="tabpanel">
-                    <p className="mt-2">
-                      <Formik
-                        initialValues={{
-                          name: this.state.userInfo.username,
-                        }}
-                        validationSchema={Yup.object().shape({
-                          password: Yup.string()
-                            .min(8, "Too Short!")
-                            .max(50, "Too Long!")
-                            .required("Pole wymagane"),
-                        })}
-                        onSubmit={(values, helpers) => {
-                          setTimeout(() => {
-                            helpers.setSubmitting(true);
-                            axiosInstance
-                              .post("/token/obtain/", {
-                                username: values.name,
-                              })
-                              .then((response) => {
-                                axiosInstance.defaults.headers[
-                                  "Authorization"
-                                ] = "JWT " + response.data.access;
-                                localStorage.setItem(
-                                  "access_token",
-                                  response.data.access
-                                );
-                                localStorage.setItem(
-                                  "refresh_token",
-                                  response.data.refresh
-                                );
-                                helpers.setSubmitting(false);
-                                this.props.checkUser();
-                                this.props.history.push("/");
-                              })
-                              .catch((error) => {
-                                // console.log("login error", error.response);
-                                const errResponse = error.response;
-                                helpers.setSubmitting(false);
-                                if (
-                                  errResponse.status === 401 &&
-                                  errResponse.statusText === "Unauthorized"
-                                ) {
-                                  helpers.setValues(
-                                    {
-                                      name: "",
-                                    },
-                                    false
-                                  );
-                                  helpers.setTouched(
-                                    {
-                                      name: false,
-                                    },
-                                    false
-                                  );
-                                  helpers.setFieldError(
-                                    "general",
-                                    "Nazwa jest w użyciu lub jest nieprawidłowa."
-                                  );
-                                }
-                              });
-                          }, 400);
-                        }}
-                      >
-                        {({
-                          values,
-                          errors,
-                          touched,
-                          handleChange,
-                          handleBlur,
-                          handleSubmit,
-                          isSubmitting,
-                        }) => (
-                          <Form onSubmit={handleSubmit}>
-                            <p className="h3 text-center mb-4">
-                              Dane podstawowe
-                            </p>
-                            <div className="grey-text">
-                              <FormikMdInput
-                                label="Nazwa użytkownika"
-                                icon="fa-user"
-                                errors={errors.name}
-                                name="name"
-                                id="name"
-                                touched={touched.name}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.name}
-                                disabled={isSubmitting || locked}
-                              />
-                            </div>
-                            <div className="text-center">
-                              <MDBBtn
-                                color="primary"
-                                type="submit"
-                                disabled={isSubmitting || locked}
-                              >
-                                Zmień
-                              </MDBBtn>
-                            </div>
-                          </Form>
-                        )}
-                      </Formik>
-                    </p>
+                    <Formik
+                      // ref={this.userDataForm}
+                      innerRef={this.userDataForm}
+                      initialValues={{
+                        name: this.state.userInfo.username,
+                      }}
+                      validationSchema={Yup.object().shape({
+                        name: Yup.string()
+                          .min(3, "Too Short!")
+                          .max(50, "Too Long!")
+                          .required("Pole wymagane"),
+                      })}
+                      onSubmit={(values, helpers) => {
+                        setTimeout(() => {
+                          this.setState({ locked: true });
+                          helpers.setSubmitting(true);
+                          axiosInstance
+                            .put("/user/update/", {
+                              username: values.name,
+                            })
+                            .then((response) => {
+                              this.props.setUser(response.data);
+                              helpers.setStatus("Pomyslnie zmieniono dane");
+                              helpers.setSubmitting(false);
+                              this.setState({ locked: false });
+                            })
+                            .catch((error) => {
+                              // console.log("login error", error.response);
+                              const errResponse = error.response;
+                              helpers.setSubmitting(false);
+                              this.setState({ locked: false });
+                              helpers.setValues(
+                                {
+                                  name: "",
+                                },
+                                false
+                              );
+                              helpers.setTouched(
+                                {
+                                  name: false,
+                                },
+                                false
+                              );
+                              helpers.setFieldError(
+                                "name",
+                                "Nazwa jest w użyciu lub jest nieprawidłowa."
+                              );
+                            });
+                        }, 400);
+                      }}
+                    >
+                      {({
+                        values,
+                        errors,
+                        touched,
+                        handleChange,
+                        handleBlur,
+                        handleSubmit,
+                        isSubmitting,
+                        status,
+                      }) => (
+                        <Form onSubmit={handleSubmit}>
+                          <p className="h3 text-center mb-4">Dane podstawowe</p>
+                          <div className="grey-text">
+                            <FormikMdInput
+                              label="Nazwa użytkownika"
+                              icon="fa-user"
+                              errors={errors.name}
+                              name="name"
+                              id="name"
+                              touched={touched.name}
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              value={values.name}
+                              disabled={isSubmitting || locked}
+                            />
+                          </div>
+                          {!!status && <div>Pomyslnie zmieniono dane</div>}
+                          <div className="text-center">
+                            <MDBBtn
+                              color="primary"
+                              type="submit"
+                              disabled={isSubmitting || locked}
+                            >
+                              Zmień
+                            </MDBBtn>
+                          </div>
+                        </Form>
+                      )}
+                    </Formik>
                   </MDBTabPane>
                   <MDBTabPane tabId="2" role="tabpanel">
-                    <p className="mt-2">
-                      Quisquam aperiam, pariatur. Tempora, placeat ratione porro
-                      voluptate odit minima. Lorem ipsum dolor sit amet,
-                      consectetur adipisicing elit. Nihil odit magnam minima,
-                      soluta doloribus reiciendis molestiae placeat unde eos
-                      molestias.
-                    </p>
-                    <p>
-                      Quisquam aperiam, pariatur. Tempora, placeat ratione porro
-                      voluptate odit minima. Lorem ipsum dolor sit amet,
-                      consectetur adipisicing elit. Nihil odit magnam minima,
-                      soluta doloribus reiciendis molestiae placeat unde eos
-                      molestias.
-                    </p>
+                    <Formik
+                      // ref={this.userDataForm}
+                      innerRef={this.userPasswordForm}
+                      initialValues={{
+                        password: "",
+                        passwordConfirm: "",
+                        oldPassword: "",
+                      }}
+                      validationSchema={Yup.object().shape({
+                        password: Yup.string()
+                          .min(8, "Too Short!")
+                          .max(50, "Too Long!")
+                          .required("Pole wymagane")
+                          .oneOf(
+                            [Yup.ref("passwordConfirm")],
+                            "Hasła są różne"
+                          ),
+                        oldPassword: Yup.string()
+                          .min(8, "Too Short!")
+                          .max(50, "Too Long!")
+                          .required("Pole wymagane"),
+                        passwordConfirm: Yup.string()
+                          .oneOf([Yup.ref("password")], "Hasła są różne")
+                          .required("Pole wymagane"),
+                      })}
+                      onSubmit={(values, helpers) => {
+                        setTimeout(() => {
+                          this.setState({ locked: true });
+                          helpers.setSubmitting(true);
+                          axiosInstance
+                            .put("/user/update/", {
+                              password: values.password,
+                              oldpassword: values.oldPassword,
+                            })
+                            .then((response) => {
+                              this.props.setUser(response.data);
+                              helpers.setStatus("Pomyslnie zmieniono hasło");
+                              helpers.setSubmitting(false);
+                              this.setState({ locked: false });
+                            })
+                            .catch((error) => {
+                              // console.log("login error", error.response);
+                              const errResponse = error.response;
+                              helpers.setSubmitting(false);
+                              this.setState({ locked: false });
+                              helpers.setValues(
+                                {
+                                  password: "",
+                                  oldPassword: "",
+                                },
+                                false
+                              );
+                              helpers.setTouched(
+                                {
+                                  password: false,
+                                  oldPassword: false,
+                                },
+                                false
+                              );
+                              helpers.setFieldError(
+                                "oldPassword",
+                                "Podano nieprawidłowe stare hasło"
+                              );
+                            });
+                        }, 400);
+                      }}
+                    >
+                      {({
+                        values,
+                        errors,
+                        touched,
+                        handleChange,
+                        handleBlur,
+                        handleSubmit,
+                        isSubmitting,
+                        status,
+                      }) => (
+                        <Form onSubmit={handleSubmit}>
+                          {/*{console.log("pass form",values,touched,errors)}*/}
+                          <p className="h3 text-center mb-4">Zmień hasło</p>
+                          <div className="grey-text">
+                            <FormikMdInput
+                              label="Stare hasło"
+                              icon="fa-lock"
+                              errors={errors.oldPassword}
+                              name="oldPassword"
+                              id="oldPassword"
+                              touched={touched.oldPassword}
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              value={values.oldPassword}
+                              disabled={isSubmitting || locked}
+                              hideInput
+                              type="password"
+                            />
+                            <FormikMdInput
+                              label="Nowe hasło"
+                              icon="fa-lock"
+                              errors={errors.password}
+                              name="password"
+                              id="password"
+                              type="password"
+                              touched={touched.password}
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              value={values.password}
+                              disabled={isSubmitting || locked}
+                              hideInput
+                            />
+                            <FormikMdInput
+                              label="Powtórz nowe hasło"
+                              icon="fa-lock"
+                              errors={errors.passwordConfirm}
+                              name="passwordConfirm"
+                              id="passwordConfirm"
+                              type="password"
+                              touched={touched.passwordConfirm}
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              value={values.passwordConfirm}
+                              hideInput
+                              disabled={isSubmitting || locked}
+                            />
+                          </div>
+                          {!!status && <div>Pomyslnie zmieniono hasło</div>}
+                          <div className="text-center">
+                            <MDBBtn
+                              color="primary"
+                              type="submit"
+                              disabled={isSubmitting || locked}
+                            >
+                              Zmień
+                            </MDBBtn>
+                          </div>
+                        </Form>
+                      )}
+                    </Formik>
                   </MDBTabPane>
                   <MDBTabPane tabId="3" role="tabpanel">
-                    <p className="mt-2">
-                      Quisquam aperiam, pariatur. Tempora, placeat ratione porro
-                      voluptate odit minima. Lorem ipsum dolor sit amet,
-                      consectetur adipisicing elit. Nihil odit magnam minima,
-                      soluta doloribus reiciendis molestiae placeat unde eos
-                      molestias.
-                    </p>
+                    <Formik
+                      // ref={this.userDataForm}
+                      innerRef={this.userEmailForm}
+                      initialValues={{
+                        email: this.state.userInfo.email,
+                      }}
+                      validationSchema={Yup.object().shape({
+                        email: Yup.string()
+                    .email("Nieprawidłowy adres e-mail")
+                    .required("Pole wymagane"),
+                      })}
+                      onSubmit={(values, helpers) => {
+                        setTimeout(() => {
+                          this.setState({ locked: true });
+                          helpers.setSubmitting(true);
+                          axiosInstance
+                            .put("/user/update/", {
+                              email: values.email,
+                            })
+                            .then((response) => {
+                              this.props.setUser(response.data);
+                              helpers.setStatus("Pomyslnie zmieniono email");
+                              helpers.setSubmitting(false);
+                              this.setState({ locked: false });
+                            })
+                            .catch((error) => {
+                              // console.log("login error", error.response);
+                              const errResponse = error.response;
+                              helpers.setSubmitting(false);
+                              this.setState({ locked: false });
+                              helpers.setValues(
+                                {
+                                  email: "",
+                                },
+                                false
+                              );
+                              helpers.setTouched(
+                                {
+                                  email: false,
+                                },
+                                false
+                              );
+                              helpers.setFieldError(
+                                "name",
+                                "E-mail jest w użyciu lub jest nieprawidłowy."
+                              );
+                            });
+                        }, 400);
+                      }}
+                    >
+                      {({
+                        values,
+                        errors,
+                        touched,
+                        handleChange,
+                        handleBlur,
+                        handleSubmit,
+                        isSubmitting,
+                        status,
+                      }) => (
+                        <Form onSubmit={handleSubmit}>
+                          <p className="h3 text-center mb-4">Zmień adres E-mail</p>
+                          <div className="grey-text">
+                            <FormikMdInput
+                              label="Adres e-mail"
+                              icon="fa-envelope"
+                              errors={errors.email}
+                              name="email"
+                              id="email"
+                              touched={touched.name}
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              value={values.email}
+                              disabled={isSubmitting || locked}
+                            />
+                          </div>
+                          {!!status && <div>{status}</div>}
+                          <div className="text-center">
+                            <MDBBtn
+                              color="primary"
+                              type="submit"
+                              disabled={isSubmitting || locked}
+                            >
+                              Zmień
+                            </MDBBtn>
+                          </div>
+                        </Form>
+                      )}
+                    </Formik>
                   </MDBTabPane>
                 </MDBTabContent>
               </MDBCol>

@@ -10,7 +10,7 @@ const Navbar = lazy(() => import("./navbar"));
 const MDBContainer = lazy(() => import("./MDBLazy/MDBLazyContainer"));
 const AccountActivation = lazy(() => import("./AccountActivation"));
 const RegisterSuccess = lazy(() => import("./RegisterSuccess"));
-const UserAccountManager = lazy(()=> import("./UserAccountManager"))
+const UserAccountManager = lazy(() => import("./UserAccountManager"));
 class App extends Component {
   constructor(props) {
     super(props);
@@ -33,7 +33,7 @@ class App extends Component {
       axiosInstance
         .get("/user/update")
         .then((response) => {
-          this.setState({ user: response.data })
+          this.setState({ user: response.data });
           if (!!onUserCheck) onUserCheck(response.data);
         })
         .catch((error) => {
@@ -62,6 +62,9 @@ class App extends Component {
         this.setState({ user: user });
       });
   };
+  setUser = (user) => {
+    this.setState({ user: user });
+  };
   render() {
     const global = {
       setAppState: this.setState,
@@ -70,6 +73,7 @@ class App extends Component {
       appState: this.state,
       axiosInstance: axiosInstance,
       userLogout: this.userLogout,
+      setUser:this.setUser,
     };
     const properties = { ...this.props, ...global };
     return (
@@ -97,9 +101,14 @@ class App extends Component {
               <Route
                 exact
                 path="/activateaccount/:token/"
-                render={(props) => <AccountActivation {...props} {...global}/>}
+                render={(props) => <AccountActivation {...props} {...global} />}
               />
-              <Route path={"/myaccount/"} render={(props)=><UserAccountManager {...props} {...global}/>}/>
+              <Route
+                path={"/myaccount/"}
+                render={(props) => (
+                  <UserAccountManager {...props} {...global} />
+                )}
+              />
               <Route path={"/"} render={(props) => <div>Home again</div>} />
             </Switch>
           </Suspense>
