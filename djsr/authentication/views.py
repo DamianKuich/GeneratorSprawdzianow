@@ -149,7 +149,7 @@ class TaskViewSet(APIView):
     permission_classes = (permissions.AllowAny,)
     # permission_classes = (IsAuthenticated,)
 
-    def get(self, request, format=None):
+    def post(self, request, format=None):
         lista = []
         if request.data:
             id_string = request.data['skill']

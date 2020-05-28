@@ -4,6 +4,7 @@ import { Switch, Link, Route } from "react-router-dom";
 import "./styles/mdcardfixes.css";
 import "./styles/styles.css";
 import axiosInstance from "./axiosAPI";
+import TaskSearch from "./taskSearch";
 const Login = lazy(() => import("./login"));
 const Signup = lazy(() => import("./signup"));
 const Navbar = lazy(() => import("./navbar"));
@@ -107,6 +108,12 @@ class App extends Component {
                 path={"/myaccount/"}
                 render={(props) => (
                   <UserAccountManager {...props} {...global} />
+                )}
+              />
+              <Route
+                path={"/search/"}
+                render={(props) => (
+                  <TaskSearch {...props} {...global} />
                 )}
               />
               <Route path={"/"} render={(props) => <div>Home again</div>} />
