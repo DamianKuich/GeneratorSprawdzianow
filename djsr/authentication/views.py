@@ -126,8 +126,11 @@ class UserRetrieveUpdateAPIView(APIView):
         try:
             if request.data['password']:
                 starehaslo = request.data['oldpassword']
-                password = request.data['password']
-                user.set_password(password)
+                if user.check_password(starehaslo):
+                    password = request.data['password']
+                    user.set_password(password)
+                else:
+                    Response({"oldpassword": "Old password doesnt match"}, status=status.HTTP_200_OK)
         except:
             pass
         try:

@@ -81,8 +81,7 @@ class App extends Component {
       <Suspense fallback={<div>ladowanie</div>}>
         <MDBContainer fluid className="h-100">
           <Navbar {...properties} />
-          <Link to={"/login/"}>ELO</Link>
-          <Suspense fallback={<div>CZEKAJ KURWO</div>}>
+          <Suspense fallback={<div>Ładowanie</div>}>
             <Switch>
               <Route
                 exact
