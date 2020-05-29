@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axiosInstance, { axiosInstanceNoAuth } from "./axiosAPI";
-import { MDBBtn, MDBCollapse, MDBContainer } from "mdbreact";
+import { MDBBtn, MDBCollapse, MDBContainer, MDBIcon } from "mdbreact";
 import FormikMdInput from "./FormikMDInput";
 import { Form, Formik } from "formik";
 
@@ -42,8 +42,9 @@ class TaskSearch extends Component {
           initialValues={{ skills: [] }}
           onSubmit={(values, helpers) => {
             setTimeout(() => {
+              // console.log("start 1");
               helpers.setSubmitting(true);
-
+              // console.log("start 2");
               let skills = values.skills;
               let result = [];
               for (let key of skills.keys()) {
@@ -89,16 +90,30 @@ class TaskSearch extends Component {
                     return (
                       <>
                         <div
-                          className="h3-responsive d-flex justify-content-between"
+                          className={
+                            "d-flex justify-content-between " +
+                            "p-2 mt-3 border-right border-top border-left " +
+                                 (collapseId === "section-" + section.id
+                                ? ""
+                                : "border-bottom")
+                          }
                           onClick={() => {
                             this.toggleCollapse("section-" + section.id);
                           }}
                         >
                           {section.Section_name}
+                          <MDBIcon
+                            icon={
+                              collapseId === "section-" + section.id
+                                ? "angle-up"
+                                : "angle-down"
+                            }
+                          />
                         </div>
                         <MDBCollapse
                           id={"section-" + section.id}
                           isOpen={collapseId}
+                          className="border-left border-right border-bottom p-2"
                         >
                           {section.skill.map((skill) => {
                             return (
@@ -111,6 +126,7 @@ class TaskSearch extends Component {
                                   name={"skills." + skill.id}
                                   onChange={handleChange}
                                   onBlur={handleBlur}
+                                  disabled={isSubmitting}
                                 />
                                 <label
                                   className="custom-control-label"
@@ -128,7 +144,17 @@ class TaskSearch extends Component {
                       </>
                     );
                   })}
-                  <MDBBtn onClick={handleSubmit}>ELO</MDBBtn>
+                  <MDBBtn onClick={handleSubmit} disabled={isSubmitting}>
+                    Szukaj
+                    {isSubmitting && (
+                      <div
+                        className="spinner-border spinner-border-sm"
+                        role="status"
+                      >
+                        <span className="sr-only">Loading...</span>
+                      </div>
+                    )}
+                  </MDBBtn>
                 </Form>
               </MDBContainer>
             </MDBContainer>
