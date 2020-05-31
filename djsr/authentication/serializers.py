@@ -80,7 +80,13 @@ class SectionSerializer(serializers.ModelSerializer):
         model = Section
         fields = ('id','Section_name','skill')
 class TaskSerializer(serializers.ModelSerializer):
-    skill = SkillSerializer(many=True)
+    text = serializers.CharField(required=True)
+    add_date = serializers.DateTimeField(required=True)
+    typ = serializers.IntegerField(required=True)
+    author = serializers.CharField(required=True)
+    level = serializers.IntegerField(required=True)
+    answer = serializers.CharField(required=True)
+    skill = SkillSerializer(many=True, required=True)
     class Meta:
         model = Task
         fields = ('id','text','add_date','typ','author','level','skill')

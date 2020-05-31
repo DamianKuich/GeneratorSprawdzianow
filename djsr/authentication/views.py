@@ -20,7 +20,7 @@ from django.db import IntegrityError
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.shortcuts import render, redirect
-
+from schema import Schema, And, Use, Optional
 
 
 from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer, \
@@ -95,6 +95,7 @@ class PasswordSendResetView(APIView):
                                                  0, 3600),
                                              used=None
                                              )
+            reset.save()
             token = tokenbackend.encode(
                 {'user_email': reset.email, 'exp': datetime.datetime.utcnow() + datetime.timedelta(0, 3600)})
             if CustomUser.objects.filter(email=serializer.email).exists():
@@ -219,27 +220,38 @@ class UserRetrieveUpdateAPIView(APIView):
 
 
 class TaskViewSet(APIView):
-    permission_classes = (permissions.AllowAny,)
-    # permission_classes = (IsAuthenticated,)
-
+    #permission_classes = (permissions.AllowAny,)
+    permission_classes = (IsAuthenticated,)
+    serializer_class = TaskSerializer
     def post(self, request, format=None):
-        lista = []
-        if request.data:
-            id_string = request.data['skill']
-            user = request.user
-        else:
-            id_string = None
-        if id_string is not None:
-            for id in id_string.split(','):
-                task = Task.objects.filter(skill=id)
+        serializer = TaskSerializer(data=request.data)
+        if serializer.is_valid():
+            lista = []
+            # schema = Schema([{'id': And(Use(int)),
+            #                   'text': And(str, len),
+            #                   'add_date':{'type': 'string', 'pattern': '^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$'},
+            #                   'typ': And(Use(int)),
+            #                   'author': And(str, len),
+            #                   'level': And(Use(int)),
+            #                   'answer': And(str, len),
+            #                   'skill': And(str, len)}])
+            if request.data:
+                id_string = request.data['skill']
+                user = request.user
+            else:
+                id_string = None
+            if id_string is not None:
+                for id in id_string.split(','):
+                    task = Task.objects.filter(skill=id)
+                    serializer = TaskSerializer(task, many=True)
+                    lista.append(serializer.data)
+                    # validated = schema.validate(test)
+                return Response(list(chain(*lista)))
+            else:
+                task = Task.objects.all()
                 serializer = TaskSerializer(task, many=True)
-                lista.append(serializer.data)
-                test = TestJSON(tasks=list(chain(*lista)), user_id = user.id)
-            return Response(list(chain(*lista)))
-        else:
-            task = Task.objects.all()
-            serializer = TaskSerializer(task, many=True)
-            return Response(serializer.data)
+                return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class TestViewSet(APIView):
     permission_classes = (permissions.AllowAny,)
