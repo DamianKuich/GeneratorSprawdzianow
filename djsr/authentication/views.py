@@ -10,16 +10,23 @@ from rest_framework_simplejwt.exceptions import TokenBackendError, TokenError
 from rest_framework_jwt.settings import api_settings
 from django.urls import reverse
 from django.conf import settings
+from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.core.mail import EmailMessage
 from django.db import IntegrityError
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.shortcuts import render, redirect
+
+
 
 from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer, \
-    CustomUserSerializerReadOnly
-from .models import Task, Section, Skill, CustomUser, UserActivationToken
+    CustomUserSerializerReadOnly, PasswordSendResetSerializer, PasswordResetSerializer
+from .models import Task, Section, Skill, CustomUser, UserActivationToken, \
+    TestJSON, PasswordSendReset, PasswordReset, UserResetToken
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
@@ -37,8 +44,6 @@ class CustomUserCreate(APIView):
             tokenbackend = TokenBackend(algorithm='RS256',
                                         signing_key=getattr(settings, "RS256_PRIVATE_KEY", None),
                                         verifying_key=getattr(settings, "RS256_PUBLIC_KEY", None))
-
-            # TODO save token to database
             activation = UserActivationToken(user=CustomUser.objects.get(id=user.id),
                                              expire=datetime.datetime.utcnow() + datetime.timedelta(0,
                                                                                                     3600) + datetime.timedelta(
@@ -54,21 +59,83 @@ class CustomUserCreate(APIView):
             data = {
                 'confirmation_token': token
             }
+            if user.objects.filter(email=user.email).exists():
+                return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+            elif user.objects.filter(username=user.username).exists():
+                return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+            user.is_active = False
+            user.save()
             mail_subject = 'Activate your account.'
             current_site = get_current_site(request)
-            uid = urlsafe_base64_encode(force_bytes(user.pk))
-            activation_link = "{0}/activateaccount/{2}".format(current_site, uid, token)
-            message = "Hello {0},\n {1}".format(user.username, activation_link)
+            activation_link = "http://{0}/activateaccount/{1}".format(current_site, token)
+            message = "Hello {0},\n click the link below to activate your account.\n {1}".format(user.username, activation_link)
             email = EmailMessage(mail_subject, message, to=[user.email])
             email.send()
-            return Response(data, status=status.HTTP_201_CREATED)
+            return Response(data,status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class PasswordSendResetView(APIView):
+    model = PasswordSendReset.objects.all()
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = PasswordSendResetSerializer
+    def post(self, request):
+        serializer = PasswordSendResetSerializer(data=request.data)
+        if serializer.is_valid():
+            reset = serializer.save()
+            # TODO check if token isn't used
+            tokenbackend = TokenBackend(algorithm='RS256',
+                                        signing_key=getattr(settings, "RS256_PRIVATE_KEY", None),
+                                        verifying_key=getattr(settings, "RS256_PUBLIC_KEY", None))
+            reset = UserResetToken(email=reset.email,
+                                             expire=datetime.datetime.utcnow() + datetime.timedelta(0,
+                                                                                                    3600) + datetime.timedelta(
+                                                 0, 3600) + datetime.timedelta(0, 3600),
+                                             created_on=datetime.datetime.utcnow() + datetime.timedelta(0,
+                                                                                                        3600) + datetime.timedelta(
+                                                 0, 3600),
+                                             used=None
+                                             )
+            token = tokenbackend.encode(
+                {'user_email': reset.email, 'exp': datetime.datetime.utcnow() + datetime.timedelta(0, 3600)})
+            if CustomUser.objects.filter(email=serializer.email).exists():
+                return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+            # TODO check if user is active
+            mail_subject = 'Reset your password.'
+            current_site = get_current_site(request)
+            activation_link = "http://{0}/resetpassword/{1}".format(current_site, token)
+            message = "Hello ,\n click the link below to reset your password.\n {0}".format(activation_link)
+            email = EmailMessage(mail_subject, message, to=[reset.email])
+            email.send()
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class PasswordResetView(APIView):
+    model = PasswordReset.objects.all()
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = PasswordResetSerializer
+
+    def get(self, request, **kwargs):
+        serializer = PasswordResetSerializer(data=request.data)
+        if serializer.is_valid():
+            reset = serializer.save()
+            token = kwargs.pop('token')
+            tokenbackend = TokenBackend(algorithm='RS256',
+                                        signing_key=getattr(settings, "RS256_PRIVATE_KEY", None),
+                                        verifying_key=getattr(settings, "RS256_PUBLIC_KEY", None))
+            try:
+                payload = tokenbackend.decode(token=token, verify=True)
+            except TokenBackendError:
+                return Response({'error': 'Invalid token'}, status=status.HTTP_403_FORBIDDEN)
+            if CustomUser.objects.filter(email=serializer.password_1).exists():
+                return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+            if serializer.password_1 == serializer.password_2:
+                return Response(status=status.HTTP_202_ACCEPTED)
+
 
 
 class HelloWorldView(APIView):
     permission_classes = (permissions.AllowAny,)
 
-    def get(self, request, verify=True, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         token = kwargs.pop('token')
         # TODO check token isnt used
         tokenbackend = TokenBackend(algorithm='RS256',
@@ -78,17 +145,20 @@ class HelloWorldView(APIView):
             payload = tokenbackend.decode(token=token, verify=True)
         except TokenBackendError:
             return Response({'error': 'Invalid token'}, status=status.HTTP_403_FORBIDDEN)
+        if UserActivationToken.expire == (datetime.datetime.utcnow() + datetime.timedelta(3600) + datetime.timedelta(0, 3600)):
+            return Response(status=status.HTTP_409_CONFLICT)
+        if UserActivationToken.used is True:
+            return Response(status=status.HTTP_409_CONFLICT)
         user = CustomUser.objects.get(id=payload.get('user_id'))
         token_id = UserActivationToken.pk
-        # Add token id
-        # UserActivationToken.objects.get(id=payload.get('token_id'))
+        UserActivationToken.objects.get(id=payload.get('token_id'))
+        UserActivationToken.used = True
         user.is_active = True
         user.save()
         return Response(
             {"message": 'User Activated'},
             status=status.HTTP_200_OK
         )
-
 
 class ReturnUserInfo(APIView):
     def get(self, request):
@@ -126,8 +196,11 @@ class UserRetrieveUpdateAPIView(APIView):
         try:
             if request.data['password']:
                 starehaslo = request.data['oldpassword']
-                password = request.data['password']
-                user.set_password(password)
+                if user.check_password(starehaslo):
+                    password = request.data['password']
+                    user.set_password(password)
+                else:
+                    Response({"oldpassword": "Old password doesnt match"}, status=status.HTTP_200_OK)
         except:
             pass
         try:
@@ -153,6 +226,7 @@ class TaskViewSet(APIView):
         lista = []
         if request.data:
             id_string = request.data['skill']
+            user = request.user
         else:
             id_string = None
         if id_string is not None:
@@ -160,12 +234,17 @@ class TaskViewSet(APIView):
                 task = Task.objects.filter(skill=id)
                 serializer = TaskSerializer(task, many=True)
                 lista.append(serializer.data)
+                test = TestJSON(tasks=list(chain(*lista)), user_id = user.id)
             return Response(list(chain(*lista)))
         else:
             task = Task.objects.all()
             serializer = TaskSerializer(task, many=True)
             return Response(serializer.data)
 
+class TestViewSet(APIView):
+    permission_classes = (permissions.AllowAny,)
+    def post(self, request):
+        return Response()
 
 class SectionViewSet(APIView):
     permission_classes = (permissions.AllowAny,)

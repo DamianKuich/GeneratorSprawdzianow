@@ -3,7 +3,7 @@ from django.urls import path, include
 from rest_framework_simplejwt import views as jwt_views
 from .views import SkillViewSet, SectionViewSet, CustomUserCreate, HelloWorldView, \
     LogoutAndBlacklistRefreshTokenForUserView, TaskViewSet, \
-    UserRetrieveUpdateAPIView, ReturnUserInfo
+    UserRetrieveUpdateAPIView, ReturnUserInfo, PasswordSendResetView, PasswordResetView
 
 # TODO resend activation token
 urlpatterns = [
@@ -17,4 +17,6 @@ urlpatterns = [
     path('hello/', ReturnUserInfo.as_view(), name='hello_world'),
     path('blacklist/', LogoutAndBlacklistRefreshTokenForUserView.as_view(), name='blacklist'),
     path('user/update/', UserRetrieveUpdateAPIView.as_view()),
+    path('user/resetsend/',PasswordSendResetView.as_view(), name='sendreset'),
+    path('user/passreset/',PasswordResetView.as_view(), name='reset'),
 ]

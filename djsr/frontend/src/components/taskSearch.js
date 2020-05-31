@@ -3,7 +3,7 @@ import axiosInstance, { axiosInstanceNoAuth } from "./axiosAPI";
 import { MDBBtn, MDBCollapse, MDBContainer } from "mdbreact";
 import FormikMdInput from "./FormikMDInput";
 import { Form, Formik } from "formik";
-
+import * as Yup from "yup";
 class TaskSearch extends Component {
   constructor(props) {
     super(props);
@@ -40,6 +40,7 @@ class TaskSearch extends Component {
       <div>
         <Formik
           initialValues={{ skills: [] }}
+          validationSchema={}
           onSubmit={(values, helpers) => {
             setTimeout(() => {
               helpers.setSubmitting(true);

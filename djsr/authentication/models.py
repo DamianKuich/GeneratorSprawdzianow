@@ -58,6 +58,24 @@ class Task(models.Model):
         return self.text
 
 
+class TestJSON(models.Model):
+    name = models.CharField(max_length=500)
+    tasks = models.TextField()
+    user_id = models.CharField(max_length=500)
+
+class PasswordSendReset(models.Model):
+    email = models.EmailField(blank=True, max_length=254, verbose_name='email address')
+
+class PasswordReset(models.Model):
+    new_pass_1 = models.CharField(max_length=500)
+    new_pass_2 = models.CharField(max_length=500)
+
+class UserResetToken(models.Model):
+    email = models.EmailField(blank=True, max_length=254, verbose_name='email address')
+    expire = models.DateTimeField()
+    created_on = models.DateTimeField()
+    # auto_now_add=True
+    used = models.DateTimeField(null=True)
 
 class UserActivationToken(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
