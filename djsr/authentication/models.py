@@ -64,6 +64,12 @@ class TestJSON(models.Model):
     created = models.DateField(default=datetime.date.today)
     user_id = models.IntegerField()
 
+    def __str__(self):
+        return self.nasza_nazwa()
+
+    def nasza_nazwa(self):
+        return self.name
+
 class PasswordSendReset(models.Model):
     email = models.EmailField(blank=True, max_length=254, verbose_name='email address')
 

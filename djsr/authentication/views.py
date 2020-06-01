@@ -245,14 +245,19 @@ class TaskViewSet(APIView):
                 serializer = TaskSerializer(task, many=True)
                 lista.append(serializer.data)
                 # validated = schema.validate(test)
-                mojtest = TestJSON()
-                mojtest.name = 'spr'
-                mojtest.tasks = simplejson.dumps(list(chain(*lista)))
-                mojtest.created = datetime.date.today()
-                pomoc = CustomUser.objects.get(id=request.user.id)
-                mojtest.user_id = pomoc.id
-                mojtest.save()
-            return Response(list(chain(*lista)))
+            try:
+                nazwa = request.data['nazwaspr']
+                if not TestJSON.objects.filter(name=nazwa).exists():
+                    mojtest = TestJSON()
+                    mojtest.name = nazwa
+                    mojtest.tasks = simplejson.dumps(list(chain(*lista)))
+                    mojtest.created = datetime.date.today()
+                    pomoc = CustomUser.objects.get(id=request.user.id)
+                    mojtest.user_id = pomoc.id
+                    mojtest.save()
+                    return Response(list(chain(*lista)))
+            except:
+                return Response(list(chain(*lista)))
         else:
             task = Task.objects.all()
             serializer = TaskSerializer(task, many=True)
