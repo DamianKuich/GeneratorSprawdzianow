@@ -1,5 +1,6 @@
 import datetime
 from itertools import chain
+import simplejson
 from rest_framework import status, permissions
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -59,11 +60,12 @@ class CustomUserCreate(APIView):
             data = {
                 'confirmation_token': token
             }
-            if user.objects.filter(email=user.email).exists():
-                return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
-            elif user.objects.filter(username=user.username).exists():
-                return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
-            user.is_active = False
+            # userr = CustomUser.objects.filter(email=user.email)
+            # if user:
+            #     return Response(userr)
+            # elif CustomUser.objects.filter(username=user.username).exists():
+            #     return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+            # user.is_active = False
             user.save()
             mail_subject = 'Activate your account.'
             current_site = get_current_site(request)
@@ -146,14 +148,14 @@ class HelloWorldView(APIView):
             payload = tokenbackend.decode(token=token, verify=True)
         except TokenBackendError:
             return Response({'error': 'Invalid token'}, status=status.HTTP_403_FORBIDDEN)
-        if UserActivationToken.expire == (datetime.datetime.utcnow() + datetime.timedelta(3600) + datetime.timedelta(0, 3600)):
-            return Response(status=status.HTTP_409_CONFLICT)
-        if UserActivationToken.used is True:
-            return Response(status=status.HTTP_409_CONFLICT)
+        # if UserActivationToken.expire == (datetime.datetime.utcnow() + datetime.timedelta(3600) + datetime.timedelta(0, 3600)):
+        #     return Response(status=status.HTTP_409_CONFLICT)
+        # if UserActivationToken.used is True:
+        #     return Response(status=status.HTTP_409_CONFLICT)
         user = CustomUser.objects.get(id=payload.get('user_id'))
-        token_id = UserActivationToken.pk
-        UserActivationToken.objects.get(id=payload.get('token_id'))
-        UserActivationToken.used = True
+        # token_id = UserActivationToken.pk
+        # UserActivationToken.objects.get(id=payload.get('token_id'))
+        # UserActivationToken.used = True
         user.is_active = True
         user.save()
         return Response(
@@ -225,33 +227,38 @@ class TaskViewSet(APIView):
     serializer_class = TaskSerializer
     def post(self, request, format=None):
         serializer = TaskSerializer(data=request.data)
-        if serializer.is_valid():
-            lista = []
-            # schema = Schema([{'id': And(Use(int)),
-            #                   'text': And(str, len),
-            #                   'add_date':{'type': 'string', 'pattern': '^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$'},
-            #                   'typ': And(Use(int)),
-            #                   'author': And(str, len),
-            #                   'level': And(Use(int)),
-            #                   'answer': And(str, len),
-            #                   'skill': And(str, len)}])
-            if request.data:
-                id_string = request.data['skill']
-                user = request.user
-            else:
-                id_string = None
-            if id_string is not None:
-                for id in id_string.split(','):
-                    task = Task.objects.filter(skill=id)
-                    serializer = TaskSerializer(task, many=True)
-                    lista.append(serializer.data)
-                    # validated = schema.validate(test)
-                return Response(list(chain(*lista)))
-            else:
-                task = Task.objects.all()
+        lista = []
+        # schema = Schema([{'id': And(Use(int)),
+        #                   'text': And(str, len),
+        #                   'add_date':{'type': 'string', 'pattern': '^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$'},
+        #                   'typ': And(Use(int)),
+        #                   'author': And(str, len),
+        #                   'level': And(Use(int)),
+        #                   'answer': And(str, len),
+        #                   'skill': And(str, len)}])
+        if request.data:
+            id_string = request.data['skill']
+            user = request.user
+        else:
+            id_string = None
+        if id_string is not None:
+            for id in id_string.split(','):
+                task = Task.objects.filter(skill=id)
                 serializer = TaskSerializer(task, many=True)
-                return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                lista.append(serializer.data)
+                # validated = schema.validate(test)
+                mojtest = TestJSON()
+                mojtest.name = 'spr'
+                mojtest.tasks = simplejson.dumps(list(chain(*lista)))
+                mojtest.created = datetime.date.today()
+                pomoc = CustomUser.objects.get(id=request.user.id)
+                mojtest.user_id = pomoc.id
+                mojtest.save()
+            return Response(list(chain(*lista)))
+        else:
+            task = Task.objects.all()
+            serializer = TaskSerializer(task, many=True)
+            return Response(serializer.data)
 
 class TestViewSet(APIView):
     permission_classes = (permissions.AllowAny,)

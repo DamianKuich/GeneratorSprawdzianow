@@ -1,6 +1,6 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
-from .models import CustomUser, Task, Section, Skill, PasswordSendReset, PasswordReset
+from .models import CustomUser, Task, Section, Skill, PasswordSendReset, PasswordReset , TestJSON
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -80,16 +80,15 @@ class SectionSerializer(serializers.ModelSerializer):
         model = Section
         fields = ('id','Section_name','skill')
 class TaskSerializer(serializers.ModelSerializer):
-    text = serializers.CharField(required=True)
-    add_date = serializers.DateTimeField(required=True)
-    typ = serializers.IntegerField(required=True)
-    author = serializers.CharField(required=True)
-    level = serializers.IntegerField(required=True)
-    answer = serializers.CharField(required=True)
-    skill = SkillSerializer(many=True, required=True)
+    # text = serializers.CharField(required=True)
+    # add_date = serializers.DateTimeField(required=True)
+    # typ = serializers.IntegerField(required=True)
+    # author = serializers.CharField(required=True)
+    # level = serializers.IntegerField(required=True)
+    # answer = serializers.CharField(required=True)
+    skill = SkillSerializer(many=True)
     class Meta:
         model = Task
-        fields = ('id','text','add_date','typ','author','level','skill')
+        fields = ('id','text','add_date','typ','author','level','answer','skill')
 
-
-
+# class TestJSONSerializer(serializers.ModelSerializer):

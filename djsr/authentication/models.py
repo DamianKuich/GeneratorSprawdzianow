@@ -42,7 +42,7 @@ class Task(models.Model):
         (1, 'Podstawowy'),
         (2, 'Rozszerzony'),
     }
-    text = models.TextField()
+    text = models.CharField(max_length=500)
     add_date = models.DateField(default=datetime.date.today)
     typ = models.IntegerField(choices=RODZAJE, default=0)
     author = models.CharField(max_length=100)
@@ -59,10 +59,10 @@ class Task(models.Model):
 
 
 class TestJSON(models.Model):
-    name = models.CharField(max_length=500)
-    tasks = models.TextField()
+    name = models.TextField(null=True)
+    tasks = models.TextField(null=True)
     created = models.DateField(default=datetime.date.today)
-    user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user_id = models.IntegerField()
 
 class PasswordSendReset(models.Model):
     email = models.EmailField(blank=True, max_length=254, verbose_name='email address')
