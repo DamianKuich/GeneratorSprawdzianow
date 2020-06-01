@@ -33,14 +33,14 @@ class PasswordSendResetSerializer(serializers.ModelSerializer):
     )
     class Meta:
         model = PasswordSendReset
-        fields = {'email'}
+        fields = ('email',)
 
 class PasswordResetSerializer(serializers.ModelSerializer):
     password_1 = serializers.CharField(min_length=8, write_only=True)
     password_2 = serializers.CharField(min_length=8, write_only=True)
     class Meta:
         model = PasswordSendReset
-        fields = {'password_1', 'password_2'}
+        fields = ('password_1', 'password_2')
 
 
 class CustomUserSerializerReadOnly(serializers.ModelSerializer):

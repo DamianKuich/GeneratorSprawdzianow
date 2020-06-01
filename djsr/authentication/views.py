@@ -41,6 +41,11 @@ class CustomUserCreate(APIView):
     def post(self, request, *args, **kwargs, ):
         serializer = CustomUserSerializer(data=request.data)
         if serializer.is_valid():
+            #userr = CustomUser.objects.filter(email=serializer.email)
+            if CustomUser.objects.filter(email=serializer.validated_data.get('email')).exists():
+                return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+            elif CustomUser.objects.filter(username=serializer.validated_data.get('username')).exists():
+                return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
             user = serializer.save()
             tokenbackend = TokenBackend(algorithm='RS256',
                                         signing_key=getattr(settings, "RS256_PRIVATE_KEY", None),
@@ -52,7 +57,7 @@ class CustomUserCreate(APIView):
                                              created_on=datetime.datetime.utcnow() + datetime.timedelta(0,
                                                                                                         3600) + datetime.timedelta(
                                                  0, 3600),
-                                             used=None
+                                             used=False
                                              )
             activation.save()
             token = tokenbackend.encode(
@@ -60,12 +65,7 @@ class CustomUserCreate(APIView):
             data = {
                 'confirmation_token': token
             }
-            # userr = CustomUser.objects.filter(email=user.email)
-            # if user:
-            #     return Response(userr)
-            # elif CustomUser.objects.filter(username=user.username).exists():
-            #     return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
-            # user.is_active = False
+            user.is_active = False
             user.save()
             mail_subject = 'Activate your account.'
             current_site = get_current_site(request)
@@ -83,32 +83,32 @@ class PasswordSendResetView(APIView):
     def post(self, request):
         serializer = PasswordSendResetSerializer(data=request.data)
         if serializer.is_valid():
-            reset = serializer.save()
-            # TODO check if token isn't used
-            tokenbackend = TokenBackend(algorithm='RS256',
-                                        signing_key=getattr(settings, "RS256_PRIVATE_KEY", None),
-                                        verifying_key=getattr(settings, "RS256_PUBLIC_KEY", None))
-            reset = UserResetToken(email=reset.email,
-                                             expire=datetime.datetime.utcnow() + datetime.timedelta(0,
-                                                                                                    3600) + datetime.timedelta(
-                                                 0, 3600) + datetime.timedelta(0, 3600),
-                                             created_on=datetime.datetime.utcnow() + datetime.timedelta(0,
+            if CustomUser.objects.filter(email=serializer.validated_data.get('email')).exists():
+                reset = serializer.save()
+                # TODO check if token isn't used
+                tokenbackend = TokenBackend(algorithm='RS256',
+                                            signing_key=getattr(settings, "RS256_PRIVATE_KEY", None),
+                                            verifying_key=getattr(settings, "RS256_PUBLIC_KEY", None))
+                reset = UserResetToken(email=reset.email,
+                                                 expire=datetime.datetime.utcnow() + datetime.timedelta(0,
                                                                                                         3600) + datetime.timedelta(
-                                                 0, 3600),
-                                             used=None
-                                             )
-            reset.save()
-            token = tokenbackend.encode(
-                {'user_email': reset.email, 'exp': datetime.datetime.utcnow() + datetime.timedelta(0, 3600)})
-            if CustomUser.objects.filter(email=serializer.email).exists():
-                return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
-            # TODO check if user is active
-            mail_subject = 'Reset your password.'
-            current_site = get_current_site(request)
-            activation_link = "http://{0}/resetpassword/{1}".format(current_site, token)
-            message = "Hello ,\n click the link below to reset your password.\n {0}".format(activation_link)
-            email = EmailMessage(mail_subject, message, to=[reset.email])
-            email.send()
+                                                     0, 3600) + datetime.timedelta(0, 3600),
+                                                 created_on=datetime.datetime.utcnow() + datetime.timedelta(0,
+                                                                                                            3600) + datetime.timedelta(
+                                                     0, 3600),
+                                                 used=False
+                                                 )
+                reset.save()
+                token = tokenbackend.encode(
+                    {'user_email': reset.email, 'exp': datetime.datetime.utcnow() + datetime.timedelta(0, 3600)})
+                # TODO check if user is active
+                mail_subject = 'Reset your password.'
+                current_site = get_current_site(request)
+                activation_link = "http://{0}/passreset/{1}".format(current_site, token)
+                message = "Hello ,\n click the link below to reset your password.\n {0}".format(activation_link)
+                email = EmailMessage(mail_subject, message, to=[reset.email])
+                email.send()
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class PasswordResetView(APIView):
@@ -119,8 +119,8 @@ class PasswordResetView(APIView):
     def get(self, request, **kwargs):
         serializer = PasswordResetSerializer(data=request.data)
         if serializer.is_valid():
-            reset = serializer.save()
             token = kwargs.pop('token')
+            reset = serializer.save()
             tokenbackend = TokenBackend(algorithm='RS256',
                                         signing_key=getattr(settings, "RS256_PRIVATE_KEY", None),
                                         verifying_key=getattr(settings, "RS256_PUBLIC_KEY", None))
@@ -128,11 +128,10 @@ class PasswordResetView(APIView):
                 payload = tokenbackend.decode(token=token, verify=True)
             except TokenBackendError:
                 return Response({'error': 'Invalid token'}, status=status.HTTP_403_FORBIDDEN)
-            if CustomUser.objects.filter(email=serializer.password_1).exists():
-                return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
-            if serializer.password_1 == serializer.password_2:
+            # if CustomUser.objects.filter(email=serializer.password_1).exists():
+            #     return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+            if serializer.validated_data.get('password_1') == serializer.validated_data.get('password_2'):
                 return Response(status=status.HTTP_202_ACCEPTED)
-
 
 
 class HelloWorldView(APIView):
@@ -148,14 +147,13 @@ class HelloWorldView(APIView):
             payload = tokenbackend.decode(token=token, verify=True)
         except TokenBackendError:
             return Response({'error': 'Invalid token'}, status=status.HTTP_403_FORBIDDEN)
-        # if UserActivationToken.expire == (datetime.datetime.utcnow() + datetime.timedelta(3600) + datetime.timedelta(0, 3600)):
-        #     return Response(status=status.HTTP_409_CONFLICT)
-        # if UserActivationToken.used is True:
-        #     return Response(status=status.HTTP_409_CONFLICT)
+        if UserActivationToken.expire == (datetime.datetime.utcnow() + datetime.timedelta(3600) + datetime.timedelta(0, 3600)):
+            return Response(status=status.HTTP_409_CONFLICT)
+        if UserActivationToken.used is True:
+            return Response(status=status.HTTP_409_CONFLICT)
         user = CustomUser.objects.get(id=payload.get('user_id'))
         # token_id = UserActivationToken.pk
         # UserActivationToken.objects.get(id=payload.get('token_id'))
-        # UserActivationToken.used = True
         user.is_active = True
         user.save()
         return Response(

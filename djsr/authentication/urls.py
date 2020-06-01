@@ -18,5 +18,5 @@ urlpatterns = [
     path('blacklist/', LogoutAndBlacklistRefreshTokenForUserView.as_view(), name='blacklist'),
     path('user/update/', UserRetrieveUpdateAPIView.as_view()),
     path('user/resetsend/',PasswordSendResetView.as_view(), name='sendreset'),
-    path('user/passreset/',PasswordResetView.as_view(), name='reset'),
+    path('user/passreset/<token>/$',PasswordResetView.as_view(), name='reset'),
 ]
