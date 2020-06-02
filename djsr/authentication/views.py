@@ -25,9 +25,9 @@ from schema import Schema, And, Use, Optional
 
 
 from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer, \
-    CustomUserSerializerReadOnly, PasswordSendResetSerializer, PasswordResetSerializer
+    CustomUserSerializerReadOnly, PasswordSendResetSerializer
 from .models import Task, Section, Skill, CustomUser, UserActivationToken, \
-    TestJSON, PasswordSendReset, PasswordReset, UserResetToken
+    TestJSON, PasswordSendReset, UserResetToken
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
@@ -112,15 +112,11 @@ class PasswordSendResetView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class PasswordResetView(APIView):
-    model = PasswordReset.objects.all()
-    permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = PasswordResetSerializer
+    permission_classes = (permissions.AllowAny,)
 
-    def get(self, request, **kwargs):
-        serializer = PasswordResetSerializer(data=request.data)
-        if serializer.is_valid():
+    def post(self, request, **kwargs):
+        if True:
             token = kwargs.pop('token')
-            reset = serializer.save()
             tokenbackend = TokenBackend(algorithm='RS256',
                                         signing_key=getattr(settings, "RS256_PRIVATE_KEY", None),
                                         verifying_key=getattr(settings, "RS256_PUBLIC_KEY", None))
@@ -128,10 +124,17 @@ class PasswordResetView(APIView):
                 payload = tokenbackend.decode(token=token, verify=True)
             except TokenBackendError:
                 return Response({'error': 'Invalid token'}, status=status.HTTP_403_FORBIDDEN)
-            # if CustomUser.objects.filter(email=serializer.password_1).exists():
-            #     return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
-            if serializer.validated_data.get('password_1') == serializer.validated_data.get('password_2'):
-                return Response(status=status.HTTP_202_ACCEPTED)
+            if UserResetToken.expire == (
+                    datetime.datetime.utcnow() + datetime.timedelta(3600) + datetime.timedelta(0, 3600)):
+                return Response(status=status.HTTP_409_CONFLICT)
+            if UserResetToken.used is True:
+                return Response(status=status.HTTP_409_CONFLICT)
+            email = payload.get('user_email')
+            user = CustomUser.objects.get(email=email)
+            password = request.data['password']
+            user.set_password(password)
+            user.save()
+            return Response(status=status.HTTP_202_ACCEPTED)
 
 
 class HelloWorldView(APIView):

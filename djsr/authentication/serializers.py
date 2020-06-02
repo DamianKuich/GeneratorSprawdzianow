@@ -1,6 +1,6 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
-from .models import CustomUser, Task, Section, Skill, PasswordSendReset, PasswordReset , TestJSON
+from .models import CustomUser, Task, Section, Skill, PasswordSendReset, TestJSON
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -34,14 +34,6 @@ class PasswordSendResetSerializer(serializers.ModelSerializer):
     class Meta:
         model = PasswordSendReset
         fields = ('email',)
-
-class PasswordResetSerializer(serializers.ModelSerializer):
-    password_1 = serializers.CharField(min_length=8, write_only=True)
-    password_2 = serializers.CharField(min_length=8, write_only=True)
-    class Meta:
-        model = PasswordSendReset
-        fields = ('password_1', 'password_2')
-
 
 class CustomUserSerializerReadOnly(serializers.ModelSerializer):
     """
