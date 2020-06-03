@@ -3,12 +3,13 @@ from django.urls import path, include
 from rest_framework_simplejwt import views as jwt_views
 from .views import SkillViewSet, SectionViewSet, CustomUserCreate, HelloWorldView, \
     LogoutAndBlacklistRefreshTokenForUserView, TaskViewSet, \
-    UserRetrieveUpdateAPIView, ReturnUserInfo, PasswordSendResetView, PasswordResetView, TestJSONViewSet
+    UserRetrieveUpdateAPIView, ReturnUserInfo, PasswordSendResetView, PasswordResetView, AllTestsJSONViewSet, MakeTestViewSet
 
 # TODO resend activation token
 urlpatterns = [
     path('user/skills/', SkillViewSet.as_view(), name="skills"),
-    path('user/test/', TestJSONViewSet.as_view(), name="Tests"),
+    path('user/maketest/', MakeTestViewSet.as_view(), name="skills"),
+    path('user/test/', AllTestsJSONViewSet.as_view(), name="Tests"),
     path('user/sections/', SectionViewSet.as_view(), name="sections"),
     path('user/tasks/', TaskViewSet.as_view(), name="tasks"),
     path('user/create/', CustomUserCreate.as_view(), name="create_user"),

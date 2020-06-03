@@ -59,6 +59,10 @@ class Answers(models.Model):
         max_length=(6 * 11),
         default = None # 6 * 10 character nominals, plus commas
     )
+
+class Image(models.Model):
+    name = models.CharField(max_length=500)
+    image = models.ImageField(blank=True, null=True)
 class Dataset(models.Model):
     variables = models.ManyToManyField(Variables)
     answers = models.ManyToManyField(Answers)
@@ -81,8 +85,10 @@ class Task(models.Model):
     typ = models.IntegerField(choices=RODZAJE, default=0)
     author = models.CharField(max_length=100)
     level = models.IntegerField(choices=RODZAJE2, default=0)
+    private = models.BooleanField(default=False)
     skill = models.ManyToManyField(Skill)
     dataset = models.ManyToManyField(Dataset)
+    image = models.ManyToManyField(Image)
 
 
     def __str__(self):
@@ -95,13 +101,14 @@ class Task(models.Model):
 class TestJSON(models.Model):
     name = models.TextField(null=True)
     tasks = JSONField(null=True)
+    images = models.ManyToManyField(Image)
     created = models.DateField(default=datetime.date.today)
     user_id = models.IntegerField()
 
     def __str__(self):
-        return self.name()
+        return self.nasza_nazwa()
 
-    def name(self):
+    def nasza_nazwa(self):
         return self.name
 
 class PasswordSendReset(models.Model):

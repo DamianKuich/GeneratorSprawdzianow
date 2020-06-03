@@ -248,6 +248,27 @@ class TaskViewSet(APIView):
                 serializer = TaskSerializer(task, many=True)
                 lista.append(serializer.data)
                 # validated = schema.validate(test)
+                return Response(list(chain(*lista)))
+        else:
+            task = Task.objects.all()
+            serializer = TaskSerializer(task, many=True)
+            return Response(serializer.data)
+
+class MakeTestViewSet(APIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = TaskSerializer
+    def post(self, request, format=None):
+        lista = []
+        if request.data:
+            id_string = request.data['id']
+        else:
+            id_string = None
+        if id_string is not None:
+            for id in id_string.split(','):
+                task = Task.objects.filter(id=id)
+                serializer = TaskSerializer(task, many=True)
+                lista.append(serializer.data)
+                # validated = schema.validate(test)
             try:
                 nazwa = request.data['nazwaspr']
                 if not TestJSON.objects.filter(name=nazwa).exists():
@@ -259,17 +280,13 @@ class TaskViewSet(APIView):
                     mojtest.user_id = pomoc.id
                     mojtest.save()
                     return Response(list(chain(*lista)))
-            except:
-                return Response(list(chain(*lista)))
+                else:
+                    return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+            except Exception as e:
+                return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         else:
-            task = Task.objects.all()
-            serializer = TaskSerializer(task, many=True)
-            return Response(serializer.data)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
-class TestViewSet(APIView):
-    permission_classes = (permissions.AllowAny,)
-    def post(self, request):
-        return Response()
 
 class SectionViewSet(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -280,7 +297,7 @@ class SectionViewSet(APIView):
         dzial = Section.objects.all()
         serializer = SectionSerializer(dzial, many=True)
         return Response(serializer.data)
-class TestJSONViewSet(APIView):
+class AllTestsJSONViewSet(APIView):
     permission_classes = (permissions.AllowAny,)
     queryset = TestJSON.objects.all()
     serializer_class = TestJSONSerializer
