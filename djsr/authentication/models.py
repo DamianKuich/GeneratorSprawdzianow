@@ -107,10 +107,6 @@ class TestJSON(models.Model):
 class PasswordSendReset(models.Model):
     email = models.EmailField(blank=True, max_length=254, verbose_name='email address')
 
-class PasswordReset(models.Model):
-    new_pass_1 = models.CharField(max_length=500)
-    new_pass_2 = models.CharField(max_length=500)
-
 class UserResetToken(models.Model):
     email = models.EmailField(blank=True, max_length=254, verbose_name='email address')
     expire = models.DateTimeField()

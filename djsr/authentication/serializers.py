@@ -1,6 +1,6 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
-from .models import CustomUser, Task, Section, Skill, PasswordSendReset, PasswordReset , TestJSON, Variables, Dataset, Answers
+from .models import CustomUser, Task, Section, Skill, PasswordSendReset, TestJSON
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -35,14 +35,6 @@ class PasswordSendResetSerializer(serializers.ModelSerializer):
         model = PasswordSendReset
         fields = ('email',)
 
-class PasswordResetSerializer(serializers.ModelSerializer):
-    password_1 = serializers.CharField(min_length=8, write_only=True)
-    password_2 = serializers.CharField(min_length=8, write_only=True)
-    class Meta:
-        model = PasswordSendReset
-        fields = ('password_1', 'password_2')
-
-
 class CustomUserSerializerReadOnly(serializers.ModelSerializer):
     """
     Currently unused in preference of the below.
@@ -72,27 +64,13 @@ class CustomUserSerializerReadOnly(serializers.ModelSerializer):
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Skill
-        fields = ('id', 'Skill')
+        fields = ('id', 'Skill_name')
 
 class SectionSerializer(serializers.ModelSerializer):
     skill = SkillSerializer(many=True)
     class Meta:
         model = Section
-        fields = ('id','Section','skill')
-class VariableSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Variables
-        fields = ('id','variables','values')
-class AnswersSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Answers
-        fields = ('id','allanswers','correctans')
-class DataSetSerializer(serializers.ModelSerializer):
-    variables = VariableSerializer(many=True)
-    answers = AnswersSerializer(many=True)
-    class Meta:
-        model = Dataset
-        fields = ('id','variables','answers')
+        fields = ('id','Section_name','skill')
 class TaskSerializer(serializers.ModelSerializer):
     # text = serializers.CharField(required=True)
     # add_date = serializers.DateTimeField(required=True)
@@ -101,12 +79,8 @@ class TaskSerializer(serializers.ModelSerializer):
     # level = serializers.IntegerField(required=True)
     # answer = serializers.CharField(required=True)
     skill = SkillSerializer(many=True)
-    dataset = DataSetSerializer(many=True)
     class Meta:
         model = Task
-        fields = ('id','text','add_date','typ','author','level','dataset','skill')
+        fields = ('id','text','add_date','typ','author','level','answer','skill')
 
-class TestJSONSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = TestJSON
-        fields = ('id','name','tasks','created','user_id')
+# class TestJSONSerializer(serializers.ModelSerializer):
