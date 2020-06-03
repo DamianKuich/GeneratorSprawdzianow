@@ -99,9 +99,9 @@ class TestJSON(models.Model):
     user_id = models.IntegerField()
 
     def __str__(self):
-        return self.nasza_nazwa()
+        return self.name()
 
-    def nasza_nazwa(self):
+    def name(self):
         return self.name
 
 class PasswordSendReset(models.Model):

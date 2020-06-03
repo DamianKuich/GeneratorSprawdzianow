@@ -1,6 +1,6 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
-from .models import CustomUser, Task, Section, Skill, PasswordSendReset, TestJSON
+from .models import CustomUser, Task, Section, Skill, PasswordSendReset, TestJSON, Answers, Variables, Dataset
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -64,13 +64,27 @@ class CustomUserSerializerReadOnly(serializers.ModelSerializer):
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Skill
-        fields = ('id', 'Skill_name')
+        fields = ('id', 'Skill')
 
 class SectionSerializer(serializers.ModelSerializer):
     skill = SkillSerializer(many=True)
     class Meta:
         model = Section
-        fields = ('id','Section_name','skill')
+        fields = ('id','Section','skill')
+class VariableSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Variables
+        fields = ('id','variables','values')
+class AnswersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Answers
+        fields = ('id','allanswers','correctans')
+class DataSetSerializer(serializers.ModelSerializer):
+    variables = VariableSerializer(many=True)
+    answers = AnswersSerializer(many=True)
+    class Meta:
+        model = Dataset
+        fields = ('id','variables','answers')
 class TaskSerializer(serializers.ModelSerializer):
     # text = serializers.CharField(required=True)
     # add_date = serializers.DateTimeField(required=True)
@@ -79,8 +93,12 @@ class TaskSerializer(serializers.ModelSerializer):
     # level = serializers.IntegerField(required=True)
     # answer = serializers.CharField(required=True)
     skill = SkillSerializer(many=True)
+    dataset = DataSetSerializer(many=True)
     class Meta:
         model = Task
-        fields = ('id','text','add_date','typ','author','level','answer','skill')
+        fields = ('id','text','add_date','typ','author','level','dataset','skill')
 
-# class TestJSONSerializer(serializers.ModelSerializer):
+class TestJSONSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TestJSON
+        fields = ('id','name','tasks','created','user_id')

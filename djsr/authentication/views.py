@@ -25,7 +25,7 @@ from schema import Schema, And, Use, Optional
 
 
 from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer, \
-    CustomUserSerializerReadOnly, PasswordSendResetSerializer
+    CustomUserSerializerReadOnly, PasswordSendResetSerializer, TestJSONSerializer
 from .models import Task, Section, Skill, CustomUser, UserActivationToken, \
     TestJSON, PasswordSendReset, UserResetToken
 
@@ -280,7 +280,15 @@ class SectionViewSet(APIView):
         dzial = Section.objects.all()
         serializer = SectionSerializer(dzial, many=True)
         return Response(serializer.data)
+class TestJSONViewSet(APIView):
+    permission_classes = (permissions.AllowAny,)
+    queryset = TestJSON.objects.all()
+    serializer_class = TestJSONSerializer
 
+    def get(self, request, format=None):
+        dzial = TestJSON.objects.all()
+        serializer = TestJSONSerializer(dzial, many=True)
+        return Response(serializer.data)
 
 class SkillViewSet(APIView):
     permission_classes = (permissions.AllowAny,)

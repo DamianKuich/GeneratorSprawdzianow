@@ -8,7 +8,7 @@ from .views import SkillViewSet, SectionViewSet, CustomUserCreate, HelloWorldVie
 # TODO resend activation token
 urlpatterns = [
     path('user/skills/', SkillViewSet.as_view(), name="skills"),
-    path('user/tests/', TestJSONViewSet.as_view(), name="Tests"),
+    path('user/test/', TestJSONViewSet.as_view(), name="Tests"),
     path('user/sections/', SectionViewSet.as_view(), name="sections"),
     path('user/tasks/', TaskViewSet.as_view(), name="tasks"),
     path('user/create/', CustomUserCreate.as_view(), name="create_user"),
