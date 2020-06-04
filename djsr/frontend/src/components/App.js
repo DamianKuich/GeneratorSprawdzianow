@@ -5,6 +5,7 @@ import "./styles/mdcardfixes.css";
 import "./styles/styles.css";
 import axiosInstance from "./axiosAPI";
 import TaskSearch from "./taskSearch";
+import ExamEditor from "./ExamEditor";
 const Login = lazy(() => import("./login"));
 const Signup = lazy(() => import("./signup"));
 const Navbar = lazy(() => import("./navbar"));
@@ -74,7 +75,7 @@ class App extends Component {
       appState: this.state,
       axiosInstance: axiosInstance,
       userLogout: this.userLogout,
-      setUser:this.setUser,
+      setUser: this.setUser,
     };
     const properties = { ...this.props, ...global };
     return (
@@ -111,9 +112,11 @@ class App extends Component {
               />
               <Route
                 path={"/search/"}
-                render={(props) => (
-                  <TaskSearch {...props} {...global} />
-                )}
+                render={(props) => <TaskSearch {...props} {...global} />}
+              />
+              <Route
+                path={"/editor/"}
+                render={(props) => <ExamEditor {...props} {...global} />}
               />
               <Route path={"/"} render={(props) => <div>Home again</div>} />
             </Switch>

@@ -37,10 +37,9 @@ class TaskSearch extends Component {
     console.log("sections", sections);
     if (!sections) return <div>loading</div>;
     return (
-      <div>
+      <div className="w-100">
         <Formik
           initialValues={{ skills: [] }}
-          validationSchema={}
           onSubmit={(values, helpers) => {
             setTimeout(() => {
               // console.log("start 1");
@@ -63,16 +62,17 @@ class TaskSearch extends Component {
                 .then((response) => {
                   helpers.setSubmitting(false);
                   console.log("response", response);
-                  this.setState({
-                    results: response.data,
-                  });
+                  // this.setState({
+                  //   results: response.data,
+                  // });
+                  this.props.updateData(response.data);
                 })
                 .catch((error) => {
                   // console.log("login error", error.response);
                   const errResponse = error.response;
                   helpers.setSubmitting(false);
                 });
-            }, 5000);
+            }, 200);
           }}
         >
           {({
@@ -161,14 +161,6 @@ class TaskSearch extends Component {
             </MDBContainer>
           )}
         </Formik>
-        <MDBContainer className="mt-3">
-          {Array.isArray(results) &&
-            results.length > 0 &&
-            results.map((task) => <div>{task.text}</div>)}
-          {Array.isArray(results) && results.length === 0 && (
-            <div>Brak zadań o podanych kryteriach</div>
-          )}
-        </MDBContainer>
       </div>
     );
   }
