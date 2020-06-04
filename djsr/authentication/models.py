@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from jsonfield import JSONField
 from django.db import models
+
+from django_mysql.models import ListCharField
 import datetime
 
 
@@ -12,16 +15,16 @@ class CustomUser(AbstractUser):
 
 
 class Skill(models.Model):
-    Skill_name = models.CharField(max_length=500)
+    Skill = models.CharField(max_length=500)
 
     def __str__(self):
         return self.nasza_nazwa()
 
     def nasza_nazwa(self):
-        return self.Skill_name
+        return self.Skill
 
 class Section(models.Model):
-    Section_name = models.CharField(max_length=500)
+    Section = models.CharField(max_length=500)
     skill = models.ManyToManyField(Skill)
     # tasks = models.ManyToManyField(Task)
 
@@ -29,7 +32,42 @@ class Section(models.Model):
         return self.nasza_nazwa()
 
     def nasza_nazwa(self):
-        return self.Section_name
+        return self.Section
+class Variables(models.Model):
+    variables =ListCharField(
+        base_field=models.CharField(max_length=10),
+        size=6,
+        max_length=(6 * 11),
+        default = None# 6 * 10 character nominals, plus commas
+    )
+    values =ListCharField(
+        base_field=models.CharField(max_length=10),
+        size=6,
+        max_length=(6 * 11),
+        default = None# 6 * 10 character nominals, plus commas
+    )
+class Answers(models.Model):
+    allanswers =ListCharField(
+        base_field=models.CharField(max_length=10),
+        size=6,
+        max_length=(6 * 11),
+        default = None # 6 * 10 character nominals, plus commas
+    )
+    correctans =ListCharField(
+        base_field=models.CharField(max_length=10),
+        size=6,
+        max_length=(6 * 11),
+        default = None # 6 * 10 character nominals, plus commas
+    )
+
+class Image(models.Model):
+    name = models.CharField(max_length=500)
+    image = models.ImageField(blank=True, null=True)
+class Dataset(models.Model):
+    variables = models.ManyToManyField(Variables)
+    answers = models.ManyToManyField(Answers)
+
+
 class Task(models.Model):
     RODZAJE = {
         (0, 'Nieznany'),
@@ -47,8 +85,10 @@ class Task(models.Model):
     typ = models.IntegerField(choices=RODZAJE, default=0)
     author = models.CharField(max_length=100)
     level = models.IntegerField(choices=RODZAJE2, default=0)
-    answer = models.CharField(max_length=500)
+    private = models.BooleanField(default=False)
     skill = models.ManyToManyField(Skill)
+    dataset = models.ManyToManyField(Dataset)
+    image = models.ManyToManyField(Image)
 
 
     def __str__(self):
@@ -58,10 +98,32 @@ class Task(models.Model):
         return self.text
 
 
+class TestJSON(models.Model):
+    name = models.TextField(null=True)
+    tasks = JSONField(null=True)
+    images = models.ManyToManyField(Image)
+    created = models.DateField(default=datetime.date.today)
+    user_id = models.IntegerField()
+
+    def __str__(self):
+        return self.nasza_nazwa()
+
+    def nasza_nazwa(self):
+        return self.name
+
+class PasswordSendReset(models.Model):
+    email = models.EmailField(blank=True, max_length=254, verbose_name='email address')
+
+class UserResetToken(models.Model):
+    email = models.EmailField(blank=True, max_length=254, verbose_name='email address')
+    expire = models.DateTimeField()
+    created_on = models.DateTimeField()
+    # auto_now_add=True
+    used = models.BooleanField()
 
 class UserActivationToken(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     expire = models.DateTimeField()
     created_on = models.DateTimeField()
     # auto_now_add=True
-    used = models.DateTimeField(null=True)
+    used = models.BooleanField()
