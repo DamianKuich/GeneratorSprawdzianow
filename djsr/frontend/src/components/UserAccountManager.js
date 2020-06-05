@@ -273,7 +273,8 @@ class UserAccountManager extends Component {
                               this.setState({ locked: false });
                             })
                             .catch((error) => {
-                              // console.log("login error", error.response);
+                              helpers.setStatus("Podano nieprawidłowe aktualne hasło")
+                              console.log("chngpass error", error.response);
                               const errResponse = error.response;
                               helpers.setSubmitting(false);
                               this.setState({ locked: false });
@@ -298,6 +299,7 @@ class UserAccountManager extends Component {
                                 "oldPassword",
                                 "Podano nieprawidłowe stare hasło"
                               );
+
                             });
                         }, 400);
                       }}
@@ -359,7 +361,7 @@ class UserAccountManager extends Component {
                               disabled={isSubmitting || locked}
                             />
                           </div>
-                          {!!status && <div>Pomyslnie zmieniono hasło</div>}
+                          {!!status && <div>{status}</div>}
                           <div className="text-center">
                             <MDBBtn
                               color="primary"
