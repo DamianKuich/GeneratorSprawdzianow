@@ -4,7 +4,13 @@ import { MDBCol, MDBCollapse, MDBContainer, MDBRow } from "mdbreact";
 import TaskSearch from "./taskSearch";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import TaskEditor from "./TaskEditor";
-import { PDFDownloadLink, Document, Page } from '@react-pdf/renderer'
+import {
+  PDFDownloadLink,
+  Document,
+  Page,
+  Text,
+  StyleSheet, View, Font,
+} from "@react-pdf/renderer";
 
 class ExamEditor extends Component {
   constructor(props) {
@@ -20,14 +26,39 @@ class ExamEditor extends Component {
     // this.taskEditorRef = React.createRef();
   }
 
-  generatedPDF = () =>{
+  generatedPDF = (exam) => {
+    Font.register({family:"FM",fontWeight:"bold"})
+    const styles = StyleSheet.create({ bold: { fontWeight: "700"} });
+    let taski = exam.tasks.map((task, index) => (
+      <Text>
+        <Text style={styles.bold}>
+          {index + 1}
+          {". "}
+        </Text>
+        <Text>{task.text}</Text>
+      </Text>
+    ));
+    return (
+      <Document>
+        <Page size="A4">
+          <View style={styles.bold}>
+          <Text>
+            Imie i nazwisko:
+            .................................................................
+          </Text>
+            </View>
+          {taski}
+        </Page>
+      </Document>
+    );
+  };
 
-  }
+  PDF = null;
 
   setTaskToEdit = (index) => {
     this.setState((state) => {
       state.editorTask = state.exam.tasks[index];
-      state.sideMenuCollapseId="taskEdit";
+      state.sideMenuCollapseId = "taskEdit";
       return state;
     });
   };
@@ -87,7 +118,7 @@ class ExamEditor extends Component {
     return (
       <DragDropContext onDragEnd={this.dragEnd}>
         <MDBRow>
-          <MDBCol size="6">
+          <MDBCol size="3">
             <MDBRow>
               <MDBCol
                 className={
@@ -102,7 +133,7 @@ class ExamEditor extends Component {
                 Dodaj zadanie
               </MDBCol>
               <MDBCol
-                size={"6"}
+                size={"3"}
                 className={
                   "d-flex justify-content-between " +
                   "p-2 mt-3 border-right border-top border-left " +
@@ -112,7 +143,29 @@ class ExamEditor extends Component {
                   this.setSideMenuCollapse("taskEdit");
                 }}
               >
-                <TaskEditor />
+                Edycja zadania
+              </MDBCol>
+              <MDBCol
+                size={"3"}
+                className={
+                  "d-flex justify-content-between " +
+                  "p-2 mt-3 border-right border-top border-left "
+                }
+              >
+                <PDFDownloadLink document={this.generatedPDF(this.state.exam)} fileName="somename.pdf">
+                    {({ blob, url, loading, error }) =>
+                      loading ? "Generowanie PDF" : "Pobierz PDF!"
+                    }
+                  </PDFDownloadLink>
+              </MDBCol>
+              <MDBCol
+                size={"3"}
+                className={
+                  "d-flex justify-content-between " +
+                  "p-2 mt-3 border-right border-top border-left "
+                }
+              >
+                <span onClick={()=>{}}>Zapisz sprawdzian</span>
               </MDBCol>
             </MDBRow>
             <MDBCollapse
@@ -193,7 +246,10 @@ class ExamEditor extends Component {
                   className="border"
                   ref={provided.innerRef}
                 >
-                  <div>Imie i nazwisko: .................................................................</div>
+                  <div>
+                    Imie i nazwisko:
+                    .................................................................
+                  </div>
                   {examTasks.map((task, index) => (
                     <Draggable
                       key={"task-" + task.id + "-" + index}
@@ -210,7 +266,11 @@ class ExamEditor extends Component {
                             this.setTaskToEdit(index);
                           }}
                         >
-                          <span className="font-weight-bold">{index+1}{". "}</span><span>{task.text}</span>
+                          <span className="font-weight-bold">
+                            {index + 1}
+                            {". "}
+                          </span>
+                          <span>{task.text}</span>
                         </div>
                       )}
                     </Draggable>

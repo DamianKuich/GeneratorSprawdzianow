@@ -21,7 +21,7 @@ class UserAccountManager extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeItem: "1",
+      activeItem: "2",
       isUserChecked: false,
       userInfo: null,
       locked: false,
@@ -62,7 +62,7 @@ class UserAccountManager extends Component {
   // }
 
   toggle = (id) => {
-    // console.log(this.userDataForm);
+    console.log(this.userDataForm);
     this.userDataForm.current.setFieldValue(
       "name",
       this.props.appState.user.username,
@@ -93,20 +93,20 @@ class UserAccountManager extends Component {
             <MDBRow className="w-auto">
               <MDBCol xl={"3"} className="border-right">
                 <MDBNav className="nav-pills flex-column nav-justified font-weight-bold">
-                  <MDBNavItem>
-                    <MDBNavLink
-                      link
-                      to="#"
-                      active={this.state.activeItem === "1"}
-                      onClick={() => {
-                        this.toggle("1");
-                      }}
-                      role="tab"
-                      disabled={locked}
-                    >
-                      Dane podstawowe
-                    </MDBNavLink>
-                  </MDBNavItem>
+                  {/*<MDBNavItem>*/}
+                  {/*  <MDBNavLink*/}
+                  {/*    link*/}
+                  {/*    to="#"*/}
+                  {/*    active={this.state.activeItem === "1"}*/}
+                  {/*    onClick={() => {*/}
+                  {/*      this.toggle("1");*/}
+                  {/*    }}*/}
+                  {/*    role="tab"*/}
+                  {/*    disabled={locked}*/}
+                  {/*  >*/}
+                  {/*    Dane podstawowe*/}
+                  {/*  </MDBNavLink>*/}
+                  {/*</MDBNavItem>*/}
                   <MDBNavItem>
                     <MDBNavLink
                       link
@@ -281,6 +281,8 @@ class UserAccountManager extends Component {
                                 {
                                   password: "",
                                   oldPassword: "",
+                                  passwordConfirm:""
+
                                 },
                                 false
                               );
@@ -288,6 +290,7 @@ class UserAccountManager extends Component {
                                 {
                                   password: false,
                                   oldPassword: false,
+                                  passwordConfirm:false
                                 },
                                 false
                               );
