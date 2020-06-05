@@ -55,7 +55,7 @@ class TaskSearch extends Component {
               }
               // console.log("values",values);
               // console.log("skillsy",result.join(","));
-              axiosInstanceNoAuth
+              axiosInstance
                 .post("/user/tasks/", {
                   skill: result.join(","),
                 })
@@ -102,7 +102,7 @@ class TaskSearch extends Component {
                             this.toggleCollapse("section-" + section.id);
                           }}
                         >
-                          {section.Section_name}
+                          {section.Section}
                           <MDBIcon
                             icon={
                               collapseId === "section-" + section.id
@@ -135,7 +135,7 @@ class TaskSearch extends Component {
                                     "skill-id-" + skill.id + "-" + section.id
                                   }
                                 >
-                                  {skill.Skill_name}
+                                  {skill.Skill}
                                 </label>
                               </div>
                             );

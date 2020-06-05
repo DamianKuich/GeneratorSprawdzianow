@@ -4,6 +4,7 @@ import { MDBCol, MDBCollapse, MDBContainer, MDBRow } from "mdbreact";
 import TaskSearch from "./taskSearch";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import TaskEditor from "./TaskEditor";
+import { PDFDownloadLink, Document, Page } from '@react-pdf/renderer'
 
 class ExamEditor extends Component {
   constructor(props) {
@@ -17,6 +18,10 @@ class ExamEditor extends Component {
       editorTask: null,
     };
     // this.taskEditorRef = React.createRef();
+  }
+
+  generatedPDF = () =>{
+
   }
 
   setTaskToEdit = (index) => {
