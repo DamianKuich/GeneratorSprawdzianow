@@ -204,7 +204,7 @@ class UserRetrieveUpdateAPIView(APIView):
                     password = request.data['password']
                     user.set_password(password)
                 else:
-                    Response({"oldpassword": "Old password doesnt match"}, status=status.HTTP_200_OK)
+                    return Response({"oldpassword": "Old password doesnt match"}, status=status.HTTP_400_BAD_REQUEST)
         except:
             pass
         try:
@@ -213,7 +213,11 @@ class UserRetrieveUpdateAPIView(APIView):
         except:
             pass
         try:
-            user.email = request.data['email']
+            if not CustomUser.objects.filter(email=request.data['email']).exists():
+                user.email = request.data['email']
+            else:
+                return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+
         except:
             pass
         user.save()
@@ -248,7 +252,7 @@ class TaskViewSet(APIView):
                 serializer = TaskSerializer(task, many=True)
                 lista.append(serializer.data)
                 # validated = schema.validate(test)
-                return Response(list(chain(*lista)))
+            return Response(list(chain(*lista)))
         else:
             task = Task.objects.all()
             serializer = TaskSerializer(task, many=True)
