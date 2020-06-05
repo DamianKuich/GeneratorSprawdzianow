@@ -83,7 +83,7 @@ class ImageSerializer(serializers.ModelSerializer):
 class AnswersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answers
-        fields = ('id','allanswers','correctans')
+        fields = ('id','allanswers','variables','correctans')
 class DataSetSerializer(serializers.ModelSerializer):
     variables = VariableSerializer(many=True)
     answers = AnswersSerializer(many=True)
@@ -99,7 +99,7 @@ class TaskSerializer(serializers.ModelSerializer):
     # answer = serializers.CharField(required=True)
     skill = SkillSerializer(many=True)
     dataset = DataSetSerializer(many=True)
-    image = ImageSerializer(many=True)
+    image = ImageSerializer(many=True,required=False)
     class Meta:
         model = Task
         fields = ('id','text','add_date','typ','author','level','dataset','skill', 'image','private')

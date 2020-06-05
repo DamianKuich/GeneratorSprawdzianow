@@ -35,28 +35,34 @@ class Section(models.Model):
         return self.Section
 class Variables(models.Model):
     variables =ListCharField(
-        base_field=models.CharField(max_length=10),
+        base_field=models.CharField(max_length=200),
         size=6,
-        max_length=(6 * 11),
-        default = None# 6 * 10 character nominals, plus commas
+        max_length=(120 * 11),
+        default = None # 6 * 10 character nominals, plus commas
     )
     values =ListCharField(
-        base_field=models.CharField(max_length=10),
+        base_field=models.CharField(max_length=200),
         size=6,
-        max_length=(6 * 11),
-        default = None# 6 * 10 character nominals, plus commas
+        max_length=(120 * 11),
+        default = None # 6 * 10 character nominals, plus commas
     )
 class Answers(models.Model):
     allanswers =ListCharField(
-        base_field=models.CharField(max_length=10),
+        base_field=models.CharField(max_length=200),
         size=6,
-        max_length=(6 * 11),
+        max_length=(120 * 11),
+        default = None # 6 * 10 character nominals, plus commas
+    )
+    variables =ListCharField(
+        base_field=models.CharField(max_length=200),
+        size=6,
+        max_length=(120 * 11),
         default = None # 6 * 10 character nominals, plus commas
     )
     correctans =ListCharField(
-        base_field=models.CharField(max_length=10),
+        base_field=models.CharField(max_length=200),
         size=6,
-        max_length=(6 * 11),
+        max_length=(120 * 11),
         default = None # 6 * 10 character nominals, plus commas
     )
 
@@ -88,7 +94,7 @@ class Task(models.Model):
     private = models.BooleanField(default=False)
     skill = models.ManyToManyField(Skill)
     dataset = models.ManyToManyField(Dataset)
-    image = models.ManyToManyField(Image)
+    image = models.ManyToManyField(Image,blank=True)
 
 
     def __str__(self):
