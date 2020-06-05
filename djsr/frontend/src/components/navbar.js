@@ -127,7 +127,7 @@ class Navbar extends Component {
                     <MDBDropdownItem href="/myaccount">
                       Zarządzaj kontem
                     </MDBDropdownItem>
-                    <MDBDropdownItem href="/myaccount">
+                    <MDBDropdownItem href="/editor">
                       Edytor
                     </MDBDropdownItem>
                     <MDBDropdownItem
