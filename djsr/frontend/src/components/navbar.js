@@ -128,7 +128,7 @@ class Navbar extends Component {
                       Zarządzaj kontem
                     </MDBDropdownItem>
                     <MDBDropdownItem href="/editor">
-                      Edytor
+                      Stworz sprawdzian
                     </MDBDropdownItem>
                     <MDBDropdownItem
                       onClick={() => {
