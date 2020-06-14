@@ -53,16 +53,16 @@ class Navbar extends Component {
   // }
 
   render() {
-    console.log("check", {} === null);
-    console.log(
-      "token Storage",
-      localStorage.getItem("access_token"),
-      !localStorage.getItem("access_token")
-    );
-    console.log("navProps", this.props);
+    // console.log("check", {} === null);
+    // console.log(
+    //   "token Storage",
+    //   localStorage.getItem("access_token"),
+    //   !localStorage.getItem("access_token")
+    // );
+    // console.log("navProps", this.props);
     const userInfo = this.props.appState.user;
     const userLogout = this.props.userLogout;
-    console.log("userInfo", userInfo);
+    // console.log("userInfo", userInfo);
     return (
       <MDBNavbar color="default-color" dark expand="md" className="mb-3">
         <MDBNavbarBrand>
@@ -121,11 +121,14 @@ class Navbar extends Component {
                 <MDBDropdown>
                   <MDBDropdownToggle nav caret>
                     <MDBIcon icon="user" className="pr-1" />
-                    <strong>{userInfo.user}</strong>
+                    <strong>{userInfo.username}</strong>
                   </MDBDropdownToggle>
                   <MDBDropdownMenu right className="dropdown-default">
-                    <MDBDropdownItem href="#!">
-                      Moje sprawdziany
+                    <MDBDropdownItem href="/myaccount">
+                      Zarządzaj kontem
+                    </MDBDropdownItem>
+                    <MDBDropdownItem href="/editor">
+                      Stworz sprawdzian
                     </MDBDropdownItem>
                     <MDBDropdownItem
                       onClick={() => {

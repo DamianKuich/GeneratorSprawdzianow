@@ -4,12 +4,15 @@ import { Switch, Link, Route } from "react-router-dom";
 import "./styles/mdcardfixes.css";
 import "./styles/styles.css";
 import axiosInstance from "./axiosAPI";
+import TaskSearch from "./taskSearch";
+import ExamEditor from "./ExamEditor";
 const Login = lazy(() => import("./login"));
 const Signup = lazy(() => import("./signup"));
 const Navbar = lazy(() => import("./navbar"));
 const MDBContainer = lazy(() => import("./MDBLazy/MDBLazyContainer"));
 const AccountActivation = lazy(() => import("./AccountActivation"));
 const RegisterSuccess = lazy(() => import("./RegisterSuccess"));
+const UserAccountManager = lazy(() => import("./UserAccountManager"));
 class App extends Component {
   constructor(props) {
     super(props);
@@ -24,20 +27,24 @@ class App extends Component {
   componentDidMount() {
     this.checkUser();
   }
-  checkUser = () => {
+  checkUser = (onUserCheck) => {
     if (!localStorage.getItem("access_token")) {
       this.setState({ user: false });
+      if (!!onUserCheck) onUserCheck(false);
     } else {
       axiosInstance
         .get("/user/update")
         .then((response) => {
           this.setState({ user: response.data });
+          if (!!onUserCheck) onUserCheck(response.data);
         })
         .catch((error) => {
           this.setState({ user: false });
+          if (!!onUserCheck) onUserCheck(response.data);
         });
     }
   };
+
   userLogout = () => {
     const user = { ...this.state.user };
     this.setState({ user: null });
@@ -57,6 +64,9 @@ class App extends Component {
         this.setState({ user: user });
       });
   };
+  setUser = (user) => {
+    this.setState({ user: user });
+  };
   render() {
     const global = {
       setAppState: this.setState,
@@ -65,14 +75,14 @@ class App extends Component {
       appState: this.state,
       axiosInstance: axiosInstance,
       userLogout: this.userLogout,
+      setUser: this.setUser,
     };
     const properties = { ...this.props, ...global };
     return (
       <Suspense fallback={<div>ladowanie</div>}>
         <MDBContainer fluid className="h-100">
           <Navbar {...properties} />
-          <Link to={"/login/"}>ELO</Link>
-          <Suspense fallback={<div>CZEKAJ KURWO</div>}>
+          <Suspense fallback={<div>Ładowanie</div>}>
             <Switch>
               <Route
                 exact
@@ -92,7 +102,21 @@ class App extends Component {
               <Route
                 exact
                 path="/activateaccount/:token/"
-                render={(props) => <AccountActivation {...props} {...global}/>}
+                render={(props) => <AccountActivation {...props} {...global} />}
+              />
+              <Route
+                path={"/myaccount/"}
+                render={(props) => (
+                  <UserAccountManager {...props} {...global} />
+                )}
+              />
+              <Route
+                path={"/search/"}
+                render={(props) => <TaskSearch {...props} {...global} />}
+              />
+              <Route
+                path={"/editor/"}
+                render={(props) => <ExamEditor {...props} {...global} />}
               />
               <Route path={"/"} render={(props) => <div>Home again</div>} />
             </Switch>

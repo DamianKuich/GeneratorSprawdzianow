@@ -138,6 +138,7 @@ class Signup extends Component {
                         errors={errors.password}
                         name="password"
                         id="password"
+                        type="password"
                         touched={touched.password}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -151,6 +152,7 @@ class Signup extends Component {
                         errors={errors.passwordConfirm}
                         name="passwordConfirm"
                         id="passwordConfirm"
+                        type="password"
                         touched={touched.passwordConfirm}
                         onChange={handleChange}
                         onBlur={handleBlur}
