@@ -268,7 +268,7 @@ class MakeTestViewSet(APIView):
                 pomoc = CustomUser.objects.get(id=request.user.id)
                 mojtest = TestJSON()
                 mojtest.name = nazwa
-                mojtest.tasks = simplejson.dumps(request.data['tasks'])
+                mojtest.tasks = request.data['tasks']
                 mojtest.created = datetime.date.today()
                 pomoc = CustomUser.objects.get(id=request.user.id)
                 mojtest.user_id = pomoc.id
@@ -311,9 +311,9 @@ class MakeTestCopyViewSet(APIView):
     def post(self, request, format=None):
         if request.data:
             try:
-                nazwa = request.data['test']
+                id = request.data['id']
                 pomoc = CustomUser.objects.get(id=request.user.id)
-                obj = TestJSON.objects.get(name=nazwa,user_id=pomoc.id)
+                obj = TestJSON.objects.get(id=id,user_id=pomoc.id)
                 pomo = obj.name
                 obj.name = pomo + 'Copy'
                 obj.pk = None
@@ -335,21 +335,22 @@ class SectionViewSet(APIView):
         serializer = SectionSerializer(dzial, many=True)
         return Response(serializer.data)
 class AllTestsJSONViewSet(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (IsAuthenticated,)
     serializer_class = TestJSONSerializer
 
     def get(self, request, format=None):
-        dzial = TestJSON.objects.filter(user_id=request.user.id)
-        serializer = TestJSONSerializer(dzial, many=True)
+        tests = TestJSON.objects.filter(user_id=request.user.id)
+        serializer = TestJSONSerializer(tests, many=True)
         return Response(serializer.data)
 
 class OneTestJSONViewSet(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (IsAuthenticated,)
     serializer_class = TestJSONSerializer
 
     def post(self, request, format=None):
-        dzial = TestJSON.objects.get(request.data['tasks'],user_id=request.user.id)
-        serializer = TestJSONSerializer(dzial, many=True)
+        id = request.data['id']
+        test = TestJSON.objects.filter(id=id,user_id=request.user.id)
+        serializer = TestJSONSerializer(test, many=True)
         return Response(serializer.data)
 
 class SkillViewSet(APIView):

@@ -107,7 +107,7 @@ class Task(models.Model):
 
 class TestJSON(models.Model):
     name = models.TextField(null=True)
-    tasks = JSONField(null=True)
+    tasks = models.TextField(null=True)
     images = models.ManyToManyField(Image)
     created = models.DateField(default=datetime.date.today)
     user_id = models.IntegerField()
