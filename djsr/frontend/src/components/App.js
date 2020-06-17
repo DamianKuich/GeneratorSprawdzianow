@@ -13,6 +13,7 @@ const MDBContainer = lazy(() => import("./MDBLazy/MDBLazyContainer"));
 const AccountActivation = lazy(() => import("./AccountActivation"));
 const RegisterSuccess = lazy(() => import("./RegisterSuccess"));
 const UserAccountManager = lazy(() => import("./UserAccountManager"));
+const PasswordReset = lazy(()=>import("./PasswordReset"))
 class App extends Component {
   constructor(props) {
     super(props);
@@ -103,6 +104,16 @@ class App extends Component {
                 exact
                 path="/activateaccount/:token/"
                 render={(props) => <AccountActivation {...props} {...global} />}
+              />
+              <Route
+                exact
+                path="/passwordreset/:token/"
+                render={(props) => <PasswordReset {...props} {...global} />}
+              />
+              <Route
+                exact
+                path="/requestresetpassword/"
+                render={(props) => <PasswordReset {...props} {...global} />}
               />
               <Route
                 path={"/myaccount/"}
