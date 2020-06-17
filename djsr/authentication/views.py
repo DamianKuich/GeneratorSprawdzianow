@@ -28,7 +28,7 @@ from schema import Schema, And, Use, Optional
 from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer, \
     CustomUserSerializerReadOnly, PasswordSendResetSerializer, TestJSONSerializer, ImageSerializer
 from .models import Task, Section, Skill, CustomUser, UserActivationToken, \
-    TestJSON, PasswordSendReset, UserResetToken, Image
+    TestJSON, PasswordSendReset, UserResetToken, Image, Dataset
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
@@ -380,3 +380,33 @@ class ImageViewSet(APIView):
         image_data = open("media/" + str(imag.image), "rb").read()
         return HttpResponse(image_data, content_type="image/png")
 
+class AddImageViewSet(APIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = Image.objects.all()
+    serializer_class = ImageSerializer
+
+    def post(self, request, *args, **kwargs):
+        file = request.data['file']
+        pomoc = CustomUser.objects.get(id=request.user.id)
+        image = Image.objects.create(name=request.data['name'],image=file,user_id=pomoc.id)
+        image.save()
+        return Response(status=status.HTTP_200_OK)
+
+class AddImageToDataSetViewSet(APIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = Dataset.objects.all()
+    serializer_class = ImageSerializer
+
+    def post(self, request, *args, **kwargs):
+        # database
+        file = request.data['file']
+        pomoc = CustomUser.objects.get(id=request.user.id)
+        image = Image.objects.create(name=request.data['name'],image=file,user_id=pomoc.id)
+        image.save()
+        # dataset
+        id = request.data['iddataset']
+        dataset = Dataset.objects.get(id=id)
+        image = Image.objects.filter(name=request.data['name'])
+        dataset.image.set(image)
+        dataset.save()
+        return Response(status=status.HTTP_200_OK)
