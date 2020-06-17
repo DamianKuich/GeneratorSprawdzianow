@@ -105,7 +105,6 @@ class TaskSerializer(serializers.ModelSerializer):
         fields = ('id','text','add_date','typ','author','level','points','dataset','skill', 'image','private')
 
 class TestJSONSerializer(serializers.ModelSerializer):
-    images = ImageSerializer(many=True)
     class Meta:
         model = TestJSON
-        fields = ('id','name','tasks','images','created','user_id')
+        fields = ('id','name','tasks','created','user_id')

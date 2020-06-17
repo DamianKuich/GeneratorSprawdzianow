@@ -273,7 +273,8 @@ class MakeTestViewSet(APIView):
                 pomoc = CustomUser.objects.get(id=request.user.id)
                 mojtest.user_id = pomoc.id
                 mojtest.save()
-                return Response(status=status.HTTP_200_OK)
+                serializer = TestJSONSerializer(mojtest, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
             except Exception as e:
                 return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         else:
@@ -347,8 +348,8 @@ class OneTestJSONViewSet(APIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = TestJSONSerializer
 
-    def post(self, request, format=None):
-        id = request.data['id']
+    def get(self, request, *args, **kwargs):
+        id = kwargs.pop('id')
         test = TestJSON.objects.filter(id=id,user_id=request.user.id)
         serializer = TestJSONSerializer(test, many=True)
         return Response(serializer.data)

@@ -69,9 +69,11 @@ class Answers(models.Model):
 class Image(models.Model):
     name = models.CharField(max_length=500)
     image = models.ImageField(blank=True, null=True)
+    user_id = models.IntegerField()
 class Dataset(models.Model):
     variables = models.ManyToManyField(Variables)
     answers = models.ManyToManyField(Answers)
+    image = models.ManyToManyField(Image)
 
 
 class Task(models.Model):
@@ -95,7 +97,6 @@ class Task(models.Model):
     points = models.IntegerField(default=0)
     skill = models.ManyToManyField(Skill)
     dataset = models.ManyToManyField(Dataset)
-    image = models.ManyToManyField(Image,blank=True)
 
 
     def __str__(self):
@@ -108,7 +109,6 @@ class Task(models.Model):
 class TestJSON(models.Model):
     name = models.TextField(null=True)
     tasks = models.TextField(null=True)
-    images = models.ManyToManyField(Image)
     created = models.DateField(default=datetime.date.today)
     user_id = models.IntegerField()
 
