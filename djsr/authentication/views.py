@@ -9,6 +9,7 @@ from rest_framework_simplejwt.tokens import RefreshToken, Token
 from rest_framework_simplejwt.backends import TokenBackend
 from rest_framework_simplejwt.exceptions import TokenBackendError, TokenError
 from rest_framework_jwt.settings import api_settings
+from django.http import HttpResponse
 from django.urls import reverse
 from django.conf import settings
 from django.template.loader import render_to_string
@@ -25,9 +26,9 @@ from schema import Schema, And, Use, Optional
 
 
 from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer, \
-    CustomUserSerializerReadOnly, PasswordSendResetSerializer, TestJSONSerializer
+    CustomUserSerializerReadOnly, PasswordSendResetSerializer, TestJSONSerializer, ImageSerializer
 from .models import Task, Section, Skill, CustomUser, UserActivationToken, \
-    TestJSON, PasswordSendReset, UserResetToken
+    TestJSON, PasswordSendReset, UserResetToken, Image
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
@@ -273,7 +274,9 @@ class MakeTestViewSet(APIView):
                 pomoc = CustomUser.objects.get(id=request.user.id)
                 mojtest.user_id = pomoc.id
                 mojtest.save()
-                serializer = TestJSONSerializer(mojtest, many=True)
+                test = TestJSON.objects.get(name=nazwa, user_id=request.user.id)
+                testt = TestJSON.objects.filter(id=test.id, user_id=request.user.id)
+                serializer = TestJSONSerializer(testt, many=True)
                 return Response(serializer.data, status=status.HTTP_200_OK)
             except Exception as e:
                 return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
@@ -319,7 +322,8 @@ class MakeTestCopyViewSet(APIView):
                 obj.name = pomo + 'Copy'
                 obj.pk = None
                 obj.save()
-                return Response(status=status.HTTP_200_OK)
+                serializer = TestJSONSerializer(obj, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
             except Exception as e:
                 return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         else:
@@ -363,3 +367,16 @@ class SkillViewSet(APIView):
         skill = Skill.objects.all()
         serializer = SkillSerializer(skill, many=True)
         return Response(serializer.data)
+
+
+class ImageViewSet(APIView):
+    permission_classes = (permissions.AllowAny,)
+    queryset = Skill.objects.all()
+    serializer_class = SkillSerializer
+
+    def get(self, request, *args, **kwargs):
+        id = kwargs.pop('id')
+        imag = Image.objects.get(id=id)
+        image_data = open("media/" + str(imag.image), "rb").read()
+        return HttpResponse(image_data, content_type="image/png")
+

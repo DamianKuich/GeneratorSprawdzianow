@@ -1,7 +1,7 @@
 from django.urls import path, include
 
 from rest_framework_simplejwt import views as jwt_views
-from .views import SkillViewSet, SectionViewSet, CustomUserCreate, HelloWorldView, \
+from .views import ImageViewSet, SkillViewSet, SectionViewSet, CustomUserCreate, HelloWorldView, \
     LogoutAndBlacklistRefreshTokenForUserView, TaskViewSet, \
     UserRetrieveUpdateAPIView, ReturnUserInfo, PasswordSendResetView, PasswordResetView, AllTestsJSONViewSet, OneTestJSONViewSet, MakeTestViewSet, MakeTestCopyViewSet
 
@@ -12,6 +12,7 @@ urlpatterns = [
     path('user/makecopytest/', MakeTestCopyViewSet.as_view(), name="skills"),
     path('user/tests/', AllTestsJSONViewSet.as_view(), name="Tests"),
     path('user/onetest/<id>', OneTestJSONViewSet.as_view(), name="Tests"),
+    path('user/image/<id>', ImageViewSet.as_view(), name="Tests"),
     path('user/sections/', SectionViewSet.as_view(), name="sections"),
     path('user/tasks/', TaskViewSet.as_view(), name="tasks"),
     path('user/create/', CustomUserCreate.as_view(), name="create_user"),

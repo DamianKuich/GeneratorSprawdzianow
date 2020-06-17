@@ -87,9 +87,10 @@ class AnswersSerializer(serializers.ModelSerializer):
 class DataSetSerializer(serializers.ModelSerializer):
     variables = VariableSerializer(many=True)
     answers = AnswersSerializer(many=True)
+    image = ImageSerializer(many=True,required=False)
     class Meta:
         model = Dataset
-        fields = ('id','variables','answers')
+        fields = ('id','variables','answers','image')
 class TaskSerializer(serializers.ModelSerializer):
     # text = serializers.CharField(required=True)
     # add_date = serializers.DateTimeField(required=True)
@@ -99,10 +100,10 @@ class TaskSerializer(serializers.ModelSerializer):
     # answer = serializers.CharField(required=True)
     skill = SkillSerializer(many=True)
     dataset = DataSetSerializer(many=True)
-    image = ImageSerializer(many=True,required=False)
+
     class Meta:
         model = Task
-        fields = ('id','text','add_date','typ','author','level','points','dataset','skill', 'image','private')
+        fields = ('id','text','add_date','type','author','level','points','dataset','skill','private')
 
 class TestJSONSerializer(serializers.ModelSerializer):
     class Meta:
