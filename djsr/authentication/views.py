@@ -109,7 +109,7 @@ class PasswordSendResetView(APIView):
                 message = "Hello ,\n click the link below to reset your password.\n {0}".format(activation_link)
                 email = EmailMessage(mail_subject, message, to=[reset.email])
                 email.send()
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class PasswordResetView(APIView):
