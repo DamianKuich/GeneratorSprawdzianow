@@ -9,6 +9,7 @@ from rest_framework_simplejwt.tokens import RefreshToken, Token
 from rest_framework_simplejwt.backends import TokenBackend
 from rest_framework_simplejwt.exceptions import TokenBackendError, TokenError
 from rest_framework_jwt.settings import api_settings
+from django.http import HttpResponse
 from django.urls import reverse
 from django.conf import settings
 from django.template.loader import render_to_string
@@ -25,9 +26,9 @@ from schema import Schema, And, Use, Optional
 
 
 from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer, \
-    CustomUserSerializerReadOnly, PasswordSendResetSerializer, TestJSONSerializer
+    CustomUserSerializerReadOnly, PasswordSendResetSerializer, TestJSONSerializer, ImageSerializer
 from .models import Task, Section, Skill, CustomUser, UserActivationToken, \
-    TestJSON, PasswordSendReset, UserResetToken
+    TestJSON, PasswordSendReset, UserResetToken, Image, Dataset
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
@@ -264,16 +265,22 @@ class MakeTestViewSet(APIView):
     def post(self, request, format=None):
         if request.data:
             try:
-                nazwa = request.data['test']
+                nazwa = request.data['name']
                 pomoc = CustomUser.objects.get(id=request.user.id)
-                mojtest = TestJSON()
-                mojtest.name = nazwa
-                mojtest.tasks = simplejson.dumps(request.data['tasks'])
-                mojtest.created = datetime.date.today()
-                pomoc = CustomUser.objects.get(id=request.user.id)
-                mojtest.user_id = pomoc.id
-                mojtest.save()
-                return Response(status=status.HTTP_200_OK)
+                if not TestJSON.objects.filter(name=nazwa, user_id=pomoc.id).exists():
+                    mojtest = TestJSON()
+                    mojtest.name = nazwa
+                    mojtest.tasks = request.data['tasks']
+                    mojtest.created = datetime.date.today()
+                    pomoc = CustomUser.objects.get(id=request.user.id)
+                    mojtest.user_id = pomoc.id
+                    mojtest.save()
+                    test = TestJSON.objects.get(name=nazwa, user_id=request.user.id)
+                    testt = TestJSON.objects.filter(id=test.id, user_id=request.user.id)
+                    serializer = TestJSONSerializer(testt, many=True)
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+                else:
+                    return Response(status=status.HTTP_400_BAD_REQUEST)
             except Exception as e:
                 return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         else:
@@ -282,20 +289,21 @@ class MakeTestViewSet(APIView):
     def put(self, request, format=None):
         if request.data:
             try:
-                nazwa = request.data['test']
+                nazwa = request.data['name']
                 if TestJSON.objects.get(name=nazwa,user_id=request.user.id).exists():
                     mojtest = TestJSON.objects.get(name=nazwa)
                     try:
-                        mojtest.name = request.data['newname']
+                        if not TestJSON.objects.filter(name=request.data['newname'], user_id=request.user.id).exists():
+                            mojtest.name = request.data['newname']
                     except:
                         pass
                     try:
-                        mojtest.tasks = simplejson.dumps(request.data['tasks'])
+                        mojtest.tasks = request.data['tasks']
                     except:
                         pass
-                    mojtest.created = datetime.date.today()
-                    pomoc = CustomUser.objects.get(id=request.user.id)
-                    mojtest.user_id = pomoc.id
+                    # mojtest.created = datetime.date.today()
+                    # pomoc = CustomUser.objects.get(id=request.user.id)
+                    # mojtest.user_id = pomoc.id
                     mojtest.save()
                     return Response(status=status.HTTP_200_OK)
                 else:
@@ -311,14 +319,17 @@ class MakeTestCopyViewSet(APIView):
     def post(self, request, format=None):
         if request.data:
             try:
-                nazwa = request.data['test']
+                id = request.data['id']
                 pomoc = CustomUser.objects.get(id=request.user.id)
-                obj = TestJSON.objects.get(name=nazwa,user_id=pomoc.id)
+                obj = TestJSON.objects.get(id=id,user_id=pomoc.id)
                 pomo = obj.name
-                obj.name = pomo + 'Copy'
+                pomm = pomo + 'Copy'
+                obj.name = pomm
                 obj.pk = None
                 obj.save()
-                return Response(status=status.HTTP_200_OK)
+                ob = TestJSON.objects.get(name=pomo + 'Copy',user_id=pomoc.id)
+                serializer = TestJSONSerializer(ob, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
             except Exception as e:
                 return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         else:
@@ -335,21 +346,22 @@ class SectionViewSet(APIView):
         serializer = SectionSerializer(dzial, many=True)
         return Response(serializer.data)
 class AllTestsJSONViewSet(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (IsAuthenticated,)
     serializer_class = TestJSONSerializer
 
     def get(self, request, format=None):
-        dzial = TestJSON.objects.filter(user_id=request.user.id)
-        serializer = TestJSONSerializer(dzial, many=True)
+        tests = TestJSON.objects.filter(user_id=request.user.id)
+        serializer = TestJSONSerializer(tests, many=True)
         return Response(serializer.data)
 
 class OneTestJSONViewSet(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (IsAuthenticated,)
     serializer_class = TestJSONSerializer
 
-    def post(self, request, format=None):
-        dzial = TestJSON.objects.get(request.data['tasks'],user_id=request.user.id)
-        serializer = TestJSONSerializer(dzial, many=True)
+    def get(self, request, *args, **kwargs):
+        id = kwargs.pop('id')
+        test = TestJSON.objects.filter(id=id,user_id=request.user.id)
+        serializer = TestJSONSerializer(test, many=True)
         return Response(serializer.data)
 
 class SkillViewSet(APIView):
@@ -361,3 +373,55 @@ class SkillViewSet(APIView):
         skill = Skill.objects.all()
         serializer = SkillSerializer(skill, many=True)
         return Response(serializer.data)
+
+
+class ImageViewSet(APIView):
+    permission_classes = (permissions.AllowAny,)
+    queryset = Skill.objects.all()
+    serializer_class = SkillSerializer
+
+    def get(self, request, *args, **kwargs):
+        id = kwargs.pop('id')
+        imag = Image.objects.get(id=id)
+        image_data = open("media/" + str(imag.image), "rb").read()
+        return HttpResponse(image_data, content_type="image/png")
+
+class AddImageViewSet(APIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = Image.objects.all()
+    serializer_class = ImageSerializer
+
+    def post(self, request, *args, **kwargs):
+        file = request.data['file']
+        pomoc = CustomUser.objects.get(id=request.user.id)
+        if not Image.objects.filter(name=request.data['name'],user_id=pomoc.id).exists():
+            image = Image.objects.create(name=request.data['name'],image=file,user_id=pomoc.id)
+            image.save()
+            imag = Image.objects.filter(name=request.data['name'],image=file,user_id=pomoc.id)
+            image_data = open("media/" + str(imag.image), "rb").read()
+            return HttpResponse(image_data, content_type="image/png")
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+class AddImageToDataSetViewSet(APIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = Dataset.objects.all()
+    serializer_class = ImageSerializer
+
+    def post(self, request, *args, **kwargs):
+        # database
+        file = request.data['file']
+        pomoc = CustomUser.objects.get(id=request.user.id)
+        if not Image.objects.filter(name=request.data['name'],image=file,user_id=pomoc.id).exists():
+            image = Image.objects.create(name=request.data['name'],image=file,user_id=pomoc.id)
+            image.save()
+            # dataset
+            id = request.data['iddataset']
+            dataset = Dataset.objects.get(id=id)
+            image = Image.objects.filter(name=request.data['name'])
+            dataset.image.set(image)
+            dataset.save()
+            image_data = open("media/" + str(image.image), "rb").read()
+            return HttpResponse(image_data, content_type="image/png")
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
