@@ -265,19 +265,22 @@ class MakeTestViewSet(APIView):
     def post(self, request, format=None):
         if request.data:
             try:
-                nazwa = request.data['test']
+                nazwa = request.data['name']
                 pomoc = CustomUser.objects.get(id=request.user.id)
-                mojtest = TestJSON()
-                mojtest.name = nazwa
-                mojtest.tasks = request.data['tasks']
-                mojtest.created = datetime.date.today()
-                pomoc = CustomUser.objects.get(id=request.user.id)
-                mojtest.user_id = pomoc.id
-                mojtest.save()
-                test = TestJSON.objects.get(name=nazwa, user_id=request.user.id)
-                testt = TestJSON.objects.filter(id=test.id, user_id=request.user.id)
-                serializer = TestJSONSerializer(testt, many=True)
-                return Response(serializer.data, status=status.HTTP_200_OK)
+                if not TestJSON.objects.filter(name=nazwa, user_id=pomoc.id).exists():
+                    mojtest = TestJSON()
+                    mojtest.name = nazwa
+                    mojtest.tasks = request.data['tasks']
+                    mojtest.created = datetime.date.today()
+                    pomoc = CustomUser.objects.get(id=request.user.id)
+                    mojtest.user_id = pomoc.id
+                    mojtest.save()
+                    test = TestJSON.objects.get(name=nazwa, user_id=request.user.id)
+                    testt = TestJSON.objects.filter(id=test.id, user_id=request.user.id)
+                    serializer = TestJSONSerializer(testt, many=True)
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+                else:
+                    return Response(status=status.HTTP_400_BAD_REQUEST)
             except Exception as e:
                 return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         else:
@@ -286,20 +289,21 @@ class MakeTestViewSet(APIView):
     def put(self, request, format=None):
         if request.data:
             try:
-                nazwa = request.data['test']
+                nazwa = request.data['name']
                 if TestJSON.objects.get(name=nazwa,user_id=request.user.id).exists():
                     mojtest = TestJSON.objects.get(name=nazwa)
                     try:
-                        mojtest.name = request.data['newname']
+                        if not TestJSON.objects.filter(name=request.data['newname'], user_id=request.user.id).exists():
+                            mojtest.name = request.data['newname']
                     except:
                         pass
                     try:
-                        mojtest.tasks = simplejson.dumps(request.data['tasks'])
+                        mojtest.tasks = request.data['tasks']
                     except:
                         pass
-                    mojtest.created = datetime.date.today()
-                    pomoc = CustomUser.objects.get(id=request.user.id)
-                    mojtest.user_id = pomoc.id
+                    # mojtest.created = datetime.date.today()
+                    # pomoc = CustomUser.objects.get(id=request.user.id)
+                    # mojtest.user_id = pomoc.id
                     mojtest.save()
                     return Response(status=status.HTTP_200_OK)
                 else:
@@ -319,10 +323,12 @@ class MakeTestCopyViewSet(APIView):
                 pomoc = CustomUser.objects.get(id=request.user.id)
                 obj = TestJSON.objects.get(id=id,user_id=pomoc.id)
                 pomo = obj.name
-                obj.name = pomo + 'Copy'
+                pomm = pomo + 'Copy'
+                obj.name = pomm
                 obj.pk = None
                 obj.save()
-                serializer = TestJSONSerializer(obj, many=True)
+                ob = TestJSON.objects.get(name=pomo + 'Copy',user_id=pomoc.id)
+                serializer = TestJSONSerializer(ob, many=True)
                 return Response(serializer.data, status=status.HTTP_200_OK)
             except Exception as e:
                 return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
@@ -388,9 +394,14 @@ class AddImageViewSet(APIView):
     def post(self, request, *args, **kwargs):
         file = request.data['file']
         pomoc = CustomUser.objects.get(id=request.user.id)
-        image = Image.objects.create(name=request.data['name'],image=file,user_id=pomoc.id)
-        image.save()
-        return Response(status=status.HTTP_200_OK)
+        if not Image.objects.filter(name=request.data['name'],user_id=pomoc.id).exists():
+            image = Image.objects.create(name=request.data['name'],image=file,user_id=pomoc.id)
+            image.save()
+            imag = Image.objects.filter(name=request.data['name'],image=file,user_id=pomoc.id)
+            image_data = open("media/" + str(imag.image), "rb").read()
+            return HttpResponse(image_data, content_type="image/png")
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 class AddImageToDataSetViewSet(APIView):
     permission_classes = (IsAuthenticated,)
@@ -401,12 +412,16 @@ class AddImageToDataSetViewSet(APIView):
         # database
         file = request.data['file']
         pomoc = CustomUser.objects.get(id=request.user.id)
-        image = Image.objects.create(name=request.data['name'],image=file,user_id=pomoc.id)
-        image.save()
-        # dataset
-        id = request.data['iddataset']
-        dataset = Dataset.objects.get(id=id)
-        image = Image.objects.filter(name=request.data['name'])
-        dataset.image.set(image)
-        dataset.save()
-        return Response(status=status.HTTP_200_OK)
+        if not Image.objects.filter(name=request.data['name'],image=file,user_id=pomoc.id).exists():
+            image = Image.objects.create(name=request.data['name'],image=file,user_id=pomoc.id)
+            image.save()
+            # dataset
+            id = request.data['iddataset']
+            dataset = Dataset.objects.get(id=id)
+            image = Image.objects.filter(name=request.data['name'])
+            dataset.image.set(image)
+            dataset.save()
+            image_data = open("media/" + str(image.image), "rb").read()
+            return HttpResponse(image_data, content_type="image/png")
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
