@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { MDBContainer } from "mdbreact";
+import {MDBBtn, MDBContainer} from "mdbreact";
 import { Form, Formik } from "formik";
 import FormikMdInput from "./FormikMDInput";
+import axiosInstance from "./axiosAPI";
 
 class TaskEditor extends Component {
   constructor(props) {
@@ -31,7 +32,20 @@ class TaskEditor extends Component {
           enableReinitialize={true}
           initialValues={this.props.task}
           onSubmit={(values, helpers) => {
-              this.props.updateTask({...values})
+            if (!!values.imageToUpload) {
+              let formData = new FormData();
+              formData.append("file", values.imageToUpload);
+              axiosInstance.post("/user/addimage/", formData, {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                },
+              }).then((response)=>{
+                  let task = {...values};
+                  task.currentDataSet.image = [response.data.id];
+                  this.props.updateTask({ ...task });
+              });
+            }
+            else this.props.updateTask({ ...values });
           }}
         >
           {({
@@ -43,6 +57,7 @@ class TaskEditor extends Component {
             handleSubmit,
             isSubmitting,
             submitForm,
+            setFieldValue,
           }) => {
             let handleChangeAndSubmit = (e) => {
               handleChange(e);
@@ -60,6 +75,38 @@ class TaskEditor extends Component {
                   onBlur={handleBlur}
                   value={values.text}
                 />
+                <div className="input-group">
+                  <div className="input-group-prepend">
+                    <span
+                      className="input-group-text"
+                      id="inputGroupFileAddon01"
+                    >
+                      Obrazek do zadania
+                    </span>
+                  </div>
+                  <div className="custom-file">
+                    <input
+                      type="file"
+                      className="custom-file-input"
+                      id="inputGroupFile01"
+                      aria-describedby="inputGroupFileAddon01"
+                      onChange={(e) => {
+                        setFieldValue(
+                          "imageToUpload",
+                          e.currentTarget.files[0]
+                        );
+                      }}
+                      onBlur={handleBlur}
+                    />
+                    <label
+                      className="custom-file-label"
+                      htmlFor="inputGroupFile01"
+                    >
+                      Wybierz
+                    </label>
+                  </div>
+                </div>
+                  <MDBBtn onClick={handleSubmit}>Zapisz</MDBBtn>
               </Form>
             );
           }}

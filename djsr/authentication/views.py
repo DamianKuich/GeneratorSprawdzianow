@@ -24,7 +24,6 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.shortcuts import render, redirect
 from schema import Schema, And, Use, Optional
 
-
 from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer, \
     CustomUserSerializerReadOnly, PasswordSendResetSerializer, TestJSONSerializer, ImageSerializer
 from .models import Task, Section, Skill, CustomUser, UserActivationToken, \
@@ -42,7 +41,7 @@ class CustomUserCreate(APIView):
     def post(self, request, *args, **kwargs, ):
         serializer = CustomUserSerializer(data=request.data)
         if serializer.is_valid():
-            #userr = CustomUser.objects.filter(email=serializer.email)
+            # userr = CustomUser.objects.filter(email=serializer.email)
             if CustomUser.objects.filter(email=serializer.validated_data.get('email')).exists():
                 return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
             elif CustomUser.objects.filter(username=serializer.validated_data.get('username')).exists():
@@ -71,16 +70,19 @@ class CustomUserCreate(APIView):
             mail_subject = 'Activate your account.'
             current_site = get_current_site(request)
             activation_link = "http://{0}/activateaccount/{1}".format(current_site, token)
-            message = "Hello {0},\n click the link below to activate your account.\n {1}".format(user.username, activation_link)
+            message = "Hello {0},\n click the link below to activate your account.\n {1}".format(user.username,
+                                                                                                 activation_link)
             email = EmailMessage(mail_subject, message, to=[user.email])
             email.send()
-            return Response(data,status=status.HTTP_201_CREATED)
+            return Response(data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class PasswordSendResetView(APIView):
     model = PasswordSendReset.objects.all()
     permission_classes = (permissions.AllowAny,)
     serializer_class = PasswordSendResetSerializer
+
     def post(self, request):
         serializer = PasswordSendResetSerializer(data=request.data)
         if serializer.is_valid():
@@ -91,14 +93,14 @@ class PasswordSendResetView(APIView):
                                             signing_key=getattr(settings, "RS256_PRIVATE_KEY", None),
                                             verifying_key=getattr(settings, "RS256_PUBLIC_KEY", None))
                 reset = UserResetToken(email=reset.email,
-                                                 expire=datetime.datetime.utcnow() + datetime.timedelta(0,
-                                                                                                        3600) + datetime.timedelta(
-                                                     0, 3600) + datetime.timedelta(0, 3600),
-                                                 created_on=datetime.datetime.utcnow() + datetime.timedelta(0,
-                                                                                                            3600) + datetime.timedelta(
-                                                     0, 3600),
-                                                 used=False
-                                                 )
+                                       expire=datetime.datetime.utcnow() + datetime.timedelta(0,
+                                                                                              3600) + datetime.timedelta(
+                                           0, 3600) + datetime.timedelta(0, 3600),
+                                       created_on=datetime.datetime.utcnow() + datetime.timedelta(0,
+                                                                                                  3600) + datetime.timedelta(
+                                           0, 3600),
+                                       used=False
+                                       )
                 reset.save()
                 token = tokenbackend.encode(
                     {'user_email': reset.email, 'exp': datetime.datetime.utcnow() + datetime.timedelta(0, 3600)})
@@ -111,6 +113,7 @@ class PasswordSendResetView(APIView):
                 email.send()
             return Response(serializer.errors, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class PasswordResetView(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -151,7 +154,8 @@ class HelloWorldView(APIView):
             payload = tokenbackend.decode(token=token, verify=True)
         except TokenBackendError:
             return Response({'error': 'Invalid token'}, status=status.HTTP_403_FORBIDDEN)
-        if UserActivationToken.expire == (datetime.datetime.utcnow() + datetime.timedelta(3600) + datetime.timedelta(0, 3600)):
+        if UserActivationToken.expire == (
+                datetime.datetime.utcnow() + datetime.timedelta(3600) + datetime.timedelta(0, 3600)):
             return Response(status=status.HTTP_409_CONFLICT)
         if UserActivationToken.used is True:
             return Response(status=status.HTTP_409_CONFLICT)
@@ -164,6 +168,7 @@ class HelloWorldView(APIView):
             {"message": 'User Activated'},
             status=status.HTTP_200_OK
         )
+
 
 class ReturnUserInfo(APIView):
     def get(self, request):
@@ -228,9 +233,10 @@ class UserRetrieveUpdateAPIView(APIView):
 
 
 class TaskViewSet(APIView):
-    #permission_classes = (permissions.AllowAny,)
+    # permission_classes = (permissions.AllowAny,)
     permission_classes = (IsAuthenticated,)
     serializer_class = TaskSerializer
+
     def post(self, request, format=None):
         serializer = TaskSerializer(data=request.data)
         lista = []
@@ -259,9 +265,11 @@ class TaskViewSet(APIView):
             serializer = TaskSerializer(task, many=True)
             return Response(serializer.data)
 
+
 class MakeTestViewSet(APIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = TaskSerializer
+
     def post(self, request, format=None):
         if request.data:
             try:
@@ -290,7 +298,7 @@ class MakeTestViewSet(APIView):
         if request.data:
             try:
                 nazwa = request.data['name']
-                if TestJSON.objects.get(name=nazwa,user_id=request.user.id).exists():
+                if TestJSON.objects.get(name=nazwa, user_id=request.user.id).exists():
                     mojtest = TestJSON.objects.get(name=nazwa)
                     try:
                         if not TestJSON.objects.filter(name=request.data['newname'], user_id=request.user.id).exists():
@@ -313,21 +321,23 @@ class MakeTestViewSet(APIView):
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
+
 class MakeTestCopyViewSet(APIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = TaskSerializer
+
     def post(self, request, format=None):
         if request.data:
             try:
                 id = request.data['id']
                 pomoc = CustomUser.objects.get(id=request.user.id)
-                obj = TestJSON.objects.get(id=id,user_id=pomoc.id)
+                obj = TestJSON.objects.get(id=id, user_id=pomoc.id)
                 pomo = obj.name
                 pomm = pomo + 'Copy'
                 obj.name = pomm
                 obj.pk = None
                 obj.save()
-                ob = TestJSON.objects.get(name=pomo + 'Copy',user_id=pomoc.id)
+                ob = TestJSON.objects.get(name=pomo + 'Copy', user_id=pomoc.id)
                 serializer = TestJSONSerializer(ob, many=True)
                 return Response(serializer.data, status=status.HTTP_200_OK)
             except Exception as e:
@@ -345,6 +355,8 @@ class SectionViewSet(APIView):
         dzial = Section.objects.all()
         serializer = SectionSerializer(dzial, many=True)
         return Response(serializer.data)
+
+
 class AllTestsJSONViewSet(APIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = TestJSONSerializer
@@ -354,15 +366,17 @@ class AllTestsJSONViewSet(APIView):
         serializer = TestJSONSerializer(tests, many=True)
         return Response(serializer.data)
 
+
 class OneTestJSONViewSet(APIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = TestJSONSerializer
 
     def get(self, request, *args, **kwargs):
         id = kwargs.pop('id')
-        test = TestJSON.objects.filter(id=id,user_id=request.user.id)
+        test = TestJSON.objects.filter(id=id, user_id=request.user.id)
         serializer = TestJSONSerializer(test, many=True)
         return Response(serializer.data)
+
 
 class SkillViewSet(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -386,6 +400,7 @@ class ImageViewSet(APIView):
         image_data = open("media/" + str(imag.image), "rb").read()
         return HttpResponse(image_data, content_type="image/png")
 
+
 class AddImageViewSet(APIView):
     permission_classes = (IsAuthenticated,)
     queryset = Image.objects.all()
@@ -394,14 +409,16 @@ class AddImageViewSet(APIView):
     def post(self, request, *args, **kwargs):
         file = request.data['file']
         pomoc = CustomUser.objects.get(id=request.user.id)
-        if not Image.objects.filter(name=request.data['name'],user_id=pomoc.id).exists():
-            image = Image.objects.create(name=request.data['name'],image=file,user_id=pomoc.id)
+        if True:
+            image = Image.objects.create(name="", image=file, user_id=pomoc.id)
             image.save()
-            imag = Image.objects.filter(name=request.data['name'],image=file,user_id=pomoc.id)
-            image_data = open("media/" + str(imag.image), "rb").read()
-            return HttpResponse(image_data, content_type="image/png")
+            #imag = Image.objects.filter(name=request.data['name'], image=file, user_id=pomoc.id)
+            #image_data = open("media/" + str(image.image), "rb").read()
+            ##return HttpResponse(image_data, content_type="image/png")
+            return Response(data={"id": image.id}, status=status.HTTP_201_CREATED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
 
 class AddImageToDataSetViewSet(APIView):
     permission_classes = (IsAuthenticated,)
@@ -412,8 +429,8 @@ class AddImageToDataSetViewSet(APIView):
         # database
         file = request.data['file']
         pomoc = CustomUser.objects.get(id=request.user.id)
-        if not Image.objects.filter(name=request.data['name'],image=file,user_id=pomoc.id).exists():
-            image = Image.objects.create(name=request.data['name'],image=file,user_id=pomoc.id)
+        if not Image.objects.filter(name=request.data['name'], image=file, user_id=pomoc.id).exists():
+            image = Image.objects.create(name=request.data['name'], image=file, user_id=pomoc.id)
             image.save()
             # dataset
             id = request.data['iddataset']
