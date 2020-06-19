@@ -75,6 +75,15 @@ class TaskEditor extends Component {
                   onBlur={handleBlur}
                   value={values.text}
                 />
+                <input
+                    type="number"
+                    name="maxPoints"
+                    value={values.maxPoints}
+                    onChange={handleChangeAndSubmit}
+                    onBlur={handleBlur}
+                    min={1}
+                    max={20}
+                />
                 <div className="input-group">
                   <div className="input-group-prepend">
                     <span

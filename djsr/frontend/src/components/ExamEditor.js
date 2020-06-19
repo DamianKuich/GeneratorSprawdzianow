@@ -226,8 +226,26 @@ class ExamEditor extends Component {
     });
   };
 
+  removeTask = (index)=>{
+    this.setState((state)=>{
+      this.setState((state)=>{
+         // state.exam.tasks =
+             state.exam.tasks.splice(index,index);
+         return state;
+      })
+    })
+  }
+
   dragEnd = (result) => {
     const { source, destination, draggableId } = result;
+    console.log(source,destination,draggableId);
+    if(source.droppableId === "examDroppable" &&
+      !destination.droppableId ){
+      this.setState((state)=>{
+         state.exam.tasks = state.exam.tasks.splice(source.index,source.index);
+         return state;
+      })
+    }
     console.log("dragEnd", result);
     if (!destination || destination.droppableId === "searchDroppable") {
       return;
@@ -291,6 +309,7 @@ class ExamEditor extends Component {
       answersSet = shuffle(answersSet);
 
       draggedItem.currentDataSet.examAnswers = answersSet;
+      draggedItem.maxPoints=1;
       console.log("draggedItem", draggedItem, this.state.tasks);
       this.setState((state) => {
         state.exam.tasks.splice(destination.index, 0, draggedItem);
@@ -439,10 +458,10 @@ class ExamEditor extends Component {
                     height: "29.7cm",
                     backgroundColor: snapshot.isDraggingOver ? "blue" : "white",
                   }}
-                  className="border"
+                  className="border p-3"
                   ref={provided.innerRef}
                 >
-                  <div>
+                  <div className="mb-2" >
                     Imie i nazwisko:
                     .................................................................
                   </div>
@@ -475,7 +494,9 @@ class ExamEditor extends Component {
                             onClick={() => {
                               this.setTaskToEdit(index);
                             }}
+                            onContextMenu={()=>{this.removeTask(index)}}
                           >
+                            <p className="text-right mb-0 pb-0">{".../"+ task.maxPoints + " pkt."}</p>
                             <p>
                               <span className="font-weight-bold">
                                 {index + 1}
