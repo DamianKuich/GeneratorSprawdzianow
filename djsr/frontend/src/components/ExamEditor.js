@@ -336,7 +336,7 @@ class ExamEditor extends Component {
                 className={
                   "d-flex justify-content-between " +
                   "p-2 mt-3 border-right border-top border-left " +
-                  (sideMenuCollapseId === "taskSearch" ? "" : "border-bottom")
+                  (sideMenuCollapseId === "taskEdit" ? "" : "border-bottom")
                 }
                 onClick={() => {
                   this.setSideMenuCollapse("taskEdit");
@@ -348,7 +348,7 @@ class ExamEditor extends Component {
                 size={"3"}
                 className={
                   "d-flex justify-content-between " +
-                  "p-2 mt-3 border-right border-top border-left "
+                  "p-2 mt-3 border-right border-top border-left border-bottom"
                 }
               >
                 <PDFDownloadLink
@@ -359,15 +359,6 @@ class ExamEditor extends Component {
                     loading ? "Generowanie PDF" : "Pobierz PDF!"
                   }
                 </PDFDownloadLink>
-              </MDBCol>
-              <MDBCol
-                size={"3"}
-                className={
-                  "d-flex justify-content-between " +
-                  "p-2 mt-3 border-right border-top border-left "
-                }
-              >
-                <span onClick={() => {}}>Zapisz sprawdzian</span>
               </MDBCol>
             </MDBRow>
             <MDBCollapse
