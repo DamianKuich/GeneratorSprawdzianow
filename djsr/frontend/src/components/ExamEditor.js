@@ -23,7 +23,7 @@ import { sampleSize, shuffle } from "lodash/collection";
 import Latex from "react-latex";
 import "./styles/katex.css";
 import "./registered-files";
-// import examToPdf from "./ExamPDF";
+import examToPdf from "./ExamPDF";
 import axiosInstance from "./axiosAPI";
 
 class ExamEditor extends Component {
@@ -65,7 +65,7 @@ class ExamEditor extends Component {
     this.getExam();
   }
 
-  generatedPDFV3 = ()=>{};
+  generatedPDFV3 = examToPdf;
 
   setTaskToEdit = (index) => {
     this.setState((state) => {

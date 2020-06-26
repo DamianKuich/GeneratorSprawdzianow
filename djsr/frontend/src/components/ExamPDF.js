@@ -1,13 +1,15 @@
+import "./registered-files"
 import PDFDocument from "pdfkit";
 import blobStream from "blob-stream";
 // import texToSvg from "./TexToSvg";
 import SVGtoPDF from "svg-to-pdfkit";
 import XmlParser from "react-xml-parser";
 import {axiosInstanceNoAuth} from "./axiosAPI";
+import { saveAs } from 'file-saver';
 // const splitLines = (parsedText, doc, width) => {};
 // const printPartWithBreak = (part, doc) => {};
 // const getStringSize = (text, doc) => {};
-
+import "@babel/polyfill";
 const texToSvg= async (latex, onEnd) => {
   let r = await axiosInstanceNoAuth.post(`/latex/svg/`, {
     latex: latex,

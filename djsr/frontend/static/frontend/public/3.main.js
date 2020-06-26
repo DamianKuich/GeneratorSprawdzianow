@@ -22,7 +22,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_katex_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./styles/katex.css */ "./djsr/frontend/src/components/styles/katex.css");
 /* harmony import */ var _styles_katex_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_styles_katex_css__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _registered_files__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./registered-files */ "./djsr/frontend/src/components/registered-files.js");
-/* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
+/* harmony import */ var _ExamPDF__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ExamPDF */ "./djsr/frontend/src/components/ExamPDF.js");
+/* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -73,7 +74,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
- // import examToPdf from "./ExamPDF";
+
 
 
 
@@ -96,7 +97,7 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "getExam", function () {
       var id = _this.props.match.params.id;
-      _axiosAPI__WEBPACK_IMPORTED_MODULE_9__["default"].get("/user/onetest/".concat(id)).then(function (response) {
+      _axiosAPI__WEBPACK_IMPORTED_MODULE_10__["default"].get("/user/onetest/".concat(id)).then(function (response) {
         console.log(response);
 
         _this.setState(function (state) {
@@ -113,7 +114,7 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "generatedPDFV3", function () {});
+    _defineProperty(_assertThisInitialized(_this), "generatedPDFV3", _ExamPDF__WEBPACK_IMPORTED_MODULE_9__["default"]);
 
     _defineProperty(_assertThisInitialized(_this), "setTaskToEdit", function (index) {
       _this.setState(function (state) {
@@ -133,7 +134,7 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "saveExam", function () {
-      _axiosAPI__WEBPACK_IMPORTED_MODULE_9__["default"].put("/user/maketest/", {
+      _axiosAPI__WEBPACK_IMPORTED_MODULE_10__["default"].put("/user/maketest/", {
         id: _this.state.exam.id,
         tasks: JSON.stringify(_this.state.exam.tasks)
       }).then(function (response) {
@@ -410,6 +411,452 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
 
 
 /* harmony default export */ __webpack_exports__["default"] = (ExamEditor);
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/ExamPDF.js":
+/*!*************************************************!*\
+  !*** ./djsr/frontend/src/components/ExamPDF.js ***!
+  \*************************************************/
+/*! exports provided: examToPdf, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "examToPdf", function() { return examToPdf; });
+/* harmony import */ var _registered_files__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./registered-files */ "./djsr/frontend/src/components/registered-files.js");
+/* harmony import */ var pdfkit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pdfkit */ "./node_modules/pdfkit/js/pdfkit.es5.js");
+/* harmony import */ var blob_stream__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! blob-stream */ "./node_modules/blob-stream/index.js");
+/* harmony import */ var blob_stream__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(blob_stream__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var svg_to_pdfkit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! svg-to-pdfkit */ "./node_modules/svg-to-pdfkit/source.js");
+/* harmony import */ var svg_to_pdfkit__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(svg_to_pdfkit__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_xml_parser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-xml-parser */ "./node_modules/react-xml-parser/dist/bundle.js");
+/* harmony import */ var react_xml_parser__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_xml_parser__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
+/* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! file-saver */ "./node_modules/file-saver/dist/FileSaver.min.js");
+/* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(file_saver__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/polyfill */ "./node_modules/@babel/polyfill/lib/index.js");
+/* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_babel_polyfill__WEBPACK_IMPORTED_MODULE_7__);
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+ // import texToSvg from "./TexToSvg";
+
+
+
+
+ // const splitLines = (parsedText, doc, width) => {};
+// const printPartWithBreak = (part, doc) => {};
+// const getStringSize = (text, doc) => {};
+
+
+
+var texToSvg = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(latex, onEnd) {
+    var r, data;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return _axiosAPI__WEBPACK_IMPORTED_MODULE_5__["axiosInstanceNoAuth"].post("/latex/svg/", {
+              latex: latex
+            });
+
+          case 2:
+            r = _context.sent;
+            data = r.data;
+            return _context.abrupt("return", data.join(""));
+
+          case 5:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function texToSvg(_x, _x2) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+var drawCircle = function drawCircle(doc, x, y) {
+  doc.circle(x, y, 3);
+  doc.stroke();
+};
+
+var moveCursorIfNeeded = function moveCursorIfNeeded(crs, distance) {
+  var maxX = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 595 - 72;
+  var downDistance = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 35;
+
+  if (crs.x + distance <= maxX) {
+    return {
+      x: crs.x,
+      y: crs.y
+    };
+  }
+
+  return {
+    x: 72,
+    y: crs.y + downDistance
+  };
+};
+
+var getSvgSize = function getSvgSize(svg) {
+  var parsedSvg = new react_xml_parser__WEBPACK_IMPORTED_MODULE_4___default.a().parseFromString(svg);
+  console.log("parsedSvg", parsedSvg);
+  return {
+    x: 100,
+    y: 20
+  };
+};
+
+var addCursor = function addCursor(pos1, pos2) {
+  var maxX = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 595 - 72;
+  return {
+    x: Math.floor(pos1.x + pos2.x),
+    y: Math.floor(pos1.y + pos2.y)
+  }; // return {x:10,y:10}
+};
+
+var moveCursorRight = function moveCursorRight(crs, distance) {
+  var maxX = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 595 - 72;
+  var downDistance = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 35;
+  console.log("distance", distance);
+
+  if (crs.x + distance <= maxX) {
+    return {
+      x: crs.x + distance,
+      y: crs.y
+    };
+  } else return {
+    x: 72,
+    y: crs.y + 20
+  };
+};
+
+var getCursorPos = function getCursorPos(doc) {
+  return {
+    x: doc.x,
+    y: doc.y
+  };
+};
+
+var parseTaskText = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(text) {
+    var re, match, taskTextParsed, taskTextParsedIndex, toPush;
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            re = /\$\{[^\$]*\}\$/g;
+            match = null;
+            taskTextParsed = [];
+            taskTextParsedIndex = 0;
+
+          case 4:
+            if (!((match = re.exec(text)) != null)) {
+              _context2.next = 15;
+              break;
+            }
+
+            // console.log(match);
+            if (taskTextParsedIndex < match.index) {
+              taskTextParsed.push({
+                type: "text",
+                text: text.substring(taskTextParsedIndex, match.index)
+              });
+            }
+
+            _context2.t0 = match[0].slice(2, -2);
+            _context2.next = 9;
+            return texToSvg(match[0].slice(2, -2));
+
+          case 9:
+            _context2.t1 = _context2.sent;
+            toPush = {
+              type: "Latex",
+              text: _context2.t0,
+              svg: _context2.t1
+            };
+            taskTextParsed.push(toPush);
+            taskTextParsedIndex = match.index + match[0].length;
+            _context2.next = 4;
+            break;
+
+          case 15:
+            if (taskTextParsedIndex < text.length - 1) {
+              taskTextParsed.push({
+                type: "text",
+                text: text.substring(taskTextParsedIndex, text.length)
+              });
+            }
+
+            return _context2.abrupt("return", taskTextParsed);
+
+          case 17:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+
+  return function parseTaskText(_x3) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+var parseTask = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(task) {
+    var currentDataSet, parsedAnswers;
+    return regeneratorRuntime.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.next = 2;
+            return parseTaskText(task.text);
+
+          case 2:
+            task.parsedText = _context4.sent;
+            currentDataSet = task.currentDataSet;
+            console.log("currentDataSet", currentDataSet);
+            _context4.next = 7;
+            return Promise.all(currentDataSet.examAnswers.map( /*#__PURE__*/function () {
+              var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(answer) {
+                var source;
+                return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                  while (1) {
+                    switch (_context3.prev = _context3.next) {
+                      case 0:
+                        console.log("answer map", answer);
+                        source = answer.isCorrect ? currentDataSet.answers[0].correctans : currentDataSet.answers[0].allanswers;
+                        _context3.next = 4;
+                        return parseTaskText(source[answer.index]);
+
+                      case 4:
+                        return _context3.abrupt("return", _context3.sent);
+
+                      case 5:
+                      case "end":
+                        return _context3.stop();
+                    }
+                  }
+                }, _callee3);
+              }));
+
+              return function (_x5) {
+                return _ref4.apply(this, arguments);
+              };
+            }()));
+
+          case 7:
+            parsedAnswers = _context4.sent;
+            task.parsedAnswers = parsedAnswers;
+            return _context4.abrupt("return", task);
+
+          case 10:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4);
+  }));
+
+  return function parseTask(_x4) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+
+var parseTasks = /*#__PURE__*/function () {
+  var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(tasks) {
+    return regeneratorRuntime.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            tasks = tasks.map(function (task) {
+              return parseTask(task);
+            });
+            _context5.next = 3;
+            return Promise.all(tasks);
+
+          case 3:
+            return _context5.abrupt("return", _context5.sent);
+
+          case 4:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5);
+  }));
+
+  return function parseTasks(_x6) {
+    return _ref5.apply(this, arguments);
+  };
+}();
+
+var parseExamData = /*#__PURE__*/function () {
+  var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(exam) {
+    var tasks, parsedTasks;
+    return regeneratorRuntime.wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
+          case 0:
+            tasks = exam.tasks;
+            _context6.next = 3;
+            return parseTasks(tasks);
+
+          case 3:
+            parsedTasks = _context6.sent;
+            // console.log("pdf tasks", tasks);
+            // console.log("pdf tasksParsed", parsedTasks);
+            exam.parsedTasks = parsedTasks;
+            return _context6.abrupt("return", exam);
+
+          case 6:
+          case "end":
+            return _context6.stop();
+        }
+      }
+    }, _callee6);
+  }));
+
+  return function parseExamData(_x7) {
+    return _ref6.apply(this, arguments);
+  };
+}();
+
+var examToPdf = /*#__PURE__*/function () {
+  var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(exam) {
+    var pageSize, tasks, doc, stream, myCursor, task, index, taskTextParsed, newCursPos, _iterator, _step, part, toPrint, textSize, crs, svgSize, _crs;
+
+    return regeneratorRuntime.wrap(function _callee7$(_context7) {
+      while (1) {
+        switch (_context7.prev = _context7.next) {
+          case 0:
+            exam = JSON.parse(JSON.stringify(exam));
+            _context7.next = 3;
+            return parseExamData(exam);
+
+          case 3:
+            exam = _context7.sent;
+            console.log("PDF exam", exam);
+            pageSize = {
+              x: 595,
+              Y: 842
+            };
+            tasks = exam.parsedTasks;
+            doc = new pdfkit__WEBPACK_IMPORTED_MODULE_1__["default"]();
+            stream = doc.pipe(blob_stream__WEBPACK_IMPORTED_MODULE_2___default()());
+            myCursor = getCursorPos(doc);
+            doc.fillColor("black");
+            console.log("first cursor"); // myCursor = getCursorPos(doc);
+
+            for (task in tasks) {
+              index = task;
+              task = tasks[index];
+              console.log("pdf task", task);
+              taskTextParsed = task.parsedText;
+              drawCircle(doc, myCursor.x, myCursor.y);
+              newCursPos = {
+                x: parseInt(Math.floor(doc.widthOfString(parseInt(index) + parseInt(1) + ". "))),
+                y: 0 // x:0
+
+              };
+              doc.text(parseInt(index) + parseInt(1) + ". ", myCursor.x, myCursor.y, {
+                continued: true
+              });
+              myCursor = moveCursorRight(myCursor, newCursPos.x);
+              drawCircle(doc, myCursor.x, myCursor.y); // let position = getCursorPos(doc);
+
+              _iterator = _createForOfIteratorHelper(taskTextParsed);
+
+              try {
+                for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                  part = _step.value;
+
+                  // console.log("part.text", part.text, taskTextParsed);
+                  // console.log("str x y", textSize);
+                  if (part.type === "text") {
+                    toPrint = String(part.text);
+                    console.log("toPrint", toPrint, part.text);
+                    textSize = {
+                      x: doc.widthOfString(toPrint, {
+                        // continued: true,
+                        width: pageSize.x - 2 * 72
+                      }),
+                      y: doc.heightOfString(toPrint, {
+                        // continued: true,
+                        width: pageSize.x - 2 * 72
+                      })
+                    };
+                    console.log("str to print", myCursor, part.text, part);
+                    console.log("crs b4", getCursorPos(doc));
+                    crs = getCursorPos(doc);
+                    myCursor = moveCursorIfNeeded(myCursor, textSize.x); // doc.text(toPrint, crs.x, crs.y, { continued: true });
+
+                    doc.text(toPrint, myCursor.x, myCursor.y // , { continued: true }
+                    );
+                    console.log("crs after", getCursorPos(doc)); // doc.text(part.text,myCursor.x,myCursor.y);
+                    // console.log("str to print after", myCursor);
+
+                    myCursor = moveCursorRight(myCursor, textSize.x);
+                    drawCircle(doc, myCursor.x, myCursor.y);
+                  }
+
+                  if (part.type === "Latex") {
+                    svgSize = getSvgSize(part.svg);
+                    myCursor = moveCursorIfNeeded(myCursor, svgSize.x);
+                    console.log("svg to print", myCursor, part.text, part);
+                    _crs = getCursorPos(doc);
+                    svg_to_pdfkit__WEBPACK_IMPORTED_MODULE_3___default()(doc, part.svg, myCursor.x, myCursor.y); // SVGtoPDF(doc, part.svg, crs.x, crs.y);
+
+                    myCursor = moveCursorRight(myCursor, svgSize.x);
+                    drawCircle(doc, myCursor.x, myCursor.y);
+                  }
+                } // doc.text("", { continued: false });
+
+              } catch (err) {
+                _iterator.e(err);
+              } finally {
+                _iterator.f();
+              }
+
+              myCursor.y = myCursor.y + 35;
+              myCursor.x = 72;
+              drawCircle(doc, myCursor.x, myCursor.y); // doc.moveDown(1);
+            }
+
+            doc.end();
+            stream.on("finish", function () {
+              var blob = stream.toBlob("application/pdf");
+              Object(file_saver__WEBPACK_IMPORTED_MODULE_6__["saveAs"])(blob, "MyFile.pdf");
+            });
+
+          case 15:
+          case "end":
+            return _context7.stop();
+        }
+      }
+    }, _callee7);
+  }));
+
+  return function examToPdf(_x8) {
+    return _ref7.apply(this, arguments);
+  };
+}();
+/* harmony default export */ __webpack_exports__["default"] = (examToPdf);
 
 /***/ }),
 
@@ -1093,6 +1540,50 @@ webpackContext.keys = function webpackContextKeys() {
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
 webpackContext.id = "./node_modules/pdfkit/js/data sync Helvetica.*\\.afm$";
+
+/***/ }),
+
+/***/ 0:
+/*!**********************!*\
+  !*** util (ignored) ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 1:
+/*!**********************!*\
+  !*** util (ignored) ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 2:
+/*!***************************!*\
+  !*** ./streams (ignored) ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 3:
+/*!*******************************!*\
+  !*** ./extend-node (ignored) ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/* (ignored) */
 
 /***/ })
 
