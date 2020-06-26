@@ -301,22 +301,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var Login = Object(react__WEBPACK_IMPORTED_MODULE_0__["lazy"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ./login */ "./djsr/frontend/src/components/login.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ./login */ "./djsr/frontend/src/components/login.js"));
 });
 var Signup = Object(react__WEBPACK_IMPORTED_MODULE_0__["lazy"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ./signup */ "./djsr/frontend/src/components/signup.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(9)]).then(__webpack_require__.bind(null, /*! ./signup */ "./djsr/frontend/src/components/signup.js"));
 });
 var Navbar = Object(react__WEBPACK_IMPORTED_MODULE_0__["lazy"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ./navbar */ "./djsr/frontend/src/components/navbar.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(13)]).then(__webpack_require__.bind(null, /*! ./navbar */ "./djsr/frontend/src/components/navbar.js"));
 });
 var MDBContainer = Object(react__WEBPACK_IMPORTED_MODULE_0__["lazy"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(9)]).then(__webpack_require__.bind(null, /*! ./MDBLazy/MDBLazyContainer */ "./djsr/frontend/src/components/MDBLazy/MDBLazyContainer.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(10)]).then(__webpack_require__.bind(null, /*! ./MDBLazy/MDBLazyContainer */ "./djsr/frontend/src/components/MDBLazy/MDBLazyContainer.js"));
 });
 var AccountActivation = Object(react__WEBPACK_IMPORTED_MODULE_0__["lazy"])(function () {
-  return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./AccountActivation */ "./djsr/frontend/src/components/AccountActivation.js"));
+  return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./AccountActivation */ "./djsr/frontend/src/components/AccountActivation.js"));
 });
 var RegisterSuccess = Object(react__WEBPACK_IMPORTED_MODULE_0__["lazy"])(function () {
-  return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./RegisterSuccess */ "./djsr/frontend/src/components/RegisterSuccess.js"));
+  return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./RegisterSuccess */ "./djsr/frontend/src/components/RegisterSuccess.js"));
 });
 var UserAccountManager = Object(react__WEBPACK_IMPORTED_MODULE_0__["lazy"])(function () {
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./UserAccountManager */ "./djsr/frontend/src/components/UserAccountManager.js"));
@@ -328,7 +328,10 @@ var ExamEditor = Object(react__WEBPACK_IMPORTED_MODULE_0__["lazy"])(function () 
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ./ExamEditor */ "./djsr/frontend/src/components/ExamEditor.js"));
 });
 var UserExams = Object(react__WEBPACK_IMPORTED_MODULE_0__["lazy"])(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ./UserExams */ "./djsr/frontend/src/components/UserExams.js"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ./UserExams */ "./djsr/frontend/src/components/UserExams.js"));
+});
+var PasswordResetRequest = Object(react__WEBPACK_IMPORTED_MODULE_0__["lazy"])(function () {
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ./RemindPassword */ "./djsr/frontend/src/components/RemindPassword.js"));
 });
 
 var App = /*#__PURE__*/function (_Component) {
@@ -386,6 +389,8 @@ var App = /*#__PURE__*/function (_Component) {
         _this.setState({
           user: false
         });
+
+        _this.props.history.push("/");
       })["catch"](function (error) {
         console.log("logout error", error);
 
@@ -469,7 +474,7 @@ var App = /*#__PURE__*/function (_Component) {
         exact: true,
         path: "/requestresetpassword/",
         render: function render(props) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(PasswordReset, _extends({}, props, global));
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(PasswordResetRequest, _extends({}, props, global));
         }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         path: "/myaccount/",

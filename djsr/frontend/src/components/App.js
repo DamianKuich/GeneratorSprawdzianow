@@ -14,6 +14,7 @@ const UserAccountManager = lazy(() => import("./UserAccountManager"));
 const PasswordReset = lazy(()=>import("./PasswordReset"));
 const ExamEditor = lazy(()=>import("./ExamEditor"));
 const UserExams = lazy(()=>import("./UserExams"));
+const PasswordResetRequest = lazy(()=>import("./RemindPassword"))
 class App extends Component {
   constructor(props) {
     super(props);
@@ -59,6 +60,7 @@ class App extends Component {
         localStorage.removeItem("refresh_token");
         axiosInstance.defaults.headers["Authorization"] = null;
         this.setState({ user: false });
+        this.props.history.push("/");
       })
       .catch((error) => {
         console.log("logout error", error);
@@ -113,7 +115,7 @@ class App extends Component {
               <Route
                 exact
                 path="/requestresetpassword/"
-                render={(props) => <PasswordReset {...props} {...global} />}
+                render={(props) => <PasswordResetRequest {...props} {...global} />}
               />
               <Route
                 path={"/myaccount/"}
