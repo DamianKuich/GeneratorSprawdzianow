@@ -144,7 +144,7 @@ class PasswordReset extends Component {
                   isSubmitting,
                 }) => (
                   <Form onSubmit={handleSubmit}>
-                    <p className="h3 text-center mb-4">Zaloguj się</p>
+                    <p className="h3 text-center mb-4">Podaj nowe hasło</p>
                     <div className="grey-text">
                       <FormikMdInput
                         label="Hasło"
