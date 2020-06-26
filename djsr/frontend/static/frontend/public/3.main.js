@@ -1099,7 +1099,11 @@ var TaskEditor = /*#__PURE__*/function (_Component) {
           onChange: handleChangeAndSubmit,
           onBlur: handleBlur,
           value: values.text
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "md-form form-group"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "mr-3"
+        }, "Liczba punkt\xF3w za zadanie"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "number",
           name: "maxPoints",
           value: values.maxPoints,
@@ -1107,7 +1111,7 @@ var TaskEditor = /*#__PURE__*/function (_Component) {
           onBlur: handleBlur,
           min: 1,
           max: 20
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "input-group"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "input-group-prepend"
@@ -1130,7 +1134,7 @@ var TaskEditor = /*#__PURE__*/function (_Component) {
           htmlFor: "inputGroupFile01"
         }, "Wybierz"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_2__["MDBBtn"], {
           onClick: handleSubmit
-        }, "Zapisz"));
+        }, "Zapisz obrazek"));
       }));
     }
   }]);

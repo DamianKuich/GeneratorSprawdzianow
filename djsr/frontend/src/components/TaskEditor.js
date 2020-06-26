@@ -75,6 +75,8 @@ class TaskEditor extends Component {
                   onBlur={handleBlur}
                   value={values.text}
                 />
+                 <div className="md-form form-group">
+                     <span className="mr-3">Liczba punktów za zadanie</span>
                 <input
                     type="number"
                     name="maxPoints"
@@ -84,6 +86,7 @@ class TaskEditor extends Component {
                     min={1}
                     max={20}
                 />
+                 </div>
                 <div className="input-group">
                   <div className="input-group-prepend">
                     <span
@@ -115,7 +118,7 @@ class TaskEditor extends Component {
                     </label>
                   </div>
                 </div>
-                  <MDBBtn onClick={handleSubmit}>Zapisz</MDBBtn>
+                  <MDBBtn onClick={handleSubmit}>Zapisz obrazek</MDBBtn>
               </Form>
             );
           }}
