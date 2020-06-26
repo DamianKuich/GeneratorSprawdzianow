@@ -126,6 +126,8 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "updateTaskToEdit", function (task) {
       _this.setState(function (state) {
         Object.assign(state.editorTask, task);
+        state.timeout = _this.resetTimeout(_this.state.timeout, setTimeout(_this.saveExam, 3000));
+        state.saved = false;
         return state;
       });
     });
@@ -273,7 +275,11 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_1__["MDBRow"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_1__["MDBCol"], {
         size: "4",
         className: "border-right"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_1__["MDBRow"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_1__["MDBCol"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "w-100 h2-responsive text-center"
+      }, exam.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "w-100 text-right"
+      }, this.state.saved ? "Zapisano" : "Zapisywanie"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_1__["MDBRow"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_1__["MDBCol"], {
         className: "d-flex justify-content-between " + "p-2 mt-3 border-right border-top border-left " + (sideMenuCollapseId === "taskSearch" ? "" : "border-bottom"),
         onClick: function onClick() {
           _this2.setSideMenuCollapse("taskSearch");

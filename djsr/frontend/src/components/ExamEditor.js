@@ -78,6 +78,11 @@ class ExamEditor extends Component {
   updateTaskToEdit = (task) => {
     this.setState((state) => {
       Object.assign(state.editorTask, task);
+      state.timeout = this.resetTimeout(
+        this.state.timeout,
+        setTimeout(this.saveExam, 3000)
+      );
+      state.saved = false;
       return state;
     });
   };
@@ -223,6 +228,8 @@ class ExamEditor extends Component {
       <DragDropContext onDragEnd={this.dragEnd}>
         <MDBRow>
           <MDBCol size="4" className="border-right">
+            <div className="w-100 h2-responsive text-center">{exam.name}</div>
+            <div className="w-100 text-right">{(this.state.saved)? "Zapisano" : "Zapisywanie"}</div>
             <MDBRow>
               <MDBCol
                 className={
