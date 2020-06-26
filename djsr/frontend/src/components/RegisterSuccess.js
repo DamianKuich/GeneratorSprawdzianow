@@ -4,10 +4,10 @@ function RegisterSuccess(props) {
   return (
     <div>
       <span>Pomyślnie utworzono konto użytkownika</span>
-        {!!props.match.params.token && (
-            <div>
-                <Link to={"/activateaccount/"+props.match.params.token}>TOKEN: {props.match.params.token}</Link>
-            </div>)}
+        {/*{!!props.match.params.token && (*/}
+        {/*    <div>*/}
+        {/*        <Link to={"/activateaccount/"+props.match.params.token}>TOKEN: {props.match.params.token}</Link>*/}
+        {/*    </div>)}*/}
     </div>
   );
 }

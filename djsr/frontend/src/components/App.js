@@ -14,7 +14,7 @@ const UserAccountManager = lazy(() => import("./UserAccountManager"));
 const PasswordReset = lazy(()=>import("./PasswordReset"));
 const ExamEditor = lazy(()=>import("./ExamEditor"));
 const UserExams = lazy(()=>import("./UserExams"));
-const PasswordResetRequest = lazy(()=>import("./RemindPassword"))
+const PasswordResetRequest = lazy(()=>import("./RemindPassword"));
 class App extends Component {
   constructor(props) {
     super(props);

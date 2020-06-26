@@ -16,9 +16,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function RegisterSuccess(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Pomy\u015Blnie utworzono konto u\u017Cytkownika"), !!props.match.params.token && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/activateaccount/" + props.match.params.token
-  }, "TOKEN: ", props.match.params.token)));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Pomy\u015Blnie utworzono konto u\u017Cytkownika"));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (RegisterSuccess);

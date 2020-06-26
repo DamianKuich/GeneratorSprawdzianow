@@ -4,6 +4,7 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import FormikMdInput from "./FormikMDInput";
 import axiosInstance from "./axiosAPI";
+import {Link} from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
@@ -147,6 +148,9 @@ class Login extends Component {
                   </Form>
                 )}
               </Formik>
+              <Link to={"/requestresetpassword"}>
+                <MDBBtn>Przypomnij hasło</MDBBtn>
+              </Link>
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
