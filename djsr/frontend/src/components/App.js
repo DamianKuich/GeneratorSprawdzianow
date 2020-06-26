@@ -109,7 +109,7 @@ class App extends Component {
               />
               <Route
                 exact
-                path="/passwordreset/:token/"
+                path="/passreset/:token/"
                 render={(props) => <PasswordReset {...props} {...global} />}
               />
               <Route

@@ -66,7 +66,7 @@ class Navbar extends Component {
     return (
       <MDBNavbar color="default-color" dark expand="md" className="mb-3">
         <MDBNavbarBrand>
-          <strong className="white-text">Navbar</strong>
+          <strong className="white-text">GEN-SPR</strong>
         </MDBNavbarBrand>
         <MDBNavbarToggler onClick={this.toggleCollapse} />
         <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>

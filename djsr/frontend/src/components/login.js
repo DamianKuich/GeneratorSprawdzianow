@@ -148,9 +148,11 @@ class Login extends Component {
                   </Form>
                 )}
               </Formik>
-              <Link to={"/requestresetpassword"}>
-                <MDBBtn>Przypomnij hasło</MDBBtn>
-              </Link>
+              <div className="w-100 text-center">
+                <Link to={"/requestresetpassword"}>
+                  <MDBBtn>Przypomnij hasło</MDBBtn>
+                </Link>
+              </div>
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
