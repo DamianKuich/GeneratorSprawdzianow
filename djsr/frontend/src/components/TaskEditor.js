@@ -15,11 +15,11 @@ class TaskEditor extends Component {
 
   setTask = (task) => {};
 
-  elo = () => {
-    let task = JSON.parse(JSON.stringify(this.props.task));
-    task.text = task.text + "1";
-    this.props.updateTask(task);
-  };
+  // elo = () => {
+  //   let task = JSON.parse(JSON.stringify(this.props.task));
+  //   task.text = task.text + "1";
+  //   this.props.updateTask(task);
+  // };
 
   render() {
     let task = this.props.task;

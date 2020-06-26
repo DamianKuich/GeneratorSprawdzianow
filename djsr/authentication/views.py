@@ -1,5 +1,7 @@
 import datetime
 from itertools import chain
+
+import requests
 import simplejson
 from rest_framework import status, permissions
 from rest_framework.permissions import IsAuthenticated
@@ -32,6 +34,15 @@ from .models import Task, Section, Skill, CustomUser, UserActivationToken, \
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 
+class LatexToSvgView(APIView):
+    permission_classes = (permissions.AllowAny,)
+    def post(self, request, *args, **kwargs):
+        print("latex",request.data['latex'])
+        latex = request.data['latex']
+
+        #latex = kwargs.pop('latex')
+        req = requests.get("https://math.now.sh?from="+latex)
+        return Response(req, status.HTTP_200_OK)
 
 class CustomUserCreate(APIView):
     model = CustomUser.objects.all()
@@ -271,6 +282,7 @@ class MakeTestViewSet(APIView):
     serializer_class = TaskSerializer
 
     def post(self, request, format=None):
+        print("make test rq data", request.data)
         if request.data:
             try:
                 nazwa = request.data['name']
@@ -288,18 +300,21 @@ class MakeTestViewSet(APIView):
                     serializer = TestJSONSerializer(testt, many=True)
                     return Response(serializer.data, status=status.HTTP_200_OK)
                 else:
+                    print("make test err 1")
                     return Response(status=status.HTTP_400_BAD_REQUEST)
             except Exception as e:
+                print("mt er2")
                 return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, format=None):
+        print("MT put req data",request.data)
         if request.data:
             try:
-                nazwa = request.data['name']
-                if TestJSON.objects.get(name=nazwa, user_id=request.user.id).exists():
-                    mojtest = TestJSON.objects.get(name=nazwa)
+                id = request.data['id']
+                if TestJSON.objects.filter(id=id, user_id=request.user.id).exists():
+                    mojtest = TestJSON.objects.get(id=id)
                     try:
                         if not TestJSON.objects.filter(name=request.data['newname'], user_id=request.user.id).exists():
                             mojtest.name = request.data['newname']
@@ -414,7 +429,7 @@ class AddImageViewSet(APIView):
             image.save()
             #imag = Image.objects.filter(name=request.data['name'], image=file, user_id=pomoc.id)
             #image_data = open("media/" + str(image.image), "rb").read()
-            ##return HttpResponse(image_data, content_type="image/png")
+            #return HttpResponse(image_data, content_type="image/png")
             return Response(data={"id": image.id}, status=status.HTTP_201_CREATED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)

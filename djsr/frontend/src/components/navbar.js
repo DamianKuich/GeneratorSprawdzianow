@@ -70,17 +70,17 @@ class Navbar extends Component {
         </MDBNavbarBrand>
         <MDBNavbarToggler onClick={this.toggleCollapse} />
         <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
-          <MDBNavbarNav left>
-            <MDBNavItem active>
-              <MDBNavLink to="#!">Home</MDBNavLink>
-            </MDBNavItem>
-            <MDBNavItem>
-              <MDBNavLink to="#!">Features</MDBNavLink>
-            </MDBNavItem>
-            <MDBNavItem>
-              <MDBNavLink to="#!">Pricing</MDBNavLink>
-            </MDBNavItem>
-          </MDBNavbarNav>
+          {/*<MDBNavbarNav left>*/}
+          {/*  <MDBNavItem active>*/}
+          {/*    <MDBNavLink to="#!">Home</MDBNavLink>*/}
+          {/*  </MDBNavItem>*/}
+          {/*  <MDBNavItem>*/}
+          {/*    <MDBNavLink to="#!">Features</MDBNavLink>*/}
+          {/*  </MDBNavItem>*/}
+          {/*  <MDBNavItem>*/}
+          {/*    <MDBNavLink to="#!">Pricing</MDBNavLink>*/}
+          {/*  </MDBNavItem>*/}
+          {/*</MDBNavbarNav>*/}
           <MDBNavbarNav right>
             {/*<MDBNavItem>*/}
             {/*  <MDBNavLink className="waves-effect waves-light" to="#!">*/}
@@ -124,25 +124,25 @@ class Navbar extends Component {
                     <strong>{userInfo.username}</strong>
                   </MDBDropdownToggle>
                   <MDBDropdownMenu right className="dropdown-default">
+                    <MDBDropdownItem href="/userexams">
+                      Moje sprawdziany
+                    </MDBDropdownItem>
                     <MDBDropdownItem href="/myaccount">
                       Zarządzaj kontem
-                    </MDBDropdownItem>
-                    <MDBDropdownItem href="/editor">
-                      Stworz sprawdzian
                     </MDBDropdownItem>
                     <MDBDropdownItem
                       onClick={() => {
                         userLogout();
                       }}
                     >
-                      Wylogowanie
+                      Wyloguj
                     </MDBDropdownItem>
-                    <MDBDropdownItem href="#!">
-                      Something else here
-                    </MDBDropdownItem>
-                    <MDBDropdownItem href="#!">
-                      Something else here
-                    </MDBDropdownItem>
+                    {/*<MDBDropdownItem href="#!">*/}
+                    {/*  Something else here*/}
+                    {/*</MDBDropdownItem>*/}
+                    {/*<MDBDropdownItem href="#!">*/}
+                    {/*  Something else here*/}
+                    {/*</MDBDropdownItem>*/}
                   </MDBDropdownMenu>
                 </MDBDropdown>
               </MDBNavItem>

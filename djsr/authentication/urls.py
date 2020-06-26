@@ -1,9 +1,11 @@
 from django.urls import path, include
 
 from rest_framework_simplejwt import views as jwt_views
-from .views import AddImageToDataSetViewSet, AddImageViewSet, ImageViewSet, SkillViewSet, SectionViewSet, CustomUserCreate, HelloWorldView, \
+from .views import AddImageToDataSetViewSet, AddImageViewSet, ImageViewSet, SkillViewSet, SectionViewSet, \
+    CustomUserCreate, HelloWorldView, \
     LogoutAndBlacklistRefreshTokenForUserView, TaskViewSet, \
-    UserRetrieveUpdateAPIView, ReturnUserInfo, PasswordSendResetView, PasswordResetView, AllTestsJSONViewSet, OneTestJSONViewSet, MakeTestViewSet, MakeTestCopyViewSet
+    UserRetrieveUpdateAPIView, ReturnUserInfo, PasswordSendResetView, PasswordResetView, AllTestsJSONViewSet, \
+    OneTestJSONViewSet, MakeTestViewSet, MakeTestCopyViewSet, LatexToSvgView
 
 # TODO resend activation token
 urlpatterns = [
@@ -13,6 +15,7 @@ urlpatterns = [
     path('user/tests/', AllTestsJSONViewSet.as_view(), name="Tests"),
     path('user/onetest/<id>', OneTestJSONViewSet.as_view(), name="Tests"),
     path('user/image/<id>', ImageViewSet.as_view(), name="Tests"),
+    path('latex/svg/', LatexToSvgView.as_view(), name="Latex_Svg"),
     path('user/addimagetods/', AddImageToDataSetViewSet.as_view(), name="Tests"),
     path('user/addimage/', AddImageViewSet.as_view(), name="Tests"),
     path('user/sections/', SectionViewSet.as_view(), name="sections"),
@@ -24,6 +27,6 @@ urlpatterns = [
     path('hello/', ReturnUserInfo.as_view(), name='hello_world'),
     path('blacklist/', LogoutAndBlacklistRefreshTokenForUserView.as_view(), name='blacklist'),
     path('user/update/', UserRetrieveUpdateAPIView.as_view()),
-    path('user/resetsend/',PasswordSendResetView.as_view(), name='sendreset'),
-    path('user/passreset/<token>/$',PasswordResetView.as_view(), name='reset'),
+    path('user/resetsend/', PasswordSendResetView.as_view(), name='sendreset'),
+    path('user/passreset/<token>/$', PasswordResetView.as_view(), name='reset'),
 ]
