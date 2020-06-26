@@ -100,7 +100,11 @@ class ExamEditor extends Component {
 
   removeTask = (index) => {
     this.setState((state) => {
-      state.exam.tasks.splice(index, index);
+      if (index === 0) {
+        state.exam.tasks.shift();
+      } else {
+        state.exam.tasks.splice(index, index);
+      }
       state.timeout = this.resetTimeout(
         this.state.timeout,
         setTimeout(this.saveExam, 3000)
@@ -229,7 +233,9 @@ class ExamEditor extends Component {
         <MDBRow>
           <MDBCol size="4" className="border-right">
             <div className="w-100 h2-responsive text-center">{exam.name}</div>
-            <div className="w-100 text-right">{(this.state.saved)? "Zapisano" : "Zapisywanie"}</div>
+            <div className="w-100 text-right">
+              {this.state.saved ? "Zapisano" : "Zapisywanie"}
+            </div>
             <MDBRow>
               <MDBCol
                 className={
@@ -394,9 +400,14 @@ class ExamEditor extends Component {
                               this.removeTask(index);
                             }}
                           >
-                            <div className="text-danger" onClick={() => {
-                              this.removeTask(index);
-                            }}>X</div>
+                            <div
+                              className="text-danger"
+                              onClick={() => {
+                                this.removeTask(index);
+                              }}
+                            >
+                              X
+                            </div>
                             <p className="text-right mb-0 pb-0">
                               {".../" + task.maxPoints + " pkt."}
                             </p>

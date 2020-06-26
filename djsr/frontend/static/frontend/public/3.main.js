@@ -146,7 +146,12 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "removeTask", function (index) {
       _this.setState(function (state) {
-        state.exam.tasks.splice(index, index);
+        if (index === 0) {
+          state.exam.tasks.shift();
+        } else {
+          state.exam.tasks.splice(index, index);
+        }
+
         state.timeout = _this.resetTimeout(_this.state.timeout, setTimeout(_this.saveExam, 3000));
         state.saved = false;
         return state;
