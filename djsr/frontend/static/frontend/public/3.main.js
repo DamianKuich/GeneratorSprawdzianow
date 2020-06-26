@@ -377,11 +377,19 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
               className: "p-2",
               onClick: function onClick() {
                 _this2.setTaskToEdit(index);
-              },
-              onContextMenu: function onContextMenu() {
+              } // onContextMenu={() => {
+              //   this.removeTask(index);
+              // }}
+              ,
+              onContextMenuCapture: function onContextMenuCapture() {
                 _this2.removeTask(index);
               }
-            }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+            }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "text-danger",
+              onClick: function onClick() {
+                _this2.removeTask(index);
+              }
+            }, "X"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
               className: "text-right mb-0 pb-0"
             }, ".../" + task.maxPoints + " pkt."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
               className: "font-weight-bold"

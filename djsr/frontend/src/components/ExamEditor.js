@@ -387,10 +387,16 @@ class ExamEditor extends Component {
                             onClick={() => {
                               this.setTaskToEdit(index);
                             }}
-                            onContextMenu={() => {
+                            // onContextMenu={() => {
+                            //   this.removeTask(index);
+                            // }}
+                            onContextMenuCapture={() => {
                               this.removeTask(index);
                             }}
                           >
+                            <div className="text-danger" onClick={() => {
+                              this.removeTask(index);
+                            }}>X</div>
                             <p className="text-right mb-0 pb-0">
                               {".../" + task.maxPoints + " pkt."}
                             </p>
