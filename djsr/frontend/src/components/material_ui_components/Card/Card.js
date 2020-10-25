@@ -9,7 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 // core components
 // import styles from "../../assets/jss/material-kit-react/components/cardStyle.js";
-import styles from "../../../../assets/jss/material-kit-react/components/cardStyle.js"
+import styles from "../../assets/jss/material-kit-react/components/cardStyle.js"
 const useStyles = makeStyles(styles);
 
 export default function Card(props) {
