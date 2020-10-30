@@ -96,6 +96,7 @@ class Task(models.Model):
     private = models.BooleanField(default=False)
     points = models.IntegerField(default=0)
     skill = models.ManyToManyField(Skill)
+    section = models.ManyToManyField(Section)
     dataset = models.ManyToManyField(Dataset)
 
 

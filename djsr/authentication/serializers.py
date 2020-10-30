@@ -71,6 +71,12 @@ class SectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Section
         fields = ('id','Section','skill')
+
+class SectionSerializerHelp(serializers.ModelSerializer):
+    skill = SkillSerializer(many=True)
+    class Meta:
+        model = Section
+        fields = ('id','Section','skill')
 class VariableSerializer(serializers.ModelSerializer):
     class Meta:
         model = Variables
@@ -98,12 +104,13 @@ class TaskSerializer(serializers.ModelSerializer):
     # author = serializers.CharField(required=True)
     # level = serializers.IntegerField(required=True)
     # answer = serializers.CharField(required=True)
+    section = SectionSerializer(many=True)
     skill = SkillSerializer(many=True)
     dataset = DataSetSerializer(many=True)
 
     class Meta:
         model = Task
-        fields = ('id','text','add_date','type','author','level','points','dataset','skill','private')
+        fields = ('id','text','add_date','type','author','level','points','dataset','section','skill','private')
 
 class TestJSONSerializer(serializers.ModelSerializer):
     class Meta:

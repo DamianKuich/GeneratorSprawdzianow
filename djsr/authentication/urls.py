@@ -5,19 +5,20 @@ from .views import AddImageToDataSetViewSet, AddImageViewSet, ImageViewSet, Skil
     CustomUserCreate, HelloWorldView, \
     LogoutAndBlacklistRefreshTokenForUserView, TaskViewSet, \
     UserRetrieveUpdateAPIView, ReturnUserInfo, PasswordSendResetView, PasswordResetView, AllTestsJSONViewSet, \
-    OneTestJSONViewSet, MakeTestViewSet, MakeTestCopyViewSet, LatexToSvgView
+    OneTestJSONViewSet, MakeTestViewSet, MakeTestCopyViewSet, LatexToSvgView, GetRandomTasksViewSet
 
 # TODO resend activation token
 urlpatterns = [
     path('user/skills/', SkillViewSet.as_view(), name="skills"),
-    path('user/maketest/', MakeTestViewSet.as_view(), name="skills"),
-    path('user/makecopytest/', MakeTestCopyViewSet.as_view(), name="skills"),
-    path('user/tests/', AllTestsJSONViewSet.as_view(), name="Tests"),
-    path('user/onetest/<id>', OneTestJSONViewSet.as_view(), name="Tests"),
-    path('user/image/<id>', ImageViewSet.as_view(), name="Tests"),
+    path('user/maketest/', MakeTestViewSet.as_view(), name="MakeTest"),
+    path('user/getrandomtasks/', GetRandomTasksViewSet.as_view(), name="GetRandomTasks"),
+    path('user/makecopytest/', MakeTestCopyViewSet.as_view(), name="MakeTestCopy"),
+    path('user/tests/', AllTestsJSONViewSet.as_view(), name="AllTests"),
+    path('user/onetest/<id>', OneTestJSONViewSet.as_view(), name="OneTest"),
+    path('user/image/<id>', ImageViewSet.as_view(), name="Image"),
     path('latex/svg/', LatexToSvgView.as_view(), name="Latex_Svg"),
-    path('user/addimagetods/', AddImageToDataSetViewSet.as_view(), name="Tests"),
-    path('user/addimage/', AddImageViewSet.as_view(), name="Tests"),
+    path('user/addimagetods/', AddImageToDataSetViewSet.as_view(), name="AddImageToDataSet"),
+    path('user/addimage/', AddImageViewSet.as_view(), name="AddImage"),
     path('user/sections/', SectionViewSet.as_view(), name="sections"),
     path('user/tasks/', TaskViewSet.as_view(), name="tasks"),
     path('user/create/', CustomUserCreate.as_view(), name="create_user"),

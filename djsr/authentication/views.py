@@ -1,7 +1,8 @@
 import datetime
 from itertools import chain
-
+from collections import OrderedDict
 import requests
+import random
 import simplejson
 from rest_framework import status, permissions
 from rest_framework.permissions import IsAuthenticated
@@ -26,7 +27,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.shortcuts import render, redirect
 from schema import Schema, And, Use, Optional
 
-from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer, \
+from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SectionSerializerHelp, SkillSerializer, \
     CustomUserSerializerReadOnly, PasswordSendResetSerializer, TestJSONSerializer, ImageSerializer
 from .models import Task, Section, Skill, CustomUser, UserActivationToken, \
     TestJSON, PasswordSendReset, UserResetToken, Image, Dataset
@@ -332,6 +333,67 @@ class MakeTestViewSet(APIView):
                 else:
                     return Response(status=status.HTTP_400_BAD_REQUEST)
             except Exception as e:
+                return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+class GetRandomTasksViewSet(APIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = TaskSerializer
+
+    def post(self, request, format=None):
+        print("get auto tasks data", request.data)
+        if request.data:
+            try:
+                lista = []
+                listaotw = []
+                listazamk = []
+                section = request.data['sections']
+                ileotw = int(request.data['ileotw'])
+                ilezamk = int(request.data['ilezamk'])
+                level = int(request.data['level'])
+                if section is not None:
+                    try:
+                        skills = request.data['skills']
+                    except:
+                        skills = None
+                    try:
+                        if skills is not None:
+                            if ilezamk != 0:
+                                for skillid in skills.split(','):
+                                    task = Task.objects.filter(skill=skillid,type=2,private=False,level=level)
+                                    serializer = TaskSerializer(task, many=True)
+                                    listaotw.append(serializer.data)
+                                a = list(chain(*listaotw))
+                                random.shuffle(a)
+                                lista.append(a[:ilezamk])
+                            if ileotw != 0:
+                                for skillid in skills.split(','):
+                                    task = Task.objects.filter(skill=skillid,type=1,private=False,level=level)
+                                    serializer = TaskSerializer(task, many=True)
+                                    listaotw.append(serializer.data)
+                                a = list(chain(*listaotw))
+                                random.shuffle(a)
+                                lista.append(a[:ileotw])
+                    except:
+                        if ilezamk != 0:
+                            task = Task.objects.filter(section=section,type=2,private=False,level=level)
+                            serializer = TaskSerializer(task, many=True)
+                            listazamk.append(serializer.data)
+                            a = list(chain(*listazamk))
+                            random.shuffle(a)
+                            lista.append(a[:ilezamk])
+                        if ileotw != 0:
+                            task = Task.objects.filter(section=section,type=1,private=False,level=level)
+                            serializer = TaskSerializer(task, many=True)
+                            listaotw.append(serializer.data)
+                            a = list(chain(*listaotw))
+                            random.shuffle(a)
+                            lista.append(a[:ileotw])
+
+                return Response(list(chain(*lista)), status=status.HTTP_200_OK)
+            except Exception as e:
+                print("mt er1")
                 return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
