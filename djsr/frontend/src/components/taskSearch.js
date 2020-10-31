@@ -37,7 +37,7 @@ class TaskSearch extends Component {
     console.log("sections", sections);
     if (!sections) return <div>loading</div>;
     return (
-      <div className="w-100">
+      <div style={{width:"100%"}}>
         <Formik
           initialValues={{ skills: [] }}
           onSubmit={(values, helpers) => {
