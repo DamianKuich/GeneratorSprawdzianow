@@ -29,8 +29,12 @@ import axiosInstance from "./axiosAPI";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Collapse from '@material-ui/core/Collapse';
-
+import Collapse from "@material-ui/core/Collapse";
+import AppBar from "@material-ui/core/AppBar";
+import { makeStyles } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/styles";
+import ExamEditorSidePanel from "./ExamEditorSidePanel";
+//todo po skasowaniu tresci zadania "zapomina" zdjecie
 class ExamEditor extends Component {
   constructor(props) {
     super(props);
@@ -220,10 +224,10 @@ class ExamEditor extends Component {
     this.setState({ sideMenuCollapseId: collapseId });
   };
 
-  handleSideMenuTabChange=(event,newValue)=>{
-    if (newValue==="generatePDF") this.generatedPDFV3(this.state.exam);
+  handleSideMenuTabChange = (event, newValue) => {
+    if (newValue === "generatePDF") this.generatedPDFV3(this.state.exam);
     else this.setSideMenuCollapse(newValue);
-  }
+  };
   render() {
     let exam = this.state.exam;
     if (!exam) {
@@ -240,99 +244,109 @@ class ExamEditor extends Component {
     console.log("editorTask", editorTask);
     return (
       <DragDropContext onDragEnd={this.dragEnd}>
-        <div style={{ width: "100%", minHeight: "100vh" ,display:"flex" }}>
-          <ResizePanel direction="e">
-            <div>
-              <div className="w-100 h2-responsive text-center">{exam.name}</div>
-              <div className="w-100 text-right">
-                {this.state.saved ? "Zapisano" : "Zapisywanie"}
-              </div>
-              <Paper>
-                <Tabs
-                    value={sideMenuCollapseId}
-                    indicatorColor={"primary"}
-                    textColor={"primary"}
-                    onChange={this.handleSideMenuTabChange}
-                    variant={"fullWidth"}
-                >
-                <Tab label={"Dodaj zadanie"} value={"taskSearch"} disabled={false}/>
-                <Tab label={"Edycja zadania"} value={"taskEdit"} disabled={false}/>
-                <Tab label={"Pobierz PDF"} value={"generatePDF"} disabled={false}/>
-                  </Tabs>
-              </Paper>
-              <Collapse
-                in={"taskSearch"===sideMenuCollapseId}
-                // isOpen={sideMenuCollapseId}
-                style={{width:"100%"}}
+        <div style={{ width: "100%", minHeight: "100vh", display: "flex", flexFlow:"row nowrap"}}>
+          <ExamEditorSidePanel>
+            <div>{exam.name}</div>
+            <div>{this.state.saved ? "Zapisano" : "Zapisywanie"}</div>
+            <AppBar position="static" color="default">
+              <Tabs
+                value={sideMenuCollapseId}
+                indicatorColor={"primary"}
+                textColor={"primary"}
+                onChange={this.handleSideMenuTabChange}
+                variant={"fullWidth"}
               >
-                <TaskSearch updateData={this.setSearchedTasks} />
-                <MDBContainer className="mt-3">
-                  {/*{Array.isArray(searchedTasks) &&*/}
-                  {/*  searchedTasks.length > 0 &&*/}
-                  {/*  searchedTasks.map((task) => <div>{task.text}</div>)}*/}
-                  {Array.isArray(searchedTasks) && searchedTasks.length > 0 && (
-                    <Droppable droppableId="searchDroppable">
-                      {(provided, snapshot) => (
-                        <div
-                          ref={provided.innerRef}
-                          style={{
-                            backgroundColor: snapshot.isDraggingOver
-                              ? "red"
-                              : "white",
-                          }}
-                          className="border-top"
-                        >
-                          {searchedTasks.map((task, index) => (
-                            <Draggable
-                              key={"task-" + task.id}
-                              draggableId={"" + task.id}
-                              index={index}
-                            >
-                              {(provided, snapshot) => (
-                                <div
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  style={provided.draggableProps.style}
-                                  className="border-right border-left border-bottom p-2"
-                                >
-                                  <Latex>{task.text}</Latex>
-                                </div>
-                              )}
-                            </Draggable>
-                          ))}
-                          {provided.placeholder}
-                        </div>
-                      )}
-                    </Droppable>
-                  )}
-                  {Array.isArray(searchedTasks) &&
-                    searchedTasks.length === 0 && (
-                      <div>Brak zadań o podanych kryteriach</div>
-                    )}
-                  {!searchedTasks && (
-                    <div className="text-truncate">
-                      Wybierz umiejetnosci z listy. Aby dodać zadania do
-                      sprawdzianu przeciągnij je na sprawdzian
-                    </div>
-                  )}
-                </MDBContainer>
-              </Collapse>
-              <Collapse
-                in={"taskEdit"===sideMenuCollapseId}
-                // id="taskEdit"
-                // isOpen={sideMenuCollapseId}
-                // className="w-100"
-                  style={{width:"100%"}}
-              >
-                <TaskEditor
-                  task={editorTask}
-                  updateTask={this.updateTaskToEdit}
+                <Tab
+                  label={"Dodaj zadanie"}
+                  value={"taskSearch"}
+                  disabled={false}
                 />
-              </Collapse>
-            </div>
-          </ResizePanel>
-          <MDBCol size="8" className="d-flex justify-content-center">
+                <Tab
+                  label={"Edycja zadania"}
+                  value={"taskEdit"}
+                  disabled={false}
+                />
+                <Tab
+                  label={"Pobierz PDF"}
+                  value={"generatePDF"}
+                  disabled={false}
+                />
+              </Tabs>
+            </AppBar>
+            <Collapse
+              in={"taskSearch" === sideMenuCollapseId}
+              // isOpen={sideMenuCollapseId}
+              style={{ width: "100%" }}
+            >
+              <TaskSearch updateData={this.setSearchedTasks} />
+              <MDBContainer className="mt-3">
+                {/*{Array.isArray(searchedTasks) &&*/}
+                {/*  searchedTasks.length > 0 &&*/}
+                {/*  searchedTasks.map((task) => <div>{task.text}</div>)}*/}
+                {Array.isArray(searchedTasks) && searchedTasks.length > 0 && (
+                  <Droppable droppableId="searchDroppable">
+                    {(provided, snapshot) => (
+                      <div
+                        ref={provided.innerRef}
+                        style={{
+                          backgroundColor: snapshot.isDraggingOver
+                            ? "red"
+                            : "white",
+                        }}
+                        className="border-top"
+                      >
+                        {searchedTasks.map((task, index) => (
+                          <Draggable
+                            key={"task-" + task.id}
+                            draggableId={"" + task.id}
+                            index={index}
+                          >
+                            {(provided, snapshot) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                style={provided.draggableProps.style}
+                                className="border-right border-left border-bottom p-2"
+                              >
+                                <Latex>{task.text}</Latex>
+                              </div>
+                            )}
+                          </Draggable>
+                        ))}
+                        {provided.placeholder}
+                      </div>
+                    )}
+                  </Droppable>
+                )}
+                {Array.isArray(searchedTasks) && searchedTasks.length === 0 && (
+                  <div>Brak zadań o podanych kryteriach</div>
+                )}
+                {!searchedTasks && (
+                  <div className="text-truncate">
+                    Wybierz umiejetnosci z listy. Aby dodać zadania do
+                    sprawdzianu przeciągnij je na sprawdzian
+                  </div>
+                )}
+              </MDBContainer>
+            </Collapse>
+            <Collapse
+              in={"taskEdit" === sideMenuCollapseId}
+              // id="taskEdit"
+              // isOpen={sideMenuCollapseId}
+              // className="w-100"
+              style={{ width: "100%" }}
+            >
+              <TaskEditor
+                task={editorTask}
+                updateTask={this.updateTaskToEdit}
+              />
+            </Collapse>
+          </ExamEditorSidePanel>
+          <div
+            // className="d-flex justify-content-center"
+            style={{ display: "flex", justifyContent: "center", flexGrow:"3" }}
+          >
             <Droppable
               droppableId="examDroppable"
               style={{ marginLeft: "auto", marginRight: "auto" }}
@@ -438,7 +452,7 @@ class ExamEditor extends Component {
                 </div>
               )}
             </Droppable>
-          </MDBCol>
+          </div>
         </div>
       </DragDropContext>
     );

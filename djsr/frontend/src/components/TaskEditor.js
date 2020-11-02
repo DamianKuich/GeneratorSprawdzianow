@@ -1,9 +1,17 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {MDBBtn, MDBContainer} from "mdbreact";
-import { Form, Formik } from "formik";
+import { MDBBtn, MDBContainer } from "mdbreact";
+import { Field, Form, Formik } from "formik";
 import FormikMdInput from "./FormikMDInput";
 import axiosInstance from "./axiosAPI";
+import MaterialFormikField from "./MaterialFormikField";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import People from "@material-ui/icons/People";
+import { Button } from "@material-ui/core";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Container from "@material-ui/core/Container";
+import Paper from "@material-ui/core/Paper";
 
 class TaskEditor extends Component {
   constructor(props) {
@@ -24,10 +32,10 @@ class TaskEditor extends Component {
   render() {
     let task = this.props.task;
     console.log("TE", task);
-
+    //todo walidacja formularza od edycji zadania
     if (!task) return <div>Wybierz zadanie</div>;
     return (
-      <MDBContainer>
+      <div style={{minHeight:"100%"}}>
         <Formik
           enableReinitialize={true}
           initialValues={this.props.task}
@@ -35,17 +43,18 @@ class TaskEditor extends Component {
             if (!!values.imageToUpload) {
               let formData = new FormData();
               formData.append("file", values.imageToUpload);
-              axiosInstance.post("/user/addimage/", formData, {
-                headers: {
-                  "Content-Type": "multipart/form-data",
-                },
-              }).then((response)=>{
-                  let task = {...values};
+              axiosInstance
+                .post("/user/addimage/", formData, {
+                  headers: {
+                    "Content-Type": "multipart/form-data",
+                  },
+                })
+                .then((response) => {
+                  let task = { ...values };
                   task.currentDataSet.image = [response.data.id];
                   this.props.updateTask({ ...task });
-              });
-            }
-            else this.props.updateTask({ ...values });
+                });
+            } else this.props.updateTask({ ...values });
           }}
         >
           {({
@@ -65,66 +74,47 @@ class TaskEditor extends Component {
             };
             return (
               <Form>
-                <FormikMdInput
-                  label="Treść zadania"
-                  errors={errors.text}
-                  name="text"
-                  id="text"
-                  touched={touched.text}
-                  onChange={handleChangeAndSubmit}
-                  onBlur={handleBlur}
-                  value={values.text}
+                <Field
+                  component={MaterialFormikField}
+                  name={"text"}
+                  formControlProps={{
+                    fullWidth: true,
+                  }}
+                  inputProps={{
+                    onChange: handleChangeAndSubmit,
+                  }}
+                  labelText="Treść zadania"
                 />
-                 <div className="md-form form-group">
-                     <span className="mr-3">Liczba punktów za zadanie</span>
-                <input
-                    type="number"
-                    name="maxPoints"
-                    value={values.maxPoints}
-                    onChange={handleChangeAndSubmit}
-                    onBlur={handleBlur}
-                    min={1}
-                    max={20}
+                <Field
+                  component={MaterialFormikField}
+                  name={"maxPoints"}
+                  type={"number"}
+                  formControlProps={{
+                    fullWidth: true,
+                  }}
+                  inputProps={{
+                    onChange: handleChangeAndSubmit,
+                  }}
+                  labelText="Maksymalna ilość punktów"
                 />
-                 </div>
-                <div className="input-group">
-                  <div className="input-group-prepend">
-                    <span
-                      className="input-group-text"
-                      id="inputGroupFileAddon01"
-                    >
-                      Obrazek do zadania
-                    </span>
-                  </div>
-                  <div className="custom-file">
-                    <input
-                      type="file"
-                      className="custom-file-input"
-                      id="inputGroupFile01"
-                      aria-describedby="inputGroupFileAddon01"
-                      onChange={(e) => {
-                        setFieldValue(
-                          "imageToUpload",
-                          e.currentTarget.files[0]
-                        );
-                      }}
-                      onBlur={handleBlur}
-                    />
-                    <label
-                      className="custom-file-label"
-                      htmlFor="inputGroupFile01"
-                    >
-                      Wybierz
-                    </label>
-                  </div>
-                </div>
-                  <MDBBtn onClick={handleSubmit}>Zapisz obrazek</MDBBtn>
+                <Button variant="contained" component="label">
+                  Wybierz zdjęcie
+                  <input
+                    type="file"
+                    name={"imageToUpload"}
+                    style={{ display: "none" }}
+                    onChange={(e) => {
+                      setFieldValue("imageToUpload", e.currentTarget.files[0]);
+                    }}
+                  />
+                </Button>
+                <Button onClick={handleSubmit}>Zapisz obrazek</Button>
               </Form>
             );
           }}
         </Formik>
         {/*<div onClick={()=>{this.elo()}}>{task.text}</div>*/}
-      </MDBContainer>
+      </div>
     );
   }
 }

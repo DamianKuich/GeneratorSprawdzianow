@@ -102,8 +102,6 @@ class MaterialUiTaskSearch extends Component {
             setFieldValue,
             fi,
           }) => (
-            <Paper>
-              {console.log("taskSearch values", values)}
               <>
                 <Form onSubmit={handleSubmit}>
                   <List>
@@ -222,7 +220,6 @@ class MaterialUiTaskSearch extends Component {
                   </MDBBtn>
                 </Form>
               </>
-            </Paper>
           )}
         </Formik>
       </div>
