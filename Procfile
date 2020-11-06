@@ -1,1 +1,1 @@
-web: gunicorn djsr/djsr.wsgi --log-file -
+web: gunicorn djsr:djsr.wsgi --log-file -
