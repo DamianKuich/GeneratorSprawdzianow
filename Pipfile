@@ -10,6 +10,7 @@ django = "*"
 djangorestframework = "*"
 djangorestframework-simplejwt = "*"
 schema = "*"
+django-heroku = "*"
 
 [requires]
 python_version = "3.7"
