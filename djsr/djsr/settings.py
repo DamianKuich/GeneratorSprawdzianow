@@ -15,6 +15,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 from datetime import timedelta
 import os
+import django_heroku
 SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -155,7 +156,7 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media'
 AUTH_USER_MODEL = "authentication.CustomUser"
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
@@ -164,3 +165,5 @@ EMAIL_HOST_USER = 'sprgenmat@gmail.com'
 EMAIL_HOST_PASSWORD = 'Sprgenmat1.'
 EMAIL_PORT = 587
 
+# Activate Django-Heroku.
+django_heroku.settings(locals())
