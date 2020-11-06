@@ -15,6 +15,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 from datetime import timedelta
 import os
+import django_heroku
 SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -109,10 +110,10 @@ WSGI_APPLICATION = 'djsr.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'genespr',
-        'USER': 'myroot',
+        'NAME': 'genspr',
+        'USER': 'root',
         'PASSWORD': 'ziomalek1998',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }
@@ -152,6 +153,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media'
 AUTH_USER_MODEL = "authentication.CustomUser"
@@ -164,3 +166,5 @@ EMAIL_HOST_USER = 'sprgenmat@gmail.com'
 EMAIL_HOST_PASSWORD = 'Sprgenmat1.'
 EMAIL_PORT = 587
 
+# Activate Django-Heroku.
+django_heroku.settings(locals())
