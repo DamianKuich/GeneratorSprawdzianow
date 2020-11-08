@@ -172,5 +172,8 @@ EMAIL_HOST_USER = 'sprgenmat@gmail.com'
 EMAIL_HOST_PASSWORD = 'tgbgehrnudqdbbcg'
 EMAIL_PORT = 587
 
+ADMINS = [('Damian', 'sprgenmat@gmail.com')]
+MANAGERS = ADMINS
+
 # Activate Django-Heroku.
 django_heroku.settings(locals())
