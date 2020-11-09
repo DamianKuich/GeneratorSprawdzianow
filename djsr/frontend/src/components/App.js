@@ -15,7 +15,7 @@ const AccountActivation = lazy(() => import("./AccountActivation"));
 const RegisterSuccess = lazy(() => import("./RegisterSuccess"));
 const UserAccountManager = lazy(() => import("./UserAccountManager"));
 const PasswordReset = lazy(()=>import("./PasswordReset"));
-const ExamEditor = lazy(()=>import("./ExamEditor"));
+const ExamEditor = lazy(()=>import("./MaterialUiExamEditor"));
 const UserExams = lazy(()=>import("./UserExams"));
 const PasswordResetRequest = lazy(()=>import("./RemindPassword"));
 const HomePage = lazy(()=>import("./HomePage"));

@@ -17,6 +17,7 @@ import {MDBDropdownItem} from "mdbreact";
 const useStyles = makeStyles(styles);
 
 const HeaderLinks = (props) => {
+
   const classes = useStyles();
   const userInfo = props.appState.user;
   const userLogout = props.userLogout;
@@ -66,7 +67,6 @@ const HeaderLinks = (props) => {
                 Zarządzaj kontem
               </Link>,
                 <span className={classes.dropdownLink} onClick={userLogout}>Wyloguj</span>
-
             ]}
           />
         </ListItem>
@@ -75,6 +75,11 @@ const HeaderLinks = (props) => {
   );
 };
 const MaterialUiNavbar = (props) => {
+  console.log("navbarprops",props,/^\/editor\//.test(props.location.pathname))
+  if (/^\/editor\//.test(props.location.pathname)){
+    console.log("triggered nb");
+    return null;
+  }
   const user = props.appState.user;
   return (
     <Header

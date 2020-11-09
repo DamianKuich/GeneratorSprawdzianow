@@ -4,6 +4,7 @@ import { MDBBtn, MDBCollapse, MDBContainer, MDBIcon } from "mdbreact";
 import FormikMdInput from "./FormikMDInput";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
+import tasksParser from "./ExamEditorSubComponents/TaskParser";
 class TaskSearch extends Component {
   constructor(props) {
     super(props);
@@ -37,7 +38,7 @@ class TaskSearch extends Component {
     console.log("sections", sections);
     if (!sections) return <div>loading</div>;
     return (
-      <div className="w-100">
+      <div style={{width:"100%"}}>
         <Formik
           initialValues={{ skills: [] }}
           onSubmit={(values, helpers) => {
@@ -65,7 +66,7 @@ class TaskSearch extends Component {
                   // this.setState({
                   //   results: response.data,
                   // });
-                  this.props.updateData(response.data);
+                  this.props.updateData(tasksParser(response.data));
                 })
                 .catch((error) => {
                   // console.log("login error", error.response);
