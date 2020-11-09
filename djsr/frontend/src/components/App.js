@@ -138,6 +138,10 @@ class App extends Component {
                 path={"/userexams/"}
                 render={(props) => <UserExams {...props} {...global} />}
               />
+              <Route
+                path={'/'}
+                render={(props)=><HomePage {...props} {...global}/>}
+                />
             </Switch>
           </Suspense>
         </MDBContainer>
