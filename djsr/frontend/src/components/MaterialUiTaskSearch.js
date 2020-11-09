@@ -19,6 +19,7 @@ import * as Yup from "yup";
 import Paper from "@material-ui/core/Paper";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Checkbox from "@material-ui/core/Checkbox";
+import tasksParser from "./ExamEditorSubComponents/TaskParser";
 
 class MaterialUiTaskSearch extends Component {
   constructor(props) {
@@ -50,6 +51,7 @@ class MaterialUiTaskSearch extends Component {
     let sections = this.state.sections;
     let collapseId = this.state.collapseId;
     let results = this.state.results;
+    console.log(this.props,"TaskSearch Props")
     console.log("sections", sections);
     if (!sections) return <div>loading</div>;
     return (
@@ -81,7 +83,7 @@ class MaterialUiTaskSearch extends Component {
                   // this.setState({
                   //   results: response.data,
                   // });
-                  this.props.updateData(response.data);
+                  this.props.updateData(tasksParser(response.data));
                 })
                 .catch((error) => {
                   // console.log("login error", error.response);
