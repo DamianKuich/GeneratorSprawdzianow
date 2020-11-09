@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const axiosInstanceNoAuth = axios.create({
-  baseURL: "api/",
+  baseURL: "https://gen-mat.herokuapp.com/api/",
   timeout: 5000,
   headers: {
     "Content-Type": "application/json",
@@ -10,7 +10,7 @@ export const axiosInstanceNoAuth = axios.create({
 });
 
 export const axiosInstance = axios.create({
-  baseURL: "api/",
+  baseURL: "https://gen-mat.herokuapp.com/api/",
   timeout: 5000,
   headers: {
     Authorization: "JWT " + localStorage.getItem("access_token"),
