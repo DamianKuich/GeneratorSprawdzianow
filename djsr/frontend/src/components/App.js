@@ -84,6 +84,7 @@ class App extends Component {
       setUser: this.setUser,
     };
     const properties = { ...this.props, ...global };
+    return (<div>cyka</div>);
     return (
       <Suspense fallback={<div>ladowanie</div>}>
         <>
