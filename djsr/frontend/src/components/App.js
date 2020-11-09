@@ -6,8 +6,8 @@ import "./styles/mdcardfixes.css";
 import "./styles/styles.css";
 import axiosInstance from "./axiosAPI";
 import CssBaseline from '@material-ui/core/CssBaseline';
-// const Login = lazy(() => import("./MaterialUiLoginPage"));
-import Login from "./MaterialUiLoginPage"
+const Login = lazy(() => import("./MaterialUiLoginPage"));
+// import Login from "./MaterialUiLoginPage"
 const Signup = lazy(() => import("./MaterialUiSignUpPage"));
 // const Navbar = lazy(() => import("./navbar"));
 const MDBContainer = lazy(() => import("./MDBLazy/MDBLazyContainer"));
@@ -90,9 +90,9 @@ class App extends Component {
       <Suspense fallback={<div>ladowanie</div>}>
         <>
           <CssBaseline />
-        {/*<MDBContainer fluid className="h-100">*/}
+        <MDBContainer fluid className="h-100">
           <MaterialUiNavbar {...properties} />
-          {/*<Suspense fallback={<div>Ładowanie</div>}>*/}
+          <Suspense fallback={<div>Ładowanie</div>}>
             <Switch>
               <Route
                 exact
@@ -139,8 +139,8 @@ class App extends Component {
                 render={(props) => <UserExams {...props} {...global} />}
               />
             </Switch>
-          {/*</Suspense>*/}
-        {/*</MDBContainer>*/}
+          </Suspense>
+        </MDBContainer>
           </>
       </Suspense>
     );
