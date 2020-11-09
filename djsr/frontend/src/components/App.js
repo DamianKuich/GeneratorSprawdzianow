@@ -93,7 +93,11 @@ class App extends Component {
           <MaterialUiNavbar {...properties} />
           <Suspense fallback={<div>Ładowanie</div>}>
             <Switch>
-
+              <Route
+                exact
+                path={"/login/"}
+                render={(props) => <Login {...global} {...props} />}
+              />
             </Switch>
           </Suspense>
         {/*</MDBContainer>*/}
