@@ -99,6 +99,45 @@ class App extends Component {
                 path={"/login/"}
                 render={(props) => <Login {...global} {...props} />}
               />
+              <Route
+                exact
+                path={"/signup/"}
+                render={(props) => <Signup {...global} {...props} />}
+              />
+              <Route
+                exact
+                path={"/signupsuccess/:token"}
+                render={(props) => <RegisterSuccess {...global} {...props} />}
+              />
+              <Route
+                exact
+                path="/activateaccount/:token/"
+                render={(props) => <AccountActivation {...props} {...global} />}
+              />
+              <Route
+                exact
+                path="/passreset/:token"
+                render={(props) => <PasswordReset {...props} {...global} />}
+              />
+              <Route
+                exact
+                path="/requestresetpassword/"
+                render={(props) => <PasswordResetRequest {...props} {...global} />}
+              />
+              <Route
+                path={"/myaccount/"}
+                render={(props) => (
+                  <UserAccountManager {...props} {...global} />
+                )}
+              />
+              <Route
+                path={"/editor/:id/"}
+                render={(props) => <ExamEditor {...props} {...global} />}
+              />
+              <Route
+                path={"/userexams/"}
+                render={(props) => <UserExams {...props} {...global} />}
+              />
             </Switch>
           {/*</Suspense>*/}
         {/*</MDBContainer>*/}
