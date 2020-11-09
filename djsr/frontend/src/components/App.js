@@ -1,12 +1,14 @@
 import React, { Component, lazy, Suspense } from "react";
 import { Switch, Link, Route } from "react-router-dom";
+import MaterialUiNavbar from "./materialUiNavbar";
 // import { MDBContainer } from "mdbreact";
 import "./styles/mdcardfixes.css";
 import "./styles/styles.css";
 import axiosInstance from "./axiosAPI";
-const Login = lazy(() => import("./login"));
-const Signup = lazy(() => import("./signup"));
-const Navbar = lazy(() => import("./navbar"));
+import CssBaseline from '@material-ui/core/CssBaseline';
+const Login = lazy(() => import("./MaterialUiLoginPage"));
+const Signup = lazy(() => import("./MaterialUiSignUpPage"));
+// const Navbar = lazy(() => import("./navbar"));
 const MDBContainer = lazy(() => import("./MDBLazy/MDBLazyContainer"));
 const AccountActivation = lazy(() => import("./AccountActivation"));
 const RegisterSuccess = lazy(() => import("./RegisterSuccess"));
@@ -15,6 +17,7 @@ const PasswordReset = lazy(()=>import("./PasswordReset"));
 const ExamEditor = lazy(()=>import("./ExamEditor"));
 const UserExams = lazy(()=>import("./UserExams"));
 const PasswordResetRequest = lazy(()=>import("./RemindPassword"));
+const HomePage = lazy(()=>import("./HomePage"));
 class App extends Component {
   constructor(props) {
     super(props);
@@ -83,8 +86,10 @@ class App extends Component {
     const properties = { ...this.props, ...global };
     return (
       <Suspense fallback={<div>ladowanie</div>}>
-        <MDBContainer fluid className="h-100">
-          <Navbar {...properties} />
+        <>
+          <CssBaseline />
+        {/*<MDBContainer fluid className="h-100">*/}
+          <MaterialUiNavbar {...properties} />
           <Suspense fallback={<div>Ładowanie</div>}>
             <Switch>
               <Route
@@ -131,10 +136,11 @@ class App extends Component {
                 path={"/userexams/"}
                 render={(props) => <UserExams {...props} {...global} />}
               />
-              <Route path={"/"} render={(props) => <div>Home again</div>} />
+              <Route path={"/"} render={(props) => <HomePage {...props} {...global}/>} />
             </Switch>
           </Suspense>
-        </MDBContainer>
+        {/*</MDBContainer>*/}
+          </>
       </Suspense>
     );
   }
