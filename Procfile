@@ -1,0 +1,1 @@
+web: python djsr/manage.py collectstatic --no-input; gunicorn --pythonpath djsr djsr.wsgi --log-file -

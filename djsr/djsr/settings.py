@@ -28,9 +28,9 @@ RS256_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\nMIIJKAIBAAKCAgEAqlpe2Y4tV3bW
 RS256_PUBLIC_KEY="-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAqlpe2Y4tV3bWXUEg+Rd3\ndR2k3XhEMt/ymRFr6Se1o5IgFyRpotI8ZIBoonvSV+WnM7E5ZNGc9UMVrphJ2h5d\n/LML214TmHOw8qfEJ0eu83JCSjszw+/DPxG9wIPwsG1EhcWnjhEJNId9SKhFgG+5\nidwwryXwO1u8x5wcYZ36OGXtxJGjkfKuZSWCKRceP9VWWK1CfOLJDAZM4lpSyzAd\nAWvo/Ip6tJrh62rpqLlZOkzjqa5ugQIWcyZsDeXif4y3CfLVgB9rfl4T9uOp/JZG\nP7s5iyDp8nDYadBjLweSlMPStkKm0GXasu85XG9PFpDZ378Noyttq/GqRHoLUC1V\nbxzg2Du8WIbQYKkZSbEEdFxFRBOuwZ+YtSmLCC/3HSYIvXhNTcB2QtttXTd2aX2+\nkDRUuM/4V5joeHVY7BmGGVR5jUozp9BI4C29qpL9bJWYv/Gz2ZZ3dBdUQ7fY+mpx\nJ2iuZo3X2P7khh9E3H/bnZzakevSiFTPmOHF9lHKxxM7VAkTOn818Oryx1KRaAXB\nRSqYDAxivmUsoq8c8UJXtWdxTF5QC7woVbedZ9Tp8QUAtPT6PPafYigXc16ReLkc\na25CDWquV3d61wZDeDQF+DSDMZC76AcZLPAP6/YEA17rje5et34iyDWwl0E4rSl6\n/KWePmYVigtrHU2eg1uKcmcCAwEAAQ==\n-----END PUBLIC KEY-----"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['gen-mat.herokuapp.com']
 
 # Application definition
 
@@ -110,13 +110,17 @@ WSGI_APPLICATION = 'djsr.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'genespr',
-        'USER': 'myroot',
+        'NAME': 'genspr',
+        'USER': 'root',
         'PASSWORD': 'ziomalek1998',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }
+
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -147,23 +151,32 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'frontend/static'),
+    os.path.join(BASE_DIR, 'frontend/templates'),
+]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media'
 AUTH_USER_MODEL = "authentication.CustomUser"
-STATIC_ROOT = '/static/'
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'sprgenmat@gmail.com'
-EMAIL_HOST_PASSWORD = 'Sprgenmat1.'
+EMAIL_HOST_PASSWORD = 'tgbgehrnudqdbbcg'
 EMAIL_PORT = 587
+
+ADMINS = [('Damian', 'sprgenmat@gmail.com')]
+MANAGERS = ADMINS
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
