@@ -164,7 +164,7 @@ var customInputStyle = {
       borderColor: "#FFFFFF"
     }
   },
-  labelRoot: _objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["defaultFont"], {
+  labelRoot: _objectSpread(_objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["defaultFont"]), {}, {
     color: "#AAAAAA !important",
     fontWeight: "400",
     fontSize: "14px",
@@ -303,7 +303,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var signupPageStyle = {
-  container: _objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["container"], {
+  container: _objectSpread(_objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["container"]), {}, {
     zIndex: "2",
     position: "relative",
     paddingTop: "25vh",

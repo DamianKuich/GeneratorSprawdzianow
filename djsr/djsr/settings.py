@@ -111,7 +111,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'genespr',
         'USER': 'myroot',
-        'PASSWORD': 'ziomalek1998',
+        'PASSWORD': 'Papaj2137',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -161,6 +161,13 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'sprgenmat@gmail.com'
-EMAIL_HOST_PASSWORD = 'Sprgenmat1.'
+EMAIL_HOST_PASSWORD = 'tgbgehrnudqdbbcg'
 EMAIL_PORT = 587
+
+
+
+
+
+
+
 
