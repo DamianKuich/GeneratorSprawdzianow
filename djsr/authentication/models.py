@@ -68,7 +68,6 @@ class Task(models.Model):
     answers = models.OneToOneField(
         Answers,
         on_delete=models.CASCADE,
-        primary_key=True,
         default ="",
     )
     image = models.ManyToManyField(Image,blank=True)
