@@ -15,6 +15,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 from datetime import timedelta
 import os
+import django_heroku
 SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -29,7 +30,7 @@ RS256_PUBLIC_KEY="-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMI
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['gen-mat.herokuapp.com']
 
 # Application definition
 
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'six',
     'rest_framework_simplejwt',
+    'django_cleanup',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -110,12 +112,16 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'genespr',
-        'USER': 'myroot',
+        'USER': 'root',
         'PASSWORD': 'ziomalek1998',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }
+
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -146,12 +152,18 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+os.path.join(BASE_DIR, 'frontend/static/'),
+    os.path.join(BASE_DIR, 'frontend/templates/'),
+]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media'
 AUTH_USER_MODEL = "authentication.CustomUser"
@@ -161,6 +173,11 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'sprgenmat@gmail.com'
-EMAIL_HOST_PASSWORD = 'Sprgenmat1.'
+EMAIL_HOST_PASSWORD = 'tgbgehrnudqdbbcg'
 EMAIL_PORT = 587
 
+ADMINS = [('Damian', 'sprgenmat@gmail.com')]
+MANAGERS = ADMINS
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())

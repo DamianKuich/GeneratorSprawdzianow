@@ -31,7 +31,7 @@ const HeaderLinks = (props) => {
             target="_blank"
             disabled
           >
-            <CircularProgress color={"white"} size={20} />
+            <CircularProgress color={"primary"} size={20} />
           </Button>
         </ListItem>
       )}
