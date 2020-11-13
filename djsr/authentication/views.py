@@ -3,6 +3,7 @@ from itertools import chain
 
 import requests
 import simplejson
+import random
 from rest_framework import status, permissions
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -29,7 +30,7 @@ from schema import Schema, And, Use, Optional
 from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer, \
     CustomUserSerializerReadOnly, PasswordSendResetSerializer, TestJSONSerializer, ImageSerializer
 from .models import Task, Section, Skill, CustomUser, UserActivationToken, \
-    TestJSON, PasswordSendReset, UserResetToken, Image, Dataset
+    TestJSON, PasswordSendReset, UserResetToken, Image
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
@@ -276,6 +277,45 @@ class TaskViewSet(APIView):
             serializer = TaskSerializer(task, many=True)
             return Response(serializer.data)
 
+class GetRandomTasksViewSet(APIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = TaskSerializer
+
+    def post(self, request, format=None):
+        print("get auto tasks data", request.data)
+        if request.data:
+            try:
+                lista = []
+                listaotw = []
+                listazamk = []
+                ileotw = int(request.data['ileotw'])
+                ilezamk = int(request.data['ilezamk'])
+                level = int(request.data['level'])
+                skills = request.data['skills']
+                if skills is not None:
+                    if ilezamk != 0:
+                        for skillid in skills.split(','):
+                            task = Task.objects.filter(skill=skillid,type=2,private=False,level=level)
+                            serializer = TaskSerializer(task, many=True)
+                            listazamk.append(serializer.data)
+                        a = list(chain(*listazamk))
+                        random.shuffle(a)
+                        lista.append(a[:ilezamk])
+                    if ileotw != 0:
+                        for skillid in skills.split(','):
+                            task = Task.objects.filter(skill=skillid,type=1,private=False,level=level)
+                            serializer = TaskSerializer(task, many=True)
+                            listaotw.append(serializer.data)
+                        a = list(chain(*listaotw))
+                        random.shuffle(a)
+                        lista.append(a[:ileotw])
+
+                return Response(list(chain(*lista)), status=status.HTTP_200_OK)
+            except Exception as e:
+                print("mt er1")
+                return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 class MakeTestViewSet(APIView):
     permission_classes = (IsAuthenticated,)
@@ -435,9 +475,9 @@ class AddImageViewSet(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-class AddImageToDataSetViewSet(APIView):
+class AddImageToTaskViewSet(APIView):
     permission_classes = (IsAuthenticated,)
-    queryset = Dataset.objects.all()
+    queryset = Task.objects.all()
     serializer_class = ImageSerializer
 
     def post(self, request, *args, **kwargs):
@@ -448,11 +488,11 @@ class AddImageToDataSetViewSet(APIView):
             image = Image.objects.create(name=request.data['name'], image=file, user_id=pomoc.id)
             image.save()
             # dataset
-            id = request.data['iddataset']
-            dataset = Dataset.objects.get(id=id)
+            id = request.data['taskid']
+            task = Task.objects.get(id=id)
             image = Image.objects.filter(name=request.data['name'])
-            dataset.image.set(image)
-            dataset.save()
+            task.image.set(image)
+            task.save()
             image_data = open("media/" + str(image.image), "rb").read()
             return HttpResponse(image_data, content_type="image/png")
         else:
