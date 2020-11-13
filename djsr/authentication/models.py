@@ -66,7 +66,7 @@ class Task(models.Model):
         (2, 'Rozszerzony'),
     }
     answers = models.ManyToManyField(Answers)
-    image = models.ManyToManyField(Image)
+    image = models.ManyToManyField(Image,blank=True)
     text = models.CharField(max_length=500)
     add_date = models.DateField(default=datetime.date.today)
     type = models.IntegerField(choices=RODZAJE, default=0)

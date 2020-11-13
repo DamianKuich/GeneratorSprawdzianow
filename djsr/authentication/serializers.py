@@ -90,7 +90,7 @@ class TaskSerializer(serializers.ModelSerializer):
     # answer = serializers.CharField(required=True)
     skill = SkillSerializer(many=True)
     answers = AnswersSerializer(many=True)
-    image = ImageSerializer(many=True,required=False,blank=True)
+    image = ImageSerializer(many=True,required=False)
 
 
     class Meta:
