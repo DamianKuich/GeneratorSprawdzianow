@@ -13,5 +13,5 @@ admin.site.register(Skill)
 admin.site.register(TestJSON)
 admin.site.register(Answers)
 admin.site.register(Image)
-admin.sie.register(Variables)
+admin.site.register(Variables)
 # Register your models here.
