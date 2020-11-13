@@ -34,18 +34,26 @@ class Section(models.Model):
         return self.Section
 
 class Answers(models.Model):
-    allanswers =ListCharField(
-        base_field=models.CharField(max_length=200),
-        size=6,
-        max_length=(120 * 11),
-        default = None # 6 * 10 character nominals, plus commas
-    )
-    correctans =ListCharField(
-        base_field=models.CharField(max_length=200),
-        size=6,
-        max_length=(120 * 11),
-        default = None # 6 * 10 character nominals, plus commas
-    )
+    # allanswers =ListCharField(
+    #     base_field=models.CharField(max_length=200),
+    #     size=6,
+    #     max_length=(120 * 11),
+    #     default = None # 6 * 10 character nominals, plus commas
+    # )
+    # correctans =ListCharField(
+    #     base_field=models.CharField(max_length=200),
+    #     size=6,
+    #     max_length=(120 * 11),
+    #     default = None # 6 * 10 character nominals, plus commas
+    # )
+    allanswers = models.CharField(max_length=500)
+    correctans = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.nasza_nazwa()
+
+    def nasza_nazwa(self):
+        return self.allanswers
 
 class Image(models.Model):
     name = models.CharField(max_length=500)
@@ -65,8 +73,6 @@ class Task(models.Model):
         (1, 'Podstawowy'),
         (2, 'Rozszerzony'),
     }
-    answers = models.ManyToManyField(Answers)
-    image = models.ManyToManyField(Image)
     text = models.CharField(max_length=500)
     add_date = models.DateField(default=datetime.date.today)
     type = models.IntegerField(choices=RODZAJE, default=0)
@@ -75,6 +81,8 @@ class Task(models.Model):
     private = models.BooleanField(default=False)
     points = models.IntegerField(default=0)
     skill = models.ManyToManyField(Skill)
+    answers = models.ManyToManyField(Answers)
+    image = models.ManyToManyField(Image)
 
 
     def __str__(self):
