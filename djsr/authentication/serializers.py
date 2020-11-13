@@ -89,7 +89,7 @@ class TaskSerializer(serializers.ModelSerializer):
     # level = serializers.IntegerField(required=True)
     # answer = serializers.CharField(required=True)
     skill = SkillSerializer(many=True)
-    answers = AnswersSerializer(many=False)
+    answers = AnswersSerializer(many=True)
     image = ImageSerializer(many=True,required=False)
 
 
