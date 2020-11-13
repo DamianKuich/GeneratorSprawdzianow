@@ -110,7 +110,7 @@ WSGI_APPLICATION = 'djsr.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'genspr',
+        'NAME': 'genespr',
         'USER': 'root',
         'PASSWORD': 'ziomalek1998',
         'HOST': '127.0.0.1',
