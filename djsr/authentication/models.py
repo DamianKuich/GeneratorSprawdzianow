@@ -34,7 +34,7 @@ class Section(models.Model):
         return self.Section
 
 class Answers(models.Model):
-    allanswers =ListCharField(
+    wronganswers =ListCharField(
         base_field=models.CharField(max_length=200),
         size=6,
         max_length=(120 * 11),
@@ -45,12 +45,6 @@ class Answers(models.Model):
         size=6,
         max_length=(120 * 11),
         default = None # 6 * 10 character nominals, plus commas
-    )
-    variables = ListCharField(
-        base_field=models.CharField(max_length=200),
-        size=6,
-        max_length=(120 * 11),
-        default=None  # 6 * 10 character nominals, plus commas
     )
 
 class Image(models.Model):
