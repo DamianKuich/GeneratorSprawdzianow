@@ -47,13 +47,22 @@ class Answers(models.Model):
     #     default = None # 6 * 10 character nominals, plus commas
     # )
     allanswers = models.CharField(max_length=500)
-    correctans = models.CharField(max_length=500)
+    #correctans = models.CharField(max_length=500)
 
     def __str__(self):
         return self.nasza_nazwa()
 
     def nasza_nazwa(self):
         return self.allanswers
+class CorrectAnswers(models.Model):
+
+    correctans = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.nasza_nazwa()
+
+    def nasza_nazwa(self):
+        return self.correctans
 
 class Image(models.Model):
     name = models.CharField(max_length=500)
@@ -81,7 +90,8 @@ class Task(models.Model):
     private = models.BooleanField(default=False)
     points = models.IntegerField(default=0)
     skill = models.ManyToManyField(Skill)
-    answers = models.ManyToManyField(Answers)
+    allanswers = models.ManyToManyField(Answers)
+    correctans = models.ManyToManyField(CorrectAnswers)
     image = models.ManyToManyField(Image)
 
 
