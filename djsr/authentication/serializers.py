@@ -1,6 +1,6 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
-from .models import CustomUser, Task, Section, Skill, PasswordSendReset, TestJSON, Answers, Image, Variables
+from .models import CustomUser, Task, Section, Skill, PasswordSendReset, TestJSON, Answers, Image
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -79,11 +79,8 @@ class ImageSerializer(serializers.ModelSerializer):
 class AnswersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answers
-        fields = ('id','allanswers','correctans')
-class VariablesSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Variables
-        fields = ('id','variables')
+        fields = ('id','allanswers','correctans','variables')
+
 class TaskSerializer(serializers.ModelSerializer):
     # text = serializers.CharField(required=True)
     # add_date = serializers.DateTimeField(required=True)
@@ -94,13 +91,12 @@ class TaskSerializer(serializers.ModelSerializer):
     skill = SkillSerializer(many=True)
     answers = AnswersSerializer(many=True)
     image = ImageSerializer(many=True,required=False)
-    variables = VariablesSerializer(many=True)
 
 
     class Meta:
         model = Task
         fields = ('id','type','level','skill','text','answers',
-                  'add_date','author','points','image','private', 'variables')
+                  'add_date','author','points','image','private')
 
 
 class TestJSONSerializer(serializers.ModelSerializer):

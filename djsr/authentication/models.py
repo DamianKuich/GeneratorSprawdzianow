@@ -46,14 +46,11 @@ class Answers(models.Model):
         max_length=(120 * 11),
         default = None # 6 * 10 character nominals, plus commas
     )
-
-
-class Variables(models.Model):
-    variables =ListCharField(
+    variables = ListCharField(
         base_field=models.CharField(max_length=200),
         size=6,
         max_length=(120 * 11),
-        default = None # 6 * 10 character nominals, plus commas
+        default=None  # 6 * 10 character nominals, plus commas
     )
 
 class Image(models.Model):
@@ -76,7 +73,6 @@ class Task(models.Model):
     }
     answers = models.ManyToManyField(Answers)
     image = models.ManyToManyField(Image)
-    variables = models.ManyToManyField(Variables)
     text = models.CharField(max_length=500)
     add_date = models.DateField(default=datetime.date.today)
     type = models.IntegerField(choices=RODZAJE, default=0)
