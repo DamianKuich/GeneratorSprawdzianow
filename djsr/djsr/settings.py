@@ -28,7 +28,7 @@ RS256_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\nMIIJKAIBAAKCAgEAqlpe2Y4tV3bW
 RS256_PUBLIC_KEY="-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAqlpe2Y4tV3bWXUEg+Rd3\ndR2k3XhEMt/ymRFr6Se1o5IgFyRpotI8ZIBoonvSV+WnM7E5ZNGc9UMVrphJ2h5d\n/LML214TmHOw8qfEJ0eu83JCSjszw+/DPxG9wIPwsG1EhcWnjhEJNId9SKhFgG+5\nidwwryXwO1u8x5wcYZ36OGXtxJGjkfKuZSWCKRceP9VWWK1CfOLJDAZM4lpSyzAd\nAWvo/Ip6tJrh62rpqLlZOkzjqa5ugQIWcyZsDeXif4y3CfLVgB9rfl4T9uOp/JZG\nP7s5iyDp8nDYadBjLweSlMPStkKm0GXasu85XG9PFpDZ378Noyttq/GqRHoLUC1V\nbxzg2Du8WIbQYKkZSbEEdFxFRBOuwZ+YtSmLCC/3HSYIvXhNTcB2QtttXTd2aX2+\nkDRUuM/4V5joeHVY7BmGGVR5jUozp9BI4C29qpL9bJWYv/Gz2ZZ3dBdUQ7fY+mpx\nJ2iuZo3X2P7khh9E3H/bnZzakevSiFTPmOHF9lHKxxM7VAkTOn818Oryx1KRaAXB\nRSqYDAxivmUsoq8c8UJXtWdxTF5QC7woVbedZ9Tp8QUAtPT6PPafYigXc16ReLkc\na25CDWquV3d61wZDeDQF+DSDMZC76AcZLPAP6/YEA17rje5et34iyDWwl0E4rSl6\n/KWePmYVigtrHU2eg1uKcmcCAwEAAQ==\n-----END PUBLIC KEY-----"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['gen-mat.herokuapp.com']
 
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'six',
     'rest_framework_simplejwt',
+    'django_cleanup',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -110,7 +111,7 @@ WSGI_APPLICATION = 'djsr.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'genspr',
+        'NAME': 'genespr',
         'USER': 'root',
         'PASSWORD': 'ziomalek1998',
         'HOST': '127.0.0.1',

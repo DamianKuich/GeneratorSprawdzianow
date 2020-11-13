@@ -46,6 +46,12 @@ class Answers(models.Model):
         max_length=(120 * 11),
         default = None # 6 * 10 character nominals, plus commas
     )
+    variables = ListCharField(
+        base_field=models.CharField(max_length=200),
+        size=6,
+        max_length=(120 * 11),
+        default=None  # 6 * 10 character nominals, plus commas
+    )
 
 class Image(models.Model):
     name = models.CharField(max_length=500)
@@ -75,6 +81,7 @@ class Task(models.Model):
     private = models.BooleanField(default=False)
     points = models.IntegerField(default=0)
     skill = models.ManyToManyField(Skill)
+
 
 
     def __str__(self):

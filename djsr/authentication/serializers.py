@@ -79,7 +79,8 @@ class ImageSerializer(serializers.ModelSerializer):
 class AnswersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answers
-        fields = ('id','allanswers','correctans')
+        fields = ('id','allanswers','correctans','variables')
+
 class TaskSerializer(serializers.ModelSerializer):
     # text = serializers.CharField(required=True)
     # add_date = serializers.DateTimeField(required=True)
@@ -94,7 +95,9 @@ class TaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Task
-        fields = ('id','type','level','skill','text','answers','add_date','author','points','image','private')
+        fields = ('id','type','level','skill','text','answers',
+                  'add_date','author','points','image','private')
+
 
 class TestJSONSerializer(serializers.ModelSerializer):
     class Meta:
