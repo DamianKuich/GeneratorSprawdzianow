@@ -96,10 +96,10 @@ var FormikMdInput = function FormikMdInput(_ref) {
 
 /***/ }),
 
-/***/ "./djsr/frontend/src/components/RemindPassword.js":
-/*!********************************************************!*\
-  !*** ./djsr/frontend/src/components/RemindPassword.js ***!
-  \********************************************************/
+/***/ "./djsr/frontend/src/components/PasswordReset.js":
+/*!*******************************************************!*\
+  !*** ./djsr/frontend/src/components/PasswordReset.js ***!
+  \*******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -107,11 +107,13 @@ var FormikMdInput = function FormikMdInput(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var mdbreact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! mdbreact */ "./node_modules/mdbreact/dist/mdbreact.esm.js");
-/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
-/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
-/* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
-/* harmony import */ var _FormikMDInput__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./FormikMDInput */ "./djsr/frontend/src/components/FormikMDInput.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var mdbreact__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! mdbreact */ "./node_modules/mdbreact/dist/mdbreact.esm.js");
+/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
+/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
+/* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
+/* harmony import */ var _FormikMDInput__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./FormikMDInput */ "./djsr/frontend/src/components/FormikMDInput.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -139,25 +141,25 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
- // import PropTypes from 'prop-types';
 
-var RemindPassword = /*#__PURE__*/function (_Component) {
-  _inherits(RemindPassword, _Component);
 
-  var _super = _createSuper(RemindPassword);
 
-  function RemindPassword(props) {
+var PasswordReset = /*#__PURE__*/function (_Component) {
+  _inherits(PasswordReset, _Component);
+
+  var _super = _createSuper(PasswordReset);
+
+  function PasswordReset(props) {
     var _this;
 
-    _classCallCheck(this, RemindPassword);
+    _classCallCheck(this, PasswordReset);
 
     _this = _super.call(this, props);
     _this.state = {
-      done: null
+      isSuccessFull: null
     };
     return _this;
-  } //
-  // componentWillMount() {
+  } // componentWillMount() {
   //
   // }
   //
@@ -186,64 +188,101 @@ var RemindPassword = /*#__PURE__*/function (_Component) {
   // }
 
 
-  _createClass(RemindPassword, [{
+  _createClass(PasswordReset, [{
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      if (this.state.done) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_1__["MDBRow"], {
+      var isSuccessFull = this.state.isSuccessFull;
+
+      if (isSuccessFull !== null) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_2__["MDBRow"], {
           center: true
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_1__["MDBCol"], {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_2__["MDBCol"], {
           md: "6",
           sm: "8",
           xs: "12",
           lg: "6",
           xl: "4"
-        }, "Sprawdz poczte"));
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_2__["MDBCard"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_2__["MDBCardBody"], {
+          className: "p-md-5 p-lg-5 p-xl-5"
+        }, isSuccessFull ? "Resetowanie hasla zakonczono powodzeniem" : "Nie udało sie zmienic hasła"))));
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_1__["MDBRow"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_2__["MDBRow"], {
         center: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_1__["MDBCol"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_2__["MDBCol"], {
         md: "6",
         sm: "8",
         xs: "12",
         lg: "6",
         xl: "4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_1__["MDBCard"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_1__["MDBCardBody"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_2__["MDBCard"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_2__["MDBCardBody"], {
         className: "p-md-5 p-lg-5 p-xl-5"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_2__["Formik"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_3__["Formik"], {
         initialValues: {
-          email: ""
+          password: "",
+          passwordConfirm: ""
         },
-        validationSchema: yup__WEBPACK_IMPORTED_MODULE_3__["object"]().shape({
-          email: yup__WEBPACK_IMPORTED_MODULE_3__["string"]().email("Nieprawidłowy adres e-mail").required("Wymagany dres e-mail")
+        validationSchema: yup__WEBPACK_IMPORTED_MODULE_4__["object"]().shape({
+          password: yup__WEBPACK_IMPORTED_MODULE_4__["string"]().min(8, "Too Short!").max(50, "Too Long!").required("Pole wymagane"),
+          passwordConfirm: yup__WEBPACK_IMPORTED_MODULE_4__["string"]().min(8, "Too Short!").max(50, "Too Long!").required("Pole wymagane")
         }),
         onSubmit: function onSubmit(values, helpers) {
           setTimeout(function () {
             helpers.setSubmitting(true);
-            _axiosAPI__WEBPACK_IMPORTED_MODULE_4__["axiosInstanceNoAuth"].post("/user/resetsend/", {
-              email: values.email
+            var token = _this2.props.match.params.token;
+            _axiosAPI__WEBPACK_IMPORTED_MODULE_5__["axiosInstanceNoAuth"].post("/user/passreset/".concat(token, "/$"), {
+              password: values.password
             }).then(function (response) {
-              helpers.setSubmitting(false);
-
+              // axiosInstance.defaults.headers["Authorization"] =
+              //   "JWT " + response.data.access;
+              // localStorage.setItem(
+              //   "access_token",
+              //   response.data.access
+              // );
+              // localStorage.setItem(
+              //   "refresh_token",
+              //   response.data.refresh
+              // );
+              // helpers.setSubmitting(false);
+              // this.props.checkUser();
+              // this.props.history.push("/");
               _this2.setState({
-                done: true
+                isSuccessFull: true
               });
             })["catch"](function (error) {
               // console.log("login error", error.response);
-              var errResponse = error.response;
-              helpers.setSubmitting(false);
-              helpers.setValues({
-                email: ""
-              }, false);
-              helpers.setTouched({
-                email: false
-              }, false);
-              helpers.setFieldError("general", "Nie isntieje konto o takim adresie E-mail");
+              // const errResponse = error.response;
+              // helpers.setSubmitting(false);
+              // if (
+              //   errResponse.status === 401 &&
+              //   errResponse.statusText === "Unauthorized"
+              // ) {
+              //   helpers.setValues(
+              //     {
+              //       name: "",
+              //       password: "",
+              //     },
+              //     false
+              //   );
+              //   helpers.setTouched(
+              //     {
+              //       name: false,
+              //       password: false,
+              //     },
+              //     false
+              //   );
+              //   helpers.setFieldError(
+              //     "general",
+              //     "Nieprawidłowa nazwa użytkownika lub hasło"
+              //   );
+              // }
+              _this2.setState({
+                isSuccessFull: false
+              });
             });
-          }, 500);
+          }, 400);
         }
       }, function (_ref) {
         var values = _ref.values,
@@ -253,39 +292,54 @@ var RemindPassword = /*#__PURE__*/function (_Component) {
             handleBlur = _ref.handleBlur,
             handleSubmit = _ref.handleSubmit,
             isSubmitting = _ref.isSubmitting;
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_2__["Form"], {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_3__["Form"], {
           onSubmit: handleSubmit
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           className: "h3 text-center mb-4"
-        }, "Przypomnij has\u0142o"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, "Podaj nowe has\u0142o"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "grey-text"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormikMDInput__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          label: "Tw\xF3j adres E-mail",
-          icon: "fa-envelope",
-          errors: errors.email,
-          name: "email",
-          id: "email",
-          touched: touched.email,
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormikMDInput__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          label: "Has\u0142o",
+          icon: "fa-lock",
+          errors: errors.password,
+          type: "password",
+          name: "password",
+          id: "password",
+          touched: touched.password,
           onChange: handleChange,
           onBlur: handleBlur,
-          value: values.email,
-          disabled: isSubmitting
+          value: values.password,
+          hideInput: true,
+          disableAutocomplete: true
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormikMDInput__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          label: "Powtorz has\u0142o",
+          icon: "fa-lock",
+          errors: errors.passwordConfirm,
+          type: "password",
+          name: "passwordConfirm",
+          id: "passwordConfirm",
+          touched: touched.passwordConfirm,
+          onChange: handleChange,
+          onBlur: handleBlur,
+          value: values.passwordConfirm,
+          hideInput: true,
+          disableAutocomplete: true
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "text-center"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_1__["MDBBtn"], {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_2__["MDBBtn"], {
           color: "primary",
           type: "submit",
           disabled: isSubmitting
-        }, "Wy\u015Blij")));
-      }), !!this.state.token && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.token)))));
+        }, "Zmie\u0144 has\u0142o")));
+      })))));
     }
   }]);
 
-  return RemindPassword;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]); // RemindPassword.propTypes = {};
+  return PasswordReset;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-
-/* harmony default export */ __webpack_exports__["default"] = (RemindPassword);
+PasswordReset.propTypes = {};
+/* harmony default export */ __webpack_exports__["default"] = (PasswordReset);
 
 /***/ })
 

@@ -145,32 +145,6 @@ const MaterialUiSignUpPage = (props) => {
                         <h4>Rejestracja</h4>
                       </CardHeader>
                       <CardBody>
-                        {/*<CustomInput*/}
-                        {/*  labelText="Nazwa użytkownika"*/}
-                        {/*  id="name"*/}
-                        {/*  error={touched.name && !!errors.name}*/}
-                        {/*  success={touched.name && !errors.name}*/}
-                        {/*  formControlProps={{*/}
-                        {/*    fullWidth: true,*/}
-                        {/*  }}*/}
-                        {/*  helperProps={{*/}
-                        {/*    children:*/}
-                        {/*      !!errors.name && touched.name ? errors.name : " ",*/}
-                        {/*    error: true,*/}
-                        {/*  }}*/}
-                        {/*  inputProps={{*/}
-                        {/*    type: "text",*/}
-                        {/*    name: "name",*/}
-                        {/*    onChange: handleChange,*/}
-                        {/*    onBlur: handleBlur,*/}
-                        {/*    value: values.name,*/}
-                        {/*    endAdornment: (*/}
-                        {/*      <InputAdornment position="end">*/}
-                        {/*        <People className={classes.inputIconsColor} />*/}
-                        {/*      </InputAdornment>*/}
-                        {/*    ),*/}
-                        {/*  }}*/}
-                        {/*/>*/}
                         <Field
                           component={MaterialFormikField}
                           name={"name"}
@@ -186,31 +160,6 @@ const MaterialUiSignUpPage = (props) => {
                             ),
                           }}
                         />
-                        {/*<CustomInput*/}
-                        {/*  labelText="E-mail"*/}
-                        {/*  id="email"*/}
-                        {/*  error={!!errors.email}*/}
-                        {/*  success={touched.email && !errors.email}*/}
-                        {/*  formControlProps={{*/}
-                        {/*    fullWidth: true,*/}
-                        {/*  }}*/}
-                        {/*  helperProps={{*/}
-                        {/*    children: errors.email,*/}
-                        {/*    error: true,*/}
-                        {/*  }}*/}
-                        {/*  inputProps={{*/}
-                        {/*    type: "text",*/}
-                        {/*    name: "email",*/}
-                        {/*    onChange: handleChange,*/}
-                        {/*    onBlur: handleBlur,*/}
-                        {/*    value: values.email,*/}
-                        {/*    endAdornment: (*/}
-                        {/*      <InputAdornment position="end">*/}
-                        {/*        <People className={classes.inputIconsColor} />*/}
-                        {/*      </InputAdornment>*/}
-                        {/*    ),*/}
-                        {/*  }}*/}
-                        {/*/>*/}
                         <Field
                           component={MaterialFormikField}
                           name={"email"}
