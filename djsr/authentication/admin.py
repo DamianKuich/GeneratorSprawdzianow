@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CustomUser, Task, Section, Skill, TestJSON, Answers, Image
+from .models import CustomUser, Task, Section, Skill, TestJSON, Answers, Image, Variables
 
 
 class CustomUserAdmin(admin.ModelAdmin):
@@ -13,4 +13,5 @@ admin.site.register(Skill)
 admin.site.register(TestJSON)
 admin.site.register(Answers)
 admin.site.register(Image)
+admin.sie.register(Variables)
 # Register your models here.
