@@ -65,7 +65,7 @@ class Task(models.Model):
         (1, 'Podstawowy'),
         (2, 'Rozszerzony'),
     }
-    answers = models.ForeignKey(Answers, on_delete=models.CASCADE)
+    answers = models.ManyToManyField(Answers)
     image = models.ManyToManyField(Image,blank=True)
     text = models.CharField(max_length=500)
     add_date = models.DateField(default=datetime.date.today)
