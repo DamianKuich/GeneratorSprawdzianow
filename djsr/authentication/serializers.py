@@ -89,13 +89,13 @@ class TaskSerializer(serializers.ModelSerializer):
     # level = serializers.IntegerField(required=True)
     # answer = serializers.CharField(required=True)
     skill = SkillSerializer(many=True)
-    answers = AnswersSerializer(many = False)
+    answers = AnswersSerializer(many=True)
     image = ImageSerializer(many=True,required=False)
 
 
     class Meta:
         model = Task
-        fields = ('id','type','level','skill','text','answers',
+        fields = ('id','type','level','skill','text','answers_id',
                   'add_date','author','points','image','private')
 
 
