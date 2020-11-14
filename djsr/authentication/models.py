@@ -65,7 +65,11 @@ class Task(models.Model):
         (1, 'Podstawowy'),
         (2, 'Rozszerzony'),
     }
-    answers = models.ManyToManyField(Answers)
+    answers = models.OneToOneField(
+        Answers,
+        on_delete=models.CASCADE,
+        default="",
+    )
     image = models.ManyToManyField(Image)
     text = models.CharField(max_length=500)
     add_date = models.DateField(default=datetime.date.today)
