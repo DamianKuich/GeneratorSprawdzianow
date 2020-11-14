@@ -70,7 +70,7 @@ class Task(models.Model):
         on_delete=models.CASCADE,
         default="",
     )
-    image = models.ManyToManyField(Image)
+    image = models.ManyToManyField(Image,blank=True)
     text = models.CharField(max_length=500)
     add_date = models.DateField(default=datetime.date.today)
     type = models.IntegerField(choices=RODZAJE, default=0)
@@ -79,8 +79,6 @@ class Task(models.Model):
     private = models.BooleanField(default=False)
     points = models.IntegerField(default=0)
     skill = models.ManyToManyField(Skill)
-
-
 
     def __str__(self):
         return self.nasza_nazwa()

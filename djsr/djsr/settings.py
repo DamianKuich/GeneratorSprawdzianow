@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'six',
     'rest_framework_simplejwt',
-    'django_cleanup',
+    'django_cleanup.apps.CleanupConfig',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
