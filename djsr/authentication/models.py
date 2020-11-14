@@ -71,7 +71,7 @@ class Task(models.Model):
         default="",
     )
     image = models.ManyToManyField(Image,blank=True)
-    text = models.CharField(max_length=500)
+    text = models.CharField(max_length=600)
     add_date = models.DateField(default=datetime.date.today)
     type = models.IntegerField(choices=RODZAJE, default=0)
     author = models.CharField(max_length=100)
