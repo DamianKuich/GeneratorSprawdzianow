@@ -2,10 +2,11 @@ import React from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import Latex from "react-latex";
 import { MDBContainer } from "mdbreact";
+import {Container} from "@material-ui/core";
 
 const TaskSearchDndResults = ({ taskSearchResult }) => {
   return (
-    <MDBContainer className="mt-3">
+    <Container>
       {Array.isArray(taskSearchResult) && taskSearchResult.length > 0 && (
         <Droppable droppableId="searchDroppable">
           {(provided, snapshot) => (
@@ -54,7 +55,7 @@ const TaskSearchDndResults = ({ taskSearchResult }) => {
           Podczas zapytania do serwera wystąpił bład spróbuj ponownie puźniej
         </div>
       )}
-    </MDBContainer>
+    </Container>
   );
 };
 
