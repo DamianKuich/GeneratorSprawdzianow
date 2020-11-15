@@ -1,7 +1,7 @@
 const taskParser = (task) => {
-  console.log("taskparser",task)
+  // console.log("taskparser",task)
   let newTask = JSON.parse(JSON.stringify(task));
-  console.log("taskparser parsed", newTask)
+  // console.log("taskparser parsed", newTask)
   // let draggedItem
   newTask.answers.correctans = JSON.parse(newTask.answers.correctans.replace(/'/g, '"'))
   newTask.answers.wronganswers = JSON.parse(newTask.answers.wronganswers.replace(/'/g, '"'))
@@ -15,7 +15,7 @@ const taskParser = (task) => {
   //   return dataSet
   // });
   // console.log("oldtask", task,"new", newTask)
-  console.log("taskparser nn",newTask)
+  // console.log("taskparser nn",newTask)
   return newTask;
 };
 

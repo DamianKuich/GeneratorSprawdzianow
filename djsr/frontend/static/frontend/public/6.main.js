@@ -199,7 +199,7 @@ var ExamPage = function ExamPage(_ref) {
       }, function (provided, snapshot) {
         console.log("ELO123", task.currentDataSet);
         var answers = task.currentDataSet.examAnswers.map(function (item) {
-          var answerSource = item.isCorrect ? task.currentDataSet.answers.correctans : task.currentDataSet.answers.allanswers;
+          var answerSource = item.isCorrect ? task.currentAnswers.correctans : task.currentAnswers.wronganswers;
           return answerSource[item.index];
         });
         var ansChar = ["A", "B", "C", "D"];
@@ -564,9 +564,9 @@ var TaskEditorCollapseMenu = function TaskEditorCollapseMenu(_ref) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var taskParser = function taskParser(task) {
-  console.log("taskparser", task);
-  var newTask = JSON.parse(JSON.stringify(task));
-  console.log("taskparser parsed", newTask); // let draggedItem
+  // console.log("taskparser",task)
+  var newTask = JSON.parse(JSON.stringify(task)); // console.log("taskparser parsed", newTask)
+  // let draggedItem
 
   newTask.answers.correctans = JSON.parse(newTask.answers.correctans.replace(/'/g, '"'));
   newTask.answers.wronganswers = JSON.parse(newTask.answers.wronganswers.replace(/'/g, '"')); // newTask.dataset = newTask.dataset.map((dataSet) => {
@@ -579,8 +579,8 @@ var taskParser = function taskParser(task) {
   //   return dataSet
   // });
   // console.log("oldtask", task,"new", newTask)
+  // console.log("taskparser nn",newTask)
 
-  console.log("taskparser nn", newTask);
   return newTask;
 };
 
@@ -1516,9 +1516,10 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
           return state;
         });
       } else {
-        var draggedItem = JSON.parse(JSON.stringify(_this.state.tasks[source.index]));
-        draggedItem.currentDataSet = draggedItem.dataset[0];
-        var currentDataSetAnswers = draggedItem.currentDataSet.answers;
+        var draggedItem = JSON.parse(JSON.stringify(_this.state.tasks[source.index])); // draggedItem.currentDataSet = draggedItem.dataset[0];
+
+        draggedItem.currentAnswers = JSON.parse(JSON.stringify(draggedItem.answers));
+        var currentDataSetAnswers = draggedItem.currentAnswers;
         console.log("dragged item", draggedItem, currentDataSetAnswers);
         var correctAnswersIndex = [Math.floor(Math.random() * (currentDataSetAnswers.correctans.length - 1))];
         console.log(correctAnswersIndex, "correctAnswersIndex", currentDataSetAnswers.length);
@@ -1540,8 +1541,8 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
           };
         }));
         answersSet = Object(lodash_collection__WEBPACK_IMPORTED_MODULE_6__["shuffle"])(answersSet);
-        draggedItem.currentDataSet.examAnswers = answersSet;
-        draggedItem.maxPoints = 1;
+        draggedItem.currentAnswers.answersIndexes = answersSet;
+        draggedItem.maxPoints = draggedItem.points;
         console.log("draggedItem", draggedItem, _this.state.tasks);
 
         _this.setState(function (state) {
@@ -1831,8 +1832,7 @@ var MaterialUiTaskSearch = /*#__PURE__*/function (_Component) {
               console.log("response", response); // this.setState({
               //   results: response.data,
               // });
-
-              console.log("parsed Twat", Object(_ExamEditorSubComponents_TaskParser__WEBPACK_IMPORTED_MODULE_20__["default"])(response.data));
+              // console.log("parsed Twat",tasksParser(response.data));
 
               _this3.props.updateData(Object(_ExamEditorSubComponents_TaskParser__WEBPACK_IMPORTED_MODULE_20__["default"])(response.data));
             })["catch"](function (error) {

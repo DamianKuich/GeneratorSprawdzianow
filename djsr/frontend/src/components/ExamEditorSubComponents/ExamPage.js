@@ -46,8 +46,8 @@ const ExamPage = ({ exam, setTaskToEdit, removeTask }) => {
                   console.log("ELO123", task.currentDataSet);
                   let answers = task.currentDataSet.examAnswers.map((item) => {
                     let answerSource = item.isCorrect
-                      ? task.currentDataSet.answers.correctans
-                      : task.currentDataSet.answers.allanswers;
+                      ? task.currentAnswers.correctans
+                      : task.currentAnswers.wronganswers;
                     return answerSource[item.index];
                   });
 
