@@ -1,6 +1,7 @@
 const taskParser = (task) => {
   console.log("taskparser",task)
   let newTask = JSON.parse(JSON.stringify(task));
+  console.log("taskparser parsed", newTask)
   // let draggedItem
   newTask.answers.correctans = JSON.parse(newTask.answer.correctans.replace(/'/g, '"'))
   newTask.answers.wronganswers = JSON.parse(newTask.answer.wronganswers.replace(/'/g, '"'))

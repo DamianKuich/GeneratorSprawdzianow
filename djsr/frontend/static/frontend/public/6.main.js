@@ -565,7 +565,8 @@ var TaskEditorCollapseMenu = function TaskEditorCollapseMenu(_ref) {
 __webpack_require__.r(__webpack_exports__);
 var taskParser = function taskParser(task) {
   console.log("taskparser", task);
-  var newTask = JSON.parse(JSON.stringify(task)); // let draggedItem
+  var newTask = JSON.parse(JSON.stringify(task));
+  console.log("taskparser parsed", newTask); // let draggedItem
 
   newTask.answers.correctans = JSON.parse(newTask.answer.correctans.replace(/'/g, '"'));
   newTask.answers.wronganswers = JSON.parse(newTask.answer.wronganswers.replace(/'/g, '"')); // newTask.dataset = newTask.dataset.map((dataSet) => {
