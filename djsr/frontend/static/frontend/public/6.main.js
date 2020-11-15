@@ -198,7 +198,7 @@ var ExamPage = function ExamPage(_ref) {
         index: index
       }, function (provided, snapshot) {
         console.log("ELO123", task.currentDataSet);
-        var answers = task.currentDataSet.examAnswers.map(function (item) {
+        var answers = task.currentAnswers.answersIndexes.map(function (item) {
           var answerSource = item.isCorrect ? task.currentAnswers.correctans : task.currentAnswers.wronganswers;
           return answerSource[item.index];
         });
