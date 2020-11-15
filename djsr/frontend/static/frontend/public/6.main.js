@@ -566,16 +566,18 @@ __webpack_require__.r(__webpack_exports__);
 var taskParser = function taskParser(task) {
   var newTask = JSON.parse(JSON.stringify(task)); // let draggedItem
 
-  newTask.dataset = newTask.dataset.map(function (dataSet) {
-    dataSet.answers = dataSet.answers.map(function (answer) {
-      answer.allanswers = JSON.parse(answer.allanswers.replace(/'/g, '"'));
-      answer.correctans = JSON.parse(answer.correctans.replace(/'/g, '"'));
-      return answer;
-    });
-    dataSet.answers = dataSet.answers[0];
-    return dataSet;
-  });
-  console.log("oldtask", task, "new", newTask);
+  newTask.answers.correctans = JSON.parse(newTask.answer.correctans.replace(/'/g, '"'));
+  newTask.answers.wronganswers = JSON.parse(newTask.answer.wronganswers.replace(/'/g, '"')); // newTask.dataset = newTask.dataset.map((dataSet) => {
+  //   dataSet.answers = dataSet.answers.map((answer) => {
+  //     answer.allanswers = JSON.parse(answer.allanswers.replace(/'/g, '"'));
+  //     answer.correctans = JSON.parse(answer.correctans.replace(/'/g, '"'));
+  //     return answer
+  //   });
+  //   dataSet.answers = dataSet.answers[0];
+  //   return dataSet
+  // });
+  // console.log("oldtask", task,"new", newTask)
+
   return newTask;
 };
 
@@ -1826,6 +1828,8 @@ var MaterialUiTaskSearch = /*#__PURE__*/function (_Component) {
               console.log("response", response); // this.setState({
               //   results: response.data,
               // });
+
+              console.log(Object(_ExamEditorSubComponents_TaskParser__WEBPACK_IMPORTED_MODULE_20__["default"])(response.data));
 
               _this3.props.updateData(Object(_ExamEditorSubComponents_TaskParser__WEBPACK_IMPORTED_MODULE_20__["default"])(response.data));
             })["catch"](function (error) {
