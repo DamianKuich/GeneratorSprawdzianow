@@ -1523,7 +1523,7 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
         console.log("dragged item", draggedItem, currentDataSetAnswers);
         var correctAnswersIndex = [Math.floor(Math.random() * (currentDataSetAnswers.correctans.length - 1))];
         console.log(correctAnswersIndex, "correctAnswersIndex", currentDataSetAnswers.length);
-        var incorrectAnswersIndexes = currentDataSetAnswers.allanswers.map(function (item, index) {
+        var incorrectAnswersIndexes = currentDataSetAnswers.wronganswers.map(function (item, index) {
           return index;
         });
         var answersSet = []; // [sampleSize(currentDataSetAnswers.allanswers,3).map];

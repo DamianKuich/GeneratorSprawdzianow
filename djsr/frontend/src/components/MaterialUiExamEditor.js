@@ -175,7 +175,7 @@ class ExamEditor extends Component {
         "correctAnswersIndex",
         currentDataSetAnswers.length
       );
-      let incorrectAnswersIndexes = currentDataSetAnswers.allanswers.map(
+      let incorrectAnswersIndexes = currentDataSetAnswers.wronganswers.map(
         (item, index) => {
           return index;
         }
