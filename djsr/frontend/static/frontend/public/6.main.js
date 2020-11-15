@@ -568,8 +568,8 @@ var taskParser = function taskParser(task) {
   var newTask = JSON.parse(JSON.stringify(task));
   console.log("taskparser parsed", newTask); // let draggedItem
 
-  newTask.answers.correctans = JSON.parse(newTask.answer.correctans.replace(/'/g, '"'));
-  newTask.answers.wronganswers = JSON.parse(newTask.answer.wronganswers.replace(/'/g, '"')); // newTask.dataset = newTask.dataset.map((dataSet) => {
+  newTask.answers.correctans = JSON.parse(newTask.answers.correctans.replace(/'/g, '"'));
+  newTask.answers.wronganswers = JSON.parse(newTask.answers.wronganswers.replace(/'/g, '"')); // newTask.dataset = newTask.dataset.map((dataSet) => {
   //   dataSet.answers = dataSet.answers.map((answer) => {
   //     answer.allanswers = JSON.parse(answer.allanswers.replace(/'/g, '"'));
   //     answer.correctans = JSON.parse(answer.correctans.replace(/'/g, '"'));
