@@ -1,4 +1,5 @@
 const taskParser = (task) => {
+  console.log("taskparser",task)
   let newTask = JSON.parse(JSON.stringify(task));
   // let draggedItem
   newTask.answers.correctans = JSON.parse(newTask.answer.correctans.replace(/'/g, '"'))
@@ -13,6 +14,7 @@ const taskParser = (task) => {
   //   return dataSet
   // });
   // console.log("oldtask", task,"new", newTask)
+  console.log("taskparser nn",newTask)
   return newTask;
 };
 

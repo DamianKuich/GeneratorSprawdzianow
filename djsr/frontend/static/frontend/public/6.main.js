@@ -564,6 +564,7 @@ var TaskEditorCollapseMenu = function TaskEditorCollapseMenu(_ref) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var taskParser = function taskParser(task) {
+  console.log("taskparser", task);
   var newTask = JSON.parse(JSON.stringify(task)); // let draggedItem
 
   newTask.answers.correctans = JSON.parse(newTask.answer.correctans.replace(/'/g, '"'));
@@ -578,6 +579,7 @@ var taskParser = function taskParser(task) {
   // });
   // console.log("oldtask", task,"new", newTask)
 
+  console.log("taskparser nn", newTask);
   return newTask;
 };
 
