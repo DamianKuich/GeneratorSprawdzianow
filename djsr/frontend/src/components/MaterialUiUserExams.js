@@ -10,28 +10,46 @@ import {
   MDBRow,
 } from "mdbreact";
 import axiosInstance from "./axiosAPI";
+import Box from '@material-ui/core/Box'
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import FormikMdInput from "./FormikMDInput";
 import { Link } from "react-router-dom";
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles,withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
-
+import ExamCollectionCard from './ExamCollectionCard'
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import IconButton from '@material-ui/core/IconButton';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ShareIcon from '@material-ui/icons/Share';
+import FileCopyIcon from '@material-ui/icons/FileCopy';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import MaterialFormikField from "./MaterialFormikField";
+import CardBody from "./material_ui_components/Card/CardBody.js";
+import CustomInput from "./material_ui_components/CustomInput/CustomInput.js";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    paper: {
-      padding: theme.spacing(1),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-    },
-  }));
+  root: {
+    maxHeight: 200,
+    minWidth: 575,
+    maxWidth: 575,
+    
+
+  },
+  marginAutoItem: {
+    margin: 'auto'
+  },
+ 
+}));
 
   class UserExams extends Component {
     constructor(props) {
@@ -98,6 +116,7 @@ const useStyles = makeStyles((theme) => ({
     // }
   
     render() {
+      const { classes } = this.props;
       let exams = this.state.exams;
       if (!exams) {
         return (
@@ -107,16 +126,23 @@ const useStyles = makeStyles((theme) => ({
         );
       }
       return (
-        <MDBContainer>
-          <div className="w-100 h1-responsive text-center mb-5">
-            Moje sprawdziany
-          </div>
-          <MDBRow>
-            <MDBCol size={3}>
-              <MDBCard className="w-100 mb-5">
-                <MDBCardBody>
-                  <MDBCardTitle>Dodaj Sprawdzian</MDBCardTitle>
-                  <Formik
+        
+        <div> 
+                          <Box 
+                          p={1}
+                          display="flex"
+                          justifyContent="left"
+
+                > 
+                <Card 
+              justify="center" 
+              
+              >
+                 
+                    <CardHeader
+                   title="Dodaj sprawdzian"/>
+                    <CardBody >
+                    <Formik
                     initialValues={{
                       name: "",
                     }}
@@ -138,7 +164,7 @@ const useStyles = makeStyles((theme) => ({
                             console.log("UE create response", response);
                             this.addExam(response.data[0]);
                             helpers.setSubmitting(false);
-                            // this.props.history.push("/");
+                            //this.props.history.push("/editor/");
                           })
                           .catch((error) => {
                             // console.log("login error", error.response);
@@ -172,16 +198,25 @@ const useStyles = makeStyles((theme) => ({
                     }) => (
                       <Form onSubmit={handleSubmit}>
                         <div className="grey-text">
-                          <FormikMdInput
-                            label="Nazwa sprawdzianu"
-                            errors={errors.name}
-                            name="name"
+                        <CustomInput
+                            labelText="Nazwa sprawdzianu"
                             id="name"
-                            touched={touched.name}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.name}
-                            disabled={isSubmitting}
+                            error={!!errors.name}
+                            success={touched.name && !errors.name}
+                            formControlProps={{
+                              fullWidth: true,
+                            }}
+                            helperProps={{
+                              children: errors.name,
+                              error: true,
+                            }}
+                            inputProps={{
+                              type: "text",
+                              name: "name",
+                              onChange: handleChange,
+                              onBlur: handleBlur,
+                              value: values.name,
+                            }}
                           />
                           {!!errors.general && (
                             <div className="invalid-feedback d-block pb-4">
@@ -202,39 +237,55 @@ const useStyles = makeStyles((theme) => ({
                       </Form>
                     )}
                   </Formik>
-                </MDBCardBody>
-              </MDBCard>
-            </MDBCol>
+                  
+                  </CardBody>
+                
+                </Card>
+                </Box>
             {exams.map((exam) => {
               return (
-                <MDBCol size={3}>
-                  <MDBCard className="w-100 mb-5">
-                    <MDBCardBody className="text-center">
-                      <MDBCardTitle>{exam.name}</MDBCardTitle>
-                      <Link to={"/editor/" + exam.id}>
-                        <Button  variant="contained" 
-                            color="primary" >Edytuj</Button>
-                      </Link>
-                      <Button
-                      variant = "contained"
-                      color = "secondary"
-                        onClick={() => {
-                          this.createExamCopy(exam);
-                        }}
-                      >
-                        Utworz kopie
-                      </Button>
-                    </MDBCardBody>
-                  </MDBCard>
-                </MDBCol>
+                
+                <Box display="flex"
+                justifyContent="center"
+                p={1}
+                
+
+                > 
+                <Card 
+              justify="center" 
+              
+              >
+                 
+                    <CardHeader
+                   title={exam.name}/>
+                 
+                    <CardActions disableSpacing>
+                    <Link to={"/editor/" + exam.id}>
+                    <IconButton >
+                      <EditIcon />
+                    </IconButton>
+                    </Link>
+                    <IconButton  onClick={() => {
+                        this.createExamCopy(exam);}} >
+                      <FileCopyIcon />
+                    </IconButton>
+                    <IconButton >
+                      <DeleteIcon />
+                    </IconButton>
+                  
+                  </CardActions>
+                
+                </Card>
+                </Box>
+                
               );
             })}
-          </MDBRow>
-        </MDBContainer>
+         
+        </div>
       );
     }
   }
   
   UserExams.propTypes = {};
 
-export default UserExams;
+export default (UserExams);
