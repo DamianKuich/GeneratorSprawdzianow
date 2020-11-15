@@ -97,19 +97,19 @@ const ExamPage = ({ exam, setTaskToEdit, removeTask }) => {
                         </span>
                         <Latex>{task.text}</Latex>
                       </p>
-                      {task.currentDataSet.image.length >= 1 && (
-                        <MDBRow center>
-                          <div>
-                            <img
-                              src={
-                                "http://127.0.0.1:8000/api/user/image/" +
-                                task.currentDataSet.image[0]
-                              }
-                              style={{ maxHeight: "100px" }}
-                            />
-                          </div>
-                        </MDBRow>
-                      )}
+                      {/*{task.currentDataSet.image.length >= 1 && (*/}
+                      {/*  <MDBRow center>*/}
+                      {/*    <div>*/}
+                      {/*      <img*/}
+                      {/*        src={*/}
+                      {/*          "http://127.0.0.1:8000/api/user/image/" +*/}
+                      {/*          task.currentDataSet.image[0]*/}
+                      {/*        }*/}
+                      {/*        style={{ maxHeight: "100px" }}*/}
+                      {/*      />*/}
+                      {/*    </div>*/}
+                      {/*  </MDBRow>*/}
+                      {/*)}*/}
                       <Grid
                         container
                         alignItems="center"
