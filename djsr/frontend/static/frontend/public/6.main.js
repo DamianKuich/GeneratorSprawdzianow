@@ -1829,7 +1829,7 @@ var MaterialUiTaskSearch = /*#__PURE__*/function (_Component) {
               //   results: response.data,
               // });
 
-              console.log(Object(_ExamEditorSubComponents_TaskParser__WEBPACK_IMPORTED_MODULE_20__["default"])(response.data));
+              console.log("parsed Twat", Object(_ExamEditorSubComponents_TaskParser__WEBPACK_IMPORTED_MODULE_20__["default"])(response.data));
 
               _this3.props.updateData(Object(_ExamEditorSubComponents_TaskParser__WEBPACK_IMPORTED_MODULE_20__["default"])(response.data));
             })["catch"](function (error) {
