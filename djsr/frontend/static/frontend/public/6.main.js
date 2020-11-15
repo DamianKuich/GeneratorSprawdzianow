@@ -330,6 +330,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_Tabs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/Tabs */ "./node_modules/@material-ui/core/esm/Tabs/index.js");
 /* harmony import */ var _material_ui_core_Tab__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Tab */ "./node_modules/@material-ui/core/esm/Tab/index.js");
 /* harmony import */ var _material_ui_core_AppBar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/AppBar */ "./node_modules/@material-ui/core/esm/AppBar/index.js");
+/* harmony import */ var _assets_jss_material_kit_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../assets/jss/material-kit-react */ "./djsr/frontend/src/components/assets/jss/material-kit-react.js");
+/* harmony import */ var _material_ui_core_styles_makeStyles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/styles/makeStyles */ "./node_modules/@material-ui/core/styles/makeStyles.js");
+/* harmony import */ var _material_ui_core_styles_makeStyles__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles_makeStyles__WEBPACK_IMPORTED_MODULE_5__);
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
@@ -337,7 +340,15 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 
 
- //todo update indicator on resize https://github.com/mui-org/material-ui/issues/9337
+
+
+
+var eloColor = _assets_jss_material_kit_react__WEBPACK_IMPORTED_MODULE_4__["primaryColor"];
+var useStyles = _material_ui_core_styles_makeStyles__WEBPACK_IMPORTED_MODULE_5___default()(function (theme) {
+  selected: {
+    color: "red";
+  }
+}); //todo update indicator on resize https://github.com/mui-org/material-ui/issues/9337
 //todo wyglad przycisku od wygenerowania pdf zeby sie wyroznial
 
 var SideMenuTabSelector = function SideMenuTabSelector(_ref) {
@@ -345,27 +356,43 @@ var SideMenuTabSelector = function SideMenuTabSelector(_ref) {
       currentTabId = _ref.currentTabId,
       props = _objectWithoutProperties(_ref, ["handleTabChange", "currentTabId"]);
 
+  var classes = useStyles();
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_AppBar__WEBPACK_IMPORTED_MODULE_3__["default"], {
     position: "static",
     color: "default"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Tabs__WEBPACK_IMPORTED_MODULE_1__["default"], {
     value: currentTabId,
-    indicatorColor: "primary",
-    textColor: "primary",
     onChange: handleTabChange,
-    variant: "fullWidth"
+    variant: "fullWidth" // style={{color:primaryColor}}
+    //   inkBarStyle={{background:primaryColor}}
+    ,
+    TabIndicatorProps: {
+      style: {
+        background: _assets_jss_material_kit_react__WEBPACK_IMPORTED_MODULE_4__["primaryColor"]
+      }
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Tab__WEBPACK_IMPORTED_MODULE_2__["default"], {
     label: "Dodaj zadanie",
     value: "taskSearch",
-    disabled: false
+    disabled: false,
+    classes: {
+      selected: classes.selected
+    } // component={<span>elo</span>}
+
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Tab__WEBPACK_IMPORTED_MODULE_2__["default"], {
     label: "Edycja zadania",
     value: "taskEdit",
-    disabled: false
+    disabled: false,
+    classes: {
+      selected: classes.selected
+    }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Tab__WEBPACK_IMPORTED_MODULE_2__["default"], {
     label: "Pobierz PDF",
     value: "generatePDF",
-    disabled: false
+    disabled: false,
+    classes: {
+      selected: classes.selected
+    }
   })));
 };
 
@@ -616,7 +643,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_latex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-latex */ "./node_modules/react-latex/build/latex.js");
 /* harmony import */ var react_latex__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_latex__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var mdbreact__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! mdbreact */ "./node_modules/mdbreact/dist/mdbreact.esm.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 
 
 
@@ -625,9 +654,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 var TaskSearchDndResults = function TaskSearchDndResults(_ref) {
   var taskSearchResult = _ref.taskSearchResult;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_3__["MDBContainer"], {
-    className: "mt-3"
-  }, Array.isArray(taskSearchResult) && taskSearchResult.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_1__["Droppable"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["Container"], null, Array.isArray(taskSearchResult) && taskSearchResult.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_1__["Droppable"], {
     droppableId: "searchDroppable"
   }, function (provided, snapshot) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1642,8 +1669,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
 /* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/@material-ui/core/esm/Paper/index.js");
 /* harmony import */ var _material_ui_core_ListItemSecondaryAction__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @material-ui/core/ListItemSecondaryAction */ "./node_modules/@material-ui/core/esm/ListItemSecondaryAction/index.js");
-/* harmony import */ var _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @material-ui/core/Checkbox */ "./node_modules/@material-ui/core/esm/Checkbox/index.js");
+/* harmony import */ var _material_ui_components_CustomCheckBox_CustomCheckbox__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./material_ui_components/CustomCheckBox/CustomCheckbox */ "./djsr/frontend/src/components/material_ui_components/CustomCheckBox/CustomCheckbox.js");
 /* harmony import */ var _ExamEditorSubComponents_TaskParser__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./ExamEditorSubComponents/TaskParser */ "./djsr/frontend/src/components/ExamEditorSubComponents/TaskParser.js");
+/* harmony import */ var _material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./material_ui_components/CustomButtons/Button */ "./djsr/frontend/src/components/material_ui_components/CustomButtons/Button.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/esm/Box/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -1673,6 +1703,9 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
 
 
 
@@ -1750,10 +1783,10 @@ var MaterialUiTaskSearch = /*#__PURE__*/function (_Component) {
       console.log(this.props, "TaskSearch Props");
       console.log("sections", sections);
       if (!sections) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "loading");
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: {
-          width: "100%"
-        }
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_23__["default"], {
+        component: "div",
+        m: 1 // display="flex" justifyContent="center"
+
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_15__["Formik"], {
         initialValues: {
           skills: []
@@ -1806,27 +1839,60 @@ var MaterialUiTaskSearch = /*#__PURE__*/function (_Component) {
         var values = _ref.values,
             errors = _ref.errors,
             touched = _ref.touched,
-            handleChange = _ref.handleChange,
             handleBlur = _ref.handleBlur,
             handleSubmit = _ref.handleSubmit,
             isSubmitting = _ref.isSubmitting,
-            setFieldValue = _ref.setFieldValue,
-            fi = _ref.fi;
+            setFieldValue = _ref.setFieldValue;
+
+        var handleChange = function handleChange(valueName) {
+          setFieldValue(valueName, !Object(formik__WEBPACK_IMPORTED_MODULE_15__["getIn"])(values, valueName));
+        };
+
+        var sectionBooleanValue = function sectionBooleanValue(parsedSection) {
+          console.log("sectionBooleanValue", parsedSection);
+          var sectionSkillsValue = parsedSection.skill.map(function (skill) {
+            return !!Object(formik__WEBPACK_IMPORTED_MODULE_15__["getIn"])(values, "skills." + skill.id);
+          });
+          return sectionSkillsValue.reduce(function (prevValue, nextValue) {
+            console.log("id" + parsedSection.id, prevValue, nextValue);
+            return prevValue && nextValue;
+          });
+        };
+
+        var handleSectionChange = function handleSectionChange(parsedSection) {
+          _this3.toggleCollapse("section-" + parsedSection.id);
+
+          var newValue = !sectionBooleanValue(parsedSection);
+          var skillsValueNames = parsedSection.skill.map(function (skill) {
+            return "skills." + skill.id;
+          });
+
+          var _iterator2 = _createForOfIteratorHelper(skillsValueNames),
+              _step2;
+
+          try {
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+              var valueName = _step2.value;
+              setFieldValue(valueName, newValue);
+            }
+          } catch (err) {
+            _iterator2.e(err);
+          } finally {
+            _iterator2.f();
+          }
+        };
+
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_15__["Form"], {
           onSubmit: handleSubmit
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_List__WEBPACK_IMPORTED_MODULE_4__["default"], null, sections.map(function (section) {
-          var handleChange = function handleChange(valueName) {
-            setFieldValue(valueName, !Object(formik__WEBPACK_IMPORTED_MODULE_15__["getIn"])(values, valueName));
-          };
-
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_5__["default"] // onClick={() => {
           //   this.toggleCollapse("section-" + section.id);
           // }}
-          , null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItemSecondaryAction__WEBPACK_IMPORTED_MODULE_18__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_19__["default"], {
+          , null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItemSecondaryAction__WEBPACK_IMPORTED_MODULE_18__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomCheckBox_CustomCheckbox__WEBPACK_IMPORTED_MODULE_19__["default"], {
             edge: "start",
-            checked: false,
+            checked: sectionBooleanValue(section),
             onChange: function onChange() {
-              console.log("elochkbox");
+              handleSectionChange(section);
             }
           })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_7__["default"], {
             primary: section.Section,
@@ -1846,7 +1912,7 @@ var MaterialUiTaskSearch = /*#__PURE__*/function (_Component) {
               onClick: function onClick() {
                 handleChange("skills." + skill.id);
               }
-            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_6__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_19__["default"], {
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_6__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomCheckBox_CustomCheckbox__WEBPACK_IMPORTED_MODULE_19__["default"], {
               edge: "start",
               checked: !!Object(formik__WEBPACK_IMPORTED_MODULE_15__["getIn"])(values, "skills." + skill.id),
               tabIndex: -1,
@@ -1859,15 +1925,17 @@ var MaterialUiTaskSearch = /*#__PURE__*/function (_Component) {
               primary: skill.Skill
             }));
           }))));
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_2__["MDBBtn"], {
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_23__["default"], {
+          component: "div",
+          m: 1,
+          display: "flex",
+          justifyContent: "center"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_21__["default"], {
+          color: "primary",
+          size: "sm",
           onClick: handleSubmit,
           disabled: isSubmitting
-        }, "Szukaj", isSubmitting && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "spinner-border spinner-border-sm",
-          role: "status"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-          className: "sr-only"
-        }, "Loading...")))));
+        }, "Szukaj"))));
       }));
     }
   }]);
@@ -4220,6 +4288,46 @@ var profilePageStyle = _objectSpread({
 });
 
 /* harmony default export */ __webpack_exports__["default"] = (profilePageStyle);
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/material_ui_components/CustomCheckBox/CustomCheckbox.js":
+/*!**********************************************************************************************!*\
+  !*** ./djsr/frontend/src/components/material_ui_components/CustomCheckBox/CustomCheckbox.js ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _assets_jss_material_kit_react_customCheckboxRadioSwitch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/jss/material-kit-react/customCheckboxRadioSwitch */ "./djsr/frontend/src/components/assets/jss/material-kit-react/customCheckboxRadioSwitch.js");
+/* harmony import */ var _assets_jss_material_kit_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../assets/jss/material-kit-react */ "./djsr/frontend/src/components/assets/jss/material-kit-react.js");
+/* harmony import */ var _material_ui_core_styles_withStyles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles/withStyles */ "./node_modules/@material-ui/core/styles/withStyles.js");
+/* harmony import */ var _material_ui_core_styles_withStyles__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles_withStyles__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Checkbox */ "./node_modules/@material-ui/core/esm/Checkbox/index.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+
+
+
+
+var CustomCheckbox = _material_ui_core_styles_withStyles__WEBPACK_IMPORTED_MODULE_3___default()({
+  root: {
+    color: _assets_jss_material_kit_react__WEBPACK_IMPORTED_MODULE_2__["primaryColor"],
+    "&$checked": {
+      color: _assets_jss_material_kit_react__WEBPACK_IMPORTED_MODULE_2__["primaryColor"]
+    }
+  },
+  checked: {}
+})(function (props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_4__["default"], _extends({
+    color: "default"
+  }, props));
+});
+/* harmony default export */ __webpack_exports__["default"] = (CustomCheckbox);
 
 /***/ }),
 

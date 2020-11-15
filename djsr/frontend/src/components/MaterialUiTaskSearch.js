@@ -18,8 +18,11 @@ import { Form, Formik, getIn } from "formik";
 import * as Yup from "yup";
 import Paper from "@material-ui/core/Paper";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import Checkbox from "@material-ui/core/Checkbox";
+import Checkbox from "./material_ui_components/CustomCheckBox/CustomCheckbox";
 import tasksParser from "./ExamEditorSubComponents/TaskParser";
+import Button from "./material_ui_components/CustomButtons/Button";
+import {Container} from "@material-ui/core";
+import Box from "@material-ui/core/Box";
 
 class MaterialUiTaskSearch extends Component {
   constructor(props) {
@@ -51,11 +54,13 @@ class MaterialUiTaskSearch extends Component {
     let sections = this.state.sections;
     let collapseId = this.state.collapseId;
     let results = this.state.results;
-    console.log(this.props,"TaskSearch Props")
+    console.log(this.props, "TaskSearch Props");
     console.log("sections", sections);
     if (!sections) return <div>loading</div>;
     return (
-      <div style={{ width: "100%" }}>
+      <Box component={"div"} m={1}
+           // display="flex" justifyContent="center"
+      >
         <Formik
           initialValues={{ skills: [] }}
           onSubmit={(values, helpers) => {
@@ -97,33 +102,51 @@ class MaterialUiTaskSearch extends Component {
             values,
             errors,
             touched,
-            handleChange,
+            // handleChange,
             handleBlur,
             handleSubmit,
             isSubmitting,
             setFieldValue,
-            fi,
-          }) => (
+          }) => {
+            const handleChange = (valueName) => {
+              setFieldValue(valueName, !getIn(values, valueName));
+            };
+            const sectionBooleanValue = (parsedSection) => {
+              console.log("sectionBooleanValue",parsedSection)
+              const sectionSkillsValue = parsedSection.skill.map((skill) =>
+                !!getIn(values, "skills." + skill.id)
+              );
+              return sectionSkillsValue.reduce((prevValue,nextValue)=>{
+                console.log("id"+parsedSection.id,prevValue,nextValue )
+                return prevValue && nextValue
+              })
+            };
+            const handleSectionChange = (parsedSection) => {
+              this.toggleCollapse("section-" + parsedSection.id);
+              const newValue= !sectionBooleanValue(parsedSection);
+              const skillsValueNames = parsedSection.skill.map((skill)=>("skills." + skill.id));
+              for (const valueName of skillsValueNames) {
+                setFieldValue(valueName, newValue)
+              }
+            };
+            return (
               <>
                 <Form onSubmit={handleSubmit}>
                   <List>
                     {sections.map((section) => {
-                      const handleChange = (valueName) => {
-                        setFieldValue(valueName, !getIn(values, valueName));
-                      };
                       return (
                         <>
                           <ListItem
-                            // onClick={() => {
-                            //   this.toggleCollapse("section-" + section.id);
-                            // }}
+                          // onClick={() => {
+                          //   this.toggleCollapse("section-" + section.id);
+                          // }}
                           >
                             <ListItemSecondaryAction>
                               <Checkbox
                                 edge="start"
-                                checked={false}
+                                checked={sectionBooleanValue(section)}
                                 onChange={() => {
-                                  console.log("elochkbox");
+                                  handleSectionChange(section)
                                 }}
                               />
                             </ListItemSecondaryAction>
@@ -209,22 +232,35 @@ class MaterialUiTaskSearch extends Component {
                       );
                     })}
                   </List>
-                  <MDBBtn onClick={handleSubmit} disabled={isSubmitting}>
-                    Szukaj
-                    {isSubmitting && (
-                      <div
-                        className="spinner-border spinner-border-sm"
-                        role="status"
-                      >
-                        <span className="sr-only">Loading...</span>
-                      </div>
-                    )}
-                  </MDBBtn>
+                  {/*<MDBBtn onClick={handleSubmit} disabled={isSubmitting}>*/}
+                  {/*  Szukaj*/}
+                  {/*  {isSubmitting && (*/}
+                  {/*    <div*/}
+                  {/*      className="spinner-border spinner-border-sm"*/}
+                  {/*      role="status"*/}
+                  {/*    >*/}
+                  {/*      <span className="sr-only">Loading...</span>*/}
+                  {/*    </div>*/}
+                  {/*  )}*/}
+                  {/*</MDBBtn>*/}
+                  <Box component={"div"} m={1} display="flex" justifyContent="center">
+                  <Button
+                          color="primary"
+                          size="sm"
+                          onClick={
+                            handleSubmit
+                          }
+                          disabled={isSubmitting}
+                        >
+                          Szukaj
+                        </Button>
+                  </Box>
                 </Form>
               </>
-          )}
+            );
+          }}
         </Formik>
-      </div>
+      </Box>
     );
   }
 }
