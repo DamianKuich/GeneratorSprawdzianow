@@ -39,6 +39,14 @@ const TaskSearchDndResults = ({ taskSearchResult }) => {
                     >
                       <Box style={{ position: "relative" }}>
                         <Latex>{task.text}</Latex>
+                        <Box>
+                          {task.answers.correctans.map((correctans)=>{
+                            return <span style={{color:"green"}}><Latex colo>{correctans},</Latex></span>
+                          })}
+                          {task.answers.wronganswers.map((wronganswer)=>{
+                            return <span style={{color:"red"}}><Latex colo>{wronganswer},</Latex></span>
+                          })}
+                        </Box>
                         <TaskToolTip />
                       </Box>
                     </Box>
