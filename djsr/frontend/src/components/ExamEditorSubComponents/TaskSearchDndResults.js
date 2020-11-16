@@ -32,6 +32,7 @@ const TaskSearchDndResults = ({ taskSearchResult }) => {
                       {...provided.dragHandleProps}
                       style={{ ...provided.draggableProps.style }}
                       pb={3}
+                      mt={3}
                       borderBottom={1}
                       // className="border-right border-left border-bottom p-2"
 

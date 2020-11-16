@@ -693,6 +693,7 @@ var TaskSearchDndResults = function TaskSearchDndResults(_ref) {
         }, provided.draggableProps, provided.dragHandleProps, {
           style: _objectSpread({}, provided.draggableProps.style),
           pb: 3,
+          mt: 3,
           borderBottom: 1 // className="border-right border-left border-bottom p-2"
 
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__["default"], {
