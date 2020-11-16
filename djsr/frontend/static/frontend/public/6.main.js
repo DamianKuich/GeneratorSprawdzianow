@@ -186,7 +186,8 @@ var ExamPage = function ExamPage(_ref) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_7__["default"], {
       style: {
         width: "21cm",
-        height: "29.7cm" // backgroundColor: snapshot.isDraggingOver ? "blue" : "white",
+        height: "29.7cm",
+        background: "white" // backgroundColor: snapshot.isDraggingOver ? "blue" : "white",
 
       } // className="border p-3"
       ,

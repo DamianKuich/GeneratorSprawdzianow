@@ -34,6 +34,7 @@ const ExamPage = ({ exam, setTaskToEdit, removeTask }) => {
             style={{
               width: "21cm",
               height: "29.7cm",
+              background:"white"
               // backgroundColor: snapshot.isDraggingOver ? "blue" : "white",
             }}
             // className="border p-3"
