@@ -4,6 +4,7 @@ import Latex from "react-latex";
 import { MDBContainer } from "mdbreact";
 import {Container} from "@material-ui/core";
 import TaskToolTip from "./TaskToolTip";
+import Box from "@material-ui/core/Box";
 
 const TaskSearchDndResults = ({ taskSearchResult }) => {
   return (
@@ -25,7 +26,7 @@ const TaskSearchDndResults = ({ taskSearchResult }) => {
                   index={index}
                 >
                   {(provided, snapshot) => (
-                    <div
+                    <Box
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
@@ -34,7 +35,7 @@ const TaskSearchDndResults = ({ taskSearchResult }) => {
                     >
                       <Latex>{task.text}</Latex>
                       <TaskToolTip/>
-                    </div>
+                    </Box>
                   )}
                 </Draggable>
               ))}
