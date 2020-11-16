@@ -705,17 +705,13 @@ var TaskSearchDndResults = function TaskSearchDndResults(_ref) {
             style: {
               color: "green"
             }
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_latex__WEBPACK_IMPORTED_MODULE_2___default.a, {
-            colo: true
-          }, correctans, ","));
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_latex__WEBPACK_IMPORTED_MODULE_2___default.a, null, correctans, ","));
         }), task.answers.wronganswers.map(function (wronganswer) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
             style: {
               color: "red"
             }
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_latex__WEBPACK_IMPORTED_MODULE_2___default.a, {
-            colo: true
-          }, wronganswer, ","));
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_latex__WEBPACK_IMPORTED_MODULE_2___default.a, null, wronganswer, ","));
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TaskToolTip__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
       });
     }), provided.placeholder);
