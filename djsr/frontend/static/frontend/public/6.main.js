@@ -174,7 +174,8 @@ var ExamPage = function ExamPage(_ref) {
       justifyContent: "center",
       flexGrow: "3",
       background: "linear-gradient(60deg, rgba(242,163,255,1) 0%, rgba(195,105,219,1) 100%)"
-    }
+    },
+    p: 3
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_1__["Droppable"], {
     droppableId: "examDroppable",
     style: {
@@ -182,13 +183,14 @@ var ExamPage = function ExamPage(_ref) {
       marginRight: "auto"
     }
   }, function (provided, snapshot) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_7__["default"], {
       style: {
         width: "21cm",
         height: "29.7cm" // backgroundColor: snapshot.isDraggingOver ? "blue" : "white",
 
-      },
-      className: "border p-3",
+      } // className="border p-3"
+      ,
+      p: 3,
       ref: provided.innerRef
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "mb-2"

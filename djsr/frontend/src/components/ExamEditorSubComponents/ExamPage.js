@@ -23,19 +23,21 @@ const ExamPage = ({ exam, setTaskToEdit, removeTask }) => {
         background:
           "linear-gradient(60deg, rgba(242,163,255,1) 0%, rgba(195,105,219,1) 100%)",
       }}
+      p={3}
     >
       <Droppable
         droppableId="examDroppable"
         style={{ marginLeft: "auto", marginRight: "auto" }}
       >
         {(provided, snapshot) => (
-          <div
+          <Box
             style={{
               width: "21cm",
               height: "29.7cm",
               // backgroundColor: snapshot.isDraggingOver ? "blue" : "white",
             }}
-            className="border p-3"
+            // className="border p-3"
+            p={3}
             ref={provided.innerRef}
           >
             <div className="mb-2">
@@ -149,7 +151,7 @@ const ExamPage = ({ exam, setTaskToEdit, removeTask }) => {
               </Draggable>
             ))}
             {provided.placeholder}
-          </div>
+          </Box>
         )}
       </Droppable>
     </Box>
