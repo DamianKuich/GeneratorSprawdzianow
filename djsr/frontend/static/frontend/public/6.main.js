@@ -701,19 +701,19 @@ var TaskSearchDndResults = function TaskSearchDndResults(_ref) {
             position: "relative"
           }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_latex__WEBPACK_IMPORTED_MODULE_2___default.a, null, task.text), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__["default"], null, task.answers.correctans.map(function (correctans) {
-          console.log("correctans", correctans);
+          // console.log("correctans", correctans);
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
             style: {
               color: "green"
             }
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_latex__WEBPACK_IMPORTED_MODULE_2___default.a, null, correctans), ", ");
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_latex__WEBPACK_IMPORTED_MODULE_2___default.a, null, correctans), ",", " ");
         }), task.answers.wronganswers.map(function (wronganswer) {
-          console.log("wronganswer", wronganswer);
+          // console.log("wronganswer", wronganswer);
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
             style: {
               color: "red"
             }
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_latex__WEBPACK_IMPORTED_MODULE_2___default.a, null, wronganswer), ", ");
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_latex__WEBPACK_IMPORTED_MODULE_2___default.a, null, wronganswer), ",", " ");
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TaskToolTip__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
       });
     }), provided.placeholder);
@@ -789,7 +789,13 @@ var TaskToolTip = function TaskToolTip(task) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HtmlTooltip, {
     title: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_2__["default"], {
       color: "inherit"
-    }, "Tooltip with HTML"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("em", null, "And here's"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "some"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("u", null, "amazing content"), ".", " ", "It's very engaging. Right?")
+    }, "Zadanie na poziomie: ", " ", task.level === 1 ? "podstawowym" : "rozszerzonym"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      color: "inherit"
+    }, "Typ: ", task.type === 2 ? "Zamknięte" : "Otwarte"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      color: "inherit"
+    }, "Proponowana liczba punktów: ", task.points), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      color: "inherit"
+    }, "Maks odp. prawidłowych/nieprawidłowych: ", task.answers.correctans.length, "/", task.answers.wronganswers.length))
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_8__["default"], {
     p: 0,
     m: 0,

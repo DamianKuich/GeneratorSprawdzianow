@@ -34,9 +34,27 @@ const TaskToolTip = (task) => {
     <HtmlTooltip
       title={
         <React.Fragment>
-          <Typography color="inherit">Tooltip with HTML</Typography>
-          <em>{"And here's"}</em> <b>{"some"}</b> <u>{"amazing content"}</u>.{" "}
-          {"It's very engaging. Right?"}
+          <Typography color="inherit">
+            {"Zadanie na poziomie: "}{" "}
+            {task.level === 1 ? "podstawowym" : "rozszerzonym"}
+          </Typography>
+          <Typography color="inherit">
+            {"Typ: "}
+            {task.type === 2 ? "Zamknięte" : "Otwarte"}
+          </Typography>
+          <Typography color="inherit">
+            {"Proponowana liczba punktów: "}
+            {task.points}
+          </Typography>
+          <Typography color="inherit">
+            {"Maks odp. prawidłowych/nieprawidłowych: "}
+            {task.answers.correctans.length}
+            {"/"}
+            {task.answers.wronganswers.length}
+          </Typography>
+
+          {/*<em>{"And here's"}</em> <b>{"some"}</b> <u>{"amazing content"}</u>.{" "}*/}
+          {/*{"It's very engaging. Right?"}*/}
         </React.Fragment>
       }
     >
