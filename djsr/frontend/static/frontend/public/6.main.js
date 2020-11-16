@@ -192,6 +192,7 @@ var ExamPage = function ExamPage(_ref) {
       } // className="border p-3"
       ,
       p: 3,
+      boxShadow: 3,
       ref: provided.innerRef
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "mb-2"

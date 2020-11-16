@@ -39,6 +39,7 @@ const ExamPage = ({ exam, setTaskToEdit, removeTask }) => {
             }}
             // className="border p-3"
             p={3}
+            boxShadow={3}
             ref={provided.innerRef}
           >
             <div className="mb-2">
