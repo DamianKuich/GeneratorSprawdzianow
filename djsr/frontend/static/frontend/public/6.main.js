@@ -701,12 +701,14 @@ var TaskSearchDndResults = function TaskSearchDndResults(_ref) {
             position: "relative"
           }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_latex__WEBPACK_IMPORTED_MODULE_2___default.a, null, task.text), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__["default"], null, task.answers.correctans.map(function (correctans) {
+          console.log("correctans", correctans);
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
             style: {
               color: "green"
             }
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_latex__WEBPACK_IMPORTED_MODULE_2___default.a, null, correctans, ","));
         }), task.answers.wronganswers.map(function (wronganswer) {
+          console.log("wronganswer", wronganswer);
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
             style: {
               color: "red"
