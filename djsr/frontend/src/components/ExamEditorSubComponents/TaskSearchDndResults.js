@@ -31,7 +31,9 @@ const TaskSearchDndResults = ({ taskSearchResult }) => {
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                       style={{ ...provided.draggableProps.style }}
-                      className="border-right border-left border-bottom p-2"
+                      pb={3}
+                      // className="border-right border-left border-bottom p-2"
+
                     >
                       <Box style={{ position: "relative" }}>
                         <Latex>{task.text}</Latex>
