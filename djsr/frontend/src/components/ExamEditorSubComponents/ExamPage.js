@@ -34,7 +34,7 @@ const ExamPage = ({ exam, setTaskToEdit, removeTask }) => {
             style={{
               width: "21cm",
               height: "29.7cm",
-              background:"white"
+              background: "white",
               // backgroundColor: snapshot.isDraggingOver ? "blue" : "white",
             }}
             // className="border p-3"
@@ -42,9 +42,12 @@ const ExamPage = ({ exam, setTaskToEdit, removeTask }) => {
             boxShadow={3}
             ref={provided.innerRef}
           >
+            <h2>{exam.name}</h2>
             <div className="mb-2">
-              Imie i nazwisko:
-              .................................................................
+              {
+                "Imie i nazwisko:................................................................."
+              }
+                {".../"}{examTasks.map(task=>task.maxPoints).reduce((a,b)=>(a+b))}
             </div>
             {examTasks.map((task, index) => (
               <Draggable
