@@ -167,12 +167,13 @@ var ExamPage = function ExamPage(_ref) {
       setTaskToEdit = _ref.setTaskToEdit,
       removeTask = _ref.removeTask;
   var examTasks = exam.tasks;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    // className="d-flex justify-content-center"
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_7__["default"] // className="d-flex justify-content-center"
+  , {
     style: {
       display: "flex",
       justifyContent: "center",
-      flexGrow: "3"
+      flexGrow: "3",
+      background: "linear-gradient(60deg, rgba(242,163,255,1) 0%, rgba(195,105,219,1) 100%)"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_1__["Droppable"], {
     droppableId: "examDroppable",
