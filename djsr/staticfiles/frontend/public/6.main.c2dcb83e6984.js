@@ -806,7 +806,7 @@ var TaskToolTip = function TaskToolTip(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Help__WEBPACK_IMPORTED_MODULE_7___default.a, {
     fontSize: "small",
     style: {
-      color: task.level === 1 ? "green" : "red"
+      color: "green"
     }
   })));
 };

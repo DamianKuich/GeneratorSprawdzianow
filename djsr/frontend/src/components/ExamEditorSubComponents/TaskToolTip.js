@@ -22,7 +22,6 @@ const HtmlTooltip = withStyles((theme) => ({
   tooltip: {
     backgroundColor: "#f5f5f9",
     color: "rgba(0, 0, 0, 0.87)",
-    maxWidth: 220,
     fontSize: theme.typography.pxToRem(12),
     border: "1px solid #dadde9",
   },
@@ -63,7 +62,7 @@ const TaskToolTip = ({task}) => {
       {/*  ?*/}
       {/*</Fab>*/}
       <Box p={0} m={0} className={classes.absolute}>
-        <HelpIcon fontSize={"small"} style={{ color: "green" }} />
+        <HelpIcon fontSize={"small"} style={{ color: task.level === 1 ? "green" : "red" }} />
       </Box>
     </HtmlTooltip>
   );

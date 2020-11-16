@@ -779,7 +779,6 @@ var HtmlTooltip = _material_ui_core_styles_withStyles__WEBPACK_IMPORTED_MODULE_6
     tooltip: {
       backgroundColor: "#f5f5f9",
       color: "rgba(0, 0, 0, 0.87)",
-      maxWidth: 220,
       fontSize: theme.typography.pxToRem(12),
       border: "1px solid #dadde9"
     }
@@ -807,7 +806,7 @@ var TaskToolTip = function TaskToolTip(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Help__WEBPACK_IMPORTED_MODULE_7___default.a, {
     fontSize: "small",
     style: {
-      color: "green"
+      color: task.level === 1 ? "green" : "red"
     }
   })));
 };
