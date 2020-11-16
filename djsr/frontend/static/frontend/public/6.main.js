@@ -478,7 +478,10 @@ var TaskEditor = function TaskEditor(_ref) {
         fullWidth: true
       },
       inputProps: {
-        onChange: handleChangeAndSubmit
+        onChange: handleChangeAndSubmit,
+        multiline: true,
+        rows: 3,
+        rowsMax: 10
       },
       labelText: "Tre\u015B\u0107 zadania"
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_1__["Field"], {

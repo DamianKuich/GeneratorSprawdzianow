@@ -59,6 +59,9 @@ const TaskEditor = ({selectedTaskToEdit,updateTask}) => {
                   }}
                   inputProps={{
                     onChange: handleChangeAndSubmit,
+                      multiline:true,
+                      rows:3,
+                      rowsMax:10
                   }}
                   labelText="Treść zadania"
                 />

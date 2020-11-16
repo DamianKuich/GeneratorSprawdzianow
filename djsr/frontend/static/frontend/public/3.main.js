@@ -444,7 +444,8 @@ function CustomInput(props) {
       white = props.white,
       inputRootCustomClasses = props.inputRootCustomClasses,
       success = props.success,
-      helperProps = props.helperProps;
+      helperProps = props.helperProps,
+      multiline = props.multiline;
   var labelClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()((_classNames = {}, _defineProperty(_classNames, " " + classes.labelRootError, error), _defineProperty(_classNames, " " + classes.labelRootSuccess, success && !error), _classNames));
   var underlineClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()((_classNames2 = {}, _defineProperty(_classNames2, classes.underlineError, error), _defineProperty(_classNames2, classes.underlineSuccess, success && !error), _defineProperty(_classNames2, classes.underline, true), _defineProperty(_classNames2, classes.whiteUnderline, white), _classNames2));
   var marginTop = classnames__WEBPACK_IMPORTED_MODULE_2___default()(_defineProperty({}, inputRootCustomClasses, inputRootCustomClasses !== undefined));
