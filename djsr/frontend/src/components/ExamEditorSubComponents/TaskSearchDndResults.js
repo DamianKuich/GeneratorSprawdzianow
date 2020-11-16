@@ -42,11 +42,11 @@ const TaskSearchDndResults = ({ taskSearchResult }) => {
                         <Box>
                           {task.answers.correctans.map((correctans)=>{
                             console.log("correctans",correctans)
-                            return <span style={{color:"green"}}><Latex>{correctans},</Latex></span>
+                            return <span style={{color:"green"}}><Latex>{correctans}</Latex>, </span>
                           })}
                           {task.answers.wronganswers.map((wronganswer)=>{
                             console.log("wronganswer",wronganswer)
-                            return <span style={{color:"red"}}><Latex>{wronganswer},</Latex></span>
+                            return <span style={{color:"red"}}><Latex>{wronganswer}</Latex>, </span>
                           })}
                         </Box>
                         <TaskToolTip />
