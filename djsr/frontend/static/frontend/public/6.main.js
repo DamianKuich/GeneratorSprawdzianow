@@ -733,6 +733,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_styles_withStyles__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles_withStyles__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _material_ui_icons_Help__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/icons/Help */ "./node_modules/@material-ui/icons/Help.js");
 /* harmony import */ var _material_ui_icons_Help__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Help__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/esm/Box/index.js");
+
 
 
 
@@ -747,7 +749,7 @@ var useStyles = _material_ui_core_styles_makeStyles__WEBPACK_IMPORTED_MODULE_1__
       margin: theme.spacing(2)
     },
     absolute: {
-      position: 'absolute',
+      position: "absolute",
       top: 0,
       right: 0
     }
@@ -756,11 +758,11 @@ var useStyles = _material_ui_core_styles_makeStyles__WEBPACK_IMPORTED_MODULE_1__
 var HtmlTooltip = _material_ui_core_styles_withStyles__WEBPACK_IMPORTED_MODULE_6___default()(function (theme) {
   return {
     tooltip: {
-      backgroundColor: '#f5f5f9',
-      color: 'rgba(0, 0, 0, 0.87)',
+      backgroundColor: "#f5f5f9",
+      color: "rgba(0, 0, 0, 0.87)",
       maxWidth: 220,
       fontSize: theme.typography.pxToRem(12),
-      border: '1px solid #dadde9'
+      border: "1px solid #dadde9"
     }
   };
 })(_material_ui_core_Tooltip__WEBPACK_IMPORTED_MODULE_5__["default"]);
@@ -770,13 +772,17 @@ var TaskToolTip = function TaskToolTip(task) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HtmlTooltip, {
     title: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_2__["default"], {
       color: "inherit"
-    }, "Tooltip with HTML"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("em", null, "And here's"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, 'some'), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("u", null, 'amazing content'), ".", ' ', "It's very engaging. Right?")
+    }, "Tooltip with HTML"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("em", null, "And here's"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "some"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("u", null, "amazing content"), ".", " ", "It's very engaging. Right?")
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    p: 0,
+    m: 0,
+    className: classes.absolute
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Help__WEBPACK_IMPORTED_MODULE_7___default.a, {
     fontSize: "small",
     style: {
       color: "green"
     }
-  }));
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (TaskToolTip);
