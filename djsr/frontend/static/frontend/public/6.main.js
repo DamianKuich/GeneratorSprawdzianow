@@ -714,7 +714,9 @@ var TaskSearchDndResults = function TaskSearchDndResults(_ref) {
               color: "red"
             }
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_latex__WEBPACK_IMPORTED_MODULE_2___default.a, null, wronganswer), ",", " ");
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TaskToolTip__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TaskToolTip__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          task: task
+        })));
       });
     }), provided.placeholder);
   }), Array.isArray(taskSearchResult) && taskSearchResult.length === 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Brak zada\u0144 o podanych kryteriach"), taskSearchResult === null && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -784,7 +786,8 @@ var HtmlTooltip = _material_ui_core_styles_withStyles__WEBPACK_IMPORTED_MODULE_6
   };
 })(_material_ui_core_Tooltip__WEBPACK_IMPORTED_MODULE_5__["default"]);
 
-var TaskToolTip = function TaskToolTip(task) {
+var TaskToolTip = function TaskToolTip(_ref) {
+  var task = _ref.task;
   var classes = useStyles();
   console.log("tasktt", task);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HtmlTooltip, {

@@ -56,7 +56,7 @@ const TaskSearchDndResults = ({ taskSearchResult }) => {
                             );
                           })}
                         </Box>
-                        <TaskToolTip />
+                        <TaskToolTip task={task}/>
                       </Box>
                     </Box>
                   )}

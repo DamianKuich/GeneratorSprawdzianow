@@ -28,7 +28,7 @@ const HtmlTooltip = withStyles((theme) => ({
   },
 }))(Tooltip);
 
-const TaskToolTip = (task) => {
+const TaskToolTip = ({task}) => {
   const classes = useStyles();
   console.log("tasktt",task)
   return (
