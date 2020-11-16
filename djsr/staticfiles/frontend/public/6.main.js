@@ -653,7 +653,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_latex__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_latex__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var mdbreact__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! mdbreact */ "./node_modules/mdbreact/dist/mdbreact.esm.js");
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+/* harmony import */ var _TaskToolTip__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./TaskToolTip */ "./djsr/frontend/src/components/ExamEditorSubComponents/TaskToolTip.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 
 
 
@@ -683,7 +685,7 @@ var TaskSearchDndResults = function TaskSearchDndResults(_ref) {
         }, provided.draggableProps, provided.dragHandleProps, {
           style: provided.draggableProps.style,
           className: "border-right border-left border-bottom p-2"
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_latex__WEBPACK_IMPORTED_MODULE_2___default.a, null, task.text));
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_latex__WEBPACK_IMPORTED_MODULE_2___default.a, null, task.text), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TaskToolTip__WEBPACK_IMPORTED_MODULE_5__["default"], null));
       });
     }), provided.placeholder);
   }), Array.isArray(taskSearchResult) && taskSearchResult.length === 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Brak zada\u0144 o podanych kryteriach"), taskSearchResult === null && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -694,6 +696,68 @@ var TaskSearchDndResults = function TaskSearchDndResults(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (TaskSearchDndResults);
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/ExamEditorSubComponents/TaskToolTip.js":
+/*!*****************************************************************************!*\
+  !*** ./djsr/frontend/src/components/ExamEditorSubComponents/TaskToolTip.js ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_styles_makeStyles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles/makeStyles */ "./node_modules/@material-ui/core/styles/makeStyles.js");
+/* harmony import */ var _material_ui_core_styles_makeStyles__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles_makeStyles__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
+/* harmony import */ var _material_ui_core_Fab__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Fab */ "./node_modules/@material-ui/core/esm/Fab/index.js");
+/* harmony import */ var _material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/icons/Add */ "./node_modules/@material-ui/icons/Add.js");
+/* harmony import */ var _material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+var useStyles = _material_ui_core_styles_makeStyles__WEBPACK_IMPORTED_MODULE_1___default()(function (theme) {
+  return {
+    fab: {
+      margin: theme.spacing(2)
+    },
+    absolute: {
+      position: 'absolute',
+      top: theme.spacing(2),
+      right: theme.spacing(3)
+    }
+  };
+});
+var HtmlTooltip = withStyles(function (theme) {
+  return {
+    tooltip: {
+      backgroundColor: '#f5f5f9',
+      color: 'rgba(0, 0, 0, 0.87)',
+      maxWidth: 220,
+      fontSize: theme.typography.pxToRem(12),
+      border: '1px solid #dadde9'
+    }
+  };
+})(Tooltip);
+
+var TaskToolTip = function TaskToolTip(task) {
+  var classes = useStyles();
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HtmlTooltip, {
+    title: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      color: "inherit"
+    }, "Tooltip with HTML"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("em", null, "And here's"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, 'some'), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("u", null, 'amazing content'), ".", ' ', "It's very engaging. Right?")
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Fab__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    color: "secondary",
+    className: classes.absolute
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_4___default.a, null)));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (TaskToolTip);
 
 /***/ }),
 

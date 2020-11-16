@@ -3,6 +3,7 @@ import { Draggable, Droppable } from "react-beautiful-dnd";
 import Latex from "react-latex";
 import { MDBContainer } from "mdbreact";
 import {Container} from "@material-ui/core";
+import TaskToolTip from "./TaskToolTip";
 
 const TaskSearchDndResults = ({ taskSearchResult }) => {
   return (
@@ -32,6 +33,7 @@ const TaskSearchDndResults = ({ taskSearchResult }) => {
                       className="border-right border-left border-bottom p-2"
                     >
                       <Latex>{task.text}</Latex>
+                      <TaskToolTip/>
                     </div>
                   )}
                 </Draggable>
