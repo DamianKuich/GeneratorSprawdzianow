@@ -2,7 +2,7 @@ import React from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import Latex from "react-latex";
 import { MDBContainer } from "mdbreact";
-import {Container} from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import TaskToolTip from "./TaskToolTip";
 import Box from "@material-ui/core/Box";
 
@@ -30,11 +30,13 @@ const TaskSearchDndResults = ({ taskSearchResult }) => {
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
-                      style={{...provided.draggableProps.style, position:"relative"}}
+                      style={{ ...provided.draggableProps.style }}
                       className="border-right border-left border-bottom p-2"
                     >
-                      <Latex>{task.text}</Latex>
-                      <TaskToolTip/>
+                      <Box style={{ position: "relative" }}>
+                        <Latex>{task.text}</Latex>
+                        <TaskToolTip />
+                      </Box>
                     </Box>
                   )}
                 </Draggable>
