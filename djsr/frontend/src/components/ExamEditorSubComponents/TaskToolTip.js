@@ -38,7 +38,7 @@ const TaskToolTip = (task) => {
           </React.Fragment>
         }
       >
-        <Fab color="secondary" className={classes.absolute}>
+        <Fab color="secondary" size={"small"} className={classes.absolute}>
           <AddIcon />
         </Fab>
       </HtmlTooltip>

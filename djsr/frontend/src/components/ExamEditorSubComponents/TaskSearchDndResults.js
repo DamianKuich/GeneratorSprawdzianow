@@ -29,7 +29,7 @@ const TaskSearchDndResults = ({ taskSearchResult }) => {
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
-                      style={provided.draggableProps.style}
+                      style={{...provided.draggableProps.style, position:"relative"}}
                       className="border-right border-left border-bottom p-2"
                     >
                       <Latex>{task.text}</Latex>
