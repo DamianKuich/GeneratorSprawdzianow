@@ -5,14 +5,15 @@ import Fab from "@material-ui/core/Fab";
 import AddIcon from '@material-ui/icons/Add';
 import Tooltip from '@material-ui/core/Tooltip';
 import withStyles from "@material-ui/core/styles/withStyles";
+import HelpIcon from '@material-ui/icons/Help';
 const useStyles = makeStyles((theme) => ({
   fab: {
     margin: theme.spacing(2),
   },
   absolute: {
     position: 'absolute',
-    top: theme.spacing(2),
-    right: theme.spacing(3),
+    top: 0,
+    right: 0,
   },
 }));
 
@@ -38,9 +39,10 @@ const TaskToolTip = (task) => {
           </React.Fragment>
         }
       >
-        <Fab color="secondary" size={"small"} className={classes.absolute}>
-          <AddIcon />
-        </Fab>
+        {/*<Fab color="secondary" size={"small"} className={classes.absolute}>*/}
+        {/*  ?*/}
+        {/*</Fab>*/}
+        <HelpIcon fontSize={"small"} style={{color:"green"}}/>
       </HtmlTooltip>
     );
 };
