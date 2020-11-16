@@ -196,11 +196,7 @@ var ExamPage = function ExamPage(_ref) {
       ref: provided.innerRef
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, exam.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "mb-2"
-    }, "Imie i nazwisko:.................................................................", ".../", examTasks.map(function (task) {
-      return task.maxPoints;
-    }).reduce(function (a, b) {
-      return a + b;
-    })), examTasks.map(function (task, index) {
+    }, "Imie i nazwisko:................................................................."), examTasks.map(function (task, index) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_1__["Draggable"], {
         key: "task-" + task.id + "-" + index,
         draggableId: "task-" + task.id + "-" + index,

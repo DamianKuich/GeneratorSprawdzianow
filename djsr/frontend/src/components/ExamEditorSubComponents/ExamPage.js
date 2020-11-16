@@ -47,7 +47,7 @@ const ExamPage = ({ exam, setTaskToEdit, removeTask }) => {
               {
                 "Imie i nazwisko:................................................................."
               }
-                {".../"}{examTasks.map(task=>task.maxPoints).reduce((a,b)=>(a+b))}
+                {/*{".../"}{examTasks.map(task=>task.maxPoints).reduce((a,b)=>(a+b))}*/}
             </div>
             {examTasks.map((task, index) => (
               <Draggable
