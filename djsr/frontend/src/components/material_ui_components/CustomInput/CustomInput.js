@@ -27,6 +27,7 @@ export default function CustomInput(props) {
     inputRootCustomClasses,
     success,
       helperProps,
+      multiline
   } = props;
 
   const labelClasses = classNames({
@@ -90,5 +91,5 @@ CustomInput.propTypes = {
   inputRootCustomClasses: PropTypes.string,
   error: PropTypes.bool,
   success: PropTypes.bool,
-  white: PropTypes.bool
+  white: PropTypes.bool,
 };

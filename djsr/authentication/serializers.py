@@ -1,6 +1,6 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
-from .models import CustomUser, Task, Section, Skill, PasswordSendReset, TestJSON, Answers, Variables, Dataset, Image
+from .models import CustomUser, Task, Section, Skill, PasswordSendReset, TestJSON, Answers, Image
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -71,10 +71,6 @@ class SectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Section
         fields = ('id','Section','skill')
-class VariableSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Variables
-        fields = ('id','variables','values')
 
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
@@ -83,14 +79,8 @@ class ImageSerializer(serializers.ModelSerializer):
 class AnswersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answers
-        fields = ('id','allanswers','variables','correctans')
-class DataSetSerializer(serializers.ModelSerializer):
-    variables = VariableSerializer(many=True)
-    answers = AnswersSerializer(many=True)
-    image = ImageSerializer(many=True,required=False)
-    class Meta:
-        model = Dataset
-        fields = ('id','variables','answers','image')
+        fields = ('id','wronganswers','correctans')
+
 class TaskSerializer(serializers.ModelSerializer):
     # text = serializers.CharField(required=True)
     # add_date = serializers.DateTimeField(required=True)
@@ -99,11 +89,15 @@ class TaskSerializer(serializers.ModelSerializer):
     # level = serializers.IntegerField(required=True)
     # answer = serializers.CharField(required=True)
     skill = SkillSerializer(many=True)
-    dataset = DataSetSerializer(many=True)
+    answers = AnswersSerializer(many=False)
+    image = ImageSerializer(many=True,required=False)
+
 
     class Meta:
         model = Task
-        fields = ('id','text','add_date','type','author','level','points','dataset','skill','private')
+        fields = ('id','type','level','skill','text','answers',
+                  'add_date','author','points','image','private')
+
 
 class TestJSONSerializer(serializers.ModelSerializer):
     class Meta:

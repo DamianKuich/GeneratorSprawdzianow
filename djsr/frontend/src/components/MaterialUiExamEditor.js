@@ -33,8 +33,10 @@ import Collapse from "@material-ui/core/Collapse";
 import AppBar from "@material-ui/core/AppBar";
 import { makeStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/styles";
-import ExamEditorSidePanel from "./ExamEditorSidePanel";
+import ExamEditorSidePanel from "./ExamEditorSubComponents/ExamEditorSidePanel";
+import ExamPage from "./ExamEditorSubComponents/ExamPage";
 //todo po skasowaniu tresci zadania "zapomina" zdjecie
+//todo zajrzec do draganddropahndlera
 class ExamEditor extends Component {
   constructor(props) {
     super(props);
@@ -157,18 +159,12 @@ class ExamEditor extends Component {
       let draggedItem = JSON.parse(
         JSON.stringify(this.state.tasks[source.index])
       );
-      draggedItem.currentDataSet = draggedItem.dataset[0];
-      let currentDataSetAnswers = draggedItem.currentDataSet.answers[0];
-      console.log("XD?", currentDataSetAnswers.allanswers.replace(/'/g, '"'));
-      currentDataSetAnswers.allanswers = JSON.parse(
-        currentDataSetAnswers.allanswers.replace(/'/g, '"')
+      // draggedItem.currentDataSet = draggedItem.dataset[0];
+      draggedItem.currentAnswers = JSON.parse(
+        JSON.stringify(draggedItem.answers)
       );
-      currentDataSetAnswers.correctans = JSON.parse(
-        currentDataSetAnswers.correctans.replace(/'/g, '"')
-      );
-
-      console.log(currentDataSetAnswers, "currentDataSetAnswers");
-
+      let currentDataSetAnswers = draggedItem.currentAnswers;
+      console.log("dragged item", draggedItem, currentDataSetAnswers);
       let correctAnswersIndex = [
         Math.floor(
           Math.random() * (currentDataSetAnswers.correctans.length - 1)
@@ -179,7 +175,7 @@ class ExamEditor extends Component {
         "correctAnswersIndex",
         currentDataSetAnswers.length
       );
-      let incorrectAnswersIndexes = currentDataSetAnswers.allanswers.map(
+      let incorrectAnswersIndexes = currentDataSetAnswers.wronganswers.map(
         (item, index) => {
           return index;
         }
@@ -199,8 +195,8 @@ class ExamEditor extends Component {
       );
       answersSet = shuffle(answersSet);
 
-      draggedItem.currentDataSet.examAnswers = answersSet;
-      draggedItem.maxPoints = 1;
+      draggedItem.currentAnswers.answersIndexes = answersSet;
+      draggedItem.maxPoints = draggedItem.points;
       console.log("draggedItem", draggedItem, this.state.tasks);
       this.setState((state) => {
         state.exam.tasks.splice(destination.index, 0, draggedItem);
@@ -214,6 +210,7 @@ class ExamEditor extends Component {
     }
   };
   setSearchedTasks = (tasks) => {
+    console.log("Triggered Task");
     this.setState((state) => {
       state.tasks = tasks;
       return state;
@@ -229,7 +226,7 @@ class ExamEditor extends Component {
     else this.setSideMenuCollapse(newValue);
   };
   render() {
-    let exam = this.state.exam;
+    const exam = this.state.exam;
     if (!exam) {
       return (
         <MDBContainer>
@@ -237,222 +234,36 @@ class ExamEditor extends Component {
         </MDBContainer>
       );
     }
-    let sideMenuCollapseId = this.state.sideMenuCollapseId;
-    let searchedTasks = this.state.tasks;
-    let examTasks = this.state.exam.tasks;
-    let editorTask = this.state.editorTask;
+    const sideMenuCollapseId = this.state.sideMenuCollapseId;
+    const searchedTasks = this.state.tasks;
+    const examTasks = this.state.exam.tasks;
+    const editorTask = this.state.editorTask;
+    const isExamSaved = this.state.saved;
     console.log("editorTask", editorTask);
     return (
       <DragDropContext onDragEnd={this.dragEnd}>
-        <div style={{ width: "100%", minHeight: "100vh", display: "flex", flexFlow:"row nowrap"}}>
-          <ExamEditorSidePanel>
-            <div>{exam.name}</div>
-            <div>{this.state.saved ? "Zapisano" : "Zapisywanie"}</div>
-            <AppBar position="static" color="default">
-              <Tabs
-                value={sideMenuCollapseId}
-                indicatorColor={"primary"}
-                textColor={"primary"}
-                onChange={this.handleSideMenuTabChange}
-                variant={"fullWidth"}
-              >
-                <Tab
-                  label={"Dodaj zadanie"}
-                  value={"taskSearch"}
-                  disabled={false}
-                />
-                <Tab
-                  label={"Edycja zadania"}
-                  value={"taskEdit"}
-                  disabled={false}
-                />
-                <Tab
-                  label={"Pobierz PDF"}
-                  value={"generatePDF"}
-                  disabled={false}
-                />
-              </Tabs>
-            </AppBar>
-            <Collapse
-              in={"taskSearch" === sideMenuCollapseId}
-              // isOpen={sideMenuCollapseId}
-              style={{ width: "100%" }}
-            >
-              <TaskSearch updateData={this.setSearchedTasks} />
-              <MDBContainer className="mt-3">
-                {/*{Array.isArray(searchedTasks) &&*/}
-                {/*  searchedTasks.length > 0 &&*/}
-                {/*  searchedTasks.map((task) => <div>{task.text}</div>)}*/}
-                {Array.isArray(searchedTasks) && searchedTasks.length > 0 && (
-                  <Droppable droppableId="searchDroppable">
-                    {(provided, snapshot) => (
-                      <div
-                        ref={provided.innerRef}
-                        style={{
-                          backgroundColor: snapshot.isDraggingOver
-                            ? "red"
-                            : "white",
-                        }}
-                        className="border-top"
-                      >
-                        {searchedTasks.map((task, index) => (
-                          <Draggable
-                            key={"task-" + task.id}
-                            draggableId={"" + task.id}
-                            index={index}
-                          >
-                            {(provided, snapshot) => (
-                              <div
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                                style={provided.draggableProps.style}
-                                className="border-right border-left border-bottom p-2"
-                              >
-                                <Latex>{task.text}</Latex>
-                              </div>
-                            )}
-                          </Draggable>
-                        ))}
-                        {provided.placeholder}
-                      </div>
-                    )}
-                  </Droppable>
-                )}
-                {Array.isArray(searchedTasks) && searchedTasks.length === 0 && (
-                  <div>Brak zadań o podanych kryteriach</div>
-                )}
-                {!searchedTasks && (
-                  <div className="text-truncate">
-                    Wybierz umiejetnosci z listy. Aby dodać zadania do
-                    sprawdzianu przeciągnij je na sprawdzian
-                  </div>
-                )}
-              </MDBContainer>
-            </Collapse>
-            <Collapse
-              in={"taskEdit" === sideMenuCollapseId}
-              // id="taskEdit"
-              // isOpen={sideMenuCollapseId}
-              // className="w-100"
-              style={{ width: "100%" }}
-            >
-              <TaskEditor
-                task={editorTask}
-                updateTask={this.updateTaskToEdit}
-              />
-            </Collapse>
-          </ExamEditorSidePanel>
-          <div
-            // className="d-flex justify-content-center"
-            style={{ display: "flex", justifyContent: "center", flexGrow:"3" }}
-          >
-            <Droppable
-              droppableId="examDroppable"
-              style={{ marginLeft: "auto", marginRight: "auto" }}
-            >
-              {(provided, snapshot) => (
-                <div
-                  style={{
-                    width: "21cm",
-                    height: "29.7cm",
-                    backgroundColor: snapshot.isDraggingOver ? "blue" : "white",
-                  }}
-                  className="border p-3"
-                  ref={provided.innerRef}
-                >
-                  <div className="mb-2">
-                    Imie i nazwisko:
-                    .................................................................
-                  </div>
-                  {examTasks.map((task, index) => (
-                    <Draggable
-                      key={"task-" + task.id + "-" + index}
-                      draggableId={"task-" + task.id + "-" + index}
-                      index={index}
-                    >
-                      {(provided, snapshot) => {
-                        console.log("ELO123", task.currentDataSet);
-                        let answers = task.currentDataSet.examAnswers.map(
-                          (item) => {
-                            let answerSource = item.isCorrect
-                              ? task.currentDataSet.answers[0].correctans
-                              : task.currentDataSet.answers[0].allanswers;
-                            return answerSource[item.index];
-                          }
-                        );
-
-                        const ansChar = ["A", "B", "C", "D"];
-                        return (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            style={provided.draggableProps.style}
-                            className="p-2"
-                            onClick={() => {
-                              this.setTaskToEdit(index);
-                            }}
-                            // onContextMenu={() => {
-                            //   this.removeTask(index);
-                            // }}
-                            onContextMenuCapture={() => {
-                              this.removeTask(index);
-                            }}
-                          >
-                            <div
-                              className="text-danger"
-                              onClick={() => {
-                                this.removeTask(index);
-                              }}
-                            >
-                              X
-                            </div>
-                            <p className="text-right mb-0 pb-0">
-                              {".../" + task.maxPoints + " pkt."}
-                            </p>
-                            <p>
-                              <span className="font-weight-bold">
-                                {index + 1}
-                                {". "}
-                              </span>
-                              <Latex>{task.text}</Latex>
-                            </p>
-                            {task.currentDataSet.image.length >= 1 && (
-                              <MDBRow center>
-                                <div>
-                                  <img
-                                    src={
-                                      "http://127.0.0.1:8000/api/user/image/" +
-                                      task.currentDataSet.image[0]
-                                    }
-                                    style={{ maxHeight: "100px" }}
-                                  />
-                                </div>
-                              </MDBRow>
-                            )}
-                            <MDBRow between className="pl-2 pr-2 ml-0 mr-2">
-                              {answers.map((item, index) => {
-                                return (
-                                  <div>
-                                    <span className="font-weight-bold">
-                                      {ansChar[index] + ". "}
-                                    </span>
-                                    <Latex>{item}</Latex>
-                                  </div>
-                                );
-                              })}
-                            </MDBRow>
-                          </div>
-                        );
-                      }}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </div>
+        <div
+          style={{
+            width: "100%",
+            minHeight: "100vh",
+            display: "flex",
+            flexFlow: "row nowrap",
+          }}
+        >
+          <ExamEditorSidePanel
+            exam={exam}
+            currentTabId={sideMenuCollapseId}
+            handleTabChange={this.handleSideMenuTabChange}
+            setTaskSearchResult={this.setSearchedTasks}
+            taskSearchResult={searchedTasks}
+            updateTask={this.updateTaskToEdit}
+            selectedTaskToEdit={this.state.editorTask}
+          />
+          <ExamPage
+            exam={exam}
+            setTaskToEdit={this.setTaskToEdit}
+            removeTask={this.removeTask}
+          />
         </div>
       </DragDropContext>
     );

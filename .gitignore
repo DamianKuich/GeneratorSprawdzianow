@@ -125,3 +125,4 @@ uploads/
 ../rootkey.csv
 .idea/
 .~lock.rootkey.csv#
+/djsr/authentication/migrations/0001_initial.py
