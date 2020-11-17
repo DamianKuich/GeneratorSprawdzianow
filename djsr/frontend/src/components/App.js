@@ -32,6 +32,7 @@ class App extends Component {
   }
   componentDidMount() {
     this.checkUser();
+    document.title="GENE-SPR"
   }
   checkUser = (onUserCheck) => {
     if (!localStorage.getItem("access_token")) {

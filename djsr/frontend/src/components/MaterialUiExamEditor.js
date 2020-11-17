@@ -159,8 +159,11 @@ class ExamEditor extends Component {
       let draggedItem = JSON.parse(
         JSON.stringify(this.state.tasks[source.index])
       );
-      draggedItem.currentDataSet = draggedItem.dataset[0];
-      let currentDataSetAnswers = draggedItem.currentDataSet.answers;
+      // draggedItem.currentDataSet = draggedItem.dataset[0];
+      draggedItem.currentAnswers = JSON.parse(
+        JSON.stringify(draggedItem.answers)
+      );
+      let currentDataSetAnswers = draggedItem.currentAnswers;
       console.log("dragged item", draggedItem, currentDataSetAnswers);
       let correctAnswersIndex = [
         Math.floor(
@@ -172,7 +175,7 @@ class ExamEditor extends Component {
         "correctAnswersIndex",
         currentDataSetAnswers.length
       );
-      let incorrectAnswersIndexes = currentDataSetAnswers.allanswers.map(
+      let incorrectAnswersIndexes = currentDataSetAnswers.wronganswers.map(
         (item, index) => {
           return index;
         }
@@ -192,8 +195,8 @@ class ExamEditor extends Component {
       );
       answersSet = shuffle(answersSet);
 
-      draggedItem.currentDataSet.examAnswers = answersSet;
-      draggedItem.maxPoints = 1;
+      draggedItem.currentAnswers.answersIndexes = answersSet;
+      draggedItem.maxPoints = draggedItem.points;
       console.log("draggedItem", draggedItem, this.state.tasks);
       this.setState((state) => {
         state.exam.tasks.splice(destination.index, 0, draggedItem);
@@ -260,7 +263,6 @@ class ExamEditor extends Component {
             exam={exam}
             setTaskToEdit={this.setTaskToEdit}
             removeTask={this.removeTask}
-
           />
         </div>
       </DragDropContext>

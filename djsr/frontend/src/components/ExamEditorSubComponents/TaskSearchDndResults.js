@@ -2,7 +2,9 @@ import React from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import Latex from "react-latex";
 import { MDBContainer } from "mdbreact";
-import {Container} from "@material-ui/core";
+import { Container } from "@material-ui/core";
+import TaskToolTip from "./TaskToolTip";
+import Box from "@material-ui/core/Box";
 
 const TaskSearchDndResults = ({ taskSearchResult }) => {
   return (
@@ -24,15 +26,39 @@ const TaskSearchDndResults = ({ taskSearchResult }) => {
                   index={index}
                 >
                   {(provided, snapshot) => (
-                    <div
+                    <Box
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
-                      style={provided.draggableProps.style}
-                      className="border-right border-left border-bottom p-2"
+                      style={{ ...provided.draggableProps.style }}
+                      pb={3}
+                      mt={3}
+                      borderBottom={1}
+                      // className="border-right border-left border-bottom p-2"
                     >
-                      <Latex>{task.text}</Latex>
-                    </div>
+                      <Box style={{ position: "relative" }}>
+                        <Latex>{task.text}</Latex>
+                        <Box>
+                          {task.answers.correctans.map((correctans) => {
+                            // console.log("correctans", correctans);
+                            return (
+                              <span style={{ color: "green" }}>
+                                <Latex>{correctans}</Latex>,{" "}
+                              </span>
+                            );
+                          })}
+                          {task.answers.wronganswers.map((wronganswer) => {
+                            // console.log("wronganswer", wronganswer);
+                            return (
+                              <span style={{ color: "red" }}>
+                                <Latex>{wronganswer}</Latex>,{" "}
+                              </span>
+                            );
+                          })}
+                        </Box>
+                        <TaskToolTip task={task}/>
+                      </Box>
+                    </Box>
                   )}
                 </Draggable>
               ))}

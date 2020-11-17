@@ -348,7 +348,7 @@ class MakeTestViewSet(APIView):
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-    def put(self, request, format=None):
+    def put(self, request):
         print("MT put req data",request.data)
         if request.data:
             try:
@@ -368,6 +368,22 @@ class MakeTestViewSet(APIView):
                     # pomoc = CustomUser.objects.get(id=request.user.id)
                     # mojtest.user_id = pomoc.id
                     mojtest.save()
+                    return Response(status=status.HTTP_200_OK)
+                else:
+                    return Response(status=status.HTTP_400_BAD_REQUEST)
+            except Exception as e:
+                return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request,format=None):
+        print("MT delete req data", request.data)
+        if request.data:
+            try:
+                id = request.data['id']
+                if TestJSON.objects.filter(id=id, user_id=request.user.id).exists():
+                    mojtest = TestJSON.objects.filter(id=id, user_id=request.user.id)
+                    mojtest.delete()
                     return Response(status=status.HTTP_200_OK)
                 else:
                     return Response(status=status.HTTP_400_BAD_REQUEST)

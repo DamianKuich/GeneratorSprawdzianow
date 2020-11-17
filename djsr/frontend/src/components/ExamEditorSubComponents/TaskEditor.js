@@ -3,6 +3,7 @@ import {Field, Form, Formik} from "formik";
 import axiosInstance from "../axiosAPI";
 import MaterialFormikField from "../MaterialFormikField";
 import {Button} from "@material-ui/core";
+import Box from "@material-ui/core/Box";
 
 
 
@@ -12,7 +13,7 @@ const TaskEditor = ({selectedTaskToEdit,updateTask}) => {
     //todo walidacja formularza od edycji zadania
     if (!task) return <div>Wybierz zadanie</div>;
     return (
-      <div style={{minHeight:"100%"}}>
+      <Box p={3} style={{minHeight:"100%"}}>
         <Formik
           enableReinitialize={true}
           initialValues={task}
@@ -59,6 +60,9 @@ const TaskEditor = ({selectedTaskToEdit,updateTask}) => {
                   }}
                   inputProps={{
                     onChange: handleChangeAndSubmit,
+                      multiline:true,
+                      rows:3,
+                      rowsMax:10
                   }}
                   labelText="Treść zadania"
                 />
@@ -90,7 +94,7 @@ const TaskEditor = ({selectedTaskToEdit,updateTask}) => {
             );
           }}
         </Formik>
-      </div>
+      </Box>
     );
 };
 

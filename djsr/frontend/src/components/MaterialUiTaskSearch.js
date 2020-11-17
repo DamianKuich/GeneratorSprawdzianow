@@ -88,7 +88,7 @@ class MaterialUiTaskSearch extends Component {
                   // this.setState({
                   //   results: response.data,
                   // });
-                  console.log("parsed Twat",tasksParser(response.data));
+                  // console.log("parsed Twat",tasksParser(response.data));
                   this.props.updateData(tasksParser(response.data));
                 })
                 .catch((error) => {

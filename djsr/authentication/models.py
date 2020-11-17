@@ -65,9 +65,13 @@ class Task(models.Model):
         (1, 'Podstawowy'),
         (2, 'Rozszerzony'),
     }
-    answers = models.ManyToManyField(Answers)
-    image = models.ManyToManyField(Image)
-    text = models.CharField(max_length=500)
+    answers = models.OneToOneField(
+        Answers,
+        on_delete=models.CASCADE,
+        default="",
+    )
+    image = models.ManyToManyField(Image,blank=True)
+    text = models.CharField(max_length=600)
     add_date = models.DateField(default=datetime.date.today)
     type = models.IntegerField(choices=RODZAJE, default=0)
     author = models.CharField(max_length=100)
@@ -75,8 +79,6 @@ class Task(models.Model):
     private = models.BooleanField(default=False)
     points = models.IntegerField(default=0)
     skill = models.ManyToManyField(Skill)
-
-
 
     def __str__(self):
         return self.nasza_nazwa()
