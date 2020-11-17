@@ -33,9 +33,14 @@ import ShareIcon from '@material-ui/icons/Share';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import Tooltip from '@material-ui/core/Tooltip';
 import MaterialFormikField from "./MaterialFormikField";
 import CardBody from "./material_ui_components/Card/CardBody.js";
 import CustomInput from "./material_ui_components/CustomInput/CustomInput.js";
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,6 +55,50 @@ const useStyles = makeStyles((theme) => ({
   },
  
 }));
+
+const useStylesBootstrap = makeStyles((theme) => ({
+  arrow: {
+    color: theme.palette.common.grey,
+  },
+  tooltip: {
+    backgroundColor: theme.palette.grey,
+  },
+}));
+
+function BootstrapTooltip(props) {
+  const classes = useStylesBootstrap();
+
+  return <Tooltip arrow classes={classes} {...props} />;
+}
+
+const useStylesAlert = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+function CustomizedSnackbars() {
+  const classes = useStylesAlert();
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    
+
+    setOpen(false);
+  };}
+
+
 
   class UserExams extends Component {
     constructor(props) {
@@ -245,7 +294,7 @@ const useStyles = makeStyles((theme) => ({
             {exams.map((exam) => {
               return (
                 
-                <Box display="flex"
+                <Box 
                 justifyContent="center"
                 p={1}
                 
@@ -254,6 +303,7 @@ const useStyles = makeStyles((theme) => ({
                 <Card 
               justify="center" 
               
+              
               >
                  
                     <CardHeader
@@ -261,17 +311,26 @@ const useStyles = makeStyles((theme) => ({
                  
                     <CardActions disableSpacing>
                     <Link to={"/editor/" + exam.id}>
-                    <IconButton >
+                    <BootstrapTooltip title="Edytuj sprawdzian">
+          
+                      <IconButton  >
                       <EditIcon />
                     </IconButton>
+                    </BootstrapTooltip>
+
                     </Link>
+                
+                    <BootstrapTooltip title="Skopiuj sprawdzian">
                     <IconButton  onClick={() => {
                         this.createExamCopy(exam);}} >
                       <FileCopyIcon />
                     </IconButton>
+                    </BootstrapTooltip>
+                    <BootstrapTooltip title="Usuń sprawdzian">
                     <IconButton >
                       <DeleteIcon />
                     </IconButton>
+                    </BootstrapTooltip>
                   
                   </CardActions>
                 
