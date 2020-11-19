@@ -124,7 +124,7 @@ class Task(models.Model):
     # )
     # add_date = models.DateField(default=datetime.date.today)
     type = models.IntegerField(choices=RODZAJE)
-    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE,default=CustomUser)
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE,default=CustomUser,blank=True,null=True)
     level = models.IntegerField(choices=RODZAJE2)
     private = models.BooleanField(default=False)
     points = models.IntegerField(default=0)
