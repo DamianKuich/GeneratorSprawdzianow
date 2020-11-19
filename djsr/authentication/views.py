@@ -29,6 +29,8 @@ from schema import Schema, And, Use, Optional
 
 from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer, \
     CustomUserSerializerReadOnly, PasswordSendResetSerializer, TestJSONSerializer, ImageSerializer
+from .serializers import  SectionSerializerv2, AnswersSerializer
+from .models import Sectionv2, Answers
 from .models import Task, Section, Skill, CustomUser, UserActivationToken, \
     TestJSON, PasswordSendReset, UserResetToken, Image
 
@@ -245,31 +247,24 @@ class UserRetrieveUpdateAPIView(APIView):
 
 
 class TaskViewSet(APIView):
-    # permission_classes = (permissions.AllowAny,)
     permission_classes = (IsAuthenticated,)
     serializer_class = TaskSerializer
 
     def post(self, request, format=None):
-        serializer = TaskSerializer(data=request.data)
         lista = []
-        # schema = Schema([{'id': And(Use(int)),
-        #                   'text': And(str, len),
-        #                   'add_date':{'type': 'string', 'pattern': '^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$'},
-        #                   'typ': And(Use(int)),
-        #                   'author': And(str, len),
-        #                   'level': And(Use(int)),
-        #                   'answer': And(str, len),
-        #                   'skill': And(str, len)}])
         if request.data:
             id_string = request.data['skill']
-            user = request.user
         else:
             id_string = None
         if id_string is not None:
             for id in id_string.split(','):
-                task = Task.objects.filter(skill=id)
+                task = Task.objects.filter(skill=id,private=False)
                 serializer = TaskSerializer(task, many=True)
                 lista.append(serializer.data)
+                # userid = CustomUser.objects.get(id=request.user.id)
+                # taskprivate = Task.objects.filter(skill=id,private=True,author=userid.id)
+                # serializer_private = TaskSerializer(taskprivate, many=True)
+                # lista.append(serializer_private.data)
                 # validated = schema.validate(test)
             return Response(list(chain(*lista)))
         else:
@@ -364,9 +359,6 @@ class MakeTestViewSet(APIView):
                         mojtest.tasks = request.data['tasks']
                     except:
                         pass
-                    # mojtest.created = datetime.date.today()
-                    # pomoc = CustomUser.objects.get(id=request.user.id)
-                    # mojtest.user_id = pomoc.id
                     mojtest.save()
                     return Response(status=status.HTTP_200_OK)
                 else:
@@ -411,6 +403,130 @@ class MakeTestCopyViewSet(APIView):
                 ob = TestJSON.objects.get(name=pomo + 'Copy', user_id=pomoc.id)
                 serializer = TestJSONSerializer(ob, many=True)
                 return Response(serializer.data, status=status.HTTP_200_OK)
+            except Exception as e:
+                return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+class SkilltoSections(APIView):
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = SectionSerializerv2
+
+    def get(self, request, format=None):
+        s = Sectionv2.objects.all()
+        s.delete()
+        sec = Section.objects.all()
+        serializer = SectionSerializer(sec, many=True)
+        for section in sec:
+            name=section.nasza_nazwa()
+            sec2 = Sectionv2.objects.create(Section=name)
+            sec2.save()
+        ss = Sectionv2.objects.all()
+        seco = SectionSerializerv2(ss,many=True)
+        for s in ss:
+            s2 = Section.objects.get(Section=s.Section)
+            fields = ('Skill')
+            skil = Skill.objects.filter(section=s2.id).only(fields)
+            s.skilll.set(skil)
+            s.save()
+        seco = Sectionv2.objects.all()
+        seria = SectionSerializerv2(seco,many=True)
+        return Response(seria.data)
+
+
+class AddTask(APIView):
+    permission_classes = (permissions.AllowAny,)
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+
+    def post(self, request, format=None):
+        if request.data:
+            try:
+                answer = int(request.data['answer_id'])
+                skills = request.data['skills_id']
+                text = request.data['text']
+                ans = Answers.objects.get(id=answer)
+                print('XDDDDD', ans)
+                user = CustomUser.objects.get(id = 1)
+                if not Task.objects.filter(text=text).exists():
+                    my_task = Task.objects.create(text=text,
+                                                  answers = ans,
+                                                  type = int(request.data['type']),
+                                                  level = int(request.data['level']),
+                                                  private = int(request.data['private']),
+                                                  points = int(request.data['points']),
+                                                  author = user)
+                    for skillid in skills.split(','):
+                        skil = Skill.objects.filter(id=skillid)
+                        my_task.skill.set(skil)
+                    my_task.save()
+                    task = Task.objects.filter(text=text)
+                    serializer = TaskSerializer(task, many=True)
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+            except Exception as e:
+                return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+class AddSection(APIView):
+    permission_classes = (permissions.AllowAny,)
+    queryset = Section.objects.all()
+    serializer_class = SectionSerializer
+
+    def post(self, request, format=None):
+        if request.data:
+            try:
+                section = request.data['section_name']
+                if not Section.objects.filter(Section=section).exists():
+                    sect = Section.objects.create(Section=section)
+                    sect.save()
+                    sec = Section.objects.filter(Section=section)
+                    serializer = SectionSerializer(sec, many=True)
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+            except Exception as e:
+                return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class AddSkill(APIView):
+    permission_classes = (permissions.AllowAny,)
+    queryset = Skill.objects.all()
+    serializer_class = SkillSerializer
+
+    def post(self, request, format=None):
+        if request.data:
+            try:
+                skill = request.data['skill_name']
+                section = request.data['section_id']
+                sect = Section.objects.get(id=section)
+                if not Skill.objects.filter(Skill=skill).exists():
+                    sk = Skill.objects.create(Skill=skill, section=sect)
+                    sk.save()
+                    skl = Skill.objects.filter(Skill=skill)
+                    serializer = SkillSerializer(skl, many=True)
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+            except Exception as e:
+                return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+class AddAnswers(APIView):
+    permission_classes = (permissions.AllowAny,)
+    queryset = Answers.objects.all()
+    serializer_class = AnswersSerializer
+
+    def post(self, request, format=None):
+        if request.data:
+            try:
+                wrongans = request.data['wrong_answers']
+                corrans = request.data['correct_answers']
+                if not Answers.objects.filter(wronganswers=wrongans,correctans=corrans).exists():
+                    ans = Answers.objects.create(wronganswers=wrongans,correctans=corrans)
+                    ans.save()
+                    answer = Answers.objects.filter(wronganswers=wrongans,correctans=corrans)
+                    serializer = AnswersSerializer(answer, many=True)
+                    return Response(serializer.data, status=status.HTTP_200_OK)
             except Exception as e:
                 return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         else:

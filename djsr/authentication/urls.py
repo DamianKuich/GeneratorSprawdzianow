@@ -5,10 +5,15 @@ from .views import AddImageToTaskViewSet, AddImageViewSet, ImageViewSet, SkillVi
     CustomUserCreate, HelloWorldView, \
     LogoutAndBlacklistRefreshTokenForUserView, TaskViewSet, \
     UserRetrieveUpdateAPIView, ReturnUserInfo, PasswordSendResetView, PasswordResetView, AllTestsJSONViewSet, \
-    OneTestJSONViewSet, MakeTestViewSet, MakeTestCopyViewSet, LatexToSvgView, GetRandomTasksViewSet
+    OneTestJSONViewSet, MakeTestViewSet, MakeTestCopyViewSet, LatexToSvgView, GetRandomTasksViewSet, \
+    SkilltoSections, AddTask, AddSkill, AddSection, AddAnswers
 
 # TODO resend activation token
 urlpatterns = [
+    path('user/addtask/', AddTask.as_view(), name="AddTask"),
+    path('user/addsection/', AddSection.as_view(), name="AddSection"),
+    path('user/addskill/', AddSkill.as_view(), name="AddSkill"),
+    path('user/addanswers/', AddAnswers.as_view(), name="AddAnswers"),
     path('user/skills/', SkillViewSet.as_view(), name="skills"),
     path('user/maketest/', MakeTestViewSet.as_view(), name="MakeTest"),
     path('user/getrandomtasks/', GetRandomTasksViewSet.as_view(), name="GetRandomTasks"),
@@ -20,6 +25,7 @@ urlpatterns = [
     path('user/addimagetods/', AddImageToTaskViewSet.as_view(), name="AddImageToTask"),
     path('user/addimage/', AddImageViewSet.as_view(), name="AddImage"),
     path('user/sections/', SectionViewSet.as_view(), name="sections"),
+    path('user/sections2/', SkilltoSections.as_view(), name="sections"),
     path('user/tasks/', TaskViewSet.as_view(), name="tasks"),
     path('user/create/', CustomUserCreate.as_view(), name="create_user"),
     path('user/activate/<token>/$', HelloWorldView.as_view(), name='activate-user'),
