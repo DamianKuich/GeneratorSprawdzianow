@@ -376,6 +376,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 
 
+
 var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_9__["makeStyles"])(function (theme) {
   return {
     root: {
@@ -487,10 +488,8 @@ var UserExams = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "removeExam", function (exam) {
-      _axiosAPI__WEBPACK_IMPORTED_MODULE_3__["default"].post("/user/maketest/delete/", {
-        id: exam.id
-      }).then(function (response) {
-        console.log("zmieniono");
+      _axiosAPI__WEBPACK_IMPORTED_MODULE_3__["default"]["delete"]("/user/maketest/".concat(exam.id, "/")).then(function (response) {
+        console.log("usunięto");
       });
     });
 

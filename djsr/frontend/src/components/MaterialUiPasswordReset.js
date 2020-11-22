@@ -86,8 +86,8 @@ const MaterialUiPasswordReset = (props) => {
           onSubmit={(values, helpers) => {
             setTimeout(() => {
               helpers.setSubmitting(true);
-              axiosInstance
-                .post(`/user/passreset/${stringToken}/`, {
+              axiosInstanceNoAuth
+                .post(`/user/passreset/${stringToken}/$`, {
                 password: values.password,
               })
                 .then((response) => {
@@ -113,11 +113,13 @@ const MaterialUiPasswordReset = (props) => {
                   helpers.setTouched(
                     {
                       password: false,
+
                       passwordConfirm:false
                     },
                     false
                   );
                   helpers.setFieldError(
+                    "oldPassword",
                     "Podano nieprawidłowe stare hasło"
                   );
 

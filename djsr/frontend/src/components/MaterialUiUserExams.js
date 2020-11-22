@@ -10,6 +10,7 @@ import {
   MDBRow,
 } from "mdbreact";
 import axiosInstance from "./axiosAPI";
+import axiosInstanceNoAuth from "./axiosAPI"
 import Box from '@material-ui/core/Box'
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
@@ -140,10 +141,9 @@ function CustomizedSnackbars() {
 
     removeExam = (exam) => {
       axiosInstance
-      .post("/user/maketest/delete/", {
-        id: exam.id,
-      })        .then((response) => {
-        console.log("zmieniono")
+      .delete(`/user/maketest/${exam.id}/`)
+              .then((response) => {
+        console.log("usunięto")
       });
     };
   

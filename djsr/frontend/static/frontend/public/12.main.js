@@ -214,7 +214,7 @@ var MaterialUiPasswordReset = function MaterialUiPasswordReset(props) {
     onSubmit: function onSubmit(values, helpers) {
       setTimeout(function () {
         helpers.setSubmitting(true);
-        _axiosAPI__WEBPACK_IMPORTED_MODULE_22__["default"].post("/user/passreset/".concat(stringToken, "/"), {
+        _axiosAPI__WEBPACK_IMPORTED_MODULE_22__["axiosInstanceNoAuth"].post("/user/passreset/".concat(stringToken, "/$"), {
           password: values.password
         }).then(function (response) {
           _this.props.setUser(response.data);
@@ -243,7 +243,7 @@ var MaterialUiPasswordReset = function MaterialUiPasswordReset(props) {
             password: false,
             passwordConfirm: false
           }, false);
-          helpers.setFieldError("Podano nieprawidłowe stare hasło");
+          helpers.setFieldError("oldPassword", "Podano nieprawidłowe stare hasło");
         });
       }, 400);
     }
