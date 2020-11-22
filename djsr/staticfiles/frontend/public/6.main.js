@@ -1892,9 +1892,14 @@ var MaterialUiTaskSearch = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      _axiosAPI__WEBPACK_IMPORTED_MODULE_1__["axiosInstanceNoAuth"].get("/user/sections/").then(function (response) {
+      _axiosAPI__WEBPACK_IMPORTED_MODULE_1__["axiosInstanceNoAuth"].get("/user/sections2/").then(function (response) {
+        var parsed = response.data.map(function (section) {
+          section.skill = section.skilll;
+          return section;
+        });
+
         _this2.setState({
-          sections: response.data
+          sections: parsed
         });
       })["catch"](function (error) {
         console.log(error);
