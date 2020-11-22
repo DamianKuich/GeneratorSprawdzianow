@@ -105,7 +105,6 @@ const MaterialUiPasswordReset = (props) => {
                   helpers.setValues(
                     {
                       password: "",
-                      oldPassword: "",
                       passwordConfirm:""
 
                     },
@@ -114,13 +113,11 @@ const MaterialUiPasswordReset = (props) => {
                   helpers.setTouched(
                     {
                       password: false,
-                      oldPassword: false,
                       passwordConfirm:false
                     },
                     false
                   );
                   helpers.setFieldError(
-                    "oldPassword",
                     "Podano nieprawidłowe stare hasło"
                   );
 

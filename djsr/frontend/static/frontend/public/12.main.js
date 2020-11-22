@@ -237,15 +237,13 @@ var MaterialUiPasswordReset = function MaterialUiPasswordReset(props) {
 
           helpers.setValues({
             password: "",
-            oldPassword: "",
             passwordConfirm: ""
           }, false);
           helpers.setTouched({
             password: false,
-            oldPassword: false,
             passwordConfirm: false
           }, false);
-          helpers.setFieldError("oldPassword", "Podano nieprawidłowe stare hasło");
+          helpers.setFieldError("Podano nieprawidłowe stare hasło");
         });
       }, 400);
     }
