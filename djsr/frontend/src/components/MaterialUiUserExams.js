@@ -139,7 +139,12 @@ function CustomizedSnackbars() {
     };
 
     removeExam = (exam) => {
-        
+      axiosInstance
+      .post("/user/maketest/delete/", {
+        id: exam.id,
+      })        .then((response) => {
+        console.log("zmieniono")
+      });
     };
   
     // componentWillMount() {

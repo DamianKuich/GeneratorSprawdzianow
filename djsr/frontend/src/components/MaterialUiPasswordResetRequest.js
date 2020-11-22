@@ -92,9 +92,6 @@ const MaterialUiPasswordResetRequest = (props) => {
                 helpers.setSubmitting(false);
                 helpers.setValues(
                   {
-                    name: "",
-                    password: "",
-                    passwordConfirm: "",
                     email: "",
                   },
                   false

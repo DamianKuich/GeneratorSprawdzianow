@@ -19,7 +19,7 @@ import CardBody from "./material_ui_components/Card/CardBody.js";
 import CardHeader from "./material_ui_components/Card/CardHeader.js";
 import CardFooter from "./material_ui_components/Card/CardFooter.js";
 import CustomInput from "./material_ui_components/CustomInput/CustomInput.js";
-
+import { useParams } from "react-router";
 import styles from "./assets/jss/material-kit-react/views/loginPage.js";
 
 import image from "./img/genspr-parralax-bg.png";
@@ -27,6 +27,7 @@ import * as Yup from "yup";
 import axiosInstance, { axiosInstanceNoAuth } from "./axiosAPI";
 import { Formik, Field } from "formik";
 import MaterialFormikField from "./MaterialFormikField";
+import { string } from "prop-types";
 
 const useStyles = makeStyles(styles);
 
@@ -34,7 +35,11 @@ const MaterialUiPasswordReset = (props) => {
   const FRS = "Pole wymagane";
   const user = props.appState.user;
   const [editView, setEditView] = React.useState("password");
-
+  const token = useParams();
+  let stringToken = JSON.stringify(token)
+  stringToken = stringToken.substr(10)
+  stringToken = stringToken.slice(0, -2);
+  console.log(stringToken)
 
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function () {
@@ -73,10 +78,7 @@ const MaterialUiPasswordReset = (props) => {
                 [Yup.ref("passwordConfirm")],
                 "Hasła są różne"
               ),
-            oldPassword: Yup.string()
-              .min(8, "Too Short!")
-              .max(50, "Too Long!")
-              .required("Pole wymagane"),
+
             passwordConfirm: Yup.string()
               .oneOf([Yup.ref("password")], "Hasła są różne")
               .required("Pole wymagane"),
@@ -85,7 +87,7 @@ const MaterialUiPasswordReset = (props) => {
             setTimeout(() => {
               helpers.setSubmitting(true);
               axiosInstance
-                .post(`/user/passreset/${token}/$`, {
+                .post(`/user/passreset/${stringToken}/`, {
                 password: values.password,
               })
                 .then((response) => {
@@ -207,3 +209,4 @@ const MaterialUiPasswordReset = (props) => {
 };
 
 export default MaterialUiPasswordReset;
+

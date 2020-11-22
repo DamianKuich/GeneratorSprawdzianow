@@ -219,9 +219,6 @@ var MaterialUiPasswordResetRequest = function MaterialUiPasswordResetRequest(pro
           var errResponse = error.response;
           helpers.setSubmitting(false);
           helpers.setValues({
-            name: "",
-            password: "",
-            passwordConfirm: "",
             email: ""
           }, false);
           helpers.setTouched({

@@ -486,7 +486,11 @@ var UserExams = /*#__PURE__*/function (_Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "removeExam", function (exam) {});
+    _defineProperty(_assertThisInitialized(_this), "removeExam", function (exam) {
+      _axiosAPI__WEBPACK_IMPORTED_MODULE_3__["default"].post("/user/maketest/delete/", {
+        id: exam.id
+      });
+    });
 
     _this.state = {
       exams: null
