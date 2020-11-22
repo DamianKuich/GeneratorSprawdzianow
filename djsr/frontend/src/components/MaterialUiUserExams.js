@@ -126,6 +126,7 @@ function CustomizedSnackbars() {
         return state;
       });
     };
+ 
     createExamCopy = (exam) => {
       axiosInstance
         .post("/user/maketest/", {
@@ -136,6 +137,11 @@ function CustomizedSnackbars() {
           this.addExam(response.data[0]);
         });
     };
+
+    removeExam = (exam) => {
+        
+    };
+  
     // componentWillMount() {
     //
     // }
@@ -327,7 +333,8 @@ function CustomizedSnackbars() {
                     </IconButton>
                     </BootstrapTooltip>
                     <BootstrapTooltip title="Usuń sprawdzian">
-                    <IconButton >
+                    <IconButton onClick={() => {
+                        this.removeExam(exam);}}>
                       <DeleteIcon />
                     </IconButton>
                     </BootstrapTooltip>

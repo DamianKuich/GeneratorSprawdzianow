@@ -1,16 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[17],{
 
-<<<<<<< HEAD
-/***/ "./djsr/frontend/src/components/AccountActivation.js":
-/*!***********************************************************!*\
-  !*** ./djsr/frontend/src/components/AccountActivation.js ***!
-  \***********************************************************/
-=======
-/***/ "./djsr/frontend/src/components/RegisterSuccess.js":
-/*!*********************************************************!*\
-  !*** ./djsr/frontend/src/components/RegisterSuccess.js ***!
-  \*********************************************************/
->>>>>>> origin/Deployment
+/***/ "./djsr/frontend/src/components/MaterialUiAccountActivation.js":
+/*!*********************************************************************!*\
+  !*** ./djsr/frontend/src/components/MaterialUiAccountActivation.js ***!
+  \*********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18,7 +11,6 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-<<<<<<< HEAD
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
@@ -96,7 +88,22 @@ var AccountActivation = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var accountConfirm = this.state.accountConfirm;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, accountConfirm === null && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Oczekiwanie na odpowiedz"), accountConfirm === true && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Konto zosta\u0142o aktywowane mozesz sie zalogowac"), accountConfirm === false && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "B\u0142\u0105d!!! Konto nie zosta\u0142o aktywowane."));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, accountConfirm === null && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Oczekiwanie na odpowiedz"), accountConfirm === true && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Box, {
+        justifyContent: "center",
+        p: 1
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Card, {
+        justify: "center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CardHeader, {
+        title: exam.name
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CardActions, {
+        disableSpacing: true
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Link, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(BootstrapTooltip, {
+        title: "Edytuj sprawdzian"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(IconButton, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(EditIcon, null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(BootstrapTooltip, {
+        title: "Skopiuj sprawdzian"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(IconButton, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(FileCopyIcon, null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(BootstrapTooltip, {
+        title: "Usu\u0144 sprawdzian"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(IconButton, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(DeleteIcon, null)))))), accountConfirm === false && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "B\u0142\u0105d!!! Konto nie zosta\u0142o aktywowane."));
     }
   }]);
 
@@ -105,17 +112,6 @@ var AccountActivation = /*#__PURE__*/function (_Component) {
 
 AccountActivation.propTypes = {};
 /* harmony default export */ __webpack_exports__["default"] = (AccountActivation);
-=======
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-
-
-
-function RegisterSuccess(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Pomy\u015Blnie utworzono konto u\u017Cytkownika"));
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (RegisterSuccess);
->>>>>>> origin/Deployment
 
 /***/ })
 

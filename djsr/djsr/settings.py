@@ -112,9 +112,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'genespr',
-        'USER': 'root',
-        'PASSWORD': 'zaq12wsx',
-        'HOST': '127.0.0.1',
+        'USER': 'myroot',
+        'PASSWORD': 'Papaj2137',
+        'HOST': 'localhost',
         'PORT': '3306',
     }
 }

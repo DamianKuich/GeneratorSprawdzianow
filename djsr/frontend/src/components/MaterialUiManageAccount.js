@@ -27,6 +27,8 @@ import * as Yup from "yup";
 import axiosInstance, { axiosInstanceNoAuth } from "./axiosAPI";
 import { Formik, Field } from "formik";
 import MaterialFormikField from "./MaterialFormikField";
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
 const useStyles = makeStyles(styles);
 
@@ -149,7 +151,7 @@ const MaterialUiManageAccount = (props) => {
             </CardHeader>
             <CardBody>
             
-              <Button variant="contained" color="primary" onClick={(e)=>setEditView("email")}  >
+              <Button variant="contained"  color="primary" onClick={(e)=>setEditView("email")}  >
                    Zmień e-mail
               </Button>
               <Button variant="contained" color="primary" onClick={(e)=>setEditView("name")}  >

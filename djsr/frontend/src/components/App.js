@@ -11,13 +11,13 @@ const Login = lazy(() => import("./MaterialUiLoginPage"));
 const Signup = lazy(() => import("./MaterialUiSignUpPage"));
 // const Navbar = lazy(() => import("./navbar"));
 const MDBContainer = lazy(() => import("./MDBLazy/MDBLazyContainer"));
-const AccountActivation = lazy(() => import("./AccountActivation"));
+const AccountActivation = lazy(() => import("./MaterialUiAccountActivation"));
 const RegisterSuccess = lazy(() => import("./RegisterSuccess"));
 const UserAccountManager = lazy(() => import("./MaterialUiManageAccount"));
-const PasswordReset = lazy(()=>import("./PasswordReset"));
+const PasswordReset = lazy(()=>import("./MaterialUiPasswordReset"));
 const ExamEditor = lazy(()=>import("./MaterialUiExamEditor"));
 const UserExams = lazy(()=>import("./MaterialUiUserExams"));
-const PasswordResetRequest = lazy(()=>import("./RemindPassword"));
+const PasswordResetRequest = lazy(()=>import("./MaterialUiPasswordResetRequest"));
 const HomePage = lazy(()=>import("./HomePage"));
 class App extends Component {
   constructor(props) {

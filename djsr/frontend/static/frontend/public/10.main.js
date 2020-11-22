@@ -486,6 +486,8 @@ var UserExams = /*#__PURE__*/function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "removeExam", function (exam) {});
+
     _this.state = {
       exams: null
     };
@@ -637,7 +639,11 @@ var UserExams = /*#__PURE__*/function (_Component) {
           }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_FileCopy__WEBPACK_IMPORTED_MODULE_24___default.a, null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(BootstrapTooltip, {
           title: "Usu\u0144 sprawdzian"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_21__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_25___default.a, null))))));
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_21__["default"], {
+          onClick: function onClick() {
+            _this2.removeExam(exam);
+          }
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_25___default.a, null))))));
       }));
     }
   }]);
@@ -879,7 +885,8 @@ function CustomInput(props) {
       white = props.white,
       inputRootCustomClasses = props.inputRootCustomClasses,
       success = props.success,
-      helperProps = props.helperProps;
+      helperProps = props.helperProps,
+      multiline = props.multiline;
   var labelClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()((_classNames = {}, _defineProperty(_classNames, " " + classes.labelRootError, error), _defineProperty(_classNames, " " + classes.labelRootSuccess, success && !error), _classNames));
   var underlineClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()((_classNames2 = {}, _defineProperty(_classNames2, classes.underlineError, error), _defineProperty(_classNames2, classes.underlineSuccess, success && !error), _defineProperty(_classNames2, classes.underline, true), _defineProperty(_classNames2, classes.whiteUnderline, white), _classNames2));
   var marginTop = classnames__WEBPACK_IMPORTED_MODULE_2___default()(_defineProperty({}, inputRootCustomClasses, inputRootCustomClasses !== undefined));

@@ -19,7 +19,7 @@ import CardBody from "./material_ui_components/Card/CardBody.js";
 import CardHeader from "./material_ui_components/Card/CardHeader.js";
 import CardFooter from "./material_ui_components/Card/CardFooter.js";
 import CustomInput from "./material_ui_components/CustomInput/CustomInput.js";
-
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 import styles from "./assets/jss/material-kit-react/views/loginPage.js";
 
 import image from "./img/genspr-parralax-bg.png";
@@ -259,7 +259,8 @@ const MaterialUiSignUpPage = (props) => {
                         />
                       </CardBody>
                       <CardFooter className={classes.cardFooter}>
-                        <Button
+
+                            <Button
                           simple
                           color="primary"
                           size="lg"
@@ -269,6 +270,8 @@ const MaterialUiSignUpPage = (props) => {
                         >
                           Zarejestruj
                         </Button>
+                   
+                        
                       </CardFooter>
                     </form>
                   )}

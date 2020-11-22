@@ -29,10 +29,10 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ "./node_modules/@material-ui/icons/Edit.js":
-/*!*************************************************!*\
-  !*** ./node_modules/@material-ui/icons/Edit.js ***!
-  \*************************************************/
+/***/ "./node_modules/@material-ui/icons/Email.js":
+/*!**************************************************!*\
+  !*** ./node_modules/@material-ui/icons/Email.js ***!
+  \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -51,8 +51,8 @@ var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_mod
 var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
 
 var _default = (0, _createSvgIcon.default)(_react.default.createElement("path", {
-  d: "M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
-}), 'Edit');
+  d: "M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+}), 'Email');
 
 exports.default = _default;
 
@@ -87,10 +87,10 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ "./node_modules/@material-ui/icons/FileCopy.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/@material-ui/icons/FileCopy.js ***!
-  \*****************************************************/
+/***/ "./node_modules/@material-ui/icons/Lock.js":
+/*!*************************************************!*\
+  !*** ./node_modules/@material-ui/icons/Lock.js ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -109,46 +109,17 @@ var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_mod
 var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
 
 var _default = (0, _createSvgIcon.default)(_react.default.createElement("path", {
-  d: "M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm-1 4l6 6v10c0 1.1-.9 2-2 2H7.99C6.89 23 6 22.1 6 21l.01-14c0-1.1.89-2 1.99-2h7zm-1 7h5.5L14 6.5V12z"
-}), 'FileCopy');
+  d: "M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"
+}), 'Lock');
 
 exports.default = _default;
 
 /***/ }),
 
-/***/ "./node_modules/@material-ui/icons/Share.js":
-/*!**************************************************!*\
-  !*** ./node_modules/@material-ui/icons/Share.js ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
-
-var _default = (0, _createSvgIcon.default)(_react.default.createElement("path", {
-  d: "M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"
-}), 'Share');
-
-exports.default = _default;
-
-/***/ }),
-
-/***/ "./node_modules/@material-ui/lab/esm/Alert/Alert.js":
-/*!**********************************************************!*\
-  !*** ./node_modules/@material-ui/lab/esm/Alert/Alert.js ***!
-  \**********************************************************/
+/***/ "./node_modules/@material-ui/lab/esm/ToggleButton/ToggleButton.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/@material-ui/lab/esm/ToggleButton/ToggleButton.js ***!
+  \************************************************************************/
 /*! exports provided: styles, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -163,19 +134,226 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
-/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/@material-ui/core/esm/Paper/index.js");
-/* harmony import */ var _internal_svg_icons_SuccessOutlined__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../internal/svg-icons/SuccessOutlined */ "./node_modules/@material-ui/lab/esm/internal/svg-icons/SuccessOutlined.js");
-/* harmony import */ var _internal_svg_icons_ReportProblemOutlined__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../internal/svg-icons/ReportProblemOutlined */ "./node_modules/@material-ui/lab/esm/internal/svg-icons/ReportProblemOutlined.js");
-/* harmony import */ var _internal_svg_icons_ErrorOutline__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../internal/svg-icons/ErrorOutline */ "./node_modules/@material-ui/lab/esm/internal/svg-icons/ErrorOutline.js");
-/* harmony import */ var _internal_svg_icons_InfoOutlined__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../internal/svg-icons/InfoOutlined */ "./node_modules/@material-ui/lab/esm/internal/svg-icons/InfoOutlined.js");
-/* harmony import */ var _internal_svg_icons_Close__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../internal/svg-icons/Close */ "./node_modules/@material-ui/lab/esm/internal/svg-icons/Close.js");
-/* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/IconButton */ "./node_modules/@material-ui/core/esm/IconButton/index.js");
-/* harmony import */ var _material_ui_core_utils__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/utils */ "./node_modules/@material-ui/core/esm/utils/index.js");
+/* harmony import */ var _material_ui_core_ButtonBase__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/ButtonBase */ "./node_modules/@material-ui/core/esm/ButtonBase/index.js");
+/* harmony import */ var _material_ui_core_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/utils */ "./node_modules/@material-ui/core/esm/utils/index.js");
+
+
+// @inheritedComponent ButtonBase
 
 
 
 
 
+
+var styles = function styles(theme) {
+  return {
+    /* Styles applied to the root element. */
+    root: Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({}, theme.typography.button, {
+      boxSizing: 'border-box',
+      borderRadius: theme.shape.borderRadius,
+      padding: 11,
+      border: "1px solid ".concat(Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["fade"])(theme.palette.action.active, 0.12)),
+      color: Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["fade"])(theme.palette.action.active, 0.38),
+      '&$selected': {
+        color: theme.palette.action.active,
+        backgroundColor: Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["fade"])(theme.palette.action.active, 0.12),
+        '&:hover': {
+          backgroundColor: Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["fade"])(theme.palette.action.active, 0.15)
+        },
+        '& + &': {
+          borderLeft: 0,
+          marginLeft: 0
+        }
+      },
+      '&$disabled': {
+        color: Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["fade"])(theme.palette.action.disabled, 0.12)
+      },
+      '&:hover': {
+        textDecoration: 'none',
+        // Reset on mouse devices
+        backgroundColor: Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["fade"])(theme.palette.text.primary, 0.05),
+        '@media (hover: none)': {
+          backgroundColor: 'transparent'
+        },
+        '&$disabled': {
+          backgroundColor: 'transparent'
+        }
+      }
+    }),
+
+    /* Pseudo-class applied to the root element if `disabled={true}`. */
+    disabled: {},
+
+    /* Pseudo-class applied to the root element if `selected={true}`. */
+    selected: {},
+
+    /* Styles applied to the `label` wrapper element. */
+    label: {
+      width: '100%',
+      // Ensure the correct width for iOS Safari
+      display: 'inherit',
+      alignItems: 'inherit',
+      justifyContent: 'inherit'
+    },
+
+    /* Styles applied to the root element if `size="small"`. */
+    sizeSmall: {
+      padding: 7,
+      fontSize: theme.typography.pxToRem(13)
+    },
+
+    /* Styles applied to the root element if `size="large"`. */
+    sizeLarge: {
+      padding: 15,
+      fontSize: theme.typography.pxToRem(15)
+    }
+  };
+};
+var ToggleButton = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__["forwardRef"](function ToggleButton(props, ref) {
+  var children = props.children,
+      classes = props.classes,
+      className = props.className,
+      _props$disabled = props.disabled,
+      disabled = _props$disabled === void 0 ? false : _props$disabled,
+      _props$disableFocusRi = props.disableFocusRipple,
+      disableFocusRipple = _props$disableFocusRi === void 0 ? false : _props$disableFocusRi,
+      onChange = props.onChange,
+      onClick = props.onClick,
+      selected = props.selected,
+      _props$size = props.size,
+      size = _props$size === void 0 ? 'medium' : _props$size,
+      value = props.value,
+      other = Object(_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_0__["default"])(props, ["children", "classes", "className", "disabled", "disableFocusRipple", "onChange", "onClick", "selected", "size", "value"]);
+
+  var handleChange = function handleChange(event) {
+    if (onClick) {
+      onClick(event, value);
+
+      if (event.isDefaultPrevented()) {
+        return;
+      }
+    }
+
+    if (onChange) {
+      onChange(event, value);
+    }
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_material_ui_core_ButtonBase__WEBPACK_IMPORTED_MODULE_6__["default"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
+    className: Object(clsx__WEBPACK_IMPORTED_MODULE_4__["default"])(classes.root, className, disabled && classes.disabled, selected && classes.selected, size !== 'medium' && classes["size".concat(Object(_material_ui_core_utils__WEBPACK_IMPORTED_MODULE_7__["capitalize"])(size))]),
+    disabled: disabled,
+    focusRipple: !disableFocusRipple,
+    ref: ref,
+    onClick: handleChange,
+    onChange: onChange,
+    value: value,
+    "aria-pressed": selected
+  }, other), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("span", {
+    className: classes.label
+  }, children));
+});
+ true ? ToggleButton.propTypes = {
+  /**
+   * The content of the button.
+   */
+  children: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.node.isRequired,
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css) below for more details.
+   */
+  classes: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired,
+
+  /**
+   * @ignore
+   */
+  className: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+
+  /**
+   * If `true`, the button will be disabled.
+   */
+  disabled: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+
+  /**
+   * If `true`, the  keyboard focus ripple will be disabled.
+   */
+  disableFocusRipple: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+
+  /**
+   * If `true`, the ripple effect will be disabled.
+   */
+  disableRipple: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+
+  /**
+   * @ignore
+   */
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
+
+  /**
+   * @ignore
+   */
+  onClick: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
+
+  /**
+   * If `true`, the button will be rendered in an active state.
+   */
+  selected: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+
+  /**
+   * @ignore
+   */
+  size: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.oneOf(['small', 'medium', 'large']),
+
+  /**
+   * The value to associate with the button when selected in a
+   * ToggleButtonGroup.
+   */
+  value: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.any.isRequired
+} : undefined;
+/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["withStyles"])(styles, {
+  name: 'MuiToggleButton'
+})(ToggleButton));
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/lab/esm/ToggleButton/index.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@material-ui/lab/esm/ToggleButton/index.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ToggleButton__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ToggleButton */ "./node_modules/@material-ui/lab/esm/ToggleButton/ToggleButton.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _ToggleButton__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/lab/esm/ToggleButtonGroup/ToggleButtonGroup.js":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/@material-ui/lab/esm/ToggleButtonGroup/ToggleButtonGroup.js ***!
+  \**********************************************************************************/
+/*! exports provided: styles, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "styles", function() { return styles; });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_is__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-is */ "./node_modules/react-is/index.js");
+/* harmony import */ var react_is__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_is__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
+/* harmony import */ var _isValueSelected__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./isValueSelected */ "./node_modules/@material-ui/lab/esm/ToggleButtonGroup/isValueSelected.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/utils */ "./node_modules/@material-ui/core/esm/utils/index.js");
 
 
 
@@ -186,422 +364,213 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var styles = function styles(theme) {
-  var getColor = theme.palette.type === 'light' ? _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["darken"] : _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["lighten"];
-  var getBackgroundColor = theme.palette.type === 'light' ? _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["lighten"] : _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["darken"];
   return {
     /* Styles applied to the root element. */
-    root: Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({}, theme.typography.body2, {
-      borderRadius: theme.shape.borderRadius,
-      backgroundColor: 'transparent',
-      display: 'flex',
-      padding: '6px 16px'
-    }),
+    root: {
+      display: 'inline-flex',
+      borderRadius: theme.shape.borderRadius
+    },
 
-    /* Styles applied to the root element if `variant="standard"` and `color="success"`. */
-    standardSuccess: {
-      color: getColor(theme.palette.success.main, 0.6),
-      backgroundColor: getBackgroundColor(theme.palette.success.main, 0.9),
-      '& $icon': {
-        color: theme.palette.success.main
+    /* Styles applied to the root element if `orientation="vertical"`. */
+    vertical: {
+      flexDirection: 'column'
+    },
+
+    /* Styles applied to the children. */
+    grouped: {},
+
+    /* Styles applied to the children if `orientation="horizontal"`. */
+    groupedHorizontal: {
+      '&:not(:first-child)': {
+        marginLeft: -1,
+        borderLeft: '1px solid transparent',
+        borderTopLeftRadius: 0,
+        borderBottomLeftRadius: 0
+      },
+      '&:not(:last-child)': {
+        borderTopRightRadius: 0,
+        borderBottomRightRadius: 0
       }
     },
 
-    /* Styles applied to the root element if `variant="standard"` and `color="info"`. */
-    standardInfo: {
-      color: getColor(theme.palette.info.main, 0.6),
-      backgroundColor: getBackgroundColor(theme.palette.info.main, 0.9),
-      '& $icon': {
-        color: theme.palette.info.main
+    /* Styles applied to the children if `orientation="vertical"`. */
+    groupedVertical: {
+      '&:not(:first-child)': {
+        marginTop: -1,
+        borderTop: '1px solid transparent',
+        borderTopLeftRadius: 0,
+        borderTopRightRadius: 0
+      },
+      '&:not(:last-child)': {
+        borderBottomLeftRadius: 0,
+        borderBottomRightRadius: 0
       }
-    },
-
-    /* Styles applied to the root element if `variant="standard"` and `color="warning"`. */
-    standardWarning: {
-      color: getColor(theme.palette.warning.main, 0.6),
-      backgroundColor: getBackgroundColor(theme.palette.warning.main, 0.9),
-      '& $icon': {
-        color: theme.palette.warning.main
-      }
-    },
-
-    /* Styles applied to the root element if `variant="standard"` and `color="error"`. */
-    standardError: {
-      color: getColor(theme.palette.error.main, 0.6),
-      backgroundColor: getBackgroundColor(theme.palette.error.main, 0.9),
-      '& $icon': {
-        color: theme.palette.error.main
-      }
-    },
-
-    /* Styles applied to the root element if `variant="outlined"` and `color="success"`. */
-    outlinedSuccess: {
-      color: getColor(theme.palette.success.main, 0.6),
-      border: "1px solid ".concat(theme.palette.success.main),
-      '& $icon': {
-        color: theme.palette.success.main
-      }
-    },
-
-    /* Styles applied to the root element if `variant="outlined"` and `color="info"`. */
-    outlinedInfo: {
-      color: getColor(theme.palette.info.main, 0.6),
-      border: "1px solid ".concat(theme.palette.info.main),
-      '& $icon': {
-        color: theme.palette.info.main
-      }
-    },
-
-    /* Styles applied to the root element if `variant="outlined"` and `color="warning"`. */
-    outlinedWarning: {
-      color: getColor(theme.palette.warning.main, 0.6),
-      border: "1px solid ".concat(theme.palette.warning.main),
-      '& $icon': {
-        color: theme.palette.warning.main
-      }
-    },
-
-    /* Styles applied to the root element if `variant="outlined"` and `color="error"`. */
-    outlinedError: {
-      color: getColor(theme.palette.error.main, 0.6),
-      border: "1px solid ".concat(theme.palette.error.main),
-      '& $icon': {
-        color: theme.palette.error.main
-      }
-    },
-
-    /* Styles applied to the root element if `variant="filled"` and `color="success"`. */
-    filledSuccess: {
-      color: '#fff',
-      fontWeight: theme.typography.fontWeightMedium,
-      backgroundColor: theme.palette.success.main
-    },
-
-    /* Styles applied to the root element if `variant="filled"` and `color="info"`. */
-    filledInfo: {
-      color: '#fff',
-      fontWeight: theme.typography.fontWeightMedium,
-      backgroundColor: theme.palette.info.main
-    },
-
-    /* Styles applied to the root element if `variant="filled"` and `color="warning"`. */
-    filledWarning: {
-      color: '#fff',
-      fontWeight: theme.typography.fontWeightMedium,
-      backgroundColor: theme.palette.warning.main
-    },
-
-    /* Styles applied to the root element if `variant="filled"` and `color="error"`. */
-    filledError: {
-      color: '#fff',
-      fontWeight: theme.typography.fontWeightMedium,
-      backgroundColor: theme.palette.error.main
-    },
-
-    /* Styles applied to the icon wrapper element. */
-    icon: {
-      marginRight: 12,
-      padding: '7px 0',
-      display: 'flex',
-      fontSize: 22,
-      opacity: 0.9
-    },
-
-    /* Styles applied to the message wrapper element. */
-    message: {
-      padding: '8px 0'
-    },
-
-    /* Styles applied to the action wrapper element if `action` is provided. */
-    action: {
-      display: 'flex',
-      alignItems: 'center',
-      marginLeft: 'auto',
-      paddingLeft: 16,
-      marginRight: -8
     }
   };
 };
-var defaultIconMapping = {
-  success: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_internal_svg_icons_SuccessOutlined__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    fontSize: "inherit"
-  }),
-  warning: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_internal_svg_icons_ReportProblemOutlined__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    fontSize: "inherit"
-  }),
-  error: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_internal_svg_icons_ErrorOutline__WEBPACK_IMPORTED_MODULE_9__["default"], {
-    fontSize: "inherit"
-  }),
-  info: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_internal_svg_icons_InfoOutlined__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    fontSize: "inherit"
-  })
-};
-
-var _ref = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_internal_svg_icons_Close__WEBPACK_IMPORTED_MODULE_11__["default"], {
-  fontSize: "small"
-});
-
-var Alert = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__["forwardRef"](function Alert(props, ref) {
-  var action = props.action,
-      children = props.children,
+var ToggleButtonGroup = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__["forwardRef"](function ToggleButton(props, ref) {
+  var children = props.children,
       classes = props.classes,
       className = props.className,
-      _props$closeText = props.closeText,
-      closeText = _props$closeText === void 0 ? 'Close' : _props$closeText,
-      color = props.color,
-      icon = props.icon,
-      _props$iconMapping = props.iconMapping,
-      iconMapping = _props$iconMapping === void 0 ? defaultIconMapping : _props$iconMapping,
-      onClose = props.onClose,
-      _props$role = props.role,
-      role = _props$role === void 0 ? 'alert' : _props$role,
-      _props$severity = props.severity,
-      severity = _props$severity === void 0 ? 'success' : _props$severity,
-      _props$variant = props.variant,
-      variant = _props$variant === void 0 ? 'standard' : _props$variant,
-      other = Object(_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_0__["default"])(props, ["action", "children", "classes", "className", "closeText", "color", "icon", "iconMapping", "onClose", "role", "severity", "variant"]);
+      _props$exclusive = props.exclusive,
+      exclusive = _props$exclusive === void 0 ? false : _props$exclusive,
+      onChange = props.onChange,
+      _props$orientation = props.orientation,
+      orientation = _props$orientation === void 0 ? 'horizontal' : _props$orientation,
+      _props$size = props.size,
+      size = _props$size === void 0 ? 'medium' : _props$size,
+      value = props.value,
+      other = Object(_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1__["default"])(props, ["children", "classes", "className", "exclusive", "onChange", "orientation", "size", "value"]);
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_6__["default"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
-    role: role,
-    square: true,
-    elevation: 0,
-    className: Object(clsx__WEBPACK_IMPORTED_MODULE_4__["default"])(classes.root, classes["".concat(variant).concat(Object(_material_ui_core_utils__WEBPACK_IMPORTED_MODULE_13__["capitalize"])(color || severity))], className),
+  var handleChange = function handleChange(event, buttonValue) {
+    if (!onChange) {
+      return;
+    }
+
+    var index = value && value.indexOf(buttonValue);
+    var newValue;
+
+    if (value && index >= 0) {
+      newValue = value.slice();
+      newValue.splice(index, 1);
+    } else {
+      newValue = value ? value.concat(buttonValue) : [buttonValue];
+    }
+
+    onChange(event, newValue);
+  };
+
+  var handleExclusiveChange = function handleExclusiveChange(event, buttonValue) {
+    if (!onChange) {
+      return;
+    }
+
+    onChange(event, value === buttonValue ? null : buttonValue);
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    role: "group",
+    className: Object(clsx__WEBPACK_IMPORTED_MODULE_5__["default"])(classes.root, className, orientation === 'vertical' && classes.vertical),
     ref: ref
-  }, other), icon !== false ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", {
-    className: classes.icon
-  }, icon || iconMapping[severity] || defaultIconMapping[severity]) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", {
-    className: classes.message
-  }, children), action != null ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", {
-    className: classes.action
-  }, action) : null, action == null && onClose ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__["createElement"]("div", {
-    className: classes.action
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    size: "small",
-    "aria-label": closeText,
-    title: closeText,
-    color: "inherit",
-    onClick: onClose
-  }, _ref)) : null);
+  }, other), react__WEBPACK_IMPORTED_MODULE_2__["Children"].map(children, function (child) {
+    if (! /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__["isValidElement"](child)) {
+      return null;
+    }
+
+    if (true) {
+      if (Object(react_is__WEBPACK_IMPORTED_MODULE_3__["isFragment"])(child)) {
+        console.error(["Material-UI: The ToggleButtonGroup component doesn't accept a Fragment as a child.", 'Consider providing an array instead.'].join('\n'));
+      }
+    }
+
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__["cloneElement"](child, {
+      className: Object(clsx__WEBPACK_IMPORTED_MODULE_5__["default"])(classes.grouped, classes["grouped".concat(Object(_material_ui_core_utils__WEBPACK_IMPORTED_MODULE_8__["capitalize"])(orientation))], child.props.className),
+      onChange: exclusive ? handleExclusiveChange : handleChange,
+      selected: child.props.selected === undefined ? Object(_isValueSelected__WEBPACK_IMPORTED_MODULE_6__["default"])(child.props.value, value) : child.props.selected,
+      size: child.props.size || size
+    });
+  }));
 });
- true ? Alert.propTypes = {
+ true ? ToggleButtonGroup.propTypes = {
   // ----------------------------- Warning --------------------------------
   // | These PropTypes are generated from the TypeScript type definitions |
   // |     To update them edit the d.ts file and run "yarn proptypes"     |
   // ----------------------------------------------------------------------
 
   /**
-   * The action to display. It renders after the message, at the end of the alert.
+   * The content of the button.
    */
-  action: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.node,
-
-  /**
-   * The content of the component.
-   */
-  children: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.node,
+  children: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.node,
 
   /**
    * Override or extend the styles applied to the component.
    * See [CSS API](#css) below for more details.
    */
-  classes: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object,
+  classes: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object,
 
   /**
    * @ignore
    */
-  className: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string,
 
   /**
-   * Override the default label for the *close popup* icon button.
-   *
-   * For localization purposes, you can use the provided [translations](/guides/localization/).
+   * If `true`, only allow one of the child ToggleButton values to be selected.
    */
-  closeText: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+  exclusive: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool,
 
   /**
-   * The main color for the alert. Unless provided, the value is taken from the `severity` prop.
-   */
-  color: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.oneOf(['error', 'info', 'success', 'warning']),
-
-  /**
-   * Override the icon displayed before the children.
-   * Unless provided, the icon is mapped to the value of the `severity` prop.
-   */
-  icon: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.node,
-
-  /**
-   * The component maps the `severity` prop to a range of different icons,
-   * for instance success to `<SuccessOutlined>`.
-   * If you wish to change this mapping, you can provide your own.
-   * Alternatively, you can use the `icon` prop to override the icon displayed.
-   */
-  iconMapping: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.shape({
-    error: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.node,
-    info: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.node,
-    success: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.node,
-    warning: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.node
-  }),
-
-  /**
-   * Callback fired when the component requests to be closed.
-   * When provided and no `action` prop is set, a close icon button is displayed that triggers the callback when clicked.
+   * Callback fired when the value changes.
    *
    * @param {object} event The event source of the callback.
+   * @param {any} value of the selected buttons. When `exclusive` is true
+   * this is a single value; when false an array of selected values. If no value
+   * is selected and `exclusive` is true the value is null; when false an empty array.
    */
-  onClose: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
 
   /**
-   * The ARIA role attribute of the element.
+   * The group orientation (layout flow direction).
    */
-  role: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+  orientation: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOf(['horizontal', 'vertical']),
 
   /**
-   * The severity of the alert. This defines the color and icon used.
+   * The size of the buttons.
    */
-  severity: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.oneOf(['error', 'info', 'success', 'warning']),
+  size: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOf(['large', 'medium', 'small']),
 
   /**
-   * The variant to use.
+   * The currently selected value within the group or an array of selected
+   * values when `exclusive` is false.
+   *
+   * The value must have reference equality with the option in order to be selected.
    */
-  variant: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.oneOf(['filled', 'outlined', 'standard'])
+  value: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.any
 } : undefined;
-/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["withStyles"])(styles, {
-  name: 'MuiAlert'
-})(Alert));
+/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7__["withStyles"])(styles, {
+  name: 'MuiToggleButtonGroup'
+})(ToggleButtonGroup));
 
 /***/ }),
 
-/***/ "./node_modules/@material-ui/lab/esm/Alert/index.js":
-/*!**********************************************************!*\
-  !*** ./node_modules/@material-ui/lab/esm/Alert/index.js ***!
-  \**********************************************************/
+/***/ "./node_modules/@material-ui/lab/esm/ToggleButtonGroup/index.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@material-ui/lab/esm/ToggleButtonGroup/index.js ***!
+  \**********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Alert__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Alert */ "./node_modules/@material-ui/lab/esm/Alert/Alert.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _Alert__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+/* harmony import */ var _ToggleButtonGroup__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ToggleButtonGroup */ "./node_modules/@material-ui/lab/esm/ToggleButtonGroup/ToggleButtonGroup.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _ToggleButtonGroup__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
 
 
 /***/ }),
 
-/***/ "./node_modules/@material-ui/lab/esm/internal/svg-icons/Close.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/@material-ui/lab/esm/internal/svg-icons/Close.js ***!
-  \***********************************************************************/
+/***/ "./node_modules/@material-ui/lab/esm/ToggleButtonGroup/isValueSelected.js":
+/*!********************************************************************************!*\
+  !*** ./node_modules/@material-ui/lab/esm/ToggleButtonGroup/isValueSelected.js ***!
+  \********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/utils */ "./node_modules/@material-ui/core/esm/utils/index.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return isValueSelected; });
+// Determine if the toggle button value matches, or is contained in, the
+// candidate group value.
+function isValueSelected(value, candidate) {
+  if (candidate === undefined || value === undefined) {
+    return false;
+  }
 
+  if (Array.isArray(candidate)) {
+    return candidate.indexOf(value) >= 0;
+  }
 
-/**
- * @ignore - internal component.
- */
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_utils__WEBPACK_IMPORTED_MODULE_1__["createSvgIcon"])( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("path", {
-  d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-}), 'Close'));
-
-/***/ }),
-
-/***/ "./node_modules/@material-ui/lab/esm/internal/svg-icons/ErrorOutline.js":
-/*!******************************************************************************!*\
-  !*** ./node_modules/@material-ui/lab/esm/internal/svg-icons/ErrorOutline.js ***!
-  \******************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/utils */ "./node_modules/@material-ui/core/esm/utils/index.js");
-
-
-/**
- * @ignore - internal component.
- */
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_utils__WEBPACK_IMPORTED_MODULE_1__["createSvgIcon"])( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("path", {
-  d: "M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
-}), 'ErrorOutline'));
-
-/***/ }),
-
-/***/ "./node_modules/@material-ui/lab/esm/internal/svg-icons/InfoOutlined.js":
-/*!******************************************************************************!*\
-  !*** ./node_modules/@material-ui/lab/esm/internal/svg-icons/InfoOutlined.js ***!
-  \******************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/utils */ "./node_modules/@material-ui/core/esm/utils/index.js");
-
-
-/**
- * @ignore - internal component.
- */
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_utils__WEBPACK_IMPORTED_MODULE_1__["createSvgIcon"])( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("path", {
-  d: "M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20, 12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10, 10 0 0,0 12,2M11,17H13V11H11V17Z"
-}), 'InfoOutlined'));
-
-/***/ }),
-
-/***/ "./node_modules/@material-ui/lab/esm/internal/svg-icons/ReportProblemOutlined.js":
-/*!***************************************************************************************!*\
-  !*** ./node_modules/@material-ui/lab/esm/internal/svg-icons/ReportProblemOutlined.js ***!
-  \***************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/utils */ "./node_modules/@material-ui/core/esm/utils/index.js");
-
-
-/**
- * @ignore - internal component.
- */
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_utils__WEBPACK_IMPORTED_MODULE_1__["createSvgIcon"])( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("path", {
-  d: "M12 5.99L19.53 19H4.47L12 5.99M12 2L1 21h22L12 2zm1 14h-2v2h2v-2zm0-6h-2v4h2v-4z"
-}), 'ReportProblemOutlined'));
-
-/***/ }),
-
-/***/ "./node_modules/@material-ui/lab/esm/internal/svg-icons/SuccessOutlined.js":
-/*!*********************************************************************************!*\
-  !*** ./node_modules/@material-ui/lab/esm/internal/svg-icons/SuccessOutlined.js ***!
-  \*********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/utils */ "./node_modules/@material-ui/core/esm/utils/index.js");
-
-
-/**
- * @ignore - internal component.
- */
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_utils__WEBPACK_IMPORTED_MODULE_1__["createSvgIcon"])( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("path", {
-  d: "M20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4C12.76,4 13.5,4.11 14.2, 4.31L15.77,2.74C14.61,2.26 13.34,2 12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0, 0 22,12M7.91,10.08L6.5,11.5L11,16L21,6L19.59,4.58L11,13.17L7.91,10.08Z"
-}), 'SuccessOutlined'));
+  return value === candidate;
+}
 
 /***/ })
 
