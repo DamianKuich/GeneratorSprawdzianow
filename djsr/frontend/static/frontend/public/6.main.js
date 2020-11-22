@@ -1899,7 +1899,7 @@ var MaterialUiTaskSearch = /*#__PURE__*/function (_Component) {
         });
 
         _this2.setState({
-          sections: response.data
+          sections: parsed
         });
       })["catch"](function (error) {
         console.log(error);
