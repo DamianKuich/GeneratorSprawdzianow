@@ -119,8 +119,7 @@ class TaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Task
-        fields = ('id','type','level','skill','text','answers',
-                  'add_date','author','points','image','private')
+        fields = ('id','type','level','skill','text','answers','author','points','image','private')
 
 
 class TestJSONSerializer(serializers.ModelSerializer):
