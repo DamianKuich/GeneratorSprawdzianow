@@ -37,7 +37,8 @@ class MaterialUiTaskSearch extends Component {
     axiosInstanceNoAuth
       .get("/user/sections/")
       .then((response) => {
-        this.setState({ sections: response.data });
+        const parsed =response.data.map(section => ({...section,skill:section.skilll}))
+        this.setState({ sections: parsed });
       })
       .catch((error) => {
         console.log(error);
