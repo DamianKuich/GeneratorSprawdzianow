@@ -482,9 +482,10 @@ var MaterialUiManageAccount = function MaterialUiManageAccount(props) {
       },
       labelText: "Has\u0142o",
       inputProps: {
+        type: "password",
         endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
           position: "end"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5___default.a, {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6___default.a, {
           className: classes.inputIconsColor
         }))
       }
@@ -496,9 +497,10 @@ var MaterialUiManageAccount = function MaterialUiManageAccount(props) {
       },
       labelText: "Powt\xF3rz has\u0142o",
       inputProps: {
+        type: "password",
         endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
           position: "end"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5___default.a, {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6___default.a, {
           className: classes.inputIconsColor
         }))
       }
@@ -510,9 +512,10 @@ var MaterialUiManageAccount = function MaterialUiManageAccount(props) {
       },
       labelText: "Podaj stare has\u0142o",
       inputProps: {
+        type: "password",
         endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
           position: "end"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5___default.a, {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6___default.a, {
           className: classes.inputIconsColor
         }))
       }

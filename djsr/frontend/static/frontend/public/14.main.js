@@ -105,13 +105,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./material_ui_components/Card/CardHeader.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardHeader.js");
 /* harmony import */ var _material_ui_components_Card_CardFooter_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./material_ui_components/Card/CardFooter.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardFooter.js");
 /* harmony import */ var _material_ui_components_CustomInput_CustomInput_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./material_ui_components/CustomInput/CustomInput.js */ "./djsr/frontend/src/components/material_ui_components/CustomInput/CustomInput.js");
-/* harmony import */ var _material_ui_core_ButtonGroup__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @material-ui/core/ButtonGroup */ "./node_modules/@material-ui/core/esm/ButtonGroup/index.js");
-/* harmony import */ var _assets_jss_material_kit_react_views_loginPage_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./assets/jss/material-kit-react/views/loginPage.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react/views/loginPage.js");
-/* harmony import */ var _img_genspr_parralax_bg_png__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./img/genspr-parralax-bg.png */ "./djsr/frontend/src/components/img/genspr-parralax-bg.png");
-/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
-/* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
-/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
-/* harmony import */ var _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./MaterialFormikField */ "./djsr/frontend/src/components/MaterialFormikField.js");
+/* harmony import */ var _assets_jss_material_kit_react_views_loginPage_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./assets/jss/material-kit-react/views/loginPage.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react/views/loginPage.js");
+/* harmony import */ var _img_genspr_parralax_bg_png__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./img/genspr-parralax-bg.png */ "./djsr/frontend/src/components/img/genspr-parralax-bg.png");
+/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
+/* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
+/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
+/* harmony import */ var _MaterialFormikField__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./MaterialFormikField */ "./djsr/frontend/src/components/MaterialFormikField.js");
 var _this = undefined;
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -152,8 +151,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
-var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])(_assets_jss_material_kit_react_views_loginPage_js__WEBPACK_IMPORTED_MODULE_19__["default"]);
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])(_assets_jss_material_kit_react_views_loginPage_js__WEBPACK_IMPORTED_MODULE_18__["default"]);
 
 var MaterialUiSignUpPage = function MaterialUiSignUpPage(props) {
   var FRS = "Pole wymagane";
@@ -178,7 +176,7 @@ var MaterialUiSignUpPage = function MaterialUiSignUpPage(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: classes.pageHeader,
     style: {
-      backgroundImage: "url(" + _img_genspr_parralax_bg_png__WEBPACK_IMPORTED_MODULE_20__["default"] + ")",
+      backgroundImage: "url(" + _img_genspr_parralax_bg_png__WEBPACK_IMPORTED_MODULE_19__["default"] + ")",
       backgroundSize: "cover",
       backgroundPosition: "top center"
     }
@@ -192,23 +190,23 @@ var MaterialUiSignUpPage = function MaterialUiSignUpPage(props) {
     md: 4
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_Card_js__WEBPACK_IMPORTED_MODULE_13__["default"], {
     className: classes[cardAnimaton]
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Formik"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_22__["Formik"], {
     initialValues: {
       name: "",
       email: "",
       password: "",
       passwordConfirm: ""
     },
-    validationSchema: yup__WEBPACK_IMPORTED_MODULE_21__["object"]().shape({
-      name: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().min(2, "Too Short!").max(50, "Too Long!").required(FRS),
-      password: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().min(8, "Too Short!").max(50, "Too Long!").required(FRS),
-      passwordConfirm: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().oneOf([yup__WEBPACK_IMPORTED_MODULE_21__["ref"]("password")], "Hasła są różne").required(FRS),
-      email: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().email("Nieprawidłowy adres e-mail").required(FRS)
+    validationSchema: yup__WEBPACK_IMPORTED_MODULE_20__["object"]().shape({
+      name: yup__WEBPACK_IMPORTED_MODULE_20__["string"]().min(2, "Too Short!").max(50, "Too Long!").required(FRS),
+      password: yup__WEBPACK_IMPORTED_MODULE_20__["string"]().min(8, "Too Short!").max(50, "Too Long!").required(FRS),
+      passwordConfirm: yup__WEBPACK_IMPORTED_MODULE_20__["string"]().oneOf([yup__WEBPACK_IMPORTED_MODULE_20__["ref"]("password")], "Hasła są różne").required(FRS),
+      email: yup__WEBPACK_IMPORTED_MODULE_20__["string"]().email("Nieprawidłowy adres e-mail").required(FRS)
     }),
     onSubmit: function onSubmit(values, helpers) {
       setTimeout(function () {
         helpers.setSubmitting(true);
-        _axiosAPI__WEBPACK_IMPORTED_MODULE_22__["axiosInstanceNoAuth"].post("/user/create/", {
+        _axiosAPI__WEBPACK_IMPORTED_MODULE_21__["axiosInstanceNoAuth"].post("/user/create/", {
           username: values.name,
           password: values.password,
           email: values.email
@@ -253,8 +251,8 @@ var MaterialUiSignUpPage = function MaterialUiSignUpPage(props) {
     }, console.log(touched, errors), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_15__["default"], {
       color: "primary",
       className: classes.cardHeader
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Rejestracja")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardBody_js__WEBPACK_IMPORTED_MODULE_14__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
-      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__["default"],
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Rejestracja")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardBody_js__WEBPACK_IMPORTED_MODULE_14__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_22__["Field"], {
+      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_23__["default"],
       name: "name",
       formControlProps: {
         fullWidth: true
@@ -267,8 +265,8 @@ var MaterialUiSignUpPage = function MaterialUiSignUpPage(props) {
           className: classes.inputIconsColor
         }))
       }
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
-      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__["default"],
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_22__["Field"], {
+      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_23__["default"],
       name: "email",
       formControlProps: {
         fullWidth: true
@@ -281,31 +279,33 @@ var MaterialUiSignUpPage = function MaterialUiSignUpPage(props) {
           className: classes.inputIconsColor
         }))
       }
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
-      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__["default"],
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_22__["Field"], {
+      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_23__["default"],
       name: "password",
       formControlProps: {
         fullWidth: true
       },
       labelText: "Has\u0142o",
       inputProps: {
+        type: "password",
         endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
           position: "end"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5___default.a, {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6___default.a, {
           className: classes.inputIconsColor
         }))
       }
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
-      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__["default"],
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_22__["Field"], {
+      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_23__["default"],
       name: "passwordConfirm",
       formControlProps: {
         fullWidth: true
       },
       labelText: "Powt\xF3rz has\u0142o",
       inputProps: {
+        type: "password",
         endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
           position: "end"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5___default.a, {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6___default.a, {
           className: classes.inputIconsColor
         }))
       }

@@ -171,7 +171,8 @@ var MaterialUiPasswordReset = function MaterialUiPasswordReset(props) {
   var stringToken = JSON.stringify(token);
   stringToken = stringToken.substr(10);
   stringToken = stringToken.slice(0, -2);
-  console.log(stringToken);
+  var strongToken = Object(react_router__WEBPACK_IMPORTED_MODULE_18__["useParams"])().token;
+  console.log(strongToken);
 
   var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState("cardHidden"),
       _React$useState4 = _slicedToArray(_React$useState3, 2),
@@ -214,7 +215,7 @@ var MaterialUiPasswordReset = function MaterialUiPasswordReset(props) {
     onSubmit: function onSubmit(values, helpers) {
       setTimeout(function () {
         helpers.setSubmitting(true);
-        _axiosAPI__WEBPACK_IMPORTED_MODULE_22__["axiosInstanceNoAuth"].post("/user/passreset/".concat(stringToken, "/$"), {
+        _axiosAPI__WEBPACK_IMPORTED_MODULE_22__["axiosInstanceNoAuth"].post("/user/passreset/".concat(strongToken, "/$"), {
           password: values.password
         }).then(function (response) {
           _this.props.setUser(response.data);

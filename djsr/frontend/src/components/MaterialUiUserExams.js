@@ -141,9 +141,12 @@ function CustomizedSnackbars() {
 
     removeExam = (exam) => {
       axiosInstance
-      .delete(`/user/maketest/${exam.id}/`)
+      .post(`/user/deletetest/`,{
+      id: exam.id,
+    })
               .then((response) => {
         console.log("usunięto")
+        this.updateExams();
       });
     };
   
@@ -189,8 +192,8 @@ function CustomizedSnackbars() {
         
         <div> 
                           <Box 
-                          p={1}
-                          display="flex"
+                          p={5}
+                          
                           justifyContent="left"
 
                 > 

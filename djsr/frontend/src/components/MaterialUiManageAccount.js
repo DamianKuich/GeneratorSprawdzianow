@@ -431,9 +431,10 @@ const MaterialUiManageAccount = (props) => {
                 }}
                 labelText="Hasło"
                 inputProps={{
+                  type: "password",
                   endAdornment: (
                     <InputAdornment position="end">
-                      <People className={classes.inputIconsColor} />
+                      <LockIcon className={classes.inputIconsColor} />
                     </InputAdornment>
                   ),
                 }}
@@ -446,9 +447,10 @@ const MaterialUiManageAccount = (props) => {
                 }}
                 labelText="Powtórz hasło"
                 inputProps={{
+                  type: "password",
                   endAdornment: (
                     <InputAdornment position="end">
-                      <People className={classes.inputIconsColor} />
+                      <LockIcon className={classes.inputIconsColor} />
                     </InputAdornment>
                   ),
                 }}
@@ -462,9 +464,10 @@ const MaterialUiManageAccount = (props) => {
                 }}
                 labelText="Podaj stare hasło"
                 inputProps={{
+                  type: "password",
                   endAdornment: (
                     <InputAdornment position="end">
-                      <People className={classes.inputIconsColor} />
+                      <LockIcon className={classes.inputIconsColor} />
                     </InputAdornment>
                   ),
                 }}

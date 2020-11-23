@@ -39,7 +39,8 @@ const MaterialUiPasswordReset = (props) => {
   let stringToken = JSON.stringify(token)
   stringToken = stringToken.substr(10)
   stringToken = stringToken.slice(0, -2);
-  console.log(stringToken)
+  const strongToken = useParams().token;
+  console.log(strongToken)
 
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function () {
@@ -87,7 +88,7 @@ const MaterialUiPasswordReset = (props) => {
             setTimeout(() => {
               helpers.setSubmitting(true);
               axiosInstanceNoAuth
-                .post(`/user/passreset/${stringToken}/$`, {
+                .post(`/user/passreset/${strongToken}/$`, {
                 password: values.password,
               })
                 .then((response) => {

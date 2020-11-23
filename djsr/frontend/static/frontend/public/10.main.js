@@ -488,8 +488,12 @@ var UserExams = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "removeExam", function (exam) {
-      _axiosAPI__WEBPACK_IMPORTED_MODULE_3__["default"]["delete"]("/user/maketest/".concat(exam.id, "/")).then(function (response) {
+      _axiosAPI__WEBPACK_IMPORTED_MODULE_3__["default"].post("/user/deletetest/", {
+        id: exam.id
+      }).then(function (response) {
         console.log("usunięto");
+
+        _this.updateExams();
       });
     });
 
@@ -541,8 +545,7 @@ var UserExams = /*#__PURE__*/function (_Component) {
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        p: 1,
-        display: "flex",
+        p: 5,
         justifyContent: "left"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_16__["default"], {
         justify: "center"
