@@ -28,7 +28,7 @@ import axiosInstance, { axiosInstanceNoAuth } from "./axiosAPI";
 import { Formik, Field } from "formik";
 import MaterialFormikField from "./MaterialFormikField";
 import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import ButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
 const useStyles = makeStyles(styles);
 
@@ -412,7 +412,12 @@ const MaterialUiManageAccount = (props) => {
               
             </CardHeader>
             <CardBody>
-            
+            <ButtonGroup
+                        orientation="vertical"
+                        color="primary"
+                        aria-label="vertical contained primary button group"
+                        variant="text"
+                      >
               <Button variant="contained" color="primary" onClick={(e)=>setEditView("email")}  >
                    Zmień e-mail
               </Button>
@@ -422,6 +427,8 @@ const MaterialUiManageAccount = (props) => {
               <Button variant="contained" color="primary" onClick={(e)=>setEditView("password")}  >
                    Zmień hasło
               </Button>
+            </ButtonGroup>
+
             
             <Field
                 component={MaterialFormikField}

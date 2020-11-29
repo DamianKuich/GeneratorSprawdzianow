@@ -25,6 +25,7 @@ import * as Yup from "yup";
 import axiosInstance from "./axiosAPI";
 import { Formik, Field } from "formik";
 import FormikMdInput from "./FormikMDInput";
+import Notification from "./Notification"
 
 const useStyles = makeStyles(styles);
 
@@ -38,10 +39,16 @@ const MaterialUiLoginPage = (props) => {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
+  const [notification, setNotification] = React.useState({isOpen: false, message:'',type:''})
   const { ...rest } = props;
   const FRS = "Pole wymagane";
   return (
     <div>
+            <Notification
+      notification = {notification}
+      setNotification = {setNotification}
+      
+      ></Notification>
       <div
         className={classes.pageHeader}
         style={{
@@ -118,6 +125,11 @@ const MaterialUiLoginPage = (props) => {
                               "general",
                               "Nierpawidłowa nazwa użytkownika lub hasło"
                             );
+                            setNotification({
+                              type:"error",
+                              isOpen:true,
+                              message:'Nieprawidłowa nazwa użytkownika lub hasło'
+                            })
                           }
                         });
                     }, 400);
@@ -231,7 +243,9 @@ const MaterialUiLoginPage = (props) => {
           </GridContainer>
         </div>
       </div>
+
     </div>
+    
   );
 };
 

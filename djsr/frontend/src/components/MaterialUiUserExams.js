@@ -40,7 +40,7 @@ import CardBody from "./material_ui_components/Card/CardBody.js";
 import CustomInput from "./material_ui_components/CustomInput/CustomInput.js";
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-
+import Notification from './Notification'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -72,6 +72,7 @@ function BootstrapTooltip(props) {
   return <Tooltip arrow classes={classes} {...props} />;
 }
 
+
 const useStylesAlert = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -81,24 +82,6 @@ const useStylesAlert = makeStyles((theme) => ({
   },
 }));
 
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
-
-function CustomizedSnackbars() {
-  const classes = useStylesAlert();
-  const [open, setOpen] = React.useState(false);
-
-  const handleClick = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (event, reason) => {
-    
-
-    setOpen(false);
-  };}
-
 
 
   class UserExams extends Component {
@@ -106,6 +89,12 @@ function CustomizedSnackbars() {
       super(props);
       this.state = {
         exams: null,
+        notification:({isOpen: false, message:'',type:''}),
+
+       
+        
+        
+        
       };
     }
   
@@ -138,6 +127,11 @@ function CustomizedSnackbars() {
           this.addExam(response.data[0]);
         });
     };
+    setNotification=()=>({
+      type:"error",
+      isOpen:true,
+      message:'Nieprawidłowa nazwa użytkownika lub hasło'
+    })
 
     removeExam = (exam) => {
       axiosInstance
@@ -147,6 +141,7 @@ function CustomizedSnackbars() {
               .then((response) => {
         console.log("usunięto")
         this.updateExams();
+       
       });
     };
   
@@ -190,7 +185,15 @@ function CustomizedSnackbars() {
       }
       return (
         
-        <div> 
+        <div>
+                      <Notification
+                        notification = {this.state.notification}
+                        setNotification = {this.setNotification}
+      
+                      ></Notification> 
+        
+          
+ 
                           <Box 
                           p={5}
                           
@@ -246,6 +249,8 @@ function CustomizedSnackbars() {
                               false
                             );
                             helpers.setFieldError("general", "Nazwa w uzyciu");
+                            this.setNotification
+                            
                           });
                       }, 400);
                     }}

@@ -19,9 +19,8 @@ import CardBody from "./material_ui_components/Card/CardBody.js";
 import CardHeader from "./material_ui_components/Card/CardHeader.js";
 import CardFooter from "./material_ui_components/Card/CardFooter.js";
 import CustomInput from "./material_ui_components/CustomInput/CustomInput.js";
-
 import styles from "./assets/jss/material-kit-react/views/loginPage.js";
-
+import Notification from "./Notification"
 import image from "./img/genspr-parralax-bg.png";
 import * as Yup from "yup";
 import axiosInstance, { axiosInstanceNoAuth } from "./axiosAPI";
@@ -34,6 +33,7 @@ const MaterialUiPasswordResetRequest = (props) => {
   const FRS = "Pole wymagane";
   const user = props.appState.user;
   const [editView, setEditView] = React.useState("email");
+  const [notification, setNotification] = React.useState({isOpen: false, message:'',type:''})
 
 
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
@@ -44,6 +44,7 @@ const MaterialUiPasswordResetRequest = (props) => {
   const { ...rest } = props;
   return (
     <div>
+
       <div
         className={classes.pageHeader}
         style={{
@@ -107,6 +108,11 @@ const MaterialUiPasswordResetRequest = (props) => {
                   "general",
                   "brak maila"
                 );
+                setNotification({
+                  type:"success",
+                  isOpen:true,
+                  message:'Link do resetu hasła został wysłany na podany adres e-mail'
+                })
               });
           }, 5000);
         }}
@@ -176,6 +182,11 @@ const MaterialUiPasswordResetRequest = (props) => {
           </GridContainer>
         </div>
       </div>
+      <Notification
+      notification = {notification}
+      setNotification = {setNotification}
+      
+      ></Notification>
     </div>
   );
 };
