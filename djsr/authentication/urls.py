@@ -6,7 +6,7 @@ from .views import AddImageToTaskViewSet, AddImageViewSet, ImageViewSet, SkillVi
     LogoutAndBlacklistRefreshTokenForUserView, TaskViewSet, \
     UserRetrieveUpdateAPIView, ReturnUserInfo, PasswordSendResetView, PasswordResetView, AllTestsJSONViewSet, \
     OneTestJSONViewSet, MakeTestViewSet, MakeTestCopyViewSet, LatexToSvgView, GetRandomTasksViewSet, \
-    SkilltoSections, AddTask, AddSkill, AddSection, AddAnswers
+    SkilltoSections, AddTask, AddSkill, AddSection, AddAnswers, DeleteTestViewSet
 
 # TODO resend activation token
 urlpatterns = [
@@ -16,6 +16,7 @@ urlpatterns = [
     path('user/addanswers/', AddAnswers.as_view(), name="AddAnswers"),
     path('user/skills/', SkillViewSet.as_view(), name="skills"),
     path('user/maketest/', MakeTestViewSet.as_view(), name="MakeTest"),
+    path('user/deletetest/', DeleteTestViewSet.as_view(), name="MakeTest"),
     path('user/getrandomtasks/', GetRandomTasksViewSet.as_view(), name="GetRandomTasks"),
     path('user/makecopytest/', MakeTestCopyViewSet.as_view(), name="MakeTestCopy"),
     path('user/tests/', AllTestsJSONViewSet.as_view(), name="AllTests"),

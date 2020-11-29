@@ -384,6 +384,26 @@ class MakeTestViewSet(APIView):
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
+class DeleteTestViewSet(APIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = TaskSerializer
+
+    def post(self, request,format=None):
+        print("MT delete req data", request.data)
+        if request.data:
+            try:
+                id = request.data['id']
+                if TestJSON.objects.filter(id=id, user_id=request.user.id).exists():
+                    mojtest = TestJSON.objects.filter(id=id, user_id=request.user.id)
+                    mojtest.delete()
+                    return Response(status=status.HTTP_200_OK)
+                else:
+                    return Response(status=status.HTTP_400_BAD_REQUEST)
+            except Exception as e:
+                return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
 
 class MakeTestCopyViewSet(APIView):
     permission_classes = (IsAuthenticated,)
@@ -442,7 +462,12 @@ class AddTask(APIView):
     def post(self, request, format=None):
         if request.data:
             try:
-                answer = int(request.data['answer_id'])
+                wrongans = request.data['wrong_answers']
+                corrans = request.data['correct_answers']
+                if not Answers.objects.filter(wronganswers=wrongans,correctans=corrans).exists():
+                    ans = Answers.objects.create(wronganswers=wrongans,correctans=corrans)
+                    ans.save()
+                answer = Answers.objects.filter(wronganswers=wrongans,correctans=corrans)
                 skills = request.data['skills_id']
                 text = request.data['text']
                 ans = Answers.objects.get(id=answer)
