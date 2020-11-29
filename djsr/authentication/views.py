@@ -251,6 +251,7 @@ class TaskViewSet(APIView):
     serializer_class = TaskSerializer
 
     def post(self, request, format=None):
+        author_id = CustomUser.objects.get(id=request.user.id)
         lista = []
         if request.data:
             id_string = request.data['skill']
@@ -261,6 +262,9 @@ class TaskViewSet(APIView):
                 task = Task.objects.filter(skill=id,private=False)
                 serializer = TaskSerializer(task, many=True)
                 lista.append(serializer.data)
+                taskprv = Task.objects.filter(skill=id,private=True,author=author_id)
+                serializerprv = TaskSerializer(taskprv, many=True)
+                lista.append(serializerprv.data)
                 # userid = CustomUser.objects.get(id=request.user.id)
                 # taskprivate = Task.objects.filter(skill=id,private=True,author=userid.id)
                 # serializer_private = TaskSerializer(taskprivate, many=True)
@@ -280,6 +284,7 @@ class GetRandomTasksViewSet(APIView):
         print("get auto tasks data", request.data)
         if request.data:
             try:
+                author_id = CustomUser.objects.get(id=request.user.id)
                 lista = []
                 listaotw = []
                 listazamk = []
@@ -292,7 +297,10 @@ class GetRandomTasksViewSet(APIView):
                         for skillid in skills.split(','):
                             task = Task.objects.filter(skill=skillid,type=2,private=False,level=level)
                             serializer = TaskSerializer(task, many=True)
+                            taskpriv = Task.objects.filter(skill=skillid,type=2,private=True,author=author_id,level=level)
+                            serializerpriv = TaskSerializer(taskpriv, many=True)
                             listazamk.append(serializer.data)
+                            listazamk.append(serializerpriv.data)
                         a = list(chain(*listazamk))
                         random.shuffle(a)
                         lista.append(a[:ilezamk])
@@ -300,7 +308,10 @@ class GetRandomTasksViewSet(APIView):
                         for skillid in skills.split(','):
                             task = Task.objects.filter(skill=skillid,type=1,private=False,level=level)
                             serializer = TaskSerializer(task, many=True)
+                            taskprv = Task.objects.filter(skill=skillid,type=1,private=True,author=author_id,level=level)
+                            serializerprv = TaskSerializer(taskprv, many=True)
                             listaotw.append(serializer.data)
+                            listaotw.append(serializerprv.data)
                         a = list(chain(*listaotw))
                         random.shuffle(a)
                         lista.append(a[:ileotw])
