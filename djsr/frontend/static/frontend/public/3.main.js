@@ -114,106 +114,6 @@ var cardStyle = {
 
 /***/ }),
 
-/***/ "./djsr/frontend/src/components/assets/jss/material-kit-react/components/customInputStyle.js":
-/*!***************************************************************************************************!*\
-  !*** ./djsr/frontend/src/components/assets/jss/material-kit-react/components/customInputStyle.js ***!
-  \***************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../jss/material-kit-react.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-var customInputStyle = {
-  disabled: {
-    "&:before": {
-      borderColor: "transparent !important"
-    }
-  },
-  underline: {
-    "&:hover:not($disabled):before,&:before": {
-      borderColor: "#D2D2D2 !important",
-      borderWidth: "1px !important"
-    },
-    "&:after": {
-      borderColor: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["primaryColor"]
-    }
-  },
-  underlineError: {
-    "&:after": {
-      borderColor: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["dangerColor"]
-    }
-  },
-  underlineSuccess: {
-    "&:after": {
-      borderColor: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["successColor"]
-    }
-  },
-  whiteUnderline: {
-    "&:hover:not($disabled):before,&:before": {
-      borderColor: "#FFFFFF"
-    },
-    "&:after": {
-      borderColor: "#FFFFFF"
-    }
-  },
-  labelRoot: _objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["defaultFont"], {
-    color: "#AAAAAA !important",
-    fontWeight: "400",
-    fontSize: "14px",
-    lineHeight: "1.42857",
-    top: "10px",
-    letterSpacing: "unset",
-    "& + $underline": {
-      marginTop: "0px"
-    }
-  }),
-  labelRootError: {
-    color: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["dangerColor"] + " !important"
-  },
-  labelRootSuccess: {
-    color: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["successColor"] + " !important"
-  },
-  formControl: {
-    margin: "0 0 17px 0",
-    paddingTop: "27px",
-    position: "relative",
-    "& svg,& .fab,& .far,& .fal,& .fas,& .material-icons": {
-      color: "#495057"
-    }
-  },
-  input: {
-    color: "#495057",
-    height: "unset",
-    "&,&::placeholder": {
-      fontSize: "14px",
-      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-      fontWeight: "400",
-      lineHeight: "1.42857",
-      opacity: "1"
-    },
-    "&::placeholder": {
-      color: "#AAAAAA"
-    }
-  },
-  whiteInput: {
-    "&,&::placeholder": {
-      color: "#FFFFFF",
-      opacity: "1"
-    }
-  }
-};
-/* harmony default export */ __webpack_exports__["default"] = (customInputStyle);
-
-/***/ }),
-
 /***/ "./djsr/frontend/src/components/assets/jss/material-kit-react/components/footerStyle.js":
 /*!**********************************************************************************************!*\
   !*** ./djsr/frontend/src/components/assets/jss/material-kit-react/components/footerStyle.js ***!
@@ -392,97 +292,193 @@ var signupPageStyle = {
 
 /***/ }),
 
-/***/ "./djsr/frontend/src/components/material_ui_components/CustomInput/CustomInput.js":
-/*!****************************************************************************************!*\
-  !*** ./djsr/frontend/src/components/material_ui_components/CustomInput/CustomInput.js ***!
-  \****************************************************************************************/
+/***/ "./djsr/frontend/src/components/img/genspr-parralax-bg.png":
+/*!*****************************************************************!*\
+  !*** ./djsr/frontend/src/components/img/genspr-parralax-bg.png ***!
+  \*****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CustomInput; });
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "8ae80ee488d6ec36fd62f67865d06356.png");
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/material_ui_components/Card/CardBody.js":
+/*!******************************************************************************!*\
+  !*** ./djsr/frontend/src/components/material_ui_components/Card/CardBody.js ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CardBody; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
-/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/FormControl */ "./node_modules/@material-ui/core/esm/FormControl/index.js");
-/* harmony import */ var _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/InputLabel */ "./node_modules/@material-ui/core/esm/InputLabel/index.js");
-/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Input */ "./node_modules/@material-ui/core/esm/Input/index.js");
-/* harmony import */ var _material_ui_core_FormHelperText__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/FormHelperText */ "./node_modules/@material-ui/core/esm/FormHelperText/index.js");
-/* harmony import */ var _assets_jss_material_kit_react_components_customInputStyle_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../assets/jss/material-kit-react/components/customInputStyle.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react/components/customInputStyle.js");
+/* harmony import */ var _assets_jss_material_kit_react_components_cardBodyStyle_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../assets/jss/material-kit-react/components/cardBodyStyle.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react/components/cardBodyStyle.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
- // nodejs library to set properties for components
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
  // nodejs library that concatenates classes
 
+ // nodejs library to set properties for components
+
  // @material-ui/core components
 
+ // @material-ui/icons
+// core components
 
 
-
-
-
-
-var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["makeStyles"])(_assets_jss_material_kit_react_components_customInputStyle_js__WEBPACK_IMPORTED_MODULE_8__["default"]);
-function CustomInput(props) {
-  var _classNames, _classNames2, _classNames4;
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["makeStyles"])(_assets_jss_material_kit_react_components_cardBodyStyle_js__WEBPACK_IMPORTED_MODULE_4__["default"]);
+function CardBody(props) {
+  var _classNames;
 
   var classes = useStyles();
-  var formControlProps = props.formControlProps,
-      labelText = props.labelText,
-      id = props.id,
-      labelProps = props.labelProps,
-      inputProps = props.inputProps,
-      error = props.error,
-      white = props.white,
-      inputRootCustomClasses = props.inputRootCustomClasses,
-      success = props.success,
-      helperProps = props.helperProps,
-      multiline = props.multiline;
-  var labelClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()((_classNames = {}, _defineProperty(_classNames, " " + classes.labelRootError, error), _defineProperty(_classNames, " " + classes.labelRootSuccess, success && !error), _classNames));
-  var underlineClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()((_classNames2 = {}, _defineProperty(_classNames2, classes.underlineError, error), _defineProperty(_classNames2, classes.underlineSuccess, success && !error), _defineProperty(_classNames2, classes.underline, true), _defineProperty(_classNames2, classes.whiteUnderline, white), _classNames2));
-  var marginTop = classnames__WEBPACK_IMPORTED_MODULE_2___default()(_defineProperty({}, inputRootCustomClasses, inputRootCustomClasses !== undefined));
-  var inputClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()((_classNames4 = {}, _defineProperty(_classNames4, classes.input, true), _defineProperty(_classNames4, classes.whiteInput, white), _classNames4));
-  var formControlClasses;
 
-  if (formControlProps !== undefined) {
-    formControlClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()(formControlProps.className, classes.formControl);
-  } else {
-    formControlClasses = classes.formControl;
-  }
+  var className = props.className,
+      children = props.children,
+      rest = _objectWithoutProperties(props, ["className", "children"]);
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_4__["default"], _extends({}, formControlProps, {
-    className: formControlClasses
-  }), labelText !== undefined ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({
-    className: classes.labelRoot + " " + labelClasses,
-    htmlFor: id
-  }, labelProps), labelText) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_6__["default"], _extends({
-    classes: {
-      input: inputClasses,
-      root: marginTop,
-      disabled: classes.disabled,
-      underline: underlineClasses
-    },
-    id: id
-  }, inputProps)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormHelperText__WEBPACK_IMPORTED_MODULE_7__["default"], helperProps));
+  var cardBodyClasses = classnames__WEBPACK_IMPORTED_MODULE_1___default()((_classNames = {}, _defineProperty(_classNames, classes.cardBody, true), _defineProperty(_classNames, className, className !== undefined), _classNames));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _extends({
+    className: cardBodyClasses
+  }, rest), children);
 }
-CustomInput.propTypes = {
-  labelText: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
-  labelProps: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
-  id: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
-  inputProps: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
-  formControlProps: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
-  inputRootCustomClasses: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
-  error: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
-  success: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
-  white: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool
+CardBody.propTypes = {
+  className: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node
+};
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/material_ui_components/Card/CardFooter.js":
+/*!********************************************************************************!*\
+  !*** ./djsr/frontend/src/components/material_ui_components/Card/CardFooter.js ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CardFooter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _assets_jss_material_kit_react_components_cardFooterStyle_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../assets/jss/material-kit-react/components/cardFooterStyle.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react/components/cardFooterStyle.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+ // nodejs library that concatenates classes
+
+ // nodejs library to set properties for components
+
+ // @material-ui/core components
+
+ // @material-ui/icons
+// core components
+
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["makeStyles"])(_assets_jss_material_kit_react_components_cardFooterStyle_js__WEBPACK_IMPORTED_MODULE_4__["default"]);
+function CardFooter(props) {
+  var _classNames;
+
+  var classes = useStyles();
+
+  var className = props.className,
+      children = props.children,
+      rest = _objectWithoutProperties(props, ["className", "children"]);
+
+  var cardFooterClasses = classnames__WEBPACK_IMPORTED_MODULE_1___default()((_classNames = {}, _defineProperty(_classNames, classes.cardFooter, true), _defineProperty(_classNames, className, className !== undefined), _classNames));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _extends({
+    className: cardFooterClasses
+  }, rest), children);
+}
+CardFooter.propTypes = {
+  className: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node
+};
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/material_ui_components/Card/CardHeader.js":
+/*!********************************************************************************!*\
+  !*** ./djsr/frontend/src/components/material_ui_components/Card/CardHeader.js ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CardHeader; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _assets_jss_material_kit_react_components_cardHeaderStyle_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../assets/jss/material-kit-react/components/cardHeaderStyle.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react/components/cardHeaderStyle.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+ // nodejs library that concatenates classes
+
+ // nodejs library to set properties for components
+
+ // @material-ui/core components
+
+ // @material-ui/icons
+// core components
+
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["makeStyles"])(_assets_jss_material_kit_react_components_cardHeaderStyle_js__WEBPACK_IMPORTED_MODULE_4__["default"]);
+function CardHeader(props) {
+  var _classNames;
+
+  var classes = useStyles();
+
+  var className = props.className,
+      children = props.children,
+      color = props.color,
+      plain = props.plain,
+      rest = _objectWithoutProperties(props, ["className", "children", "color", "plain"]);
+
+  var cardHeaderClasses = classnames__WEBPACK_IMPORTED_MODULE_1___default()((_classNames = {}, _defineProperty(_classNames, classes.cardHeader, true), _defineProperty(_classNames, classes[color + "CardHeader"], color), _defineProperty(_classNames, classes.cardHeaderPlain, plain), _defineProperty(_classNames, className, className !== undefined), _classNames));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _extends({
+    className: cardHeaderClasses
+  }, rest), children);
+}
+CardHeader.propTypes = {
+  className: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  color: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOf(["warning", "success", "danger", "info", "primary"]),
+  plain: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
+  children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node
 };
 
 /***/ })

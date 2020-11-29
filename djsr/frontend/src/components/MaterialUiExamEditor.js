@@ -34,7 +34,7 @@ import AppBar from "@material-ui/core/AppBar";
 import { makeStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/styles";
 import ExamEditorSidePanel from "./ExamEditorSubComponents/ExamEditorSidePanel";
-import ExamPage from "./ExamEditorSubComponents/ExamPage";
+import ExamPage from "./ExamEditorSubComponents/ExamPageWithTaskOverlays";
 //todo po skasowaniu tresci zadania "zapomina" zdjecie
 //todo zajrzec do draganddropahndlera
 class ExamEditor extends Component {
@@ -50,6 +50,8 @@ class ExamEditor extends Component {
       editorTask: null,
       timeout: null,
       saved: true,
+      editorTaskIndex: null,
+      editorTaskPart: null,
     };
   }
 
@@ -74,6 +76,31 @@ class ExamEditor extends Component {
   };
   componentDidMount() {
     this.getExam();
+  }
+
+  setTaskOnPageEditor = (index, part) => {
+    this.setState((state) => {
+      state.editorTaskIndex = index;
+      state.editorTaskPart = part;
+      state.editorTask = null;
+      if (index !== null) {
+        state.editorTask = state.exam.tasks[index];
+      }
+      state.sideMenuCollapseId = "taskEdit";
+      return state;
+    });
+  };
+
+  updateTaskText=(index,text)=>{
+    this.setState((state)=>{
+      state.exam.tasks[index].text=text;
+      state.timeout = this.resetTimeout(
+        this.state.timeout,
+        setTimeout(this.saveExam, 3000)
+      );
+      state.saved = false;
+      return state
+    })
   }
 
   generatedPDFV3 = examToPdf;
@@ -263,6 +290,10 @@ class ExamEditor extends Component {
             exam={exam}
             setTaskToEdit={this.setTaskToEdit}
             removeTask={this.removeTask}
+            setTaskToEditWithPart={this.setTaskOnPageEditor}
+            editorTaskIndex={this.state.editorTaskIndex}
+            editorTaskPart={this.state.editorTaskPart}
+            updateTaskText={this.updateTaskText}
           />
         </div>
       </DragDropContext>
