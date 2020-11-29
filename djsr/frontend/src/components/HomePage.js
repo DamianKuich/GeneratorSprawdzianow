@@ -9,6 +9,7 @@ import styles from "./assets/jss/material-kit-react/views/landingPage.js";
 
 import parallaxBgImage from "./img/genspr-parralax-bg.png";
 import ShortDescription from "./ShortDescription";
+import image from "./img/genspr-parralax-bg.png";
 
 const useStyles = makeStyles(styles);
 
@@ -16,17 +17,16 @@ const HomePage = (props) => {
   const classes = useStyles();
   const { ...rest } = props;
   return (
-    <>
+    <div>
+
       <Parallax filter image={parallaxBgImage}>
+        
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>Your Story Starts With Us.</h1>
+              <h1 className={classes.title}>Generator Sprawdzianów</h1>
               <h4>
-                Every landing page needs a small description after the big bold
-                title, that{"'"}s why we added this text here. Add here all the
-                information that can make you or your product create the first
-                impression.
+                Generator Sprawdzianów
               </h4>
               <br />
               <Button
@@ -37,18 +37,14 @@ const HomePage = (props) => {
                 rel="noopener noreferrer"
               >
                 <i className="fas fa-play" />
-                Watch video
+               
               </Button>
             </GridItem>
           </GridContainer>
         </div>
       </Parallax>
-      <div className={classNames(classes.main, classes.mainRaised)}>
-        <div className={classes.container}>
-          <ShortDescription/>
-        </div>
-      </div>
-    </>
+
+    </div>
   );
 };
 

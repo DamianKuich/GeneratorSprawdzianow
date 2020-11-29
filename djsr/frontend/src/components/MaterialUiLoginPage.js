@@ -7,7 +7,6 @@ import Icon from "@material-ui/core/Icon";
 import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
 import LockIcon from '@material-ui/icons/Lock';
-
 import Header from "./material_ui_components/Header/Header.js";
 import HeaderLinks from "./material_ui_components/Header/HeaderLinks.js";
 import Footer from "./material_ui_components/Footer/Footer.js";
@@ -19,14 +18,14 @@ import CardBody from "./material_ui_components/Card/CardBody.js";
 import CardHeader from "./material_ui_components/Card/CardHeader.js";
 import CardFooter from "./material_ui_components/Card/CardFooter.js";
 import CustomInput from "./material_ui_components/CustomInput/CustomInput.js";
-
 import styles from "./assets/jss/material-kit-react/views/loginPage.js";
-
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 import image from "./img/genspr-parralax-bg.png";
 import * as Yup from "yup";
 import axiosInstance from "./axiosAPI";
 import { Formik, Field } from "formik";
 import FormikMdInput from "./FormikMDInput";
+import Notification from "./Notification"
 
 const useStyles = makeStyles(styles);
 
@@ -40,10 +39,16 @@ const MaterialUiLoginPage = (props) => {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
+  const [notification, setNotification] = React.useState({isOpen: false, message:'',type:''})
   const { ...rest } = props;
   const FRS = "Pole wymagane";
   return (
     <div>
+            <Notification
+      notification = {notification}
+      setNotification = {setNotification}
+      
+      ></Notification>
       <div
         className={classes.pageHeader}
         style={{
@@ -120,6 +125,11 @@ const MaterialUiLoginPage = (props) => {
                               "general",
                               "Nierpawidłowa nazwa użytkownika lub hasło"
                             );
+                            setNotification({
+                              type:"error",
+                              isOpen:true,
+                              message:'Nieprawidłowa nazwa użytkownika lub hasło'
+                            })
                           }
                         });
                     }, 400);
@@ -196,16 +206,33 @@ const MaterialUiLoginPage = (props) => {
                           />
                         </CardBody>
                         <CardFooter className={classes.cardFooter}>
-                          <Button
-                            simple
-                            color="primary"
-                            size="lg"
-                            onClick={() => {
-                              handleSubmit();
-                            }}
-                          >
-                            Zaloguj
-                          </Button>
+                        <ButtonGroup
+                        orientation="vertical"
+                        color="primary"
+                        aria-label="vertical contained primary button group"
+                        variant="text"
+                      >
+                            <Button
+                          simple
+                          color="primary"
+                          size="lg"
+                          onClick={() => {
+                            handleSubmit();
+                          }}
+                        >
+                          Zaloguj się
+                        </Button>
+                        <Button
+                          simple
+                          color="primary"
+                          size="lg"
+                          onClick={() => {
+                            props.history.push("/requestresetpassword");
+                          }}
+                        >
+                          Zapomniałem hasła
+                        </Button>
+                      </ButtonGroup>
                         </CardFooter>
                       </form>
                     );
@@ -216,7 +243,9 @@ const MaterialUiLoginPage = (props) => {
           </GridContainer>
         </div>
       </div>
+
     </div>
+    
   );
 };
 

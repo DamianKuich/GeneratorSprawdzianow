@@ -19,9 +19,7 @@ import CardBody from "./material_ui_components/Card/CardBody.js";
 import CardHeader from "./material_ui_components/Card/CardHeader.js";
 import CardFooter from "./material_ui_components/Card/CardFooter.js";
 import CustomInput from "./material_ui_components/CustomInput/CustomInput.js";
-
 import styles from "./assets/jss/material-kit-react/views/loginPage.js";
-
 import image from "./img/genspr-parralax-bg.png";
 import * as Yup from "yup";
 import axiosInstance, { axiosInstanceNoAuth } from "./axiosAPI";
@@ -168,6 +166,7 @@ const MaterialUiSignUpPage = (props) => {
                           }}
                           labelText="E-mail"
                           inputProps={{
+                            
                             endAdornment: (
                               <InputAdornment position="end">
                                 <People className={classes.inputIconsColor} />
@@ -208,9 +207,10 @@ const MaterialUiSignUpPage = (props) => {
                           }}
                           labelText="Hasło"
                           inputProps={{
+                            type:"password",
                             endAdornment: (
                               <InputAdornment position="end">
-                                <People className={classes.inputIconsColor} />
+                                <LockIcon className={classes.inputIconsColor} />
                               </InputAdornment>
                             ),
                           }}
@@ -250,16 +250,18 @@ const MaterialUiSignUpPage = (props) => {
                           }}
                           labelText="Powtórz hasło"
                           inputProps={{
+                            type:"password",
                             endAdornment: (
                               <InputAdornment position="end">
-                                <People className={classes.inputIconsColor} />
+                                <LockIcon className={classes.inputIconsColor} />
                               </InputAdornment>
                             ),
                           }}
                         />
                       </CardBody>
                       <CardFooter className={classes.cardFooter}>
-                        <Button
+
+                            <Button
                           simple
                           color="primary"
                           size="lg"
@@ -269,6 +271,8 @@ const MaterialUiSignUpPage = (props) => {
                         >
                           Zarejestruj
                         </Button>
+                   
+                        
                       </CardFooter>
                     </form>
                   )}

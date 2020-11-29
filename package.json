@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "dependencies": {
     "@babel/polyfill": "^7.10.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "@progress/kendo-drawing": "^1.7.0",
     "@progress/kendo-react-pdf": "^3.14.0",
     "@react-pdf/fontkit": "^1.13.0",

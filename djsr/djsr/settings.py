@@ -112,16 +112,16 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'genespr',
-        'USER': 'root',
-        'PASSWORD': 'ziomalek1998',
-        'HOST': '127.0.0.1',
+        'USER': 'myroot',
+        'PASSWORD': 'Papaj2137',
+        'HOST': 'localhost',
         'PORT': '3306',
     }
 }
 
-import dj_database_url
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
+# import dj_database_url
+# db_from_env = dj_database_url.config()
+# DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
