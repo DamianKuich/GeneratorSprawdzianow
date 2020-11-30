@@ -496,9 +496,9 @@ class AddTask(APIView):
             try:
                 wrongans = request.data['wrong_answers']
                 corrans = request.data['correct_answers']
-                # #if not Answers.objects.filter(wronganswers=wrongans,correctans=corrans).exists():
-                #     ans = Answers.objects.create(wronganswers=wrongans,correctans=corrans)
-                #     ans.save()
+                if not Answers.objects.filter(wronganswers=wrongans,correctans=corrans).exists():
+                    ans = Answers.objects.create(wronganswers=wrongans,correctans=corrans)
+                    ans.save()
                 answer = Answers.objects.filter(wronganswers=wrongans,correctans=corrans)
                 skills = request.data['skills_id']
                 text = request.data['text']
@@ -521,7 +521,7 @@ class AddTask(APIView):
                     serializer = TaskSerializer(task, many=True)
                     return Response(serializer.data, status=status.HTTP_200_OK)
             except Exception as e:
-                return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+                return Response(data={"error": str(e)}, status=status.HTTP_402_PAYMENT_REQUIRED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -541,7 +541,7 @@ class AddSection(APIView):
                     serializer = SectionSerializer(sec, many=True)
                     return Response(serializer.data, status=status.HTTP_200_OK)
             except Exception as e:
-                return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+                return Response(data={"error": str(e)}, status=status.HTTP_403_FORBIDDEN)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -566,7 +566,7 @@ class AddSkill(APIView):
             except Exception as e:
                 return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
 class AddAnswers(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -585,7 +585,7 @@ class AddAnswers(APIView):
                     serializer = AnswersSerializer(answer, many=True)
                     return Response(serializer.data, status=status.HTTP_200_OK)
             except Exception as e:
-                return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+                return Response(data={"error": str(e)}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
