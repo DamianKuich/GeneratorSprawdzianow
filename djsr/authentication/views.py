@@ -496,14 +496,13 @@ class AddTask(APIView):
             try:
                 wrongans = request.data['wrong_answers']
                 corrans = request.data['correct_answers']
-                # if not Answers.objects.filter(wronganswers=wrongans,correctans=corrans).exists():
-                #     ans = Answers.objects.create(wronganswers=wrongans,correctans=corrans)
-                #     ans.save()
+                ans = Answers.objects.create(wronganswers=wrongans,correctans=corrans)
+                ans.save()
                 # answer = Answers.objects.filter(wronganswers__in=wrongans,correctans__in=corrans)
                 skills = request.data['skills_id']
                 text = request.data['text']
-                ans = Answers.objects.get(id=1)
-                print('XDDDDD', ans)
+                # ans = Answers.objects.get(id=1)
+                # print('XDDDDD', ans)
                 user = CustomUser.objects.get(id = 1)
                 if not Task.objects.filter(text=text).exists():
                     my_task = Task.objects.create(text=text,
