@@ -6,12 +6,21 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-
+import TaskContentWithMenu from "./TaskContentWithMenu";
+import bgImage from "../img/genspr-parralax-bg.png";
 // const useStyles = makeStyles(theme => ({
 //
 // }));
 
-const ExamPage = ({ exam, setTaskToEdit, removeTask }) => {
+const ExamPage = ({
+  exam,
+  setTaskToEdit,
+  removeTask,
+  setTaskToEditWithPart,
+  editorTaskIndex,
+  editorTaskPart,
+    updateTaskText
+}) => {
   const examTasks = exam.tasks;
   return (
     <Box
@@ -21,7 +30,7 @@ const ExamPage = ({ exam, setTaskToEdit, removeTask }) => {
         justifyContent: "center",
         flexGrow: "3",
         background:
-          "linear-gradient(60deg, rgba(242,163,255,1) 0%, rgba(195,105,219,1) 100%)",
+          `linear-gradient(60deg, rgba(242,163,255,0.5) 0%, rgba(195,105,219,0.5) 100%), url(${bgImage})`,
       }}
       p={3}
     >
@@ -47,7 +56,7 @@ const ExamPage = ({ exam, setTaskToEdit, removeTask }) => {
               {
                 "Imie i nazwisko:................................................................."
               }
-                {/*{".../"}{examTasks.map(task=>task.maxPoints).reduce((a,b)=>(a+b))}*/}
+              {/*{".../"}{examTasks.map(task=>task.maxPoints).reduce((a,b)=>(a+b))}*/}
             </div>
             {examTasks.map((task, index) => (
               <Draggable
@@ -105,11 +114,15 @@ const ExamPage = ({ exam, setTaskToEdit, removeTask }) => {
                           </Grid>
                         </Grid>
                         <p>
-                          <span className="font-weight-bold">
-                            {index + 1}
-                            {". "}
-                          </span>
-                          <Latex>{task.text}</Latex>
+                          <TaskContentWithMenu
+                            taskIndex={index}
+                            content={task.text}
+                            setTaskToEditWithPart={setTaskToEditWithPart}
+                            editorTaskIndex={editorTaskIndex}
+                            editorTaskPart={editorTaskPart}
+                            updateTaskText={updateTaskText}
+                          />
+                          {/*<Latex>{task.text}</Latex>*/}
                         </p>
                         {/*{task.currentDataSet.image.length >= 1 && (*/}
                         {/*  <MDBRow center>*/}

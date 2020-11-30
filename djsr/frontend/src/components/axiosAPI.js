@@ -22,6 +22,7 @@ export const axiosInstance = axios.create({
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
+
     const originalRequest = error.config;
     console.log("AxiosError", error.config, error.response);
     if (error.config.url === "/token/obtain/") {

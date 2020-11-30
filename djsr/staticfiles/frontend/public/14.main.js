@@ -1,1 +1,104 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[14],{1432:function(e,t,r){"use strict";r.r(t);var n=r(1),a=r.n(n),o=r(385),i=r(551),c=r(411),l=r.n(c),s=(r(99),r(510),r(511),r(447)),u=r(448),m=r(61),p=r(512),f=r(462),d=r(513),y=r(514),b=(r(415),r(450)),g=r(516),h=r(451),v=r(459),O=r(54),E=r(439),j=r(420),w=void 0;function P(){return(P=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var n in r)Object.prototype.hasOwnProperty.call(r,n)&&(e[n]=r[n])}return e}).apply(this,arguments)}function S(e,t){return function(e){if(Array.isArray(e))return e}(e)||function(e,t){if("undefined"==typeof Symbol||!(Symbol.iterator in Object(e)))return;var r=[],n=!0,a=!1,o=void 0;try{for(var i,c=e[Symbol.iterator]();!(n=(i=c.next()).done)&&(r.push(i.value),!t||r.length!==t);n=!0);}catch(e){a=!0,o=e}finally{try{n||null==c.return||c.return()}finally{if(a)throw o}}return r}(e,t)||function(e,t){if(!e)return;if("string"==typeof e)return k(e,t);var r=Object.prototype.toString.call(e).slice(8,-1);"Object"===r&&e.constructor&&(r=e.constructor.name);if("Map"===r||"Set"===r)return Array.from(r);if("Arguments"===r||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r))return k(e,t)}(e,t)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function k(e,t){(null==t||t>e.length)&&(t=e.length);for(var r=0,n=new Array(t);r<t;r++)n[r]=e[r];return n}var N=Object(o.a)(b.default);t.default=function(e){e.appState.user;var t=S(a.a.useState("email"),2),r=t[0],n=(t[1],S(a.a.useState({isOpen:!1,message:"",type:""}),2)),o=n[0],c=n[1],b=S(a.a.useState("cardHidden"),2),k=b[0],C=b[1];setTimeout((function(){C("")}),700);var T=N();P({},e);return a.a.createElement("div",null,a.a.createElement("div",{className:T.pageHeader,style:{backgroundImage:"url("+h.a+")",backgroundSize:"cover",backgroundPosition:"top center"}},a.a.createElement("div",{className:T.container},a.a.createElement(s.a,{justify:"center"},a.a.createElement(u.a,{xs:12,sm:12,md:4},a.a.createElement(p.a,{className:T[k]},"email"==r?a.a.createElement(E.c,{initialValues:{name:"",email:"",password:"",passwordConfirm:""},validationSchema:v.a().shape({email:v.c().email("Nieprawidłowy adres e-mail").required("Pole wymagane")}),onSubmit:function(e,t){setTimeout((function(){t.setSubmitting(!0),O.a.post("/user/resetsend/",{email:e.email}).then((function(e){t.setSubmitting(!1),w.setState({token:e.data.confirmation_token}),w.props.history.push("/signupsuccess/".concat(e.data.confirmation_token))})).catch((function(e){e.response;t.setSubmitting(!1),t.setValues({email:""},!1),t.setTouched({email:!1},!1),t.setFieldError("general","brak maila"),c({type:"success",isOpen:!0,message:"Link do resetu hasła został wysłany na podany adres e-mail"})}))}),5e3)}},(function(e){e.values;var t=e.errors,r=e.touched,n=(e.handleChange,e.handleBlur,e.handleSubmit);e.isSubmitting;return a.a.createElement("form",{className:T.form},console.log(r,t),a.a.createElement(d.a,{color:"primary",className:T.cardHeader},a.a.createElement("h4",null,"Przypomnij hasło")),a.a.createElement(f.a,null,a.a.createElement(E.a,{component:j.a,name:"email",formControlProps:{fullWidth:!0},labelText:"E-mail",inputProps:{endAdornment:a.a.createElement(i.a,{position:"end"},a.a.createElement(l.a,{className:T.inputIconsColor}))}})),a.a.createElement(y.a,{className:T.cardFooter},a.a.createElement(m.a,{simple:!0,color:"primary",size:"lg",onClick:function(){n()}},"Przypomnij hasło")))})):a.a.createElement(a.a.Fragment,null)))))),a.a.createElement(g.a,{notification:o,setNotification:c}))}},420:function(e,t,r){"use strict";var n=r(1),a=r.n(n),o=(r(0),r(415));function i(e,t){var r=Object.keys(e);if(Object.getOwnPropertySymbols){var n=Object.getOwnPropertySymbols(e);t&&(n=n.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),r.push.apply(r,n)}return r}function c(e){for(var t=1;t<arguments.length;t++){var r=null!=arguments[t]?arguments[t]:{};t%2?i(Object(r),!0).forEach((function(t){l(e,t,r[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(r)):i(Object(r)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(r,t))}))}return e}function l(e,t,r){return t in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}function s(e,t){if(null==e)return{};var r,n,a=function(e,t){if(null==e)return{};var r,n,a={},o=Object.keys(e);for(n=0;n<o.length;n++)r=o[n],t.indexOf(r)>=0||(a[r]=e[r]);return a}(e,t);if(Object.getOwnPropertySymbols){var o=Object.getOwnPropertySymbols(e);for(n=0;n<o.length;n++)r=o[n],t.indexOf(r)>=0||Object.prototype.propertyIsEnumerable.call(e,r)&&(a[r]=e[r])}return a}var u=function(e){var t=e.inputProps,r=e.type,n=e.labelText,i=e.field,l=i.name,u=s(i,["name"]),m=e.form,p=m.errors,f=s(m,["errors"]),d=e.formControlProps,y=(s(e,["inputProps","type","labelText","field","form","formControlProps"]),p[l]),b=f.touched[l];return a.a.createElement(o.a,{labelText:n,id:l,error:b&&!!y,success:b&&!y,formControlProps:d,helperProps:{children:y&&b?y:" ",error:!!y&&b},inputProps:c({type:r,name:l},u,{},t)})};u.propTypes={},t.a=u},516:function(e,t,r){"use strict";r.d(t,"a",(function(){return c}));var n=r(1),a=r.n(n),o=r(851),i=r(846);function c(e){var t=e.notification;e.setNotification;return a.a.createElement(o.a,{open:t.isOpen,autoHideDuration:30},a.a.createElement(i.a,{severity:t.type},t.message))}}}]);
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[14],{
+
+/***/ "./djsr/frontend/src/components/AccountActivation.js":
+/*!***********************************************************!*\
+  !*** ./djsr/frontend/src/components/AccountActivation.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+var AccountActivation = /*#__PURE__*/function (_Component) {
+  _inherits(AccountActivation, _Component);
+
+  var _super = _createSuper(AccountActivation);
+
+  function AccountActivation(props) {
+    var _this;
+
+    _classCallCheck(this, AccountActivation);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      accountConfirm: null
+    };
+    return _this;
+  }
+
+  _createClass(AccountActivation, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var token = this.props.match.params.token;
+
+      if (!token) {
+        this.setState({
+          accountConfirm: false
+        });
+      } else {
+        _axiosAPI__WEBPACK_IMPORTED_MODULE_2__["axiosInstanceNoAuth"].get("/user/activate/".concat(token, "/$"), {}).then(function (response) {
+          console.log(response);
+
+          _this2.setState({
+            accountConfirm: true
+          });
+        })["catch"](function (error) {
+          console.log(error);
+
+          _this2.setState({
+            accountConfirm: false
+          });
+        });
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var accountConfirm = this.state.accountConfirm;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, accountConfirm === null && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Oczekiwanie na odpowiedz"), accountConfirm === true && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Konto zosta\u0142o aktywowane mozesz sie zalogowac"), accountConfirm === false && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "B\u0142\u0105d!!! Konto nie zosta\u0142o aktywowane."));
+    }
+  }]);
+
+  return AccountActivation;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+AccountActivation.propTypes = {};
+/* harmony default export */ __webpack_exports__["default"] = (AccountActivation);
+
+/***/ })
+
+}]);
+//# sourceMappingURL=14.main.js.map
