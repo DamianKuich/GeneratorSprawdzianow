@@ -499,7 +499,7 @@ class AddTask(APIView):
                 if not Answers.objects.filter(wronganswers=wrongans,correctans=corrans).exists():
                     ans = Answers.objects.create(wronganswers=wrongans,correctans=corrans)
                     ans.save()
-                answer = Answers.objects.filter(wronganswers=wrongans,correctans=corrans)
+                answer = Answers.objects.filter(wronganswers__in=wrongans,correctans__in=corrans)
                 skills = request.data['skills_id']
                 text = request.data['text']
                 ans = Answers.objects.get(id=answer)
