@@ -502,12 +502,12 @@ class AddTask(APIView):
                 answer = Answers.objects.filter(wronganswers=wrongans,correctans=corrans)
                 skills = request.data['skills_id']
                 text = request.data['text']
-                ans = Answers.objects.get(id=answer)
+                # ans = Answers.objects.get(id=answer)
                 print('XDDDDD', ans)
                 user = CustomUser.objects.get(id = 1)
                 if not Task.objects.filter(text=text).exists():
                     my_task = Task.objects.create(text=text,
-                                                  answers = ans,
+                                                  answers = answer,
                                                   type = int(request.data['type']),
                                                   level = int(request.data['level']),
                                                   private = int(request.data['private']),
