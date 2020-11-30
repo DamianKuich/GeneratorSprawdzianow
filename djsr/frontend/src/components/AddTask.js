@@ -92,6 +92,7 @@ class AddTask extends Component {
               taskData["private"] = values.private;
               taskData["wrong_answers"] = values.wrongans;
               taskData["correct_answers"] = values.corrans;
+              console.log("ddtask",taskData);
               axiosInstance
                 .post("/user/addtask/", taskData)
                 .then((response) => {
