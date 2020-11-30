@@ -110,7 +110,8 @@ class AddTask extends Component {
                     .then((response) => {
                       helpers.setSubmitting(false);
                       console.log("response", response);
-                      this.setState({ addTaskResponse: response.data });
+                      this.props.onTaskAdd(response.data[0])
+                      // this.setState({ addTaskResponse: response.data });
                     });
                 });
               // console.log("values",values);
@@ -281,7 +282,7 @@ class AddTask extends Component {
                     labelText="prawodp"
                   />
                   <Box>
-                    <FormControl>
+                    <FormControl fullWidth>
                       <InputLabel id="poziom">Poziom</InputLabel>
                       <Select
                         labelId="poziom"
@@ -300,7 +301,7 @@ class AddTask extends Component {
                     </FormControl>
                   </Box>
                   <Box>
-                    <FormControl>
+                    <FormControl fullWidth>
                       <InputLabel id="type">Typ</InputLabel>
                       <Select
                         labelId="type"
@@ -309,17 +310,17 @@ class AddTask extends Component {
                         inputProps={{
                           name: "type",
                         }}
+                        autoWidth
                         onChange={handleChange}
                       >
                         <MenuItem value={0}>krtk odp</MenuItem>
-                        <MenuItem value={1}>Nan</MenuItem>
                         <MenuItem value={2}>Otw</MenuItem>
                         <MenuItem value={2}>Zamkn</MenuItem>
                       </Select>
                     </FormControl>
                   </Box>
                   <Box>
-                    <FormControl>
+                    <FormControl fullWidth>
                       <InputLabel id="pp">Prywatne/publiczne</InputLabel>
                       <Select
                         labelId="pp"
@@ -347,7 +348,7 @@ class AddTask extends Component {
                       onClick={handleSubmit}
                       disabled={isSubmitting}
                     >
-                      Szukaj
+                      Dodaj
                     </Button>
                   </Box>
                 </Form>
@@ -355,7 +356,6 @@ class AddTask extends Component {
             );
           }}
         </Formik>
-          <div><pre>{JSON.stringify(this.state.addTaskResponse)}</pre></div>
       </Box>
     );
   }

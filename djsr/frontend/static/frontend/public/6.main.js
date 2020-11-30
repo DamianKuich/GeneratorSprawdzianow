@@ -42,6 +42,234 @@ var ExamEditorSidePanel = function ExamEditorSidePanel(_ref) {
 
 /***/ }),
 
+/***/ "./djsr/frontend/src/components/ExamEditorSubComponents/AddTaskDialog.js":
+/*!*******************************************************************************!*\
+  !*** ./djsr/frontend/src/components/ExamEditorSubComponents/AddTaskDialog.js ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/Dialog */ "./node_modules/@material-ui/core/esm/Dialog/index.js");
+/* harmony import */ var _material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/DialogTitle */ "./node_modules/@material-ui/core/esm/DialogTitle/index.js");
+/* harmony import */ var _material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/DialogContent */ "./node_modules/@material-ui/core/esm/DialogContent/index.js");
+/* harmony import */ var _material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/DialogContentText */ "./node_modules/@material-ui/core/esm/DialogContentText/index.js");
+/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/TextField */ "./node_modules/@material-ui/core/esm/TextField/index.js");
+/* harmony import */ var _material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/DialogActions */ "./node_modules/@material-ui/core/esm/DialogActions/index.js");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/index.js");
+/* harmony import */ var _AddTask__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../AddTask */ "./djsr/frontend/src/components/AddTask.js");
+/* harmony import */ var _TaskParser__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./TaskParser */ "./djsr/frontend/src/components/ExamEditorSubComponents/TaskParser.js");
+/* harmony import */ var lodash_collection__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lodash/collection */ "./node_modules/lodash/collection.js");
+/* harmony import */ var lodash_collection__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(lodash_collection__WEBPACK_IMPORTED_MODULE_10__);
+
+
+
+
+
+
+
+
+
+
+
+
+var AddTaskDialog = function AddTaskDialog(_ref) {
+  var open = _ref.open,
+      handleClose = _ref.handleClose,
+      indexOffset = _ref.indexOffset,
+      pushTaskAtIndex = _ref.pushTaskAtIndex,
+      index = _ref.index;
+
+  var onTaskAdd = function onTaskAdd(task) {
+    var draggedItem = Object(_TaskParser__WEBPACK_IMPORTED_MODULE_9__["taskParser"])(task);
+    draggedItem.currentAnswers = JSON.parse(JSON.stringify(draggedItem.answers));
+    var currentDataSetAnswers = draggedItem.currentAnswers;
+    console.log("dragged item", draggedItem, currentDataSetAnswers);
+    var correctAnswersIndex = [Math.floor(Math.random() * (currentDataSetAnswers.correctans.length - 1))];
+    console.log(correctAnswersIndex, "correctAnswersIndex", currentDataSetAnswers.length);
+    var incorrectAnswersIndexes = currentDataSetAnswers.wronganswers.map(function (item, index) {
+      return index;
+    });
+    var answersSet = []; // [sampleSize(currentDataSetAnswers.allanswers,3).map];
+
+    answersSet = answersSet.concat(Object(lodash_collection__WEBPACK_IMPORTED_MODULE_10__["sampleSize"])(correctAnswersIndex).map(function (item) {
+      return {
+        index: item,
+        isCorrect: true
+      };
+    }));
+    answersSet = answersSet.concat(Object(lodash_collection__WEBPACK_IMPORTED_MODULE_10__["sampleSize"])(incorrectAnswersIndexes, 3).map(function (item) {
+      return {
+        index: item,
+        isCorrect: false
+      };
+    }));
+    answersSet = Object(lodash_collection__WEBPACK_IMPORTED_MODULE_10__["shuffle"])(answersSet);
+    draggedItem.currentAnswers.answersIndexes = answersSet;
+    draggedItem.maxPoints = draggedItem.points;
+    pushTaskAtIndex(draggedItem, index + indexOffset);
+    handleClose();
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    open: open,
+    onClose: handleClose,
+    "aria-labelledby": "form-dialog-title"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    id: "form-dialog-title"
+  }, "Dodaj zadanie"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_4__["default"], null, "Wybierz jakie umiej\u0119tno\u015B\u0107i ma sprwadza\u0107 zadanie."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AddTask__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    onTaskAdd: onTaskAdd
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_6__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    onClick: handleClose,
+    color: "primary"
+  }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    onClick: handleClose,
+    color: "primary"
+  }, "Subscribe")));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (AddTaskDialog);
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/ExamEditorSubComponents/AddTaskWithDropdownMenu.js":
+/*!*****************************************************************************************!*\
+  !*** ./djsr/frontend/src/components/ExamEditorSubComponents/AddTaskWithDropdownMenu.js ***!
+  \*****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_Menu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/Menu */ "./node_modules/@material-ui/core/esm/Menu/index.js");
+/* harmony import */ var _material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/MenuItem */ "./node_modules/@material-ui/core/esm/MenuItem/index.js");
+/* harmony import */ var _AddTaskDialog__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AddTaskDialog */ "./djsr/frontend/src/components/ExamEditorSubComponents/AddTaskDialog.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
+
+
+
+
+var AddTaskWithDropdownMenu = function AddTaskWithDropdownMenu(_ref) {
+  var index = _ref.index,
+      pushTaskAtIndex = _ref.pushTaskAtIndex,
+      props = _objectWithoutProperties(_ref, ["index", "pushTaskAtIndex"]);
+
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState({
+    anchorEl: null,
+    open: false,
+    indexOffset: 0
+  }),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      state = _React$useState2[0],
+      setState = _React$useState2[1]; // const [open, setOpen] = React.useState(false);
+
+
+  var anchorEl = state.anchorEl;
+  var open = state.open;
+  var indexOffset = state.indexOffset;
+
+  var handleOpenDialog = function handleOpenDialog() {
+    // setOpen(true);
+    setState({
+      open: true,
+      anchorEl: anchorEl,
+      indexOffset: indexOffset
+    });
+  };
+
+  var handleCloseDialog = function handleCloseDialog() {
+    // setOpen(false);
+    setState({
+      open: false,
+      anchorEl: anchorEl,
+      indexOffset: indexOffset
+    });
+  };
+
+  var handleClick = function handleClick(event) {
+    // setAnchorEl(event.currentTarget);
+    setState({
+      anchorEl: event.currentTarget,
+      open: open,
+      indexOffset: indexOffset
+    });
+  };
+
+  var handleUpChoose = function handleUpChoose() {
+    setState({
+      open: true,
+      anchorEl: null,
+      indexOffset: 0
+    });
+  };
+
+  var handleDownChoose = function handleDownChoose() {
+    setState({
+      open: true,
+      anchorEl: null,
+      indexOffset: 1
+    });
+  };
+
+  var handleClose = function handleClose() {
+    setState({
+      anchorEl: null,
+      open: open,
+      indexOffset: indexOffset
+    });
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      color: "white",
+      backgroundColor: "black"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    onClick: handleClick
+  }, "+"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Menu__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    id: "simple-menu",
+    anchorEl: anchorEl,
+    keepMounted: true,
+    open: Boolean(anchorEl),
+    onClose: handleClose
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    onClick: handleUpChoose
+  }, "Dodaj zadanie powy\u017Cej"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    onClick: handleDownChoose
+  }, "Dodaj zadanie poni\u017Cej")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AddTaskDialog__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    open: open,
+    handleClose: handleCloseDialog,
+    indexOffset: indexOffset,
+    index: index,
+    pushTaskAtIndex: pushTaskAtIndex
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (AddTaskWithDropdownMenu);
+
+/***/ }),
+
 /***/ "./djsr/frontend/src/components/ExamEditorSubComponents/CollapseMenuContainer.js":
 /*!***************************************************************************************!*\
   !*** ./djsr/frontend/src/components/ExamEditorSubComponents/CollapseMenuContainer.js ***!
@@ -178,7 +406,8 @@ var ExamPage = function ExamPage(_ref) {
       editorTaskIndex = _ref.editorTaskIndex,
       editorTaskPart = _ref.editorTaskPart,
       updateTaskText = _ref.updateTaskText,
-      props = _objectWithoutProperties(_ref, ["exam", "setTaskToEdit", "removeTask", "setTaskToEditWithPart", "editorTaskIndex", "editorTaskPart", "updateTaskText"]);
+      pushTaskAtIndex = _ref.pushTaskAtIndex,
+      props = _objectWithoutProperties(_ref, ["exam", "setTaskToEdit", "removeTask", "setTaskToEditWithPart", "editorTaskIndex", "editorTaskPart", "updateTaskText", "pushTaskAtIndex"]);
 
   var examTasks = exam.tasks;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -209,7 +438,8 @@ var ExamPage = function ExamPage(_ref) {
     setTaskToEditWithPart: setTaskToEditWithPart,
     editorTaskIndex: editorTaskIndex,
     editorTaskPart: editorTaskPart,
-    updateTaskText: updateTaskText
+    updateTaskText: updateTaskText,
+    pushTaskAtIndex: pushTaskAtIndex
   })));
 };
 
@@ -716,13 +946,26 @@ var TaskOverlay = function TaskOverlay(_ref) {
       var rightOffset = boxWidth / 2 - menuWidth / 2;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_1__["default"], {
         position: "absolute",
-        top: "-20px",
+        top: "-".concat(height, "px"),
         right: "".concat(rightOffset, "px") // left={"auto"}
         // right={"auto"}
         ,
         borderColor: "primary.main",
-        display: "flex"
-      }, menuComponents);
+        display: "flex",
+        color: "white"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          border: "solid transparent",
+          borderRight: "solid black",
+          borderWidth: "22px 12px 0 0"
+        }
+      }), menuComponents, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          border: "solid transparent",
+          borderLeft: "solid black",
+          borderWidth: "22px 0 0 12px"
+        }
+      }));
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_1__["default"] // m={isActive ? "-1px" : ""}
     , {
       style: {}
@@ -972,11 +1215,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_latex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-latex */ "./node_modules/react-latex/build/latex.js");
 /* harmony import */ var react_latex__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_latex__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/esm/Box/index.js");
+/* harmony import */ var _AddTaskWithDropdownMenu__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./AddTaskWithDropdownMenu */ "./djsr/frontend/src/components/ExamEditorSubComponents/AddTaskWithDropdownMenu.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
 
 
 
@@ -995,7 +1240,8 @@ var TaskWithOverlay = function TaskWithOverlay(_ref) {
       editorTaskPart = _ref.editorTaskPart,
       updateTaskText = _ref.updateTaskText,
       task = _ref.task,
-      props = _objectWithoutProperties(_ref, ["index", "droppableId", "setTaskToEditWithPart", "editorTaskIndex", "editorTaskPart", "updateTaskText", "task"]);
+      pushTaskAtIndex = _ref.pushTaskAtIndex,
+      props = _objectWithoutProperties(_ref, ["index", "droppableId", "setTaskToEditWithPart", "editorTaskIndex", "editorTaskPart", "updateTaskText", "task", "pushTaskAtIndex"]);
 
   var answers = task.currentAnswers.answersIndexes.map(function (item) {
     var answerSource = item.isCorrect ? task.currentAnswers.correctans : task.currentAnswers.wronganswers;
@@ -1012,7 +1258,23 @@ var TaskWithOverlay = function TaskWithOverlay(_ref) {
     }, provided.draggableProps, {
       style: provided.draggableProps.style
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TaskOverlay__WEBPACK_IMPORTED_MODULE_1__["default"], {
-      menuComponents: [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", provided.dragHandleProps, "dndHandler")]
+      menuComponents: [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AddTaskWithDropdownMenu__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        index: index,
+        pushTaskAtIndex: pushTaskAtIndex
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _extends({
+        style: {
+          color: "white",
+          backgroundColor: "black",
+          borderRight: "solid white",
+          borderLeft: "solid white"
+        }
+      }, provided.dragHandleProps), "H"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          color: "white",
+          backgroundColor: "black",
+          borderLeft: "solid white"
+        }
+      }, "X")]
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_7__["default"], {
       mb: 2
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -1100,7 +1362,12 @@ var TasksDragAndDrop = function TasksDragAndDrop(_ref) {
       droppableId = _ref$DroppableProps.droppableId,
       DroppablePropsAnother = _objectWithoutProperties(_ref$DroppableProps, ["droppableId"]),
       examTasks = _ref.examTasks,
-      props = _objectWithoutProperties(_ref, ["DroppableProps", "examTasks"]);
+      setTaskToEditWithPart = _ref.setTaskToEditWithPart,
+      editorTaskIndex = _ref.editorTaskIndex,
+      editorTaskPart = _ref.editorTaskPart,
+      updateTaskText = _ref.updateTaskText,
+      pushTaskAtIndex = _ref.pushTaskAtIndex,
+      props = _objectWithoutProperties(_ref, ["DroppableProps", "examTasks", "setTaskToEditWithPart", "editorTaskIndex", "editorTaskPart", "updateTaskText", "pushTaskAtIndex"]);
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_2__["Droppable"], _extends({
     droppableId: "examDroppable",
@@ -1113,6 +1380,11 @@ var TasksDragAndDrop = function TasksDragAndDrop(_ref) {
       ref: provided.innerRef
     }), examTasks.map(function (task, index) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TaskWithOverlay__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        setTaskToEditWithPart: setTaskToEditWithPart,
+        editorTaskIndex: editorTaskIndex,
+        editorTaskPart: editorTaskPart,
+        updateTaskText: updateTaskText,
+        pushTaskAtIndex: pushTaskAtIndex,
         index: index,
         task: task
       });
@@ -1950,6 +2222,15 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "pushTaskAtIndex", function (task, index) {
+      _this.setState(function (state) {
+        state.exam.tasks.splice(index, 0, task);
+        state.saved = false;
+        state.timeout = _this.resetTimeout(_this.state.timeout, setTimeout(_this.saveExam, 3000));
+        return state;
+      });
+    });
+
     _defineProperty(_assertThisInitialized(_this), "handleSideMenuTabChange", function (event, newValue) {
       if (newValue === "generatePDF") _this.generatedPDFV3(_this.state.exam);else _this.setSideMenuCollapse(newValue);
     });
@@ -2014,7 +2295,8 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
         setTaskToEditWithPart: this.setTaskOnPageEditor,
         editorTaskIndex: this.state.editorTaskIndex,
         editorTaskPart: this.state.editorTaskPart,
-        updateTaskText: this.updateTaskText
+        updateTaskText: this.updateTaskText,
+        pushTaskAtIndex: this.pushTaskAtIndex
       })));
     }
   }]);

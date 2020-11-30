@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import TaskContentWithMenu from "./TaskContentWithMenu";
 import Latex from "react-latex";
 import Box from "@material-ui/core/Box";
+import AddTaskWithDropdownMenu from "./AddTaskWithDropdownMenu";
 
 const TaskWithOverlay = ({
   index,
@@ -15,6 +16,7 @@ const TaskWithOverlay = ({
   editorTaskPart,
   updateTaskText,
   task,
+    pushTaskAtIndex,
   ...props
 }) => {
   let answers = task.currentAnswers.answersIndexes.map((item) => {
@@ -40,8 +42,27 @@ const TaskWithOverlay = ({
           >
             <TaskOverlay
               menuComponents={[
-                <div>X</div>,
-                <div {...provided.dragHandleProps}>dndHandler</div>,
+                <AddTaskWithDropdownMenu index={index} pushTaskAtIndex={pushTaskAtIndex}/>,
+                <div
+                  style={{
+                    color: "white",
+                    backgroundColor: "black",
+                    borderRight: "solid white",
+                    borderLeft: "solid white",
+                  }}
+                  {...provided.dragHandleProps}
+                >
+                  H
+                </div>,
+                <div
+                  style={{
+                    color: "white",
+                    backgroundColor: "black",
+                    borderLeft: "solid white",
+                  }}
+                >
+                  X
+                </div>,
               ]}
             >
               <Box mb={2}>
@@ -69,6 +90,7 @@ const TaskWithOverlay = ({
                     editorTaskIndex={editorTaskIndex}
                     editorTaskPart={editorTaskPart}
                     updateTaskText={updateTaskText}
+
                   />
                   {/*<Latex>{task.text}</Latex>*/}
                 </p>

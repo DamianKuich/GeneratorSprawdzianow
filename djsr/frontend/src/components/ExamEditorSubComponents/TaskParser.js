@@ -1,4 +1,4 @@
-const taskParser = (task) => {
+export const taskParser = (task) => {
   console.log("taskparser",task)
   let newTask = JSON.parse(JSON.stringify(task));
   // console.log("taskparser parsed", newTask)

@@ -31,20 +31,35 @@ const TaskOverlay = ({
           >
             {isActive && (
               <ReactResizeDetector>
-                {({width, height}) => {
-                  const menuWidth=width;
-                  const rightOffset=(boxWidth/2) - (menuWidth/2)
+                {({ width, height }) => {
+                  const menuWidth = width;
+                  const rightOffset = boxWidth / 2 - menuWidth / 2;
                   return (
                     <Box
                       position={"absolute"}
-                      top={"-20px"}
+                      top={`-${height}px`}
                       right={`${rightOffset}px`}
                       // left={"auto"}
                       // right={"auto"}
                       borderColor={"primary.main"}
                       display={"flex"}
+                      color={"white"}
                     >
+                      <div
+                        style={{
+                          border: "solid transparent",
+                          borderRight: "solid black",
+                          borderWidth: "22px 12px 0 0",
+                        }}
+                      ></div>
                       {menuComponents}
+                      <div
+                        style={{
+                          border: "solid transparent",
+                          borderLeft: "solid black",
+                          borderWidth: "22px 0 0 12px",
+                        }}
+                      ></div>
                     </Box>
                   );
                 }}

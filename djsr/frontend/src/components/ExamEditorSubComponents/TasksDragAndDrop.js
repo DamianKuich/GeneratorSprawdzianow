@@ -10,6 +10,11 @@ import TaskWithOverlay from "./TaskWithOverlay";
 const TasksDragAndDrop = ({
   DroppableProps: { droppableId, ...DroppablePropsAnother },
   examTasks,
+  setTaskToEditWithPart,
+  editorTaskIndex,
+  editorTaskPart,
+  updateTaskText,
+  pushTaskAtIndex,
   ...props
 }) => {
   return (
@@ -22,7 +27,17 @@ const TasksDragAndDrop = ({
         return (
           <div {...provided.droppableProps} ref={provided.innerRef}>
             {examTasks.map((task, index) => {
-              return <TaskWithOverlay index={index} task={task} />;
+              return (
+                <TaskWithOverlay
+                  setTaskToEditWithPart={setTaskToEditWithPart}
+                  editorTaskIndex={editorTaskIndex}
+                  editorTaskPart={editorTaskPart}
+                  updateTaskText={updateTaskText}
+                  pushTaskAtIndex={pushTaskAtIndex}
+                  index={index}
+                  task={task}
+                />
+              );
             })}
           </div>
         );

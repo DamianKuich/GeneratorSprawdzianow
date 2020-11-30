@@ -248,6 +248,17 @@ class ExamEditor extends Component {
     this.setState({ sideMenuCollapseId: collapseId });
   };
 
+  pushTaskAtIndex= (task,index)=>{
+    this.setState((state)=>{
+      state.exam.tasks.splice(index, 0, task);
+      state.saved = false;
+        state.timeout = this.resetTimeout(
+          this.state.timeout,
+          setTimeout(this.saveExam, 3000)
+        );
+        return state;
+    })
+  }
   handleSideMenuTabChange = (event, newValue) => {
     if (newValue === "generatePDF") this.generatedPDFV3(this.state.exam);
     else this.setSideMenuCollapse(newValue);
@@ -294,6 +305,7 @@ class ExamEditor extends Component {
             editorTaskIndex={this.state.editorTaskIndex}
             editorTaskPart={this.state.editorTaskPart}
             updateTaskText={this.updateTaskText}
+            pushTaskAtIndex={this.pushTaskAtIndex}
           />
         </div>
       </DragDropContext>

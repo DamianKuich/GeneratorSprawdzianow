@@ -21,6 +21,7 @@ const ExamPage = ({
   editorTaskIndex,
   editorTaskPart,
   updateTaskText,
+    pushTaskAtIndex,
   ...props
 }) => {
   const examTasks = exam.tasks;
@@ -59,6 +60,7 @@ const ExamPage = ({
           editorTaskIndex={editorTaskIndex}
           editorTaskPart={editorTaskPart}
           updateTaskText={updateTaskText}
+          pushTaskAtIndex={pushTaskAtIndex}
         />
       </Box>
     </Box>
