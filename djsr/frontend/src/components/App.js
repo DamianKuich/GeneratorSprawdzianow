@@ -6,6 +6,7 @@ import "./styles/mdcardfixes.css";
 import "./styles/styles.css";
 import axiosInstance from "./axiosAPI";
 import CssBaseline from '@material-ui/core/CssBaseline';
+import AddTask from "./AddTask";
 const Login = lazy(() => import("./MaterialUiLoginPage"));
 // import Login from "./MaterialUiLoginPage"
 const Signup = lazy(() => import("./MaterialUiSignUpPage"));
@@ -124,6 +125,11 @@ class App extends Component {
                 exact
                 path="/requestresetpassword/"
                 render={(props) => <PasswordResetRequest {...props} {...global} />}
+              />
+               <Route
+                exact
+                path="/addtask/"
+                render={(props) => <AddTask {...props} {...global} />}
               />
               <Route
                 path={"/myaccount/"}

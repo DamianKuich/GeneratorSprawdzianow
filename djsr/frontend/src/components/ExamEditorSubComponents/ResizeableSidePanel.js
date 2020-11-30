@@ -1,6 +1,7 @@
 import React from "react";
 import ResizePanel from "react-resize-panel";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
   sidePanel: {
@@ -13,7 +14,7 @@ const ResizeableSidePanel = ({children, ...props }) => {
   const theme = useTheme();
   return (
     <ResizePanel direction="e" style={{ flexGrow: 1 }}>
-      <div className={classes.sidePanel}>{children}</div>
+      <Box className={classes.sidePanel} boxShadow={3}>{children}</Box>
     </ResizePanel>
   );
 };
