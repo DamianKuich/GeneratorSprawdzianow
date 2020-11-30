@@ -90,30 +90,31 @@ class AddTask extends Component {
               taskData["level"] = values.poziom;
               taskData["points"] = values.points;
               taskData["private"] = values.private;
-              ansData["wrong_answers"] = values.wrongans;
-              ansData["correct_answers"] = values.corrans;
+              taskData["wrong_answers"] = values.wrongans;
+              taskData["correct_answers"] = values.corrans;
               axiosInstance
-                .post("/user/addanswers/", ansData)
+                .post("/user/addtask/", taskData)
                 .then((response) => {
                   helpers.setSubmitting(false);
                   console.log("response", response);
                   // this.setState({ addTaskResponse: response.data });
-                  return response;
+                  // return response;
+                  this.props.onTaskAdd(response.data[0])
                 })
-                .then((answerset) => {
-                    console.log("ansset",answerset)
-                    let newtaskdata = {...taskData,"answer_id":answerset.data[0].id}
-                        // taskData["answer_id"] = answerset.id
-                    // newtaskdata["answer_id"]=answerset.data.id
-                  axiosInstance
-                    .post("/user/addtask/", newtaskdata)
-                    .then((response) => {
-                      helpers.setSubmitting(false);
-                      console.log("response", response);
-                      this.props.onTaskAdd(response.data[0])
-                      // this.setState({ addTaskResponse: response.data });
-                    });
-                });
+                // .then((answerset) => {
+                //     console.log("ansset",answerset)
+                //     let newtaskdata = {...taskData,"answer_id":answerset.data[0].id}
+                //         // taskData["answer_id"] = answerset.id
+                //     // newtaskdata["answer_id"]=answerset.data.id
+                //   axiosInstance
+                //     .post("/user/addtask/", newtaskdata)
+                //     .then((response) => {
+                //       helpers.setSubmitting(false);
+                //       console.log("response", response);
+                //       this.props.onTaskAdd(response.data[0])
+                //       // this.setState({ addTaskResponse: response.data });
+                //     });
+                // });
               // console.log("values",values);
               // console.log("skillsy",result.join(","));
               // axiosInstance
