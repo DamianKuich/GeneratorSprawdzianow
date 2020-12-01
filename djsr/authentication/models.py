@@ -108,20 +108,20 @@ class Task(models.Model):
         default="",
         blank=True
     )
-    # wronganswers =ListCharField(
-    #     base_field=models.CharField(max_length=200),
-    #     size=6,
-    #     max_length=(120 * 11),
-    #     default = None,
-    #     blank = True# 6 * 10 character nominals, plus commas
-    # )
-    # correctans =ListCharField(
-    #     base_field=models.CharField(max_length=200),
-    #     size=6,
-    #     max_length=(120 * 11),
-    #     default = None,
-    #     blank = True# 6 * 10 character nominals, plus commas
-    # )
+    wronganswers =ListCharField(
+        base_field=models.CharField(max_length=200),
+        size=6,
+        max_length=(120 * 11),
+        default = None,
+        blank = True# 6 * 10 character nominals, plus commas
+    )
+    correctans =ListCharField(
+        base_field=models.CharField(max_length=200),
+        size=6,
+        max_length=(120 * 11),
+        default = None,
+        blank = True# 6 * 10 character nominals, plus commas
+    )
     # add_date = models.DateField(default=datetime.date.today)
     type = models.IntegerField(choices=RODZAJE)
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE,default="",blank=True,null=True)
