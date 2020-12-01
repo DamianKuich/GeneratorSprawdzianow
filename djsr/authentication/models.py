@@ -102,12 +102,12 @@ class Task(models.Model):
         (2, 'Rozszerzony'),
     }
     text = models.CharField(max_length=600,unique=True)
-    answers = models.OneToOneField(
-        Answers,
-        on_delete=models.CASCADE,
-        default="",
-        blank=True
-    )
+    # answers = models.OneToOneField(
+    #     Answers,
+    #     on_delete=models.CASCADE,
+    #     default="",
+    #     blank=True
+    # )
     wronganswers =ListCharField(
         base_field=models.CharField(max_length=200),
         size=6,
