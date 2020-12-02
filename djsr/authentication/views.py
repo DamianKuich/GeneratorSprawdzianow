@@ -713,3 +713,4 @@ class TestEndpoint(APIView):
                </html>
                '''
             wygenerowany_pdf = pdfkit.from_string(html, False)
+        return HttpResponse(wygenerowany_pdf, content_type="application/pdf")
