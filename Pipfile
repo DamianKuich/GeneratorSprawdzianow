@@ -43,6 +43,7 @@ virtualenv-clone = "*"
 whitenoise = "*"
 cryptography = "*"
 django-cleanup = "*"
+pdfkit = "*"
 
 [requires]
 python_version = "3.7"
