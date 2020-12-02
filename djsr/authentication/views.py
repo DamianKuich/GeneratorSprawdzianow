@@ -694,24 +694,23 @@ class TestEndpoint(APIView):
 
     def post(self,request):
         # req = requests.get("https://math.now.sh/?from=%22+%22//frac%7B1%7D%7B//Gamma(s)%7D//int_%7B0%7D%5E%7B//infty%7D//frac%7Bu%5E%7Bs-1%7D%7D%7Be%5E%7Bu%7D-1%7D//mathrm%7Bd%7Du%22)
-        with open("./texSvg.svg") as f:
             # data = f.read()
-            data = requests.get(
-                "https://math.now.sh/?inline=%22+%22//frac%7B1%7D%7B//Gamma(s)%7D//int_%7B0%7D%5E%7B//infty%7D//frac%7Bu%5E%7Bs-1%7D%7D%7Be%5E%7Bu%7D-1%7D//mathrm%7Bd%7Du%22)".text)
-            print(data)
-            # encoded_string = base64.b64encode(data.encode('utf-8'))
-            encoded_string = base64.b64encode(data.encode('utf-8'))
-            print(encoded_string)
-            b64 = encoded_string.decode('utf-8')
-            print(b64)
-            html = '''
-               <html>
-                   <body>
-                       <h1>Circle</h1>
-                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consequat . Vestibulum consequat scelerisque elit sit <img alt="" style="display:inline;" src="data:image/svg+xml;base64,''' + b64 + '''" />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consequat scelerisque elit sit amet consequat. Aliquam erat volutpat. </p>
-                   </body>
-               </html>
-               '''
-            wygenerowany_pdf = pdfkit.from_string(html, False)
-        # return HttpResponse(wygenerowany_pdf, content_type="application/pdf")
-        return Response(data={"id": wygenerowany_pdf}, status=status.HTTP_201_CREATED)
+        data = requests.get(
+            "https://math.now.sh/?inline=%22+%22//frac%7B1%7D%7B//Gamma(s)%7D//int_%7B0%7D%5E%7B//infty%7D//frac%7Bu%5E%7Bs-1%7D%7D%7Be%5E%7Bu%7D-1%7D//mathrm%7Bd%7Du%22)".text)
+        print(data)
+        # encoded_string = base64.b64encode(data.encode('utf-8'))
+        encoded_string = base64.b64encode(data.encode('utf-8'))
+        print(encoded_string)
+        b64 = encoded_string.decode('utf-8')
+        print(b64)
+        html = '''
+           <html>
+               <body>
+                   <h1>Circle</h1>
+                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consequat . Vestibulum consequat scelerisque elit sit <img alt="" style="display:inline;" src="data:image/svg+xml;base64,''' + b64 + '''" />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consequat scelerisque elit sit amet consequat. Aliquam erat volutpat. </p>
+               </body>
+           </html>
+           '''
+        wygenerowany_pdf = pdfkit.from_string(html, False)
+        return HttpResponse(wygenerowany_pdf, content_type="application/pdf")
+    # return Response(data={"id": wygenerowany_pdf}, status=status.HTTP_201_CREATED)
