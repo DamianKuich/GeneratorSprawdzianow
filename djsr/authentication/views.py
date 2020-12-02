@@ -696,7 +696,7 @@ class TestEndpoint(APIView):
         # req = requests.get("https://math.now.sh/?from=%22+%22//frac%7B1%7D%7B//Gamma(s)%7D//int_%7B0%7D%5E%7B//infty%7D//frac%7Bu%5E%7Bs-1%7D%7D%7Be%5E%7Bu%7D-1%7D//mathrm%7Bd%7Du%22)
             # data = f.read()
         data = requests.get(
-            "https://math.now.sh/?inline=%22+%22//frac%7B1%7D%7B//Gamma(s)%7D//int_%7B0%7D%5E%7B//infty%7D//frac%7Bu%5E%7Bs-1%7D%7D%7Be%5E%7Bu%7D-1%7D//mathrm%7Bd%7Du%22)".text)
+            "https://math.now.sh/?inline=%22+%22//frac%7B1%7D%7B//Gamma(s)%7D//int_%7B0%7D%5E%7B//infty%7D//frac%7Bu%5E%7Bs-1%7D%7D%7Be%5E%7Bu%7D-1%7D//mathrm%7Bd%7Du%22)").text
         print(data)
         # encoded_string = base64.b64encode(data.encode('utf-8'))
         encoded_string = base64.b64encode(data.encode('utf-8'))
