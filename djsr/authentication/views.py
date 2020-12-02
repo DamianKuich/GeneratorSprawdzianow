@@ -711,6 +711,7 @@ class TestEndpoint(APIView):
                </body>
            </html>
            '''
-        wygenerowany_pdf = pdfkit.from_string(html, False)
+        config = pdfkit.configuration(wkhtmltopdf='./bin/wkhtmltopdf')
+        wygenerowany_pdf = pdfkit.from_string(html, False, configuration=config)
         return HttpResponse(wygenerowany_pdf, content_type="application/pdf")
     # return Response(data={"id": wygenerowany_pdf}, status=status.HTTP_201_CREATED)
