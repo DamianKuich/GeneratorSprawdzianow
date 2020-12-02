@@ -687,6 +687,8 @@ class AddImageToTaskViewSet(APIView):
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
+
+
 class TestEndpoint(APIView):
     permission_classes = (permissions.AllowAny,)
 
