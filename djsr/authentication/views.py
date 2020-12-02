@@ -491,6 +491,8 @@ class AddTask(APIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
+
+
     def post(self, request, format=None):
         if request.data:
             try:
