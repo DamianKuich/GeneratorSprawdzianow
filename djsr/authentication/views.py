@@ -4,6 +4,7 @@ from itertools import chain
 import requests
 import simplejson
 import random
+import math
 from rest_framework import status, permissions
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -258,6 +259,11 @@ class TaskViewSet(APIView):
         lista = []
         if request.data:
             id_string = request.data['skill']
+            numberoftask = int(request.data['nroftasks'])
+            try:
+                pag = int(request.data['pagenr'])
+            except:
+                pag = 1
         else:
             id_string = None
         if id_string is not None:
@@ -268,12 +274,11 @@ class TaskViewSet(APIView):
                 taskprv = Task.objects.filter(skill=id,private=True,author=author_id)
                 serializerprv = TaskSerializer(taskprv, many=True)
                 lista.append(serializerprv.data)
-                # userid = CustomUser.objects.get(id=request.user.id)
-                # taskprivate = Task.objects.filter(skill=id,private=True,author=userid.id)
-                # serializer_private = TaskSerializer(taskprivate, many=True)
-                # lista.append(serializer_private.data)
-                # validated = schema.validate(test)
-            return Response(list(chain(*lista)))
+                a = math.ceil((len(list(chain(*lista)))/numberoftask))
+            if pag == 1:
+                return Response(data={"pages": str(a),"tasks":list(chain(*lista))[0:numberoftask]})
+            elif pag > 1:
+                return Response(data={"pages": str(a),"tasks":list(chain(*lista))[(pag*numberoftask)-numberoftask:pag*numberoftask]})
         else:
             task = Task.objects.all()
             serializer = TaskSerializer(task, many=True)
