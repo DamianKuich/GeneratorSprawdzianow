@@ -3,8 +3,9 @@ export const taskParser = (task) => {
   let newTask = JSON.parse(JSON.stringify(task));
   // console.log("taskparser parsed", newTask)
   // let draggedItem
-  newTask.answers.correctans = JSON.parse(newTask.answers.correctans.replace(/'/g, '"'))
-  newTask.answers.wronganswers = JSON.parse(newTask.answers.wronganswers.replace(/'/g, '"'))
+  newTask.answers={}
+  newTask.answers.correctans = JSON.parse(newTask.correctans.replace(/'/g, '"'))
+  newTask.answers.wronganswers = JSON.parse(newTask.wronganswers.replace(/'/g, '"'))
   // newTask.dataset = newTask.dataset.map((dataSet) => {
   //   dataSet.answers = dataSet.answers.map((answer) => {
   //     answer.allanswers = JSON.parse(answer.allanswers.replace(/'/g, '"'));

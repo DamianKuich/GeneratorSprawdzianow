@@ -90,6 +90,8 @@ class MaterialUiTaskSearch extends Component {
               axiosInstance
                 .post("/user/tasks/", {
                   skill: result.join(","),
+                  pagenr:1,
+                  nroftasks:20
                 })
                 .then((response) => {
                   helpers.setSubmitting(false);
@@ -98,7 +100,7 @@ class MaterialUiTaskSearch extends Component {
                   //   results: response.data,
                   // });
                   // console.log("parsed Twat",tasksParser(response.data));
-                  this.props.updateData(tasksParser(response.data));
+                  this.props.updateData(tasksParser(response.data.tasks));
                 })
                 .catch((error) => {
                   // console.log("login error", error.response);
