@@ -692,7 +692,7 @@ class AddImageToTaskViewSet(APIView):
 class TestEndpoint(APIView):
     permission_classes = (permissions.AllowAny,)
 
-    def get(self):
+    def get(self, request):
         # req = requests.get("https://math.now.sh/?from=%22+%22//frac%7B1%7D%7B//Gamma(s)%7D//int_%7B0%7D%5E%7B//infty%7D//frac%7Bu%5E%7Bs-1%7D%7D%7Be%5E%7Bu%7D-1%7D//mathrm%7Bd%7Du%22)
             # data = f.read()
         data = requests.get(
