@@ -490,7 +490,7 @@ class SkilltoSections(APIView):
 
 
 class AddTask(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (IsAuthenticated,)
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
