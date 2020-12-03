@@ -1,0 +1,2 @@
+def generatePdf():
+    return None

@@ -33,6 +33,7 @@ import requests
 import base64
 import pdfkit
 from yattag import Doc
+from djsr.authentication.examToPdf.MainScript import generatePdf
 
 
 from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer, \
