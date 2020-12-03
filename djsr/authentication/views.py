@@ -1,5 +1,6 @@
 import datetime
 import json
+import re
 from itertools import chain
 
 import requests
@@ -31,6 +32,8 @@ from schema import Schema, And, Use, Optional
 import requests
 import base64
 import pdfkit
+from yattag import Doc
+
 
 from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer, \
     CustomUserSerializerReadOnly, PasswordSendResetSerializer, TestJSONSerializer, ImageSerializer
@@ -283,7 +286,7 @@ class TaskViewSet(APIView):
                 return Response(data={"pages": str(a), "tasks": list(chain(*lista))[0:numberoftask]})
             elif pag > 1:
                 return Response(data={"pages": str(a), "tasks": list(chain(*lista))[(
-                                                                                                pag * numberoftask) - numberoftask:pag * numberoftask]})
+                                                                                            pag * numberoftask) - numberoftask:pag * numberoftask]})
         else:
             task = Task.objects.all()
             serializer = TaskSerializer(task, many=True)
@@ -748,9 +751,27 @@ class TestTasksiewSet(APIView):
         # test = test.replace("$'","")
         # print(test[319:])
         # test = json.loads(test)
-        tasks=json.loads(test['tasks'])
-        def tasktextparser(text):
-            return text
+        tasks = json.loads(test['tasks'])
 
-        # test = map(tasktextparser, test)
-        return Response(data={"test": tasks})
+        def tasktextparser(text):
+            pattern = "\$\{[^\$]*\}\$"
+            matches = [(m.start(0), m.end(0)) for m in re.finditer(pattern, text)]
+            taskTextParsed = list()
+            taskTextParsedIndex = 0
+            for match in matches:
+                if taskTextParsedIndex < match[0]:
+                    taskTextParsed.append({"type": "text", "data": text[taskTextParsedIndex:match[0]]})
+                taskTextParsed.append({"type": "latex", "data": text[match[0]:match[1]], "svg": requests.get(
+                    "https://math.now.sh?from=" + text[match[0]:match[1]][2:-2])})
+                taskTextParsedIndex = match[1]
+
+            if taskTextParsedIndex < (len(text) - 1):
+                taskTextParsed.append({"type": "text", "data": text[taskTextParsedIndex:]})
+            return {'text': text, "matches": taskTextParsed}
+
+        def taskMapper(task):
+            result={}
+            return tasktextparser(task['text'])
+
+        mapped = map(taskMapper, tasks)
+        return Response(data={"test": mapped})
