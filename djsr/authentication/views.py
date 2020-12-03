@@ -742,15 +742,15 @@ class TestTasksiewSet(APIView):
         test = TestJSON.objects.filter(id=1).values('tasks')
         test = str(test)[22:-4]
         # print(test)
-        test = list(TestJSON.objects.filter(id=1).values())
+        test = list(TestJSON.objects.filter(id=1).values())[0]
         # test=
-        print(test)
+        print(test['tasks'])
         # test = test.replace("$'","")
         # print(test[319:])
         # test = json.loads(test)
-
+        tasks=json.loads(test['tasks'])
         def tasktextparser(text):
             return text
 
         # test = map(tasktextparser, test)
-        return Response(data={"test": test})
+        return Response(data={"test": tasks})
