@@ -16,6 +16,7 @@ const TaskWithOverlay = ({
   editorTaskPart,
   updateTaskText,
   task,
+    removeTask,
     pushTaskAtIndex,
   ...props
 }) => {
@@ -60,6 +61,7 @@ const TaskWithOverlay = ({
                     backgroundColor: "black",
                     borderLeft: "solid white",
                   }}
+                  onClick={()=>{removeTask(index)}}
                 >
                   X
                 </div>,

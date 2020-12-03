@@ -61,6 +61,7 @@ const ExamPage = ({
           editorTaskPart={editorTaskPart}
           updateTaskText={updateTaskText}
           pushTaskAtIndex={pushTaskAtIndex}
+          removeTask={removeTask}
         />
       </Box>
     </Box>

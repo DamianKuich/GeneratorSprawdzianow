@@ -15,6 +15,7 @@ const TasksDragAndDrop = ({
   editorTaskPart,
   updateTaskText,
   pushTaskAtIndex,
+    removeTask,
   ...props
 }) => {
   return (
@@ -36,6 +37,7 @@ const TasksDragAndDrop = ({
                   pushTaskAtIndex={pushTaskAtIndex}
                   index={index}
                   task={task}
+                  removeTask={removeTask}
                 />
               );
             })}
