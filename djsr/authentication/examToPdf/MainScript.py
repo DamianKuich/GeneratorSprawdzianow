@@ -15,7 +15,7 @@ def katexparser(text):
         if taskTextParsedIndex < match[0]:
             taskTextParsed.append({"type": "text", "data": text[taskTextParsedIndex:match[0]]})
         taskTextParsed.append({"type": "latex", "data": text[match[0]:match[1]], "svg": requests.get(
-            "https://math.now.sh?from=" + text[match[0]:match[1]][2:-2])})
+            "https://math.now.sh?from=" + text[match[0]:match[1]][2:-2]).text})
         taskTextParsedIndex = match[1]
 
     if taskTextParsedIndex < (len(text) - 1):
