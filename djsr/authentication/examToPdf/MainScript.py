@@ -37,7 +37,7 @@ def collectTaskAnswers(answers):
 def taskPrintDataParser(task):
     task = deepcopy(task)
     task['text'] = katexparser(task['text'])
-    task['answers'] = collectTaskAnswers(task['answers'])
+    task['answers'] = collectTaskAnswers(task['currentAnswers'])
     task['answers'] = map(katexparser, task['answers'])
     return task
 
