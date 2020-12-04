@@ -8,6 +8,7 @@ from yattag import Doc
 
 def katexparser(text):
     pattern = "\$\{[^\$]*\}\$"
+    print({"text": text})
     matches = [(m.start(0), m.end(0)) for m in re.finditer(pattern, text)]
     taskTextParsed = list()
     taskTextParsedIndex = 0
@@ -38,12 +39,14 @@ def taskPrintDataParser(task):
     task = deepcopy(task)
     task['text'] = katexparser(task['text'])
     task['answers'] = collectTaskAnswers(task['currentAnswers'])
-    task['answers'] = map(katexparser, task['answers'])
+    # print({'taskPrintDataParser': task})
+    # task['answers'] = list(map(katexparser, task['answers']))
     return task
 
 
 def generatePdf(tasks, name="Sprawdzian"):
-    tasks = map(taskPrintDataParser, tasks)
+    tasks = list(map(taskPrintDataParser, tasks))
+    # print(tasks)
     doc, tag, text = Doc().tagtext()
     with tag('html'):
         with tag('body'):
