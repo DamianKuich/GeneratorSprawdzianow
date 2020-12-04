@@ -67,7 +67,7 @@ def generatePdf(tasks, name="Sprawdzian"):
                     # renderowanie odp zadania
                     with tag('div'):
                         for answer in task['answers']:
-                            with tag('div'):
+                            with tag('p'):
                                 for part in answer:
                                     if part["type"] == "text":
                                         with tag('span'):
