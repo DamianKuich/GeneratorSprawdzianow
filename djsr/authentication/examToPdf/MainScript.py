@@ -60,7 +60,7 @@ def generatePdf(tasks, name="Sprawdzian"):
                                 with tag('span'):
                                     text(part["data"])
                             elif part["type"] == "latex":
-                                doc.stag("img", src='data:image/svg+xml;utf8,' + ''.join(part["svg"]))
+                                doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"])
                     # renderowanie odp zadania
                     with tag('div'):
                         for answer in task['answers']:
@@ -70,7 +70,7 @@ def generatePdf(tasks, name="Sprawdzian"):
                                         with tag('span'):
                                             text(part["data"])
                                     elif part["type"] == "latex":
-                                        doc.stag("img", src='data:image/svg+xml;utf8,' + ''.join(part["svg"]))
+                                        doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"])
     html = doc.getvalue()
     config = pdfkit.configuration(wkhtmltopdf='./bin/wkhtmltopdf')
     wygenerowany_pdf = pdfkit.from_string(html, False, configuration=config)
