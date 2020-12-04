@@ -743,8 +743,8 @@ class TestTasksiewSet(APIView):
     def get(self, request, format=None):
         listazadan = []
         listaodp = []
-        test = TestJSON.objects.filter(id=1).values('tasks')
-        test = str(test)[22:-4]
+        # test = TestJSON.objects.filter(id=1).values('tasks')
+        # test = str(test)[22:-4]
         # print(test)
         test = list(TestJSON.objects.filter(id=1).values())[0]
         # test=
@@ -753,8 +753,9 @@ class TestTasksiewSet(APIView):
         # print(test[319:])
         # test = json.loads(test)
         tasks = json.loads(test['tasks'])
-        pdf=generatePdf(tasks=tasks,name="beczka")
-        return HttpResponse(pdf, content_type="application/pdf")
+        # pdf=generatePdf(tasks=tasks,name="beczka")
+        # return HttpResponse(pdf, content_type="application/pdf")
+        return Response(data={"test": tasks})
         def tasktextparser(text):
             pattern = "\$\{[^\$]*\}\$"
             matches = [(m.start(0), m.end(0)) for m in re.finditer(pattern, text)]
