@@ -2,6 +2,7 @@ import re
 from copy import deepcopy
 
 import pdfkit
+import requests
 from yattag import Doc
 
 
