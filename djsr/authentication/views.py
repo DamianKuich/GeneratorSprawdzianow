@@ -753,9 +753,9 @@ class TestTasksiewSet(APIView):
         # print(test[319:])
         # test = json.loads(test)
         tasks = json.loads(test['tasks'])
-        # pdf=generatePdf(tasks=tasks,name="beczka")
-        # return HttpResponse(pdf, content_type="application/pdf")
-        return Response(data={"test": tasks})
+        pdf=generatePdf(tasks=tasks,name="beczka")
+        return HttpResponse(pdf, content_type="application/pdf")
+        # return Response(data={"test": tasks})
         def tasktextparser(text):
             pattern = "\$\{[^\$]*\}\$"
             matches = [(m.start(0), m.end(0)) for m in re.finditer(pattern, text)]
