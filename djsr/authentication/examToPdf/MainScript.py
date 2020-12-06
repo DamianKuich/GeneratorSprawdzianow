@@ -16,7 +16,7 @@ def katexparser(text):
         if taskTextParsedIndex < match[0]:
             taskTextParsed.append({"type": "text", "data": text[taskTextParsedIndex:match[0]]})
         taskTextParsed.append({"type": "latex", "data": text[match[0]:match[1]], "svg": requests.get(
-            "https://math.now.sh?from=" + text[match[0]:match[1]][2:-2]).text})
+            "https://math.now.sh?inline=" + text[match[0]:match[1]][2:-2]).text})
         taskTextParsedIndex = match[1]
 
     if taskTextParsedIndex < (len(text)):
@@ -60,7 +60,7 @@ def generatePdf(tasks, name="Sprawdzian"):
             # renderowanie taskow
             for task in tasks:
                 with tag('div'):
-                    print('TASK',task)
+                    print('TASK', task)
                     # renderowanie tekstu zadania
                     with tag('p'):
                         for part in task['text']:
@@ -71,8 +71,8 @@ def generatePdf(tasks, name="Sprawdzian"):
                                 svg = part["svg"]
                                 w = re.search('width="(.+?)ex', svg).group(0)
                                 h = re.search('height="(.+?)ex', svg).group(0)
-                                print('W/H',w,h)
-                                doc.stag("img", src='data:image/svg+xml;utf8,' + svg,style="display:inline;")
+                                print('W/H', w, h)
+                                doc.stag("img", src='data:image/svg+xml;utf8,' + svg, style="display:inline;")
                     # renderowanie odp zadania
                     with tag('div'):
                         for answer in task['answers']:
@@ -84,7 +84,8 @@ def generatePdf(tasks, name="Sprawdzian"):
                                 elif part["type"] == "latex":
                                     doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"])
     html = doc.getvalue()
-    print('HAATEEMEEEL',html)
-    config = pdfkit.configuration(wkhtmltopdf='./bin/wkhtmltopdf')
-    wygenerowany_pdf = pdfkit.from_string(html, False, configuration=config)
+    print('HAATEEMEEEL', html)
+    # config = pdfkit.configuration(wkhtmltopdf='./bin/wkhtmltopdf')
+    # wygenerowany_pdf = pdfkit.from_string(html, False, configuration=config)
+    wygenerowany_pdf = pdfkit.from_string(html, False)
     return wygenerowany_pdf
