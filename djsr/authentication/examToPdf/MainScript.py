@@ -8,7 +8,7 @@ from yattag import Doc
 
 def katexparser(text):
     pattern = "\$\{[^\$]*\}\$"
-    print({"text": text})
+    # print({"text": text})
     matches = [(m.start(0), m.end(0)) for m in re.finditer(pattern, text)]
     taskTextParsed = list()
     taskTextParsedIndex = 0
@@ -19,7 +19,7 @@ def katexparser(text):
             "https://math.now.sh?from=" + text[match[0]:match[1]][2:-2]).text})
         taskTextParsedIndex = match[1]
 
-    if taskTextParsedIndex < (len(text) - 1):
+    if taskTextParsedIndex < (len(text)):
         taskTextParsed.append({"type": "text", "data": text[taskTextParsedIndex:]})
     return taskTextParsed
 
@@ -49,6 +49,10 @@ def generatePdf(tasks, name="Sprawdzian"):
     # print(tasks)
     doc, tag, text = Doc().tagtext()
     with tag('html'):
+        with tag('head'):
+            doc.stag('meta', charset='UTF-8')
+            # with tag('style'):
+            #     text('img { width: 10%; height: auto; }')
         with tag('body'):
             # dodaj tytul do spr
             with tag('h1'):
@@ -56,6 +60,7 @@ def generatePdf(tasks, name="Sprawdzian"):
             # renderowanie taskow
             for task in tasks:
                 with tag('div'):
+                    print('TASK',task)
                     # renderowanie tekstu zadania
                     with tag('p'):
                         for part in task['text']:
@@ -63,18 +68,23 @@ def generatePdf(tasks, name="Sprawdzian"):
                                 with tag('span'):
                                     text(part["data"])
                             elif part["type"] == "latex":
-                                doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"])
+                                svg = part["svg"]
+                                w = re.search('width="(.+?)ex', svg).group(0)
+                                h = re.search('height="(.+?)ex', svg).group(0)
+                                print('W/H',w,h)
+                                doc.stag("img", src='data:image/svg+xml;utf8,' + svg)
                     # renderowanie odp zadania
                     with tag('div'):
                         for answer in task['answers']:
-                            with tag('div'):
-                                for part in answer:
-                                    if part["type"] == "text":
-                                        with tag('span'):
-                                            text(part["data"])
-                                    elif part["type"] == "latex":
-                                        doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"])
+                            # with tag('div'):
+                            for part in answer:
+                                if part["type"] == "text":
+                                    with tag('span'):
+                                        text(part["data"])
+                                elif part["type"] == "latex":
+                                    doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"])
     html = doc.getvalue()
-    config = pdfkit.configuration(wkhtmltopdf='./bin/wkhtmltopdf')
+    print('HAATEEMEEEL',html)
+    config = pdfkit.configuration(wkhtmltopdf='C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
     wygenerowany_pdf = pdfkit.from_string(html, False, configuration=config)
     return wygenerowany_pdf

@@ -753,7 +753,7 @@ class TestTasksiewSet(APIView):
         # print(test[319:])
         # test = json.loads(test)
         tasks = json.loads(test['tasks'])
-        pdf=generatePdf(tasks=tasks,name="beczka")
+        pdf=generatePdf(tasks=tasks,name="SPR")
         return HttpResponse(pdf, content_type="application/pdf")
         # return Response(data={"test": tasks})
         def tasktextparser(text):
