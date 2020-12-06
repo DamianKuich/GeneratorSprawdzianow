@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const axiosInstanceNoAuth = axios.create({
   baseURL: window.location.origin+"/api/",
-  timeout: 5000,
+  timeout: 30000,
   headers: {
     "Content-Type": "application/json",
     accept: "application/json",
@@ -12,7 +12,7 @@ export const axiosInstanceNoAuth = axios.create({
 
 export const axiosInstance = axios.create({
   baseURL: window.location.origin+"/api/",
-  timeout: 5000,
+  timeout: 30000,
   headers: {
     Authorization: "JWT " + localStorage.getItem("access_token"),
     "Content-Type": "application/json",
