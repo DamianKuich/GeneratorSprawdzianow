@@ -72,7 +72,7 @@ def generatePdf(tasks, name="Sprawdzian"):
                                 w = re.search('width="(.+?)ex', svg).group(0)
                                 h = re.search('height="(.+?)ex', svg).group(0)
                                 print('W/H',w,h)
-                                doc.stag("img", src='data:image/svg+xml;utf8,' + svg)
+                                doc.stag("img", src='data:image/svg+xml;utf8,' + svg,style="display:inline;")
                     # renderowanie odp zadania
                     with tag('div'):
                         for answer in task['answers']:
@@ -85,6 +85,6 @@ def generatePdf(tasks, name="Sprawdzian"):
                                     doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"])
     html = doc.getvalue()
     print('HAATEEMEEEL',html)
-    config = pdfkit.configuration(wkhtmltopdf='C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
+    config = pdfkit.configuration(wkhtmltopdf='./bin/wkhtmltopdf')
     wygenerowany_pdf = pdfkit.from_string(html, False, configuration=config)
     return wygenerowany_pdf
