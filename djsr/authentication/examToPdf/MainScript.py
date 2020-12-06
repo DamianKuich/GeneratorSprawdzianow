@@ -88,4 +88,4 @@ def generatePdf(tasks, name="Sprawdzian"):
     # config = pdfkit.configuration(wkhtmltopdf='./bin/wkhtmltopdf')
     # wygenerowany_pdf = pdfkit.from_string(html, False, configuration=config)
     wygenerowany_pdf = pdfkit.from_string(html, False)
-    return wygenerowany_pdf
+    return wygenerowany_pdf, html

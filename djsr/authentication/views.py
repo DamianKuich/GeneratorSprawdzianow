@@ -33,8 +33,8 @@ import requests
 import base64
 import pdfkit
 from yattag import Doc
-from .examToPdf.MainScript import generatePdf
-
+from .examToPdf.MainScript import generatePdf as generatePdfClassic
+from .examToPdf.PdfFromNode import generatePdf
 
 from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer, \
     CustomUserSerializerReadOnly, PasswordSendResetSerializer, TestJSONSerializer, ImageSerializer
@@ -753,9 +753,10 @@ class TestTasksiewSet(APIView):
         # print(test[319:])
         # test = json.loads(test)
         tasks = json.loads(test['tasks'])
-        pdf=generatePdf(tasks=tasks,name="SPR")
+        pdf, html = generatePdf(tasks=tasks, name="SPR")
         return HttpResponse(pdf, content_type="application/pdf")
-        # return Response(data={"test": tasks})
+
+        # return Response(data={"test": html})
         def tasktextparser(text):
             pattern = "\$\{[^\$]*\}\$"
             matches = [(m.start(0), m.end(0)) for m in re.finditer(pattern, text)]
@@ -773,7 +774,7 @@ class TestTasksiewSet(APIView):
             return {'text': text, "matches": taskTextParsed}
 
         def taskMapper(task):
-            result={}
+            result = {}
             return tasktextparser(task['text'])
 
         mapped = map(taskMapper, tasks)
