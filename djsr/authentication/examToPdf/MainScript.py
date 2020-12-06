@@ -84,7 +84,7 @@ def generatePdf(tasks, name="Sprawdzian"):
                                 elif part["type"] == "latex":
                                     doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"])
     html = doc.getvalue()
-    print('HAATEEMEEEL', html)
+    # print('HAATEEMEEEL', html)
     # config = pdfkit.configuration(wkhtmltopdf='./bin/wkhtmltopdf')
     # wygenerowany_pdf = pdfkit.from_string(html, False, configuration=config)
     wygenerowany_pdf = pdfkit.from_string(html, False)
