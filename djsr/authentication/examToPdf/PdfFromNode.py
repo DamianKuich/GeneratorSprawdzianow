@@ -35,10 +35,10 @@ def generatePdf(tasks, name="Sprawdzian"):
                             doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"])
     html = doc.getvalue()
     # print('HAATEEMEEEL', html)
-    requestJson=json.dump({'html':html})
+    requestJson=json.dumps({'html':html})
     # wygenerowany_pdf = requests.get("https://gen-mat-pdf-node.herokuapp.com/pdf/", data='{"html": "'+html.encode(encoding='UTF-8')+'"}')
     wygenerowany_pdf = requests.get("https://gen-mat-pdf-node.herokuapp.com/pdf/",
-                                    data=requestJson)
+                                    data=requestJson,headers={"Content-Type":"application/json"})
     print("wyg pdf", wygenerowany_pdf)
     # config = pdfkit.configuration(wkhtmltopdf='./bin/wkhtmltopdf')
     # wygenerowany_pdf = pdfkit.from_string(html, False, configuration=config)
