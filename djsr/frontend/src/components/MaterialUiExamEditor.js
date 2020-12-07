@@ -263,7 +263,7 @@ class ExamEditor extends Component {
     // if (newValue === "generatePDF") this.generatedPDFV3(this.state.exam);
     if (newValue === "generatePDF")
       window.open(
-        "https://gen-mat.herokuapp.com/api/user/testpdf/" + this.state.exam.id +"/",
+        "https://gen-mat.herokuapp.com/api/user/testpdf/" + this.state.exam.id,
         "_blank"
       );
     //window.open(url,'_blank');
