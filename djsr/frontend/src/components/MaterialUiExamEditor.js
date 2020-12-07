@@ -91,17 +91,17 @@ class ExamEditor extends Component {
     });
   };
 
-  updateTaskText=(index,text)=>{
-    this.setState((state)=>{
-      state.exam.tasks[index].text=text;
+  updateTaskText = (index, text) => {
+    this.setState((state) => {
+      state.exam.tasks[index].text = text;
       state.timeout = this.resetTimeout(
         this.state.timeout,
         setTimeout(this.saveExam, 3000)
       );
       state.saved = false;
-      return state
-    })
-  }
+      return state;
+    });
+  };
 
   generatedPDFV3 = examToPdf;
 
@@ -248,19 +248,25 @@ class ExamEditor extends Component {
     this.setState({ sideMenuCollapseId: collapseId });
   };
 
-  pushTaskAtIndex= (task,index)=>{
-    this.setState((state)=>{
+  pushTaskAtIndex = (task, index) => {
+    this.setState((state) => {
       state.exam.tasks.splice(index, 0, task);
       state.saved = false;
-        state.timeout = this.resetTimeout(
-          this.state.timeout,
-          setTimeout(this.saveExam, 3000)
-        );
-        return state;
-    })
-  }
+      state.timeout = this.resetTimeout(
+        this.state.timeout,
+        setTimeout(this.saveExam, 3000)
+      );
+      return state;
+    });
+  };
   handleSideMenuTabChange = (event, newValue) => {
-    if (newValue === "generatePDF") this.generatedPDFV3(this.state.exam);
+    // if (newValue === "generatePDF") this.generatedPDFV3(this.state.exam);
+    if (newValue === "generatePDF")
+      window.open(
+        "https://gen-mat.herokuapp.com/api/user/testpdf/" + this.state.exam.id +"/",
+        "_blank"
+      );
+    //window.open(url,'_blank');
     else this.setSideMenuCollapse(newValue);
   };
   render() {
