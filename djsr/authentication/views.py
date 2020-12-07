@@ -740,20 +740,22 @@ class TestTasksiewSet(APIView):
     permission_classes = (permissions.AllowAny,)
     serializer_class = TestJSONSerializer
 
-    def get(self, request, format=None):
+    def get(self, request, *args, **kwargs):
+        id = kwargs.pop('id')
         listazadan = []
         listaodp = []
         # test = TestJSON.objects.filter(id=1).values('tasks')
         # test = str(test)[22:-4]
         # print(test)
-        test = list(TestJSON.objects.filter(id=1).values())[0]
+
+        test = list(TestJSON.objects.filter(id=id).values())[0]
         # test=
         print(test['tasks'])
         # test = test.replace("$'","")
         # print(test[319:])
         # test = json.loads(test)
         tasks = json.loads(test['tasks'])
-        pdf, html = generatePdf(tasks=tasks, name="SPR")
+        pdf, html = generatePdf(tasks=tasks, name=test['name'])
         return HttpResponse(pdf, content_type="application/pdf")
 
         # return Response(data={"test": html})

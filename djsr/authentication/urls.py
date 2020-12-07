@@ -39,5 +39,5 @@ urlpatterns = [
     path('user/passreset/<token>/$', PasswordResetView.as_view(), name='reset'),
     path('user/deletetest/', DeleteTestViewSet.as_view(), name='deleteTest'),
     path('user/testend/', TestEndpoint.as_view(), name='testend'),
-    path('user/testpdf/', TestTasksiewSet.as_view(), name='testpdf'),
+    path('user/testpdf/<id>', TestTasksiewSet.as_view(), name='testpdf'),
 ]
