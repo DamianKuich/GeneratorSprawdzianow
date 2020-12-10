@@ -245,8 +245,10 @@ class ExamEditor extends Component {
 
   generateAnswerSetForTask = (
     task,
-    { numberOfAnswers = 4, numberOfCorrectAnswers = 1, ...options }
+    { numberOfAnswers, numberOfCorrectAnswers, ...options }={}
   ) => {
+    numberOfAnswers=numberOfAnswers || 4
+    numberOfCorrectAnswers=numberOfCorrectAnswers||1
     let NewTask = JSON.parse(JSON.stringify(task));
     NewTask.currentAnswers = JSON.parse(JSON.stringify(NewTask.answers));
     let currentDataSetAnswers = NewTask.currentAnswers;
@@ -265,6 +267,7 @@ class ExamEditor extends Component {
     );
     answersSet = shuffle(answersSet);
     NewTask.currentAnswers.answersIndexes = answersSet;
+    return NewTask
   };
 
   //zmiana zakladki w menu po lewej stronie
