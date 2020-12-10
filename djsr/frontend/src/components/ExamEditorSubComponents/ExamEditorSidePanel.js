@@ -28,7 +28,7 @@ const ExamEditorSidePanel = ({
       <TaskSearchCollapseMenu
         currentTabId={currentTabId}
         taskSearchResult={taskSearchResult}
-        setTaskSearchResult={setTaskSearchResult}npm
+        setTaskSearchResult={setTaskSearchResult}
       />
       <TaskEditorCollapseMenu
         currentTabId={currentTabId}
