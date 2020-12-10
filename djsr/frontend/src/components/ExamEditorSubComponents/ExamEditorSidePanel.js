@@ -19,7 +19,7 @@ const ExamEditorSidePanel = ({
   console.log("side panel props", currentTabId, props);
   return (
     <ResizeableSidePanel>
-      <div>{exam.name}</div>
+      <div>{exam.name} eluwina</div>
       <div>{saved ? "Zapisano" : "Zapisywanie"}</div>
       <SideMenuTabSelector
         handleTabChange={handleTabChange}
@@ -28,7 +28,7 @@ const ExamEditorSidePanel = ({
       <TaskSearchCollapseMenu
         currentTabId={currentTabId}
         taskSearchResult={taskSearchResult}
-        setTaskSearchResult={setTaskSearchResult}
+        setTaskSearchResult={setTaskSearchResult}npm
       />
       <TaskEditorCollapseMenu
         currentTabId={currentTabId}

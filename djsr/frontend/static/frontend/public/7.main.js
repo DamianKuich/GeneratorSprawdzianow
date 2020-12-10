@@ -340,13 +340,14 @@ var ExamEditorSidePanel = function ExamEditorSidePanel(_ref) {
       props = _objectWithoutProperties(_ref, ["exam", "saved", "currentTabId", "handleTabChange", "taskSearchResult", "setTaskSearchResult", "updateTask", "selectedTaskToEdit"]);
 
   console.log("side panel props", currentTabId, props);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ResizeableSidePanel__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, exam.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, saved ? "Zapisano" : "Zapisywanie"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SideMenuTabSelector__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ResizeableSidePanel__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, exam.name, " eluwina"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, saved ? "Zapisano" : "Zapisywanie"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SideMenuTabSelector__WEBPACK_IMPORTED_MODULE_2__["default"], {
     handleTabChange: handleTabChange,
     currentTabId: currentTabId
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TaskSearchCollapseMenu__WEBPACK_IMPORTED_MODULE_4__["default"], {
     currentTabId: currentTabId,
     taskSearchResult: taskSearchResult,
-    setTaskSearchResult: setTaskSearchResult
+    setTaskSearchResult: setTaskSearchResult,
+    npm: true
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TaskEditorCollapseMenu__WEBPACK_IMPORTED_MODULE_5__["default"], {
     currentTabId: currentTabId,
     updateTask: updateTask,
