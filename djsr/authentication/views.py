@@ -34,7 +34,7 @@ import base64
 import pdfkit
 from yattag import Doc
 from .examToPdf.MainScript import generatePdf as generatePdfClassic
-from .examToPdf.PdfFromNode import generatePdf
+from .examToPdf.PdfFromNode import generatePdf, generateAnswersPdf
 
 from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer, \
     CustomUserSerializerReadOnly, PasswordSendResetSerializer, TestJSONSerializer, ImageSerializer
@@ -741,43 +741,28 @@ class TestTasksiewSet(APIView):
     serializer_class = TestJSONSerializer
 
     def get(self, request, *args, **kwargs):
+        # type = args.pop('type')
         id = kwargs.pop('id')
-        listazadan = []
-        listaodp = []
-        # test = TestJSON.objects.filter(id=1).values('tasks')
-        # test = str(test)[22:-4]
-        # print(test)
 
         test = list(TestJSON.objects.filter(id=id).values())[0]
-        # test=
         print(test['tasks'])
-        # test = test.replace("$'","")
-        # print(test[319:])
-        # test = json.loads(test)
         tasks = json.loads(test['tasks'])
-        pdf, html = generatePdf(tasks=tasks, name=test['name'])
+        pdf, html = generateAnswersPdf(tasks=tasks, name=test['name'])
+        # pdf, html = generatePdf(tasks=tasks, name=test['name'])
         return HttpResponse(pdf, content_type="application/pdf")
 
-        # return Response(data={"test": html})
-        def tasktextparser(text):
-            pattern = "\$\{[^\$]*\}\$"
-            matches = [(m.start(0), m.end(0)) for m in re.finditer(pattern, text)]
-            taskTextParsed = list()
-            taskTextParsedIndex = 0
-            for match in matches:
-                if taskTextParsedIndex < match[0]:
-                    taskTextParsed.append({"type": "text", "data": text[taskTextParsedIndex:match[0]]})
-                taskTextParsed.append({"type": "latex", "data": text[match[0]:match[1]], "svg": requests.get(
-                    "https://math.now.sh?from=" + text[match[0]:match[1]][2:-2])})
-                taskTextParsedIndex = match[1]
 
-            if taskTextParsedIndex < (len(text) - 1):
-                taskTextParsed.append({"type": "text", "data": text[taskTextParsedIndex:]})
-            return {'text': text, "matches": taskTextParsed}
+class TestAnswersviewSet(APIView):
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = TestJSONSerializer
 
-        def taskMapper(task):
-            result = {}
-            return tasktextparser(task['text'])
+    def get(self, request, *args, **kwargs):
+        # type = args.pop('type')
+        id = kwargs.pop('id')
 
-        mapped = map(taskMapper, tasks)
-        return Response(data={"test": mapped})
+        test = list(TestJSON.objects.filter(id=id).values())[0]
+        print(test['tasks'])
+        tasks = json.loads(test['tasks'])
+        pdf, html = generateAnswersPdf(tasks=tasks, name=test['name'])
+        return HttpResponse(pdf, content_type="application/pdf")
+
