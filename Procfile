@@ -1,1 +1,1 @@
-web: python djsr/manage.py runserver
+web: gunicorn --pythonpath djsr djsr.wsgi --log-file -
