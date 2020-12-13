@@ -20,6 +20,7 @@ const ExamEditor = lazy(()=>import("./MaterialUiExamEditor"));
 const UserExams = lazy(()=>import("./MaterialUiUserExams"));
 const PasswordResetRequest = lazy(()=>import("./MaterialUiPasswordResetRequest"));
 const HomePage = lazy(()=>import("./HomePage"));
+const Fenerator = lazy(()=>import("./MaterialUiFenerator.js"));
 class App extends Component {
   constructor(props) {
     super(props);
@@ -140,6 +141,10 @@ class App extends Component {
               <Route
                 path={"/editor/:id/"}
                 render={(props) => <ExamEditor {...props} {...global} />}
+              />
+              <Route
+                path={"/fenerator/:id/"}
+                render={(props)=><Fenerator {...props} {...global}/>}
               />
               <Route
                 path={"/userexams/"}

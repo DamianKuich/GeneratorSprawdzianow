@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[16],{
 
-/***/ "./djsr/frontend/src/components/MaterialUiManageAccount.js":
-/*!*****************************************************************!*\
-  !*** ./djsr/frontend/src/components/MaterialUiManageAccount.js ***!
-  \*****************************************************************/
+/***/ "./djsr/frontend/src/components/MaterialUiAccountActivation.js":
+/*!*********************************************************************!*\
+  !*** ./djsr/frontend/src/components/MaterialUiAccountActivation.js ***!
+  \*********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11,459 +11,92 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
-/* harmony import */ var _material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/InputAdornment */ "./node_modules/@material-ui/core/esm/InputAdornment/index.js");
-/* harmony import */ var _material_ui_core_Icon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Icon */ "./node_modules/@material-ui/core/esm/Icon/index.js");
-/* harmony import */ var _material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/icons/Email */ "./node_modules/@material-ui/icons/Email.js");
-/* harmony import */ var _material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/icons/People */ "./node_modules/@material-ui/icons/People.js");
-/* harmony import */ var _material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/icons/Lock */ "./node_modules/@material-ui/icons/Lock.js");
-/* harmony import */ var _material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _material_ui_components_Header_Header_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./material_ui_components/Header/Header.js */ "./djsr/frontend/src/components/material_ui_components/Header/Header.js");
-/* harmony import */ var _material_ui_components_Header_HeaderLinks_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./material_ui_components/Header/HeaderLinks.js */ "./djsr/frontend/src/components/material_ui_components/Header/HeaderLinks.js");
-/* harmony import */ var _material_ui_components_Footer_Footer_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./material_ui_components/Footer/Footer.js */ "./djsr/frontend/src/components/material_ui_components/Footer/Footer.js");
-/* harmony import */ var _material_ui_components_Grid_GridContainer_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./material_ui_components/Grid/GridContainer.js */ "./djsr/frontend/src/components/material_ui_components/Grid/GridContainer.js");
-/* harmony import */ var _material_ui_components_Grid_GridItem_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./material_ui_components/Grid/GridItem.js */ "./djsr/frontend/src/components/material_ui_components/Grid/GridItem.js");
-/* harmony import */ var _material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ././material_ui_components/CustomButtons/Button.js */ "./djsr/frontend/src/components/material_ui_components/CustomButtons/Button.js");
-/* harmony import */ var _material_ui_components_Card_Card_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./material_ui_components/Card/Card.js */ "./djsr/frontend/src/components/material_ui_components/Card/Card.js");
-/* harmony import */ var _material_ui_components_Card_CardBody_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./material_ui_components/Card/CardBody.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardBody.js");
-/* harmony import */ var _material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./material_ui_components/Card/CardHeader.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardHeader.js");
-/* harmony import */ var _material_ui_components_Card_CardFooter_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./material_ui_components/Card/CardFooter.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardFooter.js");
-/* harmony import */ var _material_ui_components_CustomInput_CustomInput_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./material_ui_components/CustomInput/CustomInput.js */ "./djsr/frontend/src/components/material_ui_components/CustomInput/CustomInput.js");
-/* harmony import */ var _assets_jss_material_kit_react_views_loginPage_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./assets/jss/material-kit-react/views/loginPage.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react/views/loginPage.js");
-/* harmony import */ var _img_genspr_parralax_bg_png__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./img/genspr-parralax-bg.png */ "./djsr/frontend/src/components/img/genspr-parralax-bg.png");
-/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
-/* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
-/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
-/* harmony import */ var _MaterialFormikField__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./MaterialFormikField */ "./djsr/frontend/src/components/MaterialFormikField.js");
-/* harmony import */ var _material_ui_lab_ToggleButton__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @material-ui/lab/ToggleButton */ "./node_modules/@material-ui/lab/esm/ToggleButton/index.js");
-/* harmony import */ var _material_ui_lab_ToggleButtonGroup__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @material-ui/lab/ToggleButtonGroup */ "./node_modules/@material-ui/lab/esm/ToggleButtonGroup/index.js");
-var _this = undefined;
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
 
 
 
+var AccountActivation = /*#__PURE__*/function (_Component) {
+  _inherits(AccountActivation, _Component);
 
+  var _super = _createSuper(AccountActivation);
 
+  function AccountActivation(props) {
+    var _this;
 
+    _classCallCheck(this, AccountActivation);
 
+    _this = _super.call(this, props);
+    _this.state = {
+      accountConfirm: null
+    };
+    return _this;
+  }
 
+  _createClass(AccountActivation, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
 
+      var token = this.props.match.params.token;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])(_assets_jss_material_kit_react_views_loginPage_js__WEBPACK_IMPORTED_MODULE_18__["default"]);
-
-var MaterialUiManageAccount = function MaterialUiManageAccount(props) {
-  var FRS = "Pole wymagane";
-  var user = props.appState.user;
-
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState("email"),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      editView = _React$useState2[0],
-      setEditView = _React$useState2[1];
-
-  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState("cardHidden"),
-      _React$useState4 = _slicedToArray(_React$useState3, 2),
-      cardAnimaton = _React$useState4[0],
-      setCardAnimation = _React$useState4[1];
-
-  setTimeout(function () {
-    setCardAnimation("");
-  }, 700);
-  var classes = useStyles();
-
-  var rest = _extends({}, props);
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: classes.pageHeader,
-    style: {
-      backgroundImage: "url(" + _img_genspr_parralax_bg_png__WEBPACK_IMPORTED_MODULE_19__["default"] + ")",
-      backgroundSize: "cover",
-      backgroundPosition: "top center"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: classes.container
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridContainer_js__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    justify: "center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridItem_js__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    xs: 12,
-    sm: 12,
-    md: 4
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_Card_js__WEBPACK_IMPORTED_MODULE_13__["default"], {
-    className: classes[cardAnimaton]
-  }, editView == "email" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_22__["Formik"], {
-    initialValues: {
-      name: "",
-      email: "",
-      password: "",
-      passwordConfirm: ""
-    },
-    validationSchema: yup__WEBPACK_IMPORTED_MODULE_20__["object"]().shape({
-      name: yup__WEBPACK_IMPORTED_MODULE_20__["string"]().min(2, "Too Short!").max(50, "Too Long!").required(FRS),
-      password: yup__WEBPACK_IMPORTED_MODULE_20__["string"]().min(8, "Too Short!").max(50, "Too Long!").required(FRS),
-      passwordConfirm: yup__WEBPACK_IMPORTED_MODULE_20__["string"]().oneOf([yup__WEBPACK_IMPORTED_MODULE_20__["ref"]("password")], "Hasła są różne").required(FRS),
-      email: yup__WEBPACK_IMPORTED_MODULE_20__["string"]().email("Nieprawidłowy adres e-mail").required(FRS)
-    }),
-    onSubmit: function onSubmit(values, helpers) {
-      setTimeout(function () {
-        helpers.setSubmitting(true);
-        _axiosAPI__WEBPACK_IMPORTED_MODULE_21__["axiosInstanceNoAuth"].put("/user/update/", {
-          username: values.name,
-          password: values.password,
-          email: values.email
-        }).then(function (response) {
-          helpers.setSubmitting(false);
-
-          _this.setState({
-            token: response.data.confirmation_token
-          });
-
-          _this.props.history.push("/signupsuccess/".concat(response.data.confirmation_token));
-        })["catch"](function (error) {
-          // console.log("login error", error.response);
-          var errResponse = error.response;
-          helpers.setSubmitting(false);
-          helpers.setValues({
-            name: "",
-            password: "",
-            passwordConfirm: "",
-            email: ""
-          }, false);
-          helpers.setTouched({
-            name: false,
-            password: false,
-            email: false,
-            passwordConfirm: false
-          }, false);
-          helpers.setFieldError("general", "Nierpawidłowa nazwa użytkownika lub hasło");
+      if (!token) {
+        this.setState({
+          accountConfirm: false
         });
-      }, 5000);
-    }
-  }, function (_ref) {
-    var values = _ref.values,
-        errors = _ref.errors,
-        touched = _ref.touched,
-        handleChange = _ref.handleChange,
-        handleBlur = _ref.handleBlur,
-        handleSubmit = _ref.handleSubmit,
-        isSubmitting = _ref.isSubmitting;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-      className: classes.form
-    }, console.log(touched, errors), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_15__["default"], {
-      color: "primary",
-      className: classes.cardHeader
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Edytuj dane")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardBody_js__WEBPACK_IMPORTED_MODULE_14__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      variant: "contained",
-      color: "primary",
-      onClick: function onClick(e) {
-        return setEditView("email");
-      }
-    }, "Zmie\u0144 e-mail"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      variant: "contained",
-      color: "primary",
-      onClick: function onClick(e) {
-        return setEditView("name");
-      }
-    }, "Zmie\u0144 nazw\u0119 u\u017Cytkownika"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      variant: "contained",
-      color: "primary",
-      onClick: function onClick(e) {
-        return setEditView("password");
-      }
-    }, "Zmie\u0144 has\u0142o"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_22__["Field"], {
-      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_23__["default"],
-      name: "email",
-      formControlProps: {
-        fullWidth: true
-      },
-      labelText: "E-mail",
-      inputProps: {
-        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          position: "end"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5___default.a, {
-          className: classes.inputIconsColor
-        }))
-      }
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardFooter_js__WEBPACK_IMPORTED_MODULE_16__["default"], {
-      className: classes.cardFooter
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      simple: true,
-      color: "primary",
-      size: "lg",
-      onClick: function onClick() {
-        handleSubmit();
-      }
-    }, "Zmie\u0144 dane")));
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null), editView == "name" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_22__["Formik"], {
-    initialValues: {
-      name: ""
-    },
-    validationSchema: yup__WEBPACK_IMPORTED_MODULE_20__["object"]().shape({
-      name: yup__WEBPACK_IMPORTED_MODULE_20__["string"]().min(2, "Too Short!").max(50, "Too Long!").required(FRS)
-    }),
-    onSubmit: function onSubmit(values, helpers) {
-      setTimeout(function () {
-        helpers.setSubmitting(true);
-        _axiosAPI__WEBPACK_IMPORTED_MODULE_21__["default"].put("/user/update/", {
-          username: values.name
-        }).then(function (response) {
-          _this.props.setUser(response.data);
+      } else {
+        _axiosAPI__WEBPACK_IMPORTED_MODULE_2__["axiosInstanceNoAuth"].get("/user/activate/".concat(token, "/$"), {}).then(function (response) {
+          console.log(response);
 
-          helpers.setStatus("Pomyslnie zmieniono dane");
-          helpers.setSubmitting(false);
-
-          _this.setState({
-            locked: false
+          _this2.setState({
+            accountConfirm: true
           });
         })["catch"](function (error) {
-          // console.log("login error", error.response);
-          var errResponse = error.response;
-          helpers.setSubmitting(false);
+          console.log(error);
 
-          _this.setState({
-            locked: false
+          _this2.setState({
+            accountConfirm: false
           });
-
-          helpers.setValues({
-            name: ""
-          }, false);
-          helpers.setTouched({
-            name: false
-          }, false);
-          helpers.setFieldError("name", "Nazwa jest w użyciu lub jest nieprawidłowa.");
         });
-      }, 400);
+      }
     }
-  }, function (_ref2) {
-    var values = _ref2.values,
-        errors = _ref2.errors,
-        touched = _ref2.touched,
-        handleChange = _ref2.handleChange,
-        handleBlur = _ref2.handleBlur,
-        handleSubmit = _ref2.handleSubmit,
-        isSubmitting = _ref2.isSubmitting;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-      className: classes.form
-    }, console.log(touched, errors), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_15__["default"], {
-      color: "primary",
-      className: classes.cardHeader
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Edytuj dane")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardBody_js__WEBPACK_IMPORTED_MODULE_14__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      variant: "contained",
-      color: "primary",
-      onClick: function onClick(e) {
-        return setEditView("email");
-      }
-    }, "Zmie\u0144 e-mail"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      variant: "contained",
-      color: "primary",
-      onClick: function onClick(e) {
-        return setEditView("name");
-      }
-    }, "Zmie\u0144 nazw\u0119 u\u017Cytkownika"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      variant: "contained",
-      color: "primary",
-      onClick: function onClick(e) {
-        return setEditView("password");
-      }
-    }, "Zmie\u0144 has\u0142o"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_22__["Field"], {
-      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_23__["default"],
-      name: "name",
-      formControlProps: {
-        fullWidth: true
-      },
-      labelText: "Nazwa u\u017Cytkownika",
-      inputProps: {
-        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          position: "end"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5___default.a, {
-          className: classes.inputIconsColor
-        }))
-      }
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardFooter_js__WEBPACK_IMPORTED_MODULE_16__["default"], {
-      className: classes.cardFooter
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      simple: true,
-      color: "primary",
-      size: "lg",
-      onClick: function onClick() {
-        handleSubmit();
-      }
-    }, "Zmie\u0144 dane")));
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null), editView == "password" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_22__["Formik"], {
-    initialValues: {
-      password: "",
-      passwordConfirm: "",
-      oldPassword: ""
-    },
-    validationSchema: yup__WEBPACK_IMPORTED_MODULE_20__["object"]().shape({
-      password: yup__WEBPACK_IMPORTED_MODULE_20__["string"]().min(8, "Too Short!").max(50, "Too Long!").required("Pole wymagane").oneOf([yup__WEBPACK_IMPORTED_MODULE_20__["ref"]("passwordConfirm")], "Hasła są różne"),
-      oldPassword: yup__WEBPACK_IMPORTED_MODULE_20__["string"]().min(8, "Too Short!").max(50, "Too Long!").required("Pole wymagane"),
-      passwordConfirm: yup__WEBPACK_IMPORTED_MODULE_20__["string"]().oneOf([yup__WEBPACK_IMPORTED_MODULE_20__["ref"]("password")], "Hasła są różne").required("Pole wymagane")
-    }),
-    onSubmit: function onSubmit(values, helpers) {
-      setTimeout(function () {
-        helpers.setSubmitting(true);
-        _axiosAPI__WEBPACK_IMPORTED_MODULE_21__["default"].put("/user/update/", {
-          password: values.password,
-          oldpassword: values.oldPassword
-        }).then(function (response) {
-          _this.props.setUser(response.data);
-
-          helpers.setStatus("Pomyslnie zmieniono hasło");
-          helpers.setSubmitting(false);
-
-          _this.setState({
-            locked: false
-          });
-        })["catch"](function (error) {
-          helpers.setStatus("Podano nieprawidłowe aktualne hasło");
-          console.log("chngpass error", error.response);
-          var errResponse = error.response;
-          helpers.setSubmitting(false);
-
-          _this.setState({
-            locked: false
-          });
-
-          helpers.setValues({
-            password: "",
-            oldPassword: "",
-            passwordConfirm: ""
-          }, false);
-          helpers.setTouched({
-            password: false,
-            oldPassword: false,
-            passwordConfirm: false
-          }, false);
-          helpers.setFieldError("oldPassword", "Podano nieprawidłowe stare hasło");
-        });
-      }, 400);
+  }, {
+    key: "render",
+    value: function render() {
+      var accountConfirm = this.state.accountConfirm;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, accountConfirm === null && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Oczekiwanie na odpowiedz"), accountConfirm === true && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Konto zosta\u0142o aktywowane mozesz sie zalogowac"), accountConfirm === false && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "B\u0142\u0105d!!! Konto nie zosta\u0142o aktywowane."));
     }
-  }, function (_ref3) {
-    var values = _ref3.values,
-        errors = _ref3.errors,
-        touched = _ref3.touched,
-        handleChange = _ref3.handleChange,
-        handleBlur = _ref3.handleBlur,
-        handleSubmit = _ref3.handleSubmit,
-        isSubmitting = _ref3.isSubmitting;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-      className: classes.form
-    }, console.log(touched, errors), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_15__["default"], {
-      color: "primary",
-      className: classes.cardHeader
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Edytuj dane")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardBody_js__WEBPACK_IMPORTED_MODULE_14__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_lab_ToggleButtonGroup__WEBPACK_IMPORTED_MODULE_25__["default"], {
-      orientation: "vertical",
-      color: "primary",
-      "aria-label": "vertical contained primary button group",
-      variant: "text"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      variant: "contained",
-      color: "primary",
-      onClick: function onClick(e) {
-        return setEditView("email");
-      }
-    }, "Zmie\u0144 e-mail"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      variant: "contained",
-      color: "primary",
-      onClick: function onClick(e) {
-        return setEditView("name");
-      }
-    }, "Zmie\u0144 nazw\u0119 u\u017Cytkownika"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      variant: "contained",
-      color: "primary",
-      onClick: function onClick(e) {
-        return setEditView("password");
-      }
-    }, "Zmie\u0144 has\u0142o")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_22__["Field"], {
-      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_23__["default"],
-      name: "password",
-      formControlProps: {
-        fullWidth: true
-      },
-      labelText: "Has\u0142o",
-      inputProps: {
-        type: "password",
-        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          position: "end"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6___default.a, {
-          className: classes.inputIconsColor
-        }))
-      }
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_22__["Field"], {
-      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_23__["default"],
-      name: "passwordConfirm",
-      formControlProps: {
-        fullWidth: true
-      },
-      labelText: "Powt\xF3rz has\u0142o",
-      inputProps: {
-        type: "password",
-        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          position: "end"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6___default.a, {
-          className: classes.inputIconsColor
-        }))
-      }
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_22__["Field"], {
-      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_23__["default"],
-      name: "oldPassword",
-      formControlProps: {
-        fullWidth: true
-      },
-      labelText: "Podaj stare has\u0142o",
-      inputProps: {
-        type: "password",
-        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          position: "end"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6___default.a, {
-          className: classes.inputIconsColor
-        }))
-      }
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardFooter_js__WEBPACK_IMPORTED_MODULE_16__["default"], {
-      className: classes.cardFooter
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__["default"], {
-      simple: true,
-      color: "primary",
-      size: "lg",
-      onClick: function onClick() {
-        handleSubmit();
-      }
-    }, "Zmie\u0144 dane")));
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null)))))));
-};
+  }]);
 
-/* harmony default export */ __webpack_exports__["default"] = (MaterialUiManageAccount);
+  return AccountActivation;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+AccountActivation.propTypes = {};
+/* harmony default export */ __webpack_exports__["default"] = (AccountActivation);
 
 /***/ })
 
