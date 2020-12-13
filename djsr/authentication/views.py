@@ -267,6 +267,7 @@ class TaskViewSet(APIView):
         lista = []
         if request.data:
             id_string = request.data['skill']
+            print ("XD")
             numberoftask = int(request.data['nroftasks'])
             try:
                 pag = int(request.data['pagenr'])
@@ -284,6 +285,7 @@ class TaskViewSet(APIView):
                 lista.append(serializerprv.data)
                 a = math.ceil((len(list(chain(*lista))) / numberoftask))
             if pag == 1:
+                print ("XD")
                 return Response(data={"pages": str(a), "tasks": list(chain(*lista))[0:numberoftask]})
             elif pag > 1:
                 return Response(data={"pages": str(a), "tasks": list(chain(*lista))[(

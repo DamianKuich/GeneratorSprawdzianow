@@ -126,3 +126,7 @@ uploads/
 .idea/
 .~lock.rootkey.csv#
 /djsr/authentication/migrations/0001_initial.py
+.env
+Procfile
+Procfile
+Procfile
