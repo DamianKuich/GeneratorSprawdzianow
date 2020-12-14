@@ -42,7 +42,8 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Notification from './Notification'
 import DynamicFeedIcon from '@material-ui/icons/DynamicFeed';
-import image from "./img/genspr-parralax-bg.png";
+import image from "./img/genesprDark.png";
+import { grey } from "@material-ui/core/colors";
 const useStyles = makeStyles((theme) => ({
   root: {
     maxHeight: 200,
@@ -77,13 +78,19 @@ function BootstrapTooltip(props) {
 const bgStyles = {
   paperContainer: {
       backgroundImage: `url(${image})`,
+      
       minHeight: 1000,
+
+     
+     
+
 
      
   },
   examCardContainer: {
     width: 700,
-    backgroundColor: '#FEFEFA'
+    backgroundColor: '#FEFEFA',
+
     
 },
 
@@ -205,7 +212,7 @@ const useStylesAlert = makeStyles((theme) => ({
         >
         <Paper  style={bgStyles.paperContainer}>
           <Box
-          p={8}
+          p={10}
           >
 
               <Grid  

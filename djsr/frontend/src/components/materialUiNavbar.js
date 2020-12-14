@@ -75,6 +75,7 @@ const HeaderLinks = (props) => {
   );
 };
 const MaterialUiNavbar = (props) => {
+  const classes = useStyles();
   console.log("navbarprops",props,/^\/editor\//.test(props.location.pathname))
   if (/^\/editor\//.test(props.location.pathname)){
     console.log("triggered nb");
@@ -82,13 +83,20 @@ const MaterialUiNavbar = (props) => {
   }
   const user = props.appState.user;
   return (
+   
     <Header
-      brand="Generator Sprawdzianów"
+      brand={<Link to={"/"} className={classes.navLink}>
+      Generator Sprawdzianów
+    </Link>}
       fixed
       rightLinks={<HeaderLinks {...props} />}
+      
       color="transparent"
-      changeColorOnScroll={{ height: 400, color: "white" }}
-    />
+      changeColorOnScroll={{ height: 250, color: "white" }}
+    >
+ 
+    </Header>
+    
   );
 };
 
