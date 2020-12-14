@@ -234,7 +234,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Notification__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./Notification */ "./djsr/frontend/src/components/Notification.js");
 /* harmony import */ var _material_ui_icons_DynamicFeed__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! @material-ui/icons/DynamicFeed */ "./node_modules/@material-ui/icons/DynamicFeed.js");
 /* harmony import */ var _material_ui_icons_DynamicFeed__WEBPACK_IMPORTED_MODULE_34___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_DynamicFeed__WEBPACK_IMPORTED_MODULE_34__);
-/* harmony import */ var _img_genspr_parralax_bg_png__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./img/genspr-parralax-bg.png */ "./djsr/frontend/src/components/img/genspr-parralax-bg.png");
+/* harmony import */ var _img_genesprDark_png__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./img/genesprDark.png */ "./djsr/frontend/src/components/img/genesprDark.png");
+/* harmony import */ var _material_ui_core_colors__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! @material-ui/core/colors */ "./node_modules/@material-ui/core/esm/colors/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -260,6 +261,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 
 
 
@@ -331,7 +333,7 @@ function BootstrapTooltip(props) {
 
 var bgStyles = {
   paperContainer: {
-    backgroundImage: "url(".concat(_img_genspr_parralax_bg_png__WEBPACK_IMPORTED_MODULE_35__["default"], ")"),
+    backgroundImage: "url(".concat(_img_genesprDark_png__WEBPACK_IMPORTED_MODULE_35__["default"], ")"),
     minHeight: 1000
   },
   examCardContainer: {
@@ -457,7 +459,7 @@ var UserExams = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_10__["default"], {
         style: bgStyles.paperContainer
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        p: 8
+        p: 10
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_11__["default"], {
         alignItems: "center",
         justify: "center",
@@ -642,16 +644,16 @@ var cardBodyStyle = {
 
 /***/ }),
 
-/***/ "./djsr/frontend/src/components/img/genspr-parralax-bg.png":
-/*!*****************************************************************!*\
-  !*** ./djsr/frontend/src/components/img/genspr-parralax-bg.png ***!
-  \*****************************************************************/
+/***/ "./djsr/frontend/src/components/img/genesprDark.png":
+/*!**********************************************************!*\
+  !*** ./djsr/frontend/src/components/img/genesprDark.png ***!
+  \**********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "8ae80ee488d6ec36fd62f67865d06356.png");
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "9235506a103c6d9fdc6b1bd054c54f79.png");
 
 /***/ }),
 
