@@ -45,6 +45,7 @@ cryptography = "*"
 django-cleanup = "*"
 pdfkit = "*"
 yattag = "*"
+django-axes= "*"
 
 [requires]
 python_version = "3.7"
