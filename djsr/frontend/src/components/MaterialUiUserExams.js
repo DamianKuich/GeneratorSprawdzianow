@@ -41,8 +41,9 @@ import CustomInput from "./material_ui_components/CustomInput/CustomInput.js";
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Notification from './Notification'
-
-
+import DynamicFeedIcon from '@material-ui/icons/DynamicFeed';
+import image from "./img/genesprDark.png";
+import { grey } from "@material-ui/core/colors";
 const useStyles = makeStyles((theme) => ({
   root: {
     maxHeight: 200,
@@ -73,6 +74,32 @@ function BootstrapTooltip(props) {
 }
 
 
+
+const bgStyles = {
+  paperContainer: {
+      backgroundImage: `url(${image})`,
+      
+      minHeight: 1000,
+
+     
+     
+
+
+     
+  },
+  examCardContainer: {
+    width: 700,
+    backgroundColor: '#FEFEFA',
+
+    
+},
+
+  cardTitle: {
+    textAlign:'center'
+  }
+
+};
+
 const useStylesAlert = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -89,7 +116,7 @@ const useStylesAlert = makeStyles((theme) => ({
       super(props);
       this.state = {
         exams: null,
-        notification:({isOpen: false, message:'',type:''}),
+        
 
        
         
@@ -127,11 +154,7 @@ const useStylesAlert = makeStyles((theme) => ({
           this.addExam(response.data[0]);
         });
     };
-    setNotification=()=>({
-      type:"error",
-      isOpen:true,
-      message:'Nieprawidłowa nazwa użytkownika lub hasło'
-    })
+
 
     removeExam = (exam) => {
       axiosInstance
@@ -185,29 +208,36 @@ const useStylesAlert = makeStyles((theme) => ({
       }
       return (
         
-        <div>
-                      <Notification
-                        notification = {this.state.notification}
-                        setNotification = {this.setNotification}
-      
-                      ></Notification> 
-        
-          
- 
-                          <Box 
-                          p={5}
-                          
-                          justifyContent="left"
+        <div  
+        >
+        <Paper  style={bgStyles.paperContainer}>
+          <Box
+          p={10}
+          >
+
+              <Grid  
+                alignItems="center"
+                justify="center"
+                container
+                direction="column"
+                
+                
 
                 > 
-                <Card 
+                <Card  style={bgStyles.examCardContainer}
               justify="center" 
+              alignItems="center"
+
               
               >
                  
-                    <CardHeader
-                   title="Dodaj sprawdzian"/>
-                    <CardBody >
+                    <CardHeader style={bgStyles.cardTitle}
+                   title="Dodaj sprawdzian"
+                   
+                   />
+                   
+                    <CardBody 
+                    >
                     <Formik
                     initialValues={{
                       name: "",
@@ -249,7 +279,7 @@ const useStylesAlert = makeStyles((theme) => ({
                               false
                             );
                             helpers.setFieldError("general", "Nazwa w uzyciu");
-                            this.setNotification
+                           
                             
                           });
                       }, 400);
@@ -292,8 +322,10 @@ const useStylesAlert = makeStyles((theme) => ({
                             </div>
                           )}
                         </div>
-                        <div className="text-center">
-                          <Button
+
+                        <CardActions style={{justifyContent: 'center'}}> 
+                       
+                          <Button 
                            variant="contained" 
                             color="primary"
                             type="submit"
@@ -301,7 +333,8 @@ const useStylesAlert = makeStyles((theme) => ({
                           >
                             Zapisz
                           </Button>
-                        </div>
+                          </CardActions>
+                        
                       </Form>
                     )}
                   </Formik>
@@ -309,18 +342,27 @@ const useStylesAlert = makeStyles((theme) => ({
                   </CardBody>
                 
                 </Card>
+                </Grid>
                 </Box>
+                <p></p>
             {exams.map((exam) => {
               return (
                 
-                <Box 
-                justifyContent="center"
-                p={1}
+                <Grid 
+                alignItems="center"
+                justify="center"
+                container
+                spacing={3}
+                direction="column"
+                
                 
 
                 > 
+              
                 <Card 
-              justify="center" 
+             
+              style={bgStyles.examCardContainer}
+              justify="center"  
               
               
               >
@@ -328,7 +370,7 @@ const useStylesAlert = makeStyles((theme) => ({
                     <CardHeader
                    title={exam.name}/>
                  
-                    <CardActions disableSpacing>
+                    <CardActions disableSpacing >
                     <Link to={"/editor/" + exam.id}>
                     <BootstrapTooltip title="Edytuj sprawdzian">
           
@@ -351,15 +393,23 @@ const useStylesAlert = makeStyles((theme) => ({
                       <DeleteIcon />
                     </IconButton>
                     </BootstrapTooltip>
+                    <Link to={"/fenerator/" + exam.id}>
+                    <BootstrapTooltip title="Wygeneruj sprawdzian automatycznie">
+                      <IconButton>
+                        <DynamicFeedIcon />
+                     </IconButton>
+                    </BootstrapTooltip>
+                    </Link>
                   
                   </CardActions>
                 
                 </Card>
-                </Box>
+                <p></p>
+                </Grid>
                 
               );
             })}
-         
+         </Paper>
         </div>
       );
     }

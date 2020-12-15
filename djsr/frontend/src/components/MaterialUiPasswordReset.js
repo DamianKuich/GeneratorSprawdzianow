@@ -35,10 +35,6 @@ const MaterialUiPasswordReset = (props) => {
   const FRS = "Pole wymagane";
   const user = props.appState.user;
   const [editView, setEditView] = React.useState("password");
-  const token = useParams();
-  let stringToken = JSON.stringify(token)
-  stringToken = stringToken.substr(10)
-  stringToken = stringToken.slice(0, -2);
   const strongToken = useParams().token;
   console.log(strongToken)
 

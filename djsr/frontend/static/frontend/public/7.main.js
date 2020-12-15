@@ -153,7 +153,7 @@ function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArra
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
@@ -340,7 +340,7 @@ var ExamEditorSidePanel = function ExamEditorSidePanel(_ref) {
       props = _objectWithoutProperties(_ref, ["exam", "saved", "currentTabId", "handleTabChange", "taskSearchResult", "setTaskSearchResult", "updateTask", "selectedTaskToEdit"]);
 
   console.log("side panel props", currentTabId, props);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ResizeableSidePanel__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, exam.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, saved ? "Zapisano" : "Zapisywanie"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SideMenuTabSelector__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ResizeableSidePanel__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, exam.name, " eluwina"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, saved ? "Zapisano" : "Zapisywanie"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SideMenuTabSelector__WEBPACK_IMPORTED_MODULE_2__["default"], {
     handleTabChange: handleTabChange,
     currentTabId: currentTabId
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TaskSearchCollapseMenu__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -615,7 +615,7 @@ function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArra
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
@@ -892,7 +892,7 @@ function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArra
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
@@ -1426,9 +1426,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(file_saver__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/polyfill */ "./node_modules/@babel/polyfill/lib/index.js");
 /* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_babel_polyfill__WEBPACK_IMPORTED_MODULE_7__);
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
@@ -1864,7 +1864,7 @@ function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArra
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
@@ -1956,30 +1956,34 @@ var FormikMdInput = function FormikMdInput(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_resize_panel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-resize-panel */ "./node_modules/react-resize-panel/dist/index.esm.js");
-/* harmony import */ var mdbreact__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! mdbreact */ "./node_modules/mdbreact/dist/mdbreact.esm.js");
-/* harmony import */ var _MaterialUiTaskSearch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MaterialUiTaskSearch */ "./djsr/frontend/src/components/MaterialUiTaskSearch.js");
-/* harmony import */ var react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-beautiful-dnd */ "./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js");
-/* harmony import */ var _TaskEditor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./TaskEditor */ "./djsr/frontend/src/components/TaskEditor.js");
-/* harmony import */ var lodash_collection__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lodash/collection */ "./node_modules/lodash/collection.js");
-/* harmony import */ var lodash_collection__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(lodash_collection__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var react_latex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-latex */ "./node_modules/react-latex/build/latex.js");
-/* harmony import */ var react_latex__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_latex__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _styles_katex_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./styles/katex.css */ "./djsr/frontend/src/components/styles/katex.css");
-/* harmony import */ var _styles_katex_css__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_styles_katex_css__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _registered_files__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./registered-files */ "./djsr/frontend/src/components/registered-files.js");
-/* harmony import */ var _ExamPDF__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./ExamPDF */ "./djsr/frontend/src/components/ExamPDF.js");
-/* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
-/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/@material-ui/core/esm/Paper/index.js");
-/* harmony import */ var _material_ui_core_Tabs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/Tabs */ "./node_modules/@material-ui/core/esm/Tabs/index.js");
-/* harmony import */ var _material_ui_core_Tab__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core/Tab */ "./node_modules/@material-ui/core/esm/Tab/index.js");
-/* harmony import */ var _material_ui_core_Collapse__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/core/Collapse */ "./node_modules/@material-ui/core/esm/Collapse/index.js");
-/* harmony import */ var _material_ui_core_AppBar__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @material-ui/core/AppBar */ "./node_modules/@material-ui/core/esm/AppBar/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
-/* harmony import */ var _material_ui_styles__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @material-ui/styles */ "./node_modules/@material-ui/styles/esm/index.js");
-/* harmony import */ var _ExamEditorSubComponents_ExamEditorSidePanel__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./ExamEditorSubComponents/ExamEditorSidePanel */ "./djsr/frontend/src/components/ExamEditorSubComponents/ExamEditorSidePanel.js");
-/* harmony import */ var _ExamEditorSubComponents_ExamPageWithTaskOverlays__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./ExamEditorSubComponents/ExamPageWithTaskOverlays */ "./djsr/frontend/src/components/ExamEditorSubComponents/ExamPageWithTaskOverlays.js");
+/* harmony import */ var mdbreact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! mdbreact */ "./node_modules/mdbreact/dist/mdbreact.esm.js");
+/* harmony import */ var react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-beautiful-dnd */ "./node_modules/react-beautiful-dnd/dist/react-beautiful-dnd.esm.js");
+/* harmony import */ var lodash_collection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash/collection */ "./node_modules/lodash/collection.js");
+/* harmony import */ var lodash_collection__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash_collection__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _styles_katex_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./styles/katex.css */ "./djsr/frontend/src/components/styles/katex.css");
+/* harmony import */ var _styles_katex_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_styles_katex_css__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _registered_files__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./registered-files */ "./djsr/frontend/src/components/registered-files.js");
+/* harmony import */ var _ExamPDF__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ExamPDF */ "./djsr/frontend/src/components/ExamPDF.js");
+/* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
+/* harmony import */ var _ExamEditorSubComponents_ExamEditorSidePanel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ExamEditorSubComponents/ExamEditorSidePanel */ "./djsr/frontend/src/components/ExamEditorSubComponents/ExamEditorSidePanel.js");
+/* harmony import */ var _ExamEditorSubComponents_ExamPageWithTaskOverlays__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ExamEditorSubComponents/ExamPageWithTaskOverlays */ "./djsr/frontend/src/components/ExamEditorSubComponents/ExamPageWithTaskOverlays.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1991,7 +1995,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -2002,33 +2006,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
- // import PropTypes from "prop-types";
-
-
-
-
- // import {
-//   PDFDownloadLink,
-//   Document,
-//   Page,
-//   Text,
-//   StyleSheet,
-//   View,
-//   Font,
-//   Image,
-//   Svg,
-//   Path,
-//   G,
-// } from "@react-pdf/renderer";
-
- // import Roboto from "./webfonts/Roboto-Regular.ttf";
-// import RobotoBold from "./webfonts/Roboto-Bold.ttf";
-
-
-
-
 
 
 
@@ -2061,7 +2038,7 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "getExam", function () {
       var id = _this.props.match.params.id;
-      _axiosAPI__WEBPACK_IMPORTED_MODULE_11__["default"].get("/user/onetest/".concat(id)).then(function (response) {
+      _axiosAPI__WEBPACK_IMPORTED_MODULE_7__["default"].get("/user/onetest/".concat(id)).then(function (response) {
         console.log(response);
 
         _this.setState(function (state) {
@@ -2075,6 +2052,15 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
 
           return state;
         });
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "updateStateAndSaveExam", function (stateUpdater) {
+      _this.setState(function (state) {
+        state = stateUpdater(state);
+        state.timeout = _this.resetTimeout(_this.state.timeout, setTimeout(_this.saveExam, 3000));
+        state.saved = false;
+        return state;
       });
     });
 
@@ -2094,15 +2080,13 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "updateTaskText", function (index, text) {
-      _this.setState(function (state) {
+      _this.updateStateAndSaveExam(function (state) {
         state.exam.tasks[index].text = text;
-        state.timeout = _this.resetTimeout(_this.state.timeout, setTimeout(_this.saveExam, 3000));
-        state.saved = false;
         return state;
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "generatedPDFV3", _ExamPDF__WEBPACK_IMPORTED_MODULE_10__["default"]);
+    _defineProperty(_assertThisInitialized(_this), "generatedPDFV3", _ExamPDF__WEBPACK_IMPORTED_MODULE_6__["default"]);
 
     _defineProperty(_assertThisInitialized(_this), "setTaskToEdit", function (index) {
       _this.setState(function (state) {
@@ -2113,16 +2097,14 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "updateTaskToEdit", function (task) {
-      _this.setState(function (state) {
+      _this.updateStateAndSaveExam(function (state) {
         Object.assign(state.editorTask, task);
-        state.timeout = _this.resetTimeout(_this.state.timeout, setTimeout(_this.saveExam, 3000));
-        state.saved = false;
         return state;
       });
     });
 
     _defineProperty(_assertThisInitialized(_this), "saveExam", function () {
-      _axiosAPI__WEBPACK_IMPORTED_MODULE_11__["default"].put("/user/maketest/", {
+      _axiosAPI__WEBPACK_IMPORTED_MODULE_7__["default"].put("/user/maketest/", {
         id: _this.state.exam.id,
         tasks: JSON.stringify(_this.state.exam.tasks)
       }).then(function (response) {
@@ -2133,20 +2115,20 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "removeTask", function (index) {
-      _this.setState(function (state) {
+      console.log("usunieto" + index);
+
+      _this.updateStateAndSaveExam(function (state) {
         if (index === 0) {
           state.exam.tasks.shift();
         } else {
           state.exam.tasks.splice(index, index);
         }
 
-        state.timeout = _this.resetTimeout(_this.state.timeout, setTimeout(_this.saveExam, 3000));
-        state.saved = false;
         return state;
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "dragEnd", function (result) {
+    _defineProperty(_assertThisInitialized(_this), "dragEndOld", function (result) {
       var source = result.source,
           destination = result.destination,
           draggableId = result.draggableId;
@@ -2176,8 +2158,7 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
           return state;
         });
       } else {
-        var draggedItem = JSON.parse(JSON.stringify(_this.state.tasks[source.index])); // draggedItem.currentDataSet = draggedItem.dataset[0];
-
+        var draggedItem = JSON.parse(JSON.stringify(_this.state.tasks[source.index]));
         draggedItem.currentAnswers = JSON.parse(JSON.stringify(draggedItem.answers));
         var currentDataSetAnswers = draggedItem.currentAnswers;
         console.log("dragged item", draggedItem, currentDataSetAnswers);
@@ -2186,21 +2167,20 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
         var incorrectAnswersIndexes = currentDataSetAnswers.wronganswers.map(function (item, index) {
           return index;
         });
-        var answersSet = []; // [sampleSize(currentDataSetAnswers.allanswers,3).map];
-
-        answersSet = answersSet.concat(Object(lodash_collection__WEBPACK_IMPORTED_MODULE_6__["sampleSize"])(correctAnswersIndex).map(function (item) {
+        var answersSet = [];
+        answersSet = answersSet.concat(Object(lodash_collection__WEBPACK_IMPORTED_MODULE_3__["sampleSize"])(correctAnswersIndex).map(function (item) {
           return {
             index: item,
             isCorrect: true
           };
         }));
-        answersSet = answersSet.concat(Object(lodash_collection__WEBPACK_IMPORTED_MODULE_6__["sampleSize"])(incorrectAnswersIndexes, 3).map(function (item) {
+        answersSet = answersSet.concat(Object(lodash_collection__WEBPACK_IMPORTED_MODULE_3__["sampleSize"])(incorrectAnswersIndexes, 3).map(function (item) {
           return {
             index: item,
             isCorrect: false
           };
         }));
-        answersSet = Object(lodash_collection__WEBPACK_IMPORTED_MODULE_6__["shuffle"])(answersSet);
+        answersSet = Object(lodash_collection__WEBPACK_IMPORTED_MODULE_3__["shuffle"])(answersSet);
         draggedItem.currentAnswers.answersIndexes = answersSet;
         draggedItem.maxPoints = draggedItem.points;
         console.log("draggedItem", draggedItem, _this.state.tasks);
@@ -2214,6 +2194,42 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
       }
     });
 
+    _defineProperty(_assertThisInitialized(_this), "dragEnd", function (result) {
+      var source = result.source,
+          destination = result.destination,
+          draggableId = result.draggableId;
+      console.log(source, destination, draggableId);
+
+      if (source.droppableId === "examDroppable" && !destination.droppableId) {
+        _this.setState(function (state) {
+          state.exam.tasks = state.exam.tasks.splice(source.index, source.index);
+          return state;
+        });
+      }
+
+      console.log("dragEnd", result);
+
+      if (!destination || destination.droppableId === "searchDroppable") {
+        return;
+      }
+
+      if (source.droppableId === "examDroppable" && destination.droppableId === "examDroppable") {
+        _this.updateStateAndSaveExam(function (state) {
+          var tasks = state.exam.tasks;
+          var _ref2 = [tasks[destination.index], tasks[source.index]];
+          tasks[source.index] = _ref2[0];
+          tasks[destination.index] = _ref2[1];
+          return state;
+        });
+      } else {
+        var draggedItem = _this.state.tasks[source.index];
+
+        var taskWithAnswerSet = _this.generateAnswerSetForTask(draggedItem);
+
+        _this.pushTaskAtIndex(taskWithAnswerSet, destination.index);
+      }
+    });
+
     _defineProperty(_assertThisInitialized(_this), "setSearchedTasks", function (tasks) {
       console.log("Triggered Task");
 
@@ -2223,6 +2239,40 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "generateAnswerSetForTask", function (task) {
+      var _ref3 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+          numberOfAnswers = _ref3.numberOfAnswers,
+          numberOfCorrectAnswers = _ref3.numberOfCorrectAnswers,
+          options = _objectWithoutProperties(_ref3, ["numberOfAnswers", "numberOfCorrectAnswers"]);
+
+      numberOfAnswers = numberOfAnswers || 4;
+      numberOfCorrectAnswers = numberOfCorrectAnswers || 1;
+      var NewTask = JSON.parse(JSON.stringify(task));
+      NewTask.currentAnswers = JSON.parse(JSON.stringify(NewTask.answers));
+      var currentDataSetAnswers = NewTask.currentAnswers;
+
+      var correctAnswersIndex = _toConsumableArray(currentDataSetAnswers.correctans.keys());
+
+      var incorrectAnswersIndexes = _toConsumableArray(currentDataSetAnswers.wronganswers.keys());
+
+      var answersSet = [];
+      answersSet = answersSet.concat(Object(lodash_collection__WEBPACK_IMPORTED_MODULE_3__["sampleSize"])(correctAnswersIndex, numberOfCorrectAnswers).map(function (item) {
+        return {
+          index: item,
+          isCorrect: true
+        };
+      }));
+      answersSet = answersSet.concat(Object(lodash_collection__WEBPACK_IMPORTED_MODULE_3__["sampleSize"])(incorrectAnswersIndexes, numberOfAnswers - numberOfCorrectAnswers).map(function (item) {
+        return {
+          index: item,
+          isCorrect: false
+        };
+      }));
+      answersSet = Object(lodash_collection__WEBPACK_IMPORTED_MODULE_3__["shuffle"])(answersSet);
+      NewTask.currentAnswers.answersIndexes = answersSet;
+      return NewTask;
+    });
+
     _defineProperty(_assertThisInitialized(_this), "setSideMenuCollapse", function (collapseId) {
       _this.setState({
         sideMenuCollapseId: collapseId
@@ -2230,16 +2280,16 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "pushTaskAtIndex", function (task, index) {
-      _this.setState(function (state) {
+      _this.updateStateAndSaveExam(function (state) {
         state.exam.tasks.splice(index, 0, task);
-        state.saved = false;
-        state.timeout = _this.resetTimeout(_this.state.timeout, setTimeout(_this.saveExam, 3000));
         return state;
       });
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleSideMenuTabChange", function (event, newValue) {
-      if (newValue === "generatePDF") _this.generatedPDFV3(_this.state.exam);else _this.setSideMenuCollapse(newValue);
+      // if (newValue === "generatePDF") this.generatedPDFV3(this.state.exam);
+      if (newValue === "generatePDF") window.open("https://gen-mat.herokuapp.com/api/user/testpdf/" + _this.state.exam.id, "_blank"); //window.open(url,'_blank');
+      else _this.setSideMenuCollapse(newValue);
     });
 
     _this.state = {
@@ -2269,7 +2319,7 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
       var exam = this.state.exam;
 
       if (!exam) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_2__["MDBContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Ladowanie"));
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(mdbreact__WEBPACK_IMPORTED_MODULE_1__["MDBContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Ladowanie"));
       }
 
       var sideMenuCollapseId = this.state.sideMenuCollapseId;
@@ -2278,7 +2328,7 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
       var editorTask = this.state.editorTask;
       var isExamSaved = this.state.saved;
       console.log("editorTask", editorTask);
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_4__["DragDropContext"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_2__["DragDropContext"], {
         onDragEnd: this.dragEnd
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
@@ -2287,7 +2337,7 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
           display: "flex",
           flexFlow: "row nowrap"
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ExamEditorSubComponents_ExamEditorSidePanel__WEBPACK_IMPORTED_MODULE_19__["default"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ExamEditorSubComponents_ExamEditorSidePanel__WEBPACK_IMPORTED_MODULE_8__["default"], {
         exam: exam,
         currentTabId: sideMenuCollapseId,
         handleTabChange: this.handleSideMenuTabChange,
@@ -2295,7 +2345,7 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
         taskSearchResult: searchedTasks,
         updateTask: this.updateTaskToEdit,
         selectedTaskToEdit: this.state.editorTask
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ExamEditorSubComponents_ExamPageWithTaskOverlays__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ExamEditorSubComponents_ExamPageWithTaskOverlays__WEBPACK_IMPORTED_MODULE_9__["default"], {
         exam: exam,
         setTaskToEdit: this.setTaskToEdit,
         removeTask: this.removeTask,
@@ -2358,9 +2408,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/esm/Box/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
@@ -2374,7 +2424,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -2639,197 +2689,6 @@ var MaterialUiTaskSearch = /*#__PURE__*/function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (MaterialUiTaskSearch);
-
-/***/ }),
-
-/***/ "./djsr/frontend/src/components/TaskEditor.js":
-/*!****************************************************!*\
-  !*** ./djsr/frontend/src/components/TaskEditor.js ***!
-  \****************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var mdbreact__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! mdbreact */ "./node_modules/mdbreact/dist/mdbreact.esm.js");
-/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
-/* harmony import */ var _FormikMDInput__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FormikMDInput */ "./djsr/frontend/src/components/FormikMDInput.js");
-/* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
-/* harmony import */ var _MaterialFormikField__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./MaterialFormikField */ "./djsr/frontend/src/components/MaterialFormikField.js");
-/* harmony import */ var _material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/InputAdornment */ "./node_modules/@material-ui/core/esm/InputAdornment/index.js");
-/* harmony import */ var _material_ui_icons_People__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/icons/People */ "./node_modules/@material-ui/icons/People.js");
-/* harmony import */ var _material_ui_icons_People__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_People__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
-/* harmony import */ var _material_ui_core_Card__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/Card */ "./node_modules/@material-ui/core/esm/Card/index.js");
-/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/CardContent */ "./node_modules/@material-ui/core/esm/CardContent/index.js");
-/* harmony import */ var _material_ui_core_Container__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/Container */ "./node_modules/@material-ui/core/esm/Container/index.js");
-/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/@material-ui/core/esm/Paper/index.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var TaskEditor = /*#__PURE__*/function (_Component) {
-  _inherits(TaskEditor, _Component);
-
-  var _super = _createSuper(TaskEditor);
-
-  function TaskEditor(props) {
-    var _this;
-
-    _classCallCheck(this, TaskEditor);
-
-    _this = _super.call(this, props);
-
-    _defineProperty(_assertThisInitialized(_this), "setTask", function (task) {});
-
-    _this.state = {
-      task: null
-    };
-    return _this;
-  }
-
-  _createClass(TaskEditor, [{
-    key: "render",
-    // elo = () => {
-    //   let task = JSON.parse(JSON.stringify(this.props.task));
-    //   task.text = task.text + "1";
-    //   this.props.updateTask(task);
-    // };
-    value: function render() {
-      var _this2 = this;
-
-      var task = this.props.task;
-      console.log("TE", task); //todo walidacja formularza od edycji zadania
-
-      if (!task) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Wybierz zadanie");
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: {
-          minHeight: "100%"
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_3__["Formik"], {
-        enableReinitialize: true,
-        initialValues: this.props.task,
-        onSubmit: function onSubmit(values, helpers) {
-          if (!!values.imageToUpload) {
-            var formData = new FormData();
-            formData.append("file", values.imageToUpload);
-            _axiosAPI__WEBPACK_IMPORTED_MODULE_5__["default"].post("/user/addimage/", formData, {
-              headers: {
-                "Content-Type": "multipart/form-data"
-              }
-            }).then(function (response) {
-              var task = _objectSpread({}, values);
-
-              task.currentDataSet.image = [response.data.id];
-
-              _this2.props.updateTask(_objectSpread({}, task));
-            });
-          } else _this2.props.updateTask(_objectSpread({}, values));
-        }
-      }, function (_ref) {
-        var values = _ref.values,
-            errors = _ref.errors,
-            touched = _ref.touched,
-            handleChange = _ref.handleChange,
-            handleBlur = _ref.handleBlur,
-            handleSubmit = _ref.handleSubmit,
-            isSubmitting = _ref.isSubmitting,
-            submitForm = _ref.submitForm,
-            setFieldValue = _ref.setFieldValue;
-
-        var handleChangeAndSubmit = function handleChangeAndSubmit(e) {
-          handleChange(e);
-          submitForm();
-        };
-
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_3__["Form"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_3__["Field"], {
-          component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_6__["default"],
-          name: "text",
-          formControlProps: {
-            fullWidth: true
-          },
-          inputProps: {
-            onChange: handleChangeAndSubmit
-          },
-          labelText: "Tre\u015B\u0107 zadania"
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_3__["Field"], {
-          component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_6__["default"],
-          name: "maxPoints",
-          type: "number",
-          formControlProps: {
-            fullWidth: true
-          },
-          inputProps: {
-            onChange: handleChangeAndSubmit
-          },
-          labelText: "Maksymalna ilo\u015B\u0107 punkt\xF3w"
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__["Button"], {
-          variant: "contained",
-          component: "label"
-        }, "Wybierz zdj\u0119cie", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          type: "file",
-          name: "imageToUpload",
-          style: {
-            display: "none"
-          },
-          onChange: function onChange(e) {
-            setFieldValue("imageToUpload", e.currentTarget.files[0]);
-          }
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__["Button"], {
-          onClick: handleSubmit
-        }, "Zapisz obrazek"));
-      }));
-    }
-  }]);
-
-  return TaskEditor;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-TaskEditor.propTypes = {};
-/* harmony default export */ __webpack_exports__["default"] = (TaskEditor);
 
 /***/ }),
 
@@ -3616,7 +3475,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var snackbarContentStyle = {
-  root: _objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["defaultFont"], {
+  root: _objectSpread(_objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["defaultFont"]), {}, {
     position: "relative",
     padding: "20px 15px",
     lineHeight: "20px",
@@ -3678,7 +3537,7 @@ var snackbarContentStyle = {
     "float": "left",
     marginRight: "1.071rem"
   },
-  container: _objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["container"], {
+  container: _objectSpread(_objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["container"]), {}, {
     position: "relative"
   })
 };
@@ -3704,7 +3563,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var typographyStyle = {
-  defaultFontStyle: _objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["defaultFont"], {
+  defaultFontStyle: _objectSpread(_objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["defaultFont"]), {}, {
     fontSize: "14px"
   }),
   defaultHeaderMargins: {
@@ -4007,7 +3866,7 @@ var basicsStyle = _objectSpread({
     padding: "70px 0"
   },
   container: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["container"],
-  title: _objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"], {
+  title: _objectSpread(_objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"]), {}, {
     marginTop: "30px",
     minHeight: "32px",
     textDecoration: "none"
@@ -4077,7 +3936,7 @@ var completedStyle = {
   section: {
     padding: "70px 0"
   },
-  container: _objectSpread({}, _jss_material_kit_react__WEBPACK_IMPORTED_MODULE_0__["container"], {
+  container: _objectSpread(_objectSpread({}, _jss_material_kit_react__WEBPACK_IMPORTED_MODULE_0__["container"]), {}, {
     textAlign: "center !important"
   })
 };
@@ -4143,14 +4002,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var exampleStyle = _objectSpread({
+var exampleStyle = _objectSpread(_objectSpread({
   section: {
     padding: "70px 0"
   },
-  container: _objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["containerFluid"], {
+  container: _objectSpread(_objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["containerFluid"]), {}, {
     textAlign: "center !important"
   })
-}, _jss_material_kit_react_imagesStyles_js__WEBPACK_IMPORTED_MODULE_1__["default"], {
+}, _jss_material_kit_react_imagesStyles_js__WEBPACK_IMPORTED_MODULE_1__["default"]), {}, {
   link: {
     textDecoration: "none"
   }
@@ -4184,12 +4043,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var javascriptStyles = _objectSpread({
+var javascriptStyles = _objectSpread(_objectSpread(_objectSpread({
   section: {
     padding: "70px 0 0"
   },
   container: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["container"],
-  title: _objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"], {
+  title: _objectSpread(_objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"]), {}, {
     marginTop: "30px",
     minHeight: "32px",
     textDecoration: "none"
@@ -4199,7 +4058,7 @@ var javascriptStyles = _objectSpread({
     height: "17px",
     marginRight: "4px"
   }
-}, _jss_material_kit_react_modalStyle_js__WEBPACK_IMPORTED_MODULE_1__["default"], {
+}, _jss_material_kit_react_modalStyle_js__WEBPACK_IMPORTED_MODULE_1__["default"]), {}, {
   label: {
     color: "rgba(0, 0, 0, 0.26)",
     cursor: "pointer",
@@ -4211,7 +4070,7 @@ var javascriptStyles = _objectSpread({
     paddingLeft: "0",
     letterSpacing: "normal"
   }
-}, _jss_material_kit_react_tooltipsStyle_js__WEBPACK_IMPORTED_MODULE_2__["default"], {}, _jss_material_kit_react_popoverStyles_js__WEBPACK_IMPORTED_MODULE_3__["default"]);
+}, _jss_material_kit_react_tooltipsStyle_js__WEBPACK_IMPORTED_MODULE_2__["default"]), _jss_material_kit_react_popoverStyles_js__WEBPACK_IMPORTED_MODULE_3__["default"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (javascriptStyles);
 
@@ -4313,13 +4172,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var navbarsStyle = function navbarsStyle(theme) {
-  return _objectSpread({
+  return _objectSpread(_objectSpread({
     section: {
       padding: "70px 0",
       paddingTop: "0"
     },
     container: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["container"],
-    title: _objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"], {
+    title: _objectSpread(_objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"]), {}, {
       marginTop: "30px",
       minHeight: "32px",
       textDecoration: "none"
@@ -4351,7 +4210,7 @@ var navbarsStyle = function navbarsStyle(theme) {
       height: "20px",
       color: "inherit"
     }
-  }, Object(_jss_material_kit_react_components_headerLinksStyle_js__WEBPACK_IMPORTED_MODULE_1__["default"])(theme), {
+  }, Object(_jss_material_kit_react_components_headerLinksStyle_js__WEBPACK_IMPORTED_MODULE_1__["default"])(theme)), {}, {
     img: {
       width: "40px",
       height: "40px",
@@ -4395,7 +4254,7 @@ var notificationsStyles = {
     position: "relative",
     padding: "0"
   },
-  title: _objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"], {
+  title: _objectSpread(_objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"]), {}, {
     marginTop: "30px",
     minHeight: "32px",
     textDecoration: "none"
@@ -4428,7 +4287,7 @@ var pillsStyle = {
     padding: "70px 0"
   },
   container: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["container"],
-  title: _objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"], {
+  title: _objectSpread(_objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"]), {}, {
     marginTop: "30px",
     minHeight: "32px",
     textDecoration: "none"
@@ -4492,7 +4351,7 @@ var typographyStyle = _objectSpread({
     height: "50px",
     display: "block"
   },
-  title: _objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"], {
+  title: _objectSpread(_objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"]), {}, {
     marginTop: "30px",
     minHeight: "32px",
     textDecoration: "none"
@@ -4547,7 +4406,7 @@ var landingPageStyle = {
     zIndex: "12",
     color: "#FFFFFF"
   }, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["container"]),
-  title: _objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"], {
+  title: _objectSpread(_objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"]), {}, {
     display: "inline-block",
     position: "relative",
     marginTop: "30px",
@@ -4597,7 +4456,7 @@ var productStyle = {
     padding: "70px 0",
     textAlign: "center"
   },
-  title: _objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"], {
+  title: _objectSpread(_objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"]), {}, {
     marginBottom: "1rem",
     marginTop: "30px",
     minHeight: "32px",
@@ -4631,18 +4490,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var teamStyle = _objectSpread({
+var teamStyle = _objectSpread(_objectSpread({
   section: {
     padding: "70px 0",
     textAlign: "center"
   },
-  title: _objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"], {
+  title: _objectSpread(_objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"]), {}, {
     marginBottom: "1rem",
     marginTop: "30px",
     minHeight: "32px",
     textDecoration: "none"
   })
-}, _jss_material_kit_react_imagesStyles_js__WEBPACK_IMPORTED_MODULE_1__["default"], {
+}, _jss_material_kit_react_imagesStyles_js__WEBPACK_IMPORTED_MODULE_1__["default"]), {}, {
   itemGrid: {
     marginLeft: "auto",
     marginRight: "auto"
@@ -4698,7 +4557,7 @@ var workStyle = {
   section: {
     padding: "70px 0"
   },
-  title: _objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"], {
+  title: _objectSpread(_objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"]), {}, {
     marginBottom: "50px",
     marginTop: "30px",
     minHeight: "32px",
@@ -4741,7 +4600,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var profilePageStyle = _objectSpread({
+var profilePageStyle = _objectSpread(_objectSpread({
   container: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["container"],
   profile: {
     textAlign: "center",
@@ -4761,7 +4620,7 @@ var profilePageStyle = _objectSpread({
   name: {
     marginTop: "-80px"
   }
-}, _jss_material_kit_react_imagesStyles_js__WEBPACK_IMPORTED_MODULE_1__["default"], {
+}, _jss_material_kit_react_imagesStyles_js__WEBPACK_IMPORTED_MODULE_1__["default"]), {}, {
   main: {
     background: "#FFFFFF",
     position: "relative",
@@ -4772,7 +4631,7 @@ var profilePageStyle = _objectSpread({
     borderRadius: "6px",
     boxShadow: "0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)"
   },
-  title: _objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"], {
+  title: _objectSpread(_objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"]), {}, {
     display: "inline-block",
     position: "relative",
     marginTop: "30px",
@@ -4877,9 +4736,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ExamEditorSubComponents_TaskParser__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ExamEditorSubComponents/TaskParser */ "./djsr/frontend/src/components/ExamEditorSubComponents/TaskParser.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
@@ -4893,7 +4752,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 

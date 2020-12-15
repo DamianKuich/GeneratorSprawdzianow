@@ -1,38 +1,11 @@
 import React, { Component } from "react";
-import ResizePanel from "react-resize-panel";
-// import PropTypes from "prop-types";
 import { MDBCol, MDBCollapse, MDBContainer, MDBRow } from "mdbreact";
-import TaskSearch from "./MaterialUiTaskSearch";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import TaskEditor from "./TaskEditor";
-// import {
-//   PDFDownloadLink,
-//   Document,
-//   Page,
-//   Text,
-//   StyleSheet,
-//   View,
-//   Font,
-//   Image,
-//   Svg,
-//   Path,
-//   G,
-// } from "@react-pdf/renderer";
 import { sampleSize, shuffle } from "lodash/collection";
-// import Roboto from "./webfonts/Roboto-Regular.ttf";
-// import RobotoBold from "./webfonts/Roboto-Bold.ttf";
-import Latex from "react-latex";
 import "./styles/katex.css";
 import "./registered-files";
 import examToPdf from "./ExamPDF";
 import axiosInstance from "./axiosAPI";
-import Paper from "@material-ui/core/Paper";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Collapse from "@material-ui/core/Collapse";
-import AppBar from "@material-ui/core/AppBar";
-import { makeStyles } from "@material-ui/core/styles";
-import { useTheme } from "@material-ui/styles";
 import ExamEditorSidePanel from "./ExamEditorSubComponents/ExamEditorSidePanel";
 import ExamPage from "./ExamEditorSubComponents/ExamPageWithTaskOverlays";
 //todo po skasowaniu tresci zadania "zapomina" zdjecie
@@ -78,6 +51,18 @@ class ExamEditor extends Component {
     this.getExam();
   }
 
+  updateStateAndSaveExam = (stateUpdater) => {
+    this.setState((state) => {
+      state = stateUpdater(state);
+      state.timeout = this.resetTimeout(
+        this.state.timeout,
+        setTimeout(this.saveExam, 3000)
+      );
+      state.saved = false;
+      return state;
+    });
+  };
+
   setTaskOnPageEditor = (index, part) => {
     this.setState((state) => {
       state.editorTaskIndex = index;
@@ -91,17 +76,12 @@ class ExamEditor extends Component {
     });
   };
 
-  updateTaskText=(index,text)=>{
-    this.setState((state)=>{
-      state.exam.tasks[index].text=text;
-      state.timeout = this.resetTimeout(
-        this.state.timeout,
-        setTimeout(this.saveExam, 3000)
-      );
-      state.saved = false;
-      return state
-    })
-  }
+  updateTaskText = (index, text) => {
+    this.updateStateAndSaveExam((state) => {
+      state.exam.tasks[index].text = text;
+      return state;
+    });
+  };
 
   generatedPDFV3 = examToPdf;
 
@@ -114,13 +94,8 @@ class ExamEditor extends Component {
   };
 
   updateTaskToEdit = (task) => {
-    this.setState((state) => {
+    this.updateStateAndSaveExam((state) => {
       Object.assign(state.editorTask, task);
-      state.timeout = this.resetTimeout(
-        this.state.timeout,
-        setTimeout(this.saveExam, 3000)
-      );
-      state.saved = false;
       return state;
     });
   };
@@ -137,22 +112,18 @@ class ExamEditor extends Component {
   };
 
   removeTask = (index) => {
-    this.setState((state) => {
+    console.log("usunieto" + index);
+    this.updateStateAndSaveExam((state) => {
       if (index === 0) {
         state.exam.tasks.shift();
       } else {
         state.exam.tasks.splice(index, index);
       }
-      state.timeout = this.resetTimeout(
-        this.state.timeout,
-        setTimeout(this.saveExam, 3000)
-      );
-      state.saved = false;
       return state;
     });
   };
 
-  dragEnd = (result) => {
+  dragEndOld = (result) => {
     const { source, destination, draggableId } = result;
     console.log(source, destination, draggableId);
     if (source.droppableId === "examDroppable" && !destination.droppableId) {
@@ -186,7 +157,6 @@ class ExamEditor extends Component {
       let draggedItem = JSON.parse(
         JSON.stringify(this.state.tasks[source.index])
       );
-      // draggedItem.currentDataSet = draggedItem.dataset[0];
       draggedItem.currentAnswers = JSON.parse(
         JSON.stringify(draggedItem.answers)
       );
@@ -208,8 +178,6 @@ class ExamEditor extends Component {
         }
       );
       let answersSet = [];
-
-      // [sampleSize(currentDataSetAnswers.allanswers,3).map];
       answersSet = answersSet.concat(
         sampleSize(correctAnswersIndex).map((item) => {
           return { index: item, isCorrect: true };
@@ -236,6 +204,37 @@ class ExamEditor extends Component {
       });
     }
   };
+  dragEnd = (result) => {
+    const { source, destination, draggableId } = result;
+    console.log(source, destination, draggableId);
+    if (source.droppableId === "examDroppable" && !destination.droppableId) {
+      this.setState((state) => {
+        state.exam.tasks = state.exam.tasks.splice(source.index, source.index);
+        return state;
+      });
+    }
+    console.log("dragEnd", result);
+    if (!destination || destination.droppableId === "searchDroppable") {
+      return;
+    }
+    if (
+      source.droppableId === "examDroppable" &&
+      destination.droppableId === "examDroppable"
+    ) {
+      this.updateStateAndSaveExam((state) => {
+        let tasks = state.exam.tasks;
+        [tasks[source.index], tasks[destination.index]] = [
+          tasks[destination.index],
+          tasks[source.index],
+        ];
+        return state;
+      });
+    } else {
+      let draggedItem = this.state.tasks[source.index];
+      let taskWithAnswerSet= this.generateAnswerSetForTask(draggedItem)
+      this.pushTaskAtIndex(taskWithAnswerSet,destination.index)
+    }
+  };
   setSearchedTasks = (tasks) => {
     console.log("Triggered Task");
     this.setState((state) => {
@@ -244,23 +243,52 @@ class ExamEditor extends Component {
     });
   };
 
+  generateAnswerSetForTask = (
+    task,
+    { numberOfAnswers, numberOfCorrectAnswers, ...options }={}
+  ) => {
+    numberOfAnswers=numberOfAnswers || 4
+    numberOfCorrectAnswers=numberOfCorrectAnswers||1
+    let NewTask = JSON.parse(JSON.stringify(task));
+    NewTask.currentAnswers = JSON.parse(JSON.stringify(NewTask.answers));
+    let currentDataSetAnswers = NewTask.currentAnswers;
+    let correctAnswersIndex = [...currentDataSetAnswers.correctans.keys()];
+    let incorrectAnswersIndexes =[...currentDataSetAnswers.wronganswers.keys()];
+    let answersSet = [];
+    answersSet = answersSet.concat(
+      sampleSize(correctAnswersIndex,numberOfCorrectAnswers).map((item) => {
+        return { index: item, isCorrect: true };
+      })
+    );
+    answersSet = answersSet.concat(
+      sampleSize(incorrectAnswersIndexes,numberOfAnswers - numberOfCorrectAnswers).map((item) => {
+        return { index: item, isCorrect: false };
+      })
+    );
+    answersSet = shuffle(answersSet);
+    NewTask.currentAnswers.answersIndexes = answersSet;
+    return NewTask
+  };
+
+  //zmiana zakladki w menu po lewej stronie
   setSideMenuCollapse = (collapseId) => {
     this.setState({ sideMenuCollapseId: collapseId });
   };
 
-  pushTaskAtIndex= (task,index)=>{
-    this.setState((state)=>{
+  pushTaskAtIndex = (task, index) => {
+    this.updateStateAndSaveExam((state) => {
       state.exam.tasks.splice(index, 0, task);
-      state.saved = false;
-        state.timeout = this.resetTimeout(
-          this.state.timeout,
-          setTimeout(this.saveExam, 3000)
-        );
-        return state;
-    })
-  }
+      return state;
+    });
+  };
   handleSideMenuTabChange = (event, newValue) => {
-    if (newValue === "generatePDF") this.generatedPDFV3(this.state.exam);
+    // if (newValue === "generatePDF") this.generatedPDFV3(this.state.exam);
+    if (newValue === "generatePDF")
+      window.open(
+        "https://gen-mat.herokuapp.com/api/user/testpdf/" + this.state.exam.id,
+        "_blank"
+      );
+    //window.open(url,'_blank');
     else this.setSideMenuCollapse(newValue);
   };
   render() {

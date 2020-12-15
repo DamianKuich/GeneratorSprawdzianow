@@ -34,7 +34,7 @@ import base64
 import pdfkit
 from yattag import Doc
 from .examToPdf.MainScript import generatePdf as generatePdfClassic
-from .examToPdf.PdfFromNode import generatePdf
+from .examToPdf.PdfFromNode import generatePdf, generateAnswersPdf
 
 from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer, \
     CustomUserSerializerReadOnly, PasswordSendResetSerializer, TestJSONSerializer, ImageSerializer
@@ -267,6 +267,7 @@ class TaskViewSet(APIView):
         lista = []
         if request.data:
             id_string = request.data['skill']
+            print ("XD")
             numberoftask = int(request.data['nroftasks'])
             try:
                 pag = int(request.data['pagenr'])
@@ -284,6 +285,7 @@ class TaskViewSet(APIView):
                 lista.append(serializerprv.data)
                 a = math.ceil((len(list(chain(*lista))) / numberoftask))
             if pag == 1:
+                print ("XD")
                 return Response(data={"pages": str(a), "tasks": list(chain(*lista))[0:numberoftask]})
             elif pag > 1:
                 return Response(data={"pages": str(a), "tasks": list(chain(*lista))[(
@@ -313,6 +315,7 @@ class GetRandomTasksViewSet(APIView):
                 if skills is not None:
                     if ilezamk != 0:
                         for skillid in skills.split(','):
+                            listazamk = []
                             task = Task.objects.filter(skill=skillid, type=2, private=False, level=level)
                             serializer = TaskSerializer(task, many=True)
                             taskpriv = Task.objects.filter(skill=skillid, type=2, private=True, author=author_id,
@@ -320,23 +323,37 @@ class GetRandomTasksViewSet(APIView):
                             serializerpriv = TaskSerializer(taskpriv, many=True)
                             listazamk.append(serializer.data)
                             listazamk.append(serializerpriv.data)
-                        a = list(chain(*listazamk))
-                        random.shuffle(a)
-                        lista.append(a[:ilezamk])
-                    if ileotw != 0:
-                        for skillid in skills.split(','):
-                            task = Task.objects.filter(skill=skillid, type=1, private=False, level=level)
-                            serializer = TaskSerializer(task, many=True)
-                            taskprv = Task.objects.filter(skill=skillid, type=1, private=True, author=author_id,
-                                                          level=level)
-                            serializerprv = TaskSerializer(taskprv, many=True)
-                            listaotw.append(serializer.data)
-                            listaotw.append(serializerprv.data)
-                        a = list(chain(*listaotw))
-                        random.shuffle(a)
-                        lista.append(a[:ileotw])
+                            a = list(chain(*listazamk))
+                            random.shuffle(a)
+                            b = math.ceil(ilezamk/len(skills.split(',')))
+                            lista.append(a[:b])
 
-                return Response(list(chain(*lista)), status=status.HTTP_200_OK)
+                    pom = len(list(chain(*lista))) - ilezamk
+                    if pom>0:
+                        lista=list(chain(*lista))[:pom*-1]
+                    lenzam1 = len(lista)
+                    lista2 = []
+                    if ileotw != 0:
+                            for skillid in skills.split(','):
+                                listaotw = []
+                                task = Task.objects.filter(skill=skillid, type=1, private=False, level=level)
+                                serializer = TaskSerializer(task, many=True)
+                                taskprv = Task.objects.filter(skill=skillid, type=1, private=True, author=author_id,
+                                                              level=level)
+                                serializerprv = TaskSerializer(taskprv, many=True)
+                                listaotw.append(serializer.data)
+                                listaotw.append(serializerprv.data)
+                                a = list(chain(*listaotw))
+                                random.shuffle(a)
+                                b = math.ceil(ileotw / len(skills.split(',')))
+                                lista2.append(a[:b])
+                    pomo = len(list(chain(*lista2))) - ileotw
+                    if pomo> 0:
+                        lista2 = list(chain(*lista2))[:pomo*-1]
+                    lenotw = len(lista2)
+                    for x in list(chain(*lista2)):
+                        lista.append(x)
+                return Response(lista, status=status.HTTP_200_OK)
             except Exception as e:
                 print("mt er1")
                 return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
@@ -740,42 +757,29 @@ class TestTasksiewSet(APIView):
     permission_classes = (permissions.AllowAny,)
     serializer_class = TestJSONSerializer
 
-    def get(self, request, format=None):
-        listazadan = []
-        listaodp = []
-        # test = TestJSON.objects.filter(id=1).values('tasks')
-        # test = str(test)[22:-4]
-        # print(test)
-        test = list(TestJSON.objects.filter(id=1).values())[0]
-        # test=
+    def get(self, request, *args, **kwargs):
+        # type = args.pop('type')
+        id = kwargs.pop('id')
+
+        test = list(TestJSON.objects.filter(id=id).values())[0]
         print(test['tasks'])
-        # test = test.replace("$'","")
-        # print(test[319:])
-        # test = json.loads(test)
         tasks = json.loads(test['tasks'])
-        pdf, html = generatePdf(tasks=tasks, name="SPR")
+        pdf, html = generateAnswersPdf(tasks=tasks, name=test['name'])
+        # pdf, html = generatePdf(tasks=tasks, name=test['name'])
         return HttpResponse(pdf, content_type="application/pdf")
 
-        # return Response(data={"test": html})
-        def tasktextparser(text):
-            pattern = "\$\{[^\$]*\}\$"
-            matches = [(m.start(0), m.end(0)) for m in re.finditer(pattern, text)]
-            taskTextParsed = list()
-            taskTextParsedIndex = 0
-            for match in matches:
-                if taskTextParsedIndex < match[0]:
-                    taskTextParsed.append({"type": "text", "data": text[taskTextParsedIndex:match[0]]})
-                taskTextParsed.append({"type": "latex", "data": text[match[0]:match[1]], "svg": requests.get(
-                    "https://math.now.sh?from=" + text[match[0]:match[1]][2:-2])})
-                taskTextParsedIndex = match[1]
 
-            if taskTextParsedIndex < (len(text) - 1):
-                taskTextParsed.append({"type": "text", "data": text[taskTextParsedIndex:]})
-            return {'text': text, "matches": taskTextParsed}
+class TestAnswersviewSet(APIView):
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = TestJSONSerializer
 
-        def taskMapper(task):
-            result = {}
-            return tasktextparser(task['text'])
+    def get(self, request, *args, **kwargs):
+        # type = args.pop('type')
+        id = kwargs.pop('id')
 
-        mapped = map(taskMapper, tasks)
-        return Response(data={"test": mapped})
+        test = list(TestJSON.objects.filter(id=id).values())[0]
+        print(test['tasks'])
+        tasks = json.loads(test['tasks'])
+        pdf, html = generateAnswersPdf(tasks=tasks, name=test['name'])
+        return HttpResponse(pdf, content_type="application/pdf")
+
