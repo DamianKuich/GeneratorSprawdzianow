@@ -46,6 +46,7 @@ django-cleanup = "*"
 pdfkit = "*"
 yattag = "*"
 django-axes= "*"
+APScheduler = "*"
 
 [requires]
 python_version = "3.7"
