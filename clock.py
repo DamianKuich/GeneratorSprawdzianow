@@ -5,7 +5,7 @@ sched = BlockingScheduler()
 
 @sched.scheduled_job('interval', minutes=1)
 def scheduled_job():
-    subprocess.run("heroku run python djsr/manage.py flushexpiredtokens", shell=True)
+    subprocess.run("python djsr/manage.py flushexpiredtokens", shell=True)
     print("dzialam")
 
 sched.start()
