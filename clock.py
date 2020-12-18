@@ -3,9 +3,9 @@ import subprocess
 
 sched = BlockingScheduler()
 
-@sched.scheduled_job('interval', minutes=1)
+@sched.scheduled_job('cron', hour=00)
 def scheduled_job():
     subprocess.run("python djsr/manage.py flushexpiredtokens", shell=True)
-    print("dzialam")
+    print("Deleting Expired Tokens")
 
 sched.start()
