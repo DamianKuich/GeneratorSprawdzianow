@@ -313,6 +313,7 @@ class GetRandomTasksViewSet(APIView):
                 if skills is not None:
                     if ilezamk != 0:
                         for skillid in skills.split(','):
+                            listazamk = []
                             task = Task.objects.filter(skill=skillid, type=2, private=False, level=level)
                             serializer = TaskSerializer(task, many=True)
                             taskpriv = Task.objects.filter(skill=skillid, type=2, private=True, author=author_id,
@@ -320,23 +321,37 @@ class GetRandomTasksViewSet(APIView):
                             serializerpriv = TaskSerializer(taskpriv, many=True)
                             listazamk.append(serializer.data)
                             listazamk.append(serializerpriv.data)
-                        a = list(chain(*listazamk))
-                        random.shuffle(a)
-                        lista.append(a[:ilezamk])
-                    if ileotw != 0:
-                        for skillid in skills.split(','):
-                            task = Task.objects.filter(skill=skillid, type=1, private=False, level=level)
-                            serializer = TaskSerializer(task, many=True)
-                            taskprv = Task.objects.filter(skill=skillid, type=1, private=True, author=author_id,
-                                                          level=level)
-                            serializerprv = TaskSerializer(taskprv, many=True)
-                            listaotw.append(serializer.data)
-                            listaotw.append(serializerprv.data)
-                        a = list(chain(*listaotw))
-                        random.shuffle(a)
-                        lista.append(a[:ileotw])
+                            a = list(chain(*listazamk))
+                            random.shuffle(a)
+                            b = math.ceil(ilezamk/len(skills.split(',')))
+                            lista.append(a[:b])
 
-                return Response(list(chain(*lista)), status=status.HTTP_200_OK)
+                    pom = len(list(chain(*lista))) - ilezamk
+                    if pom>0:
+                        lista=list(chain(*lista))[:pom*-1]
+                    lenzam1 = len(lista)
+                    lista2 = []
+                    if ileotw != 0:
+                            for skillid in skills.split(','):
+                                listaotw = []
+                                task = Task.objects.filter(skill=skillid, type=1, private=False, level=level)
+                                serializer = TaskSerializer(task, many=True)
+                                taskprv = Task.objects.filter(skill=skillid, type=1, private=True, author=author_id,
+                                                              level=level)
+                                serializerprv = TaskSerializer(taskprv, many=True)
+                                listaotw.append(serializer.data)
+                                listaotw.append(serializerprv.data)
+                                a = list(chain(*listaotw))
+                                random.shuffle(a)
+                                b = math.ceil(ileotw / len(skills.split(',')))
+                                lista2.append(a[:b])
+                    pomo = len(list(chain(*lista2))) - ileotw
+                    if pomo> 0:
+                        lista2 = list(chain(*lista2))[:pomo*-1]
+                    lenotw = len(lista2)
+                    for x in list(chain(*lista2)):
+                        lista.append(x)
+                return Response(lista, status=status.HTTP_200_OK)
             except Exception as e:
                 print("mt er1")
                 return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
