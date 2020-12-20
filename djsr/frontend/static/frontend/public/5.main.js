@@ -6695,7 +6695,7 @@ __webpack_require__.r(__webpack_exports__);
 /* empty/unused harmony star reexport *//* harmony import */ var _useAutocomplete__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./useAutocomplete */ "./node_modules/@material-ui/lab/esm/useAutocomplete/index.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useAutocomplete", function() { return _useAutocomplete__WEBPACK_IMPORTED_MODULE_25__["default"]; });
 
-/** @license Material-UI v4.0.0-alpha.57
+/** @license Material-UI v4.0.0-alpha.56
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
