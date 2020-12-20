@@ -34,48 +34,7 @@ class AccountActivation extends Component {
       <>
         {accountConfirm === null && <div>Oczekiwanie na odpowiedz</div>}
         {accountConfirm === true && (
-                         <Box 
-                         justifyContent="center"
-                         p={1}
-                         
-         
-                         > 
-                         <Card 
-                       justify="center" 
-                       
-                       
-                       >
-                          
-                             <CardHeader
-                            title={exam.name}/>
-                          
-                             <CardActions disableSpacing>
-                             <Link>
-                             <BootstrapTooltip title="Edytuj sprawdzian">
-                   
-                               <IconButton  >
-                               <EditIcon />
-                             </IconButton>
-                             </BootstrapTooltip>
-         
-                             </Link>
-                         
-                             <BootstrapTooltip title="Skopiuj sprawdzian">
-                             <IconButton  >
-                               <FileCopyIcon />
-                             </IconButton>
-                             </BootstrapTooltip>
-                             <BootstrapTooltip title="Usuń sprawdzian">
-                             <IconButton >
-                               <DeleteIcon />
-                             </IconButton>
-                             </BootstrapTooltip>
-                           
-                           </CardActions>
-                         
-                         </Card>
-                         </Box>
-                         
+          <div>Konto zostało aktywowane mozesz sie zalogowac</div>
         )}
         {accountConfirm === false && (
           <div>Błąd!!! Konto nie zostało aktywowane.</div>

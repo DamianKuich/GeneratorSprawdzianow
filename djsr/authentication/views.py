@@ -5,6 +5,7 @@ from itertools import chain
 
 import requests
 import simplejson
+from rest_framework_simplejwt.utils import *
 import random
 import math
 from rest_framework import status, permissions
@@ -259,6 +260,7 @@ class UserRetrieveUpdateAPIView(APIView):
 
 
 class TaskViewSet(APIView):
+
     permission_classes = (IsAuthenticated,)
     serializer_class = TaskSerializer
 
@@ -267,6 +269,7 @@ class TaskViewSet(APIView):
         lista = []
         if request.data:
             id_string = request.data['skill']
+            print ("XD")
             numberoftask = int(request.data['nroftasks'])
             try:
                 pag = int(request.data['pagenr'])
@@ -284,6 +287,7 @@ class TaskViewSet(APIView):
                 lista.append(serializerprv.data)
                 a = math.ceil((len(list(chain(*lista))) / numberoftask))
             if pag == 1:
+                print ("XD")
                 return Response(data={"pages": str(a), "tasks": list(chain(*lista))[0:numberoftask]})
             elif pag > 1:
                 return Response(data={"pages": str(a), "tasks": list(chain(*lista))[(
@@ -762,7 +766,7 @@ class TestTasksiewSet(APIView):
         test = list(TestJSON.objects.filter(id=id).values())[0]
         print(test['tasks'])
         tasks = json.loads(test['tasks'])
-        pdf, html = generateAnswersPdf(tasks=tasks, name=test['name'])
+        pdf, html = generatePdf(tasks=tasks, name=test['name'])
         # pdf, html = generatePdf(tasks=tasks, name=test['name'])
         return HttpResponse(pdf, content_type="application/pdf")
 
