@@ -6,7 +6,7 @@ from .views import AddImageToTaskViewSet, AddImageViewSet, ImageViewSet, SkillVi
     LogoutAndBlacklistRefreshTokenForUserView, TaskViewSet, \
     UserRetrieveUpdateAPIView, ReturnUserInfo, PasswordSendResetView, PasswordResetView, AllTestsJSONViewSet, \
     OneTestJSONViewSet, MakeTestViewSet, MakeTestCopyViewSet, LatexToSvgView, GetRandomTasksViewSet, \
-    SkilltoSections, AddTask, AddSkill, AddSection, AddAnswers, DeleteTestViewSet, TestEndpoint, TestTasksiewSet, TestAnswersviewSet
+    SkilltoSections, AddTask, AddSkill, AddSection, AddAnswers, DeleteTestViewSet, TestTasksiewSet, TestAnswersviewSet
 
 # TODO resend activation token
 urlpatterns = [
@@ -38,7 +38,7 @@ urlpatterns = [
     path('user/resetsend/', PasswordSendResetView.as_view(), name='sendreset'),
     path('user/passreset/<token>/$', PasswordResetView.as_view(), name='reset'),
     path('user/deletetest/', DeleteTestViewSet.as_view(), name='deleteTest'),
-    path('user/testend/', TestEndpoint.as_view(), name='testend'),
+    # path('user/testend/', TestEndpoint.as_view(), name='testend'),
     path('user/testpdf/<id>', TestTasksiewSet.as_view(), name='testpdf'),
     path('user/answerspdf/<id>', TestAnswersviewSet.as_view(), name='testpdf'),
 ]

@@ -12,28 +12,9 @@ class CustomUser(AbstractUser):
 # Create your models here.
 
 
-# class Skill(models.Model):
-#     Skill = models.CharField(max_length=500)
-#
-#     def __str__(self):
-#         return self.nasza_nazwa()
-#
-#     def nasza_nazwa(self):
-#         return self.Skill
-#
-# class Section(models.Model):
-#     Section = models.CharField(max_length=500)
-#     skill = models.ManyToManyField(Skill)
-#     # tasks = models.ManyToManyField(Task)
-#
-#     def __str__(self):
-#         return self.nasza_nazwa()
-#
-#     def nasza_nazwa(self):
-#         return self.Section
+
 class Section(models.Model):
     Section = models.CharField(max_length=500,unique=True)
-    # tasks = models.ManyToManyField(Task)
 
     def __str__(self):
         return self.nasza_nazwa()
@@ -102,12 +83,6 @@ class Task(models.Model):
         (2, 'Rozszerzony'),
     }
     text = models.CharField(max_length=600,unique=True)
-    # answers = models.OneToOneField(
-    #     Answers,
-    #     on_delete=models.CASCADE,
-    #     default="",
-    #     blank=True
-    # )
     wronganswers =ListCharField(
         base_field=models.CharField(max_length=200),
         size=6,
@@ -122,10 +97,8 @@ class Task(models.Model):
         default = None,
         blank = True# 6 * 10 character nominals, plus commas
     )
-    # add_date = models.DateField(default=datetime.date.today)
     type = models.IntegerField(choices=RODZAJE)
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE,default="",blank=True,null=True)
-    #author = models.CharField(max_length=100, default="")
     level = models.IntegerField(choices=RODZAJE2)
     private = models.BooleanField(default=False)
     points = models.IntegerField(default=0)
@@ -158,12 +131,10 @@ class UserResetToken(models.Model):
     email = models.EmailField(blank=True, max_length=254, verbose_name='email address')
     expire = models.DateTimeField()
     created_on = models.DateTimeField()
-    # auto_now_add=True
     used = models.BooleanField()
 
 class UserActivationToken(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     expire = models.DateTimeField()
     created_on = models.DateTimeField()
-    # auto_now_add=True
     used = models.BooleanField()
