@@ -13,7 +13,7 @@ const TaskOverlay = ({
   return (
     <ReactResizeDetector>
       {({ width, height }) => {
-        console.log("task overlay", width, height);
+        // console.log("task overlay", width, height);
         const boxWidth = width;
         return (
           <Box

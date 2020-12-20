@@ -12,7 +12,7 @@ import bgImage from "../img/genspr-parralax-bg.png";
 //
 // }));
 
-const ExamPage = ({
+const ExamPages = ({
   exam,
   setTaskToEdit,
   removeTask,
@@ -176,4 +176,4 @@ const ExamPage = ({
   );
 };
 
-export default ExamPage;
+export default ExamPages;
