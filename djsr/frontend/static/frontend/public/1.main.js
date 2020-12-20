@@ -389,7 +389,7 @@ __webpack_require__.r(__webpack_exports__);
  * @type {React.Context<{} | {expanded: boolean, disabled: boolean, toggle: () => void}>}
  */
 
-var AccordionContext = react__WEBPACK_IMPORTED_MODULE_0__["createContext"]({});
+var AccordionContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createContext"]({});
 
 if (true) {
   AccordionContext.displayName = 'AccordionContext';
@@ -851,10 +851,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
-/* harmony import */ var _material_ui_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/utils */ "./node_modules/@material-ui/utils/esm/index.js");
-/* harmony import */ var _styles_withStyles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
-/* harmony import */ var _internal_svg_icons_Person__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../internal/svg-icons/Person */ "./node_modules/@material-ui/core/esm/internal/svg-icons/Person.js");
-
+/* harmony import */ var _styles_withStyles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
+/* harmony import */ var _internal_svg_icons_Person__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../internal/svg-icons/Person */ "./node_modules/@material-ui/core/esm/internal/svg-icons/Person.js");
 
 
 
@@ -889,9 +887,6 @@ var styles = function styles(theme) {
 
     /* Styles applied to the root element if `variant="circle"`. */
     circle: {},
-
-    /* Styles applied to the root element if `variant="circular"`. */
-    circular: {},
 
     /* Styles applied to the root element if `variant="rounded"`. */
     rounded: {
@@ -1003,7 +998,7 @@ var Avatar = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__["forwardRef"](funct
   } else if (hasImg && alt) {
     children = alt[0];
   } else {
-    children = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_internal_svg_icons_Person__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    children = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__["createElement"](_internal_svg_icons_Person__WEBPACK_IMPORTED_MODULE_6__["default"], {
       className: classes.fallback
     });
   }
@@ -1035,20 +1030,7 @@ var Avatar = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__["forwardRef"](funct
    * Override or extend the styles applied to the component.
    * See [CSS API](#css) below for more details.
    */
-  classes: Object(_material_ui_utils__WEBPACK_IMPORTED_MODULE_5__["chainPropTypes"])(prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object, function (props) {
-    var classes = props.classes;
-
-    if (classes == null) {
-      return null;
-    }
-
-    if (classes.circle != null && // 2 classnames? one from withStyles the other must be custom
-    classes.circle.split(' ').length > 1) {
-      throw new Error("Material-UI: The `circle` class was deprecated. Use `circular` instead.");
-    }
-
-    return null;
-  }),
+  classes: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object,
 
   /**
    * @ignore
@@ -1088,17 +1070,9 @@ var Avatar = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__["forwardRef"](funct
   /**
    * The shape of the avatar.
    */
-  variant: Object(_material_ui_utils__WEBPACK_IMPORTED_MODULE_5__["chainPropTypes"])(prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.oneOf(['circle', 'circular', 'rounded', 'square']), function (props) {
-    var variant = props.variant;
-
-    if (variant === 'circle') {
-      throw new Error('Material-UI: `variant="circle"` was deprecated. Use `variant="circular"` instead.');
-    }
-
-    return null;
-  })
+  variant: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.oneOf(['circle', 'rounded', 'square'])
 } : undefined;
-/* harmony default export */ __webpack_exports__["default"] = (Object(_styles_withStyles__WEBPACK_IMPORTED_MODULE_6__["default"])(styles, {
+/* harmony default export */ __webpack_exports__["default"] = (Object(_styles_withStyles__WEBPACK_IMPORTED_MODULE_5__["default"])(styles, {
   name: 'MuiAvatar'
 })(Avatar));
 
@@ -5100,7 +5074,7 @@ __webpack_require__.r(__webpack_exports__);
  * @type {React.Context<{} | {expanded: boolean, disabled: boolean, toggle: () => void}>}
  */
 
-var ExpansionPanelContext = react__WEBPACK_IMPORTED_MODULE_0__["createContext"]({});
+var ExpansionPanelContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createContext"]({});
 
 if (true) {
   ExpansionPanelContext.displayName = 'ExpansionPanelContext';
@@ -8365,7 +8339,7 @@ __webpack_require__.r(__webpack_exports__);
  * @ignore - internal component.
  */
 
-var RadioGroupContext = react__WEBPACK_IMPORTED_MODULE_0__["createContext"]();
+var RadioGroupContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createContext"]();
 
 if (true) {
   RadioGroupContext.displayName = 'RadioGroupContext';
@@ -13253,7 +13227,7 @@ __webpack_require__.r(__webpack_exports__);
  * @ignore - internal component.
  */
 
-var TableContext = react__WEBPACK_IMPORTED_MODULE_0__["createContext"]();
+var TableContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createContext"]();
 
 if (true) {
   TableContext.displayName = 'TableContext';
@@ -13279,7 +13253,7 @@ __webpack_require__.r(__webpack_exports__);
  * @ignore - internal component.
  */
 
-var Tablelvl2Context = react__WEBPACK_IMPORTED_MODULE_0__["createContext"]();
+var Tablelvl2Context = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createContext"]();
 
 if (true) {
   Tablelvl2Context.displayName = 'Tablelvl2Context';
@@ -17146,7 +17120,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Zoom__WEBPACK_IMPORTED_MODULE_123__ = __webpack_require__(/*! ./Zoom */ "./node_modules/@material-ui/core/esm/Zoom/index.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Zoom", function() { return _Zoom__WEBPACK_IMPORTED_MODULE_123__["default"]; });
 
-/* empty/unused harmony star reexport *//** @license Material-UI v4.11.2
+/* empty/unused harmony star reexport *//** @license Material-UI v4.11.0
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17815,21 +17789,13 @@ var cachedType;
 /**
  * Based on the jquery plugin https://github.com/othree/jquery.rtl-scroll-type
  *
- * Types of scrollLeft, assuming scrollWidth=100 and direction is rtl.
+ * Types of scrollLeft, assiming scrollWidth=100 and direction is rtl.
  *
- * Type             | <- Most Left | Most Right -> | Initial
- * ---------------- | ------------ | ------------- | -------
- * default          | 0            | 100           | 100
- * negative (spec*) | -100         | 0             | 0
- * reverse          | 100          | 0             | 0
- *
- * Edge 85: default
- * Safari 14: negative
- * Chrome 85: negative
- * Firefox 81: negative
- * IE 11: reverse
- *
- * spec* https://drafts.csswg.org/cssom-view/#dom-window-scroll
+ * Browser        | Type          | <- Most Left | Most Right -> | Initial
+ * -------------- | ------------- | ------------ | ------------- | -------
+ * WebKit         | default       | 0            | 100           | 100
+ * Firefox/Opera  | negative      | -100         | 0             | 0
+ * IE/Edge        | reverse       | 100          | 0             | 0
  */
 
 function detectScrollType() {
@@ -17838,10 +17804,7 @@ function detectScrollType() {
   }
 
   var dummy = document.createElement('div');
-  var container = document.createElement('div');
-  container.style.width = '10px';
-  container.style.height = '1px';
-  dummy.appendChild(container);
+  dummy.appendChild(document.createTextNode('ABCD'));
   dummy.dir = 'rtl';
   dummy.style.fontSize = '14px';
   dummy.style.width = '4px';
