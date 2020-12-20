@@ -176,10 +176,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media'
 AUTH_USER_MODEL = "authentication.CustomUser"
 
-AXES_FAILURE_LIMIT=10
-AXES_COOLOFF_TIME = timedelta(minutes=1)
-AXES_LOCK_OUT_BY_COMBINATION_USER_AND_IP = True
-AXES_LOCKOUT_TEMPLATE = 'lockout.html'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True

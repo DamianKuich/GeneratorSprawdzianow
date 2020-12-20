@@ -1,10 +1,7 @@
 import datetime
 import json
-import re
 from itertools import chain
 
-import requests
-import simplejson
 from rest_framework_simplejwt.utils import *
 import random
 import math
@@ -12,29 +9,19 @@ from rest_framework import status, permissions
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework_simplejwt.tokens import RefreshToken, Token
+from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.backends import TokenBackend
-from rest_framework_simplejwt.exceptions import TokenBackendError, TokenError
+from rest_framework_simplejwt.exceptions import TokenBackendError
 from rest_framework_jwt.settings import api_settings
 from django.http import HttpResponse
-from django.urls import reverse
 from django.conf import settings
-from django.template.loader import render_to_string
-from django.core.mail import send_mail
+
 from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
 from django.core.mail import EmailMessage
-from django.db import IntegrityError
-from django.utils.encoding import force_bytes, force_text
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.shortcuts import render, redirect
-from schema import Schema, And, Use, Optional
 import requests
 import base64
 import pdfkit
-from yattag import Doc
-from .examToPdf.MainScript import generatePdf as generatePdfClassic
+
 from .examToPdf.PdfFromNode import generatePdf, generateAnswersPdf
 
 from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer, \

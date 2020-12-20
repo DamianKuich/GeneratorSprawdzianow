@@ -6,7 +6,6 @@ from yattag import Doc
 req = requests.get("https://math.now.sh?from=" + "\square").text
 
 def generatePdf(tasks, name="Sprawdzian"):
-    listodp = ['A: ', 'B: ', 'C: ', 'D: ']
     tasks = list(map(taskPrintDataParser, tasks))
     doc, tag, text = Doc().tagtext()
     # dodaj tytul do spr
@@ -21,7 +20,7 @@ def generatePdf(tasks, name="Sprawdzian"):
                 for part in task['text']:
                     if part["type"] == "text":
                         with tag('span'):
-                            text(listodp[index] + part["data"])
+                            text(part["data"])
                     elif part["type"] == "latex":
                         svg = part["svg"]
                         doc.stag("img", src='data:image/svg+xml;utf8,' + svg, style="display:inline;")

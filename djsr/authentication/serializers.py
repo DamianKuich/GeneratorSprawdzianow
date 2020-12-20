@@ -1,4 +1,4 @@
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
 from rest_framework import serializers
 from .models import CustomUser, Task, Section, Skill, PasswordSendReset, TestJSON, Answers, Image
 from .models import Sectionv2
