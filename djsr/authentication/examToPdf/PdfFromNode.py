@@ -33,7 +33,6 @@ def generatePdf(tasks, name="Sprawdzian"):
                             with tag('span'):
                                 text(part["data"])
                         elif part["type"] == "latex":
-                            text(listodp[index])
                             doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"])
     html = doc.getvalue()
     # print('HAATEEMEEEL', html)
