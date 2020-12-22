@@ -1,8 +1,10 @@
 import datetime
 import json
 from itertools import chain
-
+from copy import deepcopy
+from django.db import connection
 from rest_framework_simplejwt.utils import *
+from django.core import serializers
 import random
 import math
 from rest_framework import status, permissions
@@ -500,7 +502,8 @@ class SkilltoSections(APIView):
         serializer = SectionSerializer(sec, many=True)
         for section in sec:
             name = section.nasza_nazwa()
-            sec2 = Sectionv2.objects.create(Section=name)
+            id = section.id
+            sec2 = Sectionv2.objects.create(id = id,Section=name)
             sec2.save()
         ss = Sectionv2.objects.all()
         seco = SectionSerializerv2(ss, many=True)
@@ -513,6 +516,39 @@ class SkilltoSections(APIView):
         seco = Sectionv2.objects.all()
         seria = SectionSerializerv2(seco, many=True)
         return Response(seria.data)
+
+class SkilltoSectionsAutoGene(APIView):
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = SectionSerializerv2
+
+    def get(self, request, format=None):
+        s = Sectionv2.objects.all()
+        s.delete()
+        list = []
+        sec = Section.objects.all()
+        for section in sec:
+            name = section.nasza_nazwa()
+            id = section.id
+            sec2 = Sectionv2.objects.create(id = id,Section=name)
+            sec2.save()
+        ss = Sectionv2.objects.all()
+        for s in ss:
+            s2 = Section.objects.get(Section=s.Section)
+            fields = ('Skill')
+            skil = Skill.objects.filter(section=s2.id).only(fields)
+            s.skilll.set(skil)
+            s.save()
+        seco = Sectionv2.objects.all()
+        seria = SectionSerializerv2(seco, many=True)
+        for x in seria.data:
+            sum = 0
+            for y in x['skilll']:
+                count = Task.objects.filter(skill=y['id'], private=False).count()
+                sum+=count
+                y['#Tasks']=count
+            x['Section#Tasks'] = sum
+            list.append(x)
+        return Response(list)
 
 
 class AddTask(APIView):
