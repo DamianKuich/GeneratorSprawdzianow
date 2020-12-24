@@ -66,14 +66,6 @@ const AddTaskDialog = ({ open, handleClose, indexOffset,pushTaskAtIndex ,index})
           onTaskAdd={onTaskAdd}
         />
       </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose} color="primary">
-          Cancel
-        </Button>
-        <Button onClick={handleClose} color="primary">
-          Subscribe
-        </Button>
-      </DialogActions>
     </Dialog>
   );
 };

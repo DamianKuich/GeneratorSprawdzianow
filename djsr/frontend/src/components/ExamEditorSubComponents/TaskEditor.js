@@ -4,6 +4,7 @@ import axiosInstance from "../axiosAPI";
 import MaterialFormikField from "../MaterialFormikField";
 import {Button} from "@material-ui/core";
 import Box from "@material-ui/core/Box";
+import EditTaskImages from "./EditTaskImages";
 
 
 
@@ -29,7 +30,7 @@ const TaskEditor = ({selectedTaskToEdit,updateTask}) => {
                 })
                 .then((response) => {
                   let task = { ...values };
-                  task.currentDataSet.image = [response.data.id];
+                  task.currentAnswers.image = [response.data.id];
                   updateTask({ ...task });
                 });
             } else updateTask({ ...values });
@@ -90,6 +91,7 @@ const TaskEditor = ({selectedTaskToEdit,updateTask}) => {
                   />
                 </Button>
                 <Button onClick={handleSubmit}>Zapisz obrazek</Button>
+                  <EditTaskImages task={task} updateTask={updateTask}/>
               </Form>
             );
           }}

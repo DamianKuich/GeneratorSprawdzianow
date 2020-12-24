@@ -29,6 +29,7 @@ const TaskWithOverlay = (props) => {
       : task.currentAnswers.wronganswers;
     return answerSource[item.index];
   });
+  const taskImage=task.currentAnswers.image || []
 
   const ansChar = ["A", "B", "C", "D"];
   return (
@@ -116,19 +117,19 @@ const TaskWithOverlay = (props) => {
                           />
                           {/*<Latex>{task.text}</Latex>*/}
                         </p>
-                        {/*{task.currentDataSet.image.length >= 1 && (*/}
-                        {/*  <MDBRow center>*/}
-                        {/*    <div>*/}
-                        {/*      <img*/}
-                        {/*        src={*/}
-                        {/*          "http://127.0.0.1:8000/api/user/image/" +*/}
-                        {/*          task.currentDataSet.image[0]*/}
-                        {/*        }*/}
-                        {/*        style={{ maxHeight: "100px" }}*/}
-                        {/*      />*/}
-                        {/*    </div>*/}
-                        {/*  </MDBRow>*/}
-                        {/*)}*/}
+                        {taskImage.length >= 1 && (
+                          <div style={{width:"100%"}}>
+                            <div>
+                              <img
+                                src={
+                                  window.location.origin+"/api"+"/user/image/" +
+                                  taskImage[0]
+                                }
+                                style={{ maxHeight: "100px" }}
+                              />
+                            </div>
+                          </div>
+                        )}
                         <Grid
                           container
                           alignItems="center"
