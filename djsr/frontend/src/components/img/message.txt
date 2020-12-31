@@ -1,0 +1,78 @@
+[
+    {
+        "id": 1,
+        "Section": "Liczby rzeczywiste",
+        "skilll": [
+            {
+                "id": 1,
+                "Skill": "Zdający wykorzystuje definicję logarytmu i stosuje w obliczeniach wzory na logarytm iloczynu, logarytm ilorazu i logarytm potęgi o wykładniku naturalnym.",
+                "#Tasks": 3
+            },
+            {
+                "id": 2,
+                "Skill": "Zdający oblicza potęgi o wykładnikach wymiernych i stosuje prawa działań na potęgach o wykładnikach wymiernych.",
+                "#Tasks": 2
+            },
+            {
+                "id": 3,
+                "Skill": "Zdający wykonuje obliczenia procentowe, oblicza podatki, zysk z lokat wymiernych.",
+                "#Tasks": 2
+            }
+        ],
+        "Section#Tasks": 7
+    },
+    {
+        "id": 2,
+        "Section": "Równania i nierówności",
+        "skilll": [
+            {
+                "id": 4,
+                "Skill": "Zdający sprawdza, czy dana liczba rzeczywista jest rozwiązaniem równania lub nierówności.",
+                "#Tasks": 2
+            },
+            {
+                "id": 5,
+                "Skill": "Zdający wykorzystuje interpretację geometryczną układu równań pierwszego stopnia z dwiema niewiadomymi.",
+                "#Tasks": 1
+            },
+            {
+                "id": 6,
+                "Skill": "Zdający rozwiązuje proste równania wymierne, prowadzące do równań liniowych lub kwadratowych.",
+                "#Tasks": 1
+            },
+            {
+                "id": 8,
+                "Skill": "Zdający rozwiązuje nierówności pierwszego stopnia z jedną niewiadomą",
+                "#Tasks": 1
+            },
+            {
+                "id": 9,
+                "Skill": "Zdający korzysta z własności iloczynu przy rozwiązywaniu równań typu",
+                "#Tasks": 1
+            }
+        ],
+        "Section#Tasks": 6
+    },
+    {
+        "id": 3,
+        "Section": "Funkcje",
+        "skilll": [
+            {
+                "id": 7,
+                "Skill": "Zdający oblicza ze wzoru wartość funkcji dla danego argumentu. Posługuje się poznanymi metodami rozwiązywania równań do obliczenia, dla jakiego argumentu funkcja przyjmuje daną wartość.",
+                "#Tasks": 1
+            },
+            {
+                "id": 10,
+                "Skill": "Zdający interpretuje współczynniki występujące we wzorze funkcji liniowej",
+                "#Tasks": 1
+            },
+            {
+                "id": 11,
+                "Skill": "Zdający oblicza ze wzoru wartość funkcji dla danego argumentu. Posługuje się poznanymi metodami rozwiązywania równań do obliczenia, dla jakiego argumentu funkcja przyjmuje daną wartość",
+                "#Tasks": 1
+            }
+        ],
+        "Section#Tasks": 3
+    }
+]

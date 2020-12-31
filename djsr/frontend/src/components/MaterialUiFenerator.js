@@ -31,10 +31,28 @@ import taskParser from './AutoGeneTaskParser'
 import { useHistory } from "react-router-dom";
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
+import { Menu } from "@material-ui/core";
 
 const useStyles = makeStyles(styles);
 
-
+const skills = [
+  {
+    skills: '1',
+    label: 'logarytmy',
+    key : 1,
+  },
+  {
+    skills:'2',
+    label:'liczby rzeczywiste',
+    key: 2,
+  },
+  {
+    skills:'3',
+    label: 'ułamki',
+    key: 3,
+  }
+]
 
 const Fenerator = (props) => {
   const FRS = "Pole wymagane";
@@ -74,7 +92,8 @@ const Fenerator = (props) => {
             ileotw: "0",
             ilezamk: "0",
             level: "0",
-            skills: "0"
+            skills: '',
+            
         }}
         validationSchema={Yup.object().shape({
             ileotw: Yup.string()
@@ -197,7 +216,8 @@ const Fenerator = (props) => {
                   ),
                 }}
               />
-                          <Field as ="select"
+                                         <Field 
+                         
 
                 component={MaterialFormikField}
                 name={"level"}
@@ -213,18 +233,20 @@ const Fenerator = (props) => {
                   ),
                 }}
               >
-                
                 </Field>
              
               
               
-                          <Field
-                component={MaterialFormikField}
-                name={"skills"}
-                formControlProps={{
-                  fullWidth: true,
+                <Field
+                name="skills" as={TextField} select
+               
+                label="umiejętności"
+                
+                fullWidth ="true"
+                
+                InputLabelProps={{
+                  shrink: true,
                 }}
-                labelText="Umiejętności"
                 inputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
@@ -232,7 +254,18 @@ const Fenerator = (props) => {
                     </InputAdornment>
                   ),
                 }}
-              />          
+              >
+                  
+                  {skills.map(option=>(
+                    
+                    <MenuItem key={option.key} value={option.skills} skills={options.skills}>
+                    {option.label}
+                    </MenuItem>
+                  )) }
+                  
+              
+                </Field>     
+
             </CardBody>
             <CardFooter className={classes.cardFooter}>
               <Button

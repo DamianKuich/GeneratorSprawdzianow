@@ -106,6 +106,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @material-ui/core/MenuItem */ "./node_modules/@material-ui/core/esm/MenuItem/index.js");
 /* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @material-ui/core/Select */ "./node_modules/@material-ui/core/esm/Select/index.js");
+/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! @material-ui/core/TextField */ "./node_modules/@material-ui/core/esm/TextField/index.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
 var _this = undefined;
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -152,7 +154,22 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
 var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])(_assets_jss_material_kit_react_views_loginPage_js__WEBPACK_IMPORTED_MODULE_19__["default"]);
+var skills = [{
+  skills: '1',
+  label: 'logarytmy',
+  key: 1
+}, {
+  skills: '2',
+  label: 'liczby rzeczywiste',
+  key: 2
+}, {
+  skills: '3',
+  label: 'ułamki',
+  key: 3
+}];
 
 var Fenerator = function Fenerator(props) {
   var FRS = "Pole wymagane";
@@ -206,7 +223,7 @@ var Fenerator = function Fenerator(props) {
       ileotw: "0",
       ilezamk: "0",
       level: "0",
-      skills: "0"
+      skills: ''
     },
     validationSchema: yup__WEBPACK_IMPORTED_MODULE_21__["object"]().shape({
       ileotw: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().required("Pole wymagane"),
@@ -296,7 +313,6 @@ var Fenerator = function Fenerator(props) {
         })
       }
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
-      as: "select",
       component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__["default"],
       name: "level",
       formControlProps: {
@@ -309,18 +325,26 @@ var Fenerator = function Fenerator(props) {
         })
       }
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
-      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__["default"],
       name: "skills",
-      formControlProps: {
-        fullWidth: true
+      as: _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_30__["default"],
+      select: true,
+      label: "umiej\u0119tno\u015Bci",
+      fullWidth: "true",
+      InputLabelProps: {
+        shrink: true
       },
-      labelText: "Umiej\u0119tno\u015Bci",
       inputProps: {
         endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
           position: "end"
         })
       }
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardFooter_js__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    }, skills.map(function (option) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_28__["default"], {
+        key: option.key,
+        value: option.skills,
+        skills: options.skills
+      }, option.label);
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardFooter_js__WEBPACK_IMPORTED_MODULE_16__["default"], {
       className: classes.cardFooter
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__["default"], {
       simple: true,
