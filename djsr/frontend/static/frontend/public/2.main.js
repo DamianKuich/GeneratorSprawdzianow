@@ -203,7 +203,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var signupPageStyle = {
-  container: _objectSpread(_objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["container"]), {}, {
+  container: _objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["container"], {
     zIndex: "2",
     position: "relative",
     paddingTop: "25vh",

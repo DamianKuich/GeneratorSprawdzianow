@@ -7,7 +7,7 @@ import "./registered-files";
 import examToPdf from "./ExamPDF";
 import axiosInstance from "./axiosAPI";
 import ExamEditorSidePanel from "./ExamEditorSubComponents/ExamEditorSidePanel";
-import ExamPage from "./ExamEditorSubComponents/ExamPageWithTaskOverlays";
+import ExamPages from "./ExamEditorSubComponents/ExamPageWithTaskOverlays";
 //todo po skasowaniu tresci zadania "zapomina" zdjecie
 //todo zajrzec do draganddropahndlera
 class ExamEditor extends Component {
@@ -85,6 +85,22 @@ class ExamEditor extends Component {
 
   generatedPDFV3 = examToPdf;
 
+  updatePageIndexes= (page,lastIndex) =>{
+    this.updateStateAndSaveExam((state)=>{
+      let pages=state.exam.pages || []
+      pages[page]=lastIndex
+      state.exam.pages = pages
+      return state
+    })
+  }
+
+  updateTaskHeight= (index , height) =>{
+    // console.log("updated height", index , height)
+    this.setState((state)=>{
+      state.exam.tasks[index].height=height
+      return state
+    })
+  }
   setTaskToEdit = (index) => {
     this.setState((state) => {
       state.editorTask = state.exam.tasks[index];
@@ -112,7 +128,7 @@ class ExamEditor extends Component {
   };
 
   removeTask = (index) => {
-    console.log("usunieto" + index);
+    // console.log("usunieto" + index);
     this.updateStateAndSaveExam((state) => {
       if (index === 0) {
         state.exam.tasks.shift();
@@ -137,14 +153,20 @@ class ExamEditor extends Component {
       return;
     }
     if (
-      source.droppableId === "examDroppable" &&
-      destination.droppableId === "examDroppable"
+      (source.droppableId || "").substring(0,13) === "examDroppable" &&
+        (destination.droppableId || "").substring(0,13) === "examDroppable"
     ) {
-      this.setState((state) => {
+      const sourcePageIndex=source.droppableId.match(/(\d+)/)[0]
+      const destinationPageIndex=destination.droppableId.match(/(\d+)/)[0]
+      const sourceStartIndex=(sourcePageIndex > 0) ? this.state.exam.pages[sourcePageIndex-1]+1 : 0
+      const destinationStartIndex=(destinationPageIndex > 0) ? this.state.exam.pages[destinationPageIndex-1]+1 : 0
+      const sourceIndex=sourceStartIndex + source.index
+      const destinationIndex=destinationStartIndex+destination.index
+      this.updateStateAndSaveExam((state) => {
         let tasks = state.exam.tasks;
-        [tasks[source.index], tasks[destination.index]] = [
-          tasks[destination.index],
-          tasks[source.index],
+        [tasks[sourceIndex], tasks[destinationIndex]] = [
+          tasks[destinationIndex],
+          tasks[sourceIndex],
         ];
         state.saved = false;
         state.timeout = this.resetTimeout(
@@ -205,6 +227,7 @@ class ExamEditor extends Component {
     }
   };
   dragEnd = (result) => {
+    console.log("dragend",result)
     const { source, destination, draggableId } = result;
     console.log(source, destination, draggableId);
     if (source.droppableId === "examDroppable" && !destination.droppableId) {
@@ -218,25 +241,36 @@ class ExamEditor extends Component {
       return;
     }
     if (
-      source.droppableId === "examDroppable" &&
-      destination.droppableId === "examDroppable"
+      (source.droppableId || "").substring(0,13) === "examDroppable" &&
+        (destination.droppableId || "").substring(0,13) === "examDroppable"
     ) {
+      const sourcePageIndex=source.droppableId.match(/(\d+)/)[0]
+      const destinationPageIndex=destination.droppableId.match(/(\d+)/)[0]
+      const sourceStartIndex=(sourcePageIndex > 0) ? this.state.exam.pages[sourcePageIndex-1]+1 : 0
+      const destinationStartIndex=(destinationPageIndex > 0) ? this.state.exam.pages[destinationPageIndex-1]+1 : 0
+      const sourceIndex=sourceStartIndex + source.index
+      const destinationIndex=destinationStartIndex+destination.index
+
       this.updateStateAndSaveExam((state) => {
         let tasks = state.exam.tasks;
-        [tasks[source.index], tasks[destination.index]] = [
-          tasks[destination.index],
-          tasks[source.index],
+        [tasks[sourceIndex], tasks[destinationIndex]] = [
+          tasks[destinationIndex],
+          tasks[sourceIndex],
         ];
         return state;
       });
     } else {
+      const destinationPageIndex=destination.droppableId.match(/(\d+)/)[0]
+      const destinationStartIndex=(destinationPageIndex > 0) ? this.state.exam.pages[destinationPageIndex-1]+1 : 0
+      const destinationIndex=destinationStartIndex+destination.index
       let draggedItem = this.state.tasks[source.index];
       let taskWithAnswerSet= this.generateAnswerSetForTask(draggedItem)
-      this.pushTaskAtIndex(taskWithAnswerSet,destination.index)
+      taskWithAnswerSet.maxPoints=taskWithAnswerSet.points || 1
+      this.pushTaskAtIndex(taskWithAnswerSet,destinationIndex)
     }
   };
   setSearchedTasks = (tasks) => {
-    console.log("Triggered Task");
+    // console.log("Triggered Task");
     this.setState((state) => {
       state.tasks = tasks;
       return state;
@@ -305,7 +339,7 @@ class ExamEditor extends Component {
     const examTasks = this.state.exam.tasks;
     const editorTask = this.state.editorTask;
     const isExamSaved = this.state.saved;
-    console.log("editorTask", editorTask);
+    // console.log("editorTask", editorTask);
     return (
       <DragDropContext onDragEnd={this.dragEnd}>
         <div
@@ -318,6 +352,7 @@ class ExamEditor extends Component {
         >
           <ExamEditorSidePanel
             exam={exam}
+            saved={isExamSaved}
             currentTabId={sideMenuCollapseId}
             handleTabChange={this.handleSideMenuTabChange}
             setTaskSearchResult={this.setSearchedTasks}
@@ -325,7 +360,7 @@ class ExamEditor extends Component {
             updateTask={this.updateTaskToEdit}
             selectedTaskToEdit={this.state.editorTask}
           />
-          <ExamPage
+          <ExamPages
             exam={exam}
             setTaskToEdit={this.setTaskToEdit}
             removeTask={this.removeTask}
@@ -334,6 +369,8 @@ class ExamEditor extends Component {
             editorTaskPart={this.state.editorTaskPart}
             updateTaskText={this.updateTaskText}
             pushTaskAtIndex={this.pushTaskAtIndex}
+            updateTaskHeight={this.updateTaskHeight}
+            updatePageIndexes={this.updatePageIndexes}
           />
         </div>
       </DragDropContext>

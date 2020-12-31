@@ -34,13 +34,19 @@ def collectTaskAnswers(answers):
         result.append(katexparser(source[answer['index']]))
     return result
 
+# def collectTaskImages(images):
+#     images = images
+#     result = []
+#     for img in images:
+#         result.append(img)
+#     return result
+
 
 def taskPrintDataParser(task):
     task = deepcopy(task)
     task['text'] = katexparser(task['text'])
     task['answers'] = collectTaskAnswers(task['currentAnswers'])
-    # print({'taskPrintDataParser': task})
-    # task['answers'] = list(map(katexparser, task['answers']))
+    # task['images'] = collectTaskImages(task['images'])
     return task
 
 

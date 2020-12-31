@@ -1,39 +1,29 @@
 import datetime
 import json
-import re
 from itertools import chain
-
-import requests
-import simplejson
+from copy import deepcopy
+from django.db import connection
+from rest_framework_simplejwt.utils import *
+from django.core import serializers
 import random
 import math
 from rest_framework import status, permissions
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework_simplejwt.tokens import RefreshToken, Token
+from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.backends import TokenBackend
-from rest_framework_simplejwt.exceptions import TokenBackendError, TokenError
+from rest_framework_simplejwt.exceptions import TokenBackendError
 from rest_framework_jwt.settings import api_settings
 from django.http import HttpResponse
-from django.urls import reverse
 from django.conf import settings
-from django.template.loader import render_to_string
-from django.core.mail import send_mail
+
 from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
 from django.core.mail import EmailMessage
-from django.db import IntegrityError
-from django.utils.encoding import force_bytes, force_text
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.shortcuts import render, redirect
-from schema import Schema, And, Use, Optional
 import requests
 import base64
 import pdfkit
-from yattag import Doc
-from .examToPdf.MainScript import generatePdf as generatePdfClassic
+
 from .examToPdf.PdfFromNode import generatePdf, generateAnswersPdf
 
 from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer, \
@@ -259,6 +249,7 @@ class UserRetrieveUpdateAPIView(APIView):
 
 
 class TaskViewSet(APIView):
+
     permission_classes = (IsAuthenticated,)
     serializer_class = TaskSerializer
 
@@ -511,7 +502,8 @@ class SkilltoSections(APIView):
         serializer = SectionSerializer(sec, many=True)
         for section in sec:
             name = section.nasza_nazwa()
-            sec2 = Sectionv2.objects.create(Section=name)
+            id = section.id
+            sec2 = Sectionv2.objects.create(id = id,Section=name)
             sec2.save()
         ss = Sectionv2.objects.all()
         seco = SectionSerializerv2(ss, many=True)
@@ -524,6 +516,39 @@ class SkilltoSections(APIView):
         seco = Sectionv2.objects.all()
         seria = SectionSerializerv2(seco, many=True)
         return Response(seria.data)
+
+class SkilltoSectionsAutoGene(APIView):
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = SectionSerializerv2
+
+    def get(self, request, format=None):
+        s = Sectionv2.objects.all()
+        s.delete()
+        list = []
+        sec = Section.objects.all()
+        for section in sec:
+            name = section.nasza_nazwa()
+            id = section.id
+            sec2 = Sectionv2.objects.create(id = id,Section=name)
+            sec2.save()
+        ss = Sectionv2.objects.all()
+        for s in ss:
+            s2 = Section.objects.get(Section=s.Section)
+            fields = ('Skill')
+            skil = Skill.objects.filter(section=s2.id).only(fields)
+            s.skilll.set(skil)
+            s.save()
+        seco = Sectionv2.objects.all()
+        seria = SectionSerializerv2(seco, many=True)
+        for x in seria.data:
+            sum = 0
+            for y in x['skilll']:
+                count = Task.objects.filter(skill=y['id'], private=False).count()
+                sum+=count
+                y['#Tasks']=count
+            x['Section#Tasks'] = sum
+            list.append(x)
+        return Response(list)
 
 
 class AddTask(APIView):
@@ -693,9 +718,6 @@ class AddImageViewSet(APIView):
         if True:
             image = Image.objects.create(name="", image=file, user_id=pomoc.id)
             image.save()
-            # imag = Image.objects.filter(name=request.data['name'], image=file, user_id=pomoc.id)
-            # image_data = open("media/" + str(image.image), "rb").read()
-            # return HttpResponse(image_data, content_type="image/png")
             return Response(data={"id": image.id}, status=status.HTTP_201_CREATED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -725,32 +747,6 @@ class AddImageToTaskViewSet(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-class TestEndpoint(APIView):
-    permission_classes = (permissions.AllowAny,)
-
-    def get(self, request):
-        # req = requests.get("https://math.now.sh/?from=%22+%22//frac%7B1%7D%7B//Gamma(s)%7D//int_%7B0%7D%5E%7B//infty%7D//frac%7Bu%5E%7Bs-1%7D%7D%7Be%5E%7Bu%7D-1%7D//mathrm%7Bd%7Du%22)
-        # data = f.read()
-        data = requests.get(
-            "https://math.now.sh/?inline=\\frac{1}{\\Gamma(s)}\\int_{0}^{\\infty}\\frac{u^{s-1}}{e^{u}-1}\\mathrm{d}").text
-        print(data)
-        # encoded_string = base64.b64encode(data.encode('utf-8'))
-        encoded_string = base64.b64encode(data.encode('utf-8'))
-        print(encoded_string)
-        b64 = encoded_string.decode('utf-8')
-        print(b64)
-        html = '''
-           <html>
-               <body>
-                   <h1>Circle</h1>
-                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consequat . Vestibulum consequat scelerisque elit sit <img alt="" style="display:inline;" src="data:image/svg+xml;base64,''' + b64 + '''" />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consequat scelerisque elit sit amet consequat. Aliquam erat volutpat. </p>
-               </body>
-           </html>
-           '''
-        config = pdfkit.configuration(wkhtmltopdf='./bin/wkhtmltopdf')
-        wygenerowany_pdf = pdfkit.from_string(html, False, configuration=config)
-        return HttpResponse(wygenerowany_pdf, content_type="application/pdf")
-    # return Response(data={"id": wygenerowany_pdf}, status=status.HTTP_201_CREATED)
 
 
 class TestTasksiewSet(APIView):
@@ -764,7 +760,7 @@ class TestTasksiewSet(APIView):
         test = list(TestJSON.objects.filter(id=id).values())[0]
         print(test['tasks'])
         tasks = json.loads(test['tasks'])
-        pdf, html = generateAnswersPdf(tasks=tasks, name=test['name'])
+        pdf, html = generatePdf(tasks=tasks, name=test['name'])
         # pdf, html = generatePdf(tasks=tasks, name=test['name'])
         return HttpResponse(pdf, content_type="application/pdf")
 

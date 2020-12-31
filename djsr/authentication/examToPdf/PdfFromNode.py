@@ -6,7 +6,6 @@ from yattag import Doc
 req = requests.get("https://math.now.sh?from=" + "\square").text
 
 def generatePdf(tasks, name="Sprawdzian"):
-    listodp = ['A: ', 'B: ', 'C: ', 'D: ']
     tasks = list(map(taskPrintDataParser, tasks))
     doc, tag, text = Doc().tagtext()
     # dodaj tytul do spr
@@ -21,10 +20,16 @@ def generatePdf(tasks, name="Sprawdzian"):
                 for part in task['text']:
                     if part["type"] == "text":
                         with tag('span'):
-                            text(listodp[index] + part["data"])
+                            text(part["data"])
                     elif part["type"] == "latex":
                         svg = part["svg"]
                         doc.stag("img", src='data:image/svg+xml;utf8,' + svg, style="display:inline;")
+            # # renderowanie obrazków
+            # with tag('div'):
+            #     for img in task['images']:
+            #         # with tag('div'):
+            #         for part in img:
+            #             doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"])
             # renderowanie odp zadania
             with tag('div'):
                 for index, answer in enumerate(task['answers']):
@@ -34,17 +39,12 @@ def generatePdf(tasks, name="Sprawdzian"):
                             with tag('span'):
                                 text(part["data"])
                         elif part["type"] == "latex":
-                            text(listodp[index])
                             doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"])
     html = doc.getvalue()
-    # print('HAATEEMEEEL', html)
     requestJson=json.dumps({'html':html})
     # wygenerowany_pdf = requests.get("https://gen-mat-pdf-node.herokuapp.com/pdf/", data='{"html": "'+html.encode(encoding='UTF-8')+'"}')
     wygenerowany_pdf = requests.get("https://gen-mat-pdf-node.herokuapp.com/pdf/",
                                     data=requestJson,headers={"Content-Type":"application/json"})
-    print("wyg pdf", wygenerowany_pdf)
-    # config = pdfkit.configuration(wkhtmltopdf='./bin/wkhtmltopdf')
-    # wygenerowany_pdf = pdfkit.from_string(html, False, configuration=config)
     return wygenerowany_pdf, html
 
 
@@ -79,7 +79,4 @@ def generateAnswersPdf(tasks, name):
     # wygenerowany_pdf = requests.get("https://gen-mat-pdf-node.herokuapp.com/pdf/", data='{"html": "'+html.encode(encoding='UTF-8')+'"}')
     wygenerowany_pdf = requests.get("https://gen-mat-pdf-node.herokuapp.com/pdf/",
                                     data=requestJson,headers={"Content-Type":"application/json"})
-    print("wyg pdf", wygenerowany_pdf)
-    # config = pdfkit.configuration(wkhtmltopdf='./bin/wkhtmltopdf')
-    # wygenerowany_pdf = pdfkit.from_string(html, False, configuration=config)
     return wygenerowany_pdf, html
