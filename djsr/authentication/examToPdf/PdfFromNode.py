@@ -24,6 +24,12 @@ def generatePdf(tasks, name="Sprawdzian"):
                     elif part["type"] == "latex":
                         svg = part["svg"]
                         doc.stag("img", src='data:image/svg+xml;utf8,' + svg, style="display:inline;")
+            # # renderowanie obrazków
+            # with tag('div'):
+            #     for img in task['images']:
+            #         # with tag('div'):
+            #         for part in img:
+            #             doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"])
             # renderowanie odp zadania
             with tag('div'):
                 for index, answer in enumerate(task['answers']):
