@@ -1,4 +1,5 @@
 import datetime
+from datetime import date as dt
 import json
 from itertools import chain
 
@@ -364,7 +365,7 @@ class MakeTestViewSet(APIView):
                     mojtest = TestJSON()
                     mojtest.name = nazwa
                     mojtest.tasks = request.data['tasks']
-                    mojtest.created = datetime.date.today()
+                    mojtest.created = dt.today()
                     pomoc = CustomUser.objects.get(id=request.user.id)
                     mojtest.user_id = pomoc.id
                     mojtest.save()
