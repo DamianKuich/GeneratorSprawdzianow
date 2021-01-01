@@ -4918,6 +4918,19 @@ var profilePageStyle = _objectSpread(_objectSpread({
 
 /***/ }),
 
+/***/ "./djsr/frontend/src/components/img/genspr-parralax-bg.png":
+/*!*****************************************************************!*\
+  !*** ./djsr/frontend/src/components/img/genspr-parralax-bg.png ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "8ae80ee488d6ec36fd62f67865d06356.png");
+
+/***/ }),
+
 /***/ "./djsr/frontend/src/components/registered-files.js":
 /*!**********************************************************!*\
   !*** ./djsr/frontend/src/components/registered-files.js ***!

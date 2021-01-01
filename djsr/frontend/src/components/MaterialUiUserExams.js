@@ -21,7 +21,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import Button from '@material-ui/core/Button';
+import Button from "./material_ui_components/CustomButtons/Button";
 import ExamCollectionCard from './ExamCollectionCard'
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -328,7 +328,8 @@ const useStylesAlert = makeStyles((theme) => ({
                           <Button 
                            variant="contained" 
                             color="primary"
-                            type="submit"
+                            size="lg"
+                            
                             disabled={isSubmitting}
                           >
                             Zapisz

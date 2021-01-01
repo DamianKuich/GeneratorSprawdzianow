@@ -19,9 +19,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _assets_jss_material_kit_react_views_landingPage_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./assets/jss/material-kit-react/views/landingPage.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react/views/landingPage.js");
-/* harmony import */ var _img_genspr_parralax_bg_png__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./img/genspr-parralax-bg.png */ "./djsr/frontend/src/components/img/genspr-parralax-bg.png");
-/* harmony import */ var _ShortDescription__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ShortDescription */ "./djsr/frontend/src/components/ShortDescription.js");
+/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/@material-ui/core/esm/Paper/index.js");
+/* harmony import */ var _img_genspr_parralax_bg_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./img/genspr-parralax-bg.png */ "./djsr/frontend/src/components/img/genspr-parralax-bg.png");
+/* harmony import */ var _ShortDescription__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./ShortDescription */ "./djsr/frontend/src/components/ShortDescription.js");
+/* harmony import */ var _img_genesprDark_png__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./img/genesprDark.png */ "./djsr/frontend/src/components/img/genesprDark.png");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 
 
 
@@ -41,10 +44,22 @@ var HomePage = function HomePage(props) {
 
   var rest = _extends({}, props);
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Parallax_Parallax__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    filter: true,
-    image: _img_genspr_parralax_bg_png__WEBPACK_IMPORTED_MODULE_8__["default"]
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  var bgStyles = {
+    paperContainer: {
+      backgroundImage: "url(".concat(_img_genesprDark_png__WEBPACK_IMPORTED_MODULE_11__["default"], ")"),
+      minHeight: 1000
+    },
+    examCardContainer: {
+      width: 700,
+      backgroundColor: '#FEFEFA'
+    },
+    cardTitle: {
+      textAlign: 'center'
+    }
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    style: bgStyles.paperContainer
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Parallax_Parallax__WEBPACK_IMPORTED_MODULE_1__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: classes.container
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridContainer__WEBPACK_IMPORTED_MODULE_2__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
     xs: 12,
@@ -52,15 +67,7 @@ var HomePage = function HomePage(props) {
     md: 6
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
     className: classes.title
-  }, "Generator Sprawdzian\xF3w"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Generator Sprawdzian\xF3w"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    color: "danger",
-    size: "lg",
-    href: "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim",
-    target: "_blank",
-    rel: "noopener noreferrer"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fas fa-play"
-  })))))));
+  }, "Generator Sprawdzian\xF3w"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Generator Sprawdzian\xF3w"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)))))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (HomePage);
@@ -342,6 +349,19 @@ var productStyle = {
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (productStyle);
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/img/genesprDark.png":
+/*!**********************************************************!*\
+  !*** ./djsr/frontend/src/components/img/genesprDark.png ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "29a2f630b088eabfaa8f98afec0658ab.png");
 
 /***/ }),
 
