@@ -44,6 +44,18 @@ import Notification from './Notification'
 import DynamicFeedIcon from '@material-ui/icons/DynamicFeed';
 import image from "./img/genesprDark.png";
 import { grey } from "@material-ui/core/colors";
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import InputLabel from '@material-ui/core/InputLabel';
+import Input from '@material-ui/core/Input';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 const useStyles = makeStyles((theme) => ({
   root: {
     maxHeight: 200,
@@ -111,11 +123,15 @@ const useStylesAlert = makeStyles((theme) => ({
 
 
 
+
+
   class UserExams extends Component {
     constructor(props) {
       super(props);
       this.state = {
         exams: null,
+        open: false,
+        generatedId: null,
         
 
        
@@ -201,16 +217,28 @@ const useStylesAlert = makeStyles((theme) => ({
       let exams = this.state.exams;
       if (!exams) {
         return (
-          <MDBContainer>
-            <div>Ladowanie</div>
-          </MDBContainer>
+          <div >
+     
+          <CircularProgress  size={312} style={{
+            'color': 'purple',
+            'marginLeft': '50%',
+            'marginTop': '15%'
+        
+        }}/>
+        <p>
+        
+        </p>
+        
+        </div>
         );
       }
       return (
         
         <div  
         >
+            
         <Paper  style={bgStyles.paperContainer}>
+        
           <Box
           p={10}
           >
@@ -334,6 +362,7 @@ const useStylesAlert = makeStyles((theme) => ({
                           >
                             Zapisz
                           </Button>
+                          
                           </CardActions>
                         
                       </Form>
@@ -394,13 +423,13 @@ const useStylesAlert = makeStyles((theme) => ({
                       <DeleteIcon />
                     </IconButton>
                     </BootstrapTooltip>
-                    <Link to={"/fenerator/" + exam.id}>
+                    
                     <BootstrapTooltip title="Wygeneruj sprawdzian automatycznie">
-                      <IconButton>
+                      <IconButton onClick={() => this.setState({ open: !this.state.open, generatedId: exam.id })}>
                         <DynamicFeedIcon />
                      </IconButton>
                     </BootstrapTooltip>
-                    </Link>
+                   
                   
                   </CardActions>
                 
@@ -411,6 +440,23 @@ const useStylesAlert = makeStyles((theme) => ({
               );
             })}
          </Paper>
+         <Dialog open={this.state.open} onClose={() => this.setState({ open: !this.state.open })}>
+        <DialogTitle id="form-dialog-title">Wygeneruj sprawdzian automatycznie</DialogTitle>
+        <DialogContent>
+       
+          <Formik>
+            
+          </Formik>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => this.setState({ open: !this.state.open})} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={() => this.setState({ open: !this.state.open })} color="primary">
+            Subscribe
+          </Button>
+        </DialogActions>
+      </Dialog>
         </div>
       );
     }

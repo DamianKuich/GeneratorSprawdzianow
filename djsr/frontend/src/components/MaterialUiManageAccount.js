@@ -171,7 +171,13 @@ const bgStyles = {
             </CardHeader>
             <CardBody>
             
-              <Button variant="contained"  color="primary" onClick={(e)=>setEditView("email")}  >
+            <ButtonGroup
+                        orientation="vertical"
+                        color="primary"
+                        aria-label="vertical contained primary button group"
+                        variant="text"
+                      >
+              <Button variant="contained" color="primary" onClick={(e)=>setEditView("email")}  >
                    Zmień e-mail
               </Button>
               <Button variant="contained" color="primary" onClick={(e)=>setEditView("name")}  >
@@ -180,6 +186,7 @@ const bgStyles = {
               <Button variant="contained" color="primary" onClick={(e)=>setEditView("password")}  >
                    Zmień hasło
               </Button>
+            </ButtonGroup>
 
 
 
@@ -293,6 +300,12 @@ const bgStyles = {
             </CardHeader>
             <CardBody>
             
+            <ButtonGroup
+                        orientation="vertical"
+                        color="primary"
+                        aria-label="vertical contained primary button group"
+                        variant="text"
+                      >
               <Button variant="contained" color="primary" onClick={(e)=>setEditView("email")}  >
                    Zmień e-mail
               </Button>
@@ -302,6 +315,7 @@ const bgStyles = {
               <Button variant="contained" color="primary" onClick={(e)=>setEditView("password")}  >
                    Zmień hasło
               </Button>
+            </ButtonGroup>
               
 
                 <Field
