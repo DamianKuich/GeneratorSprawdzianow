@@ -754,8 +754,6 @@ class AddImageToTaskViewSet(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-
-
 class TestTasksiewSet(APIView):
     permission_classes = (permissions.AllowAny,)
     serializer_class = TestJSONSerializer

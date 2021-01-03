@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import Box from "@material-ui/core/Box";
 import ReactResizeDetector from "react-resize-detector";
+import styles from "../assets/jss/material-kit-react/components/taskOverlayStyle";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import classNames from "classnames";
+
+const useStyles = makeStyles(styles);
+
 const TaskOverlay = ({
   children,
   menuComponents,
@@ -8,6 +14,7 @@ const TaskOverlay = ({
   rootBoxProps,
   ...props
 }) => {
+  const classes = useStyles();
   const [isHovered, setHover] = useState(false);
   const isActive = isHovered || forceOverlay;
   return (
@@ -22,12 +29,16 @@ const TaskOverlay = ({
             }}
             onMouseLeave={() => setHover(false)}
             // borderColor={isHovered ? "primary.main" : ""}
-            style={{
-              border: isActive ? "1px solid black" : "",
-              margin: isActive ? "-2px -13px" : "0px",
-              padding: isActive ? "1px 12px" : "0px",
-            }}
-            position={"relative"}
+            // style={{
+            //   border: isActive ? "1px solid black" : "",
+            //   margin: isActive ? "-2px -13px" : "0px",
+            //   padding: isActive ? "1px 12px" : "0px",
+            // }}
+              className={classNames({
+                [classes.root]:true,
+                [classes.activeRoot]:isActive
+              })}
+            // position={"relative"}
           >
             {isActive && (
               <ReactResizeDetector>

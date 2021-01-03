@@ -14,7 +14,7 @@ def generatePdf(tasks, name="Sprawdzian"):
     # renderowanie taskow
     for task in tasks:
         with tag('div'):
-            print('TASK', task)
+            # print('TASK', task)
             # renderowanie tekstu zadania
             with tag('p'):
                 for part in task['text']:
@@ -25,11 +25,14 @@ def generatePdf(tasks, name="Sprawdzian"):
                         svg = part["svg"]
                         doc.stag("img", src='data:image/svg+xml;utf8,' + svg, style="display:inline;")
             # # renderowanie obrazków
-            # with tag('div'):
-            #     for img in task['images']:
-            #         # with tag('div'):
-            #         for part in img:
-            #             doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"])
+            with tag('p'):
+                for img in task['obrazki']:
+                    # text("whatever")
+                    with tag('div'):
+                        try:
+                            with tag('span'):
+                                doc.stag("img", src='data:image/*;base64,' + img)
+                        except: text("error")
             # renderowanie odp zadania
             with tag('div'):
                 for index, answer in enumerate(task['answers']):
