@@ -721,7 +721,10 @@ class AddImageViewSet(APIView):
         if True:
             image = Image.objects.create(name="", image=file, user_id=pomoc.id)
             image.save()
-            img = ImageDB.objects.create(image=file)
+            try:
+                img = ImageDB.objects.create(image=file)
+            except:
+                pass
             return Response(data={"id": image.id}, status=status.HTTP_201_CREATED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
