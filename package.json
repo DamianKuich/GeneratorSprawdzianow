@@ -25,10 +25,13 @@
     "react-beautiful-dnd": "^13.0.0",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
+    "react-dropzone": "^11.2.4",
+    "react-grid-dnd": "^2.1.2",
     "react-latex": "^1.6.0",
     "react-loadable": "^5.5.0",
     "react-pdf-with-svg": "^1.6.12",
     "react-resize-panel": "^0.3.5",
+    "react-router": "^5.2.0",
     "react-router-dom": "^5.1.2",
     "react-simple-tree-menu": "^1.1.15",
     "react-spinners": "^0.8.1",
@@ -36,7 +39,7 @@
     "style-loader": "^1.1.4",
     "svg-to-pdfkit": "^0.1.8",
     "wait.for-es6": "^0.1.0",
-    "yup": "^0.28.3"
+    "yup": "^0.28.5"
   },
   "main": "index.js",
   "scripts": {
