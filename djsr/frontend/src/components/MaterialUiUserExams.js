@@ -12,7 +12,7 @@ import {
 import axiosInstance from "./axiosAPI";
 import axiosInstanceNoAuth from "./axiosAPI"
 import Box from '@material-ui/core/Box'
-import { Form, Formik } from "formik";
+import { Form, Formik,Field } from "formik";
 import * as Yup from "yup";
 import FormikMdInput from "./FormikMDInput";
 import { Link } from "react-router-dom";
@@ -219,10 +219,10 @@ const useStylesAlert = makeStyles((theme) => ({
         return (
           <div >
      
-          <CircularProgress  size={312} style={{
+          <CircularProgress   style={{
             'color': 'purple',
             'marginLeft': '50%',
-            'marginTop': '15%'
+            'marginTop': '12%'
         
         }}/>
         <p>
@@ -443,17 +443,138 @@ const useStylesAlert = makeStyles((theme) => ({
          <Dialog open={this.state.open} onClose={() => this.setState({ open: !this.state.open })}>
         <DialogTitle id="form-dialog-title">Wygeneruj sprawdzian automatycznie</DialogTitle>
         <DialogContent>
-       
-          <Formik>
+          
+          <Formik
+                  initialValues={{
+                    ileotw: "0",
+                    ilezamk: "0",
+                    level: "",
+                    skills: "0"
+                }}
+          
+          >
+
+            <Form>
+          <Box margin={1}> 
+            <Field
+                component={TextField}
+                name={"ileotw"}
+                fullWidth="true"
+                label="Ilość zadań otwartych"
+               
+              />
+              </Box>
+              <Box margin={1}> 
+             <Field
+                component={TextField}
+                name={"ilezamk"}
+                fullWidth="true"
+                label="Ilość zadań zamkniętych"
+               
+              />
+              </Box>
+
+              <Box margin={1}>
+                <Field
+                component = {TextField}
+                select
+                name="level"
+                label="Poziom trudności"
+                variant="standard"
+                type="text"
+                fullWidth="true"
+                >
+                
+
+                    <MenuItem key={"1"} value="1">
+                      1
+                    </MenuItem>
+                    <MenuItem key={"2"} value={"2"}>
+                      2
+                    </MenuItem>
+                </Field>
+              </Box>
+
+
+              
+              <Box margin={1}>
+                <Field
+                component = {TextField}
+                multiselect 
+                
+                name="skills"
+                label="Sprawdzane umiejętności"
+                variant="standard"
+                type="text"
+                fullWidth="true"
+                >
+                
+
+                    <MenuItem key={"1"} value="1">
+                    Zdający wykorzystuje definicję logarytmu i stosuje w obliczeniach wzory na logarytm iloczynu, logarytm ilorazu i logarytm potęgi o wykładniku naturalnym.
+                    </MenuItem>
+                    <MenuItem key={"2"} value={"2"}>
+                    Zdający oblicza potęgi o wykładnikach wymiernych i stosuje prawa działań na potęgach o wykładnikach wymiernych.
+                    </MenuItem>
+                    <MenuItem key={"3"} value={"3"}>
+                    Zdający wykonuje obliczenia procentowe, oblicza podatki, zysk z lokat wymiernych.
+                    </MenuItem>
+                    <MenuItem key={"4"} value={"4"}>
+                    Zdający wykorzystuje pojęcie wartości bez względnej i jej interpretację geometryczną
+                    </MenuItem>
+                    <MenuItem key={"5"} value={"5"}>
+                    Zdający posługuje się w obliczeniach pierwiastkami dowolnego stopnia i stosuje prawa działań na pierwiastkach
+                    </MenuItem>
+                    <MenuItem key={"6"} value={"6"}>
+                    Zdający stosuje w obliczeniach wzór na logarytm potęgi oraz wzór na zamianę podstawy logarytmu
+                    </MenuItem>
+                    <MenuItem key={"7"} value={"7"}>
+                    Zdający wykorzystuje podstawowe własności potęg
+                    </MenuItem>
+                    <MenuItem key={"8"} value={"9"}>
+                    Zdający wykorzystuje interpretację geometryczną układu równań pierwszego stopnia z dwiema niewiadomymi.
+                    </MenuItem>
+                    <MenuItem key={"10"} value={"10"}>
+                    Zdający rozwiązuje proste równania wymierne, prowadzące do równań liniowych lub kwadratowych.
+                    </MenuItem>
+                    <MenuItem key={"11"} value={"11"}>
+                    Zdający rozwiązuje nierówności pierwszego stopnia z jedną niewiadomą
+                    </MenuItem>
+                    <MenuItem key={"12"} value={"12"}>
+                    Zdający korzysta z własności iloczynu przy rozwiązywaniu równań typu x(x+1)(x-7)=0
+                    </MenuItem>
+                    <MenuItem key={"13"} value={"13"}>
+                    Zdający rozwiązuje nierówności kwadratowe z jedną niewiadomą
+                    </MenuItem>
+                    <MenuItem key={"14"} value={"14"}>
+                    Zdający wykorzystuje podstawowe własności potęg
+                    </MenuItem>
+                    <MenuItem key={"15"} value={"15"}>
+                    Zdający stosuje twierdzenie o reszcie z dzielenia wielomianu przez dwumian x – a
+                    </MenuItem>
+                    <MenuItem key={"16"} value={"16"}>
+                    Zdający stosuje wzory Viète’a
+                    </MenuItem>
+                    <MenuItem key={"17"} value={"17"}>
+                    Zdający rozwiązuje równania i nierówności z wartością bezwzględną
+                    </MenuItem>
+                </Field>
+              </Box>
+
+
+           
+              
             
+           </Form>
           </Formik>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => this.setState({ open: !this.state.open})} color="primary">
-            Cancel
+            Wyjdź
           </Button>
+          
           <Button onClick={() => this.setState({ open: !this.state.open })} color="primary">
-            Subscribe
+            Generuj
           </Button>
         </DialogActions>
       </Dialog>

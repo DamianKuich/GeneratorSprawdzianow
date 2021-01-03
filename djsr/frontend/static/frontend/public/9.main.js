@@ -480,11 +480,10 @@ var UserExams = /*#__PURE__*/function (_Component) {
 
       if (!exams) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_43__["default"], {
-          size: 312,
           style: {
             'color': 'purple',
             'marginLeft': '50%',
-            'marginTop': '15%'
+            'marginTop': '12%'
           }
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null));
       }
@@ -630,21 +629,116 @@ var UserExams = /*#__PURE__*/function (_Component) {
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_42__["default"], {
         id: "form-dialog-title"
-      }, "Wygeneruj sprawdzian automatycznie"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_40__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_5__["Formik"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_39__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_14__["default"], {
+      }, "Wygeneruj sprawdzian automatycznie"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_40__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_5__["Formik"], {
+        initialValues: {
+          ileotw: "0",
+          ilezamk: "0",
+          level: "",
+          skills: "0"
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_5__["Form"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        margin: 1
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_5__["Field"], {
+        component: _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_37__["default"],
+        name: "ileotw",
+        fullWidth: "true",
+        label: "Ilo\u015B\u0107 zada\u0144 otwartych"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        margin: 1
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_5__["Field"], {
+        component: _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_37__["default"],
+        name: "ilezamk",
+        fullWidth: "true",
+        label: "Ilo\u015B\u0107 zada\u0144 zamkni\u0119tych"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        margin: 1
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_5__["Field"], {
+        component: _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_37__["default"],
+        select: true,
+        name: "level",
+        label: "Poziom trudno\u015Bci",
+        variant: "standard",
+        type: "text",
+        fullWidth: "true"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
+        key: "1",
+        value: "1"
+      }, "1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
+        key: "2",
+        value: "2"
+      }, "2"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        margin: 1
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_5__["Field"], {
+        component: _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_37__["default"],
+        multiselect: true,
+        name: "skills",
+        label: "Sprawdzane umiej\u0119tno\u015Bci",
+        variant: "standard",
+        type: "text",
+        fullWidth: "true"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
+        key: "1",
+        value: "1"
+      }, "Zdaj\u0105cy wykorzystuje definicj\u0119 logarytmu i stosuje w obliczeniach wzory na logarytm iloczynu, logarytm ilorazu i logarytm pot\u0119gi o wyk\u0142adniku naturalnym."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
+        key: "2",
+        value: "2"
+      }, "Zdaj\u0105cy oblicza pot\u0119gi o wyk\u0142adnikach wymiernych i stosuje prawa dzia\u0142a\u0144 na pot\u0119gach o wyk\u0142adnikach wymiernych."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
+        key: "3",
+        value: "3"
+      }, "Zdaj\u0105cy wykonuje obliczenia procentowe, oblicza podatki, zysk z lokat wymiernych."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
+        key: "4",
+        value: "4"
+      }, "Zdaj\u0105cy wykorzystuje poj\u0119cie warto\u015Bci bez wzgl\u0119dnej i jej interpretacj\u0119 geometryczn\u0105"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
+        key: "5",
+        value: "5"
+      }, "Zdaj\u0105cy pos\u0142uguje si\u0119 w obliczeniach pierwiastkami dowolnego stopnia i stosuje prawa dzia\u0142a\u0144 na pierwiastkach"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
+        key: "6",
+        value: "6"
+      }, "Zdaj\u0105cy stosuje w obliczeniach wz\xF3r na logarytm pot\u0119gi oraz wz\xF3r na zamian\u0119 podstawy logarytmu"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
+        key: "7",
+        value: "7"
+      }, "Zdaj\u0105cy wykorzystuje podstawowe w\u0142asno\u015Bci pot\u0119g"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
+        key: "8",
+        value: "9"
+      }, "Zdaj\u0105cy wykorzystuje interpretacj\u0119 geometryczn\u0105 uk\u0142adu r\xF3wna\u0144 pierwszego stopnia z dwiema niewiadomymi."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
+        key: "10",
+        value: "10"
+      }, "Zdaj\u0105cy rozwi\u0105zuje proste r\xF3wnania wymierne, prowadz\u0105ce do r\xF3wna\u0144 liniowych lub kwadratowych."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
+        key: "11",
+        value: "11"
+      }, "Zdaj\u0105cy rozwi\u0105zuje nier\xF3wno\u015Bci pierwszego stopnia z jedn\u0105 niewiadom\u0105"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
+        key: "12",
+        value: "12"
+      }, "Zdaj\u0105cy korzysta z w\u0142asno\u015Bci iloczynu przy rozwi\u0105zywaniu r\xF3wna\u0144 typu x(x+1)(x-7)=0"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
+        key: "13",
+        value: "13"
+      }, "Zdaj\u0105cy rozwi\u0105zuje nier\xF3wno\u015Bci kwadratowe z jedn\u0105 niewiadom\u0105"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
+        key: "14",
+        value: "14"
+      }, "Zdaj\u0105cy wykorzystuje podstawowe w\u0142asno\u015Bci pot\u0119g"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
+        key: "15",
+        value: "15"
+      }, "Zdaj\u0105cy stosuje twierdzenie o reszcie z dzielenia wielomianu przez dwumian x \u2013 a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
+        key: "16",
+        value: "16"
+      }, "Zdaj\u0105cy stosuje wzory Vi\xE8te\u2019a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
+        key: "17",
+        value: "17"
+      }, "Zdaj\u0105cy rozwi\u0105zuje r\xF3wnania i nier\xF3wno\u015Bci z warto\u015Bci\u0105 bezwzgl\u0119dn\u0105")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_39__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_14__["default"], {
         onClick: function onClick() {
           return _this2.setState({
             open: !_this2.state.open
           });
         },
         color: "primary"
-      }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_14__["default"], {
+      }, "Wyjd\u017A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_14__["default"], {
         onClick: function onClick() {
           return _this2.setState({
             open: !_this2.state.open
           });
         },
         color: "primary"
-      }, "Subscribe"))));
+      }, "Generuj"))));
     }
   }]);
 
