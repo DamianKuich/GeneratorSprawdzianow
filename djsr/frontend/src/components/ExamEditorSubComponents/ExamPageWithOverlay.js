@@ -73,7 +73,7 @@ const ExamPageWithOverlay = (props) => {
         <ReactResizeDetector>
           {({ width, height }) => {
             if (divHeight !== height) setHeight(height);
-            console.log("XDDD?", divHeight, height);
+            // console.log("XDDD?", divHeight, height);
             return (
               <div
                 style={{

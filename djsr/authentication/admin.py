@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CustomUser, Task, Section, Skill, TestJSON, Answers, Image
+from .models import CustomUser, Task, Section, Skill, TestJSON, Answers, Image, ImageDB
 from .models import Sectionv2
 
 
@@ -14,5 +14,6 @@ admin.site.register(Skill)
 admin.site.register(TestJSON)
 admin.site.register(Answers)
 admin.site.register(Image)
+admin.site.register(ImageDB)
 admin.site.register(Sectionv2)
 # Register your models here.
