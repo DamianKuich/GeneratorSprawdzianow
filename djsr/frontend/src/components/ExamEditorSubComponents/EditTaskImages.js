@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import PropTypes from "prop-types";
-import Dialog from "@material-ui/core/Dialog";
+import Dialog from "../material_ui_components/CustomModal/CustomModal";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "../material_ui_components/CustomButtons/Button";
 import DialogContentText from "@material-ui/core/DialogContentText";
@@ -17,6 +17,8 @@ import ExamImageValidator from "./ExamImageValidator";
 import postImage from "./PostImage";
 import getLayoutParams from "./getImageLayotRowsCols";
 import CustomRadio from "../material_ui_components/CustomRadio/CustomRadio";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import CircularProgress from "@material-ui/core/CircularProgress";
 const EditTaskImages = (props) => {
   const { task, updateTask } = props;
   const index = props.index || 0;
@@ -65,19 +67,20 @@ const EditTaskImages = (props) => {
     console.log("sendImages", newImages);
     let updatedTask = { ...task };
     updatedTask.currentAnswers.image = newImages;
-    updatedTask.currentAnswers.imageLayout= imageLayout
+    updatedTask.currentAnswers.imageLayout = imageLayout;
     updateTask({ ...updatedTask });
     setSending(false);
     //TODO komunikat done
     setOpen(false);
   };
-  const removeImage=(index)=>{
-      // console.log("removeImage",index)
-      const newImages=[...images]
-      newImages.splice(index,1)
-      // console.log("removeImage",newImages)
-      setImages(newImages)
-  }
+  const removeImage = (index) => {
+    // console.log("removeImage",index)
+      if (isSending) return;
+    const newImages = [...images];
+    newImages.splice(index, 1);
+    // console.log("removeImage",newImages)
+    setImages(newImages);
+  };
 
   return (
     <>
@@ -90,21 +93,46 @@ const EditTaskImages = (props) => {
       </Button>
       <Dialog
         open={open}
+        dialogTitle={"Edycja zdjęć"}
         fullWidth={true}
         maxWidth={"lg"}
         onClose={() => {
           setOpen(false);
         }}
+        dialogActionsChildren={[
+          <Button
+            color={"transparent"}
+            onClick={() => {
+              setOpen(false);
+            }}
+            disabled={isSending}
+          >
+            Anuluj
+          </Button>,
+          <Button
+            color={"primary"}
+            onClick={() => {
+              sendImages();
+            }}
+            disabled={isSending}
+          >
+            Zapisz zdjęcia
+          </Button>,
+        ]}
         // style={{ minHeight: "80vh" }}
       >
-        <DialogTitle id="form-image-title">Edycja zdjęć</DialogTitle>
+        {/*<DialogTitle id="form-image-title">Edycja zdjęć</DialogTitle>*/}
         {/*<DialogContentText>*/}
         {/*</DialogContentText>*/}
-        <div style={{ minHeight: "80vh" }}>
-          <TaskImageDndPush onDrop={pushImages} />
+        <div style={{ minHeight: "50vh" }}>
+          {!isSending ? (
+            <TaskImageDndPush onDrop={pushImages} />
+          ) : (
+            <LinearProgress />
+          )}
           <div>
             <CustomRadio
-              labelProps={{ label: "2x1" }}
+              labelProps={{ label: "2x1", disabled: isSending }}
               radioProps={{
                 checked: imageLayout === "2x1",
                 onChange: () => {
@@ -113,7 +141,7 @@ const EditTaskImages = (props) => {
               }}
             />
             <CustomRadio
-              labelProps={{ label: "1x2" }}
+              labelProps={{ label: "1x2", disabled: isSending }}
               radioProps={{
                 checked: imageLayout === "1x2",
                 onChange: () => {
@@ -139,10 +167,15 @@ const EditTaskImages = (props) => {
                         width: rowWidth,
                         margin: "0 auto",
                       }}
+                      disableDrag={isSending}
                     >
                       {images.map((img, index) => {
                         return (
-                          <TaskImageDndComponent removeImage={removeImage} image={img} itemKey={index} />
+                          <TaskImageDndComponent
+                            removeImage={removeImage}
+                            image={img}
+                            itemKey={index}
+                          />
                         );
                       })}
                       {/*{*/}
@@ -154,13 +187,6 @@ const EditTaskImages = (props) => {
               );
             }}
           </ReactResizeDetector>
-        </div>
-        <div
-          onClick={() => {
-            sendImages();
-          }}
-        >
-          ok
         </div>
       </Dialog>
     </>
