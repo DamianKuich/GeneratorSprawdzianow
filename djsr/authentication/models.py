@@ -138,3 +138,6 @@ class UserActivationToken(models.Model):
     expire = models.DateTimeField()
     created_on = models.DateTimeField()
     used = models.BooleanField()
+
+class ImageDB(models.Model):
+    image = models.BinaryField(blank=True)

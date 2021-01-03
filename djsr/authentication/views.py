@@ -1,5 +1,8 @@
 import datetime
+from datetime import date
 import json
+from django.core import serializers
+from . import models
 from itertools import chain
 from copy import deepcopy
 from django.db import connection
@@ -31,7 +34,7 @@ from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer
 from .serializers import SectionSerializerv2, AnswersSerializer
 from .models import Sectionv2, Answers
 from .models import Task, Section, Skill, CustomUser, UserActivationToken, \
-    TestJSON, PasswordSendReset, UserResetToken, Image
+    TestJSON, PasswordSendReset, UserResetToken, Image, ImageDB
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
@@ -366,7 +369,7 @@ class MakeTestViewSet(APIView):
                     mojtest = TestJSON()
                     mojtest.name = nazwa
                     mojtest.tasks = request.data['tasks']
-                    mojtest.created = datetime.date.today()
+                    mojtest.created = date.today()
                     pomoc = CustomUser.objects.get(id=request.user.id)
                     mojtest.user_id = pomoc.id
                     mojtest.save()
@@ -718,7 +721,8 @@ class AddImageViewSet(APIView):
         if True:
             image = Image.objects.create(name="", image=file, user_id=pomoc.id)
             image.save()
-            return Response(data={"id": image.id}, status=status.HTTP_201_CREATED)
+            img = ImageDB.objects.create(image=image)
+            return Response(data={"image": img.image}, status=status.HTTP_201_CREATED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -754,14 +758,12 @@ class TestTasksiewSet(APIView):
     serializer_class = TestJSONSerializer
 
     def get(self, request, *args, **kwargs):
-        # type = args.pop('type')
         id = kwargs.pop('id')
 
         test = list(TestJSON.objects.filter(id=id).values())[0]
         print(test['tasks'])
         tasks = json.loads(test['tasks'])
         pdf, html = generatePdf(tasks=tasks, name=test['name'])
-        # pdf, html = generatePdf(tasks=tasks, name=test['name'])
         return HttpResponse(pdf, content_type="application/pdf")
 
 
@@ -770,7 +772,6 @@ class TestAnswersviewSet(APIView):
     serializer_class = TestJSONSerializer
 
     def get(self, request, *args, **kwargs):
-        # type = args.pop('type')
         id = kwargs.pop('id')
 
         test = list(TestJSON.objects.filter(id=id).values())[0]
@@ -778,4 +779,14 @@ class TestAnswersviewSet(APIView):
         tasks = json.loads(test['tasks'])
         pdf, html = generateAnswersPdf(tasks=tasks, name=test['name'])
         return HttpResponse(pdf, content_type="application/pdf")
+
+class RetDB(APIView):
+
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = TaskSerializer
+
+    def get(self, request, format=None):
+        task = Task.objects.all()
+        serializer = TaskSerializer(task, many=True)
+        return Response(serializer.data)
 
