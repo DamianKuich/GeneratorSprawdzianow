@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from .models import CustomUser, Task, Section, Skill, PasswordSendReset, TestJSON, Answers, Image
+from .models import CustomUser, Task, Section, Skill, PasswordSendReset, TestJSON, Answers, Image, ImageDB
 from .models import Sectionv2
 
 
@@ -89,6 +89,10 @@ class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
         fields = ('id','name','image')
+class ImageDBSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ImageDB
+        fields = ('id','image')
 class AnswersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answers
