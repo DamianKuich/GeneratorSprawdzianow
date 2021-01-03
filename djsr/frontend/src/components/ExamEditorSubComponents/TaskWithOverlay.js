@@ -8,6 +8,7 @@ import Latex from "react-latex";
 import Box from "@material-ui/core/Box";
 import AddTaskWithDropdownMenu from "./AddTaskWithDropdownMenu";
 import ReactResizeDetector from "react-resize-detector";
+import getLayoutParams from "./getImageLayotRowsCols";
 
 const TaskWithOverlay = (props) => {
   const {
@@ -29,8 +30,9 @@ const TaskWithOverlay = (props) => {
       : task.currentAnswers.wronganswers;
     return answerSource[item.index];
   });
-  const taskImage=task.currentAnswers.image || []
-
+  const taskImage = task.currentAnswers.image || [];
+  const imageLayout = getLayoutParams(task.currentAnswers.imageLayout || "");
+  const imageWidth = 12 / imageLayout.cols;
   const ansChar = ["A", "B", "C", "D"];
   return (
     <Draggable
@@ -117,19 +119,52 @@ const TaskWithOverlay = (props) => {
                           />
                           {/*<Latex>{task.text}</Latex>*/}
                         </p>
-                        {taskImage.length >= 1 && (
-                          <div style={{width:"100%"}}>
-                            <div>
-                              <img
-                                src={
-                                  window.location.origin+"/api"+"/user/image/" +
-                                  taskImage[0]
-                                }
-                                style={{ maxHeight: "100px" }}
-                              />
+                        {
+                          <Box
+                          // style={{ maxHeight: "5cm", width: "100%" }}
+                          >
+                            {taskImage.length >= 1 && (
+                              <Grid container spacing={2}>
+                                {taskImage.map((image) => {
+                                  return (
+                                    <Grid
+                                      item
+                                      xs={imageWidth}
+                                      // xs={1}
+                                      // sm={1}
+                                      // md={1}
+                                      // xl={1}
+                                      // lg={1}
+                                    >
+                                      <img
+                                        src={`${window.location.origin}/api/user/image/${image}`}
+                                        style={{
+                                          maxHeight: "5cm",
+                                          maxWidth: "100%",
+                                          margin: "0 auto",
+                                          display: "block",
+                                        }}
+                                      />
+                                    </Grid>
+                                  );
+                                })}
+                              </Grid>
+                            )}
+                          </Box>
+                        }
+                        {/*taskImage.length >= 1 &&(
+                            <div style={{width:"100%"}}>
+                              <div>
+                                <img
+                                  src={
+                                    window.location.origin+"/api"+"/user/image/" +
+                                    taskImage[0]
+                                  }
+                                  style={{ maxHeight: "100px" }}
+                                />
+                              </div>
                             </div>
-                          </div>
-                        )}
+                        )*/}
                         <Grid
                           container
                           alignItems="center"

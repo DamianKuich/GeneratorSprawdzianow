@@ -17,31 +17,40 @@ const Thumb = (props) => {
     // }
     switch (true) {
       case Number.isInteger(image):
-        console.log("thumb is int",image)
+        console.log("thumb is int", image);
         setThumb(`${window.location.origin}/api/user/image/${image}`);
         break;
-      case Object.getPrototypeOf(image||{}) === File.prototype:
-          console.log("thumb is file",image)
+      case Object.getPrototypeOf(image || {}) === File.prototype:
+        console.log("thumb is file", image);
         let reader = new FileReader();
         reader.onloadend = () => {
           setThumb(reader.result);
         };
         reader.readAsDataURL(image);
       default:
-          console.log("thumb is default",image)
+        console.log("thumb is default", image);
         setThumb(false);
     }
   }, [image]);
-  return <img src={thumb || ""} />;
+  return (
+    <img
+      onDragStart={(e) => {
+        e.preventDefault();
+      }}
+      src={thumb || ""}
+      style={{ maxWidth: "100%", maxHeight: "100%" }}
+    />
+  );
 };
 
 const TaskImageDndComponent = (props) => {
-    console.log("imgdnd ",props)
-  const { image, itemKey } = props;
+  console.log("imgdnd ", props);
+  const { image, itemKey,removeImage } = props;
   const isFile = !Number.isInteger(image);
-
+  const key=(Number.isInteger(image)) ? image : (image.name || "XD");
+    console.log("imageKey",key)
   return (
-    <GridItem key={itemKey || "XD"}>
+    <GridItem key={key || "XD"}>
       <div
         // style={{
         //     width: "100%",
@@ -84,27 +93,27 @@ const TaskImageDndComponent = (props) => {
             }}
             // className="w-100 h-100 d-flex border bg-light"
           >
-              <>
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "0px",
-                    right: "0px",
-                    height: "30px",
-                    width: "30px",
-                    zIndex: "3",
-                    margin: "6px",
-                    color: "red",
-                  }}
-                  // onClick={() => {
-                  //   setFieldValue(name + "." + index.toString(), null);
-                  // }}
-                >
-                  {/*<Icon size={"100%"} icon={timesCircleO} />*/}
-                  <div>X</div>
-                </div>
-                <Thumb image={image} />
-              </>
+            <>
+              <div
+                style={{
+                  position: "absolute",
+                  top: "0px",
+                  right: "0px",
+                  height: "30px",
+                  width: "30px",
+                  zIndex: "3",
+                  margin: "6px",
+                  color: "red",
+                }}
+                onClick={() => {
+                  removeImage(itemKey)
+                }}
+              >
+                {/*<Icon size={"100%"} icon={timesCircleO} />*/}
+                <div>X</div>
+              </div>
+              <Thumb image={image} />
+            </>
           </div>
         </div>
       </div>
