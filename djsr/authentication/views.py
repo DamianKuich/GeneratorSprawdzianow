@@ -705,9 +705,8 @@ class ImageViewSet(APIView):
 
     def get(self, request, *args, **kwargs):
         id = kwargs.pop('id')
-        imag = Image.objects.get(id=id)
-        image_data = open("media/" + str(imag.image), "rb").read()
-        return HttpResponse(image_data, content_type="image/png")
+        imag = ImageDB.objects.get(id=id)
+        return HttpResponse(imag.image, content_type="image/*")
 
 
 class AddImageViewSet(APIView):
@@ -721,11 +720,12 @@ class AddImageViewSet(APIView):
         if True:
             image = Image.objects.create(name="", image=file, user_id=pomoc.id)
             image.save()
-            try:
-                img = ImageDB.objects.create(image=file)
-            except:
-                pass
-            return Response(data={"id": image.id}, status=status.HTTP_201_CREATED)
+            imag = Image.objects.get(id=image.id)
+            image_data = open("media/" + str(imag.image), "rb").read()
+            cos = bytes(image_data)
+            img = ImageDB.objects.create(image=cos)
+            img.save()
+            return Response(data={"id": img.id}, status=status.HTTP_201_CREATED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
