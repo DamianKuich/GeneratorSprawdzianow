@@ -1,9 +1,10 @@
 import re
 from copy import deepcopy
-
+from ..models import ImageDB
 import pdfkit
 import requests
 from yattag import Doc
+import base64
 
 
 def katexparser(text):
@@ -34,19 +35,26 @@ def collectTaskAnswers(answers):
         result.append(katexparser(source[answer['index']]))
     return result
 
-# def collectTaskImages(images):
-#     images = images
-#     result = []
-#     for img in images:
-#         result.append(img)
-#     return result
+def collectTaskImages(image):
+    # print(image, "help")
+    image_id = image['image']
+    # image_layout = image['imageLayout']
+    ids = []
+    for img in image_id:
+        data = list(ImageDB.objects.filter(id=img).values())
+        data = data[0]
+        image_data = base64.b64encode(data['image']).decode('utf-8')
+        print("pomocy1", image_data, "pomocy2")
+        ids.append(image_data)
+    # ids.append(image_layout)
+    return ids
 
 
 def taskPrintDataParser(task):
     task = deepcopy(task)
     task['text'] = katexparser(task['text'])
     task['answers'] = collectTaskAnswers(task['currentAnswers'])
-    # task['images'] = collectTaskImages(task['images'])
+    task['obrazki'] = collectTaskImages(task['currentAnswers'])
     return task
 
 
