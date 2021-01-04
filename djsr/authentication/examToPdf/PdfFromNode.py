@@ -32,7 +32,8 @@ def generatePdf(tasks, name="Sprawdzian"):
                             text(part["data"])
                     elif part["type"] == "latex":
                         svg = part["svg"]
-                        doc.stag("img", src='data:image/svg+xml;utf8,' + svg, style="display:inline;transform: translate(0px,30%);")
+                        doc.stag("img", src='data:image/svg+xml;utf8,' + svg,
+                                 style="display:inline;transform: translate(0px,30%);")
             # # renderowanie obrazków
             try:
                 with tag('p'):
@@ -68,15 +69,17 @@ def generatePdf(tasks, name="Sprawdzian"):
                             with tag('div style="display: inline-block;margin-right: 20px;"'):
                                 with tag('span style="display: block;margin-right: 20px;"'):
                                     text(listodp[index])
-                                    doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"], style="transform: translate(0px,4px);")
+                                    doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"],
+                                             style="transform: translate(0px,4px);")
             with tag('div'):
                 text(
                     "---------------------------------------------------------------------------------------------------------------------------------")
     html = doc.getvalue()
     requestJson = json.dumps({'html': html})
     # wygenerowany_pdf = requests.get("https://gen-mat-pdf-node.herokuapp.com/pdf/", data='{"html": "'+html.encode(encoding='UTF-8')+'"}')
-    wygenerowany_pdf = requests.get("https://gen-mat-pdf-node.herokuapp.com/pdf/",
-                                    data=requestJson, headers={"Content-Type": "application/json"})
+    # wygenerowany_pdf = requests.get("https://gen-mat-pdf-node.herokuapp.com/pdf/",
+    #                                 data=requestJson, headers={"Content-Type": "application/json"})
+    wygenerowany_pdf = requests.post("https://gen-mat-pdf-node.herokuapp.com/pdf2/", files={"html": html})
     return wygenerowany_pdf, html
 
 
