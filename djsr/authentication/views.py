@@ -723,6 +723,7 @@ class AddImageViewSet(APIView):
             imag = Image.objects.get(id=image.id)
             image_data = open("media/" + str(imag.image), "rb").read()
             cos = bytes(image_data)
+            imag.delete()
             img = ImageDB.objects.create(image=cos)
             img.save()
             return Response(data={"id": img.id}, status=status.HTTP_201_CREATED)
@@ -746,9 +747,15 @@ class AddImageToTaskViewSet(APIView):
             id = request.data['taskid']
             task = Task.objects.get(id=id)
             image = Image.objects.filter(name=request.data['name'])
+            image_data = open("media/" + str(image.image), "rb").read()
+            cos = bytes(image_data)
+            img = ImageDB.objects.create(image=cos)
+            img.save()
+            image.name = "ImagaDB_" + str(img.id)
+            image.save()
             task.image.set(image)
             task.save()
-            image_data = open("media/" + str(image.image), "rb").read()
+
             return HttpResponse(image_data, content_type="image/png")
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)

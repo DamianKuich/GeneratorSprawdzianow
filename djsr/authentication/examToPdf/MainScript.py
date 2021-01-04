@@ -36,18 +36,20 @@ def collectTaskAnswers(answers):
     return result
 
 def collectTaskImages(image):
-    # print(image, "help")
-    image_id = image['image']
-    # image_layout = image['imageLayout']
-    ids = []
-    for img in image_id:
-        data = list(ImageDB.objects.filter(id=img).values())
-        data = data[0]
-        image_data = base64.b64encode(data['image']).decode('utf-8')
-        print("pomocy1", image_data, "pomocy2")
-        ids.append(image_data)
-    # ids.append(image_layout)
-    return ids
+    try:
+        image_id = image['image']
+        # image_layout = image['imageLayout']
+        ids = []
+        for img in image_id:
+            data = list(ImageDB.objects.filter(id=img).values())
+            data = data[0]
+            image_data = base64.b64encode(data['image']).decode('utf-8')
+            print("pomocy1", image_data, "pomocy2")
+            ids.append(image_data)
+        # ids.append(image_layout)
+        return ids
+    except:
+        pass
 
 
 def taskPrintDataParser(task):

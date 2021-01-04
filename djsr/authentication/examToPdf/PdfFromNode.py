@@ -6,16 +6,23 @@ from yattag import Doc
 req = requests.get("https://math.now.sh?from=" + "\square").text
 
 def generatePdf(tasks, name="Sprawdzian"):
+    listodp = ['A: ', 'B: ', 'C: ', 'D: ']
     tasks = list(map(taskPrintDataParser, tasks))
     doc, tag, text = Doc().tagtext()
     # dodaj tytul do spr
-    with tag('h1'):
+    with tag('h5'):
+        text("Imię ............................")
+    with tag('h5'):
+        text("Nazwisko......................... ")
+    with tag('h2'):
         text(name)
     # renderowanie taskow
-    for task in tasks:
+    for index,task in enumerate(tasks):
+
         with tag('div'):
-            # print('TASK', task)
-            # renderowanie tekstu zadania
+            text("-------------")
+        with tag('div'):
+            text("Zadanie nr."+ str(index+1))
             with tag('p'):
                 for part in task['text']:
                     if part["type"] == "text":
@@ -25,14 +32,17 @@ def generatePdf(tasks, name="Sprawdzian"):
                         svg = part["svg"]
                         doc.stag("img", src='data:image/svg+xml;utf8,' + svg, style="display:inline;")
             # # renderowanie obrazków
-            with tag('p'):
-                for img in task['obrazki']:
-                    # text("whatever")
-                    with tag('div'):
-                        try:
-                            with tag('span'):
-                                doc.stag("img", src='data:image/*;base64,' + img)
-                        except: text("error")
+            try:
+                with tag('p'):
+                    for img in task['obrazki']:
+                        # text("whatever")
+                        with tag('div'):
+                            try:
+                                with tag('span'):
+                                    doc.stag("img", src='data:image/*;base64,' + img)
+                            except: text("error")
+            except:
+                pass
             # renderowanie odp zadania
             with tag('div'):
                 for index, answer in enumerate(task['answers']):
@@ -40,8 +50,9 @@ def generatePdf(tasks, name="Sprawdzian"):
                     for part in answer:
                         if part["type"] == "text":
                             with tag('span'):
-                                text(part["data"])
+                                text(listodp[index] + part["data"])
                         elif part["type"] == "latex":
+                            text(listodp[index])
                             doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"])
     html = doc.getvalue()
     requestJson=json.dumps({'html':html})
