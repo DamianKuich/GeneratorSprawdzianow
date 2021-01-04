@@ -10,17 +10,18 @@ def generatePdf(tasks, name="Sprawdzian"):
     tasks = list(map(taskPrintDataParser, tasks))
     doc, tag, text = Doc().tagtext()
     # dodaj tytul do spr
-    with tag('h5'):
-        text("Imię ............................")
-    with tag('h5'):
+    with tag('div'):
+        text("Imię ................................")
+    with tag('div'):
         text("Nazwisko......................... ")
-    with tag('h2'):
+    with tag('div'):
         text(name)
     # renderowanie taskow
+    with tag('div'):
+        text(
+            "---------------------------------------------------------------------------------------------------------------------------------")
     for index,task in enumerate(tasks):
 
-        with tag('div'):
-            text("-------------")
         with tag('div'):
             text("Zadanie nr."+ str(index+1))
             with tag('p'):
@@ -49,11 +50,16 @@ def generatePdf(tasks, name="Sprawdzian"):
                     # with tag('div'):
                     for part in answer:
                         if part["type"] == "text":
-                            with tag('span'):
+                            with tag('div style="display: inline-block;margin-right: 20px;"'):
                                 text(listodp[index] + part["data"])
                         elif part["type"] == "latex":
-                            text(listodp[index])
-                            doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"])
+                            with tag('div style="display: inline-block;margin-right: 20px;"'):
+                                with tag('span style="display: block;margin-right: 20px;"'):
+                                    text(listodp[index])
+                                    doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"])
+            with tag('div'):
+                text(
+                    "---------------------------------------------------------------------------------------------------------------------------------")
     html = doc.getvalue()
     requestJson=json.dumps({'html':html})
     # wygenerowany_pdf = requests.get("https://gen-mat-pdf-node.herokuapp.com/pdf/", data='{"html": "'+html.encode(encoding='UTF-8')+'"}')
