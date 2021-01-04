@@ -122,13 +122,7 @@ var AddTaskDialog = function AddTaskDialog(_ref) {
     id: "form-dialog-title"
   }, "Dodaj zadanie"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_4__["default"], null, "Wybierz jakie umiej\u0119tno\u015B\u0107i ma sprwadza\u0107 zadanie."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AddTask__WEBPACK_IMPORTED_MODULE_8__["default"], {
     onTaskAdd: onTaskAdd
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_6__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    onClick: handleClose,
-    color: "primary"
-  }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    onClick: handleClose,
-    color: "primary"
-  }, "Subscribe")));
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (AddTaskDialog);
@@ -301,6 +295,292 @@ var CollapseMenuContainer = function CollapseMenuContainer(_ref) {
 
 /***/ }),
 
+/***/ "./djsr/frontend/src/components/ExamEditorSubComponents/EditTaskImages.js":
+/*!********************************************************************************!*\
+  !*** ./djsr/frontend/src/components/ExamEditorSubComponents/EditTaskImages.js ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Dialog */ "./node_modules/@material-ui/core/esm/Dialog/index.js");
+/* harmony import */ var _material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/DialogTitle */ "./node_modules/@material-ui/core/esm/DialogTitle/index.js");
+/* harmony import */ var _material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../material_ui_components/CustomButtons/Button */ "./djsr/frontend/src/components/material_ui_components/CustomButtons/Button.js");
+/* harmony import */ var _material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/DialogContentText */ "./node_modules/@material-ui/core/esm/DialogContentText/index.js");
+/* harmony import */ var react_grid_dnd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-grid-dnd */ "./node_modules/react-grid-dnd/esm/index.js");
+/* harmony import */ var react_resize_detector__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-resize-detector */ "./node_modules/react-resize-detector/lib/esm/index.js");
+/* harmony import */ var _TaskImageDndComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./TaskImageDndComponent */ "./djsr/frontend/src/components/ExamEditorSubComponents/TaskImageDndComponent.js");
+/* harmony import */ var _TaskImageDndPush__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./TaskImageDndPush */ "./djsr/frontend/src/components/ExamEditorSubComponents/TaskImageDndPush.js");
+/* harmony import */ var _ExamImageValidator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./ExamImageValidator */ "./djsr/frontend/src/components/ExamEditorSubComponents/ExamImageValidator.js");
+/* harmony import */ var _PostImage__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./PostImage */ "./djsr/frontend/src/components/ExamEditorSubComponents/PostImage.js");
+/* harmony import */ var _getImageLayotRowsCols__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./getImageLayotRowsCols */ "./djsr/frontend/src/components/ExamEditorSubComponents/getImageLayotRowsCols.js");
+/* harmony import */ var _material_ui_components_CustomRadio_CustomRadio__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../material_ui_components/CustomRadio/CustomRadio */ "./djsr/frontend/src/components/material_ui_components/CustomRadio/CustomRadio.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var EditTaskImages = function EditTaskImages(props) {
+  var task = props.task,
+      updateTask = props.updateTask;
+  var index = props.index || 0;
+  var taskImages = task.currentAnswers.image || [];
+  var taskImageLayout = task.currentAnswers.imageLayout || "2x1";
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(taskImageLayout),
+      _useState2 = _slicedToArray(_useState, 2),
+      imageLayout = _useState2[0],
+      setImageLayout = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(taskImages),
+      _useState4 = _slicedToArray(_useState3, 2),
+      images = _useState4[0],
+      setImages = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      open = _useState6[0],
+      setOpen = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      isSending = _useState8[0],
+      setSending = _useState8[1];
+
+  var maxImages = 2;
+  var imagesLeftToAdd = maxImages - (images.length || 0);
+  var pushImages = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(function (inputImages) {
+    // console.log(images.map(ExamImageValidator))
+    var imagesToPush = [];
+
+    var _iterator = _createForOfIteratorHelper(inputImages),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var image = _step.value;
+        var result = Object(_ExamImageValidator__WEBPACK_IMPORTED_MODULE_10__["default"])(image);
+        console.log(result, result.constructor.name);
+
+        if ("ValidationError" === result.constructor.name) {
+          console.log("image input error", result);
+          return;
+        }
+
+        imagesToPush.push(result);
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+
+    if (imagesToPush.length > imagesLeftToAdd) {
+      //todo 2 much images error
+      return;
+    }
+
+    setImages(images.concat(imagesToPush));
+  }, [images, maxImages, imagesLeftToAdd]);
+
+  var onDrop = function onDrop(srcId, sourceIndex, targetIndex) {
+    setImages(Object(react_grid_dnd__WEBPACK_IMPORTED_MODULE_6__["swap"])(images, sourceIndex, targetIndex));
+  };
+
+  var layoutParam = Object(_getImageLayotRowsCols__WEBPACK_IMPORTED_MODULE_12__["default"])(imageLayout);
+
+  var sendImages = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+      var newImages, updatedTask;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              setSending(true);
+              _context2.next = 3;
+              return Promise.all(images.map( /*#__PURE__*/function () {
+                var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(image) {
+                  return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                      switch (_context.prev = _context.next) {
+                        case 0:
+                          return _context.abrupt("return", Object.getPrototypeOf(image) === File.prototype ? Object(_PostImage__WEBPACK_IMPORTED_MODULE_11__["default"])(image) : image);
+
+                        case 1:
+                        case "end":
+                          return _context.stop();
+                      }
+                    }
+                  }, _callee);
+                }));
+
+                return function (_x) {
+                  return _ref2.apply(this, arguments);
+                };
+              }()));
+
+            case 3:
+              newImages = _context2.sent;
+              console.log("sendImages", newImages);
+              updatedTask = _objectSpread({}, task);
+              updatedTask.currentAnswers.image = newImages;
+              updatedTask.currentAnswers.imageLayout = imageLayout;
+              updateTask(_objectSpread({}, updatedTask));
+              setSending(false); //TODO komunikat done
+
+              setOpen(false);
+
+            case 11:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function sendImages() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  var removeImage = function removeImage(index) {
+    // console.log("removeImage",index)
+    var newImages = _toConsumableArray(images);
+
+    newImages.splice(index, 1); // console.log("removeImage",newImages)
+
+    setImages(newImages);
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    onClick: function onClick() {
+      setOpen(true);
+    }
+  }, "Edytuj zdjecia"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    open: open,
+    fullWidth: true,
+    maxWidth: "lg",
+    onClose: function onClose() {
+      setOpen(false);
+    } // style={{ minHeight: "80vh" }}
+
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    id: "form-image-title"
+  }, "Edycja zdj\u0119\u0107"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      minHeight: "80vh"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TaskImageDndPush__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    onDrop: pushImages
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomRadio_CustomRadio__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    labelProps: {
+      label: "2x1"
+    },
+    radioProps: {
+      checked: imageLayout === "2x1",
+      onChange: function onChange() {
+        setImageLayout("2x1");
+      }
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomRadio_CustomRadio__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    labelProps: {
+      label: "1x2"
+    },
+    radioProps: {
+      checked: imageLayout === "1x2",
+      onChange: function onChange() {
+        setImageLayout("1x2");
+      }
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_resize_detector__WEBPACK_IMPORTED_MODULE_7__["default"], null, function (_ref3) {
+    var width = _ref3.width,
+        height = _ref3.height;
+    var rowHeight = (width || 20) / 4;
+    var rowWidth = rowHeight * layoutParam.cols;
+    var dropZoneHeight = rowHeight * layoutParam.rows;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: {
+        width: "100%",
+        margin: "0",
+        padding: "0"
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_grid_dnd__WEBPACK_IMPORTED_MODULE_6__["GridContextProvider"], {
+      onChange: onDrop
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_grid_dnd__WEBPACK_IMPORTED_MODULE_6__["GridDropZone"], {
+      boxesPerRow: layoutParam.cols,
+      rowHeight: (width || 20) / 4,
+      id: "task-image-dnd-".concat(index),
+      style: {
+        height: dropZoneHeight,
+        width: rowWidth,
+        margin: "0 auto"
+      }
+    }, images.map(function (img, index) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TaskImageDndComponent__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        removeImage: removeImage,
+        image: img,
+        itemKey: index
+      });
+    }))));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    onClick: function onClick() {
+      sendImages();
+    }
+  }, "ok")));
+};
+
+EditTaskImages.propTypes = {};
+/* harmony default export */ __webpack_exports__["default"] = (EditTaskImages);
+
+/***/ }),
+
 /***/ "./djsr/frontend/src/components/ExamEditorSubComponents/ExamEditorSidePanel.js":
 /*!*************************************************************************************!*\
   !*** ./djsr/frontend/src/components/ExamEditorSubComponents/ExamEditorSidePanel.js ***!
@@ -355,6 +635,38 @@ var ExamEditorSidePanel = function ExamEditorSidePanel(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ExamEditorSidePanel);
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/ExamEditorSubComponents/ExamImageValidator.js":
+/*!************************************************************************************!*\
+  !*** ./djsr/frontend/src/components/ExamEditorSubComponents/ExamImageValidator.js ***!
+  \************************************************************************************/
+/*! exports provided: imageValidationSchema, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "imageValidationSchema", function() { return imageValidationSchema; });
+/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
+
+var MAX_FILE_SIZE = 2 * 1024 * 1024;
+var SUPPORTED_FORMATS = ["image/jpg", "image/jpeg"];
+var imageValidationSchema = yup__WEBPACK_IMPORTED_MODULE_0__["mixed"]().test("fileSize", "File size error", function (value) {
+  return value && value.size <= MAX_FILE_SIZE;
+}).test("fileFormat", "File format error", function (value) {
+  return value && SUPPORTED_FORMATS.includes(value.type);
+});
+
+var imageValidate = function imageValidate(image) {
+  try {
+    return imageValidationSchema.validateSync(image);
+  } catch (e) {
+    return e;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (imageValidate);
 
 /***/ }),
 
@@ -456,8 +768,8 @@ var ExamPageWithOverlay = function ExamPageWithOverlay(props) {
   }, !!header && header, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_resize_detector__WEBPACK_IMPORTED_MODULE_4__["default"], null, function (_ref) {
     var width = _ref.width,
         height = _ref.height;
-    if (divHeight !== height) setHeight(height);
-    console.log("XDDD?", divHeight, height);
+    if (divHeight !== height) setHeight(height); // console.log("XDDD?", divHeight, height);
+
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       style: {
         // flex: "1",
@@ -577,6 +889,59 @@ ExamPages.propTypes = {
   updateTaskHeight: prop_types__WEBPACK_IMPORTED_MODULE_12___default.a.func.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (ExamPages);
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/ExamEditorSubComponents/PostImage.js":
+/*!***************************************************************************!*\
+  !*** ./djsr/frontend/src/components/ExamEditorSubComponents/PostImage.js ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+var sendImage = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(image) {
+    var formData, response;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            formData = new FormData();
+            formData.append("file", image);
+            _context.next = 4;
+            return _axiosAPI__WEBPACK_IMPORTED_MODULE_0__["default"].post("/user/addimage/", formData, {
+              headers: {
+                "Content-Type": "multipart/form-data"
+              }
+            });
+
+          case 4:
+            response = _context.sent;
+            return _context.abrupt("return", response.data.id || null);
+
+          case 6:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function sendImage(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (sendImage);
 
 /***/ }),
 
@@ -943,11 +1308,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _MaterialFormikField__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../MaterialFormikField */ "./djsr/frontend/src/components/MaterialFormikField.js");
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
 /* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/esm/Box/index.js");
+/* harmony import */ var _EditTaskImages__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./EditTaskImages */ "./djsr/frontend/src/components/ExamEditorSubComponents/EditTaskImages.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -982,7 +1349,7 @@ var TaskEditor = function TaskEditor(_ref) {
         }).then(function (response) {
           var task = _objectSpread({}, values);
 
-          task.currentDataSet.image = [response.data.id];
+          task.currentAnswers.image = [response.data.id];
           updateTask(_objectSpread({}, task));
         });
       } else updateTask(_objectSpread({}, values));
@@ -1041,7 +1408,10 @@ var TaskEditor = function TaskEditor(_ref) {
       }
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["Button"], {
       onClick: handleSubmit
-    }, "Zapisz obrazek"));
+    }, "Zapisz obrazek"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_EditTaskImages__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      task: task,
+      updateTask: updateTask
+    }));
   }));
 };
 
@@ -1084,6 +1454,243 @@ var TaskEditorCollapseMenu = function TaskEditorCollapseMenu(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (TaskEditorCollapseMenu);
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/ExamEditorSubComponents/TaskImageDndComponent.js":
+/*!***************************************************************************************!*\
+  !*** ./djsr/frontend/src/components/ExamEditorSubComponents/TaskImageDndComponent.js ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_grid_dnd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-grid-dnd */ "./node_modules/react-grid-dnd/esm/index.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+var Thumb = function Thumb(props) {
+  var image = props.image;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      thumb = _useState2[0],
+      setThumb = _useState2[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    // if (!image) return null;
+    // if (Number.isInteger(image)){
+    //
+    // }
+    switch (true) {
+      case Number.isInteger(image):
+        console.log("thumb is int", image);
+        setThumb("".concat(window.location.origin, "/api/user/image/").concat(image));
+        break;
+
+      case Object.getPrototypeOf(image || {}) === File.prototype:
+        console.log("thumb is file", image);
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+          setThumb(reader.result);
+        };
+
+        reader.readAsDataURL(image);
+
+      default:
+        console.log("thumb is default", image);
+        setThumb(false);
+    }
+  }, [image]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    onDragStart: function onDragStart(e) {
+      e.preventDefault();
+    },
+    src: thumb || "",
+    style: {
+      maxWidth: "100%",
+      maxHeight: "100%"
+    }
+  });
+};
+
+var TaskImageDndComponent = function TaskImageDndComponent(props) {
+  console.log("imgdnd ", props);
+  var image = props.image,
+      itemKey = props.itemKey,
+      removeImage = props.removeImage;
+  var isFile = !Number.isInteger(image);
+  var key = Number.isInteger(image) ? image : image.name || "XD";
+  console.log("imageKey", key);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_grid_dnd__WEBPACK_IMPORTED_MODULE_2__["GridItem"], {
+    key: key || "XD"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    // style={{
+    //     width: "100%",
+    //     height: "100%",
+    //     // backgroundColor: "blue"
+    //     // display: "flex",
+    //     // flexWrap: "wrap",
+    //     // alignContent: "center",
+    //     // margin: "10px",
+    //     // position: "relative"
+    // }}
+    style: {
+      width: "100%",
+      height: "100%",
+      display: "flex"
+    } // className="w-100 h-100 d-flex"
+
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _defineProperty({
+    style: {// cursor: "pointer",
+      // border:
+      //     "2px solid black",
+      // backgroundColor:
+      //     "white",
+      // position: "absolute"
+    }
+  }, "style", {
+    width: "100%",
+    height: "100%",
+    padding: "5px"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      width: "100%",
+      height: "100%",
+      display: "flex",
+      flexWrap: "wrap",
+      alignContent: "center",
+      // padding: "10px",
+      border: "1px solid",
+      justifyContent: "center"
+    } // className="w-100 h-100 d-flex border bg-light"
+
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      position: "absolute",
+      top: "0px",
+      right: "0px",
+      height: "30px",
+      width: "30px",
+      zIndex: "3",
+      margin: "6px",
+      color: "red"
+    },
+    onClick: function onClick() {
+      removeImage(itemKey);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Thumb, {
+    image: image
+  }))))));
+};
+
+TaskImageDndComponent.propTypes = {};
+/* harmony default export */ __webpack_exports__["default"] = (TaskImageDndComponent);
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/ExamEditorSubComponents/TaskImageDndPush.js":
+/*!**********************************************************************************!*\
+  !*** ./djsr/frontend/src/components/ExamEditorSubComponents/TaskImageDndPush.js ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_grid_dnd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-grid-dnd */ "./node_modules/react-grid-dnd/esm/index.js");
+/* harmony import */ var react_dropzone__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dropzone */ "./node_modules/react-dropzone/dist/es/index.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+var TaskImageDndPush = function TaskImageDndPush(props) {
+  var onDrop = props.onDrop; // const onDrop = useCallback((acceptedFiles) => {
+  //   console.log(acceptedFiles);
+  // }, []);
+
+  var _useDropzone = Object(react_dropzone__WEBPACK_IMPORTED_MODULE_2__["useDropzone"])({
+    onDrop: onDrop
+  }),
+      getRootProps = _useDropzone.getRootProps,
+      getInputProps = _useDropzone.getInputProps,
+      isDragActive = _useDropzone.isDragActive;
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    key: "pushxd"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    // style={{
+    //     width: "100%",
+    //     height: "100%",
+    //     // backgroundColor: "blue"
+    //     // display: "flex",
+    //     // flexWrap: "wrap",
+    //     // alignContent: "center",
+    //     // margin: "10px",
+    //     // position: "relative"
+    // }}
+    style: {
+      width: "100%",
+      height: "100%",
+      display: "flex"
+    } // className="w-100 h-100 d-flex"
+
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _defineProperty({
+    style: {// cursor: "pointer",
+      // border:
+      //     "2px solid black",
+      // backgroundColor:
+      //     "white",
+      // position: "absolute"
+    }
+  }, "style", {
+    width: "100%",
+    height: "100%",
+    padding: "5px"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      width: "100%",
+      height: "100%",
+      display: "flex",
+      flexWrap: "wrap",
+      alignContent: "center",
+      // padding: "10px",
+      border: "1px solid",
+      justifyContent: "center"
+    } // className="w-100 h-100 d-flex border bg-light"
+
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", getRootProps(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", getInputProps()), isDragActive ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Upu\u015B\u0107 zdj\u0119cia tutaj") :
+  /*#__PURE__*/
+  // <p>Drag 'n' drop some files here, or click to select files</p>
+  react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Przyci\u0105gnij zdj\u0119cia tutaj, albo kliknij tutaj, aby wybra\u0107 zdj\u0119cia"))))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (TaskImageDndPush);
 
 /***/ }),
 
@@ -1430,7 +2037,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/esm/Box/index.js");
 /* harmony import */ var _AddTaskWithDropdownMenu__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./AddTaskWithDropdownMenu */ "./djsr/frontend/src/components/ExamEditorSubComponents/AddTaskWithDropdownMenu.js");
 /* harmony import */ var react_resize_detector__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-resize-detector */ "./node_modules/react-resize-detector/lib/esm/index.js");
+/* harmony import */ var _getImageLayotRowsCols__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./getImageLayotRowsCols */ "./djsr/frontend/src/components/ExamEditorSubComponents/getImageLayotRowsCols.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 
 
 
@@ -1459,6 +2068,9 @@ var TaskWithOverlay = function TaskWithOverlay(props) {
     var answerSource = item.isCorrect ? task.currentAnswers.correctans : task.currentAnswers.wronganswers;
     return answerSource[item.index];
   });
+  var taskImage = task.currentAnswers.image || [];
+  var imageLayout = Object(_getImageLayotRowsCols__WEBPACK_IMPORTED_MODULE_10__["default"])(task.currentAnswers.imageLayout || "");
+  var imageWidth = 12 / imageLayout.cols;
   var ansChar = ["A", "B", "C", "D"];
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_2__["Draggable"], {
     key: "task-" + task.id + "-" + index,
@@ -1522,7 +2134,29 @@ var TaskWithOverlay = function TaskWithOverlay(props) {
         editorTaskIndex: editorTaskIndex,
         editorTaskPart: editorTaskPart,
         updateTaskText: updateTaskText
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_7__["default"] // style={{ maxHeight: "5cm", width: "100%" }}
+      , null, taskImage.length >= 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        container: true,
+        spacing: 2
+      }, taskImage.map(function (image) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          item: true,
+          xs: imageWidth // xs={1}
+          // sm={1}
+          // md={1}
+          // xl={1}
+          // lg={1}
+
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: "".concat(window.location.origin, "/api/user/image/").concat(image),
+          style: {
+            maxHeight: "5cm",
+            maxWidth: "100%",
+            margin: "0 auto",
+            display: "block"
+          }
+        }));
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__["default"], {
         container: true,
         alignItems: "center",
         justify: "space-between",
@@ -1618,6 +2252,47 @@ var TasksDragAndDrop = function TasksDragAndDrop(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (TasksDragAndDrop);
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/ExamEditorSubComponents/getImageLayotRowsCols.js":
+/*!***************************************************************************************!*\
+  !*** ./djsr/frontend/src/components/ExamEditorSubComponents/getImageLayotRowsCols.js ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var getColRows = function getColRows(layout) {
+  switch (layout) {
+    case "2x1":
+      return {
+        rows: 1,
+        cols: 2
+      };
+
+    case "1x2":
+      return {
+        rows: 2,
+        cols: 1
+      };
+
+    case "1x1":
+      return {
+        rows: 1,
+        cols: 1
+      };
+
+    default:
+      return {
+        rows: 1,
+        cols: 1
+      };
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (getColRows);
 
 /***/ }),
 
@@ -4928,6 +5603,60 @@ var profilePageStyle = _objectSpread(_objectSpread({
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "8ae80ee488d6ec36fd62f67865d06356.png");
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/material_ui_components/CustomRadio/CustomRadio.js":
+/*!****************************************************************************************!*\
+  !*** ./djsr/frontend/src/components/material_ui_components/CustomRadio/CustomRadio.js ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "./node_modules/@material-ui/core/esm/FormControlLabel/index.js");
+/* harmony import */ var _material_ui_core_Radio__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Radio */ "./node_modules/@material-ui/core/esm/Radio/index.js");
+/* harmony import */ var _assets_jss_material_kit_react_customCheckboxRadioSwitch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../assets/jss/material-kit-react/customCheckboxRadioSwitch */ "./djsr/frontend/src/components/assets/jss/material-kit-react/customCheckboxRadioSwitch.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/icons */ "./node_modules/@material-ui/icons/esm/index.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+
+
+
+
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__["makeStyles"])(_assets_jss_material_kit_react_customCheckboxRadioSwitch__WEBPACK_IMPORTED_MODULE_3__["default"]);
+
+var CustomRadio = function CustomRadio(props) {
+  var labelProps = props.labelProps,
+      radioProps = props.radioProps;
+  var classes = useStyles();
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({
+    control: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Radio__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({
+      icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons__WEBPACK_IMPORTED_MODULE_5__["FiberManualRecord"], {
+        className: classes.radioUnchecked
+      }),
+      checkedIcon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons__WEBPACK_IMPORTED_MODULE_5__["FiberManualRecord"], {
+        className: classes.radioChecked
+      }),
+      classes: {
+        checked: classes.radio,
+        root: classes.radioRoot
+      }
+    }, radioProps)),
+    classes: {
+      label: classes.label,
+      root: classes.labelRoot
+    }
+  }, labelProps));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (CustomRadio);
 
 /***/ }),
 

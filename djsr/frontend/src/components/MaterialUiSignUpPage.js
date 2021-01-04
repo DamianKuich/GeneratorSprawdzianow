@@ -20,17 +20,41 @@ import CardHeader from "./material_ui_components/Card/CardHeader.js";
 import CardFooter from "./material_ui_components/Card/CardFooter.js";
 import CustomInput from "./material_ui_components/CustomInput/CustomInput.js";
 import styles from "./assets/jss/material-kit-react/views/loginPage.js";
-import image from "./img/genspr-parralax-bg.png";
+import image from "./img/genesprDark.png";
 import * as Yup from "yup";
 import axiosInstance, { axiosInstanceNoAuth } from "./axiosAPI";
 import { Formik, Field } from "formik";
 import MaterialFormikField from "./MaterialFormikField";
-
+import Paper from '@material-ui/core/Paper';
 const useStyles = makeStyles(styles);
 
 const MaterialUiSignUpPage = (props) => {
   const FRS = "Pole wymagane";
   const user = props.appState.user;
+  const bgStyles = {
+    paperContainer: {
+        backgroundImage: `url(${image})`,
+        
+        minHeight: 1000,
+  
+       
+       
+  
+  
+       
+    },
+    examCardContainer: {
+      width: 700,
+      backgroundColor: '#FEFEFA',
+  
+      
+  },
+  
+    cardTitle: {
+      textAlign:'center'
+    }
+  
+  };
   if (!!user) {
     props.history.push("/");
   }
@@ -42,13 +66,8 @@ const MaterialUiSignUpPage = (props) => {
   const { ...rest } = props;
   return (
     <div>
-      <div
-        className={classes.pageHeader}
-        style={{
-          backgroundImage: "url(" + image + ")",
-          backgroundSize: "cover",
-          backgroundPosition: "top center",
-        }}
+                <Paper
+       style={bgStyles.paperContainer}
       >
         <div className={classes.container}>
           <GridContainer justify="center">
@@ -281,7 +300,7 @@ const MaterialUiSignUpPage = (props) => {
             </GridItem>
           </GridContainer>
         </div>
-      </div>
+      </Paper>
     </div>
   );
 };

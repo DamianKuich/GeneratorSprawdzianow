@@ -67,7 +67,7 @@ var HomePage = function HomePage(props) {
     md: 6
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
     className: classes.title
-  }, "Generator Sprawdzian\xF3w"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Generator Sprawdzian\xF3w"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)))))));
+  }, "Generator Sprawdzian\xF3w"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "\u201CGen-Mat\u201D jest to nowy serwis do generowania sprawdzian\xF3w z matematyki. Zalety serwisu: - wyb\xF3r zada\u0144 z naszej bazy - mo\u017Cliwo\u015B\u0107 dodania w\u0142asnego zadania - mo\u017Cliwo\u015B\u0107 pobrania sprawdzianu w formacie PDF"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)))))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (HomePage);

@@ -1,5 +1,67 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[9],{
 
+/***/ "./djsr/frontend/src/components/AutoGeneTaskParser.js":
+/*!************************************************************!*\
+  !*** ./djsr/frontend/src/components/AutoGeneTaskParser.js ***!
+  \************************************************************/
+/*! exports provided: taskParser, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "taskParser", function() { return taskParser; });
+var taskParser = function taskParser(task) {
+  console.log("taskparser", task);
+  var newTask = JSON.parse(JSON.stringify(task)); // console.log("taskparser parsed", newTask)
+  // let draggedItem
+
+  newTask.answers = {};
+  newTask.correctans = JSON.parse(newTask.correctans.replace(/'/g, '"'));
+  newTask.wronganswers = JSON.parse(newTask.wronganswers.replace(/'/g, '"'));
+  newTask.answers = {
+    correctans: newTask.correctans,
+    wronganswers: newTask.wronganswers
+  };
+  newTask.currentAnswers = {
+    correctans: newTask.correctans,
+    wronganswers: newTask.wronganswers,
+    answersIndexes: [{
+      "index": 1,
+      "isCorrect": false
+    }, {
+      "index": 0,
+      "isCorrect": true
+    }, {
+      "index": 2,
+      "isCorrect": false
+    }, {
+      "index": 0,
+      "isCorrect": false
+    }]
+  };
+  newTask.maxPoints = JSON.parse(newTask.points); // newTask.dataset = newTask.dataset.map((dataSet) => {
+  //   dataSet.answers = dataSet.answers.map((answer) => {
+  //     answer.allanswers = JSON.parse(answer.allanswers.replace(/'/g, '"'));
+  //     answer.correctans = JSON.parse(answer.correctans.replace(/'/g, '"'));
+  //     return answer
+  //   });
+  //   dataSet.answers = dataSet.answers[0];
+  //   return dataSet
+  // });
+  // console.log("oldtask", task,"new", newTask)
+
+  console.log("taskparser nn", newTask);
+  return newTask;
+};
+
+var tasksParser = function tasksParser(tasks) {
+  return tasks.map(taskParser);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (tasksParser);
+
+/***/ }),
+
 /***/ "./djsr/frontend/src/components/ExamCollectionCard.js":
 /*!************************************************************!*\
   !*** ./djsr/frontend/src/components/ExamCollectionCard.js ***!
@@ -236,18 +298,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_icons_DynamicFeed__WEBPACK_IMPORTED_MODULE_34___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_DynamicFeed__WEBPACK_IMPORTED_MODULE_34__);
 /* harmony import */ var _img_genesprDark_png__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./img/genesprDark.png */ "./djsr/frontend/src/components/img/genesprDark.png");
 /* harmony import */ var _material_ui_core_colors__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! @material-ui/core/colors */ "./node_modules/@material-ui/core/esm/colors/index.js");
-/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! @material-ui/core/TextField */ "./node_modules/@material-ui/core/esm/TextField/index.js");
-/* harmony import */ var _material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! @material-ui/core/Dialog */ "./node_modules/@material-ui/core/esm/Dialog/index.js");
-/* harmony import */ var _material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! @material-ui/core/DialogActions */ "./node_modules/@material-ui/core/esm/DialogActions/index.js");
-/* harmony import */ var _material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! @material-ui/core/DialogContent */ "./node_modules/@material-ui/core/esm/DialogContent/index.js");
-/* harmony import */ var _material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! @material-ui/core/DialogContentText */ "./node_modules/@material-ui/core/esm/DialogContentText/index.js");
-/* harmony import */ var _material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! @material-ui/core/DialogTitle */ "./node_modules/@material-ui/core/esm/DialogTitle/index.js");
-/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! @material-ui/core/CircularProgress */ "./node_modules/@material-ui/core/esm/CircularProgress/index.js");
-/* harmony import */ var _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! @material-ui/core/InputLabel */ "./node_modules/@material-ui/core/esm/InputLabel/index.js");
-/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! @material-ui/core/Input */ "./node_modules/@material-ui/core/esm/Input/index.js");
-/* harmony import */ var _material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! @material-ui/core/MenuItem */ "./node_modules/@material-ui/core/esm/MenuItem/index.js");
-/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! @material-ui/core/FormControl */ "./node_modules/@material-ui/core/esm/FormControl/index.js");
-/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! @material-ui/core/Select */ "./node_modules/@material-ui/core/esm/Select/index.js");
+/* harmony import */ var _material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! @material-ui/core/Dialog */ "./node_modules/@material-ui/core/esm/Dialog/index.js");
+/* harmony import */ var _material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! @material-ui/core/DialogActions */ "./node_modules/@material-ui/core/esm/DialogActions/index.js");
+/* harmony import */ var _material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! @material-ui/core/DialogContent */ "./node_modules/@material-ui/core/esm/DialogContent/index.js");
+/* harmony import */ var _material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! @material-ui/core/DialogContentText */ "./node_modules/@material-ui/core/esm/DialogContentText/index.js");
+/* harmony import */ var _material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! @material-ui/core/DialogTitle */ "./node_modules/@material-ui/core/esm/DialogTitle/index.js");
+/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! @material-ui/core/CircularProgress */ "./node_modules/@material-ui/core/esm/CircularProgress/index.js");
+/* harmony import */ var _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! @material-ui/core/InputLabel */ "./node_modules/@material-ui/core/esm/InputLabel/index.js");
+/* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! @material-ui/core/Input */ "./node_modules/@material-ui/core/esm/Input/index.js");
+/* harmony import */ var _material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! @material-ui/core/MenuItem */ "./node_modules/@material-ui/core/esm/MenuItem/index.js");
+/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! @material-ui/core/FormControl */ "./node_modules/@material-ui/core/esm/FormControl/index.js");
+/* harmony import */ var _AutoGeneTaskParser__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./AutoGeneTaskParser */ "./djsr/frontend/src/components/AutoGeneTaskParser.js");
+/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! @material-ui/core/TextField */ "./node_modules/@material-ui/core/esm/TextField/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -436,7 +498,12 @@ var UserExams = /*#__PURE__*/function (_Component) {
     _this.state = {
       exams: null,
       open: false,
-      generatedId: null
+      generatedId: null,
+      sections: null,
+      ileotw: '',
+      ilezamk: '',
+      level: '',
+      skills: ''
     };
     return _this;
   }
@@ -479,11 +546,12 @@ var UserExams = /*#__PURE__*/function (_Component) {
       var exams = this.state.exams;
 
       if (!exams) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_43__["default"], {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_42__["default"], {
+          size: 250,
           style: {
             'color': 'purple',
             'marginLeft': '50%',
-            'marginTop': '12%'
+            'marginTop': '20%'
           }
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null));
       }
@@ -578,6 +646,7 @@ var UserExams = /*#__PURE__*/function (_Component) {
           variant: "contained",
           color: "primary",
           size: "lg",
+          type: "submit",
           disabled: isSubmitting
         }, "Zapisz")));
       }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null), exams.map(function (exam) {
@@ -620,125 +689,139 @@ var UserExams = /*#__PURE__*/function (_Component) {
             });
           }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_DynamicFeed__WEBPACK_IMPORTED_MODULE_34___default.a, null))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null));
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_38__["default"], {
-        open: this.state.open,
-        onClose: function onClose() {
-          return _this2.setState({
-            open: !_this2.state.open
-          });
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_5__["Formik"], {
+        onSubmit: function onSubmit(values, helpers) {
+          setTimeout(function () {
+            helpers.setSubmitting(true);
+            _axiosAPI__WEBPACK_IMPORTED_MODULE_3__["default"].post("/user/getrandomtasks/", {
+              ileotw: _this2.state.ileotw,
+              ilezamk: _this2.state.ilezamk,
+              level: _this2.state.level,
+              skills: _this2.state.skills
+            }).then(function (response) {
+              var randomtasks = JSON.stringify(Object(_AutoGeneTaskParser__WEBPACK_IMPORTED_MODULE_47__["default"])(response.data));
+              _axiosAPI__WEBPACK_IMPORTED_MODULE_3__["default"].put("/user/maketest/", {
+                id: _this2.state.generatedId,
+                tasks: randomtasks
+              }).then(function (response) {
+                history.push("/editor/".concat(_this2.state.generatedId));
+              });
+              console.log(randomtasks);
+              console.log(_this2.state.generatedId);
+            })["catch"](function (error) {
+              helpers.setStatus("Podano nieprawidłowe aktualne hasło");
+              console.log("chngpass error", error.response);
+              var errResponse = error.response;
+              helpers.setSubmitting(false);
+
+              _this2.setState({
+                locked: false
+              });
+
+              helpers.setValues({
+                ileotw: "",
+                ilezamk: "",
+                level: "",
+                skills: ""
+              }, false);
+            });
+          }, 400);
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_42__["default"], {
-        id: "form-dialog-title"
-      }, "Wygeneruj sprawdzian automatycznie"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_40__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_5__["Formik"], {
-        initialValues: {
-          ileotw: "0",
-          ilezamk: "0",
-          level: "",
-          skills: "0"
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_5__["Form"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        margin: 1
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_5__["Field"], {
-        component: _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_37__["default"],
-        name: "ileotw",
-        fullWidth: "true",
-        label: "Ilo\u015B\u0107 zada\u0144 otwartych"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        margin: 1
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_5__["Field"], {
-        component: _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_37__["default"],
-        name: "ilezamk",
-        fullWidth: "true",
-        label: "Ilo\u015B\u0107 zada\u0144 zamkni\u0119tych"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        margin: 1
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_5__["Field"], {
-        component: _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_37__["default"],
-        select: true,
-        name: "level",
-        label: "Poziom trudno\u015Bci",
-        variant: "standard",
-        type: "text",
-        fullWidth: "true"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
-        key: "1",
-        value: "1"
-      }, "1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
-        key: "2",
-        value: "2"
-      }, "2"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        margin: 1
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_5__["Field"], {
-        component: _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_37__["default"],
-        multiselect: true,
-        name: "skills",
-        label: "Sprawdzane umiej\u0119tno\u015Bci",
-        variant: "standard",
-        type: "text",
-        fullWidth: "true"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
-        key: "1",
-        value: "1"
-      }, "Zdaj\u0105cy wykorzystuje definicj\u0119 logarytmu i stosuje w obliczeniach wzory na logarytm iloczynu, logarytm ilorazu i logarytm pot\u0119gi o wyk\u0142adniku naturalnym."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
-        key: "2",
-        value: "2"
-      }, "Zdaj\u0105cy oblicza pot\u0119gi o wyk\u0142adnikach wymiernych i stosuje prawa dzia\u0142a\u0144 na pot\u0119gach o wyk\u0142adnikach wymiernych."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
-        key: "3",
-        value: "3"
-      }, "Zdaj\u0105cy wykonuje obliczenia procentowe, oblicza podatki, zysk z lokat wymiernych."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
-        key: "4",
-        value: "4"
-      }, "Zdaj\u0105cy wykorzystuje poj\u0119cie warto\u015Bci bez wzgl\u0119dnej i jej interpretacj\u0119 geometryczn\u0105"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
-        key: "5",
-        value: "5"
-      }, "Zdaj\u0105cy pos\u0142uguje si\u0119 w obliczeniach pierwiastkami dowolnego stopnia i stosuje prawa dzia\u0142a\u0144 na pierwiastkach"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
-        key: "6",
-        value: "6"
-      }, "Zdaj\u0105cy stosuje w obliczeniach wz\xF3r na logarytm pot\u0119gi oraz wz\xF3r na zamian\u0119 podstawy logarytmu"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
-        key: "7",
-        value: "7"
-      }, "Zdaj\u0105cy wykorzystuje podstawowe w\u0142asno\u015Bci pot\u0119g"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
-        key: "8",
-        value: "9"
-      }, "Zdaj\u0105cy wykorzystuje interpretacj\u0119 geometryczn\u0105 uk\u0142adu r\xF3wna\u0144 pierwszego stopnia z dwiema niewiadomymi."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
-        key: "10",
-        value: "10"
-      }, "Zdaj\u0105cy rozwi\u0105zuje proste r\xF3wnania wymierne, prowadz\u0105ce do r\xF3wna\u0144 liniowych lub kwadratowych."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
-        key: "11",
-        value: "11"
-      }, "Zdaj\u0105cy rozwi\u0105zuje nier\xF3wno\u015Bci pierwszego stopnia z jedn\u0105 niewiadom\u0105"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
-        key: "12",
-        value: "12"
-      }, "Zdaj\u0105cy korzysta z w\u0142asno\u015Bci iloczynu przy rozwi\u0105zywaniu r\xF3wna\u0144 typu x(x+1)(x-7)=0"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
-        key: "13",
-        value: "13"
-      }, "Zdaj\u0105cy rozwi\u0105zuje nier\xF3wno\u015Bci kwadratowe z jedn\u0105 niewiadom\u0105"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
-        key: "14",
-        value: "14"
-      }, "Zdaj\u0105cy wykorzystuje podstawowe w\u0142asno\u015Bci pot\u0119g"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
-        key: "15",
-        value: "15"
-      }, "Zdaj\u0105cy stosuje twierdzenie o reszcie z dzielenia wielomianu przez dwumian x \u2013 a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
-        key: "16",
-        value: "16"
-      }, "Zdaj\u0105cy stosuje wzory Vi\xE8te\u2019a"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_46__["default"], {
-        key: "17",
-        value: "17"
-      }, "Zdaj\u0105cy rozwi\u0105zuje r\xF3wnania i nier\xF3wno\u015Bci z warto\u015Bci\u0105 bezwzgl\u0119dn\u0105")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_39__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_14__["default"], {
-        onClick: function onClick() {
-          return _this2.setState({
-            open: !_this2.state.open
-          });
-        },
-        color: "primary"
-      }, "Wyjd\u017A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_14__["default"], {
-        onClick: function onClick() {
-          return _this2.setState({
-            open: !_this2.state.open
-          });
-        },
-        color: "primary"
-      }, "Generuj"))));
+      }, function (_ref2) {
+        var values = _ref2.values,
+            errors = _ref2.errors,
+            touched = _ref2.touched,
+            handleChange = _ref2.handleChange,
+            handleBlur = _ref2.handleBlur,
+            handleSubmit = _ref2.handleSubmit,
+            isSubmitting = _ref2.isSubmitting;
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, console.log(touched, errors), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_37__["default"], {
+          open: _this2.state.open,
+          onClose: function onClose() {
+            return _this2.setState({
+              open: !_this2.state.open
+            });
+          }
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_41__["default"], {
+          id: "form-dialog-title"
+        }, "Wygeneruj sprawdzian automatycznie"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_39__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          p: 1
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_48__["default"], {
+          fullWidth: true,
+          onChange: function onChange(event) {
+            return _this2.setState({
+              ileotw: event.target.value
+            });
+          },
+          id: "ileotw",
+          label: "Ile zada\u0144 otwartych"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          p: 1
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_48__["default"], {
+          fullWidth: true,
+          onChange: function onChange(event) {
+            return _this2.setState({
+              ilezamk: event.target.value
+            });
+          },
+          id: "ilezamk",
+          label: "Ile zada\u0144 zamkni\u0119tych"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          p: 1
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_48__["default"], {
+          fullWidth: true,
+          id: "level",
+          select: true,
+          label: "Poziom trudno\u015Bci",
+          value: _this2.state.level,
+          onChange: function onChange(event) {
+            return _this2.setState({
+              level: event.target.value
+            });
+          },
+          helperText: "Wybierz poziom trudno\u015Bci"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_45__["default"], {
+          key: "level1",
+          value: "1"
+        }, 1), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_45__["default"], {
+          key: "level2",
+          value: "2"
+        }, 2))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          p: 1
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_48__["default"], {
+          fullWidth: true,
+          id: "skills",
+          select: true,
+          label: "Dzia\u0142y",
+          value: _this2.state.skills,
+          onChange: function onChange(event) {
+            return _this2.setState({
+              skills: event.target.value
+            });
+          },
+          helperText: "Kt\xF3re umiej\u0119tno\u015Bci chcesz sprawdzi\u0107"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_45__["default"], {
+          key: "1",
+          value: "1"
+        }, 1), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_45__["default"], {
+          key: "2",
+          value: "2"
+        }, 2), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_45__["default"], {
+          key: "3",
+          value: "1,2"
+        }, (1, 2))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_38__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_14__["default"], {
+          onClick: function onClick() {
+            return _this2.setState({
+              open: !_this2.state.open
+            });
+          },
+          color: "primary"
+        }, "Wyjd\u017A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_14__["default"], {
+          onClick: function onClick() {
+            handleSubmit();
+          }
+        }, "Generuj"))));
+      }));
     }
   }]);
 

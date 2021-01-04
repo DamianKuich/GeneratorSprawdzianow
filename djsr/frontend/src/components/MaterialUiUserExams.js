@@ -44,7 +44,6 @@ import Notification from './Notification'
 import DynamicFeedIcon from '@material-ui/icons/DynamicFeed';
 import image from "./img/genesprDark.png";
 import { grey } from "@material-ui/core/colors";
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -55,7 +54,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import taskParser from './AutoGeneTaskParser'
+import TextField from '@material-ui/core/TextField';
 const useStyles = makeStyles((theme) => ({
   root: {
     maxHeight: 200,
@@ -132,6 +132,11 @@ const useStylesAlert = makeStyles((theme) => ({
         exams: null,
         open: false,
         generatedId: null,
+        sections: null,
+        ileotw: '',
+        ilezamk: '',
+        level: '',
+        skills: '', 
         
 
        
@@ -171,7 +176,7 @@ const useStylesAlert = makeStyles((theme) => ({
         });
     };
 
-
+  
     removeExam = (exam) => {
       axiosInstance
       .post(`/user/deletetest/`,{
@@ -190,6 +195,7 @@ const useStylesAlert = makeStyles((theme) => ({
     //
     componentDidMount() {
       this.updateExams();
+     
     }
     //
     // componentWillReceiveProps(nextProps) {
@@ -219,10 +225,11 @@ const useStylesAlert = makeStyles((theme) => ({
         return (
           <div >
      
-          <CircularProgress   style={{
+          <CircularProgress size={250}  style={{
             'color': 'purple',
             'marginLeft': '50%',
-            'marginTop': '12%'
+            'marginTop': '20%',
+           
         
         }}/>
         <p>
@@ -357,6 +364,7 @@ const useStylesAlert = makeStyles((theme) => ({
                            variant="contained" 
                             color="primary"
                             size="lg"
+                            type="submit"
                             
                             disabled={isSubmitting}
                           >
@@ -423,13 +431,13 @@ const useStylesAlert = makeStyles((theme) => ({
                       <DeleteIcon />
                     </IconButton>
                     </BootstrapTooltip>
-                    
+                   
                     <BootstrapTooltip title="Wygeneruj sprawdzian automatycznie">
                       <IconButton onClick={() => this.setState({ open: !this.state.open, generatedId: exam.id })}>
                         <DynamicFeedIcon />
                      </IconButton>
                     </BootstrapTooltip>
-                   
+                    
                   
                   </CardActions>
                 
@@ -440,144 +448,158 @@ const useStylesAlert = makeStyles((theme) => ({
               );
             })}
          </Paper>
+         <Formik
+         
+         onSubmit={(values, helpers) => {
+          setTimeout(() => {
+            helpers.setSubmitting(true);
+            axiosInstance
+              .post(`/user/getrandomtasks/`, {
+              ileotw: this.state.ileotw,
+              ilezamk: this.state.ilezamk,
+              level:this.state.level,
+              skills:this.state.skills
+            })
+              .then((response) => {
+                  
+                 let randomtasks = JSON.stringify(taskParser(response.data))
+                 axiosInstance.put(`/user/maketest/`, {
+                  id:this.state.generatedId,
+                  tasks:randomtasks
+                }).then((response)=>{
+                  history.push(`/editor/${this.state.generatedId}`);
+                })
+
+                console.log(randomtasks)
+                console.log(this.state.generatedId)
+
+              })
+              .catch((error) => {
+                helpers.setStatus("Podano nieprawidłowe aktualne hasło")
+                console.log("chngpass error", error.response);
+                const errResponse = error.response;
+                helpers.setSubmitting(false);
+                this.setState({ locked: false });
+                helpers.setValues(
+                  {
+                    ileotw: "",
+                    ilezamk:"",
+                    level:"",
+                    skills:"",
+
+                  },
+                  false
+                );
+    
+
+              });
+          }, 400);
+        }}
+         >
+
+{({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+        }) => (
+          <form >
+            {console.log(touched, errors)}
+
          <Dialog open={this.state.open} onClose={() => this.setState({ open: !this.state.open })}>
         <DialogTitle id="form-dialog-title">Wygeneruj sprawdzian automatycznie</DialogTitle>
+      
         <DialogContent>
+        <Box p={1}>
+        <TextField  fullWidth
+         onChange={(event) => this.setState({ ileotw: event.target.value })}
+        id="ileotw" label="Ile zadań otwartych" />
+            </Box>
+        <Box p={1}>
+        <TextField  fullWidth
+         onChange={(event) => this.setState({ ilezamk: event.target.value })}
+        id="ilezamk" label="Ile zadań zamkniętych" />
+            </Box>
+
+        <Box p={1}>
+        <TextField fullWidth
+          id="level"
+          select
+          label="Poziom trudności"
+          value={this.state.level}
+          onChange={(event) => this.setState({ level: event.target.value })}
+          helperText="Wybierz poziom trudności"
+        >
           
-          <Formik
-                  initialValues={{
-                    ileotw: "0",
-                    ilezamk: "0",
-                    level: "",
-                    skills: "0"
-                }}
-          
-          >
-
-            <Form>
-          <Box margin={1}> 
-            <Field
-                component={TextField}
-                name={"ileotw"}
-                fullWidth="true"
-                label="Ilość zadań otwartych"
-               
-              />
-              </Box>
-              <Box margin={1}> 
-             <Field
-                component={TextField}
-                name={"ilezamk"}
-                fullWidth="true"
-                label="Ilość zadań zamkniętych"
-               
-              />
-              </Box>
-
-              <Box margin={1}>
-                <Field
-                component = {TextField}
-                select
-                name="level"
-                label="Poziom trudności"
-                variant="standard"
-                type="text"
-                fullWidth="true"
-                >
-                
-
-                    <MenuItem key={"1"} value="1">
-                      1
-                    </MenuItem>
-                    <MenuItem key={"2"} value={"2"}>
-                      2
-                    </MenuItem>
-                </Field>
-              </Box>
-
-
-              
-              <Box margin={1}>
-                <Field
-                component = {TextField}
-                multiselect 
-                
-                name="skills"
-                label="Sprawdzane umiejętności"
-                variant="standard"
-                type="text"
-                fullWidth="true"
-                >
-                
-
-                    <MenuItem key={"1"} value="1">
-                    Zdający wykorzystuje definicję logarytmu i stosuje w obliczeniach wzory na logarytm iloczynu, logarytm ilorazu i logarytm potęgi o wykładniku naturalnym.
-                    </MenuItem>
-                    <MenuItem key={"2"} value={"2"}>
-                    Zdający oblicza potęgi o wykładnikach wymiernych i stosuje prawa działań na potęgach o wykładnikach wymiernych.
-                    </MenuItem>
-                    <MenuItem key={"3"} value={"3"}>
-                    Zdający wykonuje obliczenia procentowe, oblicza podatki, zysk z lokat wymiernych.
-                    </MenuItem>
-                    <MenuItem key={"4"} value={"4"}>
-                    Zdający wykorzystuje pojęcie wartości bez względnej i jej interpretację geometryczną
-                    </MenuItem>
-                    <MenuItem key={"5"} value={"5"}>
-                    Zdający posługuje się w obliczeniach pierwiastkami dowolnego stopnia i stosuje prawa działań na pierwiastkach
-                    </MenuItem>
-                    <MenuItem key={"6"} value={"6"}>
-                    Zdający stosuje w obliczeniach wzór na logarytm potęgi oraz wzór na zamianę podstawy logarytmu
-                    </MenuItem>
-                    <MenuItem key={"7"} value={"7"}>
-                    Zdający wykorzystuje podstawowe własności potęg
-                    </MenuItem>
-                    <MenuItem key={"8"} value={"9"}>
-                    Zdający wykorzystuje interpretację geometryczną układu równań pierwszego stopnia z dwiema niewiadomymi.
-                    </MenuItem>
-                    <MenuItem key={"10"} value={"10"}>
-                    Zdający rozwiązuje proste równania wymierne, prowadzące do równań liniowych lub kwadratowych.
-                    </MenuItem>
-                    <MenuItem key={"11"} value={"11"}>
-                    Zdający rozwiązuje nierówności pierwszego stopnia z jedną niewiadomą
-                    </MenuItem>
-                    <MenuItem key={"12"} value={"12"}>
-                    Zdający korzysta z własności iloczynu przy rozwiązywaniu równań typu x(x+1)(x-7)=0
-                    </MenuItem>
-                    <MenuItem key={"13"} value={"13"}>
-                    Zdający rozwiązuje nierówności kwadratowe z jedną niewiadomą
-                    </MenuItem>
-                    <MenuItem key={"14"} value={"14"}>
-                    Zdający wykorzystuje podstawowe własności potęg
-                    </MenuItem>
-                    <MenuItem key={"15"} value={"15"}>
-                    Zdający stosuje twierdzenie o reszcie z dzielenia wielomianu przez dwumian x – a
-                    </MenuItem>
-                    <MenuItem key={"16"} value={"16"}>
-                    Zdający stosuje wzory Viète’a
-                    </MenuItem>
-                    <MenuItem key={"17"} value={"17"}>
-                    Zdający rozwiązuje równania i nierówności z wartością bezwzględną
-                    </MenuItem>
-                </Field>
-              </Box>
-
-
-           
-              
             
-           </Form>
-          </Formik>
+         
+            <MenuItem key={"level1"} value={"1"}>
+              {1}
+            </MenuItem>
+           
+                      
+            <MenuItem key={"level2"} value={"2"}>
+              {2}
+            </MenuItem>
+         
+        </TextField>
+        </Box>
+
+        <Box p={1}>
+        <TextField  fullWidth
+          id="skills"
+          select
+          label="Działy"
+          value={this.state.skills}
+          onChange={(event) => this.setState({ skills: event.target.value })}
+          helperText="Które umiejętności chcesz sprawdzić"
+        >
+          
+            
+         
+            <MenuItem key={"1"} value={"1"}>
+              {1}
+            </MenuItem>
+           
+                      
+            <MenuItem key={"2"} value={"2"}>
+              {2}
+            </MenuItem>
+         
+            <MenuItem key={"3"} value={"1,2"}>
+              {1,2}
+            </MenuItem>
+
+        </TextField>
+        </Box>
+      
+      
+
+        
+            
+          
+          
         </DialogContent>
+        
         <DialogActions>
           <Button onClick={() => this.setState({ open: !this.state.open})} color="primary">
             Wyjdź
           </Button>
           
-          <Button onClick={() => this.setState({ open: !this.state.open })} color="primary">
+          <Button                 onClick={() => {
+                  handleSubmit();
+                }}>
             Generuj
           </Button>
         </DialogActions>
+        
       </Dialog>
+      </form>
+        )}
+      </Formik>
         </div>
       );
     }

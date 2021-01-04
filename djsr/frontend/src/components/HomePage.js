@@ -51,7 +51,11 @@ const bgStyles = {
             <GridItem xs={12} sm={12} md={6}>
               <h1 className={classes.title}>Generator Sprawdzianów</h1>
               <h4>
-                Generator Sprawdzianów
+              “Gen-Mat” jest to nowy serwis do generowania sprawdzianów z matematyki.
+Zalety serwisu:
+- wybór zadań z naszej bazy
+- możliwość dodania własnego zadania
+- możliwość pobrania sprawdzianu w formacie PDF
               </h4>
               <br />
           

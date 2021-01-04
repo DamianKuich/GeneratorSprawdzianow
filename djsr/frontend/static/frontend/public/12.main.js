@@ -32,11 +32,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_components_Card_CardFooter_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./material_ui_components/Card/CardFooter.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardFooter.js");
 /* harmony import */ var _material_ui_components_CustomInput_CustomInput_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./material_ui_components/CustomInput/CustomInput.js */ "./djsr/frontend/src/components/material_ui_components/CustomInput/CustomInput.js");
 /* harmony import */ var _assets_jss_material_kit_react_views_loginPage_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./assets/jss/material-kit-react/views/loginPage.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react/views/loginPage.js");
-/* harmony import */ var _img_genspr_parralax_bg_png__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./img/genspr-parralax-bg.png */ "./djsr/frontend/src/components/img/genspr-parralax-bg.png");
+/* harmony import */ var _img_genesprDark_png__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./img/genesprDark.png */ "./djsr/frontend/src/components/img/genesprDark.png");
 /* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
 /* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
 /* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
 /* harmony import */ var _MaterialFormikField__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./MaterialFormikField */ "./djsr/frontend/src/components/MaterialFormikField.js");
+/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/@material-ui/core/esm/Paper/index.js");
 var _this = undefined;
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -77,11 +78,25 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])(_assets_jss_material_kit_react_views_loginPage_js__WEBPACK_IMPORTED_MODULE_18__["default"]);
 
 var MaterialUiSignUpPage = function MaterialUiSignUpPage(props) {
   var FRS = "Pole wymagane";
   var user = props.appState.user;
+  var bgStyles = {
+    paperContainer: {
+      backgroundImage: "url(".concat(_img_genesprDark_png__WEBPACK_IMPORTED_MODULE_19__["default"], ")"),
+      minHeight: 1000
+    },
+    examCardContainer: {
+      width: 700,
+      backgroundColor: '#FEFEFA'
+    },
+    cardTitle: {
+      textAlign: 'center'
+    }
+  };
 
   if (!!user) {
     props.history.push("/");
@@ -99,13 +114,8 @@ var MaterialUiSignUpPage = function MaterialUiSignUpPage(props) {
 
   var rest = _extends({}, props);
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: classes.pageHeader,
-    style: {
-      backgroundImage: "url(" + _img_genspr_parralax_bg_png__WEBPACK_IMPORTED_MODULE_19__["default"] + ")",
-      backgroundSize: "cover",
-      backgroundPosition: "top center"
-    }
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    style: bgStyles.paperContainer
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: classes.container
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridContainer_js__WEBPACK_IMPORTED_MODULE_10__["default"], {
@@ -252,16 +262,16 @@ var MaterialUiSignUpPage = function MaterialUiSignUpPage(props) {
 
 /***/ }),
 
-/***/ "./djsr/frontend/src/components/img/genspr-parralax-bg.png":
-/*!*****************************************************************!*\
-  !*** ./djsr/frontend/src/components/img/genspr-parralax-bg.png ***!
-  \*****************************************************************/
+/***/ "./djsr/frontend/src/components/img/genesprDark.png":
+/*!**********************************************************!*\
+  !*** ./djsr/frontend/src/components/img/genesprDark.png ***!
+  \**********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "8ae80ee488d6ec36fd62f67865d06356.png");
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "29a2f630b088eabfaa8f98afec0658ab.png");
 
 /***/ }),
 
