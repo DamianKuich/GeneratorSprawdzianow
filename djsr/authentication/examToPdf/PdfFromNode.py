@@ -5,6 +5,7 @@ from yattag import Doc
 
 req = requests.get("https://math.now.sh?from=" + "\square").text
 
+
 def generatePdf(tasks, name="Sprawdzian"):
     listodp = ['A: ', 'B: ', 'C: ', 'D: ']
     tasks = list(map(taskPrintDataParser, tasks))
@@ -20,10 +21,10 @@ def generatePdf(tasks, name="Sprawdzian"):
     with tag('div'):
         text(
             "---------------------------------------------------------------------------------------------------------------------------------")
-    for index,task in enumerate(tasks):
+    for index, task in enumerate(tasks):
 
         with tag('div'):
-            text("Zadanie nr."+ str(index+1))
+            text("Zadanie nr." + str(index + 1))
             with tag('p'):
                 for part in task['text']:
                     if part["type"] == "text":
@@ -31,17 +32,29 @@ def generatePdf(tasks, name="Sprawdzian"):
                             text(part["data"])
                     elif part["type"] == "latex":
                         svg = part["svg"]
-                        doc.stag("img", src='data:image/svg+xml;utf8,' + svg, style="display:inline;")
+                        doc.stag("img", src='data:image/svg+xml;utf8,' + svg,
+                                 style="display:inline;transform: translate(0px,30%);")
             # # renderowanie obrazków
             try:
                 with tag('p'):
                     for img in task['obrazki']:
                         # text("whatever")
-                        with tag('div'):
+                        if task['layout'] == "2x1":
+                            # with tag('div'):
                             try:
                                 with tag('span'):
-                                    doc.stag("img", src='data:image/*;base64,' + img)
-                            except: text("error")
+                                    doc.stag("img", src='data:image/*;base64,' + img, style="display:inline-block;")
+                            except:
+                                text("error")
+                        elif task['layout'] == "1x2":
+                            with tag('div'):
+                                try:
+                                    with tag('span'):
+                                        doc.stag("img", src='data:image/*;base64,' + img)
+                                except:
+                                    text("error")
+                        else:
+                            text("error")
             except:
                 pass
             # renderowanie odp zadania
@@ -56,20 +69,22 @@ def generatePdf(tasks, name="Sprawdzian"):
                             with tag('div style="display: inline-block;margin-right: 20px;"'):
                                 with tag('span style="display: block;margin-right: 20px;"'):
                                     text(listodp[index])
-                                    doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"])
+                                    doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"],
+                                             style="transform: translate(0px,4px);")
             with tag('div'):
                 text(
                     "---------------------------------------------------------------------------------------------------------------------------------")
     html = doc.getvalue()
-    requestJson=json.dumps({'html':html})
+    requestJson = json.dumps({'html': html})
     # wygenerowany_pdf = requests.get("https://gen-mat-pdf-node.herokuapp.com/pdf/", data='{"html": "'+html.encode(encoding='UTF-8')+'"}')
-    wygenerowany_pdf = requests.get("https://gen-mat-pdf-node.herokuapp.com/pdf/",
-                                    data=requestJson,headers={"Content-Type":"application/json"})
+    # wygenerowany_pdf = requests.get("https://gen-mat-pdf-node.herokuapp.com/pdf/",
+    #                                 data=requestJson, headers={"Content-Type": "application/json"})
+    wygenerowany_pdf = requests.post("https://gen-mat-pdf-node.herokuapp.com/pdf2/", files={"html": html})
     return wygenerowany_pdf, html
 
 
 def generateAnswersPdf(tasks, name):
-    listodp = ['A:','B:','C:','D:']
+    listodp = ['A:', 'B:', 'C:', 'D:']
     tasks = list(map(taskPrintDataParser, tasks))
     doc, tag, text = Doc().tagtext()
     # dodaj tytul do spr
@@ -80,9 +95,9 @@ def generateAnswersPdf(tasks, name):
     with tag('h3'):
         text("Odpowiednią odpowiedź zaznaczyć X")
     # renderowanie taskow
-    for index,task in enumerate(tasks):
+    for index, task in enumerate(tasks):
         with tag('div'):
-            text("Zadanie nr."+ str(index+1))
+            text("Zadanie nr." + str(index + 1))
             with tag('p'):
                 for index, answer in enumerate(task['answers']):
                     for part in answer:
@@ -95,8 +110,8 @@ def generateAnswersPdf(tasks, name):
                             text(listodp[index])
                             doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"])
     html = doc.getvalue()
-    requestJson=json.dumps({'html':html})
+    requestJson = json.dumps({'html': html})
     # wygenerowany_pdf = requests.get("https://gen-mat-pdf-node.herokuapp.com/pdf/", data='{"html": "'+html.encode(encoding='UTF-8')+'"}')
     wygenerowany_pdf = requests.get("https://gen-mat-pdf-node.herokuapp.com/pdf/",
-                                    data=requestJson,headers={"Content-Type":"application/json"})
+                                    data=requestJson, headers={"Content-Type": "application/json"})
     return wygenerowany_pdf, html

@@ -5,6 +5,7 @@ import pdfkit
 import requests
 from yattag import Doc
 import base64
+from urllib.parse import quote
 
 
 def katexparser(text):
@@ -17,7 +18,7 @@ def katexparser(text):
         if taskTextParsedIndex < match[0]:
             taskTextParsed.append({"type": "text", "data": text[taskTextParsedIndex:match[0]]})
         taskTextParsed.append({"type": "latex", "data": text[match[0]:match[1]], "svg": requests.get(
-            "https://math.now.sh?inline=" + text[match[0]:match[1]][2:-2]).text})
+            "https://math.now.sh?inline=" + quote(text[match[0]:match[1]][2:-2], safe='')).text})
         taskTextParsedIndex = match[1]
 
     if taskTextParsedIndex < (len(text)):
@@ -44,10 +45,17 @@ def collectTaskImages(image):
             data = list(ImageDB.objects.filter(id=img).values())
             data = data[0]
             image_data = base64.b64encode(data['image']).decode('utf-8')
-            print("pomocy1", image_data, "pomocy2")
             ids.append(image_data)
         # ids.append(image_layout)
         return ids
+    except:
+        pass
+
+def collectImageLayout(image):
+    try:
+        image_layout = image['imageLayout']
+        print(image_layout, "tujestem")
+        return image_layout
     except:
         pass
 
@@ -57,6 +65,7 @@ def taskPrintDataParser(task):
     task['text'] = katexparser(task['text'])
     task['answers'] = collectTaskAnswers(task['currentAnswers'])
     task['obrazki'] = collectTaskImages(task['currentAnswers'])
+    task['layout'] = collectImageLayout(task['currentAnswers'])
     return task
 
 
