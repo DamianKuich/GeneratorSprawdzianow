@@ -299,7 +299,6 @@ class GetRandomTasksViewSet(APIView):
         if request.data:
             try:
                 author_id = CustomUser.objects.get(id=request.user.id)
-
                 listaotw = []
                 listazamk = []
                 ileotw = int(request.data['ileotw'])
@@ -319,39 +318,50 @@ class GetRandomTasksViewSet(APIView):
                                 taskpriv = Task.objects.filter(skill=skillid, type=2, private=True, author=author_id,
                                                                level=level)
                                 serializerpriv = TaskSerializer(taskpriv, many=True)
-                                listazamk.append(serializer.data)
-                                listazamk.append(serializerpriv.data)
-                                a = list(chain(*listazamk))
+                                if len(serializer.data)>0:
+                                    for x in serializer.data:
+                                        listazamk.append(x)
+                                if len(serializerpriv.data)>0:
+                                    for y in  serializerpriv.data:
+                                        listazamk.append(y)
+                                a = listazamk
                                 random.shuffle(a)
                                 b = math.ceil(ilezamk/len(skills.split(',')))
-                                lista.append(a[:b])
-
-                        pom = len(list(chain(*lista))) - ilezamk
-                        if pom>0:
-                            lista=list(chain(*lista))[:pom*-1]
-                        lenzam1 = len(lista)
+                                for x in a[:b]:
+                                    lista.append(x)
+                            pom = len(lista) - ilezamk
+                            if pom>0:
+                                lista=lista[:pom*-1]
+                            lenzam1 = len(lista)
                         lista2 = []
                         if ileotw != 0:
-                                for skillid in skills.split(','):
-                                    listaotw = []
-                                    task = Task.objects.filter(skill=skillid, type=1, private=False, level=level)
-                                    serializer = TaskSerializer(task, many=True)
-                                    taskprv = Task.objects.filter(skill=skillid, type=1, private=True, author=author_id,
-                                                                  level=level)
-                                    serializerprv = TaskSerializer(taskprv, many=True)
-                                    listaotw.append(serializer.data)
-                                    listaotw.append(serializerprv.data)
-                                    a = list(chain(*listaotw))
-                                    random.shuffle(a)
-                                    b = math.ceil(ileotw / len(skills.split(',')))
-                                    lista2.append(a[:b])
-                        pomo = len(list(chain(*lista2))) - ileotw
-                        if pomo> 0:
-                            lista2 = list(chain(*lista2))[:pomo*-1]
-                        lenotw = len(lista2)
-                        for x in list(chain(*lista2)):
-                            lista.append(x)
+                            for skillid in skills.split(','):
+                                listaotw = []
+                                task = Task.objects.filter(skill=skillid, type=1, private=False, level=level)
+                                serializer = TaskSerializer(task, many=True)
+                                taskprv = Task.objects.filter(skill=skillid, type=1, private=True, author=author_id,
+                                                              level=level)
+                                serializerprv = TaskSerializer(taskprv, many=True)
+                                if len(serializer.data)>0:
+                                    for x in serializer.data:
+                                        listaotw.append(x)
+                                if len(serializerpriv.data)>0:
+                                    for y in serializerpriv.data:
+                                        listaotw.append(y)
+                                a = listaotw
+                                random.shuffle(a)
+                                b = math.ceil(ileotw / len(skills.split(',')))
+                                for x in a[:b]:
+                                    if len(x)>0:
+                                        lista2.append(x)
+                            pomo = len(lista2) - ileotw
+                            if pomo > 0:
+                                lista2 = lista2[:pomo*-1]
+                            for x in lista2:
+                                lista.append(x)
+                    # to mozna zakomentowac i bedzie bez grup
                     listagr.append(lista)
+                # return Response(lista, status=status.HTTP_200_OK)
                 return Response(listagr, status=status.HTTP_200_OK)
             except Exception as e:
                 print("mt er1")
