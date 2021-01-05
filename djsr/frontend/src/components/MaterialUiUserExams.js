@@ -201,7 +201,7 @@ const useStylesAlert = makeStyles((theme) => ({
     componentDidMount() {
       this.updateExams();
       axiosInstanceNoAuth
-      .get("/user/sections2/")
+      .get("/user/sections3/")
       .then((response) => {
         const parsed = response.data.map(section => {
           section.skill=section.skilll

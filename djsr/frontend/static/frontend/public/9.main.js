@@ -526,7 +526,7 @@ var UserExams = /*#__PURE__*/function (_Component) {
       var _this2 = this;
 
       this.updateExams();
-      _axiosAPI__WEBPACK_IMPORTED_MODULE_3__["default"].get("/user/sections2/").then(function (response) {
+      _axiosAPI__WEBPACK_IMPORTED_MODULE_3__["default"].get("/user/sections3/").then(function (response) {
         var parsed = response.data.map(function (section) {
           section.skill = section.skilll;
           return section;
