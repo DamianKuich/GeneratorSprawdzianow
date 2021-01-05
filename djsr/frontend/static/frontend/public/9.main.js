@@ -307,9 +307,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! @material-ui/core/InputLabel */ "./node_modules/@material-ui/core/esm/InputLabel/index.js");
 /* harmony import */ var _material_ui_core_Input__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! @material-ui/core/Input */ "./node_modules/@material-ui/core/esm/Input/index.js");
 /* harmony import */ var _material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! @material-ui/core/MenuItem */ "./node_modules/@material-ui/core/esm/MenuItem/index.js");
-/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! @material-ui/core/FormControl */ "./node_modules/@material-ui/core/esm/FormControl/index.js");
-/* harmony import */ var _AutoGeneTaskParser__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./AutoGeneTaskParser */ "./djsr/frontend/src/components/AutoGeneTaskParser.js");
-/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! @material-ui/core/TextField */ "./node_modules/@material-ui/core/esm/TextField/index.js");
+/* harmony import */ var _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! @material-ui/core/Checkbox */ "./node_modules/@material-ui/core/esm/Checkbox/index.js");
+/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! @material-ui/core/Select */ "./node_modules/@material-ui/core/esm/Select/index.js");
+/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! @material-ui/core/FormControl */ "./node_modules/@material-ui/core/esm/FormControl/index.js");
+/* harmony import */ var _AutoGeneTaskParser__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./AutoGeneTaskParser */ "./djsr/frontend/src/components/AutoGeneTaskParser.js");
+/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! @material-ui/core/TextField */ "./node_modules/@material-ui/core/esm/TextField/index.js");
+/* harmony import */ var _material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! @material-ui/core/ListItemText */ "./node_modules/@material-ui/core/esm/ListItemText/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -335,6 +338,10 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+
+
 
 
 
@@ -503,7 +510,8 @@ var UserExams = /*#__PURE__*/function (_Component) {
       ileotw: '',
       ilezamk: '',
       level: '',
-      skills: ''
+      skills: '',
+      autoGenSkills: []
     };
     return _this;
   }
@@ -515,7 +523,26 @@ var UserExams = /*#__PURE__*/function (_Component) {
     // }
     //
     value: function componentDidMount() {
+      var _this2 = this;
+
       this.updateExams();
+      _axiosAPI__WEBPACK_IMPORTED_MODULE_3__["default"].get("/user/sections2/").then(function (response) {
+        var parsed = response.data.map(function (section) {
+          section.skill = section.skilll;
+          return section;
+        });
+
+        _this2.setState({
+          sections: parsed
+        }); // const parsed= response.data.map((section)=>{
+        //   section.skill=section.skilll
+        //   return section
+        // })
+        // this.setState({ sections: response.data });
+
+      })["catch"](function (error) {
+        console.log(error);
+      });
     } //
     // componentWillReceiveProps(nextProps) {
     //
@@ -540,12 +567,13 @@ var UserExams = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       var classes = this.props.classes;
       var exams = this.state.exams;
+      var sections = this.state.sections;
 
-      if (!exams) {
+      if (!exams || !sections) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_42__["default"], {
           size: 250,
           style: {
@@ -588,7 +616,7 @@ var UserExams = /*#__PURE__*/function (_Component) {
             }).then(function (response) {
               console.log("UE create response", response);
 
-              _this2.addExam(response.data[0]);
+              _this3.addExam(response.data[0]);
 
               helpers.setSubmitting(false); //this.props.history.push("/editor/");
             })["catch"](function (error) {
@@ -671,157 +699,125 @@ var UserExams = /*#__PURE__*/function (_Component) {
           title: "Skopiuj sprawdzian"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_21__["default"], {
           onClick: function onClick() {
-            _this2.createExamCopy(exam);
+            _this3.createExamCopy(exam);
           }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_FileCopy__WEBPACK_IMPORTED_MODULE_24___default.a, null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(BootstrapTooltip, {
           title: "Usu\u0144 sprawdzian"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_21__["default"], {
           onClick: function onClick() {
-            _this2.removeExam(exam);
+            _this3.removeExam(exam);
           }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_25___default.a, null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(BootstrapTooltip, {
           title: "Wygeneruj sprawdzian automatycznie"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_21__["default"], {
           onClick: function onClick() {
-            return _this2.setState({
-              open: !_this2.state.open,
+            return _this3.setState({
+              open: !_this3.state.open,
               generatedId: exam.id
             });
           }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_DynamicFeed__WEBPACK_IMPORTED_MODULE_34___default.a, null))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null));
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_5__["Formik"], {
-        onSubmit: function onSubmit(values, helpers) {
-          setTimeout(function () {
-            helpers.setSubmitting(true);
-            _axiosAPI__WEBPACK_IMPORTED_MODULE_3__["default"].post("/user/getrandomtasks/", {
-              ileotw: _this2.state.ileotw,
-              ilezamk: _this2.state.ilezamk,
-              level: _this2.state.level,
-              skills: _this2.state.skills
-            }).then(function (response) {
-              var randomtasks = JSON.stringify(Object(_AutoGeneTaskParser__WEBPACK_IMPORTED_MODULE_47__["default"])(response.data));
-              _axiosAPI__WEBPACK_IMPORTED_MODULE_3__["default"].put("/user/maketest/", {
-                id: _this2.state.generatedId,
-                tasks: randomtasks
-              }).then(function (response) {
-                history.push("/editor/".concat(_this2.state.generatedId));
-              });
-              console.log(randomtasks);
-              console.log(_this2.state.generatedId);
-            })["catch"](function (error) {
-              helpers.setStatus("Podano nieprawidłowe aktualne hasło");
-              console.log("chngpass error", error.response);
-              var errResponse = error.response;
-              helpers.setSubmitting(false);
-
-              _this2.setState({
-                locked: false
-              });
-
-              helpers.setValues({
-                ileotw: "",
-                ilezamk: "",
-                level: "",
-                skills: ""
-              }, false);
-            });
-          }, 400);
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_37__["default"], {
+        open: this.state.open,
+        onClose: function onClose() {
+          return _this3.setState({
+            open: !_this3.state.open
+          });
         }
-      }, function (_ref2) {
-        var values = _ref2.values,
-            errors = _ref2.errors,
-            touched = _ref2.touched,
-            handleChange = _ref2.handleChange,
-            handleBlur = _ref2.handleBlur,
-            handleSubmit = _ref2.handleSubmit,
-            isSubmitting = _ref2.isSubmitting;
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, console.log(touched, errors), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_37__["default"], {
-          open: _this2.state.open,
-          onClose: function onClose() {
-            return _this2.setState({
-              open: !_this2.state.open
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_41__["default"], {
+        id: "form-dialog-title"
+      }, "Wygeneruj sprawdzian automatycznie"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_39__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        p: 1
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_50__["default"], {
+        fullWidth: true,
+        onChange: function onChange(event) {
+          return _this3.setState({
+            ileotw: event.target.value
+          });
+        },
+        id: "ileotw",
+        label: "Ile zada\u0144 otwartych"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        p: 1
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_50__["default"], {
+        fullWidth: true,
+        onChange: function onChange(event) {
+          return _this3.setState({
+            ilezamk: event.target.value
+          });
+        },
+        id: "ilezamk",
+        label: "Ile zada\u0144 zamkni\u0119tych"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        p: 1
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_50__["default"], {
+        fullWidth: true,
+        id: "level",
+        select: true,
+        label: "Poziom trudno\u015Bci",
+        value: this.state.level,
+        onChange: function onChange(event) {
+          return _this3.setState({
+            level: event.target.value
+          });
+        },
+        helperText: "Wybierz poziom trudno\u015Bci"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_45__["default"], {
+        key: "level1",
+        value: "1"
+      }, 1), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_45__["default"], {
+        key: "level2",
+        value: "2"
+      }, 2))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        p: 1
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_47__["default"], {
+        fullWidth: true,
+        labelId: "demo-mutiple-checkbox-label",
+        id: "demo-mutiple-checkbox",
+        multiple: true,
+        value: this.state.autoGenSkills,
+        onChange: function onChange(event) {
+          return _this3.setState({
+            autoGenSkills: event.target.value
+          });
+        },
+        input: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Input__WEBPACK_IMPORTED_MODULE_44__["default"], null),
+        renderValue: function renderValue(selected) {
+          return selected.join(', ');
+        }
+      }, sections.map(function (section, key) {
+        return section.skill.map(function (skill) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_45__["default"], {
+            key: skill.id,
+            value: skill.id
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_51__["default"], {
+            primary: skill.Skill
+          }));
+        });
+      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_38__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_14__["default"], {
+        color: "primary",
+        onClick: function onClick() {
+          _axiosAPI__WEBPACK_IMPORTED_MODULE_3__["default"].post("/user/getrandomtasks/", {
+            ileotw: _this3.state.ileotw,
+            ilezamk: _this3.state.ilezamk,
+            level: _this3.state.level,
+            skills: _this3.state.autoGenSkills.join(', ')
+          }).then(function (response) {
+            var randomtasks = JSON.stringify(Object(_AutoGeneTaskParser__WEBPACK_IMPORTED_MODULE_49__["default"])(response.data));
+            _axiosAPI__WEBPACK_IMPORTED_MODULE_3__["default"].put("/user/maketest/", {
+              id: _this3.state.generatedId,
+              tasks: randomtasks
+            }).then(function (response) {
+              console.log(randomtasks);
+              console.log(_this3.state.generatedId);
+
+              _this3.props.history.push("/editor/".concat(_this3.state.generatedId));
             });
-          }
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_41__["default"], {
-          id: "form-dialog-title"
-        }, "Wygeneruj sprawdzian automatycznie"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_39__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
-          p: 1
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_48__["default"], {
-          fullWidth: true,
-          onChange: function onChange(event) {
-            return _this2.setState({
-              ileotw: event.target.value
-            });
-          },
-          id: "ileotw",
-          label: "Ile zada\u0144 otwartych"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
-          p: 1
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_48__["default"], {
-          fullWidth: true,
-          onChange: function onChange(event) {
-            return _this2.setState({
-              ilezamk: event.target.value
-            });
-          },
-          id: "ilezamk",
-          label: "Ile zada\u0144 zamkni\u0119tych"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
-          p: 1
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_48__["default"], {
-          fullWidth: true,
-          id: "level",
-          select: true,
-          label: "Poziom trudno\u015Bci",
-          value: _this2.state.level,
-          onChange: function onChange(event) {
-            return _this2.setState({
-              level: event.target.value
-            });
-          },
-          helperText: "Wybierz poziom trudno\u015Bci"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_45__["default"], {
-          key: "level1",
-          value: "1"
-        }, 1), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_45__["default"], {
-          key: "level2",
-          value: "2"
-        }, 2))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
-          p: 1
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_48__["default"], {
-          fullWidth: true,
-          id: "skills",
-          select: true,
-          label: "Dzia\u0142y",
-          value: _this2.state.skills,
-          onChange: function onChange(event) {
-            return _this2.setState({
-              skills: event.target.value
-            });
-          },
-          helperText: "Kt\xF3re umiej\u0119tno\u015Bci chcesz sprawdzi\u0107"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_45__["default"], {
-          key: "1",
-          value: "1"
-        }, 1), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_45__["default"], {
-          key: "2",
-          value: "2"
-        }, 2), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_45__["default"], {
-          key: "3",
-          value: "1,2"
-        }, (1, 2))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_38__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_14__["default"], {
-          onClick: function onClick() {
-            return _this2.setState({
-              open: !_this2.state.open
-            });
-          },
-          color: "primary"
-        }, "Wyjd\u017A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_14__["default"], {
-          onClick: function onClick() {
-            handleSubmit();
-          }
-        }, "Generuj"))));
-      }));
+          })["catch"](function (error) {
+            console.log("chngpass error", error.response);
+          });
+        }
+      }, "Generuj"))));
     }
   }]);
 

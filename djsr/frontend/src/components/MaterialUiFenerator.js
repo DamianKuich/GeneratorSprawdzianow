@@ -101,15 +101,16 @@ const Fenerator = (props) => {
                 .then((response) => {
                     
                    let randomtasks = JSON.stringify(taskParser(response.data))
+                    
+                  console.log(randomtasks)
+                  console.log(strongToken)
                    axiosInstance.put(`/user/maketest/`, {
                     id:strongToken,
                     tasks:randomtasks
                   }).then((response)=>{
                     history.push(`/editor/${strongToken}`);
                   })
- 
-                  console.log(randomtasks)
-                  console.log(strongToken)
+
 
                 })
                 .catch((error) => {
@@ -144,7 +145,7 @@ const Fenerator = (props) => {
                   );
 
                 });
-            }, 400);
+            }, 5000);
           }}
       >
         {({

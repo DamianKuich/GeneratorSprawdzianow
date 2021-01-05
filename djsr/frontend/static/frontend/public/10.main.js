@@ -224,14 +224,14 @@ var Fenerator = function Fenerator(props) {
           skills: values.skills
         }).then(function (response) {
           var randomtasks = JSON.stringify(Object(_AutoGeneTaskParser__WEBPACK_IMPORTED_MODULE_26__["default"])(response.data));
+          console.log(randomtasks);
+          console.log(strongToken);
           _axiosAPI__WEBPACK_IMPORTED_MODULE_22__["default"].put("/user/maketest/", {
             id: strongToken,
             tasks: randomtasks
           }).then(function (response) {
             history.push("/editor/".concat(strongToken));
           });
-          console.log(randomtasks);
-          console.log(strongToken);
         })["catch"](function (error) {
           helpers.setStatus("Podano nieprawidłowe aktualne hasło");
           console.log("chngpass error", error.response);
@@ -256,7 +256,7 @@ var Fenerator = function Fenerator(props) {
           }, false);
           helpers.setFieldError("oldPassword", "Podano nieprawidłowe stare hasło");
         });
-      }, 400);
+      }, 5000);
     }
   }, function (_ref) {
     var values = _ref.values,

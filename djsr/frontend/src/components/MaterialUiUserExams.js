@@ -53,9 +53,13 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import MenuItem from '@material-ui/core/MenuItem';
+import Checkbox from '@material-ui/core/Checkbox';
+import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import taskParser from './AutoGeneTaskParser'
 import TextField from '@material-ui/core/TextField';
+import { useHistory } from "react-router-dom";
+import ListItemText from '@material-ui/core/ListItemText';
 const useStyles = makeStyles((theme) => ({
   root: {
     maxHeight: 200,
@@ -137,6 +141,7 @@ const useStylesAlert = makeStyles((theme) => ({
         ilezamk: '',
         level: '',
         skills: '', 
+        autoGenSkills:[]
         
 
        
@@ -195,6 +200,23 @@ const useStylesAlert = makeStyles((theme) => ({
     //
     componentDidMount() {
       this.updateExams();
+      axiosInstanceNoAuth
+      .get("/user/sections2/")
+      .then((response) => {
+        const parsed = response.data.map(section => {
+          section.skill=section.skilll
+          return section
+        })
+        this.setState({ sections: parsed });
+        // const parsed= response.data.map((section)=>{
+        //   section.skill=section.skilll
+        //   return section
+        // })
+        // this.setState({ sections: response.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
      
     }
     //
@@ -221,7 +243,9 @@ const useStylesAlert = makeStyles((theme) => ({
     render() {
       const { classes } = this.props;
       let exams = this.state.exams;
-      if (!exams) {
+      let sections = this.state.sections
+
+      if (!exams || !sections) {
         return (
           <div >
      
@@ -245,7 +269,7 @@ const useStylesAlert = makeStyles((theme) => ({
         >
             
         <Paper  style={bgStyles.paperContainer}>
-        
+   
           <Box
           p={10}
           >
@@ -447,68 +471,8 @@ const useStylesAlert = makeStyles((theme) => ({
                 
               );
             })}
+            
          </Paper>
-         <Formik
-         
-         onSubmit={(values, helpers) => {
-          setTimeout(() => {
-            helpers.setSubmitting(true);
-            axiosInstance
-              .post(`/user/getrandomtasks/`, {
-              ileotw: this.state.ileotw,
-              ilezamk: this.state.ilezamk,
-              level:this.state.level,
-              skills:this.state.skills
-            })
-              .then((response) => {
-                  
-                 let randomtasks = JSON.stringify(taskParser(response.data))
-                 axiosInstance.put(`/user/maketest/`, {
-                  id:this.state.generatedId,
-                  tasks:randomtasks
-                }).then((response)=>{
-                  history.push(`/editor/${this.state.generatedId}`);
-                })
-
-                console.log(randomtasks)
-                console.log(this.state.generatedId)
-
-              })
-              .catch((error) => {
-                helpers.setStatus("Podano nieprawidłowe aktualne hasło")
-                console.log("chngpass error", error.response);
-                const errResponse = error.response;
-                helpers.setSubmitting(false);
-                this.setState({ locked: false });
-                helpers.setValues(
-                  {
-                    ileotw: "",
-                    ilezamk:"",
-                    level:"",
-                    skills:"",
-
-                  },
-                  false
-                );
-    
-
-              });
-          }, 400);
-        }}
-         >
-
-{({
-          values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          isSubmitting,
-        }) => (
-          <form >
-            {console.log(touched, errors)}
-
          <Dialog open={this.state.open} onClose={() => this.setState({ open: !this.state.open })}>
         <DialogTitle id="form-dialog-title">Wygeneruj sprawdzian automatycznie</DialogTitle>
       
@@ -549,31 +513,38 @@ const useStylesAlert = makeStyles((theme) => ({
         </Box>
 
         <Box p={1}>
-        <TextField  fullWidth
-          id="skills"
-          select
-          label="Działy"
-          value={this.state.skills}
-          onChange={(event) => this.setState({ skills: event.target.value })}
-          helperText="Które umiejętności chcesz sprawdzić"
-        >
-          
-            
+       
+        <Select
+        fullWidth
+          labelId="demo-mutiple-checkbox-label"
+          id="demo-mutiple-checkbox"
+          multiple
+          value={this.state.autoGenSkills}
+          onChange={(event) => this.setState({ autoGenSkills: event.target.value })}
+          input={<Input />}
          
-            <MenuItem key={"1"} value={"1"}>
-              {1}
-            </MenuItem>
-           
-                      
-            <MenuItem key={"2"} value={"2"}>
-              {2}
-            </MenuItem>
          
-            <MenuItem key={"3"} value={"1,2"}>
-              {1,2}
-            </MenuItem>
+          renderValue={(selected) => 
 
-        </TextField>
+            
+            selected.join(', ')
+          
+
+          }
+            
+      
+        >
+
+        {sections.map((section,key) => (
+
+          section.skill.map((skill) => (
+            <MenuItem key={skill.id} value={skill.id}>
+              <ListItemText primary={skill.Skill} />
+            </MenuItem>
+          ))))}
+
+        </Select>
+      
         </Box>
       
       
@@ -585,21 +556,47 @@ const useStylesAlert = makeStyles((theme) => ({
         </DialogContent>
         
         <DialogActions>
-          <Button onClick={() => this.setState({ open: !this.state.open})} color="primary">
-            Wyjdź
-          </Button>
           
-          <Button                 onClick={() => {
-                  handleSubmit();
-                }}>
+          <Button 
+          color="primary"      
+            onClick={() => {
+              
+      
+               axiosInstance
+                .post(`/user/getrandomtasks/`, {
+                ileotw: this.state.ileotw,
+                ilezamk: this.state.ilezamk,
+                level:  this.state.level,
+                skills: this.state.autoGenSkills.join(', ')
+              })
+                .then((response) => {
+                    
+                   let randomtasks = JSON.stringify(taskParser(response.data))
+                   
+                   
+                    axiosInstance.put(`/user/maketest/`, {
+                    id:this.state.generatedId,
+                    tasks:randomtasks
+                  }).then((response)=>{
+                    console.log(randomtasks)
+                    console.log(this.state.generatedId)
+                    this.props.history.push(`/editor/${this.state.generatedId}`);
+                  })
+ 
+ 
+
+                })
+                .catch((error) => {
+
+                  console.log("chngpass error", error.response);
+
+                });
+            }}>
             Generuj
           </Button>
         </DialogActions>
         
       </Dialog>
-      </form>
-        )}
-      </Formik>
         </div>
       );
     }
