@@ -9,6 +9,8 @@ const useStyles = makeStyles(style);
 const CustomRadio = (props) => {
   const { labelProps, radioProps } = props;
   const classes = useStyles();
+  // const disabled=labelProps;
+  // const disabledClass= (disabled)? {}:{};
   return (
     <FormControlLabel
       control={
@@ -19,7 +21,11 @@ const CustomRadio = (props) => {
           {...radioProps}
         />
       }
-      classes={{ label: classes.label, root: classes.labelRoot }}
+      classes={{
+        label: classes.label,
+        root: classes.labelRoot,
+        disabled: classes.disabledCheckboxAndRadio,
+      }}
       {...labelProps}
     />
   );

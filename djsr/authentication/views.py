@@ -299,35 +299,42 @@ class GetRandomTasksViewSet(APIView):
         if request.data:
             try:
                 author_id = CustomUser.objects.get(id=request.user.id)
-                lista = []
                 listaotw = []
                 listazamk = []
                 ileotw = int(request.data['ileotw'])
                 ilezamk = int(request.data['ilezamk'])
                 level = int(request.data['level'])
                 skills = request.data['skills']
-                if skills is not None:
-                    if ilezamk != 0:
-                        for skillid in skills.split(','):
-                            listazamk = []
-                            task = Task.objects.filter(skill=skillid, type=2, private=False, level=level)
-                            serializer = TaskSerializer(task, many=True)
-                            taskpriv = Task.objects.filter(skill=skillid, type=2, private=True, author=author_id,
-                                                           level=level)
-                            serializerpriv = TaskSerializer(taskpriv, many=True)
-                            listazamk.append(serializer.data)
-                            listazamk.append(serializerpriv.data)
-                            a = list(chain(*listazamk))
-                            random.shuffle(a)
-                            b = math.ceil(ilezamk/len(skills.split(',')))
-                            lista.append(a[:b])
-
-                    pom = len(list(chain(*lista))) - ilezamk
-                    if pom>0:
-                        lista=list(chain(*lista))[:pom*-1]
-                    lenzam1 = len(lista)
-                    lista2 = []
-                    if ileotw != 0:
+                groups = int(request.data['groups'])
+                listagr = []
+                for x in range(groups):
+                    lista = []
+                    if skills is not None:
+                        if ilezamk != 0:
+                            for skillid in skills.split(','):
+                                listazamk = []
+                                task = Task.objects.filter(skill=skillid, type=2, private=False, level=level)
+                                serializer = TaskSerializer(task, many=True)
+                                taskpriv = Task.objects.filter(skill=skillid, type=2, private=True, author=author_id,
+                                                               level=level)
+                                serializerpriv = TaskSerializer(taskpriv, many=True)
+                                if len(serializer.data)>0:
+                                    for x in serializer.data:
+                                        listazamk.append(x)
+                                if len(serializerpriv.data)>0:
+                                    for y in  serializerpriv.data:
+                                        listazamk.append(y)
+                                a = listazamk
+                                random.shuffle(a)
+                                b = math.ceil(ilezamk/len(skills.split(',')))
+                                for x in a[:b]:
+                                    lista.append(x)
+                            pom = len(lista) - ilezamk
+                            if pom>0:
+                                lista=lista[:pom*-1]
+                            lenzam1 = len(lista)
+                        lista2 = []
+                        if ileotw != 0:
                             for skillid in skills.split(','):
                                 listaotw = []
                                 task = Task.objects.filter(skill=skillid, type=1, private=False, level=level)
@@ -335,19 +342,27 @@ class GetRandomTasksViewSet(APIView):
                                 taskprv = Task.objects.filter(skill=skillid, type=1, private=True, author=author_id,
                                                               level=level)
                                 serializerprv = TaskSerializer(taskprv, many=True)
-                                listaotw.append(serializer.data)
-                                listaotw.append(serializerprv.data)
-                                a = list(chain(*listaotw))
+                                if len(serializer.data)>0:
+                                    for x in serializer.data:
+                                        listaotw.append(x)
+                                if len(serializerpriv.data)>0:
+                                    for y in serializerpriv.data:
+                                        listaotw.append(y)
+                                a = listaotw
                                 random.shuffle(a)
                                 b = math.ceil(ileotw / len(skills.split(',')))
-                                lista2.append(a[:b])
-                    pomo = len(list(chain(*lista2))) - ileotw
-                    if pomo> 0:
-                        lista2 = list(chain(*lista2))[:pomo*-1]
-                    lenotw = len(lista2)
-                    for x in list(chain(*lista2)):
-                        lista.append(x)
-                return Response(lista, status=status.HTTP_200_OK)
+                                for x in a[:b]:
+                                    if len(x)>0:
+                                        lista2.append(x)
+                            pomo = len(lista2) - ileotw
+                            if pomo > 0:
+                                lista2 = lista2[:pomo*-1]
+                            for x in lista2:
+                                lista.append(x)
+                    # to mozna zakomentowac i bedzie bez grup
+                    listagr.append(lista)
+                # return Response(lista, status=status.HTTP_200_OK)
+                return Response(listagr, status=status.HTTP_200_OK)
             except Exception as e:
                 print("mt er1")
                 return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
@@ -561,30 +576,44 @@ class AddTask(APIView):
 
     def post(self, request, format=None):
         if request.data:
-            try:
-                wrongans = request.data['wrong_answers']
-                corrans = request.data['correct_answers']
-                skills = request.data['skills_id']
-                text = request.data['text']
-                user = CustomUser.objects.get(id=request.user.id)
-                if not Task.objects.filter(text=text).exists():
-                    my_task = Task.objects.create(text=text,
-                                                  wronganswers=wrongans,
-                                                  correctans=corrans,
-                                                  type=int(request.data['type']),
-                                                  level=int(request.data['level']),
-                                                  private=int(request.data['private']),
-                                                  points=int(request.data['points']),
-                                                  author=user)
-                    for skillid in skills.split(','):
-                        skil = Skill.objects.filter(id=skillid)
-                        my_task.skill.set(skil)
-                    my_task.save()
-                    task = Task.objects.filter(text=text)
-                    serializer = TaskSerializer(task, many=True)
-                    return Response(serializer.data, status=status.HTTP_200_OK)
-            except Exception as e:
-                return Response(data={"error": str(e)}, status=status.HTTP_402_PAYMENT_REQUIRED)
+            # try:
+            wrongans = request.data['wrong_answers']
+            corrans = request.data['correct_answers']
+            skills = request.data['skills_id']
+            text = request.data['text']
+            file = request.data['file']
+            user = CustomUser.objects.get(id=request.user.id)
+            if not Task.objects.filter(text=text).exists():
+                my_task = Task.objects.create(text=text,
+                                              wronganswers=wrongans,
+                                              correctans=corrans,
+                                              type=int(request.data['type']),
+                                              level=int(request.data['level']),
+                                              private=int(request.data['private']),
+                                              points=int(request.data['points']),
+                                              author=user)
+                for skillid in skills.split(','):
+                    skil = Skill.objects.filter(id=skillid)
+                    my_task.skill.set(skil)
+                if not Image.objects.filter(name="", image=file, user_id=user.id).exists():
+                    image = Image.objects.create(name="", image=file, user_id=user.id)
+                    image.save()
+                    # imag = Image.objects.filter(name="", image=file, user_id=user.id)
+                    image_data = open("media/" + str(image.image), "rb").read()
+                    cos = bytes(image_data)
+                    img = ImageDB.objects.create(image=cos)
+                    img.save()
+                    image.name = str(img.id)
+                    image.save()
+                    img = Image.objects.filter(name=str(img.id))
+                    my_task.image.set(img)
+                my_task.save()
+                task = Task.objects.filter(text=text)
+                serializer = TaskSerializer(task, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            # except Exception as e:
+            #     my_task.delete()
+            #     return Response(data={"error": str(e)}, status=status.HTTP_402_PAYMENT_REQUIRED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -705,9 +734,8 @@ class ImageViewSet(APIView):
 
     def get(self, request, *args, **kwargs):
         id = kwargs.pop('id')
-        imag = Image.objects.get(id=id)
-        image_data = open("media/" + str(imag.image), "rb").read()
-        return HttpResponse(image_data, content_type="image/png")
+        imag = ImageDB.objects.get(id=id)
+        return HttpResponse(imag.image, content_type="image/*")
 
 
 class AddImageViewSet(APIView):
@@ -721,11 +749,13 @@ class AddImageViewSet(APIView):
         if True:
             image = Image.objects.create(name="", image=file, user_id=pomoc.id)
             image.save()
-            try:
-                img = ImageDB.objects.create(image=file)
-            except:
-                pass
-            return Response(data={"id": image.id}, status=status.HTTP_201_CREATED)
+            imag = Image.objects.get(id=image.id)
+            image_data = open("media/" + str(imag.image), "rb").read()
+            cos = bytes(image_data)
+            imag.delete()
+            img = ImageDB.objects.create(image=cos)
+            img.save()
+            return Response(data={"id": img.id}, status=status.HTTP_201_CREATED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -746,14 +776,18 @@ class AddImageToTaskViewSet(APIView):
             id = request.data['taskid']
             task = Task.objects.get(id=id)
             image = Image.objects.filter(name=request.data['name'])
+            image_data = open("media/" + str(image.image), "rb").read()
+            cos = bytes(image_data)
+            img = ImageDB.objects.create(image=cos)
+            img.save()
+            image.name = str(img.id)
+            image.save()
             task.image.set(image)
             task.save()
-            image_data = open("media/" + str(image.image), "rb").read()
+
             return HttpResponse(image_data, content_type="image/png")
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
-
-
 
 
 class TestTasksiewSet(APIView):
