@@ -566,30 +566,44 @@ class AddTask(APIView):
 
     def post(self, request, format=None):
         if request.data:
-            try:
-                wrongans = request.data['wrong_answers']
-                corrans = request.data['correct_answers']
-                skills = request.data['skills_id']
-                text = request.data['text']
-                user = CustomUser.objects.get(id=request.user.id)
-                if not Task.objects.filter(text=text).exists():
-                    my_task = Task.objects.create(text=text,
-                                                  wronganswers=wrongans,
-                                                  correctans=corrans,
-                                                  type=int(request.data['type']),
-                                                  level=int(request.data['level']),
-                                                  private=int(request.data['private']),
-                                                  points=int(request.data['points']),
-                                                  author=user)
-                    for skillid in skills.split(','):
-                        skil = Skill.objects.filter(id=skillid)
-                        my_task.skill.set(skil)
-                    my_task.save()
-                    task = Task.objects.filter(text=text)
-                    serializer = TaskSerializer(task, many=True)
-                    return Response(serializer.data, status=status.HTTP_200_OK)
-            except Exception as e:
-                return Response(data={"error": str(e)}, status=status.HTTP_402_PAYMENT_REQUIRED)
+            # try:
+            wrongans = request.data['wrong_answers']
+            corrans = request.data['correct_answers']
+            skills = request.data['skills_id']
+            text = request.data['text']
+            file = request.data['file']
+            user = CustomUser.objects.get(id=request.user.id)
+            if not Task.objects.filter(text=text).exists():
+                my_task = Task.objects.create(text=text,
+                                              wronganswers=wrongans,
+                                              correctans=corrans,
+                                              type=int(request.data['type']),
+                                              level=int(request.data['level']),
+                                              private=int(request.data['private']),
+                                              points=int(request.data['points']),
+                                              author=user)
+                for skillid in skills.split(','):
+                    skil = Skill.objects.filter(id=skillid)
+                    my_task.skill.set(skil)
+                if not Image.objects.filter(name="", image=file, user_id=user.id).exists():
+                    image = Image.objects.create(name="", image=file, user_id=user.id)
+                    image.save()
+                    # imag = Image.objects.filter(name="", image=file, user_id=user.id)
+                    image_data = open("media/" + str(image.image), "rb").read()
+                    cos = bytes(image_data)
+                    img = ImageDB.objects.create(image=cos)
+                    img.save()
+                    image.name = str(img.id)
+                    image.save()
+                    img = Image.objects.filter(name=str(img.id))
+                    my_task.image.set(img)
+                my_task.save()
+                task = Task.objects.filter(text=text)
+                serializer = TaskSerializer(task, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            # except Exception as e:
+            #     my_task.delete()
+            #     return Response(data={"error": str(e)}, status=status.HTTP_402_PAYMENT_REQUIRED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -756,7 +770,7 @@ class AddImageToTaskViewSet(APIView):
             cos = bytes(image_data)
             img = ImageDB.objects.create(image=cos)
             img.save()
-            image.name = "ImagaDB_" + str(img.id)
+            image.name = str(img.id)
             image.save()
             task.image.set(image)
             task.save()
