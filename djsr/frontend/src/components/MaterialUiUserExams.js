@@ -60,6 +60,9 @@ import taskParser from './AutoGeneTaskParser'
 import TextField from '@material-ui/core/TextField';
 import { useHistory } from "react-router-dom";
 import ListItemText from '@material-ui/core/ListItemText';
+import List from "@material-ui/core/List";
+import ListSubheader from '@material-ui/core/ListSubheader';
+import { MenuTwoTone } from "@material-ui/icons";
 const useStyles = makeStyles((theme) => ({
   root: {
     maxHeight: 200,
@@ -501,12 +504,12 @@ const useStylesAlert = makeStyles((theme) => ({
             
          
             <MenuItem key={"level1"} value={"1"}>
-              {1}
+              {'Podstawowy'}
             </MenuItem>
            
                       
             <MenuItem key={"level2"} value={"2"}>
-              {2}
+              {'Rozszerzony'}
             </MenuItem>
          
         </TextField>
@@ -516,12 +519,13 @@ const useStylesAlert = makeStyles((theme) => ({
        
         <Select
         fullWidth
-          labelId="demo-mutiple-checkbox-label"
+          
           id="demo-mutiple-checkbox"
+          
           multiple
           value={this.state.autoGenSkills}
           onChange={(event) => this.setState({ autoGenSkills: event.target.value })}
-          input={<Input />}
+         
          
          
           renderValue={(selected) => 
@@ -535,14 +539,19 @@ const useStylesAlert = makeStyles((theme) => ({
       
         >
 
-        {sections.map((section,key) => (
-
+        {sections.map((section) =>
+        
+        
+          <ListSubheader>{section.Section}</ListSubheader>
+          &&
           section.skill.map((skill) => (
             <MenuItem key={skill.id} value={skill.id}>
-              <ListItemText primary={skill.Skill} />
+              <ListItemText primary={skill.Skill} secondary={"Dostępnych zadań: " + skill.taskCount}/>
             </MenuItem>
-          ))))}
-
+              )))}
+        
+              
+          
         </Select>
       
         </Box>
