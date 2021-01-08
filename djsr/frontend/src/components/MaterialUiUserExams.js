@@ -63,6 +63,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import List from "@material-ui/core/List";
 import ListSubheader from '@material-ui/core/ListSubheader';
 import { MenuTwoTone } from "@material-ui/icons";
+import Loading from "./LoadingScreen"
 const useStyles = makeStyles((theme) => ({
   root: {
     maxHeight: 200,
@@ -250,20 +251,7 @@ const useStylesAlert = makeStyles((theme) => ({
 
       if (!exams || !sections) {
         return (
-          <div >
-     
-          <CircularProgress size={250}  style={{
-            'color': 'purple',
-            'marginLeft': '50%',
-            'marginTop': '20%',
-           
-        
-        }}/>
-        <p>
-        
-        </p>
-        
-        </div>
+          <Loading></Loading>
         );
       }
       return (
@@ -274,7 +262,7 @@ const useStylesAlert = makeStyles((theme) => ({
         <Paper  style={bgStyles.paperContainer}>
    
           <Box
-          p={10}
+          p={7}
           >
 
               <Grid  
@@ -486,7 +474,7 @@ const useStylesAlert = makeStyles((theme) => ({
         id="ileotw" label="Ile zadań otwartych" />
             </Box>
         <Box p={1}>
-        <TextField  fullWidth
+        <CustomInput  fullWidth
          onChange={(event) => this.setState({ ilezamk: event.target.value })}
         id="ilezamk" label="Ile zadań zamkniętych" />
             </Box>
