@@ -1,5 +1,4 @@
-import datetime
-from datetime import date
+from datetime import date, timedelta
 import json
 from django.core import serializers
 from . import models
@@ -70,17 +69,15 @@ class CustomUserCreate(APIView):
                                         signing_key=getattr(settings, "RS256_PRIVATE_KEY", None),
                                         verifying_key=getattr(settings, "RS256_PUBLIC_KEY", None))
             activation = UserActivationToken(user=CustomUser.objects.get(id=user.id),
-                                             expire=datetime.datetime.utcnow() + datetime.timedelta(0,
-                                                                                                    3600) + datetime.timedelta(
-                                                 0, 3600) + datetime.timedelta(0, 3600),
-                                             created_on=datetime.datetime.utcnow() + datetime.timedelta(0,
-                                                                                                        3600) + datetime.timedelta(
+                                             expire=datetime.utcnow() + timedelta(0,3600) + timedelta(0, 3600) + timedelta(0, 3600),
+                                             created_on=datetime.utcnow() + timedelta(0,
+                                             3600) + timedelta(
                                                  0, 3600),
                                              used=False
                                              )
             activation.save()
             token = tokenbackend.encode(
-                {'user_id': user.id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(0, 3600)})
+                {'user_id': user.id, 'exp': datetime.utcnow() + timedelta(0, 3600)})
             data = {
                 'confirmation_token': token
             }
@@ -112,17 +109,17 @@ class PasswordSendResetView(APIView):
                                             signing_key=getattr(settings, "RS256_PRIVATE_KEY", None),
                                             verifying_key=getattr(settings, "RS256_PUBLIC_KEY", None))
                 reset = UserResetToken(email=reset.email,
-                                       expire=datetime.datetime.utcnow() + datetime.timedelta(0,
-                                                                                              3600) + datetime.timedelta(
-                                           0, 3600) + datetime.timedelta(0, 3600),
-                                       created_on=datetime.datetime.utcnow() + datetime.timedelta(0,
-                                                                                                  3600) + datetime.timedelta(
+                                       expire=datetime.utcnow() + timedelta(0,
+                                                                                              3600) + timedelta(
+                                           0, 3600) + timedelta(0, 3600),
+                                       created_on=datetime.utcnow() + timedelta(0,
+                                                                                                  3600) + timedelta(
                                            0, 3600),
                                        used=False
                                        )
                 reset.save()
                 token = tokenbackend.encode(
-                    {'user_email': reset.email, 'exp': datetime.datetime.utcnow() + datetime.timedelta(0, 3600)})
+                    {'user_email': reset.email, 'exp': datetime.utcnow() + timedelta(0, 3600)})
                 # TODO check if user is active
                 mail_subject = 'Reset your password.'
                 current_site = get_current_site(request)
@@ -148,7 +145,7 @@ class PasswordResetView(APIView):
             except TokenBackendError:
                 return Response({'error': 'Invalid token'}, status=status.HTTP_403_FORBIDDEN)
             if UserResetToken.expire == (
-                    datetime.datetime.utcnow() + datetime.timedelta(3600) + datetime.timedelta(0, 3600)):
+                    datetime.utcnow() + timedelta(3600) + timedelta(0, 3600)):
                 return Response(status=status.HTTP_409_CONFLICT)
             if UserResetToken.used is True:
                 return Response(status=status.HTTP_409_CONFLICT)
@@ -174,7 +171,7 @@ class HelloWorldView(APIView):
         except TokenBackendError:
             return Response({'error': 'Invalid token'}, status=status.HTTP_403_FORBIDDEN)
         if UserActivationToken.expire == (
-                datetime.datetime.utcnow() + datetime.timedelta(3600) + datetime.timedelta(0, 3600)):
+                datetime.utcnow() + timedelta(3600) + timedelta(0, 3600)):
             return Response(status=status.HTTP_409_CONFLICT)
         if UserActivationToken.used is True:
             return Response(status=status.HTTP_409_CONFLICT)
