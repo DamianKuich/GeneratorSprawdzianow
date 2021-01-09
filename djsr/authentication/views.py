@@ -538,20 +538,22 @@ class SkilltoSectionsAutoGene(APIView):
     serializer_class = SectionSerializerv2
 
     def get(self, request, format=None):
-        s = Sectionv2.objects.all()
-        s.delete()
+        # s = Sectionv2.objects.all()
+        # s.delete()
         list = []
-        sec = Section.objects.all()
-        for section in sec:
-            name = section.nasza_nazwa()
+        for section in Section.objects.only("Section").iterator():
+            name = section.Section
             id = section.id
-            sec2 = Sectionv2.objects.create(id = id,Section=name)
-            sec2.save()
-        ss = Sectionv2.objects.all()
-        for s in ss:
-            s2 = Section.objects.get(Section=s.Section)
-            fields = ('Skill')
-            skil = Skill.objects.filter(section=s2.id).only(fields)
+            try:
+                if not Sectionv2.objects.filter(id=id, Section=name).exists():
+                    sec2 = Sectionv2.objects.create(id=id, Section=name)
+                    sec2.save()
+            except Sectionv2.DoesNotExist:
+                sec2 = Sectionv2.objects.create(id=id, Section=name)
+                sec2.save()
+        for s in Sectionv2.objects.only("skilll","Section").iterator():
+            s2 = Section.objects.get(Section=s.Section).id
+            skil = Skill.objects.filter(section=s2).only("id")
             s.skilll.set(skil)
             s.save()
         seco = Sectionv2.objects.all()
@@ -565,6 +567,7 @@ class SkilltoSectionsAutoGene(APIView):
             x['sectionTaskCount'] = sum
             list.append(x)
         return Response(list)
+        # return Response(seria.data)
 
 
 class AddTask(APIView):
