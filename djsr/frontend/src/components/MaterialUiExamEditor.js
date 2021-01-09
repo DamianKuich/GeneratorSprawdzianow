@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { MDBCol, MDBCollapse, MDBContainer, MDBRow } from "mdbreact";
+// import { MDBCol, MDBCollapse, MDBContainer, MDBRow } from "mdbreact";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { sampleSize, shuffle } from "lodash/collection";
 import "./styles/katex.css";
@@ -329,9 +329,9 @@ class ExamEditor extends Component {
     const exam = this.state.exam;
     if (!exam) {
       return (
-        <MDBContainer>
+        <div>
           <div>Ladowanie</div>
-        </MDBContainer>
+        </div>
       );
     }
     const sideMenuCollapseId = this.state.sideMenuCollapseId;

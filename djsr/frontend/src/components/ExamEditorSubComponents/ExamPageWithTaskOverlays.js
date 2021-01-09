@@ -1,19 +1,9 @@
 import React, { useState } from "react";
-import { Draggable, Droppable } from "react-beautiful-dnd";
-import Latex from "react-latex";
-import { MDBRow } from "mdbreact";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import TaskContentWithMenu from "./TaskContentWithMenu";
 import bgImage from "../img/genspr-parralax-bg.png";
-import TasksDragAndDrop from "./TasksDragAndDrop";
 import ExamPageWithOverlay from "./ExamPageWithOverlay";
 import PropTypes from "prop-types";
-// const useStyles = makeStyles(theme => ({
-//
-// }));
+import Typography from "@material-ui/core/Typography";
 
 const ExamPages = (props) => {
   const {
@@ -27,12 +17,29 @@ const ExamPages = (props) => {
     pushTaskAtIndex,
   } = props;
   const examTasks = exam.tasks;
+  const maxPoints =
+    examTasks.length > 1
+      ? examTasks.map((task) => task.maxPoints).reduce((a, b) => a + b)
+      : examTasks.length > 0
+      ? examTasks[0].maxPoints
+      : 0;
+  const headers = [
+    <div>
+      <h2>{exam.name}</h2>
+      <div className="mb-2">
+        {
+          "Imie i nazwisko:................................................................."
+        }
+        {".../"}{maxPoints}
+      </div>
+    </div>,
+  ];
   return (
     <Box
       style={{
         display: "flex",
         justifyContent: "center",
-        flexDirection:"column",
+        flexDirection: "column",
         flexGrow: "3",
         background: `linear-gradient(60deg, rgba(242,163,255,0.5) 0%, rgba(195,105,219,0.5) 100%), url(${bgImage})`,
       }}
@@ -41,6 +48,7 @@ const ExamPages = (props) => {
       <ExamPageWithOverlay
         DroppableProps={{ droppableId: "examDroppable" }}
         tasks={examTasks}
+        headers={headers}
         {...props}
       />
     </Box>

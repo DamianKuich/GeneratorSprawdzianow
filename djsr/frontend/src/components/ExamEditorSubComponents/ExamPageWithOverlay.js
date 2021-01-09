@@ -7,7 +7,8 @@ import ReactResizeDetector from "react-resize-detector";
 const ExamPageWithOverlay = (props) => {
   const {
     exam,
-    header,
+    // header,
+      headers,
     tasks,
     setTaskToEdit,
     removeTask,
@@ -20,6 +21,7 @@ const ExamPageWithOverlay = (props) => {
   } = props;
   const [divHeight, setHeight] = useState(null);
   const pageIndex = props.pageIndex || 0;
+  const header= (headers||[])[pageIndex] || null
   const startIndex = props.startIndex || 0;
   const examTasks = tasks;
   // const endIndex = startIndex + 3;
