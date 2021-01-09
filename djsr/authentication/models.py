@@ -104,8 +104,8 @@ class Task(models.Model):
     points = models.IntegerField(default=0)
     skill = models.ManyToManyField(Skill)
     image = models.ManyToManyField(Image, blank=True)
-    # timetosolve = models.IntegerField(blank=True,null=True)
-    # spacetosolve = models.IntegerField(blank=True,null=True)
+    timetosolve = models.IntegerField(blank=True,null=True)
+    spacetosolve = models.IntegerField(blank=True,null=True)
 
     def __str__(self):
         return self.nasza_nazwa()
