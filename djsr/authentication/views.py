@@ -26,7 +26,7 @@ import requests
 import base64
 import pdfkit
 
-from .examToPdf.PdfFromNode import generatePdf, generateAnswersPdf
+from .examToPdf.PdfFromNode import generatePdf, generateAnswersPdf, generateAnswerKeyPdf
 
 from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer, \
     CustomUserSerializerReadOnly, PasswordSendResetSerializer, TestJSONSerializer, ImageSerializer
@@ -799,7 +799,6 @@ class TestTasksiewSet(APIView):
         id = kwargs.pop('id')
 
         test = list(TestJSON.objects.filter(id=id).values())[0]
-        print(test['tasks'])
         tasks = json.loads(test['tasks'])
         pdf, html = generatePdf(tasks=tasks, name=test['name'])
         return HttpResponse(pdf, content_type="application/pdf")
@@ -813,9 +812,20 @@ class TestAnswersviewSet(APIView):
         id = kwargs.pop('id')
 
         test = list(TestJSON.objects.filter(id=id).values())[0]
-        print(test['tasks'])
         tasks = json.loads(test['tasks'])
         pdf, html = generateAnswersPdf(tasks=tasks, name=test['name'])
+        return HttpResponse(pdf, content_type="application/pdf")
+
+class TestKeyAnswersviewSet(APIView):
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = TestJSONSerializer
+
+    def get(self, request, *args, **kwargs):
+        id = kwargs.pop('id')
+
+        test = list(TestJSON.objects.filter(id=id).values())[0]
+        tasks = json.loads(test['tasks'])
+        pdf, html = generateAnswerKeyPdf(tasks=tasks, name=test['name'])
         return HttpResponse(pdf, content_type="application/pdf")
 
 class RetDB(APIView):

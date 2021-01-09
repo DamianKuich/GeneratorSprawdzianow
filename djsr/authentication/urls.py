@@ -3,7 +3,7 @@ from django.urls import path, include
 from rest_framework_simplejwt import views as jwt_views
 from .views import AddImageToTaskViewSet, AddImageViewSet, ImageViewSet, SkillViewSet, SectionViewSet, \
     CustomUserCreate, HelloWorldView, \
-    LogoutAndBlacklistRefreshTokenForUserView, TaskViewSet, \
+    LogoutAndBlacklistRefreshTokenForUserView, TaskViewSet, TestKeyAnswersviewSet, \
     UserRetrieveUpdateAPIView, ReturnUserInfo, PasswordSendResetView, PasswordResetView, AllTestsJSONViewSet, \
     OneTestJSONViewSet, MakeTestViewSet, MakeTestCopyViewSet, LatexToSvgView, GetRandomTasksViewSet, \
     SkilltoSections, AddTask, AddSkill, AddSection, AddAnswers, DeleteTestViewSet, TestTasksiewSet, TestAnswersviewSet, SkilltoSectionsAutoGene
@@ -42,4 +42,5 @@ urlpatterns = [
     # path('user/testend/', TestEndpoint.as_view(), name='testend'),
     path('user/testpdf/<id>', TestTasksiewSet.as_view(), name='testpdf'),
     path('user/answerspdf/<id>', TestAnswersviewSet.as_view(), name='testpdf'),
+    path('user/answerskeypdf/<id>', TestKeyAnswersviewSet.as_view(), name='testpdf'),
 ]
