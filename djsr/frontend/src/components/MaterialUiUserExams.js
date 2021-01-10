@@ -477,7 +477,7 @@ const useStylesAlert = makeStyles((theme) => ({
           titlestyle={{textAlign: "center"}}
           
          open={this.state.open} onClose={() => this.setState({ open: !this.state.open })}>
-        <DialogTitle  id="form-dialog-title"><Typography variant="h5" align="center">Wygeneruj sprawdzian automatycznie</Typography></DialogTitle>
+        <DialogTitle  id="form-dialog-title"><Typography variant="h5" align="center">Wygeneruj sprawdzian automatycznie XDD</Typography></DialogTitle>
       
         <DialogContent>
         <Box p={1}>
