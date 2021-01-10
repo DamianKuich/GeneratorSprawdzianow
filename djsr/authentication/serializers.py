@@ -103,14 +103,10 @@ class TaskSerializer(serializers.ModelSerializer):
     image = ImageSerializer(many=True,required=False)
 
 
-    # class Meta:
-    #     model = Task
-    #     fields = ('id','type','level','skill','text',
-    #               'wronganswers','correctans','author','points','image','private')
     class Meta:
         model = Task
         fields = ('id','type','level','skill','text',
-                  'wronganswers','correctans','author','points','image','private','timetosolve','spacetosolve')
+                  'wronganswers','correctans','author','points','image','private')
 
 
 class TestJSONSerializer(serializers.ModelSerializer):
