@@ -309,54 +309,85 @@ class GetRandomTasksViewSet(APIView):
                     lista = []
                     if skills is not None:
                         if ilezamk != 0:
-                            for skillid in skills.split(','):
-                                listazamk = []
-                                task = Task.objects.filter(skill=skillid, type=2, private=False, level=level)
-                                serializer = TaskSerializer(task, many=True)
+                            skillist = skills.split(',')
+                            for index, skillid in enumerate(skills.split(',')):
+                                task = Task.objects.filter(skill=skillid, type=2, private=False, level=level).count()
+
                                 taskpriv = Task.objects.filter(skill=skillid, type=2, private=True, author=author_id,
-                                                               level=level)
-                                serializerpriv = TaskSerializer(taskpriv, many=True)
-                                if len(serializer.data)>0:
-                                    for x in serializer.data:
-                                        listazamk.append(x)
-                                if len(serializerpriv.data)>0:
-                                    for y in  serializerpriv.data:
-                                        listazamk.append(y)
-                                a = listazamk
-                                random.shuffle(a)
-                                b = math.ceil(ilezamk/len(skills.split(',')))
-                                for x in a[:b]:
-                                    lista.append(x)
-                            pom = len(lista) - ilezamk
-                            if pom>0:
-                                lista=lista[:pom*-1]
-                            lenzam1 = len(lista)
+                                                               level=level).count()
+                                if task == 0 and taskpriv == 0:
+                                    try:
+                                        del skillist[index]
+                                    except:
+                                        del skillist[index-1]
+                            if len(skillist)>0:
+                                for index, skillid in enumerate(skillist):
+                                    brak = 0
+                                    listazamk = []
+                                    task = Task.objects.filter(skill=skillid, type=2, private=False, level=level)
+                                    serializer = TaskSerializer(task, many=True)
+                                    taskpriv = Task.objects.filter(skill=skillid, type=2, private=True, author=author_id,
+                                                                   level=level)
+                                    serializerpriv = TaskSerializer(taskpriv, many=True)
+                                    if len(serializer.data)>0:
+                                        for x in serializer.data:
+                                            listazamk.append(x)
+                                    if len(serializerpriv.data)>0:
+                                        for y in  serializerpriv.data:
+                                            listazamk.append(y)
+                                    if len(listazamk) > 0:
+                                        a = listazamk
+                                        random.shuffle(a)
+                                        if index == 0:
+                                            b = math.ceil(ilezamk/len(skills.split(',')))
+                                        else:
+                                            b = round(ilezamk/len(skills.split(',')))
+                                        for x in a[:b]:
+                                            lista.append(x)
+                                pom = len(lista) - ilezamk
+                                if pom>0:
+                                    lista=lista[:pom*-1]
+                                lenzam1 = len(lista)
                         lista2 = []
                         if ileotw != 0:
-                            for skillid in skills.split(','):
-                                listaotw = []
-                                task = Task.objects.filter(skill=skillid, type=1, private=False, level=level)
-                                serializer = TaskSerializer(task, many=True)
-                                taskprv = Task.objects.filter(skill=skillid, type=1, private=True, author=author_id,
-                                                              level=level)
-                                serializerprv = TaskSerializer(taskprv, many=True)
-                                if len(serializer.data)>0:
-                                    for x in serializer.data:
-                                        listaotw.append(x)
-                                if len(serializerpriv.data)>0:
-                                    for y in serializerpriv.data:
-                                        listaotw.append(y)
-                                a = listaotw
-                                random.shuffle(a)
-                                b = math.ceil(ileotw / len(skills.split(',')))
-                                for x in a[:b]:
-                                    if len(x)>0:
-                                        lista2.append(x)
-                            pomo = len(lista2) - ileotw
-                            if pomo > 0:
-                                lista2 = lista2[:pomo*-1]
-                            for x in lista2:
-                                lista.append(x)
+                            skillist = skills.split(',')
+                            for index, skillid in enumerate(skills.split(',')):
+                                task = Task.objects.filter(skill=skillid, type=1, private=False, level=level).count()
+                                taskpriv = Task.objects.filter(skill=skillid, type=1, private=True, author=author_id,
+                                                               level=level).count()
+                                if task == 0 and taskpriv == 0:
+                                    try:
+                                        del skillist[index]
+                                    except:
+                                        del skillist[index-1]
+                            if len(skillist)>0:
+                                for index, skillid in enumerate(skillist):
+                                    listaotw = []
+                                    task = Task.objects.filter(skill=skillid, type=1, private=False, level=level)
+                                    serializer = TaskSerializer(task, many=True)
+                                    taskprv = Task.objects.filter(skill=skillid, type=1, private=True, author=author_id,
+                                                                  level=level)
+                                    serializerprv = TaskSerializer(taskprv, many=True)
+                                    if len(serializer.data)>0:
+                                        for x in serializer.data:
+                                            listaotw.append(x)
+                                    if len(serializerprv.data)>0:
+                                        for y in serializerprv.data:
+                                            listaotw.append(y)
+                                    a = listaotw
+                                    random.shuffle(a)
+                                    if index == 0:
+                                        b = math.ceil(ileotw / len(skills.split(',')))
+                                    else:
+                                        b = round(ileotw / len(skills.split(',')))
+                                    for x in a[:b]:
+                                        if len(x)>0:
+                                            lista2.append(x)
+                                pomo = len(lista2) - ileotw
+                                if pomo > 0:
+                                    lista2 = lista2[:pomo*-1]
+                                for x in lista2:
+                                    lista.append(x)
                     # to mozna zakomentowac i bedzie bez grup
                     #listagr.append(lista)
                 return Response(lista, status=status.HTTP_200_OK)
