@@ -53,16 +53,22 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import MenuItem from '@material-ui/core/MenuItem';
-import Checkbox from '@material-ui/core/Checkbox';
+import Checkbox from "./material_ui_components/CustomCheckBox/CustomCheckbox";
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import taskParser from './AutoGeneTaskParser'
 import TextField from '@material-ui/core/TextField';
 import { useHistory } from "react-router-dom";
-import ListItemText from '@material-ui/core/ListItemText';
 import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListSubheader from '@material-ui/core/ListSubheader';
 import { MenuTwoTone } from "@material-ui/icons";
+import Collapse from "@material-ui/core/Collapse";
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 import Loading from "./LoadingScreen"
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -464,8 +470,14 @@ const useStylesAlert = makeStyles((theme) => ({
             })}
             
          </Paper>
-         <Dialog open={this.state.open} onClose={() => this.setState({ open: !this.state.open })}>
-        <DialogTitle id="form-dialog-title">Wygeneruj sprawdzian automatycznie</DialogTitle>
+         <Dialog 
+         
+         fullWidth={true}
+        
+          titlestyle={{textAlign: "center"}}
+          
+         open={this.state.open} onClose={() => this.setState({ open: !this.state.open })}>
+        <DialogTitle  id="form-dialog-title"><Typography variant="h5" align="center">Wygeneruj sprawdzian automatycznie</Typography></DialogTitle>
       
         <DialogContent>
         <Box p={1}>
@@ -474,7 +486,7 @@ const useStylesAlert = makeStyles((theme) => ({
         id="ileotw" label="Ile zadań otwartych" />
             </Box>
         <Box p={1}>
-        <CustomInput  fullWidth
+        <TextField  fullWidth
          onChange={(event) => this.setState({ ilezamk: event.target.value })}
         id="ilezamk" label="Ile zadań zamkniętych" />
             </Box>
@@ -505,42 +517,59 @@ const useStylesAlert = makeStyles((theme) => ({
 
         <Box p={1}>
        
-        <Select
-        fullWidth
-          
-          id="demo-mutiple-checkbox"
-          
-          multiple
-          value={this.state.autoGenSkills}
-          onChange={(event) => this.setState({ autoGenSkills: event.target.value })}
-         
-         
-         
-          renderValue={(selected) => 
-
-            
-            selected.join(', ')
-          
-
-          }
-            
-      
-        >
-
-        {sections.map((section) =>
-        
-        
-          <ListSubheader>{section.Section}</ListSubheader>
-          &&
-          section.skill.map((skill) => (
-            <MenuItem key={skill.id} value={skill.id}>
-              <ListItemText primary={skill.Skill} secondary={"Dostępnych zadań: " + skill.taskCount}/>
-            </MenuItem>
-              )))}
-        
-              
-          
-        </Select>
+                  <List>
+                    {sections.map((section) => {
+                      return (
+                        <>
+                          <ListItem
+                          // onClick={() => {
+                          //   this.toggleCollapse("section-" + section.id);
+                          // }}
+                          >
+                          
+                            <ListItemText
+                              primary={section.Section}
+                              secondary={"Dostępnych zadań: " + section.sectionTaskCount}
+                          
+                            />
+                              <ListItemSecondaryAction>
+                              <Checkbox
+                                edge="start"
+                           
+                              />
+                            </ListItemSecondaryAction>
+                          </ListItem>
+                       
+                            <List component="div" disablePadding>
+                              {section.skill.map((skill) => {
+                                return (
+                                  <ListItem button
+                                  
+                                  >
+                                    <ListItemIcon>
+                                      <Checkbox
+                                        edge="start"
+                                       
+                                      
+                                      />
+                                    </ListItemIcon>
+                                    <ListItemText 
+                                     
+                                      primary={skill.Skill}
+                                      secondary={"Dostępnych zadań: " + skill.taskCount}
+                                    />
+                                 
+                             
+                                  </ListItem>
+                                );
+                              })}
+                            </List>
+                        
+                         
+                        </>
+                      );
+                    })}
+                  </List>
       
         </Box>
       
@@ -552,7 +581,7 @@ const useStylesAlert = makeStyles((theme) => ({
           
         </DialogContent>
         
-        <DialogActions>
+        <DialogActions >
           
           <Button 
           color="primary"      
