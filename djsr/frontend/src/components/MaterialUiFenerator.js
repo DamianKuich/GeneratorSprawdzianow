@@ -118,7 +118,7 @@ const Fenerator = (props) => {
                   console.log("chngpass error", error.response);
                   const errResponse = error.response;
                   helpers.setSubmitting(false);
-                  this.setState({ locked: false });
+                
                   helpers.setValues(
                     {
                       ileotw: "",
@@ -163,7 +163,7 @@ const Fenerator = (props) => {
               color="primary"
               className={classes.cardHeader}
             >
-              <h4>Wygeneruj sprawdzian</h4>
+              <h4>Wygeneruj sprawdzian XDDD</h4>
               
             </CardHeader>
             <CardBody>
