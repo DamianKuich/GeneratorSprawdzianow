@@ -453,7 +453,7 @@ const useStylesAlert = makeStyles((theme) => ({
                     </IconButton>
                     </BootstrapTooltip>
                    
-                    <BootstrapTooltip title="Wygeneruj sprawdzian automatycznie">
+                    <BootstrapTooltip title="Wygeneruj sprawdzian automatycznie xxx">
                       <IconButton onClick={() => this.setState({ open: !this.state.open, generatedId: exam.id })}>
                         <DynamicFeedIcon />
                      </IconButton>

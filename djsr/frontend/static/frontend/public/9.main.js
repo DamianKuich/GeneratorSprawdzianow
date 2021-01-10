@@ -764,7 +764,7 @@ var UserExams = /*#__PURE__*/function (_Component) {
             _this3.removeExam(exam);
           }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_25___default.a, null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(BootstrapTooltip, {
-          title: "Wygeneruj sprawdzian automatycznie"
+          title: "Wygeneruj sprawdzian automatycznie xxx"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_21__["default"], {
           onClick: function onClick() {
             return _this3.setState({
