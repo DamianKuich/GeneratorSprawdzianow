@@ -54,6 +54,7 @@ def collectTaskImages(image):
 def collectImageLayout(image):
     try:
         image_layout = image['imageLayout']
+        print(image_layout, "tujestem")
         return image_layout
     except:
         pass
