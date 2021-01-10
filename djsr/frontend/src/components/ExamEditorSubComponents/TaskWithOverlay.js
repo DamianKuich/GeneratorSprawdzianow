@@ -9,6 +9,8 @@ import Box from "@material-ui/core/Box";
 import AddTaskWithDropdownMenu from "./AddTaskWithDropdownMenu";
 import ReactResizeDetector from "react-resize-detector";
 import getLayoutParams from "./getImageLayotRowsCols";
+import TaskPointsWithEdit from "./taskPointsWithEdit";
+import TaskOverlayButton from "./TaskOverlayButton";
 
 const TaskWithOverlay = (props) => {
   const {
@@ -53,29 +55,18 @@ const TaskWithOverlay = (props) => {
                   index={index}
                   pushTaskAtIndex={pushTaskAtIndex}
                 />,
-                <div
-                  style={{
-                    color: "white",
-                    backgroundColor: "black",
-                    borderRight: "solid white",
-                    borderLeft: "solid white",
-                  }}
+                <TaskOverlayButton
                   {...provided.dragHandleProps}
                 >
                   H
-                </div>,
-                <div
-                  style={{
-                    color: "white",
-                    backgroundColor: "black",
-                    borderLeft: "solid white",
-                  }}
+                </TaskOverlayButton>,
+                <TaskOverlayButton
                   onClick={() => {
                     removeTask(index);
                   }}
                 >
                   X
-                </div>,
+                </TaskOverlayButton>,
               ]}
             >
               <ReactResizeDetector>
@@ -103,9 +94,10 @@ const TaskWithOverlay = (props) => {
                             </div>
                           </Grid>
                           <Grid item>
-                            <p className="text-right mb-0 pb-0">
-                              {".../" + task.maxPoints + " pkt."}
-                            </p>
+                            {/*<p className="text-right mb-0 pb-0">*/}
+                            {/*  {".../" + task.maxPoints + " pkt."}*/}
+                            {/*</p>*/}
+                            <TaskPointsWithEdit {...props} maxPoints={task.maxPoints}/>
                           </Grid>
                         </Grid>
                         <p>

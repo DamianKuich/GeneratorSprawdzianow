@@ -51,6 +51,12 @@ class ExamEditor extends Component {
     this.getExam();
   }
 
+  updateStateNoSave=(stateUpdater)=>{
+    this.setState((state) => {
+      state = stateUpdater(state);
+      return state;
+    });
+  }
   updateStateAndSaveExam = (stateUpdater) => {
     this.setState((state) => {
       state = stateUpdater(state);
@@ -371,6 +377,8 @@ class ExamEditor extends Component {
             pushTaskAtIndex={this.pushTaskAtIndex}
             updateTaskHeight={this.updateTaskHeight}
             updatePageIndexes={this.updatePageIndexes}
+            updateStateAndSaveExam={this.updateStateAndSaveExam}
+            updateStateNoSave={this.updateStateNoSave}
           />
         </div>
       </DragDropContext>

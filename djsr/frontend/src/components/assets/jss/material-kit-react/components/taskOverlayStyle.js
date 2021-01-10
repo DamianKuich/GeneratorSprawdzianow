@@ -27,11 +27,13 @@ const taskOverlayStyle = {
     border: "solid transparent",
     borderRight: `solid ${primaryColor}`,
     borderWidth: "22px 12px 0 0",
+    marginRight:"-1px"
   },
   menuRightLeaf: {
     border: "solid transparent",
     borderLeft: `solid ${primaryColor}`,
     borderWidth: "22px 0 0 12px",
+    marginLeft:"-1px"
   },
 };
 

@@ -2,6 +2,7 @@ import React from "react";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import AddTaskDialog from "./AddTaskDialog";
+import TaskOverlayButton from "./TaskOverlayButton";
 
 const AddTaskWithDropdownMenu = ({ index, pushTaskAtIndex, ...props }) => {
   const [state, setState] = React.useState({
@@ -44,8 +45,7 @@ const AddTaskWithDropdownMenu = ({ index, pushTaskAtIndex, ...props }) => {
   };
   return (
     <>
-      <div style={{ color: "white", backgroundColor: "black" }}>
-        <div onClick={handleClick}>+</div>
+        <TaskOverlayButton onClick={handleClick}>+</TaskOverlayButton>
         <Menu
           id="simple-menu"
           anchorEl={anchorEl}
@@ -63,7 +63,6 @@ const AddTaskWithDropdownMenu = ({ index, pushTaskAtIndex, ...props }) => {
           index={index}
           pushTaskAtIndex={pushTaskAtIndex}
         />
-      </div>
     </>
   );
 };

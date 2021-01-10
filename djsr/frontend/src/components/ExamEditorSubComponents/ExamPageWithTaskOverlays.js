@@ -3,7 +3,7 @@ import Box from "@material-ui/core/Box";
 import bgImage from "../img/genspr-parralax-bg.png";
 import ExamPageWithOverlay from "./ExamPageWithOverlay";
 import PropTypes from "prop-types";
-import Typography from "@material-ui/core/Typography";
+import FirstPageHeader from "./FirstPageHeader";
 
 const ExamPages = (props) => {
   const {
@@ -15,6 +15,7 @@ const ExamPages = (props) => {
     editorTaskPart,
     updateTaskText,
     pushTaskAtIndex,
+
   } = props;
   const examTasks = exam.tasks;
   const maxPoints =
@@ -24,15 +25,7 @@ const ExamPages = (props) => {
       ? examTasks[0].maxPoints
       : 0;
   const headers = [
-    <div>
-      <h2>{exam.name}</h2>
-      <div className="mb-2">
-        {
-          "Imie i nazwisko:................................................................."
-        }
-        {".../"}{maxPoints}
-      </div>
-    </div>,
+    <FirstPageHeader {...props} title={exam.name} maxExamPoints={maxPoints} />,
   ];
   return (
     <Box
