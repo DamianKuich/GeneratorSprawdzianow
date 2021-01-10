@@ -206,13 +206,15 @@ var Fenerator = function Fenerator(props) {
       ileotw: "0",
       ilezamk: "0",
       level: "0",
-      skills: "0"
+      skills: "0",
+      groups: "0"
     },
     validationSchema: yup__WEBPACK_IMPORTED_MODULE_21__["object"]().shape({
       ileotw: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().required("Pole wymagane"),
       ilezamk: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().required("Pole wymagane"),
       level: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().required("Pole wymagane"),
-      skills: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().required("Pole wymagane")
+      skills: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().required("Pole wymagane"),
+      groups: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().required("Pole wymagane")
     }),
     onSubmit: function onSubmit(values, helpers) {
       setTimeout(function () {
@@ -221,7 +223,8 @@ var Fenerator = function Fenerator(props) {
           ileotw: values.ileotw,
           ilezamk: values.ilezamk,
           level: values.level,
-          skills: values.skills
+          skills: values.skills,
+          groups: values.groups
         }).then(function (response) {
           var randomtasks = JSON.stringify(Object(_AutoGeneTaskParser__WEBPACK_IMPORTED_MODULE_26__["default"])(response.data));
           console.log(randomtasks);
@@ -271,7 +274,7 @@ var Fenerator = function Fenerator(props) {
     }, console.log(touched, errors), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_15__["default"], {
       color: "primary",
       className: classes.cardHeader
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Wygeneruj sprawdzian")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardBody_js__WEBPACK_IMPORTED_MODULE_14__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Wygeneruj sprawdzian XD")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardBody_js__WEBPACK_IMPORTED_MODULE_14__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
       component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__["default"],
       name: "ileotw",
       formControlProps: {
@@ -315,6 +318,18 @@ var Fenerator = function Fenerator(props) {
         fullWidth: true
       },
       labelText: "Umiej\u0119tno\u015Bci",
+      inputProps: {
+        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          position: "end"
+        })
+      }
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
+      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__["default"],
+      name: "groups",
+      formControlProps: {
+        fullWidth: true
+      },
+      labelText: "GRUPY KATOLICKIE JANA PAW\u0141A 2",
       inputProps: {
         endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
           position: "end"
