@@ -419,7 +419,7 @@ class ExamEditor extends Component {
           <Menu
             id="simple-menu"
             anchorEl={anchorEl}
-            keepMounted
+            // keepMounted
             open={Boolean(anchorEl)}
             onClose={this.handleCloseMenu}
           >
