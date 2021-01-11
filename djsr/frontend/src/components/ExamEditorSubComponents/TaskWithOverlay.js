@@ -12,9 +12,10 @@ import getLayoutParams from "./getImageLayotRowsCols";
 import TaskPointsWithEdit from "./taskPointsWithEdit";
 import TaskOverlayButton from "./TaskOverlayButton";
 import TaskAnswerWithEdit from "./TaskAnswerWithEdit";
-import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import EditTaskImages from "./EditTaskImages";
+import EditTaskAnswerSpace from "./EditTaskAnswerSpace";
 
 const TaskWithOverlay = (props) => {
   const {
@@ -29,7 +30,7 @@ const TaskWithOverlay = (props) => {
     removeTask,
     pushTaskAtIndex,
     updateTaskHeight,
-      updateStateAndSaveExam
+    updateStateAndSaveExam,
   } = props;
   let answers = task.currentAnswers.answersIndexes.map((item) => {
     let answerSource = item.isCorrect
@@ -59,26 +60,30 @@ const TaskWithOverlay = (props) => {
           >
             <TaskOverlay
               menuComponents={[
-                  <EditTaskImages task={task} updateTask={(updatedTask)=>{
-                    updateStateAndSaveExam((state)=>{
-                      state.exam.tasks[index]=updatedTask
-                      return state
-                    })
-                  }}/>,
+                <EditTaskImages
+                  task={task}
+                  updateTask={(updatedTask) => {
+                    updateStateAndSaveExam((state) => {
+                      state.exam.tasks[index] = updatedTask;
+                      return state;
+                    });
+                  }}
+                />,
                 <AddTaskWithDropdownMenu
                   index={index}
                   pushTaskAtIndex={pushTaskAtIndex}
                 />,
                 <TaskOverlayButton {...provided.dragHandleProps}>
-                  <DragIndicatorIcon fontSize={"small"}/>
+                  <DragIndicatorIcon fontSize={"small"} />
                 </TaskOverlayButton>,
                 <TaskOverlayButton
                   onClick={() => {
                     removeTask(index);
                   }}
                 >
-                  <DeleteForeverIcon fontSize={"small"}/>
+                  <DeleteForeverIcon fontSize={"small"} />
                 </TaskOverlayButton>,
+                  <EditTaskAnswerSpace {...props}/>
               ]}
             >
               <ReactResizeDetector>
@@ -197,25 +202,30 @@ const TaskWithOverlay = (props) => {
                         {/*    );*/}
                         {/*  })}*/}
                         {/*</Grid>*/}
-                        <Grid
-                          container
-                          alignItems="center"
-                          justify={"space-between"}
-                          // className="pl-2 pr-2 ml-0 mr-2"
-                        >
-                          {answersIndexes.map((ans, answerIndex) => {
-                            return (
-                              <TaskAnswerWithEdit
-                                {...props}
-                                answer={ans}
-                                wronganswers={wronganswers}
-                                correctans={correctans}
-                                answerIndex={answerIndex}
-                                ansChar={ansChar}
-                              />
-                            );
-                          })}
-                        </Grid>
+                        {!task.currentAnswers.isOtwarte && (
+                          <Grid
+                            container
+                            alignItems="center"
+                            justify={"space-between"}
+                            // className="pl-2 pr-2 ml-0 mr-2"
+                          >
+                            {answersIndexes.map((ans, answerIndex) => {
+                              return (
+                                <TaskAnswerWithEdit
+                                  {...props}
+                                  answer={ans}
+                                  wronganswers={wronganswers}
+                                  correctans={correctans}
+                                  answerIndex={answerIndex}
+                                  ansChar={ansChar}
+                                />
+                              );
+                            })}
+                          </Grid>
+                        )}
+                        {!!task.currentAnswers.isOtwarte && (
+                          <div style={{ border: "1px solid black", height:`${task.currentAnswers.spaceToSolve ||0}cm` }}></div>
+                        )}
                       </Box>
                     </Box>
                   );
