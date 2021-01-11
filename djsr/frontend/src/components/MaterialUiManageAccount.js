@@ -7,7 +7,7 @@ import Icon from "@material-ui/core/Icon";
 import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
 import LockIcon from "@material-ui/icons/Lock";
-
+import Paper from '@material-ui/core/Paper';
 import Header from "./material_ui_components/Header/Header.js";
 import HeaderLinks from "./material_ui_components/Header/HeaderLinks.js";
 import Footer from "./material_ui_components/Footer/Footer.js";
@@ -22,7 +22,7 @@ import CustomInput from "./material_ui_components/CustomInput/CustomInput.js";
 
 import styles from "./assets/jss/material-kit-react/views/loginPage.js";
 
-import image from "./img/genspr-parralax-bg.png";
+import image from "./img/genesprDark.png";
 import * as Yup from "yup";
 import axiosInstance, { axiosInstanceNoAuth } from "./axiosAPI";
 import { Formik, Field } from "formik";
@@ -36,6 +36,31 @@ const MaterialUiManageAccount = (props) => {
   const FRS = "Pole wymagane";
   const user = props.appState.user;
   const [editView, setEditView] = React.useState("email");
+  
+const bgStyles = {
+  paperContainer: {
+      backgroundImage: `url(${image})`,
+      
+      minHeight: 1000,
+
+     
+     
+
+
+     
+  },
+  examCardContainer: {
+    width: 700,
+    backgroundColor: '#FEFEFA',
+
+    
+},
+
+  cardTitle: {
+    textAlign:'center'
+  }
+
+};
 
 
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
@@ -46,13 +71,8 @@ const MaterialUiManageAccount = (props) => {
   const { ...rest } = props;
   return (
     <div>
-      <div
-        className={classes.pageHeader}
-        style={{
-          backgroundImage: "url(" + image + ")",
-          backgroundSize: "cover",
-          backgroundPosition: "top center",
-        }}
+      <Paper
+       style={bgStyles.paperContainer}
       >
         <div className={classes.container}>
           <GridContainer justify="center">
@@ -151,7 +171,13 @@ const MaterialUiManageAccount = (props) => {
             </CardHeader>
             <CardBody>
             
-              <Button variant="contained"  color="primary" onClick={(e)=>setEditView("email")}  >
+            <ButtonGroup
+                        orientation="vertical"
+                        color="primary"
+                        aria-label="vertical contained primary button group"
+                        variant="text"
+                      >
+              <Button variant="contained" color="primary" onClick={(e)=>setEditView("email")}  >
                    Zmień e-mail
               </Button>
               <Button variant="contained" color="primary" onClick={(e)=>setEditView("name")}  >
@@ -160,6 +186,7 @@ const MaterialUiManageAccount = (props) => {
               <Button variant="contained" color="primary" onClick={(e)=>setEditView("password")}  >
                    Zmień hasło
               </Button>
+            </ButtonGroup>
 
 
 
@@ -273,6 +300,12 @@ const MaterialUiManageAccount = (props) => {
             </CardHeader>
             <CardBody>
             
+            <ButtonGroup
+                        orientation="vertical"
+                        color="primary"
+                        aria-label="vertical contained primary button group"
+                        variant="text"
+                      >
               <Button variant="contained" color="primary" onClick={(e)=>setEditView("email")}  >
                    Zmień e-mail
               </Button>
@@ -282,6 +315,7 @@ const MaterialUiManageAccount = (props) => {
               <Button variant="contained" color="primary" onClick={(e)=>setEditView("password")}  >
                    Zmień hasło
               </Button>
+            </ButtonGroup>
               
 
                 <Field
@@ -510,7 +544,7 @@ const MaterialUiManageAccount = (props) => {
             </GridItem>
           </GridContainer>
         </div>
-      </div>
+      </Paper>
     </div>
   );
 };

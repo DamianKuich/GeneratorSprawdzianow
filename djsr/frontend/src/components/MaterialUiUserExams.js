@@ -12,7 +12,7 @@ import {
 import axiosInstance from "./axiosAPI";
 import axiosInstanceNoAuth from "./axiosAPI"
 import Box from '@material-ui/core/Box'
-import { Form, Formik } from "formik";
+import { Form, Formik,Field } from "formik";
 import * as Yup from "yup";
 import FormikMdInput from "./FormikMDInput";
 import { Link } from "react-router-dom";
@@ -21,7 +21,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import Button from '@material-ui/core/Button';
+import Button from "./material_ui_components/CustomButtons/Button";
 import ExamCollectionCard from './ExamCollectionCard'
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -44,6 +44,25 @@ import Notification from './Notification'
 import DynamicFeedIcon from '@material-ui/icons/DynamicFeed';
 import image from "./img/genesprDark.png";
 import { grey } from "@material-ui/core/colors";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import InputLabel from '@material-ui/core/InputLabel';
+import Input from '@material-ui/core/Input';
+import MenuItem from '@material-ui/core/MenuItem';
+import Checkbox from '@material-ui/core/Checkbox';
+import Select from '@material-ui/core/Select';
+import FormControl from '@material-ui/core/FormControl';
+import taskParser from './AutoGeneTaskParser'
+import TextField from '@material-ui/core/TextField';
+import { useHistory } from "react-router-dom";
+import ListItemText from '@material-ui/core/ListItemText';
+import List from "@material-ui/core/List";
+import ListSubheader from '@material-ui/core/ListSubheader';
+import { MenuTwoTone } from "@material-ui/icons";
 const useStyles = makeStyles((theme) => ({
   root: {
     maxHeight: 200,
@@ -111,11 +130,21 @@ const useStylesAlert = makeStyles((theme) => ({
 
 
 
+
+
   class UserExams extends Component {
     constructor(props) {
       super(props);
       this.state = {
         exams: null,
+        open: false,
+        generatedId: null,
+        sections: null,
+        ileotw: '',
+        ilezamk: '',
+        level: '',
+        skills: '', 
+        autoGenSkills:[]
         
 
        
@@ -155,7 +184,7 @@ const useStylesAlert = makeStyles((theme) => ({
         });
     };
 
-
+  
     removeExam = (exam) => {
       axiosInstance
       .post(`/user/deletetest/`,{
@@ -174,6 +203,24 @@ const useStylesAlert = makeStyles((theme) => ({
     //
     componentDidMount() {
       this.updateExams();
+      axiosInstanceNoAuth
+      .get("/user/sections3/")
+      .then((response) => {
+        const parsed = response.data.map(section => {
+          section.skill=section.skilll
+          return section
+        })
+        this.setState({ sections: parsed });
+        // const parsed= response.data.map((section)=>{
+        //   section.skill=section.skilll
+        //   return section
+        // })
+        // this.setState({ sections: response.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+     
     }
     //
     // componentWillReceiveProps(nextProps) {
@@ -199,18 +246,33 @@ const useStylesAlert = makeStyles((theme) => ({
     render() {
       const { classes } = this.props;
       let exams = this.state.exams;
-      if (!exams) {
+      let sections = this.state.sections
+
+      if (!exams || !sections) {
         return (
-          <MDBContainer>
-            <div>Ladowanie</div>
-          </MDBContainer>
+          <div >
+     
+          <CircularProgress size={250}  style={{
+            'color': 'purple',
+            'marginLeft': '50%',
+            'marginTop': '20%',
+           
+        
+        }}/>
+        <p>
+        
+        </p>
+        
+        </div>
         );
       }
       return (
         
         <div  
         >
+            
         <Paper  style={bgStyles.paperContainer}>
+   
           <Box
           p={10}
           >
@@ -328,11 +390,14 @@ const useStylesAlert = makeStyles((theme) => ({
                           <Button 
                            variant="contained" 
                             color="primary"
+                            size="lg"
                             type="submit"
+                            
                             disabled={isSubmitting}
                           >
                             Zapisz
                           </Button>
+                          
                           </CardActions>
                         
                       </Form>
@@ -393,13 +458,13 @@ const useStylesAlert = makeStyles((theme) => ({
                       <DeleteIcon />
                     </IconButton>
                     </BootstrapTooltip>
-                    <Link to={"/fenerator/" + exam.id}>
+                   
                     <BootstrapTooltip title="Wygeneruj sprawdzian automatycznie">
-                      <IconButton>
+                      <IconButton onClick={() => this.setState({ open: !this.state.open, generatedId: exam.id })}>
                         <DynamicFeedIcon />
                      </IconButton>
                     </BootstrapTooltip>
-                    </Link>
+                    
                   
                   </CardActions>
                 
@@ -409,7 +474,138 @@ const useStylesAlert = makeStyles((theme) => ({
                 
               );
             })}
+            
          </Paper>
+         <Dialog open={this.state.open} onClose={() => this.setState({ open: !this.state.open })}>
+        <DialogTitle id="form-dialog-title">Wygeneruj sprawdzian automatycznie</DialogTitle>
+      
+        <DialogContent>
+        <Box p={1}>
+        <TextField  fullWidth
+         onChange={(event) => this.setState({ ileotw: event.target.value })}
+        id="ileotw" label="Ile zadań otwartych" />
+            </Box>
+        <Box p={1}>
+        <TextField  fullWidth
+         onChange={(event) => this.setState({ ilezamk: event.target.value })}
+        id="ilezamk" label="Ile zadań zamkniętych" />
+            </Box>
+
+        <Box p={1}>
+        <TextField fullWidth
+          id="level"
+          select
+          label="Poziom trudności"
+          value={this.state.level}
+          onChange={(event) => this.setState({ level: event.target.value })}
+          helperText="Wybierz poziom trudności"
+        >
+          
+            
+         
+            <MenuItem key={"level1"} value={"1"}>
+              {'Podstawowy'}
+            </MenuItem>
+           
+                      
+            <MenuItem key={"level2"} value={"2"}>
+              {'Rozszerzony'}
+            </MenuItem>
+         
+        </TextField>
+        </Box>
+
+        <Box p={1}>
+       
+        <Select
+        fullWidth
+          
+          id="demo-mutiple-checkbox"
+          
+          multiple
+          value={this.state.autoGenSkills}
+          onChange={(event) => this.setState({ autoGenSkills: event.target.value })}
+         
+         
+         
+          renderValue={(selected) => 
+
+            
+            selected.join(', ')
+          
+
+          }
+            
+      
+        >
+
+        {sections.map((section) =>
+        
+        
+          <ListSubheader>{section.Section}</ListSubheader>
+          &&
+          section.skill.map((skill) => (
+            <MenuItem key={skill.id} value={skill.id}>
+              <ListItemText primary={skill.Skill} secondary={"Dostępnych zadań: " + skill.taskCount}/>
+            </MenuItem>
+              )))}
+        
+              
+          
+        </Select>
+      
+        </Box>
+      
+      
+
+        
+            
+          
+          
+        </DialogContent>
+        
+        <DialogActions>
+          
+          <Button 
+          color="primary"      
+            onClick={() => {
+              
+      
+               axiosInstance
+                .post(`/user/getrandomtasks/`, {
+                ileotw: this.state.ileotw,
+                ilezamk: this.state.ilezamk,
+                level:  this.state.level,
+                skills: this.state.autoGenSkills.join(', ')
+              })
+                .then((response) => {
+                    
+                   let randomtasks = JSON.stringify(taskParser(response.data))
+                   
+                   
+                    axiosInstance.put(`/user/maketest/`, {
+                    id:this.state.generatedId,
+                    tasks:randomtasks
+                  }).then((response)=>{
+                    console.log(randomtasks)
+                    console.log(this.state.generatedId)
+                    this.props.history.push(`/editor/${this.state.generatedId}`);
+                  })
+ 
+ 
+
+                })
+                .catch((error) => {
+
+                  console.log("chngpass error", error.response);
+
+                });
+            }}>
+            Generuj
+          </Button>
+        </DialogActions>
+        
+      </Dialog>
         </div>
       );
     }

@@ -1,5 +1,4 @@
-import datetime
-from datetime import date
+from datetime import date, timedelta
 import json
 from django.core import serializers
 from . import models
@@ -27,7 +26,7 @@ import requests
 import base64
 import pdfkit
 
-from .examToPdf.PdfFromNode import generatePdf, generateAnswersPdf
+from .examToPdf.PdfFromNode import generatePdf, generateAnswersPdf, generateAnswerKeyPdf
 
 from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer, \
     CustomUserSerializerReadOnly, PasswordSendResetSerializer, TestJSONSerializer, ImageSerializer
@@ -70,17 +69,15 @@ class CustomUserCreate(APIView):
                                         signing_key=getattr(settings, "RS256_PRIVATE_KEY", None),
                                         verifying_key=getattr(settings, "RS256_PUBLIC_KEY", None))
             activation = UserActivationToken(user=CustomUser.objects.get(id=user.id),
-                                             expire=datetime.datetime.utcnow() + datetime.timedelta(0,
-                                                                                                    3600) + datetime.timedelta(
-                                                 0, 3600) + datetime.timedelta(0, 3600),
-                                             created_on=datetime.datetime.utcnow() + datetime.timedelta(0,
-                                                                                                        3600) + datetime.timedelta(
+                                             expire=datetime.utcnow() + timedelta(0,3600) + timedelta(0, 3600) + timedelta(0, 3600),
+                                             created_on=datetime.utcnow() + timedelta(0,
+                                             3600) + timedelta(
                                                  0, 3600),
                                              used=False
                                              )
             activation.save()
             token = tokenbackend.encode(
-                {'user_id': user.id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(0, 3600)})
+                {'user_id': user.id, 'exp': datetime.utcnow() + timedelta(0, 3600)})
             data = {
                 'confirmation_token': token
             }
@@ -112,17 +109,17 @@ class PasswordSendResetView(APIView):
                                             signing_key=getattr(settings, "RS256_PRIVATE_KEY", None),
                                             verifying_key=getattr(settings, "RS256_PUBLIC_KEY", None))
                 reset = UserResetToken(email=reset.email,
-                                       expire=datetime.datetime.utcnow() + datetime.timedelta(0,
-                                                                                              3600) + datetime.timedelta(
-                                           0, 3600) + datetime.timedelta(0, 3600),
-                                       created_on=datetime.datetime.utcnow() + datetime.timedelta(0,
-                                                                                                  3600) + datetime.timedelta(
+                                       expire=datetime.utcnow() + timedelta(0,
+                                                                                              3600) + timedelta(
+                                           0, 3600) + timedelta(0, 3600),
+                                       created_on=datetime.utcnow() + timedelta(0,
+                                                                                                  3600) + timedelta(
                                            0, 3600),
                                        used=False
                                        )
                 reset.save()
                 token = tokenbackend.encode(
-                    {'user_email': reset.email, 'exp': datetime.datetime.utcnow() + datetime.timedelta(0, 3600)})
+                    {'user_email': reset.email, 'exp': datetime.utcnow() + timedelta(0, 3600)})
                 # TODO check if user is active
                 mail_subject = 'Reset your password.'
                 current_site = get_current_site(request)
@@ -148,7 +145,7 @@ class PasswordResetView(APIView):
             except TokenBackendError:
                 return Response({'error': 'Invalid token'}, status=status.HTTP_403_FORBIDDEN)
             if UserResetToken.expire == (
-                    datetime.datetime.utcnow() + datetime.timedelta(3600) + datetime.timedelta(0, 3600)):
+                    datetime.utcnow() + timedelta(3600) + timedelta(0, 3600)):
                 return Response(status=status.HTTP_409_CONFLICT)
             if UserResetToken.used is True:
                 return Response(status=status.HTTP_409_CONFLICT)
@@ -174,7 +171,7 @@ class HelloWorldView(APIView):
         except TokenBackendError:
             return Response({'error': 'Invalid token'}, status=status.HTTP_403_FORBIDDEN)
         if UserActivationToken.expire == (
-                datetime.datetime.utcnow() + datetime.timedelta(3600) + datetime.timedelta(0, 3600)):
+                datetime.utcnow() + timedelta(3600) + timedelta(0, 3600)):
             return Response(status=status.HTTP_409_CONFLICT)
         if UserActivationToken.used is True:
             return Response(status=status.HTTP_409_CONFLICT)
@@ -299,55 +296,102 @@ class GetRandomTasksViewSet(APIView):
         if request.data:
             try:
                 author_id = CustomUser.objects.get(id=request.user.id)
-                lista = []
                 listaotw = []
                 listazamk = []
                 ileotw = int(request.data['ileotw'])
                 ilezamk = int(request.data['ilezamk'])
                 level = int(request.data['level'])
                 skills = request.data['skills']
-                if skills is not None:
-                    if ilezamk != 0:
-                        for skillid in skills.split(','):
-                            listazamk = []
-                            task = Task.objects.filter(skill=skillid, type=2, private=False, level=level)
-                            serializer = TaskSerializer(task, many=True)
-                            taskpriv = Task.objects.filter(skill=skillid, type=2, private=True, author=author_id,
-                                                           level=level)
-                            serializerpriv = TaskSerializer(taskpriv, many=True)
-                            listazamk.append(serializer.data)
-                            listazamk.append(serializerpriv.data)
-                            a = list(chain(*listazamk))
-                            random.shuffle(a)
-                            b = math.ceil(ilezamk/len(skills.split(',')))
-                            lista.append(a[:b])
+                #groups = int(request.data['groups'])
+                groups = 1
+                listagr = []
+                for x in range(groups):
+                    lista = []
+                    if skills is not None:
+                        if ilezamk != 0:
+                            skillist = skills.split(',')
+                            for index, skillid in enumerate(skills.split(',')):
+                                task = Task.objects.filter(skill=skillid, type=2, private=False, level=level).count()
 
-                    pom = len(list(chain(*lista))) - ilezamk
-                    if pom>0:
-                        lista=list(chain(*lista))[:pom*-1]
-                    lenzam1 = len(lista)
-                    lista2 = []
-                    if ileotw != 0:
-                            for skillid in skills.split(','):
-                                listaotw = []
-                                task = Task.objects.filter(skill=skillid, type=1, private=False, level=level)
-                                serializer = TaskSerializer(task, many=True)
-                                taskprv = Task.objects.filter(skill=skillid, type=1, private=True, author=author_id,
-                                                              level=level)
-                                serializerprv = TaskSerializer(taskprv, many=True)
-                                listaotw.append(serializer.data)
-                                listaotw.append(serializerprv.data)
-                                a = list(chain(*listaotw))
-                                random.shuffle(a)
-                                b = math.ceil(ileotw / len(skills.split(',')))
-                                lista2.append(a[:b])
-                    pomo = len(list(chain(*lista2))) - ileotw
-                    if pomo> 0:
-                        lista2 = list(chain(*lista2))[:pomo*-1]
-                    lenotw = len(lista2)
-                    for x in list(chain(*lista2)):
-                        lista.append(x)
+                                taskpriv = Task.objects.filter(skill=skillid, type=2, private=True, author=author_id,
+                                                               level=level).count()
+                                if task == 0 and taskpriv == 0:
+                                    try:
+                                        del skillist[index]
+                                    except:
+                                        del skillist[index-1]
+                            if len(skillist)>0:
+                                for index, skillid in enumerate(skillist):
+                                    brak = 0
+                                    listazamk = []
+                                    task = Task.objects.filter(skill=skillid, type=2, private=False, level=level)
+                                    serializer = TaskSerializer(task, many=True)
+                                    taskpriv = Task.objects.filter(skill=skillid, type=2, private=True, author=author_id,
+                                                                   level=level)
+                                    serializerpriv = TaskSerializer(taskpriv, many=True)
+                                    if len(serializer.data)>0:
+                                        for x in serializer.data:
+                                            listazamk.append(x)
+                                    if len(serializerpriv.data)>0:
+                                        for y in  serializerpriv.data:
+                                            listazamk.append(y)
+                                    if len(listazamk) > 0:
+                                        a = listazamk
+                                        random.shuffle(a)
+                                        if index == 0:
+                                            b = math.ceil(ilezamk/len(skills.split(',')))
+                                        else:
+                                            b = round(ilezamk/len(skills.split(',')))
+                                        for x in a[:b]:
+                                            lista.append(x)
+                                pom = len(lista) - ilezamk
+                                if pom>0:
+                                    lista=lista[:pom*-1]
+                                lenzam1 = len(lista)
+                        lista2 = []
+                        if ileotw != 0:
+                            skillist = skills.split(',')
+                            for index, skillid in enumerate(skills.split(',')):
+                                task = Task.objects.filter(skill=skillid, type=1, private=False, level=level).count()
+                                taskpriv = Task.objects.filter(skill=skillid, type=1, private=True, author=author_id,
+                                                               level=level).count()
+                                if task == 0 and taskpriv == 0:
+                                    try:
+                                        del skillist[index]
+                                    except:
+                                        del skillist[index-1]
+                            if len(skillist)>0:
+                                for index, skillid in enumerate(skillist):
+                                    listaotw = []
+                                    task = Task.objects.filter(skill=skillid, type=1, private=False, level=level)
+                                    serializer = TaskSerializer(task, many=True)
+                                    taskprv = Task.objects.filter(skill=skillid, type=1, private=True, author=author_id,
+                                                                  level=level)
+                                    serializerprv = TaskSerializer(taskprv, many=True)
+                                    if len(serializer.data)>0:
+                                        for x in serializer.data:
+                                            listaotw.append(x)
+                                    if len(serializerprv.data)>0:
+                                        for y in serializerprv.data:
+                                            listaotw.append(y)
+                                    a = listaotw
+                                    random.shuffle(a)
+                                    if index == 0:
+                                        b = math.ceil(ileotw / len(skills.split(',')))
+                                    else:
+                                        b = round(ileotw / len(skills.split(',')))
+                                    for x in a[:b]:
+                                        if len(x)>0:
+                                            lista2.append(x)
+                                pomo = len(lista2) - ileotw
+                                if pomo > 0:
+                                    lista2 = lista2[:pomo*-1]
+                                for x in lista2:
+                                    lista.append(x)
+                    # to mozna zakomentowac i bedzie bez grup
+                    #listagr.append(lista)
                 return Response(lista, status=status.HTTP_200_OK)
+                # return Response(listagr, status=status.HTTP_200_OK)
             except Exception as e:
                 print("mt er1")
                 return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
@@ -525,20 +569,22 @@ class SkilltoSectionsAutoGene(APIView):
     serializer_class = SectionSerializerv2
 
     def get(self, request, format=None):
-        s = Sectionv2.objects.all()
-        s.delete()
+        # s = Sectionv2.objects.all()
+        # s.delete()
         list = []
-        sec = Section.objects.all()
-        for section in sec:
-            name = section.nasza_nazwa()
+        for section in Section.objects.only("Section").iterator():
+            name = section.Section
             id = section.id
-            sec2 = Sectionv2.objects.create(id = id,Section=name)
-            sec2.save()
-        ss = Sectionv2.objects.all()
-        for s in ss:
-            s2 = Section.objects.get(Section=s.Section)
-            fields = ('Skill')
-            skil = Skill.objects.filter(section=s2.id).only(fields)
+            try:
+                if not Sectionv2.objects.filter(id=id, Section=name).exists():
+                    sec2 = Sectionv2.objects.create(id=id, Section=name)
+                    sec2.save()
+            except Sectionv2.DoesNotExist:
+                sec2 = Sectionv2.objects.create(id=id, Section=name)
+                sec2.save()
+        for s in Sectionv2.objects.only("skilll","Section").iterator():
+            s2 = Section.objects.get(Section=s.Section).id
+            skil = Skill.objects.filter(section=s2).only("id")
             s.skilll.set(skil)
             s.save()
         seco = Sectionv2.objects.all()
@@ -548,10 +594,11 @@ class SkilltoSectionsAutoGene(APIView):
             for y in x['skilll']:
                 count = Task.objects.filter(skill=y['id'], private=False).count()
                 sum+=count
-                y['#Tasks']=count
-            x['Section#Tasks'] = sum
+                y['taskCount']=count
+            x['sectionTaskCount'] = sum
             list.append(x)
         return Response(list)
+        # return Response(seria.data)
 
 
 class AddTask(APIView):
@@ -561,30 +608,44 @@ class AddTask(APIView):
 
     def post(self, request, format=None):
         if request.data:
-            try:
-                wrongans = request.data['wrong_answers']
-                corrans = request.data['correct_answers']
-                skills = request.data['skills_id']
-                text = request.data['text']
-                user = CustomUser.objects.get(id=request.user.id)
-                if not Task.objects.filter(text=text).exists():
-                    my_task = Task.objects.create(text=text,
-                                                  wronganswers=wrongans,
-                                                  correctans=corrans,
-                                                  type=int(request.data['type']),
-                                                  level=int(request.data['level']),
-                                                  private=int(request.data['private']),
-                                                  points=int(request.data['points']),
-                                                  author=user)
-                    for skillid in skills.split(','):
-                        skil = Skill.objects.filter(id=skillid)
-                        my_task.skill.set(skil)
-                    my_task.save()
-                    task = Task.objects.filter(text=text)
-                    serializer = TaskSerializer(task, many=True)
-                    return Response(serializer.data, status=status.HTTP_200_OK)
-            except Exception as e:
-                return Response(data={"error": str(e)}, status=status.HTTP_402_PAYMENT_REQUIRED)
+            # try:
+            wrongans = request.data['wrong_answers']
+            corrans = request.data['correct_answers']
+            skills = request.data['skills_id']
+            text = request.data['text']
+            file = request.data['file']
+            user = CustomUser.objects.get(id=request.user.id)
+            if not Task.objects.filter(text=text).exists():
+                my_task = Task.objects.create(text=text,
+                                              wronganswers=wrongans,
+                                              correctans=corrans,
+                                              type=int(request.data['type']),
+                                              level=int(request.data['level']),
+                                              private=int(request.data['private']),
+                                              points=int(request.data['points']),
+                                              author=user)
+                for skillid in skills.split(','):
+                    skil = Skill.objects.filter(id=skillid)
+                    my_task.skill.set(skil)
+                if not Image.objects.filter(name="", image=file, user_id=user.id).exists():
+                    image = Image.objects.create(name="", image=file, user_id=user.id)
+                    image.save()
+                    # imag = Image.objects.filter(name="", image=file, user_id=user.id)
+                    image_data = open("media/" + str(image.image), "rb").read()
+                    cos = bytes(image_data)
+                    img = ImageDB.objects.create(image=cos)
+                    img.save()
+                    image.name = str(img.id)
+                    image.save()
+                    img = Image.objects.filter(name=str(img.id))
+                    my_task.image.set(img)
+                my_task.save()
+                task = Task.objects.filter(text=text)
+                serializer = TaskSerializer(task, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            # except Exception as e:
+            #     my_task.delete()
+            #     return Response(data={"error": str(e)}, status=status.HTTP_402_PAYMENT_REQUIRED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -723,6 +784,7 @@ class AddImageViewSet(APIView):
             imag = Image.objects.get(id=image.id)
             image_data = open("media/" + str(imag.image), "rb").read()
             cos = bytes(image_data)
+            imag.delete()
             img = ImageDB.objects.create(image=cos)
             img.save()
             return Response(data={"id": img.id}, status=status.HTTP_201_CREATED)
@@ -746,14 +808,18 @@ class AddImageToTaskViewSet(APIView):
             id = request.data['taskid']
             task = Task.objects.get(id=id)
             image = Image.objects.filter(name=request.data['name'])
+            image_data = open("media/" + str(image.image), "rb").read()
+            cos = bytes(image_data)
+            img = ImageDB.objects.create(image=cos)
+            img.save()
+            image.name = str(img.id)
+            image.save()
             task.image.set(image)
             task.save()
-            image_data = open("media/" + str(image.image), "rb").read()
+
             return HttpResponse(image_data, content_type="image/png")
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
-
-
 
 
 class TestTasksiewSet(APIView):
@@ -764,7 +830,6 @@ class TestTasksiewSet(APIView):
         id = kwargs.pop('id')
 
         test = list(TestJSON.objects.filter(id=id).values())[0]
-        print(test['tasks'])
         tasks = json.loads(test['tasks'])
         pdf, html = generatePdf(tasks=tasks, name=test['name'])
         return HttpResponse(pdf, content_type="application/pdf")
@@ -778,9 +843,20 @@ class TestAnswersviewSet(APIView):
         id = kwargs.pop('id')
 
         test = list(TestJSON.objects.filter(id=id).values())[0]
-        print(test['tasks'])
         tasks = json.loads(test['tasks'])
         pdf, html = generateAnswersPdf(tasks=tasks, name=test['name'])
+        return HttpResponse(pdf, content_type="application/pdf")
+
+class TestKeyAnswersviewSet(APIView):
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = TestJSONSerializer
+
+    def get(self, request, *args, **kwargs):
+        id = kwargs.pop('id')
+
+        test = list(TestJSON.objects.filter(id=id).values())[0]
+        tasks = json.loads(test['tasks'])
+        pdf, html = generateAnswerKeyPdf(tasks=tasks, name=test['name'])
         return HttpResponse(pdf, content_type="application/pdf")
 
 class RetDB(APIView):

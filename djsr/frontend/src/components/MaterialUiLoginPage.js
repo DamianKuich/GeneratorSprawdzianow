@@ -20,13 +20,13 @@ import CardFooter from "./material_ui_components/Card/CardFooter.js";
 import CustomInput from "./material_ui_components/CustomInput/CustomInput.js";
 import styles from "./assets/jss/material-kit-react/views/loginPage.js";
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import image from "./img/genspr-parralax-bg.png";
+import image from "./img/genesprDark.png";
 import * as Yup from "yup";
 import axiosInstance from "./axiosAPI";
 import { Formik, Field } from "formik";
 import FormikMdInput from "./FormikMDInput";
 import Notification from "./Notification"
-
+import Paper from '@material-ui/core/Paper';
 const useStyles = makeStyles(styles);
 
 const MaterialUiLoginPage = (props) => {
@@ -42,20 +42,37 @@ const MaterialUiLoginPage = (props) => {
   const [notification, setNotification] = React.useState({isOpen: false, message:'',type:''})
   const { ...rest } = props;
   const FRS = "Pole wymagane";
-  return (
-    <div>
-            <Notification
-      notification = {notification}
-      setNotification = {setNotification}
+  const bgStyles = {
+    paperContainer: {
+        backgroundImage: `url(${image})`,
+        
+        minHeight: 1000,
+  
+       
+       
+  
+  
+       
+    },
+    examCardContainer: {
+      width: 700,
+      backgroundColor: '#FEFEFA',
+  
       
-      ></Notification>
+  },
+  
+    cardTitle: {
+      textAlign:'center'
+    }
+  
+  };
+  return (
+   
       <div
-        className={classes.pageHeader}
-        style={{
-          backgroundImage: "url(" + image + ")",
-          backgroundSize: "cover",
-          backgroundPosition: "top center",
-        }}
+       
+      >
+          <Paper
+       style={bgStyles.paperContainer}
       >
         <div className={classes.container}>
           <GridContainer justify="center">
@@ -68,12 +85,12 @@ const MaterialUiLoginPage = (props) => {
                   }}
                   validationSchema={Yup.object().shape({
                     password: Yup.string()
-                      .min(8, "Too Short!")
-                      .max(50, "Too Long!")
+                      .min(8, "Minimum 8 znaków")
+                      .max(50, "Przekroczono maksymalną ilość znaków!")
                       .required(FRS),
                     name: Yup.string()
-                      .min(2, "Too Short!")
-                      .max(50, "Too Long!")
+                      .min(2, "Minimum 8 znaków!")
+                      .max(50, "Przekroczono maksymalną ilość znaków!")
                       .required(FRS),
                   })}
                   onSubmit={(values, helpers) => {
@@ -242,9 +259,10 @@ const MaterialUiLoginPage = (props) => {
             </GridItem>
           </GridContainer>
         </div>
+        </Paper>
       </div>
-
-    </div>
+                  
+    
     
   );
 };
