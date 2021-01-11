@@ -12,12 +12,17 @@ def generatePdf(tasks, name="Sprawdzian"):
     print("TASK",tasks[0])
     doc, tag, text = Doc().tagtext()
     # dodaj tytul do spr
+    czas = 0
+    # for task in enumerate(tasks):
+    #     czas += task['timetosolve']
     with tag('div style="display: inline;"'):
         text("Imię:")
         with tag('span style="display: inline;margin-left: 170px;"'):
             text("Nazwisko:")
     with tag('div'):
         text("Data:")
+    # with tag('div'):
+    #     text("Czas na rozwiązanie testu: "+str(czas))
     with tag('div'):
         text(name)
     # renderowanie taskow
@@ -26,6 +31,8 @@ def generatePdf(tasks, name="Sprawdzian"):
             text("Zadanie nr." + str(index + 1))
             with tag('span style="display: inline;margin-left: 20px;"'):
                 text("0-" + str(task['maxPoints']) + "pkt.")
+            # with tag('span style="display: inline;margin-left: 20px;"'):
+            #     text(str(task['timetosolve']) + " minut")
         with tag('p'):
             for part in task['text']:
                 if part["type"] == "text":
@@ -72,6 +79,9 @@ def generatePdf(tasks, name="Sprawdzian"):
                                 text(listodp[index])
                                 doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"],
                                          style="transform: translate(0px,4px);")
+        # if task['spacetosolve'] > 0:
+        #     with tag('div style="margin-bottom:' + str(task['spacetosolve']*19)+'px;"'):
+        #         pass
         with tag('hr style="color: black;"'):
             pass
     html = doc.getvalue()
