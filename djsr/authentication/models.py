@@ -118,7 +118,7 @@ class TestJSON(models.Model):
     name = models.TextField(null=True)
     tasks = models.TextField(null=True)
     created = models.DateField(default=datetime.date.today)
-    user_id = models.IntegerField()
+    user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE,default="",blank=True,null=True)
 
     def __str__(self):
         return self.nasza_nazwa()
