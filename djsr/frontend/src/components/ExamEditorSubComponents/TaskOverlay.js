@@ -47,29 +47,32 @@ const TaskOverlay = ({
                   const rightOffset = boxWidth / 2 - menuWidth / 2;
                   return (
                     <Box
-                      position={"absolute"}
+                      // position={"absolute"}
                       top={`-${height}px`}
                       right={`${rightOffset}px`}
                       // left={"auto"}
                       // right={"auto"}
-                      borderColor={"primary.main"}
-                      display={"flex"}
-                      color={"white"}
+                      // borderColor={"primary.main"}
+                      // display={"flex"}
+                      // color={"white"}
+                        className={classes.menuContainer}
                     >
                       <div
-                        style={{
-                          border: "solid transparent",
-                          borderRight: "solid black",
-                          borderWidth: "22px 12px 0 0",
-                        }}
+                        // style={{
+                        //   border: "solid transparent",
+                        //   borderRight: "solid black",
+                        //   borderWidth: "22px 12px 0 0",
+                        // }}
+                          className={classes.menuLeftLeaf}
                       ></div>
                       {menuComponents}
                       <div
-                        style={{
-                          border: "solid transparent",
-                          borderLeft: "solid black",
-                          borderWidth: "22px 0 0 12px",
-                        }}
+                        // style={{
+                        //   border: "solid transparent",
+                        //   borderLeft: "solid black",
+                        //   borderWidth: "22px 0 0 12px",
+                        // }}
+                          className={classes.menuRightLeaf}
                       ></div>
                     </Box>
                   );

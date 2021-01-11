@@ -14,10 +14,27 @@ const taskOverlayStyle = {
     padding: "0px",
   },
   activeRoot: {
-    border: "1px solid black",
+    border: `1px solid ${primaryColor}`,
     margin: "-2px -13px",
     padding: "1px 12px",
   },
+  menuContainer: {
+    position: "absolute",
+    display: "flex",
+    color: "white",
+  },
+  menuLeftLeaf: {
+    border: "solid transparent",
+    borderRight: `solid ${primaryColor}`,
+    borderWidth: "22px 12px 0 0",
+    marginRight:"-1px"
+  },
+  menuRightLeaf: {
+    border: "solid transparent",
+    borderLeft: `solid ${primaryColor}`,
+    borderWidth: "22px 0 0 12px",
+    marginLeft:"-1px"
+  },
 };
 
-export default taskOverlayStyle
+export default taskOverlayStyle;

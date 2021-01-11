@@ -7,7 +7,8 @@ import ReactResizeDetector from "react-resize-detector";
 const ExamPageWithOverlay = (props) => {
   const {
     exam,
-    header,
+    // header,
+    headers,
     tasks,
     setTaskToEdit,
     removeTask,
@@ -16,16 +17,17 @@ const ExamPageWithOverlay = (props) => {
     editorTaskPart,
     updateTaskText,
     pushTaskAtIndex,
-      updatePageIndexes,
+    updatePageIndexes,
   } = props;
   const [divHeight, setHeight] = useState(null);
   const pageIndex = props.pageIndex || 0;
+  const header = (headers || [])[pageIndex] || null;
   const startIndex = props.startIndex || 0;
   const examTasks = tasks;
   // const endIndex = startIndex + 3;
   const tasksLength = tasks.length;
-  const pages=exam.pages || [];
-  const stateLastIndex= pages[pageIndex]
+  const pages = exam.pages || [];
+  const stateLastIndex = pages[pageIndex];
   const calculateEnd = (start, tablica, limit) => {
     let current = 0;
     let index = start;
@@ -38,13 +40,13 @@ const ExamPageWithOverlay = (props) => {
       index++;
     }
     console.log("cacl end", index, current, limit);
-    return index-1;
+    return index - 1;
   };
   const endIndex =
     divHeight > 1 ? calculateEnd(startIndex, tasks, divHeight) : tasksLength;
   if (stateLastIndex !== endIndex) {
-    console.log("pg update",stateLastIndex,endIndex ,exam.pages)
-    updatePageIndexes(pageIndex, endIndex)
+    console.log("pg update", stateLastIndex, endIndex, exam.pages);
+    updatePageIndexes(pageIndex, endIndex);
   }
   return (
     <>
@@ -60,7 +62,9 @@ const ExamPageWithOverlay = (props) => {
           flexDirection: "column",
           // backgroundColor: snapshot.isDraggingOver ? "blue" : "white",
         }}
-        mb={20}
+        // mb={20}
+        mb={5}
+        mt={2}
       >
         {!!header && header}
         {/*<h2>{exam.name}</h2>*/}
