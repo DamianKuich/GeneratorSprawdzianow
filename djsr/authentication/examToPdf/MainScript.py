@@ -65,6 +65,7 @@ def taskPrintDataParser(task):
     task['answers'] = collectTaskAnswers(task['currentAnswers'])
     task['obrazki'] = collectTaskImages(task['currentAnswers'])
     task['layout'] = collectImageLayout(task['currentAnswers'])
+    task['space']= task['currentAnswers']['spacetosolve']
     return task
 
 
