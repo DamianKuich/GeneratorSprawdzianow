@@ -19,8 +19,9 @@ const ExamEditorSidePanel = ({
   console.log("side panel props", currentTabId, props);
   return (
     <ResizeableSidePanel>
-      <div>{exam.name} eluwina</div>
-      <div>{saved ? "Zapisano" : "Zapisywanie"}</div>
+      {/*<div>{exam.name} eluwina</div>*/}
+      {/*<div>{saved ? "Zapisano" : "Zapisywanie"}</div>*/}
+      <div style={{height:"100vh",overflow:"auto"}}>
       <SideMenuTabSelector
         handleTabChange={handleTabChange}
         currentTabId={currentTabId}
@@ -35,6 +36,7 @@ const ExamEditorSidePanel = ({
         updateTask={updateTask}
         selectedTaskToEdit={selectedTaskToEdit}
       />
+      </div>
     </ResizeableSidePanel>
   );
 };

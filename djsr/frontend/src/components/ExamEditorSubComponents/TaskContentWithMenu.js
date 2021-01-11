@@ -13,6 +13,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import People from "@material-ui/icons/People";
 import CardFooter from "../material_ui_components/Card/CardFooter";
 import Button from "../material_ui_components/CustomButtons/Button";
+import TaskOverlayButton from "./TaskOverlayButton";
 
 const TaskContentWithMenu = ({
   content,
@@ -31,22 +32,22 @@ const TaskContentWithMenu = ({
       menuComponents={
         isEditing
           ? [
-              <div
+              <TaskOverlayButton
                 onClick={() => {
                   setTaskToEditWithPart(null, null);
                 }}
               >
                 Zakończ Edycje
-              </div>,
+              </TaskOverlayButton>,
             ]
           : [
-              <div
+              <TaskOverlayButton
                 onClick={() => {
                   setTaskToEditWithPart(taskIndex, "text");
                 }}
               >
                 Edytuj
-              </div>,
+              </TaskOverlayButton>,
             ]
       }
     >

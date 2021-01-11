@@ -9,6 +9,9 @@ import Box from "@material-ui/core/Box";
 import AddTaskWithDropdownMenu from "./AddTaskWithDropdownMenu";
 import ReactResizeDetector from "react-resize-detector";
 import getLayoutParams from "./getImageLayotRowsCols";
+import TaskPointsWithEdit from "./taskPointsWithEdit";
+import TaskOverlayButton from "./TaskOverlayButton";
+import TaskAnswerWithEdit from "./TaskAnswerWithEdit";
 
 const TaskWithOverlay = (props) => {
   const {
@@ -30,6 +33,9 @@ const TaskWithOverlay = (props) => {
       : task.currentAnswers.wronganswers;
     return answerSource[item.index];
   });
+  const wronganswers = task.currentAnswers.wronganswers;
+  const correctans = task.currentAnswers.correctans;
+  const answersIndexes = task.currentAnswers.answersIndexes;
   const taskImage = task.currentAnswers.image || [];
   const imageLayout = getLayoutParams(task.currentAnswers.imageLayout || "");
   const imageWidth = 12 / imageLayout.cols;
@@ -53,29 +59,16 @@ const TaskWithOverlay = (props) => {
                   index={index}
                   pushTaskAtIndex={pushTaskAtIndex}
                 />,
-                <div
-                  style={{
-                    color: "white",
-                    backgroundColor: "black",
-                    borderRight: "solid white",
-                    borderLeft: "solid white",
-                  }}
-                  {...provided.dragHandleProps}
-                >
+                <TaskOverlayButton {...provided.dragHandleProps}>
                   H
-                </div>,
-                <div
-                  style={{
-                    color: "white",
-                    backgroundColor: "black",
-                    borderLeft: "solid white",
-                  }}
+                </TaskOverlayButton>,
+                <TaskOverlayButton
                   onClick={() => {
                     removeTask(index);
                   }}
                 >
                   X
-                </div>,
+                </TaskOverlayButton>,
               ]}
             >
               <ReactResizeDetector>
@@ -103,9 +96,13 @@ const TaskWithOverlay = (props) => {
                             </div>
                           </Grid>
                           <Grid item>
-                            <p className="text-right mb-0 pb-0">
-                              {".../" + task.maxPoints + " pkt."}
-                            </p>
+                            {/*<p className="text-right mb-0 pb-0">*/}
+                            {/*  {".../" + task.maxPoints + " pkt."}*/}
+                            {/*</p>*/}
+                            <TaskPointsWithEdit
+                              {...props}
+                              maxPoints={task.maxPoints}
+                            />
                           </Grid>
                         </Grid>
                         <p>
@@ -165,28 +162,47 @@ const TaskWithOverlay = (props) => {
                               </div>
                             </div>
                         )*/}
+                        {/*<Grid*/}
+                        {/*  container*/}
+                        {/*  alignItems="center"*/}
+                        {/*  justify={"space-between"}*/}
+                        {/*  className="pl-2 pr-2 ml-0 mr-2"*/}
+                        {/*>*/}
+                        {/*  {answers.map((item, index) => {*/}
+                        {/*    return (*/}
+                        {/*      <Grid item>*/}
+                        {/*        <div>*/}
+                        {/*          <Typography*/}
+                        {/*            display={"inline"}*/}
+                        {/*            style={{*/}
+                        {/*              fontWeight: "bold",*/}
+                        {/*            }}*/}
+                        {/*            className="font-weight-bold"*/}
+                        {/*          >*/}
+                        {/*            {ansChar[index] + ". "}*/}
+                        {/*          </Typography>*/}
+                        {/*          <Latex>{item}</Latex>*/}
+                        {/*        </div>*/}
+                        {/*      </Grid>*/}
+                        {/*    );*/}
+                        {/*  })}*/}
+                        {/*</Grid>*/}
                         <Grid
                           container
                           alignItems="center"
                           justify={"space-between"}
-                          className="pl-2 pr-2 ml-0 mr-2"
+                          // className="pl-2 pr-2 ml-0 mr-2"
                         >
-                          {answers.map((item, index) => {
+                          {answersIndexes.map((ans, answerIndex) => {
                             return (
-                              <Grid item>
-                                <div>
-                                  <Typography
-                                    display={"inline"}
-                                    style={{
-                                      fontWeight: "bold",
-                                    }}
-                                    className="font-weight-bold"
-                                  >
-                                    {ansChar[index] + ". "}
-                                  </Typography>
-                                  <Latex>{item}</Latex>
-                                </div>
-                              </Grid>
+                              <TaskAnswerWithEdit
+                                {...props}
+                                answer={ans}
+                                wronganswers={wronganswers}
+                                correctans={correctans}
+                                answerIndex={answerIndex}
+                                ansChar={ansChar}
+                              />
                             );
                           })}
                         </Grid>
