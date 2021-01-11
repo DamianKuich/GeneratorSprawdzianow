@@ -19,6 +19,9 @@ import getLayoutParams from "./getImageLayotRowsCols";
 import CustomRadio from "../material_ui_components/CustomRadio/CustomRadio";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
+import TaskOverlayButton from "./TaskOverlayButton";
+
 const EditTaskImages = (props) => {
   const { task, updateTask } = props;
   const index = props.index || 0;
@@ -84,13 +87,13 @@ const EditTaskImages = (props) => {
 
   return (
     <>
-      <Button
+      <TaskOverlayButton
         onClick={() => {
           setOpen(true);
         }}
       >
-        Edytuj zdjecia
-      </Button>
+        <PhotoLibraryIcon fontSize={"small"}/>
+      </TaskOverlayButton>
       <Dialog
         open={open}
         dialogTitle={"Edycja zdjęć"}

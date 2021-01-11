@@ -3,7 +3,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import AddTaskDialog from "./AddTaskDialog";
 import TaskOverlayButton from "./TaskOverlayButton";
-
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 const AddTaskWithDropdownMenu = ({ index, pushTaskAtIndex, ...props }) => {
   const [state, setState] = React.useState({
     anchorEl: null,
@@ -45,7 +45,7 @@ const AddTaskWithDropdownMenu = ({ index, pushTaskAtIndex, ...props }) => {
   };
   return (
     <>
-        <TaskOverlayButton onClick={handleClick}>+</TaskOverlayButton>
+        <TaskOverlayButton onClick={handleClick}><AddCircleIcon fontSize={"small"}/></TaskOverlayButton>
         <Menu
           id="simple-menu"
           anchorEl={anchorEl}

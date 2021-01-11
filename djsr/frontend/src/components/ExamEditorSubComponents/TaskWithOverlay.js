@@ -12,6 +12,9 @@ import getLayoutParams from "./getImageLayotRowsCols";
 import TaskPointsWithEdit from "./taskPointsWithEdit";
 import TaskOverlayButton from "./TaskOverlayButton";
 import TaskAnswerWithEdit from "./TaskAnswerWithEdit";
+import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import EditTaskImages from "./EditTaskImages";
 
 const TaskWithOverlay = (props) => {
   const {
@@ -26,6 +29,7 @@ const TaskWithOverlay = (props) => {
     removeTask,
     pushTaskAtIndex,
     updateTaskHeight,
+      updateStateAndSaveExam
   } = props;
   let answers = task.currentAnswers.answersIndexes.map((item) => {
     let answerSource = item.isCorrect
@@ -55,19 +59,25 @@ const TaskWithOverlay = (props) => {
           >
             <TaskOverlay
               menuComponents={[
+                  <EditTaskImages task={task} updateTask={(updatedTask)=>{
+                    updateStateAndSaveExam((state)=>{
+                      state.exam.tasks[index]=updatedTask
+                      return state
+                    })
+                  }}/>,
                 <AddTaskWithDropdownMenu
                   index={index}
                   pushTaskAtIndex={pushTaskAtIndex}
                 />,
                 <TaskOverlayButton {...provided.dragHandleProps}>
-                  H
+                  <DragIndicatorIcon fontSize={"small"}/>
                 </TaskOverlayButton>,
                 <TaskOverlayButton
                   onClick={() => {
                     removeTask(index);
                   }}
                 >
-                  X
+                  <DeleteForeverIcon fontSize={"small"}/>
                 </TaskOverlayButton>,
               ]}
             >

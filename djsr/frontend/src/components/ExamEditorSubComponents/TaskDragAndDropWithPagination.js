@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import TaskContentWithMenu from "./TaskContentWithMenu";
 import Latex from "react-latex";
 import TaskWithOverlay from "./TaskWithOverlay";
+import { warningColor } from "../assets/jss/material-kit-react";
 
 const TasksDragAndDrop = ({
   DroppableProps: { droppableId, ...DroppablePropsAnother },
@@ -15,13 +16,13 @@ const TasksDragAndDrop = ({
   editorTaskPart,
   updateTaskText,
   pushTaskAtIndex,
-    removeTask,
-startIndex,
-    pageIndex,
-    endIndex,
+  removeTask,
+  startIndex,
+  pageIndex,
+  endIndex,
   ...props
 }) => {
-  const tasksToRender=examTasks.slice(startIndex,endIndex+1)
+  const tasksToRender = examTasks.slice(startIndex, endIndex + 1);
   return (
     <Droppable
       droppableId={`examDroppable-${pageIndex}`}
@@ -29,8 +30,16 @@ startIndex,
       {...DroppablePropsAnother}
     >
       {(provided, snapshot) => {
+        const {isDraggingOver} = snapshot
         return (
-          <div {...provided.droppableProps} ref={provided.innerRef}>
+          <div
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+            style={{ height: "100%",
+              border:(isDraggingOver) ? `1px solid ${warningColor}`:"",
+              margin:(isDraggingOver) ? `-1px`:"0px"
+            }}
+          >
             {tasksToRender.map((task, index) => {
               return (
                 <TaskWithOverlay
@@ -39,7 +48,7 @@ startIndex,
                   editorTaskPart={editorTaskPart}
                   updateTaskText={updateTaskText}
                   pushTaskAtIndex={pushTaskAtIndex}
-                  index={index+startIndex}
+                  index={index + startIndex}
                   draggableIndex={index}
                   task={task}
                   removeTask={removeTask}
