@@ -94,7 +94,7 @@ class MaterialUiTaskSearch extends Component {
                 .post("/user/tasks/", {
                   skill: result.join(","),
                   pagenr: values.currentPage,
-                  nroftasks: 20,
+                  nroftasks: 10,
                 })
                 .then((response) => {
                   helpers.setSubmitting(false);
