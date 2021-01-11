@@ -302,8 +302,8 @@ class GetRandomTasksViewSet(APIView):
                 ilezamk = int(request.data['ilezamk'])
                 level = int(request.data['level'])
                 skills = request.data['skills']
-                #groups = int(request.data['groups'])
-                groups = 1
+                groups = int(request.data['groups'])
+                # groups = 1
                 listagr = []
                 for x in range(groups):
                     lista = []
@@ -389,9 +389,9 @@ class GetRandomTasksViewSet(APIView):
                                 for x in lista2:
                                     lista.append(x)
                     # to mozna zakomentowac i bedzie bez grup
-                    #listagr.append(lista)
-                return Response(lista, status=status.HTTP_200_OK)
-                # return Response(listagr, status=status.HTTP_200_OK)
+                    listagr.append(lista)
+                # return Response(lista, status=status.HTTP_200_OK)
+                return Response(listagr, status=status.HTTP_200_OK)
             except Exception as e:
                 print("mt er1")
                 return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
@@ -732,7 +732,7 @@ class AllTestsJSONViewSet(APIView):
     serializer_class = TestJSONSerializer
 
     def get(self, request, format=None):
-        tests = TestJSON.objects.filter(user_id=request.user.id)
+        tests = TestJSON.objects.filter(user_id=request.user.id).order_by('-created')
         serializer = TestJSONSerializer(tests, many=True)
         return Response(serializer.data)
 
