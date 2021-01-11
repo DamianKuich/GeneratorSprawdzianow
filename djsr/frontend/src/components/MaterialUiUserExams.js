@@ -412,6 +412,14 @@ const useStylesAlert = makeStyles((theme) => ({
                           >
                             Zapisz
                           </Button>
+                          <Button 
+                           variant="contained" 
+                            color="primary"
+                            size="lg"
+                            onClick={() => this.setState({ open: !this.state.open})}
+                          >
+                            Wygeneruj automatycznie
+                          </Button>
                           
                           </CardActions>
                         
@@ -474,11 +482,7 @@ const useStylesAlert = makeStyles((theme) => ({
                     </IconButton>
                     </BootstrapTooltip>
                    
-                    <BootstrapTooltip title="Wygeneruj sprawdzian automatycznie ">
-                      <IconButton onClick={() => this.setState({ open: !this.state.open, generatedName: exam.name })}>
-                        <DynamicFeedIcon />
-                     </IconButton>
-                    </BootstrapTooltip>
+                  
                     
                   
                   </CardActions>
@@ -501,6 +505,11 @@ const useStylesAlert = makeStyles((theme) => ({
         <DialogTitle  id="form-dialog-title"><Typography variant="h5" align="center">Wygeneruj sprawdzian automatycznie</Typography></DialogTitle>
       
         <DialogContent>
+        <Box p={1}>
+        <TextField  fullWidth
+         onChange={(event) => this.setState({ generatedName: event.target.value })}
+        id="ileotw" label="Nazwa sprawdzianu" />
+            </Box>
         <Box p={1}>
         <TextField  fullWidth
          onChange={(event) => this.setState({ ileotw: event.target.value })}
