@@ -295,6 +295,7 @@ class GetRandomTasksViewSet(APIView):
         print("get auto tasks data", request.data)
         if request.data:
             try:
+
                 author_id = CustomUser.objects.get(id=request.user.id)
                 listaotw = []
                 listazamk = []
