@@ -517,6 +517,8 @@ var UserExams = /*#__PURE__*/function (_Component) {
   var _super = _createSuper(UserExams);
 
   function UserExams(props) {
+    var _this$state;
+
     var _this;
 
     _classCallCheck(this, UserExams);
@@ -565,18 +567,19 @@ var UserExams = /*#__PURE__*/function (_Component) {
       });
     });
 
-    _this.state = {
+    _this.state = (_this$state = {
       exams: null,
       open: false,
+      listExpand: {},
       generatedId: null,
+      generatedName: null,
       sections: null,
+      groups: null,
       ileotw: '',
       ilezamk: '',
       level: '',
-      skills: '',
-      groups: '',
-      autoGenSkills: []
-    };
+      skills: ''
+    }, _defineProperty(_this$state, "groups", ''), _defineProperty(_this$state, "autoGenSkills", []), _this$state);
     return _this;
   }
 
@@ -765,12 +768,12 @@ var UserExams = /*#__PURE__*/function (_Component) {
             _this3.removeExam(exam);
           }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_25___default.a, null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(BootstrapTooltip, {
-          title: "Wygeneruj sprawdzian automatycznie xxx"
+          title: "Wygeneruj sprawdzian automatycznie "
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_21__["default"], {
           onClick: function onClick() {
             return _this3.setState({
               open: !_this3.state.open,
-              generatedId: exam.id
+              generatedName: exam.name
             });
           }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_DynamicFeed__WEBPACK_IMPORTED_MODULE_34___default.a, null))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null));
@@ -790,7 +793,7 @@ var UserExams = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_12__["default"], {
         variant: "h5",
         align: "center"
-      }, "Wygeneruj sprawdzian automatycznie 22:08")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_39__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }, "Wygeneruj sprawdzian automatycznie 3:53")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_39__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
         p: 1
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_50__["default"], {
         fullWidth: true,
@@ -859,7 +862,13 @@ var UserExams = /*#__PURE__*/function (_Component) {
           disablePadding: true
         }, section.skill.map(function (skill) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_52__["default"], {
-            button: true
+            button: true,
+            key: skill.id,
+            onClick: function onClick() {
+              return _this3.setState({
+                autoGenSkills: _this3.state.autoGenSkills.push(skill.id)
+              });
+            }
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_53__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomCheckBox_CustomCheckbox__WEBPACK_IMPORTED_MODULE_46__["default"], {
             edge: "start"
           })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_54__["default"], {
@@ -874,18 +883,22 @@ var UserExams = /*#__PURE__*/function (_Component) {
             ileotw: _this3.state.ileotw,
             ilezamk: _this3.state.ilezamk,
             level: _this3.state.level,
-            skills: _this3.state.autoGenSkills.join(', '),
+            skills: "1,2,3",
+            //this.state.autoGenSkills.join(', '),
             groups: _this3.state.groups
           }).then(function (response) {
-            var randomtasks = JSON.stringify(Object(_AutoGeneTaskParser__WEBPACK_IMPORTED_MODULE_49__["default"])(response.data));
-            _axiosAPI__WEBPACK_IMPORTED_MODULE_3__["default"].put("/user/maketest/", {
-              id: _this3.state.generatedId,
-              tasks: randomtasks
-            }).then(function (response) {
-              console.log(randomtasks);
-              console.log(_this3.state.generatedId);
+            var key = 0;
+            response.data.map(function (group) {
+              var randomtasks = JSON.stringify(Object(_AutoGeneTaskParser__WEBPACK_IMPORTED_MODULE_49__["default"])(group));
+              ++key;
+              _axiosAPI__WEBPACK_IMPORTED_MODULE_3__["default"].post("/user/maketest/", {
+                name: _this3.state.generatedName + ' Grupa ' + key,
+                tasks: randomtasks
+              }).then(function (response) {
+                console.log(randomtasks); // console.log(this.state.generatedId)
 
-              _this3.props.history.push("/editor/".concat(_this3.state.generatedId));
+                _this3.props.history.push("/userexams/");
+              });
             });
           })["catch"](function (error) {
             console.log("chngpass error", error.response);

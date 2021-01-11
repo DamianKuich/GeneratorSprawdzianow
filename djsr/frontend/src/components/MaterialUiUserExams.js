@@ -145,8 +145,11 @@ const useStylesAlert = makeStyles((theme) => ({
       this.state = {
         exams: null,
         open: false,
+        listExpand:{},
         generatedId: null,
+        generatedName: null,
         sections: null,
+        groups: null,
         ileotw: '',
         ilezamk: '',
         level: '',
@@ -454,8 +457,8 @@ const useStylesAlert = makeStyles((theme) => ({
                     </IconButton>
                     </BootstrapTooltip>
                    
-                    <BootstrapTooltip title="Wygeneruj sprawdzian automatycznie xxx">
-                      <IconButton onClick={() => this.setState({ open: !this.state.open, generatedId: exam.id })}>
+                    <BootstrapTooltip title="Wygeneruj sprawdzian automatycznie ">
+                      <IconButton onClick={() => this.setState({ open: !this.state.open, generatedName: exam.name })}>
                         <DynamicFeedIcon />
                      </IconButton>
                     </BootstrapTooltip>
@@ -478,7 +481,7 @@ const useStylesAlert = makeStyles((theme) => ({
           titlestyle={{textAlign: "center"}}
           
          open={this.state.open} onClose={() => this.setState({ open: !this.state.open })}>
-        <DialogTitle  id="form-dialog-title"><Typography variant="h5" align="center">Wygeneruj sprawdzian automatycznie 22:14</Typography></DialogTitle>
+        <DialogTitle  id="form-dialog-title"><Typography variant="h5" align="center">Wygeneruj sprawdzian automatycznie 3:53</Typography></DialogTitle>
       
         <DialogContent>
         <Box p={1}>
@@ -516,6 +519,7 @@ const useStylesAlert = makeStyles((theme) => ({
         </TextField>
         </Box>
  <Box p={1}>
+   
         <TextField  fullWidth
          onChange={(event) => this.setState({ groups: event.target.value })}
         id="groups" label="Ilość grup" />
@@ -523,6 +527,7 @@ const useStylesAlert = makeStyles((theme) => ({
             <Box p={1}>
                   <List>
                     {sections.map((section) => {
+                     
                       return (
                         <>
                           <ListItem
@@ -548,12 +553,13 @@ const useStylesAlert = makeStyles((theme) => ({
                               {section.skill.map((skill) => {
                                 return (
                                   <ListItem button
-                                  
+                                  key={skill.id}
+                                  onClick={() => this.setState({ autoGenSkills: this.state.autoGenSkills.push(skill.id) })}
                                   >
                                     <ListItemIcon>
                                       <Checkbox
                                         edge="start"
-                                       
+                                        
                                       
                                       />
                                     </ListItemIcon>
@@ -597,22 +603,37 @@ const useStylesAlert = makeStyles((theme) => ({
                 ileotw: this.state.ileotw,
                 ilezamk: this.state.ilezamk,
                 level:  this.state.level,
-                skills: this.state.autoGenSkills.join(', '),
+                skills: "1,2,3",
+                
+                //this.state.autoGenSkills.join(', '),
                 groups: this.state.groups,
               })
                 .then((response) => {
+
+                  let key = 0;
+                    response.data.map((group )=> {
+                      
+                      
+                      let randomtasks = JSON.stringify(taskParser(group))
+                      ++key
+                      axiosInstance.post(`/user/maketest/`, {
+                        name:this.state.generatedName + ' Grupa '+ key,
+                        tasks:randomtasks
+                        
+                      }).then((response)=>{
+                        
+                        console.log(randomtasks)
+                       // console.log(this.state.generatedId)
+                       this.props.history.push(`/userexams/`);
+                      })
                     
-                   let randomtasks = JSON.stringify(taskParser(response.data))
+                    })
+                    
                    
                    
-                    axiosInstance.put(`/user/maketest/`, {
-                    id:this.state.generatedId,
-                    tasks:randomtasks
-                  }).then((response)=>{
-                    console.log(randomtasks)
-                    console.log(this.state.generatedId)
-                    this.props.history.push(`/editor/${this.state.generatedId}`);
-                  })
+                   
+                   
+            
  
  
 
