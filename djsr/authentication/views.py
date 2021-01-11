@@ -26,7 +26,7 @@ import requests
 import base64
 import pdfkit
 
-from .examToPdf.PdfFromNode import generatePdf, generateAnswersPdf
+from .examToPdf.PdfFromNode import generatePdf, generateAnswersPdf, generateAnswerKeyPdf
 
 from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer, \
     CustomUserSerializerReadOnly, PasswordSendResetSerializer, TestJSONSerializer, ImageSerializer
@@ -302,65 +302,96 @@ class GetRandomTasksViewSet(APIView):
                 ilezamk = int(request.data['ilezamk'])
                 level = int(request.data['level'])
                 skills = request.data['skills']
-                groups = int(request.data['groups'])
-                
+                #groups = int(request.data['groups'])
+                groups = 1
                 listagr = []
                 for x in range(groups):
                     lista = []
                     if skills is not None:
                         if ilezamk != 0:
-                            for skillid in skills.split(','):
-                                listazamk = []
-                                task = Task.objects.filter(skill=skillid, type=2, private=False, level=level)
-                                serializer = TaskSerializer(task, many=True)
+                            skillist = skills.split(',')
+                            for index, skillid in enumerate(skills.split(',')):
+                                task = Task.objects.filter(skill=skillid, type=2, private=False, level=level).count()
+
                                 taskpriv = Task.objects.filter(skill=skillid, type=2, private=True, author=author_id,
-                                                               level=level)
-                                serializerpriv = TaskSerializer(taskpriv, many=True)
-                                if len(serializer.data)>0:
-                                    for x in serializer.data:
-                                        listazamk.append(x)
-                                if len(serializerpriv.data)>0:
-                                    for y in  serializerpriv.data:
-                                        listazamk.append(y)
-                                a = listazamk
-                                random.shuffle(a)
-                                b = math.ceil(ilezamk/len(skills.split(',')))
-                                for x in a[:b]:
-                                    lista.append(x)
-                            pom = len(lista) - ilezamk
-                            if pom>0:
-                                lista=lista[:pom*-1]
-                            lenzam1 = len(lista)
+                                                               level=level).count()
+                                if task == 0 and taskpriv == 0:
+                                    try:
+                                        del skillist[index]
+                                    except:
+                                        del skillist[index-1]
+                            if len(skillist)>0:
+                                for index, skillid in enumerate(skillist):
+                                    brak = 0
+                                    listazamk = []
+                                    task = Task.objects.filter(skill=skillid, type=2, private=False, level=level)
+                                    serializer = TaskSerializer(task, many=True)
+                                    taskpriv = Task.objects.filter(skill=skillid, type=2, private=True, author=author_id,
+                                                                   level=level)
+                                    serializerpriv = TaskSerializer(taskpriv, many=True)
+                                    if len(serializer.data)>0:
+                                        for x in serializer.data:
+                                            listazamk.append(x)
+                                    if len(serializerpriv.data)>0:
+                                        for y in  serializerpriv.data:
+                                            listazamk.append(y)
+                                    if len(listazamk) > 0:
+                                        a = listazamk
+                                        random.shuffle(a)
+                                        if index == 0:
+                                            b = math.ceil(ilezamk/len(skills.split(',')))
+                                        else:
+                                            b = round(ilezamk/len(skills.split(',')))
+                                        for x in a[:b]:
+                                            lista.append(x)
+                                pom = len(lista) - ilezamk
+                                if pom>0:
+                                    lista=lista[:pom*-1]
+                                lenzam1 = len(lista)
                         lista2 = []
                         if ileotw != 0:
-                            for skillid in skills.split(','):
-                                listaotw = []
-                                task = Task.objects.filter(skill=skillid, type=1, private=False, level=level)
-                                serializer = TaskSerializer(task, many=True)
-                                taskprv = Task.objects.filter(skill=skillid, type=1, private=True, author=author_id,
-                                                              level=level)
-                                serializerprv = TaskSerializer(taskprv, many=True)
-                                if len(serializer.data)>0:
-                                    for x in serializer.data:
-                                        listaotw.append(x)
-                                if len(serializerpriv.data)>0:
-                                    for y in serializerpriv.data:
-                                        listaotw.append(y)
-                                a = listaotw
-                                random.shuffle(a)
-                                b = math.ceil(ileotw / len(skills.split(',')))
-                                for x in a[:b]:
-                                    if len(x)>0:
-                                        lista2.append(x)
-                            pomo = len(lista2) - ileotw
-                            if pomo > 0:
-                                lista2 = lista2[:pomo*-1]
-                            for x in lista2:
-                                lista.append(x)
+                            skillist = skills.split(',')
+                            for index, skillid in enumerate(skills.split(',')):
+                                task = Task.objects.filter(skill=skillid, type=1, private=False, level=level).count()
+                                taskpriv = Task.objects.filter(skill=skillid, type=1, private=True, author=author_id,
+                                                               level=level).count()
+                                if task == 0 and taskpriv == 0:
+                                    try:
+                                        del skillist[index]
+                                    except:
+                                        del skillist[index-1]
+                            if len(skillist)>0:
+                                for index, skillid in enumerate(skillist):
+                                    listaotw = []
+                                    task = Task.objects.filter(skill=skillid, type=1, private=False, level=level)
+                                    serializer = TaskSerializer(task, many=True)
+                                    taskprv = Task.objects.filter(skill=skillid, type=1, private=True, author=author_id,
+                                                                  level=level)
+                                    serializerprv = TaskSerializer(taskprv, many=True)
+                                    if len(serializer.data)>0:
+                                        for x in serializer.data:
+                                            listaotw.append(x)
+                                    if len(serializerprv.data)>0:
+                                        for y in serializerprv.data:
+                                            listaotw.append(y)
+                                    a = listaotw
+                                    random.shuffle(a)
+                                    if index == 0:
+                                        b = math.ceil(ileotw / len(skills.split(',')))
+                                    else:
+                                        b = round(ileotw / len(skills.split(',')))
+                                    for x in a[:b]:
+                                        if len(x)>0:
+                                            lista2.append(x)
+                                pomo = len(lista2) - ileotw
+                                if pomo > 0:
+                                    lista2 = lista2[:pomo*-1]
+                                for x in lista2:
+                                    lista.append(x)
                     # to mozna zakomentowac i bedzie bez grup
-                    listagr.append(lista)
-                #return Response(lista, status=status.HTTP_200_OK)
-                return Response(listagr, status=status.HTTP_200_OK)
+                    #listagr.append(lista)
+                return Response(lista, status=status.HTTP_200_OK)
+                # return Response(listagr, status=status.HTTP_200_OK)
             except Exception as e:
                 print("mt er1")
                 return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
@@ -538,20 +569,22 @@ class SkilltoSectionsAutoGene(APIView):
     serializer_class = SectionSerializerv2
 
     def get(self, request, format=None):
-        s = Sectionv2.objects.all()
-        s.delete()
+        # s = Sectionv2.objects.all()
+        # s.delete()
         list = []
-        sec = Section.objects.all()
-        for section in sec:
-            name = section.nasza_nazwa()
+        for section in Section.objects.only("Section").iterator():
+            name = section.Section
             id = section.id
-            sec2 = Sectionv2.objects.create(id = id,Section=name)
-            sec2.save()
-        ss = Sectionv2.objects.all()
-        for s in ss:
-            s2 = Section.objects.get(Section=s.Section)
-            fields = ('Skill')
-            skil = Skill.objects.filter(section=s2.id).only(fields)
+            try:
+                if not Sectionv2.objects.filter(id=id, Section=name).exists():
+                    sec2 = Sectionv2.objects.create(id=id, Section=name)
+                    sec2.save()
+            except Sectionv2.DoesNotExist:
+                sec2 = Sectionv2.objects.create(id=id, Section=name)
+                sec2.save()
+        for s in Sectionv2.objects.only("skilll","Section").iterator():
+            s2 = Section.objects.get(Section=s.Section).id
+            skil = Skill.objects.filter(section=s2).only("id")
             s.skilll.set(skil)
             s.save()
         seco = Sectionv2.objects.all()
@@ -565,6 +598,7 @@ class SkilltoSectionsAutoGene(APIView):
             x['sectionTaskCount'] = sum
             list.append(x)
         return Response(list)
+        # return Response(seria.data)
 
 
 class AddTask(APIView):
@@ -796,7 +830,6 @@ class TestTasksiewSet(APIView):
         id = kwargs.pop('id')
 
         test = list(TestJSON.objects.filter(id=id).values())[0]
-        print(test['tasks'])
         tasks = json.loads(test['tasks'])
         pdf, html = generatePdf(tasks=tasks, name=test['name'])
         return HttpResponse(pdf, content_type="application/pdf")
@@ -810,9 +843,20 @@ class TestAnswersviewSet(APIView):
         id = kwargs.pop('id')
 
         test = list(TestJSON.objects.filter(id=id).values())[0]
-        print(test['tasks'])
         tasks = json.loads(test['tasks'])
         pdf, html = generateAnswersPdf(tasks=tasks, name=test['name'])
+        return HttpResponse(pdf, content_type="application/pdf")
+
+class TestKeyAnswersviewSet(APIView):
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = TestJSONSerializer
+
+    def get(self, request, *args, **kwargs):
+        id = kwargs.pop('id')
+
+        test = list(TestJSON.objects.filter(id=id).values())[0]
+        tasks = json.loads(test['tasks'])
+        pdf, html = generateAnswerKeyPdf(tasks=tasks, name=test['name'])
         return HttpResponse(pdf, content_type="application/pdf")
 
 class RetDB(APIView):
