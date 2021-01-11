@@ -54,6 +54,7 @@ def collectTaskImages(image):
 def collectImageLayout(image):
     try:
         image_layout = image['imageLayout']
+        print(image_layout, "tujestem")
         return image_layout
     except:
         pass
@@ -65,6 +66,7 @@ def taskPrintDataParser(task):
     task['answers'] = collectTaskAnswers(task['currentAnswers'])
     task['obrazki'] = collectTaskImages(task['currentAnswers'])
     task['layout'] = collectImageLayout(task['currentAnswers'])
+    task['space']= task['currentAnswers']['spacetosolve']
     return task
 
 
