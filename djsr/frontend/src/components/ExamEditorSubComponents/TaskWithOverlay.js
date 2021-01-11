@@ -162,31 +162,31 @@ const TaskWithOverlay = (props) => {
                               </div>
                             </div>
                         )*/}
-                        <Grid
-                          container
-                          alignItems="center"
-                          justify={"space-between"}
-                          className="pl-2 pr-2 ml-0 mr-2"
-                        >
-                          {answers.map((item, index) => {
-                            return (
-                              <Grid item>
-                                <div>
-                                  <Typography
-                                    display={"inline"}
-                                    style={{
-                                      fontWeight: "bold",
-                                    }}
-                                    className="font-weight-bold"
-                                  >
-                                    {ansChar[index] + ". "}
-                                  </Typography>
-                                  <Latex>{item}</Latex>
-                                </div>
-                              </Grid>
-                            );
-                          })}
-                        </Grid>
+                        {/*<Grid*/}
+                        {/*  container*/}
+                        {/*  alignItems="center"*/}
+                        {/*  justify={"space-between"}*/}
+                        {/*  className="pl-2 pr-2 ml-0 mr-2"*/}
+                        {/*>*/}
+                        {/*  {answers.map((item, index) => {*/}
+                        {/*    return (*/}
+                        {/*      <Grid item>*/}
+                        {/*        <div>*/}
+                        {/*          <Typography*/}
+                        {/*            display={"inline"}*/}
+                        {/*            style={{*/}
+                        {/*              fontWeight: "bold",*/}
+                        {/*            }}*/}
+                        {/*            className="font-weight-bold"*/}
+                        {/*          >*/}
+                        {/*            {ansChar[index] + ". "}*/}
+                        {/*          </Typography>*/}
+                        {/*          <Latex>{item}</Latex>*/}
+                        {/*        </div>*/}
+                        {/*      </Grid>*/}
+                        {/*    );*/}
+                        {/*  })}*/}
+                        {/*</Grid>*/}
                         <Grid
                           container
                           alignItems="center"

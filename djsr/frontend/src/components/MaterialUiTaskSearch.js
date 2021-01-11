@@ -93,7 +93,7 @@ class MaterialUiTaskSearch extends Component {
               axiosInstance
                 .post("/user/tasks/", {
                   skill: result.join(","),
-                  pagenr: 1,
+                  pagenr: values.currentPage,
                   nroftasks: 20,
                 })
                 .then((response) => {
@@ -103,6 +103,10 @@ class MaterialUiTaskSearch extends Component {
                   //   results: response.data,
                   // });
                   // console.log("parsed Twat",tasksParser(response.data));
+                  helpers.setFieldValue(
+                    "maxPage",
+                    parseInt(response.data.pages)
+                  );
                   this.props.updateData(tasksParser(response.data.tasks));
                 })
                 .catch((error) => {
@@ -146,12 +150,22 @@ class MaterialUiTaskSearch extends Component {
                 setFieldValue(valueName, newValue);
               }
             };
-            const handlePageChange=(event,page)=>{
-              setFieldValue("currentPage",page)
-            }
-            const paginationItems = usePagination({
+            const handlePageChange = (event, page) => {
+              console.log("pageChange", page);
+              if (
+                values.currentPage !== page &&
+                page <= values.maxPage &&
+                page > 0 &&
+                  !isSubmitting
+              ) {
+                setFieldValue("currentPage", page);
+                handleSubmit();
+              }
+            };
+            const { items: paginationItems } = usePagination({
               count: values.maxPage || 1,
               page: values.currentPage,
+              onChange: handlePageChange,
             });
             return (
               <>
@@ -283,26 +297,31 @@ class MaterialUiTaskSearch extends Component {
                     </Button>
                   </Box>
                   {!!values.maxPage && (
-                    <Box>
+                    <Box
+                        style={{display:"flex",justifyContent:"center"}}
+                    >
                       <Pagination
                         pages={paginationItems.map(
                           ({ page, type, selected, ...item }, index) => {
                             switch (true) {
                               case type === "start-ellipsis" ||
                                 type === "end-ellipsis":
-                                return { text: "...", ...item };
+                                return { text: "...",disabled:isSubmitting, ...item };
                               case type === "page":
                                 return {
                                   text: page,
                                   active: selected,
+                                  disabled:isSubmitting,
                                   ...item,
                                 };
                               case type === "previous":
-                                return { text: "<", ...item };
+                                return { text: "<",
+                                  disabled:isSubmitting,...item };
                               case type === "next":
-                                return { text: ">", ...item };
+                                return { text: ">",
+                                  disabled:isSubmitting,...item };
                               default:
-                                return {text:"XD"}
+                                return { text: "XD" };
                             }
                           }
                         )}
