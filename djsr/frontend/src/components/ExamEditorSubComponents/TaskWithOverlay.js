@@ -11,6 +11,7 @@ import ReactResizeDetector from "react-resize-detector";
 import getLayoutParams from "./getImageLayotRowsCols";
 import TaskPointsWithEdit from "./taskPointsWithEdit";
 import TaskOverlayButton from "./TaskOverlayButton";
+import TaskAnswerWithEdit from "./TaskAnswerWithEdit";
 
 const TaskWithOverlay = (props) => {
   const {
@@ -32,6 +33,9 @@ const TaskWithOverlay = (props) => {
       : task.currentAnswers.wronganswers;
     return answerSource[item.index];
   });
+  const wronganswers = task.currentAnswers.wronganswers;
+  const correctans = task.currentAnswers.correctans;
+  const answersIndexes = task.currentAnswers.answersIndexes;
   const taskImage = task.currentAnswers.image || [];
   const imageLayout = getLayoutParams(task.currentAnswers.imageLayout || "");
   const imageWidth = 12 / imageLayout.cols;
@@ -55,9 +59,7 @@ const TaskWithOverlay = (props) => {
                   index={index}
                   pushTaskAtIndex={pushTaskAtIndex}
                 />,
-                <TaskOverlayButton
-                  {...provided.dragHandleProps}
-                >
+                <TaskOverlayButton {...provided.dragHandleProps}>
                   H
                 </TaskOverlayButton>,
                 <TaskOverlayButton
@@ -97,7 +99,10 @@ const TaskWithOverlay = (props) => {
                             {/*<p className="text-right mb-0 pb-0">*/}
                             {/*  {".../" + task.maxPoints + " pkt."}*/}
                             {/*</p>*/}
-                            <TaskPointsWithEdit {...props} maxPoints={task.maxPoints}/>
+                            <TaskPointsWithEdit
+                              {...props}
+                              maxPoints={task.maxPoints}
+                            />
                           </Grid>
                         </Grid>
                         <p>
@@ -179,6 +184,25 @@ const TaskWithOverlay = (props) => {
                                   <Latex>{item}</Latex>
                                 </div>
                               </Grid>
+                            );
+                          })}
+                        </Grid>
+                        <Grid
+                          container
+                          alignItems="center"
+                          justify={"space-between"}
+                          // className="pl-2 pr-2 ml-0 mr-2"
+                        >
+                          {answersIndexes.map((ans, answerIndex) => {
+                            return (
+                              <TaskAnswerWithEdit
+                                {...props}
+                                answer={ans}
+                                wronganswers={wronganswers}
+                                correctans={correctans}
+                                answerIndex={answerIndex}
+                                ansChar={ansChar}
+                              />
                             );
                           })}
                         </Grid>

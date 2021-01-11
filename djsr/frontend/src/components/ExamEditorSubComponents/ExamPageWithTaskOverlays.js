@@ -28,15 +28,17 @@ const ExamPages = (props) => {
     <FirstPageHeader {...props} title={exam.name} maxExamPoints={maxPoints} />,
   ];
   return (
+      <Box
+          style={{height:"100vh",overflow:"auto",flexGrow: "3",}}
+      >
     <Box
       style={{
         display: "flex",
         justifyContent: "center",
+        alignItems:"center",
         flexDirection: "column",
-        flexGrow: "3",
         background: `linear-gradient(60deg, rgba(242,163,255,0.5) 0%, rgba(195,105,219,0.5) 100%), url(${bgImage})`,
       }}
-      p={3}
     >
       <ExamPageWithOverlay
         DroppableProps={{ droppableId: "examDroppable" }}
@@ -45,6 +47,7 @@ const ExamPages = (props) => {
         {...props}
       />
     </Box>
+        </Box>
   );
 };
 
