@@ -106,6 +106,7 @@ const bgStyles = {
       backgroundImage: `url(${image})`,
       
       minHeight: 1000,
+      maxWidth: 1885
 
      
      
@@ -155,7 +156,8 @@ const useStylesAlert = makeStyles((theme) => ({
         level: '',
         skills: '', 
         groups: '',
-        autoGenSkills:[]
+        autoGenSkills:[],
+        checked: []
         
 
        
@@ -163,6 +165,7 @@ const useStylesAlert = makeStyles((theme) => ({
         
         
       };
+      this.handleToggle = this.handleToggle.bind(this);
     }
   
     updateExams = () => {
@@ -208,6 +211,20 @@ const useStylesAlert = makeStyles((theme) => ({
       });
     };
   
+
+    handleToggle = (value) => () => {
+      this.setState({ autoGenSkills: this.state.autoGenSkills.concat(value) })
+      const currentIndex = this.state.checked.indexOf(value);
+      const newChecked = [...this.state.checked];
+      
+      if (currentIndex === -1) {
+        newChecked.push(value);
+      } else {
+        newChecked.splice(currentIndex, 1);
+      }
+  
+      this.setState({ checked: newChecked });
+    };
     // componentWillMount() {
     //
     // }
@@ -272,7 +289,7 @@ const useStylesAlert = makeStyles((theme) => ({
         <Paper  style={bgStyles.paperContainer}>
    
           <Box
-          p={7}
+          p={8}
           >
 
               <Grid  
@@ -481,7 +498,7 @@ const useStylesAlert = makeStyles((theme) => ({
           titlestyle={{textAlign: "center"}}
           
          open={this.state.open} onClose={() => this.setState({ open: !this.state.open })}>
-        <DialogTitle  id="form-dialog-title"><Typography variant="h5" align="center">Wygeneruj sprawdzian automatycznie 3:53</Typography></DialogTitle>
+        <DialogTitle  id="form-dialog-title"><Typography variant="h5" align="center">Wygeneruj sprawdzian automatycznie</Typography></DialogTitle>
       
         <DialogContent>
         <Box p={1}>
@@ -537,15 +554,12 @@ const useStylesAlert = makeStyles((theme) => ({
                           >
                           
                             <ListItemText
-                              primary={section.Section}
+                              primary={<h3>{section.Section}</h3>}
                               secondary={"Dostępnych zadań: " + section.sectionTaskCount}
                           
                             />
                               <ListItemSecondaryAction>
-                              <Checkbox
-                                edge="start"
-                           
-                              />
+                            
                             </ListItemSecondaryAction>
                           </ListItem>
                        
@@ -554,12 +568,14 @@ const useStylesAlert = makeStyles((theme) => ({
                                 return (
                                   <ListItem button
                                   key={skill.id}
-                                  onClick={() => this.setState({ autoGenSkills: this.state.autoGenSkills.push(skill.id) })}
+                                  onClick={this.handleToggle(skill.id)}
+                                  
                                   >
                                     <ListItemIcon>
                                       <Checkbox
                                         edge="start"
-                                        
+                                        checked={this.state.checked.indexOf(skill.id) !== -1}
+                                        tabIndex={-1}
                                       
                                       />
                                     </ListItemIcon>
@@ -603,9 +619,7 @@ const useStylesAlert = makeStyles((theme) => ({
                 ileotw: this.state.ileotw,
                 ilezamk: this.state.ilezamk,
                 level:  this.state.level,
-                skills: "1,2,3",
-                
-                //this.state.autoGenSkills.join(', '),
+                skills: this.state.checked.join(', '),
                 groups: this.state.groups,
               })
                 .then((response) => {
@@ -624,7 +638,7 @@ const useStylesAlert = makeStyles((theme) => ({
                         
                         console.log(randomtasks)
                        // console.log(this.state.generatedId)
-                       this.props.history.push(`/userexams/`);
+                       this.props.history.go(0);
                       })
                     
                     })

@@ -384,7 +384,7 @@ class MakeTestViewSet(APIView):
                     mojtest.tasks = request.data['tasks']
                     mojtest.created = date.today()
                     pomoc = CustomUser.objects.get(id=request.user.id)
-                    mojtest.user_id = pomoc.id
+                    mojtest.user_id = pomoc
                     mojtest.save()
                     test = TestJSON.objects.get(name=nazwa, user_id=request.user.id)
                     testt = TestJSON.objects.filter(id=test.id, user_id=request.user.id)
