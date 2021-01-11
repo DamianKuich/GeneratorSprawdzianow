@@ -1,2 +1,2 @@
-web: python djsr/manage.py runserver 127.0.0.1:8000
+web: gunicorn --pythonpath djsr djsr.wsgi --log-file -
 clock: python clock.py
