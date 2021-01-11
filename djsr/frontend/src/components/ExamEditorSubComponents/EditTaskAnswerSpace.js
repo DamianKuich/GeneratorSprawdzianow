@@ -79,7 +79,7 @@ const EditTaskAnswerSpace = (props) => {
                     radioProps={{
                       checked: !!values.isOtwarte ,
                       onChange: () => {
-                        setFieldValue("isOtwarte",!!values.isOtwarte);
+                        setFieldValue("isOtwarte",true);
                       },
                     }}
                   />
@@ -88,7 +88,7 @@ const EditTaskAnswerSpace = (props) => {
                     radioProps={{
                       checked: !values.isOtwarte ,
                       onChange: () => {
-                        setFieldValue("isOtwarte",!values.isOtwarte);
+                        setFieldValue("isOtwarte",false);
                       },
                     }}
                   />
