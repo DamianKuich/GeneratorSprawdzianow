@@ -1,0 +1,1 @@
+{"id": 3, "Section": "Funkcje", "skilll": [{"id": 16, "Skill": "Zdający szkicuje wykres funkcji określonej w różnych przedziałach różnymi wzorami; odczytuje własności takiej funkcji z wykresu", "taskCountOtw": 1, "taskCountZamk": 0}], "sectionTaskCount": 1}
