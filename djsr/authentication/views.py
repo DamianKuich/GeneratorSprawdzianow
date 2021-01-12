@@ -308,7 +308,8 @@ class GetRandomTasksViewSet(APIView):
                 for x in range(groups):
                     lista = []
                     if skills is not None:
-                        if ilezamk != 0:
+                        if ilezamk > 0:
+                            dousu = []
                             skillist = skills.split(',')
                             for index, skillid in enumerate(skills.split(',')):
                                 task = Task.objects.filter(skill=skillid, type=2, private=False, level=level).count()
@@ -316,10 +317,9 @@ class GetRandomTasksViewSet(APIView):
                                 taskpriv = Task.objects.filter(skill=skillid, type=2, private=True, author=author_id,
                                                                level=level).count()
                                 if task == 0 and taskpriv == 0:
-                                    try:
-                                        del skillist[index]
-                                    except:
-                                        del skillist[index-1]
+                                    dousu.append(skillid)
+                            for x in dousu:
+                                skillist.remove(x)
                             if len(skillist)>0:
                                 for index, skillid in enumerate(skillist):
                                     brak = 0
@@ -349,17 +349,17 @@ class GetRandomTasksViewSet(APIView):
                                     lista=lista[:pom*-1]
                                 lenzam1 = len(lista)
                         lista2 = []
-                        if ileotw != 0:
+                        if ileotw > 0:
+                            dousu = []
                             skillist = skills.split(',')
                             for index, skillid in enumerate(skills.split(',')):
                                 task = Task.objects.filter(skill=skillid, type=1, private=False, level=level).count()
                                 taskpriv = Task.objects.filter(skill=skillid, type=1, private=True, author=author_id,
                                                                level=level).count()
                                 if task == 0 and taskpriv == 0:
-                                    try:
-                                        del skillist[index]
-                                    except:
-                                        del skillist[index-1]
+                                    dousu.append(skillid)
+                            for x in dousu:
+                                    skillist.remove(x)
                             if len(skillist)>0:
                                 for index, skillid in enumerate(skillist):
                                     listaotw = []
