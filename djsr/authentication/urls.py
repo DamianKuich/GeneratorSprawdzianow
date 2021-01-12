@@ -3,10 +3,11 @@ from django.urls import path, include
 from rest_framework_simplejwt import views as jwt_views
 from .views import AddImageToTaskViewSet, AddImageViewSet, ImageViewSet, SkillViewSet, SectionViewSet, \
     CustomUserCreate, HelloWorldView, \
-    LogoutAndBlacklistRefreshTokenForUserView, TaskViewSet, \
+    LogoutAndBlacklistRefreshTokenForUserView, TaskViewSet, TestKeyAnswersviewSet, \
     UserRetrieveUpdateAPIView, ReturnUserInfo, PasswordSendResetView, PasswordResetView, AllTestsJSONViewSet, \
     OneTestJSONViewSet, MakeTestViewSet, MakeTestCopyViewSet, LatexToSvgView, GetRandomTasksViewSet, \
-    SkilltoSections, AddTask, AddSkill, AddSection, AddAnswers, DeleteTestViewSet, TestTasksiewSet, TestAnswersviewSet, SkilltoSectionsAutoGene
+    SkilltoSections, AddTask, AddSkill, AddSection, AddAnswers, DeleteTestViewSet, TestTasksiewSet,\
+    TestAnswersviewSet, SkilltoSectionsAutoGene, GetSkillsFromfile
 
 # TODO resend activation token
 urlpatterns = [
@@ -27,7 +28,8 @@ urlpatterns = [
     path('user/addimage/', AddImageViewSet.as_view(), name="AddImage"),
     path('user/sections/', SectionViewSet.as_view(), name="sections"),
     path('user/sections2/', SkilltoSections.as_view(), name="sections"),
-    path('user/sections3/', SkilltoSectionsAutoGene.as_view(), name="sections"),
+    path('user/sections4/', SkilltoSectionsAutoGene.as_view(), name="sections"),
+    path('user/sections3/', GetSkillsFromfile.as_view(), name="sections"),
     path('user/tasks/', TaskViewSet.as_view(), name="tasks"),
     path('user/create/', CustomUserCreate.as_view(), name="create_user"),
     path('user/activate/<token>/$', HelloWorldView.as_view(), name='activate-user'),
@@ -42,4 +44,5 @@ urlpatterns = [
     # path('user/testend/', TestEndpoint.as_view(), name='testend'),
     path('user/testpdf/<id>', TestTasksiewSet.as_view(), name='testpdf'),
     path('user/answerspdf/<id>', TestAnswersviewSet.as_view(), name='testpdf'),
+    path('user/answerskeypdf/<id>', TestKeyAnswersviewSet.as_view(), name='testpdf'),
 ]

@@ -104,6 +104,8 @@ class Task(models.Model):
     points = models.IntegerField(default=0)
     skill = models.ManyToManyField(Skill)
     image = models.ManyToManyField(Image, blank=True)
+    timetosolve = models.IntegerField(blank=True,null=True)
+    spacetosolve = models.IntegerField(blank=True,null=True)
 
     def __str__(self):
         return self.nasza_nazwa()
@@ -115,7 +117,7 @@ class Task(models.Model):
 class TestJSON(models.Model):
     name = models.TextField(null=True)
     tasks = models.TextField(null=True)
-    created = models.DateField(default=datetime.date.today)
+    created = models.DateTimeField(auto_now=True)
     user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE,default="",blank=True,null=True)
 
     def __str__(self):
@@ -141,3 +143,6 @@ class UserActivationToken(models.Model):
 
 class ImageDB(models.Model):
     image = models.BinaryField(blank=True)
+
+class SecAndSkillhelp(models.Model):
+    text = models.CharField(max_length=60000,unique=True)
