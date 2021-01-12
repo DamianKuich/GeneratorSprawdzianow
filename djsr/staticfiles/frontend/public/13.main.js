@@ -1,1 +1,341 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[13],{454:function(e,t,n){"use strict";var a=n(44),o=n(158);Object.defineProperty(t,"__esModule",{value:!0}),t.default=void 0;var i=o(n(1)),r=(0,a(n(159)).default)(i.createElement("path",{d:"M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"}),"People");t.default=r},533:function(e,t,n){"use strict";var a=n(44),o=n(158);Object.defineProperty(t,"__esModule",{value:!0}),t.default=void 0;var i=o(n(1)),r=(0,a(n(159)).default)(i.createElement("path",{d:"M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"}),"Favorite");t.default=r},610:function(e,t,n){"use strict";var a=n(1),o=n(49);t.a=Object(o.a)(a.createElement("path",{d:"M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"}),"Apps")},611:function(e,t,n){"use strict";var a=n(1),o=n(49);t.a=Object(o.a)(a.createElement("path",{d:"M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"}),"CloudDownload")},613:function(e,t,n){"use strict";var a=n(2),o=n(5),i=n(1),r=(n(0),n(6)),c=n(131),l=n(7),s=n(68),d=i.forwardRef((function(e,t){var n=e.children,l=e.classes,d=e.className,u=e.component,m=void 0===u?"div":u,p=e.disablePointerEvents,f=void 0!==p&&p,b=e.disableTypography,g=void 0!==b&&b,h=e.position,v=e.variant,O=Object(o.a)(e,["children","classes","className","component","disablePointerEvents","disableTypography","position","variant"]),E=Object(s.b)()||{},j=v;return v&&E.variant,E&&!j&&(j=E.variant),i.createElement(s.a.Provider,{value:null},i.createElement(m,Object(a.a)({className:Object(r.a)(l.root,d,f&&l.disablePointerEvents,E.hiddenLabel&&l.hiddenLabel,"filled"===j&&l.filled,{start:l.positionStart,end:l.positionEnd}[h],"dense"===E.margin&&l.marginDense),ref:t},O),"string"!=typeof n||g?n:i.createElement(c.a,{color:"textSecondary"},n)))}));t.a=Object(l.a)({root:{display:"flex",height:"0.01em",maxHeight:"2em",alignItems:"center",whiteSpace:"nowrap"},filled:{"&$positionStart:not($hiddenLabel)":{marginTop:16}},positionStart:{marginRight:8},positionEnd:{marginLeft:8},disablePointerEvents:{pointerEvents:"none"},hiddenLabel:{},marginDense:{}},{name:"MuiInputAdornment"})(d)},912:function(e,t,n){"use strict";var a=n(5),o=n(2),i=n(1),r=(n(0),n(6)),c=n(18),l=n(7),s=n(443),d=n(49),u=Object(d.a)(i.createElement("path",{d:"M20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4C12.76,4 13.5,4.11 14.2, 4.31L15.77,2.74C14.61,2.26 13.34,2 12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0, 0 22,12M7.91,10.08L6.5,11.5L11,16L21,6L19.59,4.58L11,13.17L7.91,10.08Z"}),"SuccessOutlined"),m=Object(d.a)(i.createElement("path",{d:"M12 5.99L19.53 19H4.47L12 5.99M12 2L1 21h22L12 2zm1 14h-2v2h2v-2zm0-6h-2v4h2v-4z"}),"ReportProblemOutlined"),p=Object(d.a)(i.createElement("path",{d:"M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"}),"ErrorOutline"),f=Object(d.a)(i.createElement("path",{d:"M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20, 12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10, 10 0 0,0 12,2M11,17H13V11H11V17Z"}),"InfoOutlined"),b=Object(d.a)(i.createElement("path",{d:"M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"}),"Close"),g=n(444),h=n(10),v={success:i.createElement(u,{fontSize:"inherit"}),warning:i.createElement(m,{fontSize:"inherit"}),error:i.createElement(p,{fontSize:"inherit"}),info:i.createElement(f,{fontSize:"inherit"})},O=i.createElement(b,{fontSize:"small"}),E=i.forwardRef((function(e,t){var n=e.action,c=e.children,l=e.classes,d=e.className,u=e.closeText,m=void 0===u?"Close":u,p=e.color,f=e.icon,b=e.iconMapping,E=void 0===b?v:b,j=e.onClose,C=e.role,y=void 0===C?"alert":C,x=e.severity,w=void 0===x?"success":x,z=e.variant,L=void 0===z?"standard":z,M=Object(a.a)(e,["action","children","classes","className","closeText","color","icon","iconMapping","onClose","role","severity","variant"]);return i.createElement(s.a,Object(o.a)({role:y,square:!0,elevation:0,className:Object(r.a)(l.root,l["".concat(L).concat(Object(h.a)(p||w))],d),ref:t},M),!1!==f?i.createElement("div",{className:l.icon},f||E[w]||v[w]):null,i.createElement("div",{className:l.message},c),null!=n?i.createElement("div",{className:l.action},n):null,null==n&&j?i.createElement("div",{className:l.action},i.createElement(g.a,{size:"small","aria-label":m,title:m,color:"inherit",onClick:j},O)):null)}));t.a=Object(l.a)((function(e){var t="light"===e.palette.type?c.a:c.e,n="light"===e.palette.type?c.e:c.a;return{root:Object(o.a)({},e.typography.body2,{borderRadius:e.shape.borderRadius,backgroundColor:"transparent",display:"flex",padding:"6px 16px"}),standardSuccess:{color:t(e.palette.success.main,.6),backgroundColor:n(e.palette.success.main,.9),"& $icon":{color:e.palette.success.main}},standardInfo:{color:t(e.palette.info.main,.6),backgroundColor:n(e.palette.info.main,.9),"& $icon":{color:e.palette.info.main}},standardWarning:{color:t(e.palette.warning.main,.6),backgroundColor:n(e.palette.warning.main,.9),"& $icon":{color:e.palette.warning.main}},standardError:{color:t(e.palette.error.main,.6),backgroundColor:n(e.palette.error.main,.9),"& $icon":{color:e.palette.error.main}},outlinedSuccess:{color:t(e.palette.success.main,.6),border:"1px solid ".concat(e.palette.success.main),"& $icon":{color:e.palette.success.main}},outlinedInfo:{color:t(e.palette.info.main,.6),border:"1px solid ".concat(e.palette.info.main),"& $icon":{color:e.palette.info.main}},outlinedWarning:{color:t(e.palette.warning.main,.6),border:"1px solid ".concat(e.palette.warning.main),"& $icon":{color:e.palette.warning.main}},outlinedError:{color:t(e.palette.error.main,.6),border:"1px solid ".concat(e.palette.error.main),"& $icon":{color:e.palette.error.main}},filledSuccess:{color:"#fff",fontWeight:e.typography.fontWeightMedium,backgroundColor:e.palette.success.main},filledInfo:{color:"#fff",fontWeight:e.typography.fontWeightMedium,backgroundColor:e.palette.info.main},filledWarning:{color:"#fff",fontWeight:e.typography.fontWeightMedium,backgroundColor:e.palette.warning.main},filledError:{color:"#fff",fontWeight:e.typography.fontWeightMedium,backgroundColor:e.palette.error.main},icon:{marginRight:12,padding:"7px 0",display:"flex",fontSize:22,opacity:.9},message:{padding:"8px 0"},action:{display:"flex",alignItems:"center",marginLeft:"auto",paddingLeft:16,marginRight:-8}}}),{name:"MuiAlert"})(E)},913:function(e,t,n){"use strict";var a=n(5),o=n(21),i=n(2),r=n(1),c=(n(0),n(6)),l=n(7),s=n(33),d=n(498),u=n(28),m=n(10),p=n(50),f=n(497),b=n(443),g=n(18),h=r.forwardRef((function(e,t){var n=e.action,o=e.classes,l=e.className,s=e.message,d=e.role,u=void 0===d?"alert":d,m=Object(a.a)(e,["action","classes","className","message","role"]);return r.createElement(b.a,Object(i.a)({role:u,square:!0,elevation:6,className:Object(c.a)(o.root,l),ref:t},m),r.createElement("div",{className:o.message},s),n?r.createElement("div",{className:o.action},n):null)})),v=Object(l.a)((function(e){var t="light"===e.palette.type?.8:.98,n=Object(g.b)(e.palette.background.default,t);return{root:Object(i.a)({},e.typography.body2,Object(o.a)({color:e.palette.getContrastText(n),backgroundColor:n,display:"flex",alignItems:"center",flexWrap:"wrap",padding:"6px 16px",borderRadius:e.shape.borderRadius,flexGrow:1},e.breakpoints.up("sm"),{flexGrow:"initial",minWidth:288})),message:{padding:"8px 0"},action:{display:"flex",alignItems:"center",marginLeft:"auto",paddingLeft:16,marginRight:-8}}}),{name:"MuiSnackbarContent"})(h),O=r.forwardRef((function(e,t){var n=e.action,o=e.anchorOrigin,l=(o=void 0===o?{vertical:"bottom",horizontal:"center"}:o).vertical,b=o.horizontal,g=e.autoHideDuration,h=void 0===g?null:g,O=e.children,E=e.classes,j=e.className,C=e.ClickAwayListenerProps,y=e.ContentProps,x=e.disableWindowBlurListener,w=void 0!==x&&x,z=e.message,L=e.onClose,M=e.onEnter,k=e.onEntered,S=e.onEntering,N=e.onExit,T=e.onExited,A=e.onExiting,R=e.onMouseEnter,P=e.onMouseLeave,W=e.open,H=e.resumeHideDuration,I=e.TransitionComponent,$=void 0===I?f.a:I,D=e.transitionDuration,V=void 0===D?{enter:s.b.enteringScreen,exit:s.b.leavingScreen}:D,B=e.TransitionProps,_=Object(a.a)(e,["action","anchorOrigin","autoHideDuration","children","classes","className","ClickAwayListenerProps","ContentProps","disableWindowBlurListener","message","onClose","onEnter","onEntered","onEntering","onExit","onExited","onExiting","onMouseEnter","onMouseLeave","open","resumeHideDuration","TransitionComponent","transitionDuration","TransitionProps"]),q=r.useRef(),G=r.useState(!0),J=G[0],Z=G[1],F=Object(u.a)((function(){L&&L.apply(void 0,arguments)})),X=Object(u.a)((function(e){L&&null!=e&&(clearTimeout(q.current),q.current=setTimeout((function(){F(null,"timeout")}),e))}));r.useEffect((function(){return W&&X(h),function(){clearTimeout(q.current)}}),[W,h,X]);var K=function(){clearTimeout(q.current)},Q=r.useCallback((function(){null!=h&&X(null!=H?H:.5*h)}),[h,H,X]);return r.useEffect((function(){if(!w&&W)return window.addEventListener("focus",Q),window.addEventListener("blur",K),function(){window.removeEventListener("focus",Q),window.removeEventListener("blur",K)}}),[w,Q,W]),!W&&J?null:r.createElement(d.a,Object(i.a)({onClickAway:function(e){L&&L(e,"clickaway")}},C),r.createElement("div",Object(i.a)({className:Object(c.a)(E.root,E["anchorOrigin".concat(Object(m.a)(l)).concat(Object(m.a)(b))],j),onMouseEnter:function(e){R&&R(e),K()},onMouseLeave:function(e){P&&P(e),Q()},ref:t},_),r.createElement($,Object(i.a)({appear:!0,in:W,onEnter:Object(p.a)((function(){Z(!1)}),M),onEntered:k,onEntering:S,onExit:N,onExited:Object(p.a)((function(){Z(!0)}),T),onExiting:A,timeout:V,direction:"top"===l?"down":"up"},B),O||r.createElement(v,Object(i.a)({message:z,action:n},y)))))}));t.a=Object(l.a)((function(e){var t={top:8},n={bottom:8},a={justifyContent:"flex-end"},r={justifyContent:"flex-start"},c={top:24},l={bottom:24},s={right:24},d={left:24},u={left:"50%",right:"auto",transform:"translateX(-50%)"};return{root:{zIndex:e.zIndex.snackbar,position:"fixed",display:"flex",left:8,right:8,justifyContent:"center",alignItems:"center"},anchorOriginTopCenter:Object(i.a)({},t,Object(o.a)({},e.breakpoints.up("sm"),Object(i.a)({},c,u))),anchorOriginBottomCenter:Object(i.a)({},n,Object(o.a)({},e.breakpoints.up("sm"),Object(i.a)({},l,u))),anchorOriginTopRight:Object(i.a)({},t,a,Object(o.a)({},e.breakpoints.up("sm"),Object(i.a)({left:"auto"},c,s))),anchorOriginBottomRight:Object(i.a)({},n,a,Object(o.a)({},e.breakpoints.up("sm"),Object(i.a)({left:"auto"},l,s))),anchorOriginTopLeft:Object(i.a)({},t,r,Object(o.a)({},e.breakpoints.up("sm"),Object(i.a)({right:"auto"},c,d))),anchorOriginBottomLeft:Object(i.a)({},n,r,Object(o.a)({},e.breakpoints.up("sm"),Object(i.a)({right:"auto"},l,d)))}}),{flip:!1,name:"MuiSnackbar"})(O)}}]);
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[13],{
+
+/***/ "./djsr/frontend/src/components/MaterialUiSignUpPage.js":
+/*!**************************************************************!*\
+  !*** ./djsr/frontend/src/components/MaterialUiSignUpPage.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/InputAdornment */ "./node_modules/@material-ui/core/esm/InputAdornment/index.js");
+/* harmony import */ var _material_ui_core_Icon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Icon */ "./node_modules/@material-ui/core/esm/Icon/index.js");
+/* harmony import */ var _material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/icons/Email */ "./node_modules/@material-ui/icons/Email.js");
+/* harmony import */ var _material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/icons/People */ "./node_modules/@material-ui/icons/People.js");
+/* harmony import */ var _material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/icons/Lock */ "./node_modules/@material-ui/icons/Lock.js");
+/* harmony import */ var _material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _material_ui_components_Header_Header_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./material_ui_components/Header/Header.js */ "./djsr/frontend/src/components/material_ui_components/Header/Header.js");
+/* harmony import */ var _material_ui_components_Header_HeaderLinks_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./material_ui_components/Header/HeaderLinks.js */ "./djsr/frontend/src/components/material_ui_components/Header/HeaderLinks.js");
+/* harmony import */ var _material_ui_components_Footer_Footer_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./material_ui_components/Footer/Footer.js */ "./djsr/frontend/src/components/material_ui_components/Footer/Footer.js");
+/* harmony import */ var _material_ui_components_Grid_GridContainer_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./material_ui_components/Grid/GridContainer.js */ "./djsr/frontend/src/components/material_ui_components/Grid/GridContainer.js");
+/* harmony import */ var _material_ui_components_Grid_GridItem_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./material_ui_components/Grid/GridItem.js */ "./djsr/frontend/src/components/material_ui_components/Grid/GridItem.js");
+/* harmony import */ var _material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ././material_ui_components/CustomButtons/Button.js */ "./djsr/frontend/src/components/material_ui_components/CustomButtons/Button.js");
+/* harmony import */ var _material_ui_components_Card_Card_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./material_ui_components/Card/Card.js */ "./djsr/frontend/src/components/material_ui_components/Card/Card.js");
+/* harmony import */ var _material_ui_components_Card_CardBody_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./material_ui_components/Card/CardBody.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardBody.js");
+/* harmony import */ var _material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./material_ui_components/Card/CardHeader.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardHeader.js");
+/* harmony import */ var _material_ui_components_Card_CardFooter_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./material_ui_components/Card/CardFooter.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardFooter.js");
+/* harmony import */ var _material_ui_components_CustomInput_CustomInput_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./material_ui_components/CustomInput/CustomInput.js */ "./djsr/frontend/src/components/material_ui_components/CustomInput/CustomInput.js");
+/* harmony import */ var _assets_jss_material_kit_react_views_loginPage_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./assets/jss/material-kit-react/views/loginPage.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react/views/loginPage.js");
+/* harmony import */ var _img_genesprDark_png__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./img/genesprDark.png */ "./djsr/frontend/src/components/img/genesprDark.png");
+/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
+/* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
+/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
+/* harmony import */ var _MaterialFormikField__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./MaterialFormikField */ "./djsr/frontend/src/components/MaterialFormikField.js");
+/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/@material-ui/core/esm/Paper/index.js");
+var _this = undefined;
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])(_assets_jss_material_kit_react_views_loginPage_js__WEBPACK_IMPORTED_MODULE_18__["default"]);
+
+var MaterialUiSignUpPage = function MaterialUiSignUpPage(props) {
+  var FRS = "Pole wymagane";
+  var user = props.appState.user;
+  var bgStyles = {
+    paperContainer: {
+      backgroundImage: "url(".concat(_img_genesprDark_png__WEBPACK_IMPORTED_MODULE_19__["default"], ")"),
+      minHeight: 1000
+    },
+    examCardContainer: {
+      width: 700,
+      backgroundColor: '#FEFEFA'
+    },
+    cardTitle: {
+      textAlign: 'center'
+    }
+  };
+
+  if (!!user) {
+    props.history.push("/");
+  }
+
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState("cardHidden"),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      cardAnimaton = _React$useState2[0],
+      setCardAnimation = _React$useState2[1];
+
+  setTimeout(function () {
+    setCardAnimation("");
+  }, 700);
+  var classes = useStyles();
+
+  var rest = _extends({}, props);
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    style: bgStyles.paperContainer
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.container
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridContainer_js__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    justify: "center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridItem_js__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    xs: 12,
+    sm: 12,
+    md: 4
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_Card_js__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    className: classes[cardAnimaton]
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_22__["Formik"], {
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+      passwordConfirm: ""
+    },
+    validationSchema: yup__WEBPACK_IMPORTED_MODULE_20__["object"]().shape({
+      name: yup__WEBPACK_IMPORTED_MODULE_20__["string"]().min(2, "Too Short!").max(50, "Too Long!").required(FRS),
+      password: yup__WEBPACK_IMPORTED_MODULE_20__["string"]().min(8, "Too Short!").max(50, "Too Long!").required(FRS),
+      passwordConfirm: yup__WEBPACK_IMPORTED_MODULE_20__["string"]().oneOf([yup__WEBPACK_IMPORTED_MODULE_20__["ref"]("password")], "Hasła są różne").required(FRS),
+      email: yup__WEBPACK_IMPORTED_MODULE_20__["string"]().email("Nieprawidłowy adres e-mail").required(FRS)
+    }),
+    onSubmit: function onSubmit(values, helpers) {
+      setTimeout(function () {
+        helpers.setSubmitting(true);
+        _axiosAPI__WEBPACK_IMPORTED_MODULE_21__["axiosInstanceNoAuth"].post("/user/create/", {
+          username: values.name,
+          password: values.password,
+          email: values.email
+        }).then(function (response) {
+          helpers.setSubmitting(false);
+
+          _this.setState({
+            token: response.data.confirmation_token
+          });
+
+          _this.props.history.push("/signupsuccess/".concat(response.data.confirmation_token));
+        })["catch"](function (error) {
+          // console.log("login error", error.response);
+          var errResponse = error.response;
+          helpers.setSubmitting(false);
+          helpers.setValues({
+            name: "",
+            password: "",
+            passwordConfirm: "",
+            email: ""
+          }, false);
+          helpers.setTouched({
+            name: false,
+            password: false,
+            email: false,
+            passwordConfirm: false
+          }, false);
+          helpers.setFieldError("general", "Nierpawidłowa nazwa użytkownika lub hasło");
+        });
+      }, 5000);
+    }
+  }, function (_ref) {
+    var values = _ref.values,
+        errors = _ref.errors,
+        touched = _ref.touched,
+        handleChange = _ref.handleChange,
+        handleBlur = _ref.handleBlur,
+        handleSubmit = _ref.handleSubmit,
+        isSubmitting = _ref.isSubmitting;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      className: classes.form
+    }, console.log(touched, errors), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      color: "primary",
+      className: classes.cardHeader
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Rejestracja")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardBody_js__WEBPACK_IMPORTED_MODULE_14__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_22__["Field"], {
+      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_23__["default"],
+      name: "name",
+      formControlProps: {
+        fullWidth: true
+      },
+      labelText: "Nazwa u\u017Cytkownika",
+      inputProps: {
+        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          position: "end"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5___default.a, {
+          className: classes.inputIconsColor
+        }))
+      }
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_22__["Field"], {
+      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_23__["default"],
+      name: "email",
+      formControlProps: {
+        fullWidth: true
+      },
+      labelText: "E-mail",
+      inputProps: {
+        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          position: "end"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5___default.a, {
+          className: classes.inputIconsColor
+        }))
+      }
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_22__["Field"], {
+      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_23__["default"],
+      name: "password",
+      formControlProps: {
+        fullWidth: true
+      },
+      labelText: "Has\u0142o",
+      inputProps: {
+        type: "password",
+        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          position: "end"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6___default.a, {
+          className: classes.inputIconsColor
+        }))
+      }
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_22__["Field"], {
+      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_23__["default"],
+      name: "passwordConfirm",
+      formControlProps: {
+        fullWidth: true
+      },
+      labelText: "Powt\xF3rz has\u0142o",
+      inputProps: {
+        type: "password",
+        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          position: "end"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6___default.a, {
+          className: classes.inputIconsColor
+        }))
+      }
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardFooter_js__WEBPACK_IMPORTED_MODULE_16__["default"], {
+      className: classes.cardFooter
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      simple: true,
+      color: "primary",
+      size: "lg",
+      onClick: function onClick() {
+        handleSubmit();
+      }
+    }, "Zarejestruj")));
+  })))))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (MaterialUiSignUpPage);
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/img/genesprDark.png":
+/*!**********************************************************!*\
+  !*** ./djsr/frontend/src/components/img/genesprDark.png ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "29a2f630b088eabfaa8f98afec0658ab.png");
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/icons/Delete.js":
+/*!***************************************************!*\
+  !*** ./node_modules/@material-ui/icons/Delete.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var React = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/React.createElement("path", {
+  d: "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+}), 'Delete');
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/icons/Favorite.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/@material-ui/icons/Favorite.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var React = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/React.createElement("path", {
+  d: "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+}), 'Favorite');
+
+exports.default = _default;
+
+/***/ })
+
+}]);
+//# sourceMappingURL=13.main.js.map

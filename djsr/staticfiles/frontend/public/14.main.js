@@ -1,1 +1,417 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[14],{1527:function(e,t,n){"use strict";n.r(t);var a=n(1),r=n.n(a),o=(n(0),n(363),n(55)),i=n(94),l=n(47),c=n(551),s=(n(591),n(31)),u=n(438),m=n(443),f=n(925),p=n(131),d=n(71),g=(n(6),n(1517)),y=n(1518),h=n(1519),b=n(444),E=n(911),v=n.n(E),w=n(573),k=n.n(w),S=n(682),x=n.n(S);Object(u.a)((function(e){return{root:{minWidth:550,maxWidth:550,maxHeight:200,justifyContent:"center",alignItems:"center"},marginAutoItem:{margin:"auto"}}}));var O=n(1504),j=(n(86),n(521)),z=n(164),C=(n(612),n(559)),N=n(1453),P=n(1455),I=n(1454),T=n(1451),W=n(67),A=n(141),J=n(762),_=n(1520),D=n(152),R=n(153),F=n(451),G=n(354),H=n(449),U=n(500),B=function(e){return r.a.createElement(f.a,{container:!0,spacing:0,direction:"column",alignItems:"center",justify:"center",style:{minHeight:"100vh"}},r.a.createElement(U.a,{size:250,style:{color:"purple"}}))};function M(e){return(M="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function V(e){return function(e){if(Array.isArray(e))return q(e)}(e)||function(e){if("undefined"!=typeof Symbol&&Symbol.iterator in Object(e))return Array.from(e)}(e)||function(e,t){if(!e)return;if("string"==typeof e)return q(e,t);var n=Object.prototype.toString.call(e).slice(8,-1);"Object"===n&&e.constructor&&(n=e.constructor.name);if("Map"===n||"Set"===n)return Array.from(e);if("Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))return q(e,t)}(e)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function q(e,t){(null==t||t>e.length)&&(t=e.length);for(var n=0,a=new Array(t);n<t;n++)a[n]=e[n];return a}function Z(e,t){for(var n=0;n<t.length;n++){var a=t[n];a.enumerable=a.enumerable||!1,a.configurable=!0,"value"in a&&(a.writable=!0),Object.defineProperty(e,a.key,a)}}function $(e,t){return($=Object.setPrototypeOf||function(e,t){return e.__proto__=t,e})(e,t)}function K(e){var t=function(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Date.prototype.toString.call(Reflect.construct(Date,[],(function(){}))),!0}catch(e){return!1}}();return function(){var n,a=X(e);if(t){var r=X(this).constructor;n=Reflect.construct(a,arguments,r)}else n=a.apply(this,arguments);return L(this,n)}}function L(e,t){return!t||"object"!==M(t)&&"function"!=typeof t?Q(e):t}function Q(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}function X(e){return(X=Object.setPrototypeOf?Object.getPrototypeOf:function(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}function Y(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function ee(){return(ee=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var a in n)Object.prototype.hasOwnProperty.call(n,a)&&(e[a]=n[a])}return e}).apply(this,arguments)}Object(u.a)((function(e){return{root:{maxHeight:200,minWidth:575,maxWidth:575},marginAutoItem:{margin:"auto"}}}));var te=Object(u.a)((function(e){return{arrow:{color:e.palette.common.grey},tooltip:{backgroundColor:e.palette.grey}}}));function ne(e){var t=te();return r.a.createElement(O.a,ee({arrow:!0,classes:t},e))}var ae={paperContainer:{backgroundImage:"url(".concat(C.a,")"),minHeight:1e3,maxWidth:1885},examCardContainer:{width:700,backgroundColor:"#FEFEFA"},cardTitle:{textAlign:"center"}},re=(Object(u.a)((function(e){return{root:{width:"100%","& > * + *":{marginTop:e.spacing(2)}}}})),function(e){!function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function");e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),t&&$(e,t)}(E,e);var t,n,a,u=K(E);function E(e){var t,n;return function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,E),Y(Q(n=u.call(this,e)),"updateExams",(function(){n.setState({exams:null}),o.b.get("/user/tests/").then((function(e){console.log("UE update response",e,"exams",e.data),n.setState({exams:e.data})})).catch((function(e){console.log("UE update error response",e)}))})),Y(Q(n),"addExam",(function(e){n.setState((function(t){return t.exams=[e].concat(t.exams),t}))})),Y(Q(n),"createExamCopy",(function(e){o.b.post("/user/maketest/",{name:e.name+"-kopia",tasks:e.tasks}).then((function(e){n.addExam(e.data[0])}))})),Y(Q(n),"removeExam",(function(e){o.b.post("/user/deletetest/",{id:e.id}).then((function(e){console.log("usunięto"),n.updateExams()}))})),Y(Q(n),"handleToggle",(function(e){return function(){n.setState({autoGenSkills:n.state.autoGenSkills.concat(e)});var t=n.state.checked.indexOf(e),a=V(n.state.checked);-1===t?a.push(e):a.splice(t,1),n.setState({checked:a})}})),n.state=(Y(t={exams:null,open:!1,listExpand:{},generatedId:null,generatedName:null,sections:null,groups:null,ileotw:"",ilezamk:"",level:"",skills:""},"groups",""),Y(t,"autoGenSkills",[]),Y(t,"checked",[]),t),n.handleToggle=n.handleToggle.bind(Q(n)),n}return t=E,(n=[{key:"componentDidMount",value:function(){var e=this;this.updateExams(),o.b.get("/user/sections3/").then((function(t){var n=t.data.map((function(e){return e.skill=e.skilll,e}));e.setState({sections:n})})).catch((function(e){console.log(e)}))}},{key:"render",value:function(){var e=this,t=(this.props.classes,this.state.exams),n=this.state.sections;return t&&n?r.a.createElement("div",null,r.a.createElement(m.a,{style:ae.paperContainer},r.a.createElement(i.a,{p:8},r.a.createElement(f.a,{alignItems:"center",justify:"center",container:!0,direction:"column"},r.a.createElement(g.a,{style:ae.examCardContainer,justify:"center",alignItems:"center"},r.a.createElement(y.a,{style:ae.cardTitle,title:"Dodaj sprawdzian"}),r.a.createElement(j.a,null,r.a.createElement(l.c,{initialValues:{name:""},validationSchema:c.b().shape({name:c.d().min(2,"Nazwa za krotka").max(50,"Nazwa za dluga").required("Pole wymagane")}),onSubmit:function(t,n){setTimeout((function(){n.setSubmitting(!0),o.b.post("/user/maketest/",{name:t.name,tasks:""}).then((function(t){console.log("UE create response",t),e.addExam(t.data[0]),n.setSubmitting(!1)})).catch((function(e){e.response,n.setSubmitting(!1),n.setValues({name:""},!1),n.setTouched({name:!1},!1),n.setFieldError("general","Nazwa w uzyciu")}))}),400)}},(function(t){var n=t.values,a=t.errors,o=t.touched,i=t.handleChange,c=t.handleBlur,s=t.handleSubmit,u=t.isSubmitting;return r.a.createElement(l.b,{onSubmit:s},r.a.createElement("div",{className:"grey-text"},r.a.createElement(z.a,{labelText:"Nazwa sprawdzianu",id:"name",error:!!a.name,success:o.name&&!a.name,formControlProps:{fullWidth:!0},helperProps:{children:a.name,error:!0},inputProps:{type:"text",name:"name",onChange:i,onBlur:c,value:n.name}}),!!a.general&&r.a.createElement("div",{className:"invalid-feedback d-block pb-4"},a.general)),r.a.createElement(h.a,{style:{justifyContent:"center"}},r.a.createElement(d.a,{variant:"contained",color:"primary",size:"lg",type:"submit",disabled:u},"Zapisz"),r.a.createElement(d.a,{variant:"contained",color:"primary",size:"lg",onClick:function(){return e.setState({open:!e.state.open})}},"Wygeneruj automatycznie")))})))))),r.a.createElement("p",null),t.map((function(t){return r.a.createElement(f.a,{alignItems:"center",justify:"center",container:!0,spacing:3,direction:"column"},r.a.createElement(g.a,{style:ae.examCardContainer,justify:"center"},r.a.createElement(y.a,{title:t.name}),r.a.createElement(h.a,{disableSpacing:!0},r.a.createElement(s.b,{to:"/editor/"+t.id},r.a.createElement(ne,{title:"Edytuj sprawdzian"},r.a.createElement(b.a,null,r.a.createElement(x.a,null)))),r.a.createElement(ne,{title:"Skopiuj sprawdzian"},r.a.createElement(b.a,{onClick:function(){e.createExamCopy(t)}},r.a.createElement(v.a,null))),r.a.createElement(ne,{title:"Usuń sprawdzian"},r.a.createElement(b.a,{onClick:function(){e.removeExam(t)}},r.a.createElement(k.a,null))))),r.a.createElement("p",null))}))),r.a.createElement(N.a,{fullWidth:!0,titlestyle:{textAlign:"center"},open:this.state.open,onClose:function(){return e.setState({open:!e.state.open})}},r.a.createElement(T.a,{id:"form-dialog-title"},r.a.createElement(p.a,{variant:"h5",align:"center"},"Wygeneruj sprawdzian automatycznie")),r.a.createElement(I.a,null,r.a.createElement(i.a,{p:1},r.a.createElement(_.a,{fullWidth:!0,onChange:function(t){return e.setState({generatedName:t.target.value})},id:"ileotw",label:"Nazwa sprawdzianu"})),r.a.createElement(i.a,{p:1},r.a.createElement(_.a,{fullWidth:!0,onChange:function(t){return e.setState({ileotw:t.target.value})},id:"ileotw",label:"Ile zadań otwartych"})),r.a.createElement(i.a,{p:1},r.a.createElement(_.a,{fullWidth:!0,onChange:function(t){return e.setState({ilezamk:t.target.value})},id:"ilezamk",label:"Ile zadań zamkniętych"})),r.a.createElement(i.a,{p:1},r.a.createElement(_.a,{fullWidth:!0,id:"level",select:!0,label:"Poziom trudności",value:this.state.level,onChange:function(t){return e.setState({level:t.target.value})},helperText:"Wybierz poziom trudności"},r.a.createElement(W.a,{key:"level1",value:"1"},"Podstawowy"),r.a.createElement(W.a,{key:"level2",value:"2"},"Rozszerzony"))),r.a.createElement(i.a,{p:1},r.a.createElement(_.a,{fullWidth:!0,onChange:function(t){return e.setState({groups:t.target.value})},id:"groups",label:"Ilość grup"})),r.a.createElement(i.a,{p:1},r.a.createElement(D.a,null,n.map((function(t){return r.a.createElement(r.a.Fragment,null,r.a.createElement(R.a,null,r.a.createElement(G.a,{primary:r.a.createElement("h3",null,t.Section),secondary:"Dostępnych zadań: "+t.sectionTaskCount}),r.a.createElement(H.a,null)),r.a.createElement(D.a,{component:"div",disablePadding:!0},t.skill.map((function(t){return r.a.createElement(R.a,{button:!0,key:t.id,onClick:e.handleToggle(t.id)},r.a.createElement(F.a,null,r.a.createElement(A.a,{edge:"start",checked:-1!==e.state.checked.indexOf(t.id),tabIndex:-1})),r.a.createElement(G.a,{primary:t.Skill,secondary:"Dostępnych zadań: "+t.taskCount}))}))))}))))),r.a.createElement(P.a,null,r.a.createElement(d.a,{color:"primary",onClick:function(){o.b.post("/user/getrandomtasks/",{ileotw:e.state.ileotw,ilezamk:e.state.ilezamk,level:e.state.level,skills:e.state.checked.join(", "),groups:e.state.groups}).then((function(t){var n=0;t.data.map((function(t){var a=JSON.stringify(Object(J.a)(t));++n,o.b.post("/user/maketest/",{name:e.state.generatedName+" Grupa "+n,tasks:a}).then((function(t){console.log(a),e.props.history.go(0)}))}))})).catch((function(e){console.log("chngpass error",e.response)}))}},"Generuj")))):r.a.createElement(B,null)}}])&&Z(t.prototype,n),a&&Z(t,a),E}(a.Component));re.propTypes={};t.default=re},519:function(e,t,n){"use strict";n.r(t);t.default={cardBody:{padding:"0.9375rem 1.875rem",flex:"1 1 auto"}}},521:function(e,t,n){"use strict";n.d(t,"a",(function(){return g}));var a=n(1),r=n.n(a),o=n(3),i=n.n(o),l=n(0),c=n.n(l),s=n(438),u=n(519);function m(){return(m=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var a in n)Object.prototype.hasOwnProperty.call(n,a)&&(e[a]=n[a])}return e}).apply(this,arguments)}function f(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function p(e,t){if(null==e)return{};var n,a,r=function(e,t){if(null==e)return{};var n,a,r={},o=Object.keys(e);for(a=0;a<o.length;a++)n=o[a],t.indexOf(n)>=0||(r[n]=e[n]);return r}(e,t);if(Object.getOwnPropertySymbols){var o=Object.getOwnPropertySymbols(e);for(a=0;a<o.length;a++)n=o[a],t.indexOf(n)>=0||Object.prototype.propertyIsEnumerable.call(e,n)&&(r[n]=e[n])}return r}var d=Object(s.a)(u.default);function g(e){var t,n=d(),a=e.className,o=e.children,l=p(e,["className","children"]),c=i()((f(t={},n.cardBody,!0),f(t,a,void 0!==a),t));return r.a.createElement("div",m({className:c},l),o)}g.propTypes={className:c.a.string,children:c.a.node}},559:function(e,t,n){"use strict";t.a=n.p+"29a2f630b088eabfaa8f98afec0658ab.png"},591:function(e,t,n){"use strict";n(1)},612:function(e,t,n){"use strict";n.d(t,"a",(function(){return l}));var a=n(1),r=n.n(a),o=n(913),i=n(912);function l(e){var t=e.notification;e.setNotification;return r.a.createElement(o.a,{open:t.isOpen,autoHideDuration:30},r.a.createElement(i.a,{severity:t.type},t.message))}},762:function(e,t,n){"use strict";var a=function(e){console.log("taskparser",e);var t=JSON.parse(JSON.stringify(e));return t.answers={},t.correctans=JSON.parse(t.correctans.replace(/'/g,'"')),t.wronganswers=JSON.parse(t.wronganswers.replace(/'/g,'"')),t.answers={correctans:t.correctans,wronganswers:t.wronganswers},t.currentAnswers={correctans:t.correctans,wronganswers:t.wronganswers,answersIndexes:[{index:1,isCorrect:!1},{index:0,isCorrect:!0},{index:2,isCorrect:!1},{index:0,isCorrect:!1}]},t.maxPoints=JSON.parse(t.points),console.log("taskparser nn",t),t};t.a=function(e){return e.map(a)}}}]);
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[14],{
+
+/***/ "./djsr/frontend/src/components/FormikMDInput.js":
+/*!*******************************************************!*\
+  !*** ./djsr/frontend/src/components/FormikMDInput.js ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+var FormikMdInput = function FormikMdInput(_ref) {
+  var name = _ref.name,
+      touched = _ref.touched,
+      value = _ref.value,
+      errors = _ref.errors,
+      icon = _ref.icon,
+      onChange = _ref.onChange,
+      _onBlur = _ref.onBlur,
+      label = _ref.label,
+      id = _ref.id,
+      type = _ref.type,
+      hideInput = _ref.hideInput,
+      disableAutocomplete = _ref.disableAutocomplete,
+      disabled = _ref.disabled,
+      prepend = _ref.prepend;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      active = _useState2[0],
+      setActive = _useState2[1]; //todo repair prepend render
+  // console.log(
+  //   "ninput",
+  //   name,
+  //   active,
+  //   value === "",
+  //   value === null,
+  //   active || !(value == "" || value == null),
+  //     "value",
+  //     value
+  // );
+
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "md-form form-group"
+  }, !!icon && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: ["fa", icon, "prefix", touched ? !errors ? "text-success" : "red-text" : ""].join(" ")
+  }), !!prepend && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "input-group-prepend"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "input-group-text"
+  }, prepend)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    name: name,
+    onChange: onChange,
+    onBlur: function onBlur(e) {
+      _onBlur(e);
+
+      setActive(false);
+    },
+    onFocus: function onFocus() {
+      console.log("input focus event", name);
+      setActive(true);
+    },
+    value: value,
+    id: id,
+    type: type,
+    autoComplete: disableAutocomplete ? "off" : "on" // className="form-control is-invalid"
+    ,
+    className: ["form-control", touched ? !errors ? "is-valid" : "is-invalid" : "", hideInput ? "text-password" : "", disabled ? "disabled" : ""].join(" "),
+    disabled: disabled
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    htmlFor: id,
+    className: [touched ? !errors ? "is-valid" : "is-invalid" : "", active || !(value === "" || value === null) ? "active" : ""].join(" ")
+  }, !!label ? label : ""), !!errors && !!touched && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "invalid-feedback d-block"
+  }, errors));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (FormikMdInput);
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/MaterialUiLoginPage.js":
+/*!*************************************************************!*\
+  !*** ./djsr/frontend/src/components/MaterialUiLoginPage.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/InputAdornment */ "./node_modules/@material-ui/core/esm/InputAdornment/index.js");
+/* harmony import */ var _material_ui_core_Icon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Icon */ "./node_modules/@material-ui/core/esm/Icon/index.js");
+/* harmony import */ var _material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/icons/Email */ "./node_modules/@material-ui/icons/Email.js");
+/* harmony import */ var _material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/icons/People */ "./node_modules/@material-ui/icons/People.js");
+/* harmony import */ var _material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/icons/Lock */ "./node_modules/@material-ui/icons/Lock.js");
+/* harmony import */ var _material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _material_ui_components_Header_Header_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./material_ui_components/Header/Header.js */ "./djsr/frontend/src/components/material_ui_components/Header/Header.js");
+/* harmony import */ var _material_ui_components_Header_HeaderLinks_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./material_ui_components/Header/HeaderLinks.js */ "./djsr/frontend/src/components/material_ui_components/Header/HeaderLinks.js");
+/* harmony import */ var _material_ui_components_Footer_Footer_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./material_ui_components/Footer/Footer.js */ "./djsr/frontend/src/components/material_ui_components/Footer/Footer.js");
+/* harmony import */ var _material_ui_components_Grid_GridContainer_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./material_ui_components/Grid/GridContainer.js */ "./djsr/frontend/src/components/material_ui_components/Grid/GridContainer.js");
+/* harmony import */ var _material_ui_components_Grid_GridItem_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./material_ui_components/Grid/GridItem.js */ "./djsr/frontend/src/components/material_ui_components/Grid/GridItem.js");
+/* harmony import */ var _material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ././material_ui_components/CustomButtons/Button.js */ "./djsr/frontend/src/components/material_ui_components/CustomButtons/Button.js");
+/* harmony import */ var _material_ui_components_Card_Card_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./material_ui_components/Card/Card.js */ "./djsr/frontend/src/components/material_ui_components/Card/Card.js");
+/* harmony import */ var _material_ui_components_Card_CardBody_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./material_ui_components/Card/CardBody.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardBody.js");
+/* harmony import */ var _material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./material_ui_components/Card/CardHeader.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardHeader.js");
+/* harmony import */ var _material_ui_components_Card_CardFooter_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./material_ui_components/Card/CardFooter.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardFooter.js");
+/* harmony import */ var _material_ui_components_CustomInput_CustomInput_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./material_ui_components/CustomInput/CustomInput.js */ "./djsr/frontend/src/components/material_ui_components/CustomInput/CustomInput.js");
+/* harmony import */ var _assets_jss_material_kit_react_views_loginPage_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./assets/jss/material-kit-react/views/loginPage.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react/views/loginPage.js");
+/* harmony import */ var _material_ui_core_ButtonGroup__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @material-ui/core/ButtonGroup */ "./node_modules/@material-ui/core/esm/ButtonGroup/index.js");
+/* harmony import */ var _img_genesprDark_png__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./img/genesprDark.png */ "./djsr/frontend/src/components/img/genesprDark.png");
+/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
+/* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
+/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
+/* harmony import */ var _FormikMDInput__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./FormikMDInput */ "./djsr/frontend/src/components/FormikMDInput.js");
+/* harmony import */ var _Notification__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./Notification */ "./djsr/frontend/src/components/Notification.js");
+/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/@material-ui/core/esm/Paper/index.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])(_assets_jss_material_kit_react_views_loginPage_js__WEBPACK_IMPORTED_MODULE_18__["default"]);
+
+var MaterialUiLoginPage = function MaterialUiLoginPage(props) {
+  var user = props.appState.user;
+
+  if (!!user) {
+    props.history.push("/");
+  }
+
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState("cardHidden"),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      cardAnimaton = _React$useState2[0],
+      setCardAnimation = _React$useState2[1];
+
+  setTimeout(function () {
+    setCardAnimation("");
+  }, 700);
+  var classes = useStyles();
+
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState({
+    isOpen: false,
+    message: '',
+    type: ''
+  }),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      notification = _React$useState4[0],
+      setNotification = _React$useState4[1];
+
+  var rest = _extends({}, props);
+
+  var FRS = "Pole wymagane";
+  var bgStyles = {
+    paperContainer: {
+      backgroundImage: "url(".concat(_img_genesprDark_png__WEBPACK_IMPORTED_MODULE_20__["default"], ")"),
+      minHeight: 1000
+    },
+    examCardContainer: {
+      width: 700,
+      backgroundColor: '#FEFEFA'
+    },
+    cardTitle: {
+      textAlign: 'center'
+    }
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_26__["default"], {
+    style: bgStyles.paperContainer
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.container
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridContainer_js__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    justify: "center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridItem_js__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    xs: 12,
+    sm: 12,
+    md: 4
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_Card_js__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    className: classes[cardAnimaton]
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Formik"], {
+    initialValues: {
+      name: "",
+      password: ""
+    },
+    validationSchema: yup__WEBPACK_IMPORTED_MODULE_21__["object"]().shape({
+      password: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().min(8, "Minimum 8 znaków").max(50, "Przekroczono maksymalną ilość znaków!").required(FRS),
+      name: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().min(2, "Minimum 8 znaków!").max(50, "Przekroczono maksymalną ilość znaków!").required(FRS)
+    }),
+    onSubmit: function onSubmit(values, helpers) {
+      setTimeout(function () {
+        helpers.setSubmitting(true);
+        _axiosAPI__WEBPACK_IMPORTED_MODULE_22__["default"].post("/token/obtain/", {
+          username: values.name,
+          password: values.password
+        }).then(function (response) {
+          _axiosAPI__WEBPACK_IMPORTED_MODULE_22__["default"].defaults.headers["Authorization"] = "JWT " + response.data.access;
+          localStorage.setItem("access_token", response.data.access);
+          localStorage.setItem("refresh_token", response.data.refresh);
+          helpers.setSubmitting(false);
+          props.checkUser();
+          props.history.push("/");
+        })["catch"](function (error) {
+          // console.log("login error", error.response);
+          var errResponse = error.response;
+          helpers.setSubmitting(false);
+
+          if (errResponse.status === 401 && errResponse.statusText === "Unauthorized") {
+            helpers.setValues({
+              name: "",
+              password: ""
+            }, false);
+            helpers.setTouched({
+              name: false,
+              password: false
+            }, false);
+            helpers.setFieldError("general", "Nierpawidłowa nazwa użytkownika lub hasło");
+            setNotification({
+              type: "error",
+              isOpen: true,
+              message: 'Nieprawidłowa nazwa użytkownika lub hasło'
+            });
+          }
+        });
+      }, 400);
+    }
+  }, function (_ref) {
+    var values = _ref.values,
+        errors = _ref.errors,
+        touched = _ref.touched,
+        handleChange = _ref.handleChange,
+        handleBlur = _ref.handleBlur,
+        handleSubmit = _ref.handleSubmit,
+        isSubmitting = _ref.isSubmitting;
+    console.log("talczed", touched, "errors", errors);
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      className: classes.form
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      color: "primary",
+      className: classes.cardHeader
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Logowanie")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardBody_js__WEBPACK_IMPORTED_MODULE_14__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomInput_CustomInput_js__WEBPACK_IMPORTED_MODULE_17__["default"], {
+      labelText: "Nazwa u\u017Cytkownika",
+      id: "name",
+      error: !!errors.name,
+      success: touched.name && !errors.name,
+      formControlProps: {
+        fullWidth: true
+      },
+      helperProps: {
+        children: errors.name,
+        error: true
+      },
+      inputProps: {
+        type: "text",
+        name: "name",
+        onChange: handleChange,
+        onBlur: handleBlur,
+        value: values.name,
+        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          position: "end"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5___default.a, {
+          className: classes.inputIconsColor
+        }))
+      }
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomInput_CustomInput_js__WEBPACK_IMPORTED_MODULE_17__["default"], {
+      labelText: "Has\u0142o",
+      id: "password",
+      error: !!errors.password,
+      success: touched.password && !errors.password,
+      formControlProps: {
+        fullWidth: true
+      },
+      helperProps: {
+        children: errors.password,
+        error: true
+      },
+      inputProps: {
+        type: "password",
+        name: "password",
+        onChange: handleChange,
+        onBlur: handleBlur,
+        value: values.password,
+        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          position: "end"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6___default.a, {
+          className: classes.inputIconsColor
+        }))
+      }
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardFooter_js__WEBPACK_IMPORTED_MODULE_16__["default"], {
+      className: classes.cardFooter
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ButtonGroup__WEBPACK_IMPORTED_MODULE_19__["default"], {
+      orientation: "vertical",
+      color: "primary",
+      "aria-label": "vertical contained primary button group",
+      variant: "text"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      simple: true,
+      color: "primary",
+      size: "lg",
+      onClick: function onClick() {
+        handleSubmit();
+      }
+    }, "Zaloguj si\u0119"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      simple: true,
+      color: "primary",
+      size: "lg",
+      onClick: function onClick() {
+        props.history.push("/requestresetpassword");
+      }
+    }, "Zapomnia\u0142em has\u0142a"))));
+  })))))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (MaterialUiLoginPage);
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/Notification.js":
+/*!******************************************************!*\
+  !*** ./djsr/frontend/src/components/Notification.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Notification; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+/* harmony import */ var _material_ui_lab__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/lab */ "./node_modules/@material-ui/lab/esm/index.js");
+
+
+
+function Notification(props) {
+  var notification = props.notification,
+      setNotification = props.setNotification;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Snackbar"], {
+    open: notification.isOpen,
+    autoHideDuration: 30
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_lab__WEBPACK_IMPORTED_MODULE_2__["Alert"], {
+    severity: notification.type
+  }, notification.message));
+}
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/img/genesprDark.png":
+/*!**********************************************************!*\
+  !*** ./djsr/frontend/src/components/img/genesprDark.png ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "29a2f630b088eabfaa8f98afec0658ab.png");
+
+/***/ })
+
+}]);
+//# sourceMappingURL=14.main.js.map

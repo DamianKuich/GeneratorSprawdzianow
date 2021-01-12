@@ -418,7 +418,7 @@ const useStylesAlert = makeStyles((theme) => ({
                             size="lg"
                             onClick={() => this.setState({ open: !this.state.open})}
                           >
-                            Wygeneruj automatycznie
+                            Wygeneruj automatycznie 20:01
                           </Button>
                           
                           </CardActions>

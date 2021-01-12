@@ -7,8 +7,15 @@ export const taskParser = (task) => {
     newTask.correctans = JSON.parse(newTask.correctans.replace(/'/g, '"'))
     newTask.wronganswers = JSON.parse(newTask.wronganswers.replace(/'/g, '"'))
     newTask.answers={correctans:newTask.correctans,wronganswers:newTask.wronganswers}
-    newTask.currentAnswers={correctans:newTask.correctans,wronganswers:newTask.wronganswers,answersIndexes:[{"index":1,"isCorrect":false},{"index":0,"isCorrect":true},{"index":2,"isCorrect":false},{"index":0,"isCorrect":false}]}
-  
+    if(newTask.correctans!="[]"){
+      newTask.currentAnswers={correctans:newTask.correctans,wronganswers:newTask.wronganswers,answersIndexes:[{"index":1,"isCorrect":false},{"index":0,"isCorrect":true},{"index":2,"isCorrect":false},{"index":0,"isCorrect":false}]}
+    }
+    else
+    {
+      newTask.currentAnswers={correctans:newTask.correctans,wronganswers:newTask.wronganswers,answersIndexes:[{}]}
+    
+    }
+
     newTask.maxPoints = JSON.parse(newTask.points)
     
     
