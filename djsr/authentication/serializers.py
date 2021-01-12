@@ -1,7 +1,7 @@
 
 from rest_framework import serializers
 from .models import CustomUser, Task, Section, Skill, PasswordSendReset, TestJSON, Answers, Image, ImageDB
-from .models import Sectionv2
+from .models import Sectionv2, SecAndSkillhelp
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -117,3 +117,8 @@ class TestJSONSerializer(serializers.ModelSerializer):
     class Meta:
         model = TestJSON
         fields = ('id','name','tasks','created','user_id')
+
+class SasSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SecAndSkillhelp
+        fields = ('id','text')
