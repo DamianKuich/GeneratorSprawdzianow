@@ -50,6 +50,7 @@ class ExamEditor extends Component {
         } else {
           state.exam.tasks = [];
         }
+        document.title=state.exam.name
         return state;
       });
     });
@@ -464,7 +465,7 @@ class ExamEditor extends Component {
           </Menu>
         </div>
         <Dialog
-          open={open}
+          open={!!this.state.downloadModal}
           // dialogTitle={}
           // fullWidth={true}
           // maxWidth={"lg"}
@@ -477,7 +478,7 @@ class ExamEditor extends Component {
           }}
           dialogActionsChildren={[
             <Button
-              color={"transparent"}
+              color={"primary"}
               onClick={() => {
                 this.setState((state) => {
                   state.downloadModal = false;
@@ -491,7 +492,7 @@ class ExamEditor extends Component {
         >
           <Box display={"flex"} flexDirection={"column"}>
             <Button
-              color={"transparent"}
+              color={"primary"}
               onClick={() => {
                 window.open(
                   `${window.location.origin}/api/user/testpdf/` +
@@ -503,7 +504,7 @@ class ExamEditor extends Component {
               Sprawdzian
             </Button>
             <Button
-              color={"transparent"}
+              color={"primary"}
               onClick={() => {
                 window.open(
                   `${window.location.origin}/api/user/answerspdf/` +
@@ -515,7 +516,7 @@ class ExamEditor extends Component {
               Arkusz odpowiedzi
             </Button>
             <Button
-              color={"transparent"}
+              color={"primary"}
               onClick={() => {
                 window.open(
                   `${window.location.origin}/api/user/answerskeypdf/` +

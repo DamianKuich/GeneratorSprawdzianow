@@ -7,18 +7,23 @@ import MaterialFormikField from "../MaterialFormikField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import People from "@material-ui/icons/People";
 import CustomRadio from "../material_ui_components/CustomRadio/CustomRadio";
-import EditIcon from '@material-ui/icons/Edit';
+import EditIcon from "@material-ui/icons/Edit";
 const EditTaskAnswerSpace = (props) => {
   const { updateStateAndSaveExam, task, index } = props;
   const currentAnswers = task.currentAnswers;
   const spaceToSolve = currentAnswers.spaceToSolve || 0;
-  const isOtwarte = currentAnswers.isOtwarte||false;
+  const isOtwarte = currentAnswers.isOtwarte || false;
   const [open, setOpen] = useState(false);
   return (
     <>
-      <TaskOverlayButton onClick={()=>{
-          setOpen(true)
-      }}><EditIcon fontSize={"small"}/></TaskOverlayButton>
+      <TaskOverlayButton
+          tooltip={"Zmień rodzaj odpowiedzi"}
+        onClick={() => {
+          setOpen(true);
+        }}
+      >
+        <EditIcon fontSize={"small"} />
+      </TaskOverlayButton>
       <Dialog
         open={open}
         dialogTitle={"Edycja miejsca pod zadaniem"}
@@ -51,7 +56,7 @@ const EditTaskAnswerSpace = (props) => {
                   values.isOtwarte;
                 return state;
               });
-              setOpen(false)
+              setOpen(false);
             }}
           >
             {({
@@ -77,24 +82,24 @@ const EditTaskAnswerSpace = (props) => {
                   <CustomRadio
                     labelProps={{ label: "Otwarte" }}
                     radioProps={{
-                      checked: !!values.isOtwarte ,
+                      checked: !!values.isOtwarte,
                       onChange: () => {
-                        setFieldValue("isOtwarte",true);
+                        setFieldValue("isOtwarte", true);
                       },
                     }}
                   />
                   <CustomRadio
                     labelProps={{ label: "Zamkniete" }}
                     radioProps={{
-                      checked: !values.isOtwarte ,
+                      checked: !values.isOtwarte,
                       onChange: () => {
-                        setFieldValue("isOtwarte",false);
+                        setFieldValue("isOtwarte", false);
                       },
                     }}
                   />
                   <Button color={"primary"} onClick={handleSubmit}>
-            Zapisz
-          </Button>
+                    Zapisz
+                  </Button>
                 </Form>
               );
             }}

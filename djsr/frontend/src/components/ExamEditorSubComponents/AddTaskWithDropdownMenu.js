@@ -45,7 +45,7 @@ const AddTaskWithDropdownMenu = ({ index, pushTaskAtIndex, ...props }) => {
   };
   return (
     <>
-        <TaskOverlayButton onClick={handleClick}><AddCircleIcon fontSize={"small"}/></TaskOverlayButton>
+        <TaskOverlayButton tooltip={"Dodaj zadanie"} onClick={handleClick}><AddCircleIcon fontSize={"small"}/></TaskOverlayButton>
         <Menu
           id="simple-menu"
           anchorEl={anchorEl}
