@@ -215,7 +215,7 @@ class UserRetrieveUpdateAPIView(APIView):
         # serializer to handle turning our `User` object into something that
         # can be JSONified and sent to the client.
         serializer = self.serializer_class(request.user)
-
+        connection.close()
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def put(self, request, *args, **kwargs):
@@ -227,6 +227,7 @@ class UserRetrieveUpdateAPIView(APIView):
                     password = request.data['password']
                     user.set_password(password)
                 else:
+                    connection.close()
                     return Response({"oldpassword": "Old password doesnt match"}, status=status.HTTP_400_BAD_REQUEST)
         except:
             pass
@@ -239,6 +240,7 @@ class UserRetrieveUpdateAPIView(APIView):
             if not CustomUser.objects.filter(email=request.data['email']).exists():
                 user.email = request.data['email']
             else:
+                connection.close()
                 return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
 
         except:
@@ -246,6 +248,7 @@ class UserRetrieveUpdateAPIView(APIView):
         user.save()
 
         serializer = CustomUserSerializerReadOnly(user, many=False)
+        connection.close()
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
