@@ -30,6 +30,9 @@ RS256_PUBLIC_KEY = "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8A
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+
+
+
 DEBUG_PROPAGATE_EXCEPTIONS = True
 ALLOWED_HOSTS = ['gen-mat.herokuapp.com', 'localhost', '127.0.0.1']
 

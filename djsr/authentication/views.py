@@ -1,10 +1,11 @@
 from datetime import date, timedelta
 import json
+from django.db import connection
 from django.core import serializers
 from . import models
 from itertools import chain
 from copy import deepcopy
-from django.db import connection
+from django import db
 from rest_framework_simplejwt.utils import *
 from django.core import serializers
 import random
@@ -30,8 +31,8 @@ from .examToPdf.PdfFromNode import generatePdf, generateAnswersPdf, generateAnsw
 
 from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer, \
     CustomUserSerializerReadOnly, PasswordSendResetSerializer, TestJSONSerializer, ImageSerializer
-from .serializers import SectionSerializerv2, AnswersSerializer
-from .models import Sectionv2, Answers
+from .serializers import SectionSerializerv2, AnswersSerializer, SasSerializer
+from .models import Sectionv2, Answers, SecAndSkillhelp
 from .models import Task, Section, Skill, CustomUser, UserActivationToken, \
     TestJSON, PasswordSendReset, UserResetToken, Image, ImageDB
 
@@ -214,7 +215,7 @@ class UserRetrieveUpdateAPIView(APIView):
         # serializer to handle turning our `User` object into something that
         # can be JSONified and sent to the client.
         serializer = self.serializer_class(request.user)
-
+        connection.close()
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def put(self, request, *args, **kwargs):
@@ -226,6 +227,7 @@ class UserRetrieveUpdateAPIView(APIView):
                     password = request.data['password']
                     user.set_password(password)
                 else:
+                    connection.close()
                     return Response({"oldpassword": "Old password doesnt match"}, status=status.HTTP_400_BAD_REQUEST)
         except:
             pass
@@ -238,6 +240,7 @@ class UserRetrieveUpdateAPIView(APIView):
             if not CustomUser.objects.filter(email=request.data['email']).exists():
                 user.email = request.data['email']
             else:
+                connection.close()
                 return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
 
         except:
@@ -245,6 +248,7 @@ class UserRetrieveUpdateAPIView(APIView):
         user.save()
 
         serializer = CustomUserSerializerReadOnly(user, many=False)
+        connection.close()
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -258,7 +262,6 @@ class TaskViewSet(APIView):
         lista = []
         if request.data:
             id_string = request.data['skill']
-            print ("XD")
             numberoftask = int(request.data['nroftasks'])
             try:
                 pag = int(request.data['pagenr'])
@@ -276,9 +279,10 @@ class TaskViewSet(APIView):
                 lista.append(serializerprv.data)
                 a = math.ceil((len(list(chain(*lista))) / numberoftask))
             if pag == 1:
-                print ("XD")
+                connection.close()
                 return Response(data={"pages": str(a), "tasks": list(chain(*lista))[0:numberoftask]})
             elif pag > 1:
+                connection.close()
                 return Response(data={"pages": str(a), "tasks": list(chain(*lista))[(
                                                                                             pag * numberoftask) - numberoftask:pag * numberoftask]})
         else:
@@ -393,6 +397,7 @@ class GetRandomTasksViewSet(APIView):
                                 for x in lista2:
                                     lista.append(x)
                     listagr.append(lista)
+                connection.close()
                 return Response(listagr, status=status.HTTP_200_OK)
             except Exception as e:
                 print("mt er1")
@@ -422,6 +427,7 @@ class MakeTestViewSet(APIView):
                     test = TestJSON.objects.get(name=nazwa, user_id=request.user.id)
                     testt = TestJSON.objects.filter(id=test.id, user_id=request.user.id)
                     serializer = TestJSONSerializer(testt, many=True)
+                    connection.close()
                     return Response(serializer.data, status=status.HTTP_200_OK)
                 else:
                     print("make test err 1")
@@ -449,6 +455,7 @@ class MakeTestViewSet(APIView):
                     except:
                         pass
                     mojtest.save()
+                    connection.close()
                     return Response(status=status.HTTP_200_OK)
                 else:
                     return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -533,6 +540,7 @@ class MakeTestCopyViewSet(APIView):
                 obj.save()
                 ob = TestJSON.objects.get(name=pomo + 'Copy', user_id=pomoc.id)
                 serializer = TestJSONSerializer(ob, many=True)
+                connection.close()
                 return Response(serializer.data, status=status.HTTP_200_OK)
             except Exception as e:
                 return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
@@ -564,6 +572,7 @@ class SkilltoSections(APIView):
             s.save()
         seco = Sectionv2.objects.all()
         seria = SectionSerializerv2(seco, many=True)
+        connection.close()
         return Response(seria.data)
 
 
@@ -611,13 +620,20 @@ class SkilltoSectionsAutoGene(APIView):
                 x['sectionTaskCount'] = sum
                 list.append(x)
             if level == 1:
-                with open('djsr/authentication/sections1.txt', 'w',encoding='utf-8') as f:
-                        json.dump(list, f,ensure_ascii=False)
-                f.close()
+                if not SecAndSkillhelp.objects.filter(id=1).exists():
+                    pods = SecAndSkillhelp.objects.create(id=1,text=json.dumps(list))
+                    pods.save()
+                else:
+                    pods = SecAndSkillhelp.objects.create(id=1)
+                    pods.text = json.dumps(list)
             elif level == 2:
-                with open('djsr/authentication/sections2.txt', 'w',encoding='utf-8') as f:
-                        json.dump(list, f,ensure_ascii=False)
-                f.close()
+                if not SecAndSkillhelp.objects.filter(id=2).exists():
+                    pods = SecAndSkillhelp.objects.create(id=2,text=json.dumps(list))
+                    pods.save()
+                else:
+                    pods = SecAndSkillhelp.objects.create(id=2)
+                    pods.text = json.dumps(list)
+            connection.close()
             return Response(list)
 
 class GetSkillsFromfile(APIView):
@@ -628,14 +644,14 @@ class GetSkillsFromfile(APIView):
         if request.data:
             level = int(request.data['level'])
             if level == 1:
-                with open('djsr/authentication/sections1.txt',encoding='utf-8') as f:
-                    data = json.load(f)
-                f.close()
+                pods = list(SecAndSkillhelp.objects.filter(id=1).values())[0]
+                tasks = json.loads(pods['text'])
+                connection.close()
             if level == 2:
-                with open('djsr/authentication/sections2.txt',encoding='utf-8') as f:
-                    data = json.load(f)
-                f.close()
-            return Response(data)
+                pods = list(SecAndSkillhelp.objects.filter(id=2).values())[0]
+                tasks = json.loads(pods['text'])
+                connection.close()
+            return Response(tasks)
 
 def aktDB(self, level):
     level = level
@@ -676,13 +692,20 @@ def aktDB(self, level):
         x['sectionTaskCount'] = sum
         list.append(x)
     if level == 1:
-        with open('djsr/authentication/sections1.txt', 'w',encoding='utf-8') as f:
-                json.dump(list, f,ensure_ascii=False)
-        f.close()
+        if not SecAndSkillhelp.objects.filter(id=1).exists():
+            pods = SecAndSkillhelp.objects.create(id=1, text=json.dumps(list))
+            pods.save()
+        else:
+            pods = SecAndSkillhelp.objects.create(id=1)
+            pods.text = json.dumps(list)
     elif level == 2:
-        with open('djsr/authentication/sections2.txt', 'w',encoding='utf-8') as f:
-                json.dump(list, f,ensure_ascii=False)
-        f.close()
+        if not SecAndSkillhelp.objects.filter(id=2).exists():
+            pods = SecAndSkillhelp.objects.create(id=2, text=json.dumps(list))
+            pods.save()
+        else:
+            pods = SecAndSkillhelp.objects.create(id=2)
+            pods.text = json.dumps(list)
+    connection.close()
 
 
 class AddTask(APIView):
@@ -728,6 +751,7 @@ class AddTask(APIView):
                 serializer = TaskSerializer(task, many=True)
                 # aktDB(1)
                 # aktDB(2)
+                connection.close()
                 return Response(serializer.data, status=status.HTTP_200_OK)
             # except Exception as e:
             #     my_task.delete()
@@ -810,6 +834,7 @@ class SectionViewSet(APIView):
     def get(self, request, format=None):
         dzial = Section.objects.all()
         serializer = SectionSerializer(dzial, many=True)
+        connection.close()
         return Response(serializer.data)
 
 
@@ -820,6 +845,7 @@ class AllTestsJSONViewSet(APIView):
     def get(self, request, format=None):
         tests = TestJSON.objects.filter(user_id=request.user.id).order_by('-created')
         serializer = TestJSONSerializer(tests, many=True)
+        connection.close()
         return Response(serializer.data)
 
 
@@ -831,6 +857,7 @@ class OneTestJSONViewSet(APIView):
         id = kwargs.pop('id')
         test = TestJSON.objects.filter(id=id, user_id=request.user.id)
         serializer = TestJSONSerializer(test, many=True)
+        connection.close()
         return Response(serializer.data)
 
 
@@ -842,6 +869,7 @@ class SkillViewSet(APIView):
     def get(self, request, format=None):
         skill = Skill.objects.all()
         serializer = SkillSerializer(skill, many=True)
+        connection.close()
         return Response(serializer.data)
 
 
@@ -853,6 +881,7 @@ class ImageViewSet(APIView):
     def get(self, request, *args, **kwargs):
         id = kwargs.pop('id')
         imag = ImageDB.objects.get(id=id)
+        connection.close()
         return HttpResponse(imag.image, content_type="image/*")
 
 
@@ -873,7 +902,9 @@ class AddImageViewSet(APIView):
             imag.delete()
             img = ImageDB.objects.create(image=cos)
             img.save()
-            return Response(data={"id": img.id}, status=status.HTTP_201_CREATED)
+            id = img.id
+            connection.close()
+            return Response(data={"id": id}, status=status.HTTP_201_CREATED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -902,7 +933,7 @@ class AddImageToTaskViewSet(APIView):
             image.save()
             task.image.set(image)
             task.save()
-
+            connection.close()
             return HttpResponse(image_data, content_type="image/png")
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -918,6 +949,7 @@ class TestTasksiewSet(APIView):
         test = list(TestJSON.objects.filter(id=id).values())[0]
         tasks = json.loads(test['tasks'])
         pdf, html = generatePdf(tasks=tasks, name=test['name'])
+        connection.close()
         return HttpResponse(pdf, content_type="application/pdf")
 
 
@@ -931,6 +963,7 @@ class TestAnswersviewSet(APIView):
         test = list(TestJSON.objects.filter(id=id).values())[0]
         tasks = json.loads(test['tasks'])
         pdf, html = generateAnswersPdf(tasks=tasks, name=test['name'])
+        connection.close()
         return HttpResponse(pdf, content_type="application/pdf")
 
 class TestKeyAnswersviewSet(APIView):
@@ -943,6 +976,7 @@ class TestKeyAnswersviewSet(APIView):
         test = list(TestJSON.objects.filter(id=id).values())[0]
         tasks = json.loads(test['tasks'])
         pdf, html = generateAnswerKeyPdf(tasks=tasks, name=test['name'])
+        connection.close()
         return HttpResponse(pdf, content_type="application/pdf")
 
 class RetDB(APIView):

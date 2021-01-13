@@ -73,10 +73,11 @@ const TaskWithOverlay = (props) => {
                   index={index}
                   pushTaskAtIndex={pushTaskAtIndex}
                 />,
-                <TaskOverlayButton {...provided.dragHandleProps}>
+                <TaskOverlayButton tooltip={"Przytrzymaj lewy przycisk myszy i przeciągnij zadanie na sprawdzianie, aby zmienić kolejność"} {...provided.dragHandleProps}>
                   <DragIndicatorIcon fontSize={"small"} />
                 </TaskOverlayButton>,
                 <TaskOverlayButton
+                    tooltip={"Usuń zadadnie"}
                   onClick={() => {
                     removeTask(index);
                   }}
@@ -164,44 +165,6 @@ const TaskWithOverlay = (props) => {
                             )}
                           </Box>
                         }
-                        {/*taskImage.length >= 1 &&(
-                            <div style={{width:"100%"}}>
-                              <div>
-                                <img
-                                  src={
-                                    window.location.origin+"/api"+"/user/image/" +
-                                    taskImage[0]
-                                  }
-                                  style={{ maxHeight: "100px" }}
-                                />
-                              </div>
-                            </div>
-                        )*/}
-                        {/*<Grid*/}
-                        {/*  container*/}
-                        {/*  alignItems="center"*/}
-                        {/*  justify={"space-between"}*/}
-                        {/*  className="pl-2 pr-2 ml-0 mr-2"*/}
-                        {/*>*/}
-                        {/*  {answers.map((item, index) => {*/}
-                        {/*    return (*/}
-                        {/*      <Grid item>*/}
-                        {/*        <div>*/}
-                        {/*          <Typography*/}
-                        {/*            display={"inline"}*/}
-                        {/*            style={{*/}
-                        {/*              fontWeight: "bold",*/}
-                        {/*            }}*/}
-                        {/*            className="font-weight-bold"*/}
-                        {/*          >*/}
-                        {/*            {ansChar[index] + ". "}*/}
-                        {/*          </Typography>*/}
-                        {/*          <Latex>{item}</Latex>*/}
-                        {/*        </div>*/}
-                        {/*      </Grid>*/}
-                        {/*    );*/}
-                        {/*  })}*/}
-                        {/*</Grid>*/}
                         {!task.currentAnswers.isOtwarte && (
                           <Grid
                             container
