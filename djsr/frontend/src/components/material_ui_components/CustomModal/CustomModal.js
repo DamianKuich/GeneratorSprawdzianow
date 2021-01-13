@@ -18,7 +18,7 @@ const CustomModal = ({ children, dialogTitle,dialogActionsChildren, ...props }) 
       }}
       {...props}
     >
-      <CustomDialogTitle onClose={onClose} title={dialogTitle} />
+        {!!dialogTitle && <CustomDialogTitle onClose={onClose} title={dialogTitle}/>}
       <DialogContent
         id="classic-modal-slide-description"
         className={classes.modalBody}

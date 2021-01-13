@@ -88,6 +88,7 @@ const EditTaskImages = (props) => {
   return (
     <>
       <TaskOverlayButton
+          tooltip={"Dodaj lub edytuj zdjęcia do zadania"}
         onClick={() => {
           setOpen(true);
         }}

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { MDBCol, MDBCollapse, MDBContainer, MDBRow } from "mdbreact";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { sampleSize, shuffle } from "lodash/collection";
 import "./styles/katex.css";
@@ -10,6 +9,10 @@ import ExamEditorSidePanel from "./ExamEditorSubComponents/ExamEditorSidePanel";
 import ExamPages from "./ExamEditorSubComponents/ExamPageWithTaskOverlays";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import Dialog from "./material_ui_components/CustomModal/CustomModal";
+import Button from "./material_ui_components/CustomButtons/Button";
+import Box from "@material-ui/core/Box";
+
 //todo po skasowaniu tresci zadania "zapomina" zdjecie
 //todo zajrzec do draganddropahndlera
 class ExamEditor extends Component {
@@ -28,6 +31,7 @@ class ExamEditor extends Component {
       editorTaskIndex: null,
       editorTaskPart: null,
       anchorEl: null,
+      downloadModal: false,
     };
   }
 
@@ -42,10 +46,11 @@ class ExamEditor extends Component {
       this.setState((state) => {
         state.exam = response.data[0];
         if (state.exam.tasks.length > 0) {
-          state.exam.tasks = JSON.parse(state.exam.tasks);
+          state.exam.tasks = JSON.parse(state.exam.tasks || []);
         } else {
           state.exam.tasks = [];
         }
+        document.title=state.exam.name
         return state;
       });
     });
@@ -348,8 +353,9 @@ class ExamEditor extends Component {
     // if (newValue === "generatePDF") this.generatedPDFV3(this.state.exam);
     if (newValue === "generatePDF") {
       this.updateStateNoSave((state) => {
-        state.anchorEl = event.currentTarget;
-        return state
+        // state.anchorEl = event.currentTarget;
+        state.downloadModal = true;
+        return state;
       });
     }
     // window.open(
@@ -458,6 +464,71 @@ class ExamEditor extends Component {
             </MenuItem>
           </Menu>
         </div>
+        <Dialog
+          open={!!this.state.downloadModal}
+          // dialogTitle={}
+          // fullWidth={true}
+          // maxWidth={"lg"}
+
+          onClose={() => {
+            this.setState((state) => {
+              state.downloadModal = false;
+              return false;
+            });
+          }}
+          dialogActionsChildren={[
+            <Button
+              color={"primary"}
+              onClick={() => {
+                this.setState((state) => {
+                  state.downloadModal = false;
+                  return false;
+                });
+              }}
+            >
+              Zamknij
+            </Button>,
+          ]}
+        >
+          <Box display={"flex"} flexDirection={"column"}>
+            <Button
+              color={"primary"}
+              onClick={() => {
+                window.open(
+                  `${window.location.origin}/api/user/testpdf/` +
+                    this.state.exam.id,
+                  "_blank"
+                );
+              }}
+            >
+              Sprawdzian
+            </Button>
+            <Button
+              color={"primary"}
+              onClick={() => {
+                window.open(
+                  `${window.location.origin}/api/user/answerspdf/` +
+                    this.state.exam.id,
+                  "_blank"
+                );
+              }}
+            >
+              Arkusz odpowiedzi
+            </Button>
+            <Button
+              color={"primary"}
+              onClick={() => {
+                window.open(
+                  `${window.location.origin}/api/user/answerskeypdf/` +
+                    this.state.exam.id,
+                  "_blank"
+                );
+              }}
+            >
+              Klucz Odpowiedzi
+            </Button>
+          </Box>
+        </Dialog>
       </DragDropContext>
     );
   }
