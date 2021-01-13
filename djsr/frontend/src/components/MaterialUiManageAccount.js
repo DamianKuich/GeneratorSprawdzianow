@@ -19,7 +19,7 @@ import CardBody from "./material_ui_components/Card/CardBody.js";
 import CardHeader from "./material_ui_components/Card/CardHeader.js";
 import CardFooter from "./material_ui_components/Card/CardFooter.js";
 import CustomInput from "./material_ui_components/CustomInput/CustomInput.js";
-
+import Grid from '@material-ui/core/Grid';
 import styles from "./assets/jss/material-kit-react/views/loginPage.js";
 
 import image from "./img/genesprDark.png";
@@ -82,74 +82,52 @@ const bgStyles = {
         
         <Formik
         initialValues={{
-          name: "",
           email: "",
-          password: "",
-          passwordConfirm: "",
         }}
         validationSchema={Yup.object().shape({
-          name: Yup.string()
+          email: Yup.string()
             .min(2, "Too Short!")
             .max(50, "Too Long!")
             .required(FRS),
-          password: Yup.string()
-            .min(8, "Too Short!")
-            .max(50, "Too Long!")
-            .required(FRS),
-          passwordConfirm: Yup.string()
-            .oneOf([Yup.ref("password")], "Hasła są różne")
-            .required(FRS),
-          email: Yup.string()
-            .email("Nieprawidłowy adres e-mail")
-            .required(FRS),
         })}
         onSubmit={(values, helpers) => {
-          setTimeout(() => {
-            helpers.setSubmitting(true);
-            axiosInstanceNoAuth
-            .put("/user/update/", {
-                username: values.name,
-                password: values.password,
-                email: values.email,
-              })
-              .then((response) => {
-                helpers.setSubmitting(false);
-                this.setState({
-                  token: response.data.confirmation_token,
+            setTimeout(() => {
+              
+              helpers.setSubmitting(true);
+              axiosInstance
+                .put("/user/update/", {
+                  email: values.email,
+                })
+                .then((response) => {
+                  this.props.setUser(response.data);
+                  helpers.setStatus("Pomyslnie zmieniono dane");
+                  helpers.setSubmitting(false);
+                  this.setState({ locked: false });
+                })
+                .catch((error) => {
+                  // console.log("login error", error.response);
+                  const errResponse = error.response;
+                  helpers.setSubmitting(false);
+                  this.setState({ locked: false });
+                  helpers.setValues(
+                    {
+                      name: "",
+                    },
+                    false
+                  );
+                  helpers.setTouched(
+                    {
+                      name: false,
+                    },
+                    false
+                  );
+                  helpers.setFieldError(
+                    "name",
+                    "Nazwa jest w użyciu lub jest nieprawidłowa."
+                  );
                 });
-                this.props.history.push(
-                  `/signupsuccess/${response.data.confirmation_token}`
-                );
-              })
-              .catch((error) => {
-                // console.log("login error", error.response);
-                const errResponse = error.response;
-                helpers.setSubmitting(false);
-                helpers.setValues(
-                  {
-                    name: "",
-                    password: "",
-                    passwordConfirm: "",
-                    email: "",
-                  },
-                  false
-                );
-                helpers.setTouched(
-                  {
-                    name: false,
-                    password: false,
-                    email: false,
-                    passwordConfirm: false,
-                  },
-                  false
-                );
-                helpers.setFieldError(
-                  "general",
-                  "Nierpawidłowa nazwa użytkownika lub hasło"
-                );
-              });
-          }, 5000);
-        }}
+            }, 400);
+          }}
       >
         {({
           values,
@@ -171,6 +149,7 @@ const bgStyles = {
             </CardHeader>
             <CardBody>
             
+            <Grid container justify="center">
             <ButtonGroup
                         orientation="vertical"
                         color="primary"
@@ -187,8 +166,8 @@ const bgStyles = {
                    Zmień hasło
               </Button>
             </ButtonGroup>
-
-
+            </Grid>
+              
 
                 <Field
                 component={MaterialFormikField}
@@ -196,7 +175,7 @@ const bgStyles = {
                 formControlProps={{
                   fullWidth: true,
                 }}
-                labelText="E-mail"
+                labelText="Adres e-mail"
                 inputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
@@ -205,9 +184,7 @@ const bgStyles = {
                   ),
                 }}
               />
-
          
-            
             </CardBody>
             <CardFooter className={classes.cardFooter}>
               <Button
@@ -229,6 +206,7 @@ const bgStyles = {
           <>
           </>
         )}
+        
          {editView=="name" ? (
         
         <Formik
@@ -300,6 +278,7 @@ const bgStyles = {
             </CardHeader>
             <CardBody>
             
+            <Grid container justify="center">
             <ButtonGroup
                         orientation="vertical"
                         color="primary"
@@ -316,6 +295,7 @@ const bgStyles = {
                    Zmień hasło
               </Button>
             </ButtonGroup>
+            </Grid>
               
 
                 <Field
@@ -446,6 +426,7 @@ const bgStyles = {
               
             </CardHeader>
             <CardBody>
+            <Grid container justify="center">
             <ButtonGroup
                         orientation="vertical"
                         color="primary"
@@ -462,6 +443,7 @@ const bgStyles = {
                    Zmień hasło
               </Button>
             </ButtonGroup>
+            </Grid>
 
             
             <Field

@@ -70,6 +70,8 @@ import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Loading from "./LoadingScreen"
+import InputAdornment from '@material-ui/core/InputAdornment';
+import ButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 const useStyles = makeStyles((theme) => ({
   root: {
     maxHeight: 200,
@@ -157,7 +159,10 @@ const useStylesAlert = makeStyles((theme) => ({
         skills: '', 
         groups: '',
         autoGenSkills:[],
-        checked: []
+        checked: [],
+        otwCount: null,
+        zamkCount: null,
+        autoGeneStep: '1',
         
 
        
@@ -212,15 +217,23 @@ const useStylesAlert = makeStyles((theme) => ({
     };
   
 
-    handleToggle = (value) => () => {
+    handleToggle = (value,otw,zamk) => () => {
       this.setState({ autoGenSkills: this.state.autoGenSkills.concat(value) })
       const currentIndex = this.state.checked.indexOf(value);
       const newChecked = [...this.state.checked];
+
+      
       
       if (currentIndex === -1) {
         newChecked.push(value);
+        let sumOtw = +otw + +this.state.otwCount
+        let sumZamk = +zamk + +this.state.zamkCount
+        this.setState({otwCount: sumOtw,zamkCount:sumZamk})
       } else {
         newChecked.splice(currentIndex, 1);
+        let sumOtw = +this.state.otwCount - +otw 
+        let sumZamk = +this.state.zamkCount - +zamk 
+        this.setState({otwCount: sumOtw,zamkCount:sumZamk})
       }
   
       this.setState({ checked: newChecked });
@@ -232,7 +245,7 @@ const useStylesAlert = makeStyles((theme) => ({
     componentDidMount() {
       this.updateExams();
       axiosInstanceNoAuth
-      .get("/user/sections3/")
+      .get("/user/sections2/")
       .then((response) => {
         const parsed = response.data.map(section => {
           section.skill=section.skilll
@@ -401,7 +414,7 @@ const useStylesAlert = makeStyles((theme) => ({
                         </div>
 
                         <CardActions style={{justifyContent: 'center'}}> 
-                       
+                    
                           <Button 
                            variant="contained" 
                             color="primary"
@@ -410,16 +423,20 @@ const useStylesAlert = makeStyles((theme) => ({
                             
                             disabled={isSubmitting}
                           >
-                            Zapisz
+                            Zapisz sprawdzian
                           </Button>
+                         
                           <Button 
                            variant="contained" 
                             color="primary"
                             size="lg"
                             onClick={() => this.setState({ open: !this.state.open})}
+                            
                           >
-                            Wygeneruj automatycznie 20:01
+                            Generuj sprawdzian
                           </Button>
+
+                        
                           
                           </CardActions>
                         
@@ -454,6 +471,7 @@ const useStylesAlert = makeStyles((theme) => ({
               
               
               >
+                
                  
                     <CardHeader
                    title={exam.name}/>
@@ -495,31 +513,23 @@ const useStylesAlert = makeStyles((theme) => ({
             })}
             
          </Paper>
+         {this.state.autoGeneStep=="1" ? (
          <Dialog 
          
          fullWidth={true}
         
           titlestyle={{textAlign: "center"}}
           
-         open={this.state.open} onClose={() => this.setState({ open: !this.state.open })}>
+         open={this.state.open} onClose={() => this.setState({ open: !this.state.open,checked:[],autoGeneStep:"1" })}>
         <DialogTitle  id="form-dialog-title"><Typography variant="h5" align="center">Wygeneruj sprawdzian automatycznie</Typography></DialogTitle>
-      
+       
         <DialogContent>
         <Box p={1}>
         <TextField  fullWidth
          onChange={(event) => this.setState({ generatedName: event.target.value })}
-        id="ileotw" label="Nazwa sprawdzianu" />
+        id="examName" label="Nazwa sprawdzianu" />
             </Box>
-        <Box p={1}>
-        <TextField  fullWidth
-         onChange={(event) => this.setState({ ileotw: event.target.value })}
-        id="ileotw" label="Ile zadań otwartych" />
-            </Box>
-        <Box p={1}>
-        <TextField  fullWidth
-         onChange={(event) => this.setState({ ilezamk: event.target.value })}
-        id="ilezamk" label="Ile zadań zamkniętych" />
-            </Box>
+ 
 
         <Box p={1}>
         <TextField fullWidth
@@ -550,6 +560,79 @@ const useStylesAlert = makeStyles((theme) => ({
          onChange={(event) => this.setState({ groups: event.target.value })}
         id="groups" label="Ilość grup" />
             </Box>
+         
+        </DialogContent>
+        
+        <DialogActions >
+          
+          <Button 
+          color="primary"      
+            onClick={() => {
+              
+      
+              axiosInstanceNoAuth
+              .post("/user/sections3/",{
+
+                level:this.state.level
+
+              })
+              .then((response) => {
+                const parsed = response.data.map(section => {
+                  section.skill=section.skilll
+                  return section
+                })
+                this.setState({ sections: parsed });
+                this.setState({autoGeneStep: "2"})
+                // const parsed= response.data.map((section)=>{
+                //   section.skill=section.skilll
+                //   return section
+                // })
+                // this.setState({ sections: response.data });
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+            }}>
+            Dalej
+          </Button>
+        </DialogActions>
+        
+      </Dialog>
+              ) : (
+                <>
+                </>
+              )}
+
+{this.state.autoGeneStep=="2" ? (
+         <Dialog 
+         
+         fullWidth={true}
+        
+          titlestyle={{textAlign: "center"}}
+          
+         open={this.state.open} onClose={() => this.setState({ open: !this.state.open,checked:[],autoGeneStep:"1" })}>
+        <DialogTitle  id="form-dialog-title"><Typography variant="h5" align="center">Wygeneruj sprawdzian automatycznie</Typography></DialogTitle>
+       
+        <DialogContent>
+        <Box p={1}>
+        <TextField  fullWidth
+         onChange={(event) => this.setState({ ileotw: event.target.value })}
+        id="ileotw" label="Ile zadań otwartych"
+        InputProps={{
+          endAdornment: <InputAdornment position="end">/{this.state.otwCount}</InputAdornment>,
+        }}
+        />
+            </Box>
+        <Box p={1}>
+        <TextField  fullWidth
+         onChange={(event) => this.setState({ ilezamk: event.target.value })}
+        id="ilezamk" label="Ile zadań zamkniętych" 
+        
+        InputProps={{
+          endAdornment: <InputAdornment position="end">/{this.state.zamkCount}</InputAdornment>,
+        }}
+        />
+            </Box>
             <Box p={1}>
                   <List>
                     {sections.map((section) => {
@@ -577,7 +660,7 @@ const useStylesAlert = makeStyles((theme) => ({
                                 return (
                                   <ListItem button
                                   key={skill.id}
-                                  onClick={this.handleToggle(skill.id)}
+                                  onClick={this.handleToggle(skill.id,skill.taskCountOtw,skill.taskCountZamk)}
                                   
                                   >
                                     <ListItemIcon>
@@ -591,7 +674,7 @@ const useStylesAlert = makeStyles((theme) => ({
                                     <ListItemText 
                                      
                                       primary={skill.Skill}
-                                      secondary={"Dostępnych zadań: " + skill.taskCount}
+                                      secondary={"Zadań otwartych: " + skill.taskCountOtw +" Zadań zamkniętych: " +skill.taskCountZamk}
                                     />
                                  
                              
@@ -672,6 +755,10 @@ const useStylesAlert = makeStyles((theme) => ({
         </DialogActions>
         
       </Dialog>
+              ) : (
+                <>
+                </>
+              )}
         </div>
       );
     }
