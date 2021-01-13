@@ -1,10 +1,11 @@
 from datetime import date, timedelta
 import json
+from django.db import connection
 from django.core import serializers
 from . import models
 from itertools import chain
 from copy import deepcopy
-from django.db import connection
+from django import db
 from rest_framework_simplejwt.utils import *
 from django.core import serializers
 import random
@@ -30,8 +31,8 @@ from .examToPdf.PdfFromNode import generatePdf, generateAnswersPdf, generateAnsw
 
 from .serializers import CustomUserSerializer, TaskSerializer, SectionSerializer, SkillSerializer, \
     CustomUserSerializerReadOnly, PasswordSendResetSerializer, TestJSONSerializer, ImageSerializer
-from .serializers import SectionSerializerv2, AnswersSerializer
-from .models import Sectionv2, Answers
+from .serializers import SectionSerializerv2, AnswersSerializer, SasSerializer
+from .models import Sectionv2, Answers, SecAndSkillhelp
 from .models import Task, Section, Skill, CustomUser, UserActivationToken, \
     TestJSON, PasswordSendReset, UserResetToken, Image, ImageDB
 
@@ -611,13 +612,19 @@ class SkilltoSectionsAutoGene(APIView):
                 x['sectionTaskCount'] = sum
                 list.append(x)
             if level == 1:
-                with open('djsr/authentication/sections1.txt', 'w',encoding='utf-8') as f:
-                        json.dump(list, f,ensure_ascii=False)
-                f.close()
+                if not SecAndSkillhelp.objects.filter(id=1).exists():
+                    pods = SecAndSkillhelp.objects.create(id=1,text=json.dumps(list))
+                    pods.save()
+                else:
+                    pods = SecAndSkillhelp.objects.create(id=1)
+                    pods.text = json.dumps(list)
             elif level == 2:
-                with open('djsr/authentication/sections2.txt', 'w',encoding='utf-8') as f:
-                        json.dump(list, f,ensure_ascii=False)
-                f.close()
+                if not SecAndSkillhelp.objects.filter(id=2).exists():
+                    pods = SecAndSkillhelp.objects.create(id=2,text=json.dumps(list))
+                    pods.save()
+                else:
+                    pods = SecAndSkillhelp.objects.create(id=2)
+                    pods.text = json.dumps(list)
             return Response(list)
 
 class GetSkillsFromfile(APIView):
@@ -628,14 +635,14 @@ class GetSkillsFromfile(APIView):
         if request.data:
             level = int(request.data['level'])
             if level == 1:
-                with open('djsr/authentication/sections1.txt',encoding='utf-8') as f:
-                    data = json.load(f)
-                f.close()
+                pods = list(SecAndSkillhelp.objects.filter(id=1).values())[0]
+                tasks = json.loads(pods['text'])
+                connection.close()
             if level == 2:
-                with open('djsr/authentication/sections2.txt',encoding='utf-8') as f:
-                    data = json.load(f)
-                f.close()
-            return Response(data)
+                pods = list(SecAndSkillhelp.objects.filter(id=2).values())[0]
+                tasks = json.loads(pods['text'])
+                connection.close()
+            return Response(tasks)
 
 def aktDB(self, level):
     level = level
@@ -676,13 +683,19 @@ def aktDB(self, level):
         x['sectionTaskCount'] = sum
         list.append(x)
     if level == 1:
-        with open('djsr/authentication/sections1.txt', 'w',encoding='utf-8') as f:
-                json.dump(list, f,ensure_ascii=False)
-        f.close()
+        if not SecAndSkillhelp.objects.filter(id=1).exists():
+            pods = SecAndSkillhelp.objects.create(id=1, text=json.dumps(list))
+            pods.save()
+        else:
+            pods = SecAndSkillhelp.objects.create(id=1)
+            pods.text = json.dumps(list)
     elif level == 2:
-        with open('djsr/authentication/sections2.txt', 'w',encoding='utf-8') as f:
-                json.dump(list, f,ensure_ascii=False)
-        f.close()
+        if not SecAndSkillhelp.objects.filter(id=2).exists():
+            pods = SecAndSkillhelp.objects.create(id=2, text=json.dumps(list))
+            pods.save()
+        else:
+            pods = SecAndSkillhelp.objects.create(id=2)
+            pods.text = json.dumps(list)
 
 
 class AddTask(APIView):
