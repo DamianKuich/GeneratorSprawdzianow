@@ -74,7 +74,8 @@ const Fenerator = (props) => {
             ileotw: "0",
             ilezamk: "0",
             level: "0",
-            skills: "0"
+            skills: "0",
+            groups: "0"
         }}
         validationSchema={Yup.object().shape({
             ileotw: Yup.string()
@@ -87,6 +88,8 @@ const Fenerator = (props) => {
               .required("Pole wymagane"),
               skills: Yup.string()
               .required("Pole wymagane"),
+              groups: Yup.string()
+              .required("Pole wymagane"),
           })}
           onSubmit={(values, helpers) => {
             setTimeout(() => {
@@ -96,7 +99,8 @@ const Fenerator = (props) => {
                 ileotw: values.ileotw,
                 ilezamk: values.ilezamk,
                 level:values.level,
-                skills:values.skills
+                skills:values.skills,
+                groups:values.groups
               })
                 .then((response) => {
                     
@@ -163,7 +167,7 @@ const Fenerator = (props) => {
               color="primary"
               className={classes.cardHeader}
             >
-              <h4>Wygeneruj sprawdzian</h4>
+              <h4>Wygeneruj sprawdzian XD</h4>
               
             </CardHeader>
             <CardBody>
@@ -233,7 +237,23 @@ const Fenerator = (props) => {
                     </InputAdornment>
                   ),
                 }}
-              />          
+              />         
+                            
+                            <Field
+                component={MaterialFormikField}
+                name={"groups"}
+                formControlProps={{
+                  fullWidth: true,
+                }}
+                labelText="GRUPY KATOLICKIE JANA PAWŁA 2"
+                inputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                     
+                    </InputAdornment>
+                  ),
+                }}
+              />   
             </CardBody>
             <CardFooter className={classes.cardFooter}>
               <Button

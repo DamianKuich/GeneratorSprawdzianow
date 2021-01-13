@@ -53,16 +53,23 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import MenuItem from '@material-ui/core/MenuItem';
-import Checkbox from '@material-ui/core/Checkbox';
+import Checkbox from "./material_ui_components/CustomCheckBox/CustomCheckbox";
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import taskParser from './AutoGeneTaskParser'
 import TextField from '@material-ui/core/TextField';
 import { useHistory } from "react-router-dom";
-import ListItemText from '@material-ui/core/ListItemText';
 import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListSubheader from '@material-ui/core/ListSubheader';
 import { MenuTwoTone } from "@material-ui/icons";
+import Collapse from "@material-ui/core/Collapse";
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import Loading from "./LoadingScreen"
 const useStyles = makeStyles((theme) => ({
   root: {
     maxHeight: 200,
@@ -99,6 +106,7 @@ const bgStyles = {
       backgroundImage: `url(${image})`,
       
       minHeight: 1000,
+      maxWidth: 1885
 
      
      
@@ -138,13 +146,18 @@ const useStylesAlert = makeStyles((theme) => ({
       this.state = {
         exams: null,
         open: false,
+        listExpand:{},
         generatedId: null,
+        generatedName: null,
         sections: null,
+        groups: null,
         ileotw: '',
         ilezamk: '',
         level: '',
         skills: '', 
-        autoGenSkills:[]
+        groups: '',
+        autoGenSkills:[],
+        checked: []
         
 
        
@@ -152,6 +165,7 @@ const useStylesAlert = makeStyles((theme) => ({
         
         
       };
+      this.handleToggle = this.handleToggle.bind(this);
     }
   
     updateExams = () => {
@@ -197,6 +211,20 @@ const useStylesAlert = makeStyles((theme) => ({
       });
     };
   
+
+    handleToggle = (value) => () => {
+      this.setState({ autoGenSkills: this.state.autoGenSkills.concat(value) })
+      const currentIndex = this.state.checked.indexOf(value);
+      const newChecked = [...this.state.checked];
+      
+      if (currentIndex === -1) {
+        newChecked.push(value);
+      } else {
+        newChecked.splice(currentIndex, 1);
+      }
+  
+      this.setState({ checked: newChecked });
+    };
     // componentWillMount() {
     //
     // }
@@ -250,20 +278,7 @@ const useStylesAlert = makeStyles((theme) => ({
 
       if (!exams || !sections) {
         return (
-          <div >
-     
-          <CircularProgress size={250}  style={{
-            'color': 'purple',
-            'marginLeft': '50%',
-            'marginTop': '20%',
-           
-        
-        }}/>
-        <p>
-        
-        </p>
-        
-        </div>
+          <Loading></Loading>
         );
       }
       return (
@@ -274,7 +289,7 @@ const useStylesAlert = makeStyles((theme) => ({
         <Paper  style={bgStyles.paperContainer}>
    
           <Box
-          p={10}
+          p={8}
           >
 
               <Grid  
@@ -397,6 +412,14 @@ const useStylesAlert = makeStyles((theme) => ({
                           >
                             Zapisz
                           </Button>
+                          <Button 
+                           variant="contained" 
+                            color="primary"
+                            size="lg"
+                            onClick={() => this.setState({ open: !this.state.open})}
+                          >
+                            Wygeneruj automatycznie
+                          </Button>
                           
                           </CardActions>
                         
@@ -459,11 +482,7 @@ const useStylesAlert = makeStyles((theme) => ({
                     </IconButton>
                     </BootstrapTooltip>
                    
-                    <BootstrapTooltip title="Wygeneruj sprawdzian automatycznie">
-                      <IconButton onClick={() => this.setState({ open: !this.state.open, generatedId: exam.id })}>
-                        <DynamicFeedIcon />
-                     </IconButton>
-                    </BootstrapTooltip>
+                  
                     
                   
                   </CardActions>
@@ -476,10 +495,21 @@ const useStylesAlert = makeStyles((theme) => ({
             })}
             
          </Paper>
-         <Dialog open={this.state.open} onClose={() => this.setState({ open: !this.state.open })}>
-        <DialogTitle id="form-dialog-title">Wygeneruj sprawdzian automatycznie</DialogTitle>
+         <Dialog 
+         
+         fullWidth={true}
+        
+          titlestyle={{textAlign: "center"}}
+          
+         open={this.state.open} onClose={() => this.setState({ open: !this.state.open })}>
+        <DialogTitle  id="form-dialog-title"><Typography variant="h5" align="center">Wygeneruj sprawdzian automatycznie</Typography></DialogTitle>
       
         <DialogContent>
+        <Box p={1}>
+        <TextField  fullWidth
+         onChange={(event) => this.setState({ generatedName: event.target.value })}
+        id="ileotw" label="Nazwa sprawdzianu" />
+            </Box>
         <Box p={1}>
         <TextField  fullWidth
          onChange={(event) => this.setState({ ileotw: event.target.value })}
@@ -514,45 +544,67 @@ const useStylesAlert = makeStyles((theme) => ({
          
         </TextField>
         </Box>
-
-        <Box p={1}>
-       
-        <Select
-        fullWidth
-          
-          id="demo-mutiple-checkbox"
-          
-          multiple
-          value={this.state.autoGenSkills}
-          onChange={(event) => this.setState({ autoGenSkills: event.target.value })}
-         
-         
-         
-          renderValue={(selected) => 
-
-            
-            selected.join(', ')
-          
-
-          }
-            
-      
-        >
-
-        {sections.map((section) =>
-        
-        
-          <ListSubheader>{section.Section}</ListSubheader>
-          &&
-          section.skill.map((skill) => (
-            <MenuItem key={skill.id} value={skill.id}>
-              <ListItemText primary={skill.Skill} secondary={"Dostępnych zadań: " + skill.taskCount}/>
-            </MenuItem>
-              )))}
-        
-              
-          
-        </Select>
+ <Box p={1}>
+   
+        <TextField  fullWidth
+         onChange={(event) => this.setState({ groups: event.target.value })}
+        id="groups" label="Ilość grup" />
+            </Box>
+            <Box p={1}>
+                  <List>
+                    {sections.map((section) => {
+                     
+                      return (
+                        <>
+                          <ListItem
+                          // onClick={() => {
+                          //   this.toggleCollapse("section-" + section.id);
+                          // }}
+                          >
+                          
+                            <ListItemText
+                              primary={<h3>{section.Section}</h3>}
+                              secondary={"Dostępnych zadań: " + section.sectionTaskCount}
+                          
+                            />
+                              <ListItemSecondaryAction>
+                            
+                            </ListItemSecondaryAction>
+                          </ListItem>
+                       
+                            <List component="div" disablePadding>
+                              {section.skill.map((skill) => {
+                                return (
+                                  <ListItem button
+                                  key={skill.id}
+                                  onClick={this.handleToggle(skill.id)}
+                                  
+                                  >
+                                    <ListItemIcon>
+                                      <Checkbox
+                                        edge="start"
+                                        checked={this.state.checked.indexOf(skill.id) !== -1}
+                                        tabIndex={-1}
+                                      
+                                      />
+                                    </ListItemIcon>
+                                    <ListItemText 
+                                     
+                                      primary={skill.Skill}
+                                      secondary={"Dostępnych zadań: " + skill.taskCount}
+                                    />
+                                 
+                             
+                                  </ListItem>
+                                );
+                              })}
+                            </List>
+                        
+                         
+                        </>
+                      );
+                    })}
+                  </List>
       
         </Box>
       
@@ -564,7 +616,7 @@ const useStylesAlert = makeStyles((theme) => ({
           
         </DialogContent>
         
-        <DialogActions>
+        <DialogActions >
           
           <Button 
           color="primary"      
@@ -576,21 +628,35 @@ const useStylesAlert = makeStyles((theme) => ({
                 ileotw: this.state.ileotw,
                 ilezamk: this.state.ilezamk,
                 level:  this.state.level,
-                skills: this.state.autoGenSkills.join(', ')
+                skills: this.state.checked.join(', '),
+                groups: this.state.groups,
               })
                 .then((response) => {
+
+                  let key = 0;
+                    response.data.map((group )=> {
+                      
+                      
+                      let randomtasks = JSON.stringify(taskParser(group))
+                      ++key
+                      axiosInstance.post(`/user/maketest/`, {
+                        name:this.state.generatedName + ' Grupa '+ key,
+                        tasks:randomtasks
+                        
+                      }).then((response)=>{
+                        
+                        console.log(randomtasks)
+                       // console.log(this.state.generatedId)
+                       this.props.history.go(0);
+                      })
                     
-                   let randomtasks = JSON.stringify(taskParser(response.data))
+                    })
+                    
                    
                    
-                    axiosInstance.put(`/user/maketest/`, {
-                    id:this.state.generatedId,
-                    tasks:randomtasks
-                  }).then((response)=>{
-                    console.log(randomtasks)
-                    console.log(this.state.generatedId)
-                    this.props.history.push(`/editor/${this.state.generatedId}`);
-                  })
+                   
+                   
+            
  
  
 

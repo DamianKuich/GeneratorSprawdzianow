@@ -25,7 +25,7 @@
     "react": "^16.13.1",
     "react-autosize-textarea": "^7.1.0",
     "react-beautiful-dnd": "^13.0.0",
-    "react-bootstrap": "^1.0.1",
+    "react-bootstrap": "^1.4.3",
     "react-dom": "^16.13.1",
     "react-dropzone": "^11.2.4",
     "react-gesture-responder": "^2.1.0",
@@ -81,12 +81,12 @@
     "prop-types": "^15.7.2",
     "raw-loader": "^4.0.2",
     "react-resize-detector": "^5.2.0",
-    "sass": "^1.29.0",
+    "sass": "^1.32.2",
     "sass-loader": "^8.0.2",
     "terser-webpack-plugin": "^2.3.8",
     "tex-equation-to-svg": "^1.0.1",
     "transform-loader": "^0.2.4",
-    "webpack": "^4.44.2",
+    "webpack": "^4.45.0",
     "webpack-cli": "^3.3.12"
   }
 }
