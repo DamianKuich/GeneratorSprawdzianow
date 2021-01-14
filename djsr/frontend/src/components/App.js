@@ -7,6 +7,7 @@ import "./styles/styles.css";
 import axiosInstance from "./axiosAPI";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AddTask from "./AddTask";
+import LoadingScreen from "./LoadingScreen";
 const Login = lazy(() => import("./MaterialUiLoginPage"));
 // import Login from "./MaterialUiLoginPage"
 const Signup = lazy(() => import("./MaterialUiSignUpPage"));
@@ -95,7 +96,7 @@ class App extends Component {
           <CssBaseline />
         <MDBContainer fluid className="h-100">
           <MaterialUiNavbar {...properties} />
-          <Suspense fallback={<div>Ładowanie</div>}>
+          <Suspense fallback={<LoadingScreen/>}>
             <Switch>
               <Route
                 exact

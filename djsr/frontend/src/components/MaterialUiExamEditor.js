@@ -12,6 +12,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Dialog from "./material_ui_components/CustomModal/CustomModal";
 import Button from "./material_ui_components/CustomButtons/Button";
 import Box from "@material-ui/core/Box";
+import LoadingScreen from "./LoadingScreen";
 
 //todo po skasowaniu tresci zadania "zapomina" zdjecie
 //todo zajrzec do draganddropahndlera
@@ -152,6 +153,14 @@ class ExamEditor extends Component {
       return state;
     });
   };
+
+  openPDFinNewTab =(type)=>{
+    let pdfBaseUrl=""
+    switch(type){
+      case "exam":
+        pdfBaseUrl="/user/testpdf/"
+    }
+  }
 
   dragEndOld = (result) => {
     const { source, destination, draggableId } = result;
@@ -376,9 +385,7 @@ class ExamEditor extends Component {
     const exam = this.state.exam;
     if (!exam) {
       return (
-        <div>
-          <div>Ladowanie</div>
-        </div>
+        <LoadingScreen message={"Ładowanie edytora sprawdzianu"}/>
       );
     }
     const sideMenuCollapseId = this.state.sideMenuCollapseId;
