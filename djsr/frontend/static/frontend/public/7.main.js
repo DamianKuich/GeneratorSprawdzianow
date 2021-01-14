@@ -3754,10 +3754,22 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "openPDFinNewTab", function (type) {
       var pdfBaseUrl = "";
+      var pdfNameSuffix = "";
 
       switch (type) {
         case "exam":
           pdfBaseUrl = "/user/testpdf/";
+          break;
+
+        case "answers":
+          pdfBaseUrl = '/user/answerspdf/';
+          pdfNameSuffix = "- arkusz odpowiedzi";
+          break;
+
+        case 'answersKeys':
+          pdfBaseUrl = '/user/answerskeypdf/';
+          pdfNameSuffix = "- klucz odpowiedzi";
+          break;
       }
 
       _axiosAPI__WEBPACK_IMPORTED_MODULE_6__["default"].get(pdfBaseUrl + _this.state.exam.id, {
@@ -3778,7 +3790,7 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
           display: "none"
         };
         a.href = fileURL;
-        a.download = _this.state.exam.name;
+        a.download = _this.state.exam.name + pdfNameSuffix;
         a.click();
         URL.revokeObjectURL(fileURL); // window.open(fileURL);
       });
@@ -4105,22 +4117,31 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_12__["default"], {
         color: "primary",
         onClick: function onClick() {
-          _this2.props.enqueueSnackbar("Successfully fetched the data.");
-        }
-      }, "Sprawdzian"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_12__["default"], {
-        color: "primary",
-        onClick: function onClick() {
           _this2.openPDFinNewTab("exam");
         }
-      }, "Sprawdzian secured"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_12__["default"], {
-        color: "primary",
+      }, "Sprawdzian"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        color: "primary" // onClick={() => {
+        //   window.open(
+        //     `${window.location.origin}/api/user/answerspdf/` +
+        //       this.state.exam.id,
+        //     "_blank"
+        //   );
+        // }}
+        ,
         onClick: function onClick() {
-          window.open("".concat(window.location.origin, "/api/user/answerspdf/") + _this2.state.exam.id, "_blank");
+          _this2.openPDFinNewTab("answers");
         }
       }, "Arkusz odpowiedzi"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_12__["default"], {
-        color: "primary",
+        color: "primary" // onClick={() => {
+        //   window.open(
+        //     `${window.location.origin}/api/user/answerskeypdf/` +
+        //       this.state.exam.id,
+        //     "_blank"
+        //   );
+        // }}
+        ,
         onClick: function onClick() {
-          window.open("".concat(window.location.origin, "/api/user/answerskeypdf/") + _this2.state.exam.id, "_blank");
+          _this2.openPDFinNewTab("answersKeys");
         }
       }, "Klucz Odpowiedzi"))));
     }

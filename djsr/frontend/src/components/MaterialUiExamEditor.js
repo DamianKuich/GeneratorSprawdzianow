@@ -180,9 +180,19 @@ class ExamEditor extends Component {
 
   openPDFinNewTab = (type) => {
     let pdfBaseUrl = "";
+    let pdfNameSuffix= ""
     switch (type) {
       case "exam":
         pdfBaseUrl = "/user/testpdf/";
+        break;
+      case "answers":
+        pdfBaseUrl ='/user/answerspdf/';
+        pdfNameSuffix= "- arkusz odpowiedzi";
+        break;
+      case 'answersKeys':
+        pdfBaseUrl ='/user/answerskeypdf/';
+        pdfNameSuffix= "- klucz odpowiedzi";
+        break;
     }
     axiosInstance
       .get(pdfBaseUrl + this.state.exam.id, {
@@ -200,7 +210,7 @@ class ExamEditor extends Component {
         document.body.appendChild(a);
         a.style = { display: "none" };
         a.href = fileURL;
-        a.download = this.state.exam.name;
+        a.download = this.state.exam.name + pdfNameSuffix;
         a.click();
         URL.revokeObjectURL(fileURL);
         // window.open(fileURL);
@@ -541,42 +551,48 @@ class ExamEditor extends Component {
           ]}
         >
           <Box display={"flex"} flexDirection={"column"}>
-            <Button
-              color={"primary"}
-              onClick={() => {
-                this.props.enqueueSnackbar("Successfully fetched the data.");
-              }}
-            >
-              Sprawdzian
-            </Button>
+            {/*<Button*/}
+            {/*  color={"primary"}*/}
+            {/*  onClick={() => {*/}
+            {/*    this.props.enqueueSnackbar("Successfully fetched the data.");*/}
+            {/*  }}*/}
+            {/*>*/}
+            {/*  Sprawdzian*/}
+            {/*</Button>*/}
             <Button
               color={"primary"}
               onClick={() => {
                 this.openPDFinNewTab("exam");
               }}
             >
-              Sprawdzian secured
+              Sprawdzian
             </Button>
             <Button
               color={"primary"}
-              onClick={() => {
-                window.open(
-                  `${window.location.origin}/api/user/answerspdf/` +
-                    this.state.exam.id,
-                  "_blank"
-                );
+              // onClick={() => {
+              //   window.open(
+              //     `${window.location.origin}/api/user/answerspdf/` +
+              //       this.state.exam.id,
+              //     "_blank"
+              //   );
+              // }}
+                onClick={() => {
+                this.openPDFinNewTab("answers");
               }}
             >
               Arkusz odpowiedzi
             </Button>
             <Button
               color={"primary"}
-              onClick={() => {
-                window.open(
-                  `${window.location.origin}/api/user/answerskeypdf/` +
-                    this.state.exam.id,
-                  "_blank"
-                );
+              // onClick={() => {
+              //   window.open(
+              //     `${window.location.origin}/api/user/answerskeypdf/` +
+              //       this.state.exam.id,
+              //     "_blank"
+              //   );
+              // }}
+                onClick={() => {
+                this.openPDFinNewTab("answersKeys");
               }}
             >
               Klucz Odpowiedzi

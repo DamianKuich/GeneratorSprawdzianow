@@ -4117,9 +4117,14 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_12__["default"], {
         color: "primary",
         onClick: function onClick() {
-          _this2.openPDFinNewTab("exam");
+          _this2.props.enqueueSnackbar("Successfully fetched the data.");
         }
       }, "Sprawdzian"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        color: "primary",
+        onClick: function onClick() {
+          _this2.openPDFinNewTab("exam");
+        }
+      }, "Sprawdzian secured"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_12__["default"], {
         color: "primary" // onClick={() => {
         //   window.open(
         //     `${window.location.origin}/api/user/answerspdf/` +
