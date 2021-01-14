@@ -26,61 +26,62 @@ def generatePdf(tasks, name="Sprawdzian"):
         text(name)
     # renderowanie taskow
     for index, task in enumerate(tasks):
-        with tag('span style="display: inline;"'):
-            text("Zadanie nr." + str(index + 1))
-            with tag('span style="display: inline;margin-left: 20px;"'):
-                text("0-" + str(task['maxPoints']) + "pkt.")
-            # with tag('span style="display: inline;margin-left: 20px;"'):
-            #     text(str(task['timetosolve']) + " minut")
-        with tag('p'):
-            for part in task['text']:
-                if part["type"] == "text":
-                    with tag('span'):
-                        text(part["data"])
-                elif part["type"] == "latex":
-                    svg = part["svg"]
-                    doc.stag("img", src='data:image/svg+xml;utf8,' + svg,
-                             style="display:inline;transform: translate(0px,30%);")
-        # # renderowanie obrazków
-        try:
+        with tag('div style="display: block;"'):
+            with tag('span style="display: inline;"'):
+                text("Zadanie nr." + str(index + 1))
+                with tag('span style="display: inline;margin-left: 20px;"'):
+                    text("0-" + str(task['maxPoints']) + "pkt.")
+                # with tag('span style="display: inline;margin-left: 20px;"'):
+                #     text(str(task['timetosolve']) + " minut")
             with tag('p'):
-                for img in task['obrazki']:
-                    # text("whatever")
-                    if task['layout'] == "2x1":
-                        # with tag('div'):
-                        try:
-                            with tag('span'):
-                                doc.stag("img", src='data:image/*;base64,' + img, style="display:inline-block;")
-                        except:
-                            text("error")
-                    elif task['layout'] == "1x2":
-                        with tag('div'):
+                for part in task['text']:
+                    if part["type"] == "text":
+                        with tag('span'):
+                            text(part["data"])
+                    elif part["type"] == "latex":
+                        svg = part["svg"]
+                        doc.stag("img", src='data:image/svg+xml;utf8,' + svg,
+                                 style="display:inline;transform: translate(0px,30%);")
+            # # renderowanie obrazków
+            try:
+                with tag('p'):
+                    for img in task['obrazki']:
+                        # text("whatever")
+                        if task['layout'] == "2x1":
+                            # with tag('div'):
                             try:
                                 with tag('span'):
-                                    doc.stag("img", src='data:image/*;base64,' + img)
+                                    doc.stag("img", src='data:image/*;base64,' + img, style="display:inline-block;")
                             except:
                                 text("error")
-                    else:
-                        text("error")
-        except:
-            pass
-        # renderowanie odp zadania
-        with tag('div'):
-            for index, answer in enumerate(task['answers']):
-                # with tag('div'):
-                for part in answer:
-                    if part["type"] == "text":
-                        with tag('div style="display: inline-block;margin-right: 20px;"'):
-                            text(listodp[index] + part["data"])
-                    elif part["type"] == "latex":
-                        with tag('div style="display: inline-block;margin-right: 20px;"'):
-                            with tag('span style="display: block;margin-right: 20px;"'):
-                                text(listodp[index])
-                                doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"],
-                                         style="transform: translate(0px,4px);")
-        # if task['spacetosolve'] > 0:
-        #     with tag('div style="margin-bottom:' + str(task['spacetosolve']*19)+'px;"'):
-        #         pass
+                        elif task['layout'] == "1x2":
+                            with tag('div'):
+                                try:
+                                    with tag('span'):
+                                        doc.stag("img", src='data:image/*;base64,' + img)
+                                except:
+                                    text("error")
+                        else:
+                            text("error")
+            except:
+                pass
+            # renderowanie odp zadania
+            with tag('div'):
+                for index, answer in enumerate(task['answers']):
+                    # with tag('div'):
+                    for part in answer:
+                        if part["type"] == "text":
+                            with tag('div style="display: inline-block;margin-right: 20px;"'):
+                                text(listodp[index] + part["data"])
+                        elif part["type"] == "latex":
+                            with tag('div style="display: inline-block;margin-right: 20px;"'):
+                                with tag('span style="display: block;margin-right: 20px;"'):
+                                    text(listodp[index])
+                                    doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"],
+                                             style="transform: translate(0px,4px);")
+            # if task['spacetosolve'] > 0:
+            #     with tag('div style="margin-bottom:' + str(task['spacetosolve']*19)+'px;"'):
+            #         pass
         with tag('hr style="color: black;"'):
             pass
     html = doc.getvalue()

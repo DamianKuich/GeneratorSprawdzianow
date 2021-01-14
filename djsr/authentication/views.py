@@ -214,9 +214,9 @@ class UserRetrieveUpdateAPIView(APIView):
     def get(self, request, *args, **kwargs):
         # serializer to handle turning our `User` object into something that
         # can be JSONified and sent to the client.
-        serializer = self.serializer_class(request.user)
+        serializer = self.serializer_class(request.user).data
         connection.close()
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer, status=status.HTTP_200_OK)
 
     def put(self, request, *args, **kwargs):
         user = request.user
@@ -247,9 +247,9 @@ class UserRetrieveUpdateAPIView(APIView):
             pass
         user.save()
 
-        serializer = CustomUserSerializerReadOnly(user, many=False)
+        serializer = CustomUserSerializerReadOnly(user, many=False).data
         connection.close()
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer, status=status.HTTP_200_OK)
 
 
 class TaskViewSet(APIView):
@@ -285,11 +285,11 @@ class TaskViewSet(APIView):
                 connection.close()
                 return Response(data={"pages": str(a), "tasks": list(chain(*lista))[(
                                                                                             pag * numberoftask) - numberoftask:pag * numberoftask]})
-        else:
-            task = Task.objects.all()
-            serializer = TaskSerializer(task, many=True)
+        elif id_string is None:
+            task = Task.objects.filter(author=author_id)
+            serializer = TaskSerializer(task, many=True).data
             connection.close()
-            return Response(serializer.data)
+            return Response(serializer)
 
 
 class GetRandomTasksViewSet(APIView):
@@ -941,7 +941,7 @@ class AddImageToTaskViewSet(APIView):
 
 
 class TestTasksiewSet(APIView):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
     serializer_class = TestJSONSerializer
 
     def get(self, request, *args, **kwargs):
