@@ -5,9 +5,10 @@ import MaterialUiNavbar from "./materialUiNavbar";
 import "./styles/mdcardfixes.css";
 import "./styles/styles.css";
 import axiosInstance from "./axiosAPI";
-import CssBaseline from '@material-ui/core/CssBaseline';
+import CssBaseline from "@material-ui/core/CssBaseline";
 import AddTask from "./AddTask";
 import LoadingScreen from "./LoadingScreen";
+import { SnackbarProvider } from "notistack";
 const Login = lazy(() => import("./MaterialUiLoginPage"));
 // import Login from "./MaterialUiLoginPage"
 const Signup = lazy(() => import("./MaterialUiSignUpPage"));
@@ -16,12 +17,14 @@ const MDBContainer = lazy(() => import("./MDBLazy/MDBLazyContainer"));
 const AccountActivation = lazy(() => import("./MaterialUiAccountActivation"));
 const RegisterSuccess = lazy(() => import("./RegisterSuccess"));
 const UserAccountManager = lazy(() => import("./MaterialUiManageAccount"));
-const PasswordReset = lazy(()=>import("./MaterialUiPasswordReset"));
-const ExamEditor = lazy(()=>import("./MaterialUiExamEditor"));
-const UserExams = lazy(()=>import("./MaterialUiUserExams"));
-const PasswordResetRequest = lazy(()=>import("./MaterialUiPasswordResetRequest"));
-const HomePage = lazy(()=>import("./HomePage"));
-const Fenerator = lazy(()=>import("./MaterialUiFenerator.js"));
+const PasswordReset = lazy(() => import("./MaterialUiPasswordReset"));
+const ExamEditor = lazy(() => import("./MaterialUiExamEditor"));
+const UserExams = lazy(() => import("./MaterialUiUserExams"));
+const PasswordResetRequest = lazy(() =>
+  import("./MaterialUiPasswordResetRequest")
+);
+const HomePage = lazy(() => import("./HomePage"));
+const Fenerator = lazy(() => import("./MaterialUiFenerator.js"));
 class App extends Component {
   constructor(props) {
     super(props);
@@ -35,7 +38,7 @@ class App extends Component {
   }
   componentDidMount() {
     this.checkUser();
-    document.title="GENE-SPR"
+    document.title = "GENE-SPR";
   }
   checkUser = (onUserCheck) => {
     if (!localStorage.getItem("access_token")) {
@@ -91,75 +94,89 @@ class App extends Component {
     const properties = { ...this.props, ...global };
     // return (<div>cyka</div>);
     return (
-      <Suspense fallback={<div>ladowanie</div>}>
-        <>
-          <CssBaseline />
-        <MDBContainer fluid className="h-100">
-          <MaterialUiNavbar {...properties} />
-          <Suspense fallback={<LoadingScreen/>}>
-            <Switch>
-              <Route
-                exact
-                path={"/login/"}
-                render={(props) => <Login {...global} {...props} />}
-              />
-              <Route
-                exact
-                path={"/signup/"}
-                render={(props) => <Signup {...global} {...props} />}
-              />
-              <Route
-                exact
-                path={"/signupsuccess/:token"}
-                render={(props) => <RegisterSuccess {...global} {...props} />}
-              />
-              <Route
-                exact
-                path="/activateaccount/:token/"
-                render={(props) => <AccountActivation {...props} {...global} />}
-              />
-              <Route
-                exact
-                path="/passreset/:token"
-                render={(props) => <PasswordReset {...props} {...global} />}
-              />
-              <Route
-                exact
-                path="/requestresetpassword/"
-                render={(props) => <PasswordResetRequest {...props} {...global} />}
-              />
-               <Route
-                exact
-                path="/addtask/"
-                render={(props) => <AddTask {...props} {...global} />}
-              />
-              <Route
-                path={"/myaccount/"}
-                render={(props) => (
-                  <UserAccountManager {...props} {...global} />
-                )}
-              />
-              <Route
-                path={"/editor/:id/"}
-                render={(props) => <ExamEditor {...props} {...global} />}
-              />
-              <Route
-                path={"/fenerator/:id/"}
-                render={(props)=><Fenerator {...props} {...global}/>}
-              />
-              <Route
-                path={"/userexams/"}
-                render={(props) => <UserExams {...props} {...global} />}
-              />
-              <Route
-                path={'/'}
-                render={(props)=><HomePage {...props} {...global}/>}
-                />
-            </Switch>
-          </Suspense>
-        </MDBContainer>
+      <SnackbarProvider
+        maxSnack={3}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+      >
+        <Suspense fallback={<div>ladowanie</div>}>
+          <>
+            <CssBaseline />
+            <MDBContainer fluid className="h-100">
+              <MaterialUiNavbar {...properties} />
+              <Suspense fallback={<LoadingScreen />}>
+                <Switch>
+                  <Route
+                    exact
+                    path={"/login/"}
+                    render={(props) => <Login {...global} {...props} />}
+                  />
+                  <Route
+                    exact
+                    path={"/signup/"}
+                    render={(props) => <Signup {...global} {...props} />}
+                  />
+                  <Route
+                    exact
+                    path={"/signupsuccess/:token"}
+                    render={(props) => (
+                      <RegisterSuccess {...global} {...props} />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/activateaccount/:token/"
+                    render={(props) => (
+                      <AccountActivation {...props} {...global} />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/passreset/:token"
+                    render={(props) => <PasswordReset {...props} {...global} />}
+                  />
+                  <Route
+                    exact
+                    path="/requestresetpassword/"
+                    render={(props) => (
+                      <PasswordResetRequest {...props} {...global} />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/addtask/"
+                    render={(props) => <AddTask {...props} {...global} />}
+                  />
+                  <Route
+                    path={"/myaccount/"}
+                    render={(props) => (
+                      <UserAccountManager {...props} {...global} />
+                    )}
+                  />
+                  <Route
+                    path={"/editor/:id/"}
+                    render={(props) => <ExamEditor {...props} {...global} />}
+                  />
+                  <Route
+                    path={"/fenerator/:id/"}
+                    render={(props) => <Fenerator {...props} {...global} />}
+                  />
+                  <Route
+                    path={"/userexams/"}
+                    render={(props) => <UserExams {...props} {...global} />}
+                  />
+                  <Route
+                    path={"/"}
+                    render={(props) => <HomePage {...props} {...global} />}
+                  />
+                </Switch>
+              </Suspense>
+            </MDBContainer>
           </>
-      </Suspense>
+        </Suspense>
+      </SnackbarProvider>
     );
   }
 }

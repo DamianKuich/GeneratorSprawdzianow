@@ -13,6 +13,7 @@ import Dialog from "./material_ui_components/CustomModal/CustomModal";
 import Button from "./material_ui_components/CustomButtons/Button";
 import Box from "@material-ui/core/Box";
 import LoadingScreen from "./LoadingScreen";
+import { withSnackbar } from "notistack";
 
 //todo po skasowaniu tresci zadania "zapomina" zdjecie
 //todo zajrzec do draganddropahndlera
@@ -83,6 +84,17 @@ class ExamEditor extends Component {
         this.state.timeout,
         setTimeout(this.saveExam, 3000)
       );
+      // state.savingSnackKey =
+      //   state.savingSnackKey ||
+      //   this.props.enqueueSnackbar("Zapisywanie sprawdzianu", {
+      //     persist: true,
+      //   });
+      if (!state.savingSnackKey){
+        this.props.closeSnackbar();
+        state.savingSnackKey=this.props.enqueueSnackbar("Zapisywanie sprawdzianu", {
+          persist: true,
+        });
+      }
       state.saved = false;
       return state;
     });
@@ -148,7 +160,9 @@ class ExamEditor extends Component {
         tasks: JSON.stringify(this.state.exam.tasks),
       })
       .then((response) => {
-        this.setState({ saved: true });
+        this.props.closeSnackbar(this.state.savingSnackKey)
+        this.props.enqueueSnackbar("Zapisano sprawdzian.",{variant:"success"})
+        this.setState({ saved: true,savingSnackKey:null });
       });
   };
 
@@ -530,11 +544,7 @@ class ExamEditor extends Component {
             <Button
               color={"primary"}
               onClick={() => {
-                window.open(
-                  `${window.location.origin}/api/user/testpdf/` +
-                    this.state.exam.id,
-                  "_blank"
-                );
+                this.props.enqueueSnackbar("Successfully fetched the data.");
               }}
             >
               Sprawdzian
@@ -580,4 +590,4 @@ class ExamEditor extends Component {
 
 // ExamEditor.propTypes = {};
 
-export default ExamEditor;
+export default withSnackbar(ExamEditor);
