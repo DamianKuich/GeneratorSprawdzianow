@@ -256,6 +256,58 @@ class TaskViewSet(APIView):
 
     permission_classes = (IsAuthenticated,)
     serializer_class = TaskSerializer
+    def post(self, request, format=None):
+        author_id = CustomUser.objects.get(id=request.user.id)
+        lista = []
+        if request.data:
+            myTasks = int(request.data['myTasks'])
+            id_string = request.data['skill']
+            numberoftask = int(request.data['nroftasks'])
+            try:
+                pag = int(request.data['pagenr'])
+            except:
+                pag = 1
+        else:
+            id_string = None
+        if id_string is not None:
+            if myTasks == 0:
+                for id in id_string.split(','):
+                    task = Task.objects.filter(skill=id, private=False)
+                    serializer = TaskSerializer(task, many=True)
+                    lista.append(serializer.data)
+                    taskprv = Task.objects.filter(skill=id, private=True, author=author_id)
+                    serializerprv = TaskSerializer(taskprv, many=True)
+                    lista.append(serializerprv.data)
+                    a = math.ceil((len(list(chain(*lista))) / numberoftask))
+                if pag == 1:
+                    connection.close()
+                    return Response(data={"pages": str(a), "tasks": list(chain(*lista))[0:numberoftask]})
+                elif pag > 1:
+                    connection.close()
+                    return Response(data={"pages": str(a), "tasks": list(chain(*lista))[(
+                                                                                                pag * numberoftask) - numberoftask:pag * numberoftask]})
+            elif myTasks == 1:
+                for id in id_string.split(','):
+                    task = Task.objects.filter(skill=id, private=False,author=author_id)
+                    serializer = TaskSerializer(task, many=True)
+                    lista.append(serializer.data)
+                    taskprv = Task.objects.filter(skill=id, private=True, author=author_id)
+                    serializerprv = TaskSerializer(taskprv, many=True)
+                    lista.append(serializerprv.data)
+                    a = math.ceil((len(list(chain(*lista))) / numberoftask))
+                if pag == 1:
+                    connection.close()
+                    return Response(data={"pages": str(a), "tasks": list(chain(*lista))[0:numberoftask]})
+                elif pag > 1:
+                    connection.close()
+                    return Response(data={"pages": str(a), "tasks": list(chain(*lista))[(
+                                                                                                pag * numberoftask) - numberoftask:pag * numberoftask]})
+
+        else:
+            task = Task.objects.all()
+            serializer = TaskSerializer(task, many=True).data
+            connection.close()
+            return Response(serializer)
 
     def post(self, request, format=None):
         author_id = CustomUser.objects.get(id=request.user.id)
@@ -290,6 +342,7 @@ class TaskViewSet(APIView):
             serializer = TaskSerializer(task, many=True).data
             connection.close()
             return Response(serializer)
+
 
 
 class GetRandomTasksViewSet(APIView):
