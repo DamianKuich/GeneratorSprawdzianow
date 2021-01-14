@@ -288,12 +288,9 @@ class TaskViewSet(APIView):
                                                                                                 pag * numberoftask) - numberoftask:pag * numberoftask]})
             elif myTasks == 1:
                 for id in id_string.split(','):
-                    task = Task.objects.filter(skill=id, private=False,author=author_id)
+                    task = Task.objects.filter(skill=id,author=author_id)
                     serializer = TaskSerializer(task, many=True)
                     lista.append(serializer.data)
-                    taskprv = Task.objects.filter(skill=id, private=True, author=author_id)
-                    serializerprv = TaskSerializer(taskprv, many=True)
-                    lista.append(serializerprv.data)
                     a = math.ceil((len(list(chain(*lista))) / numberoftask))
                 if pag == 1:
                     connection.close()
@@ -814,7 +811,7 @@ class AddTask(APIView):
 
 
 class AddSection(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Section.objects.all()
     serializer_class = SectionSerializer
 
@@ -835,7 +832,7 @@ class AddSection(APIView):
 
 
 class AddSkill(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Skill.objects.all()
     serializer_class = SkillSerializer
 
@@ -858,7 +855,7 @@ class AddSkill(APIView):
 
 
 class AddAnswers(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Answers.objects.all()
     serializer_class = AnswersSerializer
 
@@ -880,7 +877,7 @@ class AddAnswers(APIView):
 
 
 class SectionViewSet(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Section.objects.all()
     serializer_class = SectionSerializer
 
@@ -916,7 +913,7 @@ class OneTestJSONViewSet(APIView):
 
 
 class SkillViewSet(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Skill.objects.all()
     serializer_class = SkillSerializer
 
@@ -928,7 +925,7 @@ class SkillViewSet(APIView):
 
 
 class ImageViewSet(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Skill.objects.all()
     serializer_class = SkillSerializer
 
@@ -994,7 +991,7 @@ class AddImageToTaskViewSet(APIView):
 
 
 class TestTasksiewSet(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = TestJSONSerializer
 
     def get(self, request, *args, **kwargs):
@@ -1008,7 +1005,7 @@ class TestTasksiewSet(APIView):
 
 
 class TestAnswersviewSet(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = TestJSONSerializer
 
     def get(self, request, *args, **kwargs):
@@ -1021,7 +1018,7 @@ class TestAnswersviewSet(APIView):
         return HttpResponse(pdf, content_type="application/pdf")
 
 class TestKeyAnswersviewSet(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = TestJSONSerializer
 
     def get(self, request, *args, **kwargs):
