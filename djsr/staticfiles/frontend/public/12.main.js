@@ -1,1 +1,307 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[12],{1527:function(e,t,n){"use strict";n.r(t);var a=n(1),r=n.n(a),o=(n(0),n(362),n(55)),l=n(94),i=n(47),c=n(545),s=(n(589),n(32)),u=n(438),m=n(443),p=n(768),f=n(131),d=n(71),g=(n(6),n(1512)),y=n(1513),h=n(1514),b=n(444),E=n(910),v=n.n(E),w=n(608),k=n.n(w),S=n(680),C=n.n(S);Object(u.a)((function(e){return{root:{minWidth:550,maxWidth:550,maxHeight:200,justifyContent:"center",alignItems:"center"},marginAutoItem:{margin:"auto"}}}));var x=n(1500),z=(n(86),n(526)),O=n(164),j=(n(610),n(557)),N=n(1450),P=n(1452),I=n(1451),A=n(1448),T=n(67),W=n(141),G=n(761),J=n(1515),_=n(152),D=n(153),F=n(451),R=n(354),H=n(449),U=n(685),Z=n(635);function B(e){return(B="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function M(e){return function(e){if(Array.isArray(e))return V(e)}(e)||function(e){if("undefined"!=typeof Symbol&&Symbol.iterator in Object(e))return Array.from(e)}(e)||function(e,t){if(!e)return;if("string"==typeof e)return V(e,t);var n=Object.prototype.toString.call(e).slice(8,-1);"Object"===n&&e.constructor&&(n=e.constructor.name);if("Map"===n||"Set"===n)return Array.from(e);if("Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))return V(e,t)}(e)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function V(e,t){(null==t||t>e.length)&&(t=e.length);for(var n=0,a=new Array(t);n<t;n++)a[n]=e[n];return a}function q(e,t){for(var n=0;n<t.length;n++){var a=t[n];a.enumerable=a.enumerable||!1,a.configurable=!0,"value"in a&&(a.writable=!0),Object.defineProperty(e,a.key,a)}}function $(e,t){return($=Object.setPrototypeOf||function(e,t){return e.__proto__=t,e})(e,t)}function K(e){var t=function(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Date.prototype.toString.call(Reflect.construct(Date,[],(function(){}))),!0}catch(e){return!1}}();return function(){var n,a=X(e);if(t){var r=X(this).constructor;n=Reflect.construct(a,arguments,r)}else n=a.apply(this,arguments);return L(this,n)}}function L(e,t){return!t||"object"!==B(t)&&"function"!=typeof t?Q(e):t}function Q(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}function X(e){return(X=Object.setPrototypeOf?Object.getPrototypeOf:function(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}function Y(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function ee(){return(ee=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var a in n)Object.prototype.hasOwnProperty.call(n,a)&&(e[a]=n[a])}return e}).apply(this,arguments)}Object(u.a)((function(e){return{root:{maxHeight:200,minWidth:575,maxWidth:575},marginAutoItem:{margin:"auto"}}}));var te=Object(u.a)((function(e){return{arrow:{color:e.palette.common.grey},tooltip:{backgroundColor:e.palette.grey}}}));function ne(e){var t=te();return r.a.createElement(x.a,ee({arrow:!0,classes:t},e))}var ae={paperContainer:{backgroundImage:"url(".concat(j.a,")"),minHeight:1e3,maxWidth:1885},examCardContainer:{width:700,backgroundColor:"#FEFEFA"},cardTitle:{textAlign:"center"}},re=(Object(u.a)((function(e){return{root:{width:"100%","& > * + *":{marginTop:e.spacing(2)}}}})),function(e){!function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function");e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),t&&$(e,t)}(E,e);var t,n,a,u=K(E);function E(e){var t,n;return function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,E),Y(Q(n=u.call(this,e)),"updateExams",(function(){n.setState({exams:null}),o.b.get("/user/tests/").then((function(e){console.log("UE update response",e,"exams",e.data),n.setState({exams:e.data})})).catch((function(e){console.log("UE update error response",e)}))})),Y(Q(n),"addExam",(function(e){n.setState((function(t){return t.exams=[e].concat(t.exams),t}))})),Y(Q(n),"createExamCopy",(function(e){o.b.post("/user/maketest/",{name:e.name+"-kopia",tasks:e.tasks}).then((function(e){n.addExam(e.data[0])}))})),Y(Q(n),"removeExam",(function(e){o.b.post("/user/deletetest/",{id:e.id}).then((function(e){console.log("usunięto"),n.updateExams()}))})),Y(Q(n),"handleToggle",(function(e,t,a){return function(){n.setState({autoGenSkills:n.state.autoGenSkills.concat(e)});var r=n.state.checked.indexOf(e),o=M(n.state.checked);if(-1===r){o.push(e);var l=+t+ +n.state.otwCount,i=+a+ +n.state.zamkCount;n.setState({otwCount:l,zamkCount:i})}else{o.splice(r,1);var c=+n.state.otwCount-+t,s=+n.state.zamkCount-+a;n.setState({otwCount:c,zamkCount:s})}n.setState({checked:o})}})),n.state=(Y(t={exams:null,open:!1,listExpand:{},generatedId:null,generatedName:null,sections:null,groups:null,ileotw:"",ilezamk:"",level:"",skills:""},"groups",""),Y(t,"autoGenSkills",[]),Y(t,"checked",[]),Y(t,"otwCount",null),Y(t,"zamkCount",null),Y(t,"autoGeneStep","1"),t),n.handleToggle=n.handleToggle.bind(Q(n)),n}return t=E,(n=[{key:"componentDidMount",value:function(){var e=this;this.updateExams(),o.b.get("/user/sections2/").then((function(t){var n=t.data.map((function(e){return e.skill=e.skilll,e}));e.setState({sections:n})})).catch((function(e){console.log(e)}))}},{key:"render",value:function(){var e=this,t=(this.props.classes,this.state.exams),n=this.state.sections;return t&&n?r.a.createElement("div",null,r.a.createElement(m.a,{style:ae.paperContainer},r.a.createElement(l.a,{p:8},r.a.createElement(p.a,{alignItems:"center",justify:"center",container:!0,direction:"column"},r.a.createElement(g.a,{style:ae.examCardContainer,justify:"center",alignItems:"center"},r.a.createElement(y.a,{style:ae.cardTitle,title:"Dodaj sprawdzian"}),r.a.createElement(z.a,null,r.a.createElement(i.c,{initialValues:{name:""},validationSchema:c.b().shape({name:c.d().min(2,"Nazwa za krotka").max(50,"Nazwa za dluga").required("Pole wymagane")}),onSubmit:function(t,n){setTimeout((function(){n.setSubmitting(!0),o.b.post("/user/maketest/",{name:t.name,tasks:""}).then((function(t){console.log("UE create response",t),e.addExam(t.data[0]),n.setSubmitting(!1)})).catch((function(e){e.response,n.setSubmitting(!1),n.setValues({name:""},!1),n.setTouched({name:!1},!1),n.setFieldError("general","Nazwa w uzyciu")}))}),400)}},(function(t){var n=t.values,a=t.errors,o=t.touched,l=t.handleChange,c=t.handleBlur,s=t.handleSubmit,u=t.isSubmitting;return r.a.createElement(i.b,{onSubmit:s},r.a.createElement("div",{className:"grey-text"},r.a.createElement(O.a,{labelText:"Nazwa sprawdzianu",id:"name",error:!!a.name,success:o.name&&!a.name,formControlProps:{fullWidth:!0},helperProps:{children:a.name,error:!0},inputProps:{type:"text",name:"name",onChange:l,onBlur:c,value:n.name}}),!!a.general&&r.a.createElement("div",{className:"invalid-feedback d-block pb-4"},a.general)),r.a.createElement(h.a,{style:{justifyContent:"center"}},r.a.createElement(d.a,{variant:"contained",color:"primary",size:"lg",type:"submit",disabled:u},"Zapisz sprawdzian"),r.a.createElement(d.a,{variant:"contained",color:"primary",size:"lg",onClick:function(){return e.setState({open:!e.state.open})}},"Generuj sprawdzian")))})))))),r.a.createElement("p",null),t.map((function(t){return r.a.createElement(p.a,{alignItems:"center",justify:"center",container:!0,spacing:3,direction:"column"},r.a.createElement(g.a,{style:ae.examCardContainer,justify:"center"},r.a.createElement(y.a,{title:t.name}),r.a.createElement(h.a,{disableSpacing:!0},r.a.createElement(s.b,{to:"/editor/"+t.id},r.a.createElement(ne,{title:"Edytuj sprawdzian"},r.a.createElement(b.a,null,r.a.createElement(C.a,null)))),r.a.createElement(ne,{title:"Skopiuj sprawdzian"},r.a.createElement(b.a,{onClick:function(){e.createExamCopy(t)}},r.a.createElement(v.a,null))),r.a.createElement(ne,{title:"Usuń sprawdzian"},r.a.createElement(b.a,{onClick:function(){e.removeExam(t)}},r.a.createElement(k.a,null))))),r.a.createElement("p",null))}))),"1"==this.state.autoGeneStep?r.a.createElement(N.a,{fullWidth:!0,titlestyle:{textAlign:"center"},open:this.state.open,onClose:function(){return e.setState({open:!e.state.open,checked:[],autoGeneStep:"1"})}},r.a.createElement(A.a,{id:"form-dialog-title"},r.a.createElement(f.a,{variant:"h5",align:"center"},"Wygeneruj sprawdzian automatycznie")),r.a.createElement(I.a,null,r.a.createElement(l.a,{p:1},r.a.createElement(J.a,{fullWidth:!0,onChange:function(t){return e.setState({generatedName:t.target.value})},id:"examName",label:"Nazwa sprawdzianu"})),r.a.createElement(l.a,{p:1},r.a.createElement(J.a,{fullWidth:!0,id:"level",select:!0,label:"Poziom trudności",value:this.state.level,onChange:function(t){return e.setState({level:t.target.value})},helperText:"Wybierz poziom trudności"},r.a.createElement(T.a,{key:"level1",value:"1"},"Podstawowy"),r.a.createElement(T.a,{key:"level2",value:"2"},"Rozszerzony"))),r.a.createElement(l.a,{p:1},r.a.createElement(J.a,{fullWidth:!0,onChange:function(t){return e.setState({groups:t.target.value})},id:"groups",label:"Ilość grup"}))),r.a.createElement(P.a,null,r.a.createElement(d.a,{color:"primary",onClick:function(){o.b.post("/user/sections3/",{level:e.state.level}).then((function(t){var n=t.data.map((function(e){return e.skill=e.skilll,e}));e.setState({sections:n}),e.setState({autoGeneStep:"2"})})).catch((function(e){console.log(e)}))}},"Dalej"))):r.a.createElement(r.a.Fragment,null),"2"==this.state.autoGeneStep?r.a.createElement(N.a,{fullWidth:!0,titlestyle:{textAlign:"center"},open:this.state.open,onClose:function(){return e.setState({open:!e.state.open,checked:[],autoGeneStep:"1"})}},r.a.createElement(A.a,{id:"form-dialog-title"},r.a.createElement(f.a,{variant:"h5",align:"center"},"Wygeneruj sprawdzian automatycznie")),r.a.createElement(I.a,null,r.a.createElement(l.a,{p:1},r.a.createElement(J.a,{fullWidth:!0,onChange:function(t){return e.setState({ileotw:t.target.value})},id:"ileotw",label:"Ile zadań otwartych",InputProps:{endAdornment:r.a.createElement(Z.a,{position:"end"},"/",this.state.otwCount)}})),r.a.createElement(l.a,{p:1},r.a.createElement(J.a,{fullWidth:!0,onChange:function(t){return e.setState({ilezamk:t.target.value})},id:"ilezamk",label:"Ile zadań zamkniętych",InputProps:{endAdornment:r.a.createElement(Z.a,{position:"end"},"/",this.state.zamkCount)}})),r.a.createElement(l.a,{p:1},r.a.createElement(_.a,null,n.map((function(t){return r.a.createElement(r.a.Fragment,null,r.a.createElement(D.a,null,r.a.createElement(R.a,{primary:r.a.createElement("h3",null,t.Section),secondary:"Dostępnych zadań: "+t.sectionTaskCount}),r.a.createElement(H.a,null)),r.a.createElement(_.a,{component:"div",disablePadding:!0},t.skill.map((function(t){return r.a.createElement(D.a,{button:!0,key:t.id,onClick:e.handleToggle(t.id,t.taskCountOtw,t.taskCountZamk)},r.a.createElement(F.a,null,r.a.createElement(W.a,{edge:"start",checked:-1!==e.state.checked.indexOf(t.id),tabIndex:-1})),r.a.createElement(R.a,{primary:t.Skill,secondary:"Zadań otwartych: "+t.taskCountOtw+" Zadań zamkniętych: "+t.taskCountZamk}))}))))}))))),r.a.createElement(P.a,null,r.a.createElement(d.a,{color:"primary",onClick:function(){o.b.post("/user/getrandomtasks/",{ileotw:e.state.ileotw,ilezamk:e.state.ilezamk,level:e.state.level,skills:e.state.checked.join(", "),groups:e.state.groups}).then((function(t){var n=0;t.data.map((function(t){var a=JSON.stringify(Object(G.a)(t));++n,o.b.post("/user/maketest/",{name:e.state.generatedName+" Grupa "+n,tasks:a}).then((function(t){console.log(a),e.props.history.go(0)}))}))})).catch((function(e){console.log("chngpass error",e.response)}))}},"Generuj"))):r.a.createElement(r.a.Fragment,null)):r.a.createElement(U.a,null)}}])&&q(t.prototype,n),a&&q(t,a),E}(a.Component));re.propTypes={};t.default=re},526:function(e,t,n){"use strict";n.d(t,"a",(function(){return g}));var a=n(1),r=n.n(a),o=n(3),l=n.n(o),i=n(0),c=n.n(i),s=n(438),u=n(527);function m(){return(m=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var a in n)Object.prototype.hasOwnProperty.call(n,a)&&(e[a]=n[a])}return e}).apply(this,arguments)}function p(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function f(e,t){if(null==e)return{};var n,a,r=function(e,t){if(null==e)return{};var n,a,r={},o=Object.keys(e);for(a=0;a<o.length;a++)n=o[a],t.indexOf(n)>=0||(r[n]=e[n]);return r}(e,t);if(Object.getOwnPropertySymbols){var o=Object.getOwnPropertySymbols(e);for(a=0;a<o.length;a++)n=o[a],t.indexOf(n)>=0||Object.prototype.propertyIsEnumerable.call(e,n)&&(r[n]=e[n])}return r}var d=Object(s.a)(u.default);function g(e){var t,n=d(),a=e.className,o=e.children,i=f(e,["className","children"]),c=l()((p(t={},n.cardBody,!0),p(t,a,void 0!==a),t));return r.a.createElement("div",m({className:c},i),o)}g.propTypes={className:c.a.string,children:c.a.node}},527:function(e,t,n){"use strict";n.r(t);t.default={cardBody:{padding:"0.9375rem 1.875rem",flex:"1 1 auto"}}},557:function(e,t,n){"use strict";t.a=n.p+"29a2f630b088eabfaa8f98afec0658ab.png"},589:function(e,t,n){"use strict";n(1)},610:function(e,t,n){"use strict";n.d(t,"a",(function(){return i}));var a=n(1),r=n.n(a),o=n(1528),l=n(1520);function i(e){var t=e.notification;e.setNotification;return r.a.createElement(o.a,{open:t.isOpen,autoHideDuration:30},r.a.createElement(l.a,{severity:t.type},t.message))}},685:function(e,t,n){"use strict";var a=n(1),r=n.n(a),o=n(500),l=n(768);t.a=function(e){return r.a.createElement(l.a,{container:!0,spacing:0,direction:"column",alignItems:"center",justify:"center",style:{minHeight:"100vh"}},r.a.createElement(o.a,{size:250,style:{color:"purple"}}))}},761:function(e,t,n){"use strict";var a=function(e){console.log("taskparser",e);var t=JSON.parse(JSON.stringify(e));if(t.answers={},t.correctans=JSON.parse(t.correctans.replace(/'/g,'"')),t.wronganswers=JSON.parse(t.wronganswers.replace(/'/g,'"')),t.answers={correctans:t.correctans,wronganswers:t.wronganswers},"2"==e.type){var n=function(e){for(var t,n,a=e.length;0!==a;)n=Math.floor(Math.random()*a),t=e[a-=1],e[a]=e[n],e[n]=t;return e}([{index:1,isCorrect:!1},{index:0,isCorrect:!0},{index:2,isCorrect:!1},{index:0,isCorrect:!1}]);t.currentAnswers={correctans:t.correctans,wronganswers:t.wronganswers,answersIndexes:n}}else"1"==e.type&&(t.currentAnswers={correctans:t.correctans,wronganswers:t.wronganswers,answersIndexes:[{}]});return t.maxPoints=JSON.parse(t.points),console.log("taskparser nn",t),t};t.a=function(e){return e.map(a)}}}]);
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[12],{
+
+/***/ "./djsr/frontend/src/components/MaterialUiPasswordReset.js":
+/*!*****************************************************************!*\
+  !*** ./djsr/frontend/src/components/MaterialUiPasswordReset.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/InputAdornment */ "./node_modules/@material-ui/core/esm/InputAdornment/index.js");
+/* harmony import */ var _material_ui_core_Icon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Icon */ "./node_modules/@material-ui/core/esm/Icon/index.js");
+/* harmony import */ var _material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/icons/Email */ "./node_modules/@material-ui/icons/Email.js");
+/* harmony import */ var _material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/icons/People */ "./node_modules/@material-ui/icons/People.js");
+/* harmony import */ var _material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/icons/Lock */ "./node_modules/@material-ui/icons/Lock.js");
+/* harmony import */ var _material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _material_ui_components_Header_Header_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./material_ui_components/Header/Header.js */ "./djsr/frontend/src/components/material_ui_components/Header/Header.js");
+/* harmony import */ var _material_ui_components_Header_HeaderLinks_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./material_ui_components/Header/HeaderLinks.js */ "./djsr/frontend/src/components/material_ui_components/Header/HeaderLinks.js");
+/* harmony import */ var _material_ui_components_Footer_Footer_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./material_ui_components/Footer/Footer.js */ "./djsr/frontend/src/components/material_ui_components/Footer/Footer.js");
+/* harmony import */ var _material_ui_components_Grid_GridContainer_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./material_ui_components/Grid/GridContainer.js */ "./djsr/frontend/src/components/material_ui_components/Grid/GridContainer.js");
+/* harmony import */ var _material_ui_components_Grid_GridItem_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./material_ui_components/Grid/GridItem.js */ "./djsr/frontend/src/components/material_ui_components/Grid/GridItem.js");
+/* harmony import */ var _material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ././material_ui_components/CustomButtons/Button.js */ "./djsr/frontend/src/components/material_ui_components/CustomButtons/Button.js");
+/* harmony import */ var _material_ui_components_Card_Card_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./material_ui_components/Card/Card.js */ "./djsr/frontend/src/components/material_ui_components/Card/Card.js");
+/* harmony import */ var _material_ui_components_Card_CardBody_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./material_ui_components/Card/CardBody.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardBody.js");
+/* harmony import */ var _material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./material_ui_components/Card/CardHeader.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardHeader.js");
+/* harmony import */ var _material_ui_components_Card_CardFooter_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./material_ui_components/Card/CardFooter.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardFooter.js");
+/* harmony import */ var _material_ui_components_CustomInput_CustomInput_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./material_ui_components/CustomInput/CustomInput.js */ "./djsr/frontend/src/components/material_ui_components/CustomInput/CustomInput.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _assets_jss_material_kit_react_views_loginPage_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./assets/jss/material-kit-react/views/loginPage.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react/views/loginPage.js");
+/* harmony import */ var _img_genspr_parralax_bg_png__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./img/genspr-parralax-bg.png */ "./djsr/frontend/src/components/img/genspr-parralax-bg.png");
+/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
+/* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
+/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
+/* harmony import */ var _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./MaterialFormikField */ "./djsr/frontend/src/components/MaterialFormikField.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_25___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_25__);
+var _this = undefined;
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])(_assets_jss_material_kit_react_views_loginPage_js__WEBPACK_IMPORTED_MODULE_19__["default"]);
+
+var MaterialUiPasswordReset = function MaterialUiPasswordReset(props) {
+  var FRS = "Pole wymagane";
+  var user = props.appState.user;
+
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState("password"),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      editView = _React$useState2[0],
+      setEditView = _React$useState2[1];
+
+  var strongToken = Object(react_router__WEBPACK_IMPORTED_MODULE_18__["useParams"])().token;
+  console.log(strongToken);
+
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState("cardHidden"),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      cardAnimaton = _React$useState4[0],
+      setCardAnimation = _React$useState4[1];
+
+  setTimeout(function () {
+    setCardAnimation("");
+  }, 700);
+  var classes = useStyles();
+
+  var rest = _extends({}, props);
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.pageHeader,
+    style: {
+      backgroundImage: "url(" + _img_genspr_parralax_bg_png__WEBPACK_IMPORTED_MODULE_20__["default"] + ")",
+      backgroundSize: "cover",
+      backgroundPosition: "top center"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.container
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridContainer_js__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    justify: "center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridItem_js__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    xs: 12,
+    sm: 12,
+    md: 4
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_Card_js__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    className: classes[cardAnimaton]
+  }, editView == "password" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Formik"], {
+    initialValues: {
+      password: "",
+      passwordConfirm: ""
+    },
+    validationSchema: yup__WEBPACK_IMPORTED_MODULE_21__["object"]().shape({
+      password: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().min(8, "Too Short!").max(50, "Too Long!").required("Pole wymagane").oneOf([yup__WEBPACK_IMPORTED_MODULE_21__["ref"]("passwordConfirm")], "Hasła są różne"),
+      passwordConfirm: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().oneOf([yup__WEBPACK_IMPORTED_MODULE_21__["ref"]("password")], "Hasła są różne").required("Pole wymagane")
+    }),
+    onSubmit: function onSubmit(values, helpers) {
+      setTimeout(function () {
+        helpers.setSubmitting(true);
+        _axiosAPI__WEBPACK_IMPORTED_MODULE_22__["axiosInstanceNoAuth"].post("/user/passreset/".concat(strongToken, "/$"), {
+          password: values.password
+        }).then(function (response) {
+          _this.props.setUser(response.data);
+
+          helpers.setStatus("Pomyslnie zmieniono hasło");
+          helpers.setSubmitting(false);
+
+          _this.setState({
+            locked: false
+          });
+        })["catch"](function (error) {
+          helpers.setStatus("Podano nieprawidłowe aktualne hasło");
+          console.log("chngpass error", error.response);
+          var errResponse = error.response;
+          helpers.setSubmitting(false);
+
+          _this.setState({
+            locked: false
+          });
+
+          helpers.setValues({
+            password: "",
+            passwordConfirm: ""
+          }, false);
+          helpers.setTouched({
+            password: false,
+            passwordConfirm: false
+          }, false);
+          helpers.setFieldError("oldPassword", "Podano nieprawidłowe stare hasło");
+        });
+      }, 400);
+    }
+  }, function (_ref) {
+    var values = _ref.values,
+        errors = _ref.errors,
+        touched = _ref.touched,
+        handleChange = _ref.handleChange,
+        handleBlur = _ref.handleBlur,
+        handleSubmit = _ref.handleSubmit,
+        isSubmitting = _ref.isSubmitting;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      className: classes.form
+    }, console.log(touched, errors), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      color: "primary",
+      className: classes.cardHeader
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Wprowad\u017A nowe has\u0142o")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardBody_js__WEBPACK_IMPORTED_MODULE_14__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
+      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__["default"],
+      name: "password",
+      formControlProps: {
+        fullWidth: true
+      },
+      labelText: "Has\u0142o",
+      inputProps: {
+        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          position: "end"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5___default.a, {
+          className: classes.inputIconsColor
+        }))
+      }
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
+      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__["default"],
+      name: "passwordConfirm",
+      formControlProps: {
+        fullWidth: true
+      },
+      labelText: "Powt\xF3rz has\u0142o",
+      inputProps: {
+        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          position: "end"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5___default.a, {
+          className: classes.inputIconsColor
+        }))
+      }
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardFooter_js__WEBPACK_IMPORTED_MODULE_16__["default"], {
+      className: classes.cardFooter
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      simple: true,
+      color: "primary",
+      size: "lg",
+      onClick: function onClick() {
+        handleSubmit();
+      }
+    }, "Zmie\u0144 has\u0142o")));
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null)))))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (MaterialUiPasswordReset);
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/img/genspr-parralax-bg.png":
+/*!*****************************************************************!*\
+  !*** ./djsr/frontend/src/components/img/genspr-parralax-bg.png ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "8ae80ee488d6ec36fd62f67865d06356.png");
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/icons/Delete.js":
+/*!***************************************************!*\
+  !*** ./node_modules/@material-ui/icons/Delete.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var React = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/React.createElement("path", {
+  d: "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+}), 'Delete');
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/icons/Favorite.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/@material-ui/icons/Favorite.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var React = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/React.createElement("path", {
+  d: "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+}), 'Favorite');
+
+exports.default = _default;
+
+/***/ })
+
+}]);
+//# sourceMappingURL=12.main.js.map

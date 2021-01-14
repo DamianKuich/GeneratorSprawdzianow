@@ -1,1 +1,579 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[10],{1448:function(e,a,t){"use strict";var r=t(2),o=t(5),i=t(1),n=(t(0),t(6)),l=t(7),c=t(131),s=i.forwardRef((function(e,a){var t=e.children,l=e.classes,s=e.className,d=e.disableTypography,p=void 0!==d&&d,u=Object(o.a)(e,["children","classes","className","disableTypography"]);return i.createElement("div",Object(r.a)({className:Object(n.a)(l.root,s),ref:a},u),p?t:i.createElement(c.a,{component:"h2",variant:"h6"},t))}));a.a=Object(l.a)({root:{margin:0,padding:"16px 24px",flex:"0 0 auto"}},{name:"MuiDialogTitle"})(s)},1450:function(e,a,t){"use strict";var r=t(2),o=t(5),i=t(21),n=t(1),l=(t(0),t(6)),c=t(7),s=t(10),d=t(502),p=t(494),u=t(446),b=t(33),m=t(443),v={enter:b.b.enteringScreen,exit:b.b.leavingScreen},f=n.forwardRef((function(e,a){var t=e.BackdropProps,i=e.children,c=e.classes,b=e.className,f=e.disableBackdropClick,h=void 0!==f&&f,x=e.disableEscapeKeyDown,g=void 0!==x&&x,y=e.fullScreen,j=void 0!==y&&y,O=e.fullWidth,E=void 0!==O&&O,w=e.maxWidth,k=void 0===w?"sm":w,N=e.onBackdropClick,P=e.onClose,W=e.onEnter,C=e.onEntered,S=e.onEntering,M=e.onEscapeKeyDown,T=e.onExit,B=e.onExited,F=e.onExiting,D=e.open,R=e.PaperComponent,L=void 0===R?m.a:R,H=e.PaperProps,I=void 0===H?{}:H,V=e.scroll,z=void 0===V?"paper":V,A=e.TransitionComponent,K=void 0===A?u.a:A,$=e.transitionDuration,_=void 0===$?v:$,q=e.TransitionProps,Y=e["aria-describedby"],X=e["aria-labelledby"],J=Object(o.a)(e,["BackdropProps","children","classes","className","disableBackdropClick","disableEscapeKeyDown","fullScreen","fullWidth","maxWidth","onBackdropClick","onClose","onEnter","onEntered","onEntering","onEscapeKeyDown","onExit","onExited","onExiting","open","PaperComponent","PaperProps","scroll","TransitionComponent","transitionDuration","TransitionProps","aria-describedby","aria-labelledby"]),U=n.useRef();return n.createElement(d.a,Object(r.a)({className:Object(l.a)(c.root,b),BackdropComponent:p.a,BackdropProps:Object(r.a)({transitionDuration:_},t),closeAfterTransition:!0,disableBackdropClick:h,disableEscapeKeyDown:g,onEscapeKeyDown:M,onClose:P,open:D,ref:a},J),n.createElement(K,Object(r.a)({appear:!0,in:D,timeout:_,onEnter:W,onEntering:S,onEntered:C,onExit:T,onExiting:F,onExited:B,role:"none presentation"},q),n.createElement("div",{className:Object(l.a)(c.container,c["scroll".concat(Object(s.a)(z))]),onMouseUp:function(e){e.target===e.currentTarget&&e.target===U.current&&(U.current=null,N&&N(e),!h&&P&&P(e,"backdropClick"))},onMouseDown:function(e){U.current=e.target}},n.createElement(L,Object(r.a)({elevation:24,role:"dialog","aria-describedby":Y,"aria-labelledby":X},I,{className:Object(l.a)(c.paper,c["paperScroll".concat(Object(s.a)(z))],c["paperWidth".concat(Object(s.a)(String(k)))],I.className,j&&c.paperFullScreen,E&&c.paperFullWidth)}),i))))}));a.a=Object(c.a)((function(e){return{root:{"@media print":{position:"absolute !important"}},scrollPaper:{display:"flex",justifyContent:"center",alignItems:"center"},scrollBody:{overflowY:"auto",overflowX:"hidden",textAlign:"center","&:after":{content:'""',display:"inline-block",verticalAlign:"middle",height:"100%",width:"0"}},container:{height:"100%","@media print":{height:"auto"},outline:0},paper:{margin:32,position:"relative",overflowY:"auto","@media print":{overflowY:"visible",boxShadow:"none"}},paperScrollPaper:{display:"flex",flexDirection:"column",maxHeight:"calc(100% - 64px)"},paperScrollBody:{display:"inline-block",verticalAlign:"middle",textAlign:"left"},paperWidthFalse:{maxWidth:"calc(100% - 64px)"},paperWidthXs:{maxWidth:Math.max(e.breakpoints.values.xs,444),"&$paperScrollBody":Object(i.a)({},e.breakpoints.down(Math.max(e.breakpoints.values.xs,444)+64),{maxWidth:"calc(100% - 64px)"})},paperWidthSm:{maxWidth:e.breakpoints.values.sm,"&$paperScrollBody":Object(i.a)({},e.breakpoints.down(e.breakpoints.values.sm+64),{maxWidth:"calc(100% - 64px)"})},paperWidthMd:{maxWidth:e.breakpoints.values.md,"&$paperScrollBody":Object(i.a)({},e.breakpoints.down(e.breakpoints.values.md+64),{maxWidth:"calc(100% - 64px)"})},paperWidthLg:{maxWidth:e.breakpoints.values.lg,"&$paperScrollBody":Object(i.a)({},e.breakpoints.down(e.breakpoints.values.lg+64),{maxWidth:"calc(100% - 64px)"})},paperWidthXl:{maxWidth:e.breakpoints.values.xl,"&$paperScrollBody":Object(i.a)({},e.breakpoints.down(e.breakpoints.values.xl+64),{maxWidth:"calc(100% - 64px)"})},paperFullWidth:{width:"calc(100% - 64px)"},paperFullScreen:{margin:0,width:"100%",maxWidth:"100%",height:"100%",maxHeight:"none",borderRadius:0,"&$paperScrollBody":{margin:0,maxWidth:"100%"}}}}),{name:"MuiDialog"})(f)},1451:function(e,a,t){"use strict";var r=t(2),o=t(5),i=t(1),n=(t(0),t(6)),l=t(7),c=i.forwardRef((function(e,a){var t=e.classes,l=e.className,c=e.dividers,s=void 0!==c&&c,d=Object(o.a)(e,["classes","className","dividers"]);return i.createElement("div",Object(r.a)({className:Object(n.a)(t.root,l,s&&t.dividers),ref:a},d))}));a.a=Object(l.a)((function(e){return{root:{flex:"1 1 auto",WebkitOverflowScrolling:"touch",overflowY:"auto",padding:"8px 24px","&:first-child":{paddingTop:20}},dividers:{padding:"16px 24px",borderTop:"1px solid ".concat(e.palette.divider),borderBottom:"1px solid ".concat(e.palette.divider)}}}),{name:"MuiDialogContent"})(c)},1452:function(e,a,t){"use strict";var r=t(2),o=t(5),i=t(1),n=(t(0),t(6)),l=t(7),c=i.forwardRef((function(e,a){var t=e.disableSpacing,l=void 0!==t&&t,c=e.classes,s=e.className,d=Object(o.a)(e,["disableSpacing","classes","className"]);return i.createElement("div",Object(r.a)({className:Object(n.a)(c.root,s,!l&&c.spacing),ref:a},d))}));a.a=Object(l.a)({root:{display:"flex",alignItems:"center",padding:8,justifyContent:"flex-end",flex:"0 0 auto"},spacing:{"& > :not(:first-child)":{marginLeft:8}}},{name:"MuiDialogActions"})(c)},1512:function(e,a,t){"use strict";var r=t(2),o=t(5),i=t(1),n=(t(0),t(6)),l=t(443),c=t(7),s=i.forwardRef((function(e,a){var t=e.classes,c=e.className,s=e.raised,d=void 0!==s&&s,p=Object(o.a)(e,["classes","className","raised"]);return i.createElement(l.a,Object(r.a)({className:Object(n.a)(t.root,c),elevation:d?8:1,ref:a},p))}));a.a=Object(c.a)({root:{overflow:"hidden"}},{name:"MuiCard"})(s)},1513:function(e,a,t){"use strict";var r=t(2),o=t(5),i=t(1),n=(t(0),t(6)),l=t(7),c=t(131),s=i.forwardRef((function(e,a){var t=e.action,l=e.avatar,s=e.classes,d=e.className,p=e.component,u=void 0===p?"div":p,b=e.disableTypography,m=void 0!==b&&b,v=e.subheader,f=e.subheaderTypographyProps,h=e.title,x=e.titleTypographyProps,g=Object(o.a)(e,["action","avatar","classes","className","component","disableTypography","subheader","subheaderTypographyProps","title","titleTypographyProps"]),y=h;null==y||y.type===c.a||m||(y=i.createElement(c.a,Object(r.a)({variant:l?"body2":"h5",className:s.title,component:"span",display:"block"},x),y));var j=v;return null==j||j.type===c.a||m||(j=i.createElement(c.a,Object(r.a)({variant:l?"body2":"body1",className:s.subheader,color:"textSecondary",component:"span",display:"block"},f),j)),i.createElement(u,Object(r.a)({className:Object(n.a)(s.root,d),ref:a},g),l&&i.createElement("div",{className:s.avatar},l),i.createElement("div",{className:s.content},y,j),t&&i.createElement("div",{className:s.action},t))}));a.a=Object(l.a)({root:{display:"flex",alignItems:"center",padding:16},avatar:{flex:"0 0 auto",marginRight:16},action:{flex:"0 0 auto",alignSelf:"flex-start",marginTop:-8,marginRight:-8},content:{flex:"1 1 auto"},title:{},subheader:{}},{name:"MuiCardHeader"})(s)},1514:function(e,a,t){"use strict";var r=t(2),o=t(5),i=t(1),n=(t(0),t(6)),l=t(7),c=i.forwardRef((function(e,a){var t=e.disableSpacing,l=void 0!==t&&t,c=e.classes,s=e.className,d=Object(o.a)(e,["disableSpacing","classes","className"]);return i.createElement("div",Object(r.a)({className:Object(n.a)(c.root,s,!l&&c.spacing),ref:a},d))}));a.a=Object(l.a)({root:{display:"flex",alignItems:"center",padding:8},spacing:{"& > :not(:first-child)":{marginLeft:8}}},{name:"MuiCardActions"})(c)},1515:function(e,a,t){"use strict";var r=t(2),o=t(5),i=t(1),n=(t(0),t(6)),l=t(447),c=t(501),s=t(503),d=t(132),p=t(130),u=t(448),b=t(154),m=t(7),v={standard:l.a,filled:c.a,outlined:s.a},f=i.forwardRef((function(e,a){var t=e.autoComplete,l=e.autoFocus,c=void 0!==l&&l,s=e.children,m=e.classes,f=e.className,h=e.color,x=void 0===h?"primary":h,g=e.defaultValue,y=e.disabled,j=void 0!==y&&y,O=e.error,E=void 0!==O&&O,w=e.FormHelperTextProps,k=e.fullWidth,N=void 0!==k&&k,P=e.helperText,W=e.hiddenLabel,C=e.id,S=e.InputLabelProps,M=e.inputProps,T=e.InputProps,B=e.inputRef,F=e.label,D=e.multiline,R=void 0!==D&&D,L=e.name,H=e.onBlur,I=e.onChange,V=e.onFocus,z=e.placeholder,A=e.required,K=void 0!==A&&A,$=e.rows,_=e.rowsMax,q=e.select,Y=void 0!==q&&q,X=e.SelectProps,J=e.type,U=e.value,G=e.variant,Q=void 0===G?"standard":G,Z=Object(o.a)(e,["autoComplete","autoFocus","children","classes","className","color","defaultValue","disabled","error","FormHelperTextProps","fullWidth","helperText","hiddenLabel","id","InputLabelProps","inputProps","InputProps","inputRef","label","multiline","name","onBlur","onChange","onFocus","placeholder","required","rows","rowsMax","select","SelectProps","type","value","variant"]);var ee={};if("outlined"===Q&&(S&&void 0!==S.shrink&&(ee.notched=S.shrink),F)){var ae,te=null!==(ae=null==S?void 0:S.required)&&void 0!==ae?ae:K;ee.label=i.createElement(i.Fragment,null,F,te&&" *")}Y&&(X&&X.native||(ee.id=void 0),ee["aria-describedby"]=void 0);var re=P&&C?"".concat(C,"-helper-text"):void 0,oe=F&&C?"".concat(C,"-label"):void 0,ie=v[Q],ne=i.createElement(ie,Object(r.a)({"aria-describedby":re,autoComplete:t,autoFocus:c,defaultValue:g,fullWidth:N,multiline:R,name:L,rows:$,rowsMax:_,type:J,value:U,id:C,inputRef:B,onBlur:H,onChange:I,onFocus:V,placeholder:z,inputProps:M},ee,T));return i.createElement(p.a,Object(r.a)({className:Object(n.a)(m.root,f),disabled:j,error:E,fullWidth:N,hiddenLabel:W,ref:a,required:K,color:x,variant:Q},Z),F&&i.createElement(d.a,Object(r.a)({htmlFor:C,id:oe},S),F),Y?i.createElement(b.a,Object(r.a)({"aria-describedby":re,id:C,labelId:oe,value:U,input:ne},X),s):ne,P&&i.createElement(u.a,Object(r.a)({id:re},w),P))}));a.a=Object(m.a)({root:{}},{name:"MuiTextField"})(f)},608:function(e,a,t){"use strict";var r=t(44),o=t(158);Object.defineProperty(a,"__esModule",{value:!0}),a.default=void 0;var i=o(t(1)),n=(0,r(t(159)).default)(i.createElement("path",{d:"M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"}),"Delete");a.default=n},680:function(e,a,t){"use strict";var r=t(44),o=t(158);Object.defineProperty(a,"__esModule",{value:!0}),a.default=void 0;var i=o(t(1)),n=(0,r(t(159)).default)(i.createElement("path",{d:"M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"}),"Edit");a.default=n},910:function(e,a,t){"use strict";var r=t(44),o=t(158);Object.defineProperty(a,"__esModule",{value:!0}),a.default=void 0;var i=o(t(1)),n=(0,r(t(159)).default)(i.createElement("path",{d:"M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm-1 4l6 6v10c0 1.1-.9 2-2 2H7.99C6.89 23 6 22.1 6 21l.01-14c0-1.1.89-2 1.99-2h7zm-1 7h5.5L14 6.5V12z"}),"FileCopy");a.default=n}}]);
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[10],{
+
+/***/ "./djsr/frontend/src/components/MaterialUiAccountActivation.js":
+/*!*********************************************************************!*\
+  !*** ./djsr/frontend/src/components/MaterialUiAccountActivation.js ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
+/* harmony import */ var _material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./material_ui_components/Card/CardHeader.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardHeader.js");
+/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/@material-ui/core/esm/Paper/index.js");
+/* harmony import */ var _img_genesprDark_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./img/genesprDark.png */ "./djsr/frontend/src/components/img/genesprDark.png");
+/* harmony import */ var _LoadingScreen__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./LoadingScreen */ "./djsr/frontend/src/components/LoadingScreen.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_components_Grid_GridContainer_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./material_ui_components/Grid/GridContainer.js */ "./djsr/frontend/src/components/material_ui_components/Grid/GridContainer.js");
+/* harmony import */ var _material_ui_components_Grid_GridItem_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./material_ui_components/Grid/GridItem.js */ "./djsr/frontend/src/components/material_ui_components/Grid/GridItem.js");
+/* harmony import */ var _material_ui_components_Card_Card_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./material_ui_components/Card/Card.js */ "./djsr/frontend/src/components/material_ui_components/Card/Card.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+
+
+
+
+
+
+var bgStyles = {
+  paperContainer: {
+    backgroundImage: "url(".concat(_img_genesprDark_png__WEBPACK_IMPORTED_MODULE_5__["default"], ")"),
+    minHeight: 1000,
+    maxWidth: 1885
+  },
+  examCardContainer: {
+    width: 700,
+    backgroundColor: '#FEFEFA'
+  },
+  cardTitle: {
+    textAlign: 'center'
+  }
+};
+var signupPageStyle = {
+  container: {
+    zIndex: "2",
+    position: "relative",
+    paddingTop: "25vh",
+    color: "#FFFFFF",
+    paddingBottom: "200px"
+  },
+  cardHidden: {
+    opacity: "0",
+    transform: "translate3d(0, -60px, 0)"
+  },
+  pageHeader: {
+    minHeight: "100vh",
+    height: "auto",
+    display: "inherit",
+    position: "relative",
+    margin: "0",
+    padding: "0",
+    border: "0",
+    alignItems: "center",
+    "&:before": {
+      background: "rgba(0, 0, 0, 0.5)"
+    },
+    "&:before,&:after": {
+      position: "absolute",
+      zIndex: "1",
+      width: "100%",
+      height: "100%",
+      display: "block",
+      left: "0",
+      top: "0",
+      content: '""'
+    },
+    "& footer li a,& footer li a:hover,& footer li a:active": {
+      color: "#FFFFFF"
+    },
+    "& footer": {
+      position: "absolute",
+      bottom: "0",
+      width: "100%"
+    }
+  },
+  form: {
+    margin: "0"
+  },
+  cardHeader: {
+    width: "auto",
+    textAlign: "center",
+    marginLeft: "20px",
+    marginRight: "20px",
+    marginTop: "-40px",
+    padding: "20px 0",
+    marginBottom: "15px"
+  },
+  socialIcons: {
+    maxWidth: "24px",
+    marginTop: "0",
+    width: "100%",
+    transform: "none",
+    left: "0",
+    top: "0",
+    height: "100%",
+    lineHeight: "41px",
+    fontSize: "20px"
+  },
+  divider: {
+    marginTop: "30px",
+    marginBottom: "0px",
+    textAlign: "center"
+  },
+  cardFooter: {
+    paddingTop: "0rem",
+    border: "0",
+    borderRadius: "6px",
+    justifyContent: "center !important"
+  },
+  socialLine: {
+    marginTop: "1rem",
+    textAlign: "center",
+    padding: "0"
+  },
+  inputIconsColor: {
+    color: "#495057"
+  }
+};
+
+var AccountActivation = /*#__PURE__*/function (_Component) {
+  _inherits(AccountActivation, _Component);
+
+  var _super = _createSuper(AccountActivation);
+
+  function AccountActivation(props) {
+    var _this;
+
+    _classCallCheck(this, AccountActivation);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      accountConfirm: null
+    };
+    return _this;
+  }
+
+  _createClass(AccountActivation, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var token = this.props.match.params.token;
+
+      if (!token) {
+        this.setState({
+          accountConfirm: false
+        });
+      } else {
+        _axiosAPI__WEBPACK_IMPORTED_MODULE_2__["axiosInstanceNoAuth"].get("/user/activate/".concat(token, "/$"), {}).then(function (response) {
+          console.log(response);
+
+          _this2.setState({
+            accountConfirm: true
+          });
+        })["catch"](function (error) {
+          console.log(error);
+
+          _this2.setState({
+            accountConfirm: false
+          });
+        });
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var accountConfirm = this.state.accountConfirm;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, accountConfirm === null && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoadingScreen__WEBPACK_IMPORTED_MODULE_6__["default"], null), accountConfirm === true && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        style: bgStyles.paperContainer
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: signupPageStyle.container
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridContainer_js__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        justify: "center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridItem_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        xs: 12,
+        sm: 12,
+        md: 4
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        color: "success",
+        style: signupPageStyle.cardHeader
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Konto zosta\u0142o aktywowane, mo\u017Cesz si\u0119 zalogowa\u0107"))))))), accountConfirm === false && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        style: bgStyles.paperContainer
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: signupPageStyle.container
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridContainer_js__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        justify: "center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridItem_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        xs: 12,
+        sm: 12,
+        md: 4
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        color: "danger",
+        style: signupPageStyle.cardHeader
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Nie uda\u0142o si\u0119 aktywowa\u0107 konta, link nieaktywny"))))))));
+    }
+  }]);
+
+  return AccountActivation;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+AccountActivation.propTypes = {};
+/* harmony default export */ __webpack_exports__["default"] = (AccountActivation);
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/assets/jss/material-kit-react/components/cardHeaderStyle.js":
+/*!**************************************************************************************************!*\
+  !*** ./djsr/frontend/src/components/assets/jss/material-kit-react/components/cardHeaderStyle.js ***!
+  \**************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../jss/material-kit-react.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react.js");
+
+var cardHeaderStyle = {
+  cardHeader: {
+    borderRadius: "3px",
+    padding: "1rem 15px",
+    marginLeft: "15px",
+    marginRight: "15px",
+    marginTop: "-30px",
+    border: "0",
+    marginBottom: "0"
+  },
+  cardHeaderPlain: {
+    marginLeft: "0px",
+    marginRight: "0px"
+  },
+  warningCardHeader: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["warningCardHeader"],
+  successCardHeader: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["successCardHeader"],
+  dangerCardHeader: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["dangerCardHeader"],
+  infoCardHeader: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["infoCardHeader"],
+  primaryCardHeader: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["primaryCardHeader"]
+};
+/* harmony default export */ __webpack_exports__["default"] = (cardHeaderStyle);
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/assets/jss/material-kit-react/components/cardStyle.js":
+/*!********************************************************************************************!*\
+  !*** ./djsr/frontend/src/components/assets/jss/material-kit-react/components/cardStyle.js ***!
+  \********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var cardStyle = {
+  card: {
+    border: "0",
+    marginBottom: "30px",
+    marginTop: "30px",
+    borderRadius: "6px",
+    color: "rgba(0, 0, 0, 0.87)",
+    background: "#fff",
+    width: "100%",
+    boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12)",
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
+    minWidth: "0",
+    wordWrap: "break-word",
+    fontSize: ".875rem",
+    transition: "all 300ms linear"
+  },
+  cardPlain: {
+    background: "transparent",
+    boxShadow: "none"
+  },
+  cardCarousel: {
+    overflow: "hidden"
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (cardStyle);
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/img/genesprDark.png":
+/*!**********************************************************!*\
+  !*** ./djsr/frontend/src/components/img/genesprDark.png ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "29a2f630b088eabfaa8f98afec0658ab.png");
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/material_ui_components/Card/Card.js":
+/*!**************************************************************************!*\
+  !*** ./djsr/frontend/src/components/material_ui_components/Card/Card.js ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Card; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _assets_jss_material_kit_react_components_cardStyle_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../assets/jss/material-kit-react/components/cardStyle.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react/components/cardStyle.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+ // nodejs library that concatenates classes
+
+ // nodejs library to set properties for components
+
+ // @material-ui/core components
+
+ // @material-ui/icons
+// core components
+// import styles from "../../assets/jss/material-kit-react/components/cardStyle.js";
+
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["makeStyles"])(_assets_jss_material_kit_react_components_cardStyle_js__WEBPACK_IMPORTED_MODULE_4__["default"]);
+function Card(props) {
+  var _classNames;
+
+  var classes = useStyles();
+
+  var className = props.className,
+      children = props.children,
+      plain = props.plain,
+      carousel = props.carousel,
+      rest = _objectWithoutProperties(props, ["className", "children", "plain", "carousel"]);
+
+  var cardClasses = classnames__WEBPACK_IMPORTED_MODULE_1___default()((_classNames = {}, _defineProperty(_classNames, classes.card, true), _defineProperty(_classNames, classes.cardPlain, plain), _defineProperty(_classNames, classes.cardCarousel, carousel), _defineProperty(_classNames, className, className !== undefined), _classNames));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _extends({
+    className: cardClasses
+  }, rest), children);
+}
+Card.propTypes = {
+  className: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  plain: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
+  carousel: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
+  children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node
+};
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/material_ui_components/Card/CardHeader.js":
+/*!********************************************************************************!*\
+  !*** ./djsr/frontend/src/components/material_ui_components/Card/CardHeader.js ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CardHeader; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _assets_jss_material_kit_react_components_cardHeaderStyle_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../assets/jss/material-kit-react/components/cardHeaderStyle.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react/components/cardHeaderStyle.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+ // nodejs library that concatenates classes
+
+ // nodejs library to set properties for components
+
+ // @material-ui/core components
+
+ // @material-ui/icons
+// core components
+
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["makeStyles"])(_assets_jss_material_kit_react_components_cardHeaderStyle_js__WEBPACK_IMPORTED_MODULE_4__["default"]);
+function CardHeader(props) {
+  var _classNames;
+
+  var classes = useStyles();
+
+  var className = props.className,
+      children = props.children,
+      color = props.color,
+      plain = props.plain,
+      rest = _objectWithoutProperties(props, ["className", "children", "color", "plain"]);
+
+  var cardHeaderClasses = classnames__WEBPACK_IMPORTED_MODULE_1___default()((_classNames = {}, _defineProperty(_classNames, classes.cardHeader, true), _defineProperty(_classNames, classes[color + "CardHeader"], color), _defineProperty(_classNames, classes.cardHeaderPlain, plain), _defineProperty(_classNames, className, className !== undefined), _classNames));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _extends({
+    className: cardHeaderClasses
+  }, rest), children);
+}
+CardHeader.propTypes = {
+  className: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  color: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOf(["warning", "success", "danger", "info", "primary"]),
+  plain: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
+  children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node
+};
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/material_ui_components/Grid/GridContainer.js":
+/*!***********************************************************************************!*\
+  !*** ./djsr/frontend/src/components/material_ui_components/Grid/GridContainer.js ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GridContainer; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/esm/Grid/index.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+ // nodejs library to set properties for components
+
+ // @material-ui/core components
+
+
+
+var styles = {
+  grid: {
+    marginRight: "-15px",
+    marginLeft: "-15px",
+    width: "auto"
+  }
+};
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["makeStyles"])(styles);
+function GridContainer(props) {
+  var classes = useStyles();
+
+  var children = props.children,
+      className = props.className,
+      rest = _objectWithoutProperties(props, ["children", "className"]);
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({
+    container: true
+  }, rest, {
+    className: classes.grid + " " + className
+  }), children);
+}
+GridContainer.defaultProps = {
+  className: ""
+};
+GridContainer.propTypes = {
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
+};
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/material_ui_components/Grid/GridItem.js":
+/*!******************************************************************************!*\
+  !*** ./djsr/frontend/src/components/material_ui_components/Grid/GridItem.js ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GridItem; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/esm/Grid/index.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+ // nodejs library to set properties for components
+
+ // @material-ui/core components
+
+
+
+var styles = {
+  grid: {
+    position: "relative",
+    width: "100%",
+    minHeight: "1px",
+    paddingRight: "15px",
+    paddingLeft: "15px",
+    flexBasis: "auto"
+  }
+};
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["makeStyles"])(styles);
+function GridItem(props) {
+  var classes = useStyles();
+
+  var children = props.children,
+      className = props.className,
+      rest = _objectWithoutProperties(props, ["children", "className"]);
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({
+    item: true
+  }, rest, {
+    className: classes.grid + " " + className
+  }), children);
+}
+GridItem.defaultProps = {
+  className: ""
+};
+GridItem.propTypes = {
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
+};
+
+/***/ })
+
+}]);
+//# sourceMappingURL=10.main.js.map
