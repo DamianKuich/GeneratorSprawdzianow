@@ -4144,6 +4144,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./material_ui_components/CustomButtons/Button */ "./djsr/frontend/src/components/material_ui_components/CustomButtons/Button.js");
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
 /* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/esm/Box/index.js");
+/* harmony import */ var _material_ui_components_CustomRadio_CustomRadio__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./material_ui_components/CustomRadio/CustomRadio */ "./djsr/frontend/src/components/material_ui_components/CustomRadio/CustomRadio.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -4181,6 +4182,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -4281,7 +4283,8 @@ var MaterialUiTaskSearch = /*#__PURE__*/function (_Component) {
         initialValues: {
           skills: [],
           currentPage: 1,
-          maxPage: null
+          maxPage: null,
+          myTasks: 0
         },
         onSubmit: function onSubmit(values, helpers) {
           setTimeout(function () {
@@ -4314,7 +4317,8 @@ var MaterialUiTaskSearch = /*#__PURE__*/function (_Component) {
             _axiosAPI__WEBPACK_IMPORTED_MODULE_1__["default"].post("/user/tasks/", {
               skill: result.join(","),
               pagenr: values.currentPage,
-              nroftasks: 10
+              nroftasks: 10,
+              myTasks: values.myTasks
             }).then(function (response) {
               helpers.setSubmitting(false);
               console.log("response", response); // this.setState({
@@ -4398,10 +4402,7 @@ var MaterialUiTaskSearch = /*#__PURE__*/function (_Component) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_16__["Form"], {
           onSubmit: handleSubmit
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_List__WEBPACK_IMPORTED_MODULE_4__["default"], null, sections.map(function (section) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_5__["default"] // onClick={() => {
-          //   this.toggleCollapse("section-" + section.id);
-          // }}
-          , null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItemSecondaryAction__WEBPACK_IMPORTED_MODULE_19__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomCheckBox_CustomCheckbox__WEBPACK_IMPORTED_MODULE_20__["default"], {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_5__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItemSecondaryAction__WEBPACK_IMPORTED_MODULE_19__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomCheckBox_CustomCheckbox__WEBPACK_IMPORTED_MODULE_20__["default"], {
             edge: "start",
             checked: sectionBooleanValue(section),
             onChange: function onChange() {
@@ -4414,9 +4415,7 @@ var MaterialUiTaskSearch = /*#__PURE__*/function (_Component) {
             }
           })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Collapse__WEBPACK_IMPORTED_MODULE_8__["default"], {
             "in": "section-" + section.id === collapseId,
-            unmountOnExit: true // isOpen={collapseId}
-            // className="border-left border-right border-bottom p-2"
-
+            unmountOnExit: true
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_List__WEBPACK_IMPORTED_MODULE_4__["default"], {
             component: "div",
             disablePadding: true
@@ -4429,10 +4428,7 @@ var MaterialUiTaskSearch = /*#__PURE__*/function (_Component) {
               edge: "start",
               checked: !!Object(formik__WEBPACK_IMPORTED_MODULE_16__["getIn"])(values, "skills." + skill.id),
               tabIndex: -1,
-              disableRipple: true // inputProps={{
-              //   "aria-labelledby": labelId,
-              // }}
-
+              disableRipple: true
             })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_7__["default"] // id={labelId}
             , {
               primary: skill.Skill
@@ -4448,7 +4444,27 @@ var MaterialUiTaskSearch = /*#__PURE__*/function (_Component) {
           size: "sm",
           onClick: handleSubmit,
           disabled: isSubmitting
-        }, "Szukaj")), !!values.maxPage && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
+        }, "Szukaj"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomRadio_CustomRadio__WEBPACK_IMPORTED_MODULE_25__["default"], {
+          labelProps: {
+            label: "Tylko moje zadania"
+          },
+          radioProps: {
+            checked: values.myTasks === 1,
+            onChange: function onChange() {
+              setFieldValue("myTasks", 1);
+            }
+          }
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomRadio_CustomRadio__WEBPACK_IMPORTED_MODULE_25__["default"], {
+          labelProps: {
+            label: "Wszystkie"
+          },
+          radioProps: {
+            checked: values.myTasks === 0,
+            onChange: function onChange() {
+              setFieldValue("myTasks", 0);
+            }
+          }
+        })), !!values.maxPage && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_24__["default"], {
           style: {
             display: "flex",
             justifyContent: "center"

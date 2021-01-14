@@ -4317,8 +4317,7 @@ var MaterialUiTaskSearch = /*#__PURE__*/function (_Component) {
             _axiosAPI__WEBPACK_IMPORTED_MODULE_1__["default"].post("/user/tasks/", {
               skill: result.join(","),
               pagenr: values.currentPage,
-              nroftasks: 10,
-              myTasks: values.myTasks
+              nroftasks: 10
             }).then(function (response) {
               helpers.setSubmitting(false);
               console.log("response", response); // this.setState({
