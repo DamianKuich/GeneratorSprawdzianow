@@ -97,7 +97,7 @@ class CustomUserCreate(APIView):
 
 class PasswordSendResetView(APIView):
     model = PasswordSendReset.objects.all()
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = PasswordSendResetSerializer
 
     def post(self, request):
@@ -133,7 +133,7 @@ class PasswordSendResetView(APIView):
 
 
 class PasswordResetView(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request, **kwargs):
         if True:
@@ -159,7 +159,7 @@ class PasswordResetView(APIView):
 
 
 class HelloWorldView(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get(self, request, *args, **kwargs):
         token = kwargs.pop('token')
@@ -193,7 +193,7 @@ class ReturnUserInfo(APIView):
 
 
 class LogoutAndBlacklistRefreshTokenForUserView(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     authentication_classes = ()
 
     def post(self, request, format='json'):
@@ -838,14 +838,21 @@ class AddTask(APIView):
                 file = None
             user = CustomUser.objects.get(id=request.user.id)
             if Task.objects.filter(id = id).exists():
+                print('0')
                 my_task = Task.objects.get(id = id)
                 if text!=None:
+                    print('1')
                     if Task.objects.filter(text = text).exists():
-                        pom = Task.objects.filter(text = text).id
+
+                        pom = Task.objects.get(text = text).id
+                        print('2')
                         if pom == id:
                             return Response(data={"error": "Zadanie o podanej treści już istnieje!"},status=status.HTTP_400_BAD_REQUEST)
                         else:
+                            print('3')
                             my_task.text = text
+                    else:
+                        my_task.text = text
                 if wrongans!=None: my_task.wronganswers = listwr
                 if corrans!=None: my_task.correctans = listcr
                 if typ!=None: my_task.type = typ
@@ -853,26 +860,27 @@ class AddTask(APIView):
                 if priv!=None:my_task.private = priv
                 if pkt!=None: my_task.points = pkt
                 my_task.author = user
-                if skills!=None:
-                    for skillid in skills.split(','):
-                        skil = Skill.objects.filter(id=skillid)
-                        my_task.skill.set(skil)
-                if file!=None:
-                    if not Image.objects.filter(name="", image=file, user_id=user.id).exists():
-                        image = Image.objects.create(name="", image=file, user_id=user.id)
-                        image.save()
-                        # imag = Image.objects.filter(name="", image=file, user_id=user.id)
-                        image_data = open("media/" + str(image.image), "rb").read()
-                        cos = bytes(image_data)
-                        img = ImageDB.objects.create(image=cos)
-                        img.save()
-                        image.name = str(img.id)
-                        image.save()
-                        img = Image.objects.filter(name=str(img.id))
-                        my_task.image.set(img)
+                # if skills!=None:
+                #     for skillid in skills.split(','):
+                #         skil = Skill.objects.filter(id=skillid)
+                #         my_task.skill.set(skil)
+                # if file!=None:
+                #     if not Image.objects.filter(name="", image=file, user_id=user.id).exists():
+                #         image = Image.objects.create(name="", image=file, user_id=user.id)
+                #         image.save()
+                #         # imag = Image.objects.filter(name="", image=file, user_id=user.id)
+                #         image_data = open("media/" + str(image.image), "rb").read()
+                #         cos = bytes(image_data)
+                #         img = ImageDB.objects.create(image=cos)
+                #         img.save()
+                #         image.name = str(img.id)
+                #         image.save()
+                #         img = Image.objects.filter(name=str(img.id))
+                #         my_task.image.set(img)
                 my_task.save()
-                task = Task.objects.filter(text=text)
-                serializer = TaskSerializer(task, many=True).data
+                print('tutaj')
+                tasko = Task.objects.filter(text=text)
+                serializer = TaskSerializer(tasko, many=True).data
                 aktDB(1)
                 aktDB(2)
                 connection.close()
