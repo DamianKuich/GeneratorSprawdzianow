@@ -12,6 +12,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Dialog from "./material_ui_components/CustomModal/CustomModal";
 import Button from "./material_ui_components/CustomButtons/Button";
 import Box from "@material-ui/core/Box";
+import LoadingScreen from "./LoadingScreen";
+import { withSnackbar } from "notistack";
 
 //todo po skasowaniu tresci zadania "zapomina" zdjecie
 //todo zajrzec do draganddropahndlera
@@ -47,10 +49,20 @@ class ExamEditor extends Component {
         state.exam = response.data[0];
         if (state.exam.tasks.length > 0) {
           state.exam.tasks = JSON.parse(state.exam.tasks || []);
+          // let tasks = JSON.parse(state.exam.tasks || []);
+          // const {pages}=tasks.pop()
+          // state.exam.tasks=tasks;
+          // state.exam.pages=pages||[];
+          // if (!tasks[tasks.length].text) {
+          //   const { pages } = tasks.pop();
+          //   state.exam.tasks = tasks;
+          //   state.exam.pages = pages || [];
+          // }
+          // state.exam.tasks = tasks;
         } else {
           state.exam.tasks = [];
         }
-        document.title=state.exam.name
+        document.title = state.exam.name;
         return state;
       });
     });
@@ -72,6 +84,17 @@ class ExamEditor extends Component {
         this.state.timeout,
         setTimeout(this.saveExam, 3000)
       );
+      // state.savingSnackKey =
+      //   state.savingSnackKey ||
+      //   this.props.enqueueSnackbar("Zapisywanie sprawdzianu", {
+      //     persist: true,
+      //   });
+      if (!state.savingSnackKey){
+        this.props.closeSnackbar();
+        state.savingSnackKey=this.props.enqueueSnackbar("Zapisywanie sprawdzianu", {
+          persist: true,
+        });
+      }
       state.saved = false;
       return state;
     });
@@ -137,7 +160,9 @@ class ExamEditor extends Component {
         tasks: JSON.stringify(this.state.exam.tasks),
       })
       .then((response) => {
-        this.setState({ saved: true });
+        this.props.closeSnackbar(this.state.savingSnackKey)
+        this.props.enqueueSnackbar("Zapisano sprawdzian.",{variant:"success"})
+        this.setState({ saved: true,savingSnackKey:null });
       });
   };
 
@@ -151,6 +176,45 @@ class ExamEditor extends Component {
       }
       return state;
     });
+  };
+
+  openPDFinNewTab = (type) => {
+    let pdfBaseUrl = "";
+    let pdfNameSuffix= ""
+    switch (type) {
+      case "exam":
+        pdfBaseUrl = "/user/testpdf/";
+        break;
+      case "answers":
+        pdfBaseUrl ='/user/answerspdf/';
+        pdfNameSuffix= "- arkusz odpowiedzi";
+        break;
+      case 'answersKeys':
+        pdfBaseUrl ='/user/answerskeypdf/';
+        pdfNameSuffix= "- klucz odpowiedzi";
+        break;
+    }
+    axiosInstance
+      .get(pdfBaseUrl + this.state.exam.id, {
+        method: "GET",
+        responseType: "blob",
+      })
+      .then((response) => {
+        // console.log("pdf response" ,response.data)
+        let pdfBlob = new Blob([response.data], { type: "application/pdf" });
+        // pdfBlob.lastModifiedDate = new Date();
+        // pdfBlob.name = this.state.exam.name;
+        // const pdf = response.data;
+        const fileURL = URL.createObjectURL(pdfBlob);
+        let a = document.createElement("a");
+        document.body.appendChild(a);
+        a.style = { display: "none" };
+        a.href = fileURL;
+        a.download = this.state.exam.name + pdfNameSuffix;
+        a.click();
+        URL.revokeObjectURL(fileURL);
+        // window.open(fileURL);
+      });
   };
 
   dragEndOld = (result) => {
@@ -375,11 +439,7 @@ class ExamEditor extends Component {
   render() {
     const exam = this.state.exam;
     if (!exam) {
-      return (
-        <div>
-          <div>Ladowanie</div>
-        </div>
-      );
+      return <LoadingScreen message={"Ładowanie edytora sprawdzianu"} />;
     }
     const sideMenuCollapseId = this.state.sideMenuCollapseId;
     const searchedTasks = this.state.tasks;
@@ -491,38 +551,48 @@ class ExamEditor extends Component {
           ]}
         >
           <Box display={"flex"} flexDirection={"column"}>
+            {/*<Button*/}
+            {/*  color={"primary"}*/}
+            {/*  onClick={() => {*/}
+            {/*    this.props.enqueueSnackbar("Successfully fetched the data.");*/}
+            {/*  }}*/}
+            {/*>*/}
+            {/*  Sprawdzian*/}
+            {/*</Button>*/}
             <Button
               color={"primary"}
               onClick={() => {
-                window.open(
-                  `${window.location.origin}/api/user/testpdf/` +
-                    this.state.exam.id,
-                  "_blank"
-                );
+                this.openPDFinNewTab("exam");
               }}
             >
               Sprawdzian
             </Button>
             <Button
               color={"primary"}
-              onClick={() => {
-                window.open(
-                  `${window.location.origin}/api/user/answerspdf/` +
-                    this.state.exam.id,
-                  "_blank"
-                );
+              // onClick={() => {
+              //   window.open(
+              //     `${window.location.origin}/api/user/answerspdf/` +
+              //       this.state.exam.id,
+              //     "_blank"
+              //   );
+              // }}
+                onClick={() => {
+                this.openPDFinNewTab("answers");
               }}
             >
               Arkusz odpowiedzi
             </Button>
             <Button
               color={"primary"}
-              onClick={() => {
-                window.open(
-                  `${window.location.origin}/api/user/answerskeypdf/` +
-                    this.state.exam.id,
-                  "_blank"
-                );
+              // onClick={() => {
+              //   window.open(
+              //     `${window.location.origin}/api/user/answerskeypdf/` +
+              //       this.state.exam.id,
+              //     "_blank"
+              //   );
+              // }}
+                onClick={() => {
+                this.openPDFinNewTab("answersKeys");
               }}
             >
               Klucz Odpowiedzi
@@ -536,4 +606,4 @@ class ExamEditor extends Component {
 
 // ExamEditor.propTypes = {};
 
-export default ExamEditor;
+export default withSnackbar(ExamEditor);

@@ -1,50 +1,101 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[11],{
 
-/***/ "./djsr/frontend/src/components/LoadingScreen.js":
-/*!*******************************************************!*\
-  !*** ./djsr/frontend/src/components/LoadingScreen.js ***!
-  \*******************************************************/
-/*! exports provided: default */
+/***/ "./djsr/frontend/src/components/AutoGeneTaskParser.js":
+/*!************************************************************!*\
+  !*** ./djsr/frontend/src/components/AutoGeneTaskParser.js ***!
+  \************************************************************/
+/*! exports provided: taskParser, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/CircularProgress */ "./node_modules/@material-ui/core/esm/CircularProgress/index.js");
-/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/@material-ui/core/esm/Paper/index.js");
-/* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/esm/Grid/index.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "taskParser", function() { return taskParser; });
+function shuffle(array) {
+  var currentIndex = array.length,
+      temporaryValue,
+      randomIndex; // While there remain elements to shuffle...
 
+  while (0 !== currentIndex) {
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1; // And swap it with the current element.
 
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
 
+  return array;
+}
 
+var taskParser = function taskParser(task) {
+  console.log("taskparser", task);
+  var newTask = JSON.parse(JSON.stringify(task)); // console.log("taskparser parsed", newTask)
+  // let draggedItem
 
-var LoadingScreen = function LoadingScreen(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    container: true,
-    spacing: 0,
-    direction: "column",
-    alignItems: "center",
-    justify: "center",
-    style: {
-      minHeight: '100vh'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    size: 250,
-    style: {
-      'color': 'purple'
-    }
-  }));
+  newTask.answers = {};
+  newTask.correctans = JSON.parse(newTask.correctans.replace(/'/g, '"'));
+  newTask.wronganswers = JSON.parse(newTask.wronganswers.replace(/'/g, '"'));
+  newTask.answers = {
+    correctans: newTask.correctans,
+    wronganswers: newTask.wronganswers
+  };
+
+  if (task.type == "2") {
+    var indexesTab = [{
+      "index": 1,
+      "isCorrect": false
+    }, {
+      "index": 0,
+      "isCorrect": true
+    }, {
+      "index": 2,
+      "isCorrect": false
+    }, {
+      "index": 0,
+      "isCorrect": false
+    }];
+    var shuffledIndexesTab = shuffle(indexesTab);
+    newTask.currentAnswers = {
+      correctans: newTask.correctans,
+      wronganswers: newTask.wronganswers,
+      answersIndexes: shuffledIndexesTab
+    };
+  } else if (task.type == "1") {
+    newTask.currentAnswers = {
+      correctans: newTask.correctans,
+      wronganswers: newTask.wronganswers,
+      answersIndexes: [{}]
+    };
+  }
+
+  newTask.maxPoints = JSON.parse(newTask.points); // newTask.dataset = newTask.dataset.map((dataSet) => {
+  //   dataSet.answers = dataSet.answers.map((answer) => {
+  //     answer.allanswers = JSON.parse(answer.allanswers.replace(/'/g, '"'));
+  //     answer.correctans = JSON.parse(answer.correctans.replace(/'/g, '"'));
+  //     return answer
+  //   });
+  //   dataSet.answers = dataSet.answers[0];
+  //   return dataSet
+  // });
+  // console.log("oldtask", task,"new", newTask)
+
+  console.log("taskparser nn", newTask);
+  return newTask;
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (LoadingScreen);
+var tasksParser = function tasksParser(tasks) {
+  return tasks.map(taskParser);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (tasksParser);
 
 /***/ }),
 
-/***/ "./djsr/frontend/src/components/MaterialUiAccountActivation.js":
-/*!*********************************************************************!*\
-  !*** ./djsr/frontend/src/components/MaterialUiAccountActivation.js ***!
-  \*********************************************************************/
+/***/ "./djsr/frontend/src/components/MaterialUiFenerator.js":
+/*!*************************************************************!*\
+  !*** ./djsr/frontend/src/components/MaterialUiFenerator.js ***!
+  \*************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -52,38 +103,54 @@ var LoadingScreen = function LoadingScreen(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
-/* harmony import */ var _material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./material_ui_components/Card/CardHeader.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardHeader.js");
-/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/@material-ui/core/esm/Paper/index.js");
-/* harmony import */ var _img_genesprDark_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./img/genesprDark.png */ "./djsr/frontend/src/components/img/genesprDark.png");
-/* harmony import */ var _LoadingScreen__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./LoadingScreen */ "./djsr/frontend/src/components/LoadingScreen.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
-/* harmony import */ var _material_ui_components_Grid_GridContainer_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./material_ui_components/Grid/GridContainer.js */ "./djsr/frontend/src/components/material_ui_components/Grid/GridContainer.js");
-/* harmony import */ var _material_ui_components_Grid_GridItem_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./material_ui_components/Grid/GridItem.js */ "./djsr/frontend/src/components/material_ui_components/Grid/GridItem.js");
-/* harmony import */ var _material_ui_components_Card_Card_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./material_ui_components/Card/Card.js */ "./djsr/frontend/src/components/material_ui_components/Card/Card.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/InputAdornment */ "./node_modules/@material-ui/core/esm/InputAdornment/index.js");
+/* harmony import */ var _material_ui_core_Icon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Icon */ "./node_modules/@material-ui/core/esm/Icon/index.js");
+/* harmony import */ var _material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/icons/Email */ "./node_modules/@material-ui/icons/Email.js");
+/* harmony import */ var _material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/icons/People */ "./node_modules/@material-ui/icons/People.js");
+/* harmony import */ var _material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/icons/Lock */ "./node_modules/@material-ui/icons/Lock.js");
+/* harmony import */ var _material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _material_ui_components_Header_Header_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./material_ui_components/Header/Header.js */ "./djsr/frontend/src/components/material_ui_components/Header/Header.js");
+/* harmony import */ var _material_ui_components_Header_HeaderLinks_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./material_ui_components/Header/HeaderLinks.js */ "./djsr/frontend/src/components/material_ui_components/Header/HeaderLinks.js");
+/* harmony import */ var _material_ui_components_Footer_Footer_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./material_ui_components/Footer/Footer.js */ "./djsr/frontend/src/components/material_ui_components/Footer/Footer.js");
+/* harmony import */ var _material_ui_components_Grid_GridContainer_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./material_ui_components/Grid/GridContainer.js */ "./djsr/frontend/src/components/material_ui_components/Grid/GridContainer.js");
+/* harmony import */ var _material_ui_components_Grid_GridItem_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./material_ui_components/Grid/GridItem.js */ "./djsr/frontend/src/components/material_ui_components/Grid/GridItem.js");
+/* harmony import */ var _material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ././material_ui_components/CustomButtons/Button.js */ "./djsr/frontend/src/components/material_ui_components/CustomButtons/Button.js");
+/* harmony import */ var _material_ui_components_Card_Card_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./material_ui_components/Card/Card.js */ "./djsr/frontend/src/components/material_ui_components/Card/Card.js");
+/* harmony import */ var _material_ui_components_Card_CardBody_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./material_ui_components/Card/CardBody.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardBody.js");
+/* harmony import */ var _material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./material_ui_components/Card/CardHeader.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardHeader.js");
+/* harmony import */ var _material_ui_components_Card_CardFooter_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./material_ui_components/Card/CardFooter.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardFooter.js");
+/* harmony import */ var _material_ui_components_CustomInput_CustomInput_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./material_ui_components/CustomInput/CustomInput.js */ "./djsr/frontend/src/components/material_ui_components/CustomInput/CustomInput.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _assets_jss_material_kit_react_views_loginPage_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./assets/jss/material-kit-react/views/loginPage.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react/views/loginPage.js");
+/* harmony import */ var _img_genspr_parralax_bg_png__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./img/genspr-parralax-bg.png */ "./djsr/frontend/src/components/img/genspr-parralax-bg.png");
+/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
+/* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
+/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
+/* harmony import */ var _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./MaterialFormikField */ "./djsr/frontend/src/components/MaterialFormikField.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_25___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_25__);
+/* harmony import */ var _AutoGeneTaskParser__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./AutoGeneTaskParser */ "./djsr/frontend/src/components/AutoGeneTaskParser.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @material-ui/core/MenuItem */ "./node_modules/@material-ui/core/esm/MenuItem/index.js");
+/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @material-ui/core/Select */ "./node_modules/@material-ui/core/esm/Select/index.js");
+var _this = undefined;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
@@ -96,523 +163,297 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var bgStyles = {
-  paperContainer: {
-    backgroundImage: "url(".concat(_img_genesprDark_png__WEBPACK_IMPORTED_MODULE_5__["default"], ")"),
-    minHeight: 1000,
-    maxWidth: 1885
-  },
-  examCardContainer: {
-    width: 700,
-    backgroundColor: '#FEFEFA'
-  },
-  cardTitle: {
-    textAlign: 'center'
-  }
-};
-var signupPageStyle = {
-  container: {
-    zIndex: "2",
-    position: "relative",
-    paddingTop: "25vh",
-    color: "#FFFFFF",
-    paddingBottom: "200px"
-  },
-  cardHidden: {
-    opacity: "0",
-    transform: "translate3d(0, -60px, 0)"
-  },
-  pageHeader: {
-    minHeight: "100vh",
-    height: "auto",
-    display: "inherit",
-    position: "relative",
-    margin: "0",
-    padding: "0",
-    border: "0",
-    alignItems: "center",
-    "&:before": {
-      background: "rgba(0, 0, 0, 0.5)"
-    },
-    "&:before,&:after": {
-      position: "absolute",
-      zIndex: "1",
-      width: "100%",
-      height: "100%",
-      display: "block",
-      left: "0",
-      top: "0",
-      content: '""'
-    },
-    "& footer li a,& footer li a:hover,& footer li a:active": {
-      color: "#FFFFFF"
-    },
-    "& footer": {
-      position: "absolute",
-      bottom: "0",
-      width: "100%"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])(_assets_jss_material_kit_react_views_loginPage_js__WEBPACK_IMPORTED_MODULE_19__["default"]);
+
+var Fenerator = function Fenerator(props) {
+  var FRS = "Pole wymagane";
+  var user = props.appState.user;
+
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState("password"),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      editView = _React$useState2[0],
+      setEditView = _React$useState2[1];
+
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(null),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      parsedTasks = _React$useState4[0],
+      setParsedTasks = _React$useState4[1];
+
+  var strongToken = Object(react_router__WEBPACK_IMPORTED_MODULE_18__["useParams"])().id;
+  console.log(strongToken);
+  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_27__["useHistory"])();
+
+  var _React$useState5 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState("cardHidden"),
+      _React$useState6 = _slicedToArray(_React$useState5, 2),
+      cardAnimaton = _React$useState6[0],
+      setCardAnimation = _React$useState6[1];
+
+  setTimeout(function () {
+    setCardAnimation("");
+  }, 700);
+  var classes = useStyles();
+
+  var rest = _extends({}, props);
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.pageHeader,
+    style: {
+      backgroundImage: "url(" + _img_genspr_parralax_bg_png__WEBPACK_IMPORTED_MODULE_20__["default"] + ")",
+      backgroundSize: "cover",
+      backgroundPosition: "top center"
     }
-  },
-  form: {
-    margin: "0"
-  },
-  cardHeader: {
-    width: "auto",
-    textAlign: "center",
-    marginLeft: "20px",
-    marginRight: "20px",
-    marginTop: "-40px",
-    padding: "20px 0",
-    marginBottom: "15px"
-  },
-  socialIcons: {
-    maxWidth: "24px",
-    marginTop: "0",
-    width: "100%",
-    transform: "none",
-    left: "0",
-    top: "0",
-    height: "100%",
-    lineHeight: "41px",
-    fontSize: "20px"
-  },
-  divider: {
-    marginTop: "30px",
-    marginBottom: "0px",
-    textAlign: "center"
-  },
-  cardFooter: {
-    paddingTop: "0rem",
-    border: "0",
-    borderRadius: "6px",
-    justifyContent: "center !important"
-  },
-  socialLine: {
-    marginTop: "1rem",
-    textAlign: "center",
-    padding: "0"
-  },
-  inputIconsColor: {
-    color: "#495057"
-  }
-};
-
-var AccountActivation = /*#__PURE__*/function (_Component) {
-  _inherits(AccountActivation, _Component);
-
-  var _super = _createSuper(AccountActivation);
-
-  function AccountActivation(props) {
-    var _this;
-
-    _classCallCheck(this, AccountActivation);
-
-    _this = _super.call(this, props);
-    _this.state = {
-      accountConfirm: null
-    };
-    return _this;
-  }
-
-  _createClass(AccountActivation, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      var token = this.props.match.params.token;
-
-      if (!token) {
-        this.setState({
-          accountConfirm: false
-        });
-      } else {
-        _axiosAPI__WEBPACK_IMPORTED_MODULE_2__["axiosInstanceNoAuth"].get("/user/activate/".concat(token, "/$"), {}).then(function (response) {
-          console.log(response);
-
-          _this2.setState({
-            accountConfirm: true
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.container
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridContainer_js__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    justify: "center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridItem_js__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    xs: 12,
+    sm: 12,
+    md: 4
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_Card_js__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    className: classes[cardAnimaton]
+  }, editView == "password" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Formik"], {
+    initialValues: {
+      ileotw: "0",
+      ilezamk: "0",
+      level: "0",
+      skills: "0",
+      groups: "0"
+    },
+    validationSchema: yup__WEBPACK_IMPORTED_MODULE_21__["object"]().shape({
+      ileotw: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().required("Pole wymagane"),
+      ilezamk: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().required("Pole wymagane"),
+      level: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().required("Pole wymagane"),
+      skills: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().required("Pole wymagane"),
+      groups: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().required("Pole wymagane")
+    }),
+    onSubmit: function onSubmit(values, helpers) {
+      setTimeout(function () {
+        helpers.setSubmitting(true);
+        _axiosAPI__WEBPACK_IMPORTED_MODULE_22__["default"].post("/user/getrandomtasks/", {
+          ileotw: values.ileotw,
+          ilezamk: values.ilezamk,
+          level: values.level,
+          skills: values.skills,
+          groups: values.groups
+        }).then(function (response) {
+          var randomtasks = JSON.stringify(Object(_AutoGeneTaskParser__WEBPACK_IMPORTED_MODULE_26__["default"])(response.data));
+          console.log(randomtasks);
+          console.log(strongToken);
+          _axiosAPI__WEBPACK_IMPORTED_MODULE_22__["default"].put("/user/maketest/", {
+            id: strongToken,
+            tasks: randomtasks
+          }).then(function (response) {
+            history.push("/editor/".concat(strongToken));
           });
         })["catch"](function (error) {
-          console.log(error);
+          helpers.setStatus("Podano nieprawidłowe aktualne hasło");
+          console.log("chngpass error", error.response);
+          var errResponse = error.response;
+          helpers.setSubmitting(false);
 
-          _this2.setState({
-            accountConfirm: false
+          _this.setState({
+            locked: false
           });
+
+          helpers.setValues({
+            ileotw: "",
+            ilezamk: "",
+            level: "",
+            skills: ""
+          }, false);
+          helpers.setTouched({
+            ileotw: false,
+            ilezamk: false,
+            level: false,
+            skills: false
+          }, false);
+          helpers.setFieldError("oldPassword", "Podano nieprawidłowe stare hasło");
         });
+      }, 5000);
+    }
+  }, function (_ref) {
+    var values = _ref.values,
+        errors = _ref.errors,
+        touched = _ref.touched,
+        handleChange = _ref.handleChange,
+        handleBlur = _ref.handleBlur,
+        handleSubmit = _ref.handleSubmit,
+        isSubmitting = _ref.isSubmitting;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      className: classes.form
+    }, console.log(touched, errors), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      color: "primary",
+      className: classes.cardHeader
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Wygeneruj sprawdzian XD")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardBody_js__WEBPACK_IMPORTED_MODULE_14__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
+      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__["default"],
+      name: "ileotw",
+      formControlProps: {
+        fullWidth: true
+      },
+      labelText: "Ilo\u015B\u0107 zada\u0144 otwartych",
+      inputProps: {
+        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          position: "end"
+        })
       }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var accountConfirm = this.state.accountConfirm;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, accountConfirm === null && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoadingScreen__WEBPACK_IMPORTED_MODULE_6__["default"], null), accountConfirm === true && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        style: bgStyles.paperContainer
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: signupPageStyle.container
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridContainer_js__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        justify: "center"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridItem_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        xs: 12,
-        sm: 12,
-        md: 4
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        color: "success",
-        style: signupPageStyle.cardHeader
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Konto zosta\u0142o aktywowane, mo\u017Cesz si\u0119 zalogowa\u0107"))))))), accountConfirm === false && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        style: bgStyles.paperContainer
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: signupPageStyle.container
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridContainer_js__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        justify: "center"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridItem_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        xs: 12,
-        sm: 12,
-        md: 4
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        color: "danger",
-        style: signupPageStyle.cardHeader
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Nie uda\u0142o si\u0119 aktywowa\u0107 konta, link nieaktywny"))))))));
-    }
-  }]);
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
+      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__["default"],
+      name: "ilezamk",
+      formControlProps: {
+        fullWidth: true
+      },
+      labelText: "Ilo\u015B\u0107 zada\u0144 zamkni\u0119tych",
+      inputProps: {
+        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          position: "end"
+        })
+      }
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
+      as: "select",
+      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__["default"],
+      name: "level",
+      formControlProps: {
+        fullWidth: true
+      },
+      labelText: "poziom trudno\u015Bci",
+      inputProps: {
+        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          position: "end"
+        })
+      }
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
+      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__["default"],
+      name: "skills",
+      formControlProps: {
+        fullWidth: true
+      },
+      labelText: "Umiej\u0119tno\u015Bci",
+      inputProps: {
+        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          position: "end"
+        })
+      }
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
+      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__["default"],
+      name: "groups",
+      formControlProps: {
+        fullWidth: true
+      },
+      labelText: "GRUPY KATOLICKIE JANA PAW\u0141A 2",
+      inputProps: {
+        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          position: "end"
+        })
+      }
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardFooter_js__WEBPACK_IMPORTED_MODULE_16__["default"], {
+      className: classes.cardFooter
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      simple: true,
+      color: "primary",
+      size: "lg",
+      onClick: function onClick() {
+        handleSubmit();
+      }
+    }, "Wygeneruj sprawdzian")));
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null)))))));
+};
 
-  return AccountActivation;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-AccountActivation.propTypes = {};
-/* harmony default export */ __webpack_exports__["default"] = (AccountActivation);
+/* harmony default export */ __webpack_exports__["default"] = (Fenerator);
 
 /***/ }),
 
-/***/ "./djsr/frontend/src/components/assets/jss/material-kit-react/components/cardHeaderStyle.js":
-/*!**************************************************************************************************!*\
-  !*** ./djsr/frontend/src/components/assets/jss/material-kit-react/components/cardHeaderStyle.js ***!
-  \**************************************************************************************************/
+/***/ "./djsr/frontend/src/components/img/genspr-parralax-bg.png":
+/*!*****************************************************************!*\
+  !*** ./djsr/frontend/src/components/img/genspr-parralax-bg.png ***!
+  \*****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../jss/material-kit-react.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react.js");
-
-var cardHeaderStyle = {
-  cardHeader: {
-    borderRadius: "3px",
-    padding: "1rem 15px",
-    marginLeft: "15px",
-    marginRight: "15px",
-    marginTop: "-30px",
-    border: "0",
-    marginBottom: "0"
-  },
-  cardHeaderPlain: {
-    marginLeft: "0px",
-    marginRight: "0px"
-  },
-  warningCardHeader: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["warningCardHeader"],
-  successCardHeader: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["successCardHeader"],
-  dangerCardHeader: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["dangerCardHeader"],
-  infoCardHeader: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["infoCardHeader"],
-  primaryCardHeader: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["primaryCardHeader"]
-};
-/* harmony default export */ __webpack_exports__["default"] = (cardHeaderStyle);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "8ae80ee488d6ec36fd62f67865d06356.png");
 
 /***/ }),
 
-/***/ "./djsr/frontend/src/components/assets/jss/material-kit-react/components/cardStyle.js":
-/*!********************************************************************************************!*\
-  !*** ./djsr/frontend/src/components/assets/jss/material-kit-react/components/cardStyle.js ***!
-  \********************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "./node_modules/@material-ui/icons/Delete.js":
+/*!***************************************************!*\
+  !*** ./node_modules/@material-ui/icons/Delete.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-var cardStyle = {
-  card: {
-    border: "0",
-    marginBottom: "30px",
-    marginTop: "30px",
-    borderRadius: "6px",
-    color: "rgba(0, 0, 0, 0.87)",
-    background: "#fff",
-    width: "100%",
-    boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12)",
-    position: "relative",
-    display: "flex",
-    flexDirection: "column",
-    minWidth: "0",
-    wordWrap: "break-word",
-    fontSize: ".875rem",
-    transition: "all 300ms linear"
-  },
-  cardPlain: {
-    background: "transparent",
-    boxShadow: "none"
-  },
-  cardCarousel: {
-    overflow: "hidden"
-  }
-};
-/* harmony default export */ __webpack_exports__["default"] = (cardStyle);
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var React = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/React.createElement("path", {
+  d: "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+}), 'Delete');
+
+exports.default = _default;
 
 /***/ }),
 
-/***/ "./djsr/frontend/src/components/img/genesprDark.png":
-/*!**********************************************************!*\
-  !*** ./djsr/frontend/src/components/img/genesprDark.png ***!
-  \**********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "./node_modules/@material-ui/icons/Favorite.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/@material-ui/icons/Favorite.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "29a2f630b088eabfaa8f98afec0658ab.png");
-
-/***/ }),
-
-/***/ "./djsr/frontend/src/components/material_ui_components/Card/Card.js":
-/*!**************************************************************************!*\
-  !*** ./djsr/frontend/src/components/material_ui_components/Card/Card.js ***!
-  \**************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Card; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
-/* harmony import */ var _assets_jss_material_kit_react_components_cardStyle_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../assets/jss/material-kit-react/components/cardStyle.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react/components/cardStyle.js");
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
-function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-
- // nodejs library that concatenates classes
-
- // nodejs library to set properties for components
-
- // @material-ui/core components
-
- // @material-ui/icons
-// core components
-// import styles from "../../assets/jss/material-kit-react/components/cardStyle.js";
 
 
-var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["makeStyles"])(_assets_jss_material_kit_react_components_cardStyle_js__WEBPACK_IMPORTED_MODULE_4__["default"]);
-function Card(props) {
-  var _classNames;
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 
-  var classes = useStyles();
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
 
-  var className = props.className,
-      children = props.children,
-      plain = props.plain,
-      carousel = props.carousel,
-      rest = _objectWithoutProperties(props, ["className", "children", "plain", "carousel"]);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
 
-  var cardClasses = classnames__WEBPACK_IMPORTED_MODULE_1___default()((_classNames = {}, _defineProperty(_classNames, classes.card, true), _defineProperty(_classNames, classes.cardPlain, plain), _defineProperty(_classNames, classes.cardCarousel, carousel), _defineProperty(_classNames, className, className !== undefined), _classNames));
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _extends({
-    className: cardClasses
-  }, rest), children);
-}
-Card.propTypes = {
-  className: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
-  plain: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
-  carousel: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
-  children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node
-};
+var React = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-/***/ }),
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
 
-/***/ "./djsr/frontend/src/components/material_ui_components/Card/CardHeader.js":
-/*!********************************************************************************!*\
-  !*** ./djsr/frontend/src/components/material_ui_components/Card/CardHeader.js ***!
-  \********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/React.createElement("path", {
+  d: "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+}), 'Favorite');
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CardHeader; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
-/* harmony import */ var _assets_jss_material_kit_react_components_cardHeaderStyle_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../assets/jss/material-kit-react/components/cardHeaderStyle.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react/components/cardHeaderStyle.js");
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
-function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-
- // nodejs library that concatenates classes
-
- // nodejs library to set properties for components
-
- // @material-ui/core components
-
- // @material-ui/icons
-// core components
-
-
-var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["makeStyles"])(_assets_jss_material_kit_react_components_cardHeaderStyle_js__WEBPACK_IMPORTED_MODULE_4__["default"]);
-function CardHeader(props) {
-  var _classNames;
-
-  var classes = useStyles();
-
-  var className = props.className,
-      children = props.children,
-      color = props.color,
-      plain = props.plain,
-      rest = _objectWithoutProperties(props, ["className", "children", "color", "plain"]);
-
-  var cardHeaderClasses = classnames__WEBPACK_IMPORTED_MODULE_1___default()((_classNames = {}, _defineProperty(_classNames, classes.cardHeader, true), _defineProperty(_classNames, classes[color + "CardHeader"], color), _defineProperty(_classNames, classes.cardHeaderPlain, plain), _defineProperty(_classNames, className, className !== undefined), _classNames));
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _extends({
-    className: cardHeaderClasses
-  }, rest), children);
-}
-CardHeader.propTypes = {
-  className: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
-  color: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOf(["warning", "success", "danger", "info", "primary"]),
-  plain: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
-  children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node
-};
-
-/***/ }),
-
-/***/ "./djsr/frontend/src/components/material_ui_components/Grid/GridContainer.js":
-/*!***********************************************************************************!*\
-  !*** ./djsr/frontend/src/components/material_ui_components/Grid/GridContainer.js ***!
-  \***********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GridContainer; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
-/* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/esm/Grid/index.js");
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
-function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-
- // nodejs library to set properties for components
-
- // @material-ui/core components
-
-
-
-var styles = {
-  grid: {
-    marginRight: "-15px",
-    marginLeft: "-15px",
-    width: "auto"
-  }
-};
-var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["makeStyles"])(styles);
-function GridContainer(props) {
-  var classes = useStyles();
-
-  var children = props.children,
-      className = props.className,
-      rest = _objectWithoutProperties(props, ["children", "className"]);
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({
-    container: true
-  }, rest, {
-    className: classes.grid + " " + className
-  }), children);
-}
-GridContainer.defaultProps = {
-  className: ""
-};
-GridContainer.propTypes = {
-  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
-  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
-};
-
-/***/ }),
-
-/***/ "./djsr/frontend/src/components/material_ui_components/Grid/GridItem.js":
-/*!******************************************************************************!*\
-  !*** ./djsr/frontend/src/components/material_ui_components/Grid/GridItem.js ***!
-  \******************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GridItem; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
-/* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/esm/Grid/index.js");
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
-function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-
- // nodejs library to set properties for components
-
- // @material-ui/core components
-
-
-
-var styles = {
-  grid: {
-    position: "relative",
-    width: "100%",
-    minHeight: "1px",
-    paddingRight: "15px",
-    paddingLeft: "15px",
-    flexBasis: "auto"
-  }
-};
-var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["makeStyles"])(styles);
-function GridItem(props) {
-  var classes = useStyles();
-
-  var children = props.children,
-      className = props.className,
-      rest = _objectWithoutProperties(props, ["children", "className"]);
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({
-    item: true
-  }, rest, {
-    className: classes.grid + " " + className
-  }), children);
-}
-GridItem.defaultProps = {
-  className: ""
-};
-GridItem.propTypes = {
-  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
-  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
-};
+exports.default = _default;
 
 /***/ })
 

@@ -44,7 +44,7 @@ class LatexToSvgView(APIView):
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request, *args, **kwargs):
-        print("latex", request.data['latex'])
+        # print("latex", request.data['latex'])
         latex = request.data['latex']
 
         # latex = kwargs.pop('latex')
@@ -97,7 +97,7 @@ class CustomUserCreate(APIView):
 
 class PasswordSendResetView(APIView):
     model = PasswordSendReset.objects.all()
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = PasswordSendResetSerializer
 
     def post(self, request):
@@ -133,7 +133,7 @@ class PasswordSendResetView(APIView):
 
 
 class PasswordResetView(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request, **kwargs):
         if True:
@@ -159,7 +159,7 @@ class PasswordResetView(APIView):
 
 
 class HelloWorldView(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get(self, request, *args, **kwargs):
         token = kwargs.pop('token')
@@ -193,7 +193,7 @@ class ReturnUserInfo(APIView):
 
 
 class LogoutAndBlacklistRefreshTokenForUserView(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     authentication_classes = ()
 
     def post(self, request, format='json'):
@@ -214,9 +214,9 @@ class UserRetrieveUpdateAPIView(APIView):
     def get(self, request, *args, **kwargs):
         # serializer to handle turning our `User` object into something that
         # can be JSONified and sent to the client.
-        serializer = self.serializer_class(request.user)
+        serializer = self.serializer_class(request.user).data
         connection.close()
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer, status=status.HTTP_200_OK)
 
     def put(self, request, *args, **kwargs):
         user = request.user
@@ -247,20 +247,20 @@ class UserRetrieveUpdateAPIView(APIView):
             pass
         user.save()
 
-        serializer = CustomUserSerializerReadOnly(user, many=False)
+        serializer = CustomUserSerializerReadOnly(user, many=False).data
         connection.close()
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer, status=status.HTTP_200_OK)
 
 
 class TaskViewSet(APIView):
 
     permission_classes = (IsAuthenticated,)
     serializer_class = TaskSerializer
-
     def post(self, request, format=None):
         author_id = CustomUser.objects.get(id=request.user.id)
         lista = []
         if request.data:
+            myTasks = int(request.data['myTasks'])
             id_string = request.data['skill']
             numberoftask = int(request.data['nroftasks'])
             try:
@@ -270,25 +270,42 @@ class TaskViewSet(APIView):
         else:
             id_string = None
         if id_string is not None:
-            for id in id_string.split(','):
-                task = Task.objects.filter(skill=id, private=False)
-                serializer = TaskSerializer(task, many=True)
-                lista.append(serializer.data)
-                taskprv = Task.objects.filter(skill=id, private=True, author=author_id)
-                serializerprv = TaskSerializer(taskprv, many=True)
-                lista.append(serializerprv.data)
-                a = math.ceil((len(list(chain(*lista))) / numberoftask))
-            if pag == 1:
-                connection.close()
-                return Response(data={"pages": str(a), "tasks": list(chain(*lista))[0:numberoftask]})
-            elif pag > 1:
-                connection.close()
-                return Response(data={"pages": str(a), "tasks": list(chain(*lista))[(
-                                                                                            pag * numberoftask) - numberoftask:pag * numberoftask]})
+            if myTasks == 0:
+                for id in id_string.split(','):
+                    task = Task.objects.filter(skill=id, private=False)
+                    serializer = TaskSerializer(task, many=True)
+                    lista.append(serializer.data)
+                    taskprv = Task.objects.filter(skill=id, private=True, author=author_id)
+                    serializerprv = TaskSerializer(taskprv, many=True)
+                    lista.append(serializerprv.data)
+                    a = math.ceil((len(list(chain(*lista))) / numberoftask))
+                if pag == 1:
+                    connection.close()
+                    return Response(data={"pages": str(a), "tasks": list(chain(*lista))[0:numberoftask]})
+                elif pag > 1:
+                    connection.close()
+                    return Response(data={"pages": str(a), "tasks": list(chain(*lista))[(
+                                                                                                pag * numberoftask) - numberoftask:pag * numberoftask]})
+            elif myTasks == 1:
+                for id in id_string.split(','):
+                    task = Task.objects.filter(skill=id,author=author_id)
+                    serializer = TaskSerializer(task, many=True)
+                    lista.append(serializer.data)
+                    a = math.ceil((len(list(chain(*lista))) / numberoftask))
+                if pag == 1:
+                    connection.close()
+                    return Response(data={"pages": str(a), "tasks": list(chain(*lista))[0:numberoftask]})
+                elif pag > 1:
+                    connection.close()
+                    return Response(data={"pages": str(a), "tasks": list(chain(*lista))[(
+                                                                                                pag * numberoftask) - numberoftask:pag * numberoftask]})
+
         else:
             task = Task.objects.all()
-            serializer = TaskSerializer(task, many=True)
-            return Response(serializer.data)
+            serializer = TaskSerializer(task, many=True).data
+            connection.close()
+            return Response(serializer)
+
 
 
 class GetRandomTasksViewSet(APIView):
@@ -296,7 +313,7 @@ class GetRandomTasksViewSet(APIView):
     serializer_class = TaskSerializer
 
     def post(self, request, format=None):
-        print("get auto tasks data", request.data)
+        # print("get auto tasks data", request.data)
         if request.data:
             try:
                 author_id = CustomUser.objects.get(id=request.user.id)
@@ -400,7 +417,7 @@ class GetRandomTasksViewSet(APIView):
                 connection.close()
                 return Response(listagr, status=status.HTTP_200_OK)
             except Exception as e:
-                print("mt er1")
+                # print("mt er1")
                 return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -411,7 +428,7 @@ class MakeTestViewSet(APIView):
     serializer_class = TaskSerializer
 
     def post(self, request, format=None):
-        print("make test rq data", request.data)
+        # print("make test rq data", request.data)
         if request.data:
             try:
                 nazwa = request.data['name']
@@ -430,16 +447,16 @@ class MakeTestViewSet(APIView):
                     connection.close()
                     return Response(serializer.data, status=status.HTTP_200_OK)
                 else:
-                    print("make test err 1")
+                    # print("make test err 1")
                     return Response(status=status.HTTP_400_BAD_REQUEST)
             except Exception as e:
-                print("mt er2")
+                # print("mt er2")
                 return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request):
-        print("MT put req data", request.data)
+        # print("MT put req data", request.data)
         if request.data:
             try:
                 id = request.data['id']
@@ -465,7 +482,7 @@ class MakeTestViewSet(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, format=None):
-        print("MT delete req data", request.data)
+        # print("MT delete req data", request.data)
         if request.data:
             try:
                 id = request.data['id']
@@ -486,7 +503,7 @@ class DeleteTestViewSet(APIView):
     serializer_class = TaskSerializer
 
     def post(self, request, format=None):
-        print("MT delete req data", request.data)
+        # print("MT delete req data", request.data)
         if request.data:
             try:
                 id = request.data['id']
@@ -507,7 +524,7 @@ class DeleteTestViewSet(APIView):
     serializer_class = TaskSerializer
 
     def post(self, request, format=None):
-        print("MT delete req data", request.data)
+        # print("MT delete req data", request.data)
         if request.data:
             try:
                 id = request.data['id']
@@ -571,9 +588,9 @@ class SkilltoSections(APIView):
             s.skilll.set(skil)
             s.save()
         seco = Sectionv2.objects.all()
-        seria = SectionSerializerv2(seco, many=True)
+        seria = SectionSerializerv2(seco, many=True).data
         connection.close()
-        return Response(seria.data)
+        return Response(seria)
 
 
 class SkilltoSectionsAutoGene(APIView):
@@ -646,11 +663,10 @@ class GetSkillsFromfile(APIView):
             if level == 1:
                 pods = list(SecAndSkillhelp.objects.filter(id=1).values())[0]
                 tasks = json.loads(pods['text'])
-                connection.close()
             if level == 2:
                 pods = list(SecAndSkillhelp.objects.filter(id=2).values())[0]
                 tasks = json.loads(pods['text'])
-                connection.close()
+            connection.close()
             return Response(tasks)
 
 def aktDB(self, level):
@@ -720,7 +736,10 @@ class AddTask(APIView):
             corrans = request.data['correct_answers']
             skills = request.data['skills_id']
             text = request.data['text']
-            file = request.data['file']
+            try:
+                file = request.data['file']
+            except:
+                pass
             user = CustomUser.objects.get(id=request.user.id)
             if not Task.objects.filter(text=text).exists():
                 my_task = Task.objects.create(text=text,
@@ -734,25 +753,28 @@ class AddTask(APIView):
                 for skillid in skills.split(','):
                     skil = Skill.objects.filter(id=skillid)
                     my_task.skill.set(skil)
-                if not Image.objects.filter(name="", image=file, user_id=user.id).exists():
-                    image = Image.objects.create(name="", image=file, user_id=user.id)
-                    image.save()
-                    # imag = Image.objects.filter(name="", image=file, user_id=user.id)
-                    image_data = open("media/" + str(image.image), "rb").read()
-                    cos = bytes(image_data)
-                    img = ImageDB.objects.create(image=cos)
-                    img.save()
-                    image.name = str(img.id)
-                    image.save()
-                    img = Image.objects.filter(name=str(img.id))
-                    my_task.image.set(img)
+                try:
+                    if not Image.objects.filter(name="", image=file, user_id=user.id).exists():
+                        image = Image.objects.create(name="", image=file, user_id=user.id)
+                        image.save()
+                        # imag = Image.objects.filter(name="", image=file, user_id=user.id)
+                        image_data = open("media/" + str(image.image), "rb").read()
+                        cos = bytes(image_data)
+                        img = ImageDB.objects.create(image=cos)
+                        img.save()
+                        image.name = str(img.id)
+                        image.save()
+                        img = Image.objects.filter(name=str(img.id))
+                        my_task.image.set(img)
+                except:
+                    pass
                 my_task.save()
                 task = Task.objects.filter(text=text)
-                serializer = TaskSerializer(task, many=True)
+                serializer = TaskSerializer(task, many=True).data
                 # aktDB(1)
                 # aktDB(2)
                 connection.close()
-                return Response(serializer.data, status=status.HTTP_200_OK)
+                return Response(serializer, status=status.HTTP_200_OK)
             # except Exception as e:
             #     my_task.delete()
             #     return Response(data={"error": str(e)}, status=status.HTTP_402_PAYMENT_REQUIRED)
@@ -761,7 +783,7 @@ class AddTask(APIView):
 
 
 class AddSection(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Section.objects.all()
     serializer_class = SectionSerializer
 
@@ -773,8 +795,8 @@ class AddSection(APIView):
                     sect = Section.objects.create(Section=section)
                     sect.save()
                     sec = Section.objects.filter(Section=section)
-                    serializer = SectionSerializer(sec, many=True)
-                    return Response(serializer.data, status=status.HTTP_200_OK)
+                    serializer = SectionSerializer(sec, many=True).data
+                    return Response(serializer, status=status.HTTP_200_OK)
             except Exception as e:
                 return Response(data={"error": str(e)}, status=status.HTTP_403_FORBIDDEN)
         else:
@@ -782,7 +804,7 @@ class AddSection(APIView):
 
 
 class AddSkill(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Skill.objects.all()
     serializer_class = SkillSerializer
 
@@ -805,7 +827,7 @@ class AddSkill(APIView):
 
 
 class AddAnswers(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Answers.objects.all()
     serializer_class = AnswersSerializer
 
@@ -827,15 +849,15 @@ class AddAnswers(APIView):
 
 
 class SectionViewSet(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Section.objects.all()
     serializer_class = SectionSerializer
 
     def get(self, request, format=None):
         dzial = Section.objects.all()
-        serializer = SectionSerializer(dzial, many=True)
+        serializer = SectionSerializer(dzial, many=True).data
         connection.close()
-        return Response(serializer.data)
+        return Response(serializer)
 
 
 class AllTestsJSONViewSet(APIView):
@@ -845,8 +867,9 @@ class AllTestsJSONViewSet(APIView):
     def get(self, request, format=None):
         tests = TestJSON.objects.filter(user_id=request.user.id).order_by('-created')
         serializer = TestJSONSerializer(tests, many=True)
+        seria = serializer.data
         connection.close()
-        return Response(serializer.data)
+        return Response(seria)
 
 
 class OneTestJSONViewSet(APIView):
@@ -856,25 +879,25 @@ class OneTestJSONViewSet(APIView):
     def get(self, request, *args, **kwargs):
         id = kwargs.pop('id')
         test = TestJSON.objects.filter(id=id, user_id=request.user.id)
-        serializer = TestJSONSerializer(test, many=True)
+        serializer = TestJSONSerializer(test, many=True).data
         connection.close()
-        return Response(serializer.data)
+        return Response(serializer)
 
 
 class SkillViewSet(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Skill.objects.all()
     serializer_class = SkillSerializer
 
     def get(self, request, format=None):
         skill = Skill.objects.all()
-        serializer = SkillSerializer(skill, many=True)
+        serializer = SkillSerializer(skill, many=True).data
         connection.close()
-        return Response(serializer.data)
+        return Response(serializer)
 
 
 class ImageViewSet(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Skill.objects.all()
     serializer_class = SkillSerializer
 
@@ -940,7 +963,7 @@ class AddImageToTaskViewSet(APIView):
 
 
 class TestTasksiewSet(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = TestJSONSerializer
 
     def get(self, request, *args, **kwargs):
@@ -954,7 +977,7 @@ class TestTasksiewSet(APIView):
 
 
 class TestAnswersviewSet(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = TestJSONSerializer
 
     def get(self, request, *args, **kwargs):
@@ -967,7 +990,7 @@ class TestAnswersviewSet(APIView):
         return HttpResponse(pdf, content_type="application/pdf")
 
 class TestKeyAnswersviewSet(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = TestJSONSerializer
 
     def get(self, request, *args, **kwargs):

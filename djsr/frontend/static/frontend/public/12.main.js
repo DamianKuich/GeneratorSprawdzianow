@@ -1,91 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[12],{
 
-/***/ "./djsr/frontend/src/components/AutoGeneTaskParser.js":
-/*!************************************************************!*\
-  !*** ./djsr/frontend/src/components/AutoGeneTaskParser.js ***!
-  \************************************************************/
-/*! exports provided: taskParser, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "taskParser", function() { return taskParser; });
-function shuffle(array) {
-  var currentIndex = array.length,
-      temporaryValue,
-      randomIndex; // While there remain elements to shuffle...
-
-  while (0 !== currentIndex) {
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1; // And swap it with the current element.
-
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-
-  return array;
-}
-
-var taskParser = function taskParser(task) {
-  console.log("taskparser", task);
-  var newTask = JSON.parse(JSON.stringify(task)); // console.log("taskparser parsed", newTask)
-  // let draggedItem
-
-  newTask.answers = {};
-  newTask.correctans = JSON.parse(newTask.correctans.replace(/'/g, '"'));
-  newTask.wronganswers = JSON.parse(newTask.wronganswers.replace(/'/g, '"'));
-  newTask.answers = {
-    correctans: newTask.correctans,
-    wronganswers: newTask.wronganswers
-  };
-
-  if (task.type == "2") {
-    var indexesTab = [{
-      "index": 1,
-      "isCorrect": false
-    }, {
-      "index": 0,
-      "isCorrect": true
-    }, {
-      "index": 2,
-      "isCorrect": false
-    }, {
-      "index": 0,
-      "isCorrect": false
-    }];
-    var shuffledIndexesTab = shuffle(indexesTab);
-    newTask.currentAnswers = {
-      correctans: newTask.correctans,
-      wronganswers: newTask.wronganswers,
-      answersIndexes: shuffledIndexesTab
-    };
-  } else if (task.type == "1") {
-    newTask.currentAnswers = {
-      correctans: newTask.correctans,
-      wronganswers: newTask.wronganswers,
-      answersIndexes: [{}]
-    };
-  }
-
-  newTask.maxPoints = JSON.parse(newTask.points);
-  console.log("taskparser nn", newTask);
-  return newTask;
-};
-
-var tasksParser = function tasksParser(tasks) {
-  return tasks.map(taskParser);
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (tasksParser);
-
-/***/ }),
-
-/***/ "./djsr/frontend/src/components/MaterialUiFenerator.js":
-/*!*************************************************************!*\
-  !*** ./djsr/frontend/src/components/MaterialUiFenerator.js ***!
-  \*************************************************************/
+/***/ "./djsr/frontend/src/components/MaterialUiPasswordReset.js":
+/*!*****************************************************************!*\
+  !*** ./djsr/frontend/src/components/MaterialUiPasswordReset.js ***!
+  \*****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -122,10 +40,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./MaterialFormikField */ "./djsr/frontend/src/components/MaterialFormikField.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_25___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_25__);
-/* harmony import */ var _AutoGeneTaskParser__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./AutoGeneTaskParser */ "./djsr/frontend/src/components/AutoGeneTaskParser.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @material-ui/core/MenuItem */ "./node_modules/@material-ui/core/esm/MenuItem/index.js");
-/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @material-ui/core/Select */ "./node_modules/@material-ui/core/esm/Select/index.js");
 var _this = undefined;
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -168,13 +82,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
-
-
-
 var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])(_assets_jss_material_kit_react_views_loginPage_js__WEBPACK_IMPORTED_MODULE_19__["default"]);
 
-var Fenerator = function Fenerator(props) {
+var MaterialUiPasswordReset = function MaterialUiPasswordReset(props) {
   var FRS = "Pole wymagane";
   var user = props.appState.user;
 
@@ -183,19 +93,13 @@ var Fenerator = function Fenerator(props) {
       editView = _React$useState2[0],
       setEditView = _React$useState2[1];
 
-  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(null),
-      _React$useState4 = _slicedToArray(_React$useState3, 2),
-      parsedTasks = _React$useState4[0],
-      setParsedTasks = _React$useState4[1];
-
-  var strongToken = Object(react_router__WEBPACK_IMPORTED_MODULE_18__["useParams"])().id;
+  var strongToken = Object(react_router__WEBPACK_IMPORTED_MODULE_18__["useParams"])().token;
   console.log(strongToken);
-  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_27__["useHistory"])();
 
-  var _React$useState5 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState("cardHidden"),
-      _React$useState6 = _slicedToArray(_React$useState5, 2),
-      cardAnimaton = _React$useState6[0],
-      setCardAnimation = _React$useState6[1];
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState("cardHidden"),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      cardAnimaton = _React$useState4[0],
+      setCardAnimation = _React$useState4[1];
 
   setTimeout(function () {
     setCardAnimation("");
@@ -223,37 +127,26 @@ var Fenerator = function Fenerator(props) {
     className: classes[cardAnimaton]
   }, editView == "password" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Formik"], {
     initialValues: {
-      ileotw: "0",
-      ilezamk: "0",
-      level: "0",
-      skills: "0",
-      groups: "0"
+      password: "",
+      passwordConfirm: ""
     },
     validationSchema: yup__WEBPACK_IMPORTED_MODULE_21__["object"]().shape({
-      ileotw: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().required("Pole wymagane"),
-      ilezamk: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().required("Pole wymagane"),
-      level: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().required("Pole wymagane"),
-      skills: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().required("Pole wymagane"),
-      groups: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().required("Pole wymagane")
+      password: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().min(8, "Too Short!").max(50, "Too Long!").required("Pole wymagane").oneOf([yup__WEBPACK_IMPORTED_MODULE_21__["ref"]("passwordConfirm")], "Hasła są różne"),
+      passwordConfirm: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().oneOf([yup__WEBPACK_IMPORTED_MODULE_21__["ref"]("password")], "Hasła są różne").required("Pole wymagane")
     }),
     onSubmit: function onSubmit(values, helpers) {
       setTimeout(function () {
         helpers.setSubmitting(true);
-        _axiosAPI__WEBPACK_IMPORTED_MODULE_22__["default"].post("/user/getrandomtasks/", {
-          ileotw: values.ileotw,
-          ilezamk: values.ilezamk,
-          level: values.level,
-          skills: values.skills,
-          groups: values.groups
+        _axiosAPI__WEBPACK_IMPORTED_MODULE_22__["axiosInstanceNoAuth"].post("/user/passreset/".concat(strongToken, "/$"), {
+          password: values.password
         }).then(function (response) {
-          var randomtasks = JSON.stringify(Object(_AutoGeneTaskParser__WEBPACK_IMPORTED_MODULE_26__["default"])(response.data));
-          console.log(randomtasks);
-          console.log(strongToken);
-          _axiosAPI__WEBPACK_IMPORTED_MODULE_22__["default"].put("/user/maketest/", {
-            id: strongToken,
-            tasks: randomtasks
-          }).then(function (response) {
-            history.push("/editor/".concat(strongToken));
+          _this.props.setUser(response.data);
+
+          helpers.setStatus("Pomyslnie zmieniono hasło");
+          helpers.setSubmitting(false);
+
+          _this.setState({
+            locked: false
           });
         })["catch"](function (error) {
           helpers.setStatus("Podano nieprawidłowe aktualne hasło");
@@ -266,20 +159,16 @@ var Fenerator = function Fenerator(props) {
           });
 
           helpers.setValues({
-            ileotw: "",
-            ilezamk: "",
-            level: "",
-            skills: ""
+            password: "",
+            passwordConfirm: ""
           }, false);
           helpers.setTouched({
-            ileotw: false,
-            ilezamk: false,
-            level: false,
-            skills: false
+            password: false,
+            passwordConfirm: false
           }, false);
           helpers.setFieldError("oldPassword", "Podano nieprawidłowe stare hasło");
         });
-      }, 5000);
+      }, 400);
     }
   }, function (_ref) {
     var values = _ref.values,
@@ -294,66 +183,33 @@ var Fenerator = function Fenerator(props) {
     }, console.log(touched, errors), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_15__["default"], {
       color: "primary",
       className: classes.cardHeader
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Wygeneruj sprawdzian XD")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardBody_js__WEBPACK_IMPORTED_MODULE_14__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Wprowad\u017A nowe has\u0142o")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardBody_js__WEBPACK_IMPORTED_MODULE_14__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
       component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__["default"],
-      name: "ileotw",
+      name: "password",
       formControlProps: {
         fullWidth: true
       },
-      labelText: "Ilo\u015B\u0107 zada\u0144 otwartych",
+      labelText: "Has\u0142o",
       inputProps: {
         endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
           position: "end"
-        })
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5___default.a, {
+          className: classes.inputIconsColor
+        }))
       }
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
       component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__["default"],
-      name: "ilezamk",
+      name: "passwordConfirm",
       formControlProps: {
         fullWidth: true
       },
-      labelText: "Ilo\u015B\u0107 zada\u0144 zamkni\u0119tych",
+      labelText: "Powt\xF3rz has\u0142o",
       inputProps: {
         endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
           position: "end"
-        })
-      }
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
-      as: "select",
-      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__["default"],
-      name: "level",
-      formControlProps: {
-        fullWidth: true
-      },
-      labelText: "poziom trudno\u015Bci",
-      inputProps: {
-        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          position: "end"
-        })
-      }
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
-      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__["default"],
-      name: "skills",
-      formControlProps: {
-        fullWidth: true
-      },
-      labelText: "Umiej\u0119tno\u015Bci",
-      inputProps: {
-        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          position: "end"
-        })
-      }
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
-      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__["default"],
-      name: "groups",
-      formControlProps: {
-        fullWidth: true
-      },
-      labelText: "GRUPY KATOLICKIE JANA PAW\u0141A 2",
-      inputProps: {
-        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          position: "end"
-        })
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5___default.a, {
+          className: classes.inputIconsColor
+        }))
       }
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardFooter_js__WEBPACK_IMPORTED_MODULE_16__["default"], {
       className: classes.cardFooter
@@ -364,11 +220,11 @@ var Fenerator = function Fenerator(props) {
       onClick: function onClick() {
         handleSubmit();
       }
-    }, "Wygeneruj sprawdzian")));
+    }, "Zmie\u0144 has\u0142o")));
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null)))))));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Fenerator);
+/* harmony default export */ __webpack_exports__["default"] = (MaterialUiPasswordReset);
 
 /***/ }),
 

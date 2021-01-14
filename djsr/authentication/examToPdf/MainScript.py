@@ -6,6 +6,7 @@ import requests
 from yattag import Doc
 import base64
 from urllib.parse import quote
+from django.db import connection
 
 
 def katexparser(text):
@@ -32,8 +33,11 @@ def collectTaskAnswers(answers):
     answerIndexes = answers['answersIndexes']
     result = []
     for answer in answerIndexes:
-        source = correctAns if answer['isCorrect'] else wrongAns
-        result.append(katexparser(source[answer['index']]))
+        try:
+            source = correctAns if answer['isCorrect'] else wrongAns
+            result.append(katexparser(source[answer['index']]))
+        except:
+            pass
     return result
 
 def collectTaskImages(image):
@@ -46,6 +50,7 @@ def collectTaskImages(image):
             data = data[0]
             image_data = base64.b64encode(data['image']).decode('utf-8')
             ids.append(image_data)
+        connection.close()
         # ids.append(image_layout)
         return ids
     except:
@@ -65,7 +70,10 @@ def taskPrintDataParser(task):
     task['answers'] = collectTaskAnswers(task['currentAnswers'])
     task['obrazki'] = collectTaskImages(task['currentAnswers'])
     task['layout'] = collectImageLayout(task['currentAnswers'])
-    # task['spacetosolve'] = task['currentAnswers']['spacetosolve']
+    try:
+        task['spaceToSolve'] = task['currentAnswers']['spaceToSolve']
+    except:
+        pass
     # task['timetosolve'] = task['currentAnswers']['timetosolve']
     return task
 
@@ -86,7 +94,6 @@ def generatePdf(tasks, name="Sprawdzian"):
             # renderowanie taskow
             for task in tasks:
                 with tag('div'):
-                    print('TASK', task)
                     # renderowanie tekstu zadania
                     with tag('p'):
                         for part in task['text']:
