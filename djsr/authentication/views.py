@@ -97,7 +97,7 @@ class CustomUserCreate(APIView):
 
 class PasswordSendResetView(APIView):
     model = PasswordSendReset.objects.all()
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
     serializer_class = PasswordSendResetSerializer
 
     def post(self, request):
@@ -133,7 +133,7 @@ class PasswordSendResetView(APIView):
 
 
 class PasswordResetView(APIView):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
 
     def post(self, request, **kwargs):
         if True:
@@ -159,7 +159,7 @@ class PasswordResetView(APIView):
 
 
 class HelloWorldView(APIView):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
 
     def get(self, request, *args, **kwargs):
         token = kwargs.pop('token')
@@ -193,7 +193,7 @@ class ReturnUserInfo(APIView):
 
 
 class LogoutAndBlacklistRefreshTokenForUserView(APIView):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
     authentication_classes = ()
 
     def post(self, request, format='json'):
@@ -669,7 +669,7 @@ class GetSkillsFromfile(APIView):
             connection.close()
             return Response(tasks)
 
-def aktDB(self, level):
+def aktDB(level):
     level = level
     list = []
     for section in Section.objects.only("Section").iterator():
@@ -708,52 +708,156 @@ def aktDB(self, level):
         x['sectionTaskCount'] = sum
         list.append(x)
     if level == 1:
-        if not SecAndSkillhelp.objects.filter(id=1).exists():
-            pods = SecAndSkillhelp.objects.create(id=1, text=json.dumps(list))
-            pods.save()
+        if SecAndSkillhelp.objects.filter(id=1).exists():
+            pods2 = SecAndSkillhelp.objects.get(id=1)
+            pods2.text = json.dumps(list)
+            pods2.save()
         else:
-            pods = SecAndSkillhelp.objects.create(id=1)
-            pods.text = json.dumps(list)
+            pods1 = SecAndSkillhelp.objects.create(id=1, text=json.dumps(list))
+            pods1.save()
     elif level == 2:
-        if not SecAndSkillhelp.objects.filter(id=2).exists():
-            pods = SecAndSkillhelp.objects.create(id=2, text=json.dumps(list))
-            pods.save()
+        if SecAndSkillhelp.objects.filter(id=2).exists():
+            pods4 = SecAndSkillhelp.objects.get(id=2)
+            pods4.text = json.dumps(list)
+            pods4.save()
         else:
-            pods = SecAndSkillhelp.objects.create(id=2)
-            pods.text = json.dumps(list)
+            pods3 = SecAndSkillhelp.objects.create(id=2, text=json.dumps(list))
+            pods3.save()
+
     connection.close()
+
 
 
 class AddTask(APIView):
     permission_classes = (IsAuthenticated,)
-    queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
     def post(self, request, format=None):
         if request.data:
-            # try:
-            wrongans = request.data['wrong_answers']
-            corrans = request.data['correct_answers']
-            skills = request.data['skills_id']
-            text = request.data['text']
+            try:
+                listwr = []
+                listcr = []
+                wrongans = request.data['wrong_answers']
+                for x in wrongans.split(';'):
+                    listwr.append(str(x.replace(',',';')))
+                corrans = request.data['correct_answers']
+                for y in corrans.split(';'):
+                    listcr.append(str(y.replace(',',';')))
+                skills = request.data['skills_id']
+                text = request.data['text']
+                try:
+                    file = request.data['file']
+                except:
+                    file = None
+                user = CustomUser.objects.get(id=request.user.id)
+                if not Task.objects.filter(text=text).exists():
+                    my_task = Task.objects.create(text=text,
+                                                  wronganswers=listwr,
+                                                  correctans=listcr,
+                                                  type=int(request.data['type']),
+                                                  level=int(request.data['level']),
+                                                  private=int(request.data['private']),
+                                                  points=int(request.data['points']),
+                                                  author=user)
+                    for skillid in skills.split(','):
+                        skil = Skill.objects.filter(id=skillid)
+                        my_task.skill.set(skil)
+                    if file!=None:
+                        if not Image.objects.filter(name="", image=file, user_id=user.id).exists():
+                            image = Image.objects.create(name="", image=file, user_id=user.id)
+                            image.save()
+                            # imag = Image.objects.filter(name="", image=file, user_id=user.id)
+                            image_data = open("media/" + str(image.image), "rb").read()
+                            cos = bytes(image_data)
+                            img = ImageDB.objects.create(image=cos)
+                            img.save()
+                            image.name = str(img.id)
+                            image.save()
+                            img = Image.objects.filter(name=str(img.id))
+                            my_task.image.set(img)
+                    my_task.save()
+                    task = Task.objects.filter(text=text)
+                    serializer = TaskSerializer(task, many=True).data
+                    lev = 1
+                    aktDB(lev)
+                    lev = 2
+                    aktDB(lev)
+                    connection.close()
+                    return Response(serializer, status=status.HTTP_200_OK)
+            except Exception as e:
+                return Response(data={"error": str(e)}, status=status.HTTP_402_PAYMENT_REQUIRED)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, format=None):
+        if request.data:
+            try:
+                wrongans = request.data['wrong_answers']
+                listwr = []
+                for x in wrongans.split(';'):
+                    listwr.append(x.replace(',',';'))
+
+            except:
+                wrongans = None
+            try:
+                corrans = request.data['correct_answers']
+                listcr = []
+                for y in corrans.split(';'):
+                    listcr.append(y.replace(',',';'))
+            except:
+                corrans = None
+            try:
+                skills = request.data['skills_id']
+            except:
+                skills = None
+            try:
+                text = request.data['text']
+            except:
+                text = None
+            try:
+                typ = int(request.data['type'])
+            except:
+                typ = None
+            try:
+                level = int(request.data['level'])
+            except:
+                level = None
+            try:
+                priv = int(request.data['private'])
+            except:
+                priv = None
+            try:
+                pkt = int(request.data['points'])
+            except:
+                pkt = None
+            id = request.data['id']
+
             try:
                 file = request.data['file']
             except:
-                pass
+                file = None
             user = CustomUser.objects.get(id=request.user.id)
-            if not Task.objects.filter(text=text).exists():
-                my_task = Task.objects.create(text=text,
-                                              wronganswers=wrongans,
-                                              correctans=corrans,
-                                              type=int(request.data['type']),
-                                              level=int(request.data['level']),
-                                              private=int(request.data['private']),
-                                              points=int(request.data['points']),
-                                              author=user)
-                for skillid in skills.split(','):
-                    skil = Skill.objects.filter(id=skillid)
-                    my_task.skill.set(skil)
-                try:
+            if Task.objects.filter(id = id).exists():
+                my_task = Task.objects.get(id = id)
+                if text!=None:
+                    if Task.objects.filter(text = text).exists():
+                        pom = Task.objects.filter(text = text).id
+                        if pom == id:
+                            return Response(data={"error": "Zadanie o podanej treści już istnieje!"},status=status.HTTP_400_BAD_REQUEST)
+                        else:
+                            my_task.text = text
+                if wrongans!=None: my_task.wronganswers = listwr
+                if corrans!=None: my_task.correctans = listcr
+                if typ!=None: my_task.type = typ
+                if level!=None: my_task.level = level
+                if priv!=None:my_task.private = priv
+                if pkt!=None: my_task.points = pkt
+                my_task.author = user
+                if skills!=None:
+                    for skillid in skills.split(','):
+                        skil = Skill.objects.filter(id=skillid)
+                        my_task.skill.set(skil)
+                if file!=None:
                     if not Image.objects.filter(name="", image=file, user_id=user.id).exists():
                         image = Image.objects.create(name="", image=file, user_id=user.id)
                         image.save()
@@ -766,18 +870,13 @@ class AddTask(APIView):
                         image.save()
                         img = Image.objects.filter(name=str(img.id))
                         my_task.image.set(img)
-                except:
-                    pass
                 my_task.save()
                 task = Task.objects.filter(text=text)
                 serializer = TaskSerializer(task, many=True).data
-                # aktDB(1)
-                # aktDB(2)
+                aktDB(1)
+                aktDB(2)
                 connection.close()
                 return Response(serializer, status=status.HTTP_200_OK)
-            # except Exception as e:
-            #     my_task.delete()
-            #     return Response(data={"error": str(e)}, status=status.HTTP_402_PAYMENT_REQUIRED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -1002,13 +1101,4 @@ class TestKeyAnswersviewSet(APIView):
         connection.close()
         return HttpResponse(pdf, content_type="application/pdf")
 
-class RetDB(APIView):
-
-    permission_classes = (permissions.AllowAny,)
-    serializer_class = TaskSerializer
-
-    def get(self, request, format=None):
-        task = Task.objects.all()
-        serializer = TaskSerializer(task, many=True)
-        return Response(serializer.data)
 
