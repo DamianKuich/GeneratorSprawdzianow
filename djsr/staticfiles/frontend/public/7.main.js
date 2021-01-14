@@ -3531,6 +3531,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./material_ui_components/CustomButtons/Button */ "./djsr/frontend/src/components/material_ui_components/CustomButtons/Button.js");
 /* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/esm/Box/index.js");
 /* harmony import */ var _LoadingScreen__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./LoadingScreen */ "./djsr/frontend/src/components/LoadingScreen.js");
+/* harmony import */ var notistack__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! notistack */ "./node_modules/notistack/dist/notistack.esm.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -3585,6 +3586,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
  //todo po skasowaniu tresci zadania "zapomina" zdjecie
 //todo zajrzec do draganddropahndlera
 
@@ -3614,7 +3616,16 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
           state.exam = response.data[0];
 
           if (state.exam.tasks.length > 0) {
-            state.exam.tasks = JSON.parse(state.exam.tasks || []);
+            state.exam.tasks = JSON.parse(state.exam.tasks || []); // let tasks = JSON.parse(state.exam.tasks || []);
+            // const {pages}=tasks.pop()
+            // state.exam.tasks=tasks;
+            // state.exam.pages=pages||[];
+            // if (!tasks[tasks.length].text) {
+            //   const { pages } = tasks.pop();
+            //   state.exam.tasks = tasks;
+            //   state.exam.pages = pages || [];
+            // }
+            // state.exam.tasks = tasks;
           } else {
             state.exam.tasks = [];
           }
@@ -3635,7 +3646,20 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "updateStateAndSaveExam", function (stateUpdater) {
       _this.setState(function (state) {
         state = stateUpdater(state);
-        state.timeout = _this.resetTimeout(_this.state.timeout, setTimeout(_this.saveExam, 3000));
+        state.timeout = _this.resetTimeout(_this.state.timeout, setTimeout(_this.saveExam, 3000)); // state.savingSnackKey =
+        //   state.savingSnackKey ||
+        //   this.props.enqueueSnackbar("Zapisywanie sprawdzianu", {
+        //     persist: true,
+        //   });
+
+        if (!state.savingSnackKey) {
+          _this.props.closeSnackbar();
+
+          state.savingSnackKey = _this.props.enqueueSnackbar("Zapisywanie sprawdzianu", {
+            persist: true
+          });
+        }
+
         state.saved = false;
         return state;
       });
@@ -3702,8 +3726,15 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
         id: _this.state.exam.id,
         tasks: JSON.stringify(_this.state.exam.tasks)
       }).then(function (response) {
+        _this.props.closeSnackbar(_this.state.savingSnackKey);
+
+        _this.props.enqueueSnackbar("Zapisano sprawdzian.", {
+          variant: "success"
+        });
+
         _this.setState({
-          saved: true
+          saved: true,
+          savingSnackKey: null
         });
       });
     });
@@ -4074,7 +4105,7 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_12__["default"], {
         color: "primary",
         onClick: function onClick() {
-          window.open("".concat(window.location.origin, "/api/user/testpdf/") + _this2.state.exam.id, "_blank");
+          _this2.props.enqueueSnackbar("Successfully fetched the data.");
         }
       }, "Sprawdzian"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_12__["default"], {
         color: "primary",
@@ -4099,7 +4130,7 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]); // ExamEditor.propTypes = {};
 
 
-/* harmony default export */ __webpack_exports__["default"] = (ExamEditor);
+/* harmony default export */ __webpack_exports__["default"] = (Object(notistack__WEBPACK_IMPORTED_MODULE_15__["withSnackbar"])(ExamEditor));
 
 /***/ }),
 
