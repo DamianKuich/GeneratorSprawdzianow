@@ -770,7 +770,10 @@ class AddTask(APIView):
             corrans = request.data['correct_answers']
             skills = request.data['skills_id']
             text = request.data['text']
-            file = request.data['file']
+            try:
+                file = request.data['file']
+            except:
+                pass
             user = CustomUser.objects.get(id=request.user.id)
             if not Task.objects.filter(text=text).exists():
                 my_task = Task.objects.create(text=text,
@@ -784,18 +787,21 @@ class AddTask(APIView):
                 for skillid in skills.split(','):
                     skil = Skill.objects.filter(id=skillid)
                     my_task.skill.set(skil)
-                if not Image.objects.filter(name="", image=file, user_id=user.id).exists():
-                    image = Image.objects.create(name="", image=file, user_id=user.id)
-                    image.save()
-                    # imag = Image.objects.filter(name="", image=file, user_id=user.id)
-                    image_data = open("media/" + str(image.image), "rb").read()
-                    cos = bytes(image_data)
-                    img = ImageDB.objects.create(image=cos)
-                    img.save()
-                    image.name = str(img.id)
-                    image.save()
-                    img = Image.objects.filter(name=str(img.id))
-                    my_task.image.set(img)
+                try:
+                    if not Image.objects.filter(name="", image=file, user_id=user.id).exists():
+                        image = Image.objects.create(name="", image=file, user_id=user.id)
+                        image.save()
+                        # imag = Image.objects.filter(name="", image=file, user_id=user.id)
+                        image_data = open("media/" + str(image.image), "rb").read()
+                        cos = bytes(image_data)
+                        img = ImageDB.objects.create(image=cos)
+                        img.save()
+                        image.name = str(img.id)
+                        image.save()
+                        img = Image.objects.filter(name=str(img.id))
+                        my_task.image.set(img)
+                except:
+                    pass
                 my_task.save()
                 task = Task.objects.filter(text=text)
                 serializer = TaskSerializer(task, many=True).data
