@@ -16,6 +16,7 @@ import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import EditTaskImages from "./EditTaskImages";
 import EditTaskAnswerSpace from "./EditTaskAnswerSpace";
+import AuthImage from "./AuthImage";
 
 const TaskWithOverlay = (props) => {
   const {
@@ -149,8 +150,17 @@ const TaskWithOverlay = (props) => {
                                       // xl={1}
                                       // lg={1}
                                     >
-                                      <img
-                                        src={`${window.location.origin}/api/user/image/${image}`}
+                                      {/*<img*/}
+                                      {/*  src={`${window.location.origin}/api/user/image/${image}`}*/}
+                                      {/*  style={{*/}
+                                      {/*    maxHeight: "5cm",*/}
+                                      {/*    maxWidth: "100%",*/}
+                                      {/*    margin: "0 auto",*/}
+                                      {/*    display: "block",*/}
+                                      {/*  }}*/}
+                                      {/*/>*/}
+                                      <AuthImage
+                                        src={image}
                                         style={{
                                           maxHeight: "5cm",
                                           maxWidth: "100%",
