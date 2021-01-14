@@ -48,6 +48,16 @@ class ExamEditor extends Component {
         state.exam = response.data[0];
         if (state.exam.tasks.length > 0) {
           state.exam.tasks = JSON.parse(state.exam.tasks || []);
+          // let tasks = JSON.parse(state.exam.tasks || []);
+          // const {pages}=tasks.pop()
+          // state.exam.tasks=tasks;
+          // state.exam.pages=pages||[];
+          // if (!tasks[tasks.length].text) {
+          //   const { pages } = tasks.pop();
+          //   state.exam.tasks = tasks;
+          //   state.exam.pages = pages || [];
+          // }
+          // state.exam.tasks = tasks;
         } else {
           state.exam.tasks = [];
         }
