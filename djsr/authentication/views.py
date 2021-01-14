@@ -97,7 +97,7 @@ class CustomUserCreate(APIView):
 
 class PasswordSendResetView(APIView):
     model = PasswordSendReset.objects.all()
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = PasswordSendResetSerializer
 
     def post(self, request):
@@ -133,7 +133,7 @@ class PasswordSendResetView(APIView):
 
 
 class PasswordResetView(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request, **kwargs):
         if True:
@@ -159,7 +159,7 @@ class PasswordResetView(APIView):
 
 
 class HelloWorldView(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get(self, request, *args, **kwargs):
         token = kwargs.pop('token')
@@ -193,7 +193,7 @@ class ReturnUserInfo(APIView):
 
 
 class LogoutAndBlacklistRefreshTokenForUserView(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     authentication_classes = ()
 
     def post(self, request, format='json'):
