@@ -288,6 +288,7 @@ class TaskViewSet(APIView):
         else:
             task = Task.objects.all()
             serializer = TaskSerializer(task, many=True)
+            connection.close()
             return Response(serializer.data)
 
 
@@ -571,9 +572,9 @@ class SkilltoSections(APIView):
             s.skilll.set(skil)
             s.save()
         seco = Sectionv2.objects.all()
-        seria = SectionSerializerv2(seco, many=True)
+        seria = SectionSerializerv2(seco, many=True).data
         connection.close()
-        return Response(seria.data)
+        return Response(seria)
 
 
 class SkilltoSectionsAutoGene(APIView):
@@ -646,11 +647,10 @@ class GetSkillsFromfile(APIView):
             if level == 1:
                 pods = list(SecAndSkillhelp.objects.filter(id=1).values())[0]
                 tasks = json.loads(pods['text'])
-                connection.close()
             if level == 2:
                 pods = list(SecAndSkillhelp.objects.filter(id=2).values())[0]
                 tasks = json.loads(pods['text'])
-                connection.close()
+            connection.close()
             return Response(tasks)
 
 def aktDB(self, level):
@@ -748,11 +748,11 @@ class AddTask(APIView):
                     my_task.image.set(img)
                 my_task.save()
                 task = Task.objects.filter(text=text)
-                serializer = TaskSerializer(task, many=True)
+                serializer = TaskSerializer(task, many=True).data
                 # aktDB(1)
                 # aktDB(2)
                 connection.close()
-                return Response(serializer.data, status=status.HTTP_200_OK)
+                return Response(serializer, status=status.HTTP_200_OK)
             # except Exception as e:
             #     my_task.delete()
             #     return Response(data={"error": str(e)}, status=status.HTTP_402_PAYMENT_REQUIRED)
@@ -773,8 +773,8 @@ class AddSection(APIView):
                     sect = Section.objects.create(Section=section)
                     sect.save()
                     sec = Section.objects.filter(Section=section)
-                    serializer = SectionSerializer(sec, many=True)
-                    return Response(serializer.data, status=status.HTTP_200_OK)
+                    serializer = SectionSerializer(sec, many=True).data
+                    return Response(serializer, status=status.HTTP_200_OK)
             except Exception as e:
                 return Response(data={"error": str(e)}, status=status.HTTP_403_FORBIDDEN)
         else:
@@ -833,9 +833,9 @@ class SectionViewSet(APIView):
 
     def get(self, request, format=None):
         dzial = Section.objects.all()
-        serializer = SectionSerializer(dzial, many=True)
+        serializer = SectionSerializer(dzial, many=True).data
         connection.close()
-        return Response(serializer.data)
+        return Response(serializer)
 
 
 class AllTestsJSONViewSet(APIView):
@@ -845,8 +845,9 @@ class AllTestsJSONViewSet(APIView):
     def get(self, request, format=None):
         tests = TestJSON.objects.filter(user_id=request.user.id).order_by('-created')
         serializer = TestJSONSerializer(tests, many=True)
+        seria = serializer.data
         connection.close()
-        return Response(serializer.data)
+        return Response(seria)
 
 
 class OneTestJSONViewSet(APIView):
@@ -856,9 +857,9 @@ class OneTestJSONViewSet(APIView):
     def get(self, request, *args, **kwargs):
         id = kwargs.pop('id')
         test = TestJSON.objects.filter(id=id, user_id=request.user.id)
-        serializer = TestJSONSerializer(test, many=True)
+        serializer = TestJSONSerializer(test, many=True).data
         connection.close()
-        return Response(serializer.data)
+        return Response(serializer)
 
 
 class SkillViewSet(APIView):
@@ -868,9 +869,9 @@ class SkillViewSet(APIView):
 
     def get(self, request, format=None):
         skill = Skill.objects.all()
-        serializer = SkillSerializer(skill, many=True)
+        serializer = SkillSerializer(skill, many=True).data
         connection.close()
-        return Response(serializer.data)
+        return Response(serializer)
 
 
 class ImageViewSet(APIView):
@@ -940,7 +941,7 @@ class AddImageToTaskViewSet(APIView):
 
 
 class TestTasksiewSet(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = TestJSONSerializer
 
     def get(self, request, *args, **kwargs):
