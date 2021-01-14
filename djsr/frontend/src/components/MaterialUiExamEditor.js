@@ -51,7 +51,7 @@ class ExamEditor extends Component {
         } else {
           state.exam.tasks = [];
         }
-        document.title=state.exam.name
+        document.title = state.exam.name;
         return state;
       });
     });
@@ -154,13 +154,34 @@ class ExamEditor extends Component {
     });
   };
 
-  openPDFinNewTab =(type)=>{
-    let pdfBaseUrl=""
-    switch(type){
+  openPDFinNewTab = (type) => {
+    let pdfBaseUrl = "";
+    switch (type) {
       case "exam":
-        pdfBaseUrl="/user/testpdf/"
+        pdfBaseUrl = "/user/testpdf/";
     }
-  }
+    axiosInstance
+      .get(pdfBaseUrl + this.state.exam.id, {
+        method: "GET",
+        responseType: "blob",
+      })
+      .then((response) => {
+        // console.log("pdf response" ,response.data)
+        let pdfBlob = new Blob([response.data], { type: "application/pdf" });
+        // pdfBlob.lastModifiedDate = new Date();
+        // pdfBlob.name = this.state.exam.name;
+        // const pdf = response.data;
+        const fileURL = URL.createObjectURL(pdfBlob);
+        let a = document.createElement("a");
+        document.body.appendChild(a);
+        a.style = { display: "none" };
+        a.href = fileURL;
+        a.download = this.state.exam.name;
+        a.click();
+        URL.revokeObjectURL(fileURL);
+        // window.open(fileURL);
+      });
+  };
 
   dragEndOld = (result) => {
     const { source, destination, draggableId } = result;
@@ -384,9 +405,7 @@ class ExamEditor extends Component {
   render() {
     const exam = this.state.exam;
     if (!exam) {
-      return (
-        <LoadingScreen message={"Ładowanie edytora sprawdzianu"}/>
-      );
+      return <LoadingScreen message={"Ładowanie edytora sprawdzianu"} />;
     }
     const sideMenuCollapseId = this.state.sideMenuCollapseId;
     const searchedTasks = this.state.tasks;
@@ -509,6 +528,14 @@ class ExamEditor extends Component {
               }}
             >
               Sprawdzian
+            </Button>
+            <Button
+              color={"primary"}
+              onClick={() => {
+                this.openPDFinNewTab("exam");
+              }}
+            >
+              Sprawdzian secured
             </Button>
             <Button
               color={"primary"}
