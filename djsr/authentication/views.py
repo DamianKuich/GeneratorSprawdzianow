@@ -44,7 +44,7 @@ class LatexToSvgView(APIView):
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request, *args, **kwargs):
-        print("latex", request.data['latex'])
+        # print("latex", request.data['latex'])
         latex = request.data['latex']
 
         # latex = kwargs.pop('latex')
@@ -313,7 +313,7 @@ class GetRandomTasksViewSet(APIView):
     serializer_class = TaskSerializer
 
     def post(self, request, format=None):
-        print("get auto tasks data", request.data)
+        # print("get auto tasks data", request.data)
         if request.data:
             try:
                 author_id = CustomUser.objects.get(id=request.user.id)
@@ -417,7 +417,7 @@ class GetRandomTasksViewSet(APIView):
                 connection.close()
                 return Response(listagr, status=status.HTTP_200_OK)
             except Exception as e:
-                print("mt er1")
+                # print("mt er1")
                 return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -428,7 +428,7 @@ class MakeTestViewSet(APIView):
     serializer_class = TaskSerializer
 
     def post(self, request, format=None):
-        print("make test rq data", request.data)
+        # print("make test rq data", request.data)
         if request.data:
             try:
                 nazwa = request.data['name']
@@ -447,16 +447,16 @@ class MakeTestViewSet(APIView):
                     connection.close()
                     return Response(serializer.data, status=status.HTTP_200_OK)
                 else:
-                    print("make test err 1")
+                    # print("make test err 1")
                     return Response(status=status.HTTP_400_BAD_REQUEST)
             except Exception as e:
-                print("mt er2")
+                # print("mt er2")
                 return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request):
-        print("MT put req data", request.data)
+        # print("MT put req data", request.data)
         if request.data:
             try:
                 id = request.data['id']
@@ -482,7 +482,7 @@ class MakeTestViewSet(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, format=None):
-        print("MT delete req data", request.data)
+        # print("MT delete req data", request.data)
         if request.data:
             try:
                 id = request.data['id']
@@ -503,7 +503,7 @@ class DeleteTestViewSet(APIView):
     serializer_class = TaskSerializer
 
     def post(self, request, format=None):
-        print("MT delete req data", request.data)
+        # print("MT delete req data", request.data)
         if request.data:
             try:
                 id = request.data['id']
@@ -524,7 +524,7 @@ class DeleteTestViewSet(APIView):
     serializer_class = TaskSerializer
 
     def post(self, request, format=None):
-        print("MT delete req data", request.data)
+        # print("MT delete req data", request.data)
         if request.data:
             try:
                 id = request.data['id']

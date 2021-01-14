@@ -26,7 +26,7 @@ def generatePdf(tasks, name="Sprawdzian"):
         text(name)
     # renderowanie taskow
     for index, task in enumerate(tasks):
-        with tag('div style="display: block;"'):
+        with tag('div style="display: block;page-break-inside: avoid;"'):
             with tag('span style="display: inline;"'):
                 text("Zadanie nr." + str(index + 1))
                 with tag('span style="display: inline;margin-left: 20px;"'):
@@ -66,22 +66,27 @@ def generatePdf(tasks, name="Sprawdzian"):
             except:
                 pass
             # renderowanie odp zadania
-            with tag('div'):
-                for index, answer in enumerate(task['answers']):
-                    # with tag('div'):
-                    for part in answer:
-                        if part["type"] == "text":
-                            with tag('div style="display: inline-block;margin-right: 20px;"'):
-                                text(listodp[index] + part["data"])
-                        elif part["type"] == "latex":
-                            with tag('div style="display: inline-block;margin-right: 20px;"'):
-                                with tag('span style="display: block;margin-right: 20px;"'):
-                                    text(listodp[index])
-                                    doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"],
-                                             style="transform: translate(0px,4px);")
-            # if task['spacetosolve'] > 0:
-            #     with tag('div style="margin-bottom:' + str(task['spacetosolve']*19)+'px;"'):
-            #         pass
+            try:
+                if int(task['spaceToSolve']) > 0:
+                    # with tag('div style="border: 1px solid black;margin-bottom:' + str(task['spaceToSolve'] * 19) + 'px;"'):
+                    with tag('div style="height:' + str(int(task['spaceToSolve']) * 19) + 'px;background-color: #FFFFFF;margin: 40px auto 0;border: 1px solid black"'):
+                        pass
+
+            except:
+                with tag('div'):
+                    for index, answer in enumerate(task['answers']):
+                        # with tag('div'):
+                        for part in answer:
+                            if part["type"] == "text":
+                                with tag('div style="display: inline-block;margin-right: 20px;"'):
+                                    text(listodp[index] + part["data"])
+                            elif part["type"] == "latex":
+                                with tag('div style="display: inline-block;margin-right: 20px;"'):
+                                    with tag('span style="display: block;margin-right: 20px;"'):
+                                        text(listodp[index])
+                                        doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"],
+                                                 style="transform: translate(0px,4px);")
+
         with tag('hr style="color: black;"'):
             pass
     html = doc.getvalue()
@@ -106,7 +111,7 @@ def generateAnswersPdf(tasks, name):
         text("Odpowiednią odpowiedź zaznaczyć X")
     # renderowanie taskow
     for index, task in enumerate(tasks):
-        with tag('div'):
+        with tag('div style="display: block;page-break-inside: avoid;"'):
             text("Zadanie nr." + str(index + 1))
             with tag('p'):
                 try:
@@ -140,7 +145,7 @@ def generateAnswerKeyPdf(tasks, name):
     # renderowanie taskow
     for index, task in enumerate(tasks):
         nr = index
-        with tag('div'):
+        with tag('div style="display: block;page-break-inside: avoid;"'):
             # text("Zadanie nr." + str(index + 1))
             with tag('p'):
                 if len(task['answers']) >=1:
