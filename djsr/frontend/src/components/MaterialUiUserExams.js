@@ -243,25 +243,7 @@ const useStylesAlert = makeStyles((theme) => ({
     // }
     //
     componentDidMount() {
-      this.updateExams();
-      axiosInstanceNoAuth
-      .get("/user/sections2/")
-      .then((response) => {
-        const parsed = response.data.map(section => {
-          section.skill=section.skilll
-          return section
-        })
-        this.setState({ sections: parsed });
-        // const parsed= response.data.map((section)=>{
-        //   section.skill=section.skilll
-        //   return section
-        // })
-        // this.setState({ sections: response.data });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-     
+      this.updateExams();     
     }
     //
     // componentWillReceiveProps(nextProps) {
@@ -289,7 +271,7 @@ const useStylesAlert = makeStyles((theme) => ({
       let exams = this.state.exams;
       let sections = this.state.sections
 
-      if (!exams || !sections) {
+      if (!exams ) {
         return (
           <Loading></Loading>
         );
@@ -524,11 +506,7 @@ const useStylesAlert = makeStyles((theme) => ({
         <DialogTitle  id="form-dialog-title"><Typography variant="h5" align="center">Wygeneruj sprawdzian automatycznie</Typography></DialogTitle>
        
         <DialogContent>
-        <Box p={1}>
-        <TextField  fullWidth
-         onChange={(event) => this.setState({ generatedName: event.target.value })}
-        id="examName" label="Nazwa sprawdzianu" />
-            </Box>
+
  
 
         <Box p={1}>
@@ -554,12 +532,7 @@ const useStylesAlert = makeStyles((theme) => ({
          
         </TextField>
         </Box>
- <Box p={1}>
-   
-        <TextField  fullWidth
-         onChange={(event) => this.setState({ groups: event.target.value })}
-        id="groups" label="Ilość grup" />
-            </Box>
+
          
         </DialogContent>
         
@@ -614,6 +587,18 @@ const useStylesAlert = makeStyles((theme) => ({
         <DialogTitle  id="form-dialog-title"><Typography variant="h5" align="center">Wygeneruj sprawdzian automatycznie</Typography></DialogTitle>
        
         <DialogContent>
+        <Box p={1}>
+        <TextField  fullWidth
+         onChange={(event) => this.setState({ generatedName: event.target.value })}
+        id="examName" label="Nazwa sprawdzianu" />
+            </Box>
+
+            <Box p={1}>
+   
+   <TextField  fullWidth
+    onChange={(event) => this.setState({ groups: event.target.value })}
+   id="groups" label="Ilość grup" />
+       </Box>
         <Box p={1}>
         <TextField  fullWidth
          onChange={(event) => this.setState({ ileotw: event.target.value })}

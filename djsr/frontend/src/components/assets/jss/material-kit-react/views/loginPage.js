@@ -85,7 +85,12 @@ const signupPageStyle = {
   },
   inputIconsColor: {
     color: "#495057"
-  }
+  },
+  wrapper: {
+    margin: theme.spacing(1),
+    position: 'relative',
+  },
+  
 };
 
 export default signupPageStyle;
