@@ -9,7 +9,6 @@ req = requests.get("https://math.now.sh?from=" + "\square").text
 def generatePdf(tasks, name="Sprawdzian"):
     listodp = ['A: ', 'B: ', 'C: ', 'D: ']
     tasks = list(map(taskPrintDataParser, tasks))
-    print("TASK",tasks[0])
     doc, tag, text = Doc().tagtext()
     # dodaj tytul do spr
     czas = 0
@@ -109,21 +108,24 @@ def generateAnswersPdf(tasks, name):
         with tag('div'):
             text("Zadanie nr." + str(index + 1))
             with tag('p'):
-                for index, answer in enumerate(task['answers']):
-                    for part in answer:
-                        if part["type"] == "text":
-                            with tag('span'):
-                                doc.stag("img", src='data:image/svg+xml;utf8,' + req, style="display:inline;")
-                                text(listodp[index] + part["data"])
-                        elif part["type"] == "latex":
-                            doc.stag("img", src='data:image/svg+xml;utf8,' + req, style="display:inline;")
-                            text(listodp[index])
-                            doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"])
+                try:
+                    for index, answer in enumerate(task['answers']):
+                        for part in answer:
+                            if part["type"] == "text":
+                                with tag('span style="display: inline-block;margin-right: 20px;"'):
+                                    doc.stag("img", src='data:image/svg+xml;utf8,' + req, style="display:inline;")
+                                    text(listodp[index] + part["data"])
+                            elif part["type"] == "latex":
+                                with tag('span style="display: inline-block;margin-right: 20px;"'):
+                                    doc.stag("img", src='data:image/svg+xml;utf8,' + req, style="display:inline;")
+                                    text(listodp[index])
+                                    doc.stag("img", src='data:image/svg+xml;utf8,' + part["svg"])
+                except:
+                    pass
     html = doc.getvalue()
     requestJson = json.dumps({'html': html})
     # wygenerowany_pdf = requests.get("https://gen-mat-pdf-node.herokuapp.com/pdf/", data='{"html": "'+html.encode(encoding='UTF-8')+'"}')
-    wygenerowany_pdf = requests.get("https://gen-mat-pdf-node.herokuapp.com/pdf/",
-                                    data=requestJson, headers={"Content-Type": "application/json"})
+    wygenerowany_pdf = requests.post("https://gen-mat-pdf-node.herokuapp.com/pdf2/", files={"html": html})
     return wygenerowany_pdf, html
 
 
