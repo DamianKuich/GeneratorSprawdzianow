@@ -77,7 +77,7 @@ const TaskWithOverlay = (props) => {
                   <DragIndicatorIcon fontSize={"small"} />
                 </TaskOverlayButton>,
                 <TaskOverlayButton
-                    tooltip={"Usuń zadadnie"}
+                    tooltip={"Usuń zadanie"}
                   onClick={() => {
                     removeTask(index);
                   }}
