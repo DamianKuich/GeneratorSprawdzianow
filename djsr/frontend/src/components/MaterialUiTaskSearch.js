@@ -23,6 +23,7 @@ import tasksParser from "./ExamEditorSubComponents/TaskParser";
 import Button from "./material_ui_components/CustomButtons/Button";
 import { Container } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
+import CustomRadio from "./material_ui_components/CustomRadio/CustomRadio";
 
 class MaterialUiTaskSearch extends Component {
   constructor(props) {
@@ -74,7 +75,7 @@ class MaterialUiTaskSearch extends Component {
         // display="flex" justifyContent="center"
       >
         <Formik
-          initialValues={{ skills: [], currentPage: 1, maxPage: null }}
+          initialValues={{ skills: [], currentPage: 1, maxPage: null ,myTasks:0}}
           onSubmit={(values, helpers) => {
             setTimeout(() => {
               // console.log("start 1");
@@ -95,6 +96,7 @@ class MaterialUiTaskSearch extends Component {
                   skill: result.join(","),
                   pagenr: values.currentPage,
                   nroftasks: 10,
+                  myTasks:values.myTasks
                 })
                 .then((response) => {
                   helpers.setSubmitting(false);
@@ -175,9 +177,6 @@ class MaterialUiTaskSearch extends Component {
                       return (
                         <>
                           <ListItem
-                          // onClick={() => {
-                          //   this.toggleCollapse("section-" + section.id);
-                          // }}
                           >
                             <ListItemSecondaryAction>
                               <Checkbox
@@ -194,20 +193,10 @@ class MaterialUiTaskSearch extends Component {
                                 this.toggleCollapse("section-" + section.id);
                               }}
                             />
-                            {/*{section.Section}*/}
-                            {/*<MDBIcon*/}
-                            {/*  icon={*/}
-                            {/*    collapseId === "section-" + section.id*/}
-                            {/*      ? "angle-up"*/}
-                            {/*      : "angle-down"*/}
-                            {/*  }*/}
-                            {/*/>*/}
                           </ListItem>
                           <Collapse
                             in={"section-" + section.id === collapseId}
                             unmountOnExit
-                            // isOpen={collapseId}
-                            // className="border-left border-right border-bottom p-2"
                           >
                             <List component="div" disablePadding>
                               {section.skill.map((skill) => {
@@ -225,41 +214,14 @@ class MaterialUiTaskSearch extends Component {
                                         }
                                         tabIndex={-1}
                                         disableRipple
-                                        // inputProps={{
-                                        //   "aria-labelledby": labelId,
-                                        // }}
+
                                       />
                                     </ListItemIcon>
                                     <ListItemText
                                       // id={labelId}
                                       primary={skill.Skill}
                                     />
-                                    {/*<input*/}
-                                    {/*  type="checkbox"*/}
-                                    {/*  className="custom-control-input"*/}
-                                    {/*  id={*/}
-                                    {/*    "skill-id-" +*/}
-                                    {/*    skill.id +*/}
-                                    {/*    "-" +*/}
-                                    {/*    section.id*/}
-                                    {/*  }*/}
-                                    {/*  value={true}*/}
-                                    {/*  name={"skills." + skill.id}*/}
-                                    {/*  onChange={handleChange}*/}
-                                    {/*  onBlur={handleBlur}*/}
-                                    {/*  disabled={isSubmitting}*/}
-                                    {/*/>*/}
-                                    {/*<label*/}
-                                    {/*  className="custom-control-label"*/}
-                                    {/*  htmlFor={*/}
-                                    {/*    "skill-id-" +*/}
-                                    {/*    skill.id +*/}
-                                    {/*    "-" +*/}
-                                    {/*    section.id*/}
-                                    {/*  }*/}
-                                    {/*>*/}
-                                    {/*  {skill.Skill}*/}
-                                    {/*</label>*/}
+
                                   </ListItem>
                                 );
                               })}
@@ -270,17 +232,6 @@ class MaterialUiTaskSearch extends Component {
                       );
                     })}
                   </List>
-                  {/*<MDBBtn onClick={handleSubmit} disabled={isSubmitting}>*/}
-                  {/*  Szukaj*/}
-                  {/*  {isSubmitting && (*/}
-                  {/*    <div*/}
-                  {/*      className="spinner-border spinner-border-sm"*/}
-                  {/*      role="status"*/}
-                  {/*    >*/}
-                  {/*      <span className="sr-only">Loading...</span>*/}
-                  {/*    </div>*/}
-                  {/*  )}*/}
-                  {/*</MDBBtn>*/}
                   <Box
                     component={"div"}
                     m={1}
@@ -295,6 +246,24 @@ class MaterialUiTaskSearch extends Component {
                     >
                       Szukaj
                     </Button>
+                    <CustomRadio
+                    labelProps={{ label: "Tylko moje zadania" }}
+                    radioProps={{
+                      checked: values.myTasks===1,
+                      onChange: () => {
+                        setFieldValue("myTasks", 1);
+                      },
+                    }}
+                  />
+                  <CustomRadio
+                    labelProps={{ label: "Wszystkie" }}
+                    radioProps={{
+                      checked: values.myTasks===0,
+                      onChange: () => {
+                        setFieldValue("myTasks", 0);
+                      },
+                    }}
+                  />
                   </Box>
                   {!!values.maxPage && (
                     <Box
