@@ -136,7 +136,7 @@ const EditTaskImages = (props) => {
           )}
           <div>
             <CustomRadio
-              labelProps={{ label: "2x1", disabled: isSending }}
+              labelProps={{ label: "poziomo", disabled: isSending }}
               radioProps={{
                 checked: imageLayout === "2x1",
                 onChange: () => {
@@ -145,7 +145,7 @@ const EditTaskImages = (props) => {
               }}
             />
             <CustomRadio
-              labelProps={{ label: "1x2", disabled: isSending }}
+              labelProps={{ label: "pionowo", disabled: isSending }}
               radioProps={{
                 checked: imageLayout === "1x2",
                 onChange: () => {

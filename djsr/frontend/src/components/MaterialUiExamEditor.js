@@ -89,11 +89,14 @@ class ExamEditor extends Component {
       //   this.props.enqueueSnackbar("Zapisywanie sprawdzianu", {
       //     persist: true,
       //   });
-      if (!state.savingSnackKey){
+      if (!state.savingSnackKey) {
         this.props.closeSnackbar();
-        state.savingSnackKey=this.props.enqueueSnackbar("Zapisywanie sprawdzianu", {
-          persist: true,
-        });
+        state.savingSnackKey = this.props.enqueueSnackbar(
+          "Zapisywanie sprawdzianu",
+          {
+            persist: true,
+          }
+        );
       }
       state.saved = false;
       return state;
@@ -160,9 +163,11 @@ class ExamEditor extends Component {
         tasks: JSON.stringify(this.state.exam.tasks),
       })
       .then((response) => {
-        this.props.closeSnackbar(this.state.savingSnackKey)
-        this.props.enqueueSnackbar("Zapisano sprawdzian.",{variant:"success"})
-        this.setState({ saved: true,savingSnackKey:null });
+        this.props.closeSnackbar(this.state.savingSnackKey);
+        this.props.enqueueSnackbar("Zapisano sprawdzian.", {
+          variant: "success",
+        });
+        this.setState({ saved: true, savingSnackKey: null });
       });
   };
 
@@ -179,25 +184,41 @@ class ExamEditor extends Component {
   };
 
   openPDFinNewTab = (type) => {
+    if (!!this.state.downloadingPDF){
+      this.props.enqueueSnackbar("Masz już PDF'a w kolejce do pobrania, prosimy poczekać",{variant:"info"})
+      return;
+    }
+    this.setState((state) => {
+      state.downloadingPDF = true;
+      return state;
+    });
     let pdfBaseUrl = "";
-    let pdfNameSuffix= ""
+    let pdfNameSuffix = "";
     switch (type) {
       case "exam":
         pdfBaseUrl = "/user/testpdf/";
         break;
       case "answers":
-        pdfBaseUrl ='/user/answerspdf/';
-        pdfNameSuffix= "- arkusz odpowiedzi";
+        pdfBaseUrl = "/user/answerspdf/";
+        pdfNameSuffix = "- arkusz odpowiedzi";
         break;
-      case 'answersKeys':
-        pdfBaseUrl ='/user/answerskeypdf/';
-        pdfNameSuffix= "- klucz odpowiedzi";
+      case "answersKeys":
+        pdfBaseUrl = "/user/answerskeypdf/";
+        pdfNameSuffix = "- klucz odpowiedzi";
         break;
+      default:
+        this.setState((state) => {
+          state.downloadingPDF = false;
+          return state;
+        });
+        return;
     }
+    this.props.enqueueSnackbar("Generowanie PDF, może to potrwać 2 minuty.")
     axiosInstance
       .get(pdfBaseUrl + this.state.exam.id, {
         method: "GET",
         responseType: "blob",
+        timeout: 120000,
       })
       .then((response) => {
         // console.log("pdf response" ,response.data)
@@ -211,9 +232,23 @@ class ExamEditor extends Component {
         a.style = { display: "none" };
         a.href = fileURL;
         a.download = this.state.exam.name + pdfNameSuffix;
+       this.setState((state) => {
+          state.downloadingPDF = false;
+          return state;
+        });
         a.click();
         URL.revokeObjectURL(fileURL);
         // window.open(fileURL);
+      })
+      .catch((e) => {
+        this.props.enqueueSnackbar(
+          "Nie udało się pobrać PDF, spróbuj ponownie później",
+          { variant: "error" }
+        );
+        this.setState((state) => {
+          state.downloadingPDF = false;
+          return state;
+        });
       });
   };
 
@@ -415,6 +450,9 @@ class ExamEditor extends Component {
   };
   handleSideMenuTabChange = (event, newValue) => {
     // if (newValue === "generatePDF") this.generatedPDFV3(this.state.exam);
+    // if (this.state.downloadingPDF===false){
+    //   this.props.enqueueSnackbar("Masz już PDF'a do pobrania w kolejce, prosimy poczekać.",{variant:"info"})
+    // }
     if (newValue === "generatePDF") {
       this.updateStateNoSave((state) => {
         // state.anchorEl = event.currentTarget;
@@ -482,47 +520,6 @@ class ExamEditor extends Component {
             updateStateAndSaveExam={this.updateStateAndSaveExam}
             updateStateNoSave={this.updateStateNoSave}
           />
-          <Menu
-            id="simple-menu"
-            anchorEl={anchorEl}
-            // keepMounted
-            open={Boolean(anchorEl)}
-            onClose={this.handleCloseMenu}
-          >
-            <MenuItem
-              onClick={() => {
-                window.open(
-                  `${window.location.origin}/api/user/testpdf/` +
-                    this.state.exam.id,
-                  "_blank"
-                );
-              }}
-            >
-              Sprawdzian
-            </MenuItem>
-            <MenuItem
-              onClick={() => {
-                window.open(
-                  `${window.location.origin}/api/user/answerspdf/` +
-                    this.state.exam.id,
-                  "_blank"
-                );
-              }}
-            >
-              Karta Odpowiedzi
-            </MenuItem>
-            <MenuItem
-              onClick={() => {
-                window.open(
-                  `${window.location.origin}/api/user/answerskeypdf/` +
-                    this.state.exam.id,
-                  "_blank"
-                );
-              }}
-            >
-              Klucz
-            </MenuItem>
-          </Menu>
         </div>
         <Dialog
           open={!!this.state.downloadModal}
@@ -576,7 +573,7 @@ class ExamEditor extends Component {
               //     "_blank"
               //   );
               // }}
-                onClick={() => {
+              onClick={() => {
                 this.openPDFinNewTab("answers");
               }}
             >
@@ -591,7 +588,7 @@ class ExamEditor extends Component {
               //     "_blank"
               //   );
               // }}
-                onClick={() => {
+              onClick={() => {
                 this.openPDFinNewTab("answersKeys");
               }}
             >
