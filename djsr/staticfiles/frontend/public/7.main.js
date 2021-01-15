@@ -116,11 +116,18 @@ var AddTaskDialog = function AddTaskDialog(_ref) {
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_1__["default"], {
     open: open,
-    onClose: handleClose,
-    "aria-labelledby": "form-dialog-title"
+    onClose: function onClose(event, reason) {
+      console.log("dialogClose", event, reason);
+      handleClose();
+    },
+    "aria-labelledby": "form-dialog-title" // disableBackdropClick={true}
+    // disableEscapeKeyDown={true}
+    // disableEnforceFocus={true}
+    // disablePortal
+
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_2__["default"], {
     id: "form-dialog-title"
-  }, "Dodaj zadanie"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_4__["default"], null, "Wybierz jakie umiej\u0119tno\u015B\u0107i ma sprwadza\u0107 zadanie."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AddTask__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, "Dodaj zadanie"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AddTask__WEBPACK_IMPORTED_MODULE_8__["default"], {
     onTaskAdd: onTaskAdd
   })));
 };
@@ -739,8 +746,9 @@ var EditTaskImages = function EditTaskImages(props) {
     dialogTitle: "Edycja zdjęć",
     fullWidth: true,
     maxWidth: "lg",
-    onClose: function onClose() {
+    onClose: function onClose(event, reason) {
       setOpen(false);
+      console.log("dClose", event, reason);
     },
     dialogActionsChildren: [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
       color: "transparent",
@@ -2352,7 +2360,9 @@ var TaskOverlay = function TaskOverlay(_ref) {
       ,
       className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_classNames = {}, _defineProperty(_classNames, classes.root, true), _defineProperty(_classNames, classes.activeRoot, isActive), _classNames)) // position={"relative"}
 
-    }, isActive && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_resize_detector__WEBPACK_IMPORTED_MODULE_2__["default"], null, function (_ref3) {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_resize_detector__WEBPACK_IMPORTED_MODULE_2__["default"], null, function (_ref3) {
+      var _classNames2;
+
       var width = _ref3.width,
           height = _ref3.height;
       var menuWidth = width;
@@ -2365,8 +2375,9 @@ var TaskOverlay = function TaskOverlay(_ref) {
         // borderColor={"primary.main"}
         // display={"flex"}
         // color={"white"}
+        //   className={classes.menuContainer}
         ,
-        className: classes.menuContainer
+        className: classnames__WEBPACK_IMPORTED_MODULE_5___default()((_classNames2 = {}, _defineProperty(_classNames2, classes.menuContainer, true), _defineProperty(_classNames2, classes.menuContainerShow, !!isActive), _defineProperty(_classNames2, classes.menuContainerHide, !isActive), _classNames2))
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         // style={{
         //   border: "solid transparent",
@@ -5586,8 +5597,14 @@ var taskOverlayStyle = {
   },
   menuContainer: {
     position: "absolute",
-    display: "flex",
+    // display: "flex",
     color: "white"
+  },
+  menuContainerShow: {
+    display: "flex"
+  },
+  menuContainerHide: {
+    display: "none"
   },
   menuLeftLeaf: {
     border: "solid transparent",
