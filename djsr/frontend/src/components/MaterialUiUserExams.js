@@ -873,7 +873,7 @@ const useStylesAlert = makeStyles((theme) => ({
                       let randomtasks = JSON.stringify(taskParser(group))
                       ++key
                       axiosInstance.post(`/user/maketest/`, {
-                        name:this.state.generatedName + ' Grupa '+ key,
+                        name: values.examName + ' Grupa '+ key,
                         tasks:randomtasks
                         
                       }).then((response)=>{
