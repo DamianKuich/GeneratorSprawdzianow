@@ -3837,11 +3837,7 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "openPDFinNewTab", function (type) {
-      if (!!_this.state.downloadingPDF) {
-        _this.props.enqueueSnackbar("Masz już PDF'a w kolejce do pobrania, prosimy poczekać", {
-          variant: "info"
-        });
-
+      if (_this.state.downloadingPDF) {
         return;
       }
 
@@ -3877,8 +3873,6 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
           return;
       }
 
-      _this.props.enqueueSnackbar("Generowanie PDF, może to potrwać 2 minuty.");
-
       _axiosAPI__WEBPACK_IMPORTED_MODULE_6__["default"].get(pdfBaseUrl + _this.state.exam.id, {
         method: "GET",
         responseType: "blob",
@@ -3899,22 +3893,11 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
         };
         a.href = fileURL;
         a.download = _this.state.exam.name + pdfNameSuffix;
-
-        _this.setState(function (state) {
-          state.downloadingPDF = false;
-          return state;
-        });
-
         a.click();
         URL.revokeObjectURL(fileURL); // window.open(fileURL);
       })["catch"](function (e) {
         _this.props.enqueueSnackbar("Nie udało się pobrać PDF, spróbuj ponownie później", {
           variant: "error"
-        });
-
-        _this.setState(function (state) {
-          state.downloadingPDF = false;
-          return state;
         });
       });
     });
@@ -4101,10 +4084,13 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleSideMenuTabChange", function (event, newValue) {
       // if (newValue === "generatePDF") this.generatedPDFV3(this.state.exam);
-      // if (this.state.downloadingPDF===false){
-      //   this.props.enqueueSnackbar("Masz już PDF'a do pobrania w kolejce, prosimy poczekać.",{variant:"info"})
-      // }
-      if (newValue === "generatePDF") {
+      if (_this.state.downloadingPDF === false) {
+        _this.props.enqueueSnackbar("Masz już PDF'a do pobrania w kolejce, prosimy poczekać.", {
+          variant: "info"
+        });
+      }
+
+      if (newValue === "generatePDF" && !_this.state.downloadingPDF) {
         _this.updateStateNoSave(function (state) {
           // state.anchorEl = event.currentTarget;
           state.downloadModal = true;
