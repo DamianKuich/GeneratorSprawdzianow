@@ -21,7 +21,7 @@ import CardFooter from "./material_ui_components/Card/CardFooter.js";
 import CustomInput from "./material_ui_components/CustomInput/CustomInput.js";
 import Grid from '@material-ui/core/Grid';
 import styles from "./assets/jss/material-kit-react/views/loginPage.js";
-
+import { useSnackbar } from 'notistack';
 import image from "./img/genesprDark.png";
 import * as Yup from "yup";
 import axiosInstance, { axiosInstanceNoAuth } from "./axiosAPI";
@@ -29,13 +29,15 @@ import { Formik, Field } from "formik";
 import MaterialFormikField from "./MaterialFormikField";
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-
+import LoadingScreenB from "./LoadingForButtons"
 const useStyles = makeStyles(styles);
 
 const MaterialUiManageAccount = (props) => {
+
   const FRS = "Pole wymagane";
   const user = props.appState.user;
   const [editView, setEditView] = React.useState("email");
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   
 const bgStyles = {
   paperContainer: {
@@ -99,19 +101,25 @@ const bgStyles = {
                   email: values.email,
                 })
                 .then((response) => {
-                  this.props.setUser(response.data);
-                  helpers.setStatus("Pomyslnie zmieniono dane");
-                  helpers.setSubmitting(false);
-                  this.setState({ locked: false });
+                  
+                  enqueueSnackbar("Pomyślnie zmieniono dane", { 
+                    variant: 'success',
+                });
+                helpers.setSubmitting(false);
+
+              
                 })
                 .catch((error) => {
                   // console.log("login error", error.response);
                   const errResponse = error.response;
+                  enqueueSnackbar("Adres e-mail jest już zajęty, bądź jest nieprawidłowy", { 
+                    variant: 'error',
+                });
                   helpers.setSubmitting(false);
-                  this.setState({ locked: false });
+                 
                   helpers.setValues(
                     {
-                      name: "",
+                      email: "",
                     },
                     false
                   );
@@ -194,9 +202,15 @@ const bgStyles = {
                 onClick={() => {
                   handleSubmit();
                 }}
+                disabled= {isSubmitting}
               >
                 Zmień dane
               </Button>
+              {
+                            isSubmitting &&  
+                           <LoadingScreenB></LoadingScreenB>
+                      
+                          }              
             </CardFooter>
           </form>
         )}
@@ -228,16 +242,22 @@ const bgStyles = {
                   username: values.name,
                 })
                 .then((response) => {
-                  this.props.setUser(response.data);
+                  
+                  enqueueSnackbar("Pomyślnie zmieniono dane", { 
+                    variant: 'success',
+                });
                   helpers.setStatus("Pomyslnie zmieniono dane");
                   helpers.setSubmitting(false);
-                  this.setState({ locked: false });
+
                 })
                 .catch((error) => {
                   // console.log("login error", error.response);
                   const errResponse = error.response;
+                  enqueueSnackbar("Nazwa użytkownika jest już zajęta", { 
+                    variant: 'error',
+                });
                   helpers.setSubmitting(false);
-                  this.setState({ locked: false });
+                  
                   helpers.setValues(
                     {
                       name: "",
@@ -323,9 +343,15 @@ const bgStyles = {
                 onClick={() => {
                   handleSubmit();
                 }}
+                disabled= {isSubmitting}
               >
                 Zmień dane
               </Button>
+              {
+                            isSubmitting &&  
+                           <LoadingScreenB></LoadingScreenB>
+                      
+                          } 
             </CardFooter>
           </form>
         )}
@@ -370,17 +396,23 @@ const bgStyles = {
                   oldpassword: values.oldPassword,
                 })
                 .then((response) => {
-                  this.props.setUser(response.data);
+
+                  enqueueSnackbar("Pomyślnie zmieniono dane", { 
+                    variant: 'success',
+                });
                   helpers.setStatus("Pomyslnie zmieniono hasło");
                   helpers.setSubmitting(false);
-                  this.setState({ locked: false });
+                 
                 })
                 .catch((error) => {
+                  enqueueSnackbar("Nie udało się zmienić hasła, spróbuj ponownie", { 
+                    variant: 'error',
+                });
                   helpers.setStatus("Podano nieprawidłowe aktualne hasło")
                   console.log("chngpass error", error.response);
                   const errResponse = error.response;
                   helpers.setSubmitting(false);
-                  this.setState({ locked: false });
+                
                   helpers.setValues(
                     {
                       password: "",
@@ -509,9 +541,15 @@ const bgStyles = {
                 onClick={() => {
                   handleSubmit();
                 }}
+                disabled= {isSubmitting}
               >
                 Zmień dane
               </Button>
+              {
+                            isSubmitting &&  
+                           <LoadingScreenB></LoadingScreenB>
+                      
+                          } 
             </CardFooter>
           </form>
         )}

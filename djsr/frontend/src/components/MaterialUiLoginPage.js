@@ -25,8 +25,8 @@ import * as Yup from "yup";
 import axiosInstance from "./axiosAPI";
 import { Formik, Field } from "formik";
 import FormikMdInput from "./FormikMDInput";
-import Notification from "./Notification"
 import Paper from '@material-ui/core/Paper';
+import { useSnackbar } from 'notistack';
 const useStyles = makeStyles(styles);
 
 const MaterialUiLoginPage = (props) => {
@@ -39,7 +39,8 @@ const MaterialUiLoginPage = (props) => {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
-  const [notification, setNotification] = React.useState({isOpen: false, message:'',type:''})
+  
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const { ...rest } = props;
   const FRS = "Pole wymagane";
   const bgStyles = {
@@ -124,6 +125,9 @@ const MaterialUiLoginPage = (props) => {
                             errResponse.status === 401 &&
                             errResponse.statusText === "Unauthorized"
                           ) {
+                            enqueueSnackbar("Nieprawidłowy adres e-mail lub hasło", { 
+                              variant: 'error',
+                          })
                             helpers.setValues(
                               {
                                 name: "",
@@ -142,11 +146,7 @@ const MaterialUiLoginPage = (props) => {
                               "general",
                               "Nierpawidłowa nazwa użytkownika lub hasło"
                             );
-                            setNotification({
-                              type:"error",
-                              isOpen:true,
-                              message:'Nieprawidłowa nazwa użytkownika lub hasło'
-                            })
+                           
                           }
                         });
                     }, 400);

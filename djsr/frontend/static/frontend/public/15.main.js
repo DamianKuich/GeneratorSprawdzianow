@@ -1,5 +1,53 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[15],{
 
+/***/ "./djsr/frontend/src/components/LoadingForButtons.js":
+/*!***********************************************************!*\
+  !*** ./djsr/frontend/src/components/LoadingForButtons.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LoadingScreenB; });
+/* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/esm/Grid/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/CircularProgress */ "./node_modules/@material-ui/core/esm/CircularProgress/index.js");
+
+
+
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["makeStyles"])(function (theme) {
+  return {
+    root: {
+      display: 'flex',
+      alignItems: 'center'
+    },
+    wrapper: {
+      margin: theme.spacing(1),
+      position: 'relative'
+    }
+  };
+});
+function LoadingScreenB() {
+  var classes = useStyles();
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: classes.root
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: classes.wrapper
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    size: 20,
+    className: classes.buttonProgress,
+    style: {
+      'color': 'purple'
+    }
+  })));
+}
+
+/***/ }),
+
 /***/ "./djsr/frontend/src/components/MaterialUiPasswordResetRequest.js":
 /*!************************************************************************!*\
   !*** ./djsr/frontend/src/components/MaterialUiPasswordResetRequest.js ***!
@@ -38,8 +86,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
 /* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
 /* harmony import */ var _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./MaterialFormikField */ "./djsr/frontend/src/components/MaterialFormikField.js");
-var _this = undefined;
-
+/* harmony import */ var notistack__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! notistack */ "./node_modules/notistack/dist/notistack.esm.js");
+/* harmony import */ var _LoadingForButtons__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./LoadingForButtons */ "./djsr/frontend/src/components/LoadingForButtons.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -53,6 +101,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 
 
@@ -99,6 +149,10 @@ var MaterialUiPasswordResetRequest = function MaterialUiPasswordResetRequest(pro
       notification = _React$useState4[0],
       setNotification = _React$useState4[1];
 
+  var _useSnackbar = Object(notistack__WEBPACK_IMPORTED_MODULE_25__["useSnackbar"])(),
+      enqueueSnackbar = _useSnackbar.enqueueSnackbar,
+      closeSnackbar = _useSnackbar.closeSnackbar;
+
   var _React$useState5 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState("cardHidden"),
       _React$useState6 = _slicedToArray(_React$useState5, 2),
       cardAnimaton = _React$useState6[0],
@@ -144,16 +198,16 @@ var MaterialUiPasswordResetRequest = function MaterialUiPasswordResetRequest(pro
         _axiosAPI__WEBPACK_IMPORTED_MODULE_22__["axiosInstanceNoAuth"].post("/user/resetsend/", {
           email: values.email
         }).then(function (response) {
-          helpers.setSubmitting(false);
-
-          _this.setState({
-            token: response.data.confirmation_token
+          enqueueSnackbar("Gotowe! Teraz aktywuj konto przy pomocy linku otrzymanego na adres e-mail", {
+            variant: 'success'
           });
-
-          _this.props.history.push("/signupsuccess/".concat(response.data.confirmation_token));
+          helpers.setSubmitting(false);
         })["catch"](function (error) {
           // console.log("login error", error.response);
           var errResponse = error.response;
+          enqueueSnackbar("Nieprawidłowy adres e-mail", {
+            variant: 'error'
+          });
           helpers.setSubmitting(false);
           helpers.setValues({
             email: ""
@@ -162,11 +216,6 @@ var MaterialUiPasswordResetRequest = function MaterialUiPasswordResetRequest(pro
             email: false
           }, false);
           helpers.setFieldError("general", "brak maila");
-          setNotification({
-            type: "success",
-            isOpen: true,
-            message: 'Link do resetu hasła został wysłany na podany adres e-mail'
-          });
         });
       }, 5000);
     }
@@ -205,8 +254,9 @@ var MaterialUiPasswordResetRequest = function MaterialUiPasswordResetRequest(pro
       size: "lg",
       onClick: function onClick() {
         handleSubmit();
-      }
-    }, "Przypomnij has\u0142o")));
+      },
+      disabled: isSubmitting
+    }, "Przypomnij has\u0142o"), isSubmitting && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoadingForButtons__WEBPACK_IMPORTED_MODULE_26__["default"], null)));
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null)))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Notification__WEBPACK_IMPORTED_MODULE_19__["default"], {
     notification: notification,
     setNotification: setNotification

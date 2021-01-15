@@ -28,6 +28,8 @@ import axiosInstance, { axiosInstanceNoAuth } from "./axiosAPI";
 import { Formik, Field } from "formik";
 import MaterialFormikField from "./MaterialFormikField";
 import { string } from "prop-types";
+import { useSnackbar } from 'notistack';
+import LoadingScreenB from "./LoadingForButtons"
 
 const useStyles = makeStyles(styles);
 
@@ -35,6 +37,7 @@ const MaterialUiPasswordReset = (props) => {
   const FRS = "Pole wymagane";
   const user = props.appState.user;
   const [editView, setEditView] = React.useState("password");
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const strongToken = useParams().token;
   console.log(strongToken)
 
@@ -88,15 +91,20 @@ const MaterialUiPasswordReset = (props) => {
                 password: values.password,
               })
                 .then((response) => {
-                  this.props.setUser(response.data);
+
+                  enqueueSnackbar("Gotowe! Teraz aktywuj konto przy pomocy linku otrzymanego na adres e-mail", { 
+                    variant: 'success',
+                });
                   helpers.setStatus("Pomyslnie zmieniono hasło");
                   helpers.setSubmitting(false);
-                  this.setState({ locked: false });
+                  
                 })
                 .catch((error) => {
-                  helpers.setStatus("Podano nieprawidłowe aktualne hasło")
-                  console.log("chngpass error", error.response);
+                  
                   const errResponse = error.response;
+                  enqueueSnackbar("Nieprawidłowy adres e-mail", { 
+                    variant: 'error',
+                });
                   helpers.setSubmitting(false);
                   this.setState({ locked: false });
                   helpers.setValues(
@@ -151,9 +159,10 @@ const MaterialUiPasswordReset = (props) => {
                 }}
                 labelText="Hasło"
                 inputProps={{
+                  type: "password",
                   endAdornment: (
                     <InputAdornment position="end">
-                      <People className={classes.inputIconsColor} />
+                      <LockIcon className={classes.inputIconsColor} />
                     </InputAdornment>
                   ),
                 }}
@@ -166,13 +175,14 @@ const MaterialUiPasswordReset = (props) => {
                 }}
                 labelText="Powtórz hasło"
                 inputProps={{
+                  type: "password",
                   endAdornment: (
                     <InputAdornment position="end">
-                      <People className={classes.inputIconsColor} />
+                      <LockIcon className={classes.inputIconsColor} />
                     </InputAdornment>
                   ),
                 }}
-              />          
+              />        
             </CardBody>
             <CardFooter className={classes.cardFooter}>
               <Button
@@ -182,9 +192,15 @@ const MaterialUiPasswordReset = (props) => {
                 onClick={() => {
                   handleSubmit();
                 }}
+                disabled={isSubmitting}
               >
                 Zmień hasło
               </Button>
+              {
+                            isSubmitting &&  
+                           <LoadingScreenB></LoadingScreenB>
+                      
+                          } 
             </CardFooter>
           </form>
         )}

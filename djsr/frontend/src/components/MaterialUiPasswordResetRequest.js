@@ -26,6 +26,8 @@ import * as Yup from "yup";
 import axiosInstance, { axiosInstanceNoAuth } from "./axiosAPI";
 import { Formik, Field } from "formik";
 import MaterialFormikField from "./MaterialFormikField";
+import { useSnackbar } from 'notistack';
+import LoadingScreenB from "./LoadingForButtons"
 
 const useStyles = makeStyles(styles);
 
@@ -34,6 +36,7 @@ const MaterialUiPasswordResetRequest = (props) => {
   const user = props.appState.user;
   const [editView, setEditView] = React.useState("email");
   const [notification, setNotification] = React.useState({isOpen: false, message:'',type:''})
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
 
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
@@ -79,17 +82,20 @@ const MaterialUiPasswordResetRequest = (props) => {
                 email: values.email,
               })
               .then((response) => {
+                enqueueSnackbar("Gotowe! Teraz aktywuj konto przy pomocy linku otrzymanego na adres e-mail", { 
+                  variant: 'success',
+              });
+
                 helpers.setSubmitting(false);
-                this.setState({
-                  token: response.data.confirmation_token,
-                });
-                this.props.history.push(
-                  `/signupsuccess/${response.data.confirmation_token}`
-                );
+            
               })
               .catch((error) => {
                 // console.log("login error", error.response);
                 const errResponse = error.response;
+                                
+                enqueueSnackbar("Nieprawidłowy adres e-mail", { 
+                  variant: 'error',
+              });
                 helpers.setSubmitting(false);
                 helpers.setValues(
                   {
@@ -108,11 +114,7 @@ const MaterialUiPasswordResetRequest = (props) => {
                   "general",
                   "brak maila"
                 );
-                setNotification({
-                  type:"success",
-                  isOpen:true,
-                  message:'Link do resetu hasła został wysłany na podany adres e-mail'
-                })
+
               });
           }, 5000);
         }}
@@ -163,9 +165,15 @@ const MaterialUiPasswordResetRequest = (props) => {
                 onClick={() => {
                   handleSubmit();
                 }}
+                disabled={isSubmitting}
               >
                 Przypomnij hasło
               </Button>
+              {
+                            isSubmitting &&  
+                           <LoadingScreenB></LoadingScreenB>
+                      
+                          } 
             </CardFooter>
           </form>
         )}

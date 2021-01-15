@@ -38,7 +38,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import MaterialFormikField from "./MaterialFormikField";
 import CardBody from "./material_ui_components/Card/CardBody.js";
 import CustomInput from "./material_ui_components/CustomInput/CustomInput.js";
-import Snackbar from '@material-ui/core/Snackbar';
+import { withSnackbar } from "notistack";
 import MuiAlert from '@material-ui/lab/Alert';
 import Notification from './Notification'
 import DynamicFeedIcon from '@material-ui/icons/DynamicFeed';
@@ -70,6 +70,7 @@ import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Loading from "./LoadingScreen"
+import LoadingScreenB from "./LoadingForButtons"
 import InputAdornment from '@material-ui/core/InputAdornment';
 import ButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 const useStyles = makeStyles((theme) => ({
@@ -163,6 +164,8 @@ const useStylesAlert = makeStyles((theme) => ({
         otwCount: null,
         zamkCount: null,
         autoGeneStep: '1',
+        isGathering: false,
+        isGenerating: false
         
 
        
@@ -273,7 +276,7 @@ const useStylesAlert = makeStyles((theme) => ({
 
       if (!exams ) {
         return (
-          <Loading></Loading>
+          <Loading  message={"Ładowanie edytora kolekcji sprawdzianów"} ></Loading>
         );
       }
       return (
@@ -284,7 +287,7 @@ const useStylesAlert = makeStyles((theme) => ({
         <Paper  style={bgStyles.paperContainer}>
    
           <Box
-          p={8}
+          p={12}
           >
 
               <Grid  
@@ -331,6 +334,10 @@ const useStylesAlert = makeStyles((theme) => ({
                           .then((response) => {
                             console.log("UE create response", response);
                             this.addExam(response.data[0]);
+                            this.props.enqueueSnackbar("Utworzyłeś nowy sprawdzian", { 
+                              variant: 'success',
+                          })
+                            
                             helpers.setSubmitting(false);
                             //this.props.history.push("/editor/");
                           })
@@ -338,19 +345,17 @@ const useStylesAlert = makeStyles((theme) => ({
                             // console.log("login error", error.response);
                             const errResponse = error.response;
                             helpers.setSubmitting(false);
-                            helpers.setValues(
-                              {
-                                name: "",
-                              },
-                              false
-                            );
+                            this.props.enqueueSnackbar("Nazwa zajęta", { 
+                              variant: 'error',
+                          })
+                           
                             helpers.setTouched(
                               {
                                 name: false,
                               },
                               false
                             );
-                            helpers.setFieldError("general", "Nazwa w uzyciu");
+                            
                            
                             
                           });
@@ -407,7 +412,11 @@ const useStylesAlert = makeStyles((theme) => ({
                           >
                             Zapisz sprawdzian
                           </Button>
-                         
+                          {
+                            isSubmitting &&  
+                           <LoadingScreenB></LoadingScreenB>
+                      
+                          } 
                           <Button 
                            variant="contained" 
                             color="primary"
@@ -496,6 +505,7 @@ const useStylesAlert = makeStyles((theme) => ({
             
          </Paper>
          {this.state.autoGeneStep=="1" ? (
+           
          <Dialog 
          
          fullWidth={true}
@@ -539,10 +549,11 @@ const useStylesAlert = makeStyles((theme) => ({
         <DialogActions >
           
           <Button 
+          disabled={this.state.isGathering}
           color="primary"      
             onClick={() => {
               
-      
+              this.setState({isGathering: true  })
               axiosInstanceNoAuth
               .post("/user/sections3/",{
 
@@ -556,6 +567,7 @@ const useStylesAlert = makeStyles((theme) => ({
                 })
                 this.setState({ sections: parsed });
                 this.setState({autoGeneStep: "2"})
+                this.setState({isGathering: false  })
                 // const parsed= response.data.map((section)=>{
                 //   section.skill=section.skilll
                 //   return section
@@ -563,11 +575,19 @@ const useStylesAlert = makeStyles((theme) => ({
                 // this.setState({ sections: response.data });
               })
               .catch((error) => {
+                this.setState({isGathering: false  })
+                this.props.enqueueSnackbar("Wybierz poziom", { 
+                  variant: 'error',
+              })
                 console.log(error);
+                
               });
             }}>
             Dalej
           </Button>
+          {
+            this.state.isGathering && <LoadingScreenB></LoadingScreenB>
+          }
         </DialogActions>
         
       </Dialog>
@@ -577,6 +597,56 @@ const useStylesAlert = makeStyles((theme) => ({
               )}
 
 {this.state.autoGeneStep=="2" ? (
+                      <Formik
+                      onSubmit={(values, helpers) => {
+                        setTimeout(() => {
+                          helpers.setSubmitting(true);
+                          axiosInstance
+                            .post("/user/maketest/", {
+                              name: values.name,
+                              tasks: "",
+                            })
+                            .then((response) => {
+                              console.log("UE create response", response);
+                              this.addExam(response.data[0]);
+                              this.props.enqueueSnackbar("Utworzyłeś nowy sprawdzian", { 
+                                variant: 'success',
+                            })
+                              
+                              helpers.setSubmitting(false);
+                              //this.props.history.push("/editor/");
+                            })
+                            .catch((error) => {
+                              // console.log("login error", error.response);
+                              const errResponse = error.response;
+                              helpers.setSubmitting(false);
+                              this.props.enqueueSnackbar("Nazwa zajęta", { 
+                                variant: 'error',
+                            })
+                             
+                              helpers.setTouched(
+                                {
+                                  name: false,
+                                },
+                                false
+                              );
+                              
+                             
+                              
+                            });
+                        }, 400);
+                      }}
+                    >
+                      {({
+                        values,
+                        errors,
+                        touched,
+                        handleChange,
+                        handleBlur,
+                        handleSubmit,
+                        isSubmitting,
+                      }) => (
+                        <Form >
          <Dialog 
          
          fullWidth={true}
@@ -687,10 +757,11 @@ const useStylesAlert = makeStyles((theme) => ({
         <DialogActions >
           
           <Button 
-          color="primary"      
+          color="primary"   
+          disabled={this.state.isGenerating}   
             onClick={() => {
               
-      
+              this.setState({isGenerating: true  })
                axiosInstance
                 .post(`/user/getrandomtasks/`, {
                 ileotw: this.state.ileotw,
@@ -714,8 +785,15 @@ const useStylesAlert = makeStyles((theme) => ({
                       }).then((response)=>{
                         
                         console.log(randomtasks)
-                       // console.log(this.state.generatedId)
+                        this.setState({isGenerating: false  })
+                        
                        this.props.history.go(0);
+                      })
+                      .catch((error)=>{
+                        this.setState({isGenerating: false  })
+                        this.props.enqueueSnackbar("Coś poszło nie tak, spróbuj ponownie", { 
+                          variant: 'error',
+                      })
                       })
                     
                     })
@@ -730,16 +808,26 @@ const useStylesAlert = makeStyles((theme) => ({
 
                 })
                 .catch((error) => {
-
+                  this.setState({isGenerating: false  })
+                  this.props.enqueueSnackbar("Coś poszło nie tak, spróbuj ponownie", { 
+                    variant: 'error',
+                })
                   console.log("chngpass error", error.response);
 
                 });
             }}>
             Generuj
           </Button>
+          {
+            this.state.isGenerating && <LoadingScreenB></LoadingScreenB>
+          }
         </DialogActions>
         
       </Dialog>
+                              
+      </Form>
+                    )}
+                  </Formik>
               ) : (
                 <>
                 </>
@@ -751,4 +839,4 @@ const useStylesAlert = makeStyles((theme) => ({
   
   UserExams.propTypes = {};
 
-export default (UserExams);
+export default withSnackbar(UserExams);

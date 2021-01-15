@@ -26,11 +26,16 @@ import axiosInstance, { axiosInstanceNoAuth } from "./axiosAPI";
 import { Formik, Field } from "formik";
 import MaterialFormikField from "./MaterialFormikField";
 import Paper from '@material-ui/core/Paper';
+import { useSnackbar } from 'notistack';
+import LoadingScreenB from "./LoadingForButtons"
+import CircularProgress from '@material-ui/core/CircularProgress';
+import LoadingScreen from "./LoadingScreen.js";
 const useStyles = makeStyles(styles);
 
 const MaterialUiSignUpPage = (props) => {
   const FRS = "Pole wymagane";
   const user = props.appState.user;
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const bgStyles = {
     paperContainer: {
         backgroundImage: `url(${image})`,
@@ -106,17 +111,18 @@ const MaterialUiSignUpPage = (props) => {
                           email: values.email,
                         })
                         .then((response) => {
+                          enqueueSnackbar("Gotowe! Teraz aktywuj konto przy pomocy linku otrzymanego na adres e-mail", { 
+                            variant: 'success',
+                        });
                           helpers.setSubmitting(false);
-                          this.setState({
-                            token: response.data.confirmation_token,
-                          });
-                          this.props.history.push(
-                            `/signupsuccess/${response.data.confirmation_token}`
-                          );
+
                         })
                         .catch((error) => {
                           // console.log("login error", error.response);
                           const errResponse = error.response;
+                          enqueueSnackbar("Email zajęty", { 
+                            variant: 'error',
+                        });
                           helpers.setSubmitting(false);
                           helpers.setValues(
                             {
@@ -287,13 +293,19 @@ const MaterialUiSignUpPage = (props) => {
                           onClick={() => {
                             handleSubmit();
                           }}
+                          disabled={isSubmitting}
                         >
-                          Zarejestruj
+                          Zarejestruj   
                         </Button>
                    
-                        
+                        {
+                            isSubmitting &&  
+                           <LoadingScreenB></LoadingScreenB>
+                      
+                          } 
                       </CardFooter>
                     </form>
+                    
                   )}
                 </Formik>
               </Card>
