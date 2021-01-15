@@ -54,14 +54,17 @@ const AddTaskDialog = ({ open, handleClose, indexOffset,pushTaskAtIndex ,index})
   return (
     <Dialog
       open={open}
-      onClose={handleClose}
+      onClose={(event, reason)=>{
+        console.log("dialogClose",event,reason)
+        handleClose()}}
       aria-labelledby="form-dialog-title"
+      // disableBackdropClick={true}
+      // disableEscapeKeyDown={true}
+      // disableEnforceFocus={true}
+      // disablePortal
     >
       <DialogTitle id="form-dialog-title">Dodaj zadanie</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          Wybierz jakie umiejętnośći ma sprwadzać zadanie.
-        </DialogContentText>
         <AddTask
           onTaskAdd={onTaskAdd}
         />

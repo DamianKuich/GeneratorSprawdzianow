@@ -34,51 +34,56 @@ const TaskOverlay = ({
             //   margin: isActive ? "-2px -13px" : "0px",
             //   padding: isActive ? "1px 12px" : "0px",
             // }}
-              className={classNames({
-                [classes.root]:true,
-                [classes.activeRoot]:isActive
-              })}
+            className={classNames({
+              [classes.root]: true,
+              [classes.activeRoot]: isActive,
+            })}
             // position={"relative"}
           >
-            {isActive && (
-              <ReactResizeDetector>
-                {({ width, height }) => {
-                  const menuWidth = width;
-                  const rightOffset = boxWidth / 2 - menuWidth / 2;
-                  return (
-                    <Box
-                      // position={"absolute"}
-                      top={`-${height}px`}
-                      right={`${rightOffset}px`}
-                      // left={"auto"}
-                      // right={"auto"}
-                      // borderColor={"primary.main"}
-                      // display={"flex"}
-                      // color={"white"}
-                        className={classes.menuContainer}
-                    >
-                      <div
-                        // style={{
-                        //   border: "solid transparent",
-                        //   borderRight: "solid black",
-                        //   borderWidth: "22px 12px 0 0",
-                        // }}
-                          className={classes.menuLeftLeaf}
-                      ></div>
-                      {menuComponents}
-                      <div
-                        // style={{
-                        //   border: "solid transparent",
-                        //   borderLeft: "solid black",
-                        //   borderWidth: "22px 0 0 12px",
-                        // }}
-                          className={classes.menuRightLeaf}
-                      ></div>
-                    </Box>
-                  );
-                }}
-              </ReactResizeDetector>
-            )}
+            {/*{isActive && (*/}
+            <ReactResizeDetector>
+              {({ width, height }) => {
+                const menuWidth = width;
+                const rightOffset = boxWidth / 2 - menuWidth / 2;
+                return (
+                  <Box
+                    // position={"absolute"}
+                    top={`-${height}px`}
+                    right={`${rightOffset}px`}
+                    // left={"auto"}
+                    // right={"auto"}
+                    // borderColor={"primary.main"}
+                    // display={"flex"}
+                    // color={"white"}
+                    //   className={classes.menuContainer}
+                    className={classNames({
+                      [classes.menuContainer]: true,
+                      [classes.menuContainerShow]: !!isActive,
+                      [classes.menuContainerHide]: !isActive,
+                    })}
+                  >
+                    <div
+                      // style={{
+                      //   border: "solid transparent",
+                      //   borderRight: "solid black",
+                      //   borderWidth: "22px 12px 0 0",
+                      // }}
+                      className={classes.menuLeftLeaf}
+                    ></div>
+                    {menuComponents}
+                    <div
+                      // style={{
+                      //   border: "solid transparent",
+                      //   borderLeft: "solid black",
+                      //   borderWidth: "22px 0 0 12px",
+                      // }}
+                      className={classes.menuRightLeaf}
+                    ></div>
+                  </Box>
+                );
+              }}
+            </ReactResizeDetector>
+            {/*)}*/}
             <Box
               // m={isActive ? "-1px" : ""}
               style={{}}
