@@ -1,13 +1,7 @@
 from django.urls import path, include
 
 from rest_framework_simplejwt import views as jwt_views
-from .views import AddImageToTaskViewSet, AddImageViewSet, ImageViewSet, SkillViewSet, SectionViewSet, \
-    CustomUserCreate, HelloWorldView, \
-    LogoutAndBlacklistRefreshTokenForUserView, TaskViewSet, TestKeyAnswersviewSet, \
-    UserRetrieveUpdateAPIView, ReturnUserInfo, PasswordSendResetView, PasswordResetView, AllTestsJSONViewSet, \
-    OneTestJSONViewSet, MakeTestViewSet, MakeTestCopyViewSet, LatexToSvgView, GetRandomTasksViewSet, \
-    SkilltoSections, AddTask, AddSkill, AddSection, AddAnswers, DeleteTestViewSet, TestTasksiewSet,\
-    TestAnswersviewSet, SkilltoSectionsAutoGene, GetSkillsFromfile
+from .views import *
 
 # TODO resend activation token
 urlpatterns = [
