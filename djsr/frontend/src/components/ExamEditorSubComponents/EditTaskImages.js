@@ -19,7 +19,7 @@ import getLayoutParams from "./getImageLayotRowsCols";
 import CustomRadio from "../material_ui_components/CustomRadio/CustomRadio";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
+import PhotoLibraryIcon from "@material-ui/icons/PhotoLibrary";
 import TaskOverlayButton from "./TaskOverlayButton";
 
 const EditTaskImages = (props) => {
@@ -78,7 +78,7 @@ const EditTaskImages = (props) => {
   };
   const removeImage = (index) => {
     // console.log("removeImage",index)
-      if (isSending) return;
+    if (isSending) return;
     const newImages = [...images];
     newImages.splice(index, 1);
     // console.log("removeImage",newImages)
@@ -88,20 +88,21 @@ const EditTaskImages = (props) => {
   return (
     <>
       <TaskOverlayButton
-          tooltip={"Dodaj lub edytuj zdjęcia do zadania"}
+        tooltip={"Dodaj lub edytuj zdjęcia do zadania"}
         onClick={() => {
           setOpen(true);
         }}
       >
-        <PhotoLibraryIcon fontSize={"small"}/>
+        <PhotoLibraryIcon fontSize={"small"} />
       </TaskOverlayButton>
       <Dialog
         open={open}
         dialogTitle={"Edycja zdjęć"}
         fullWidth={true}
         maxWidth={"lg"}
-        onClose={() => {
+        onClose={(event, reason) => {
           setOpen(false);
+          console.log("dClose",event, reason);
         }}
         dialogActionsChildren={[
           <Button
@@ -136,7 +137,7 @@ const EditTaskImages = (props) => {
           )}
           <div>
             <CustomRadio
-              labelProps={{ label: "2x1", disabled: isSending }}
+              labelProps={{ label: "poziomo", disabled: isSending }}
               radioProps={{
                 checked: imageLayout === "2x1",
                 onChange: () => {
@@ -145,7 +146,7 @@ const EditTaskImages = (props) => {
               }}
             />
             <CustomRadio
-              labelProps={{ label: "1x2", disabled: isSending }}
+              labelProps={{ label: "pionowo", disabled: isSending }}
               radioProps={{
                 checked: imageLayout === "1x2",
                 onChange: () => {

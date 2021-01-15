@@ -20,8 +20,14 @@ const taskOverlayStyle = {
   },
   menuContainer: {
     position: "absolute",
-    display: "flex",
+    // display: "flex",
     color: "white",
+  },
+  menuContainerShow:{
+    display:"flex",
+  },
+  menuContainerHide:{
+    display:"none",
   },
   menuLeftLeaf: {
     border: "solid transparent",

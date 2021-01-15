@@ -1,1 +1,364 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[13],{1527:function(e,a,t){"use strict";t.r(a);var n=t(1),r=t.n(n),o=t(448),i=t(772),l=t(465),s=t.n(l),c=t(597),m=t.n(c),u=t(356),d=(t(168),t(575),t(567),t(530)),p=t(531),f=t(72),b=t(549),h=t(534),v=t(535),E=t(551),y=(t(162),t(462)),w=t(544),g=t(163),C=t(545),S=t(548),j=t(55),P=t(47),z=t(87),k=t(2),N=t(5),T=(t(59),t(0),t(6));function x(e,a){return void 0!==a&&void 0!==e&&(Array.isArray(a)?a.indexOf(e)>=0:e===a)}var O=t(7),A=t(10),R=n.forwardRef((function(e,a){var t=e.children,r=e.classes,o=e.className,i=e.exclusive,l=void 0!==i&&i,s=e.onChange,c=e.orientation,m=void 0===c?"horizontal":c,u=e.size,d=void 0===u?"medium":u,p=e.value,f=Object(N.a)(e,["children","classes","className","exclusive","onChange","orientation","size","value"]),b=function(e,a){if(s){var t,n=p&&p.indexOf(a);p&&n>=0?(t=p.slice()).splice(n,1):t=p?p.concat(a):[a],s(e,t)}},h=function(e,a){s&&s(e,p===a?null:a)};return n.createElement("div",Object(k.a)({role:"group",className:Object(T.a)(r.root,o,"vertical"===m&&r.vertical),ref:a},f),n.Children.map(t,(function(e){return n.isValidElement(e)?n.cloneElement(e,{className:Object(T.a)(r.grouped,r["grouped".concat(Object(A.a)(m))],e.props.className),onChange:l?h:b,selected:void 0===e.props.selected?x(e.props.value,p):e.props.selected,size:e.props.size||d}):null})))})),F=Object(O.a)((function(e){return{root:{display:"inline-flex",borderRadius:e.shape.borderRadius},vertical:{flexDirection:"column"},grouped:{},groupedHorizontal:{"&:not(:first-child)":{marginLeft:-1,borderLeft:"1px solid transparent",borderTopLeftRadius:0,borderBottomLeftRadius:0},"&:not(:last-child)":{borderTopRightRadius:0,borderBottomRightRadius:0}},groupedVertical:{"&:not(:first-child)":{marginTop:-1,borderTop:"1px solid transparent",borderTopLeftRadius:0,borderTopRightRadius:0},"&:not(:last-child)":{borderBottomLeftRadius:0,borderBottomRightRadius:0}}}}),{name:"MuiToggleButtonGroup"})(R),Z=t(560);function I(){return(I=Object.assign||function(e){for(var a=1;a<arguments.length;a++){var t=arguments[a];for(var n in t)Object.prototype.hasOwnProperty.call(t,n)&&(e[n]=t[n])}return e}).apply(this,arguments)}function L(e,a){return function(e){if(Array.isArray(e))return e}(e)||function(e,a){if("undefined"==typeof Symbol||!(Symbol.iterator in Object(e)))return;var t=[],n=!0,r=!1,o=void 0;try{for(var i,l=e[Symbol.iterator]();!(n=(i=l.next()).done)&&(t.push(i.value),!a||t.length!==a);n=!0);}catch(e){r=!0,o=e}finally{try{n||null==l.return||l.return()}finally{if(r)throw o}}return t}(e,a)||function(e,a){if(!e)return;if("string"==typeof e)return V(e,a);var t=Object.prototype.toString.call(e).slice(8,-1);"Object"===t&&e.constructor&&(t=e.constructor.name);if("Map"===t||"Set"===t)return Array.from(e);if("Arguments"===t||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t))return V(e,a)}(e,a)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function V(e,a){(null==a||a>e.length)&&(a=e.length);for(var t=0,n=new Array(a);t<a;t++)n[t]=e[t];return n}var H=Object(o.a)(w.default);a.default=function(e){var a="Pole wymagane",t=(e.appState.user,L(r.a.useState("email"),2)),n=t[0],o=t[1],l=Object(g.b)(),c=l.enqueueSnackbar,w=(l.closeSnackbar,{paperContainer:{backgroundImage:"url(".concat(C.a,")"),minHeight:1e3},examCardContainer:{width:700,backgroundColor:"#FEFEFA"},cardTitle:{textAlign:"center"}}),k=L(r.a.useState("cardHidden"),2),N=k[0],T=k[1];setTimeout((function(){T("")}),700);var x=H();I({},e);return r.a.createElement("div",null,r.a.createElement(u.a,{style:w.paperContainer},r.a.createElement("div",{className:x.container},r.a.createElement(d.a,{justify:"center"},r.a.createElement(p.a,{xs:12,sm:12,md:4},r.a.createElement(b.a,{className:x[N]},"email"==n?r.a.createElement(P.c,{initialValues:{email:""},validationSchema:S.b().shape({email:S.d().min(2,"Too Short!").max(50,"Too Long!").required(a)}),onSubmit:function(e,a){setTimeout((function(){a.setSubmitting(!0),j.b.put("/user/update/",{email:e.email}).then((function(e){c("Pomyślnie zmieniono dane",{variant:"success"}),a.setSubmitting(!1)})).catch((function(e){e.response;c("Adres e-mail jest już zajęty, bądź jest nieprawidłowy",{variant:"error"}),a.setSubmitting(!1),a.setValues({email:""},!1),a.setTouched({name:!1},!1),a.setFieldError("name","Nazwa jest w użyciu lub jest nieprawidłowa.")}))}),400)}},(function(e){e.values;var a=e.errors,t=e.touched,n=(e.handleChange,e.handleBlur,e.handleSubmit),l=e.isSubmitting;return r.a.createElement("form",{className:x.form},console.log(t,a),r.a.createElement(v.a,{color:"primary",className:x.cardHeader},r.a.createElement("h4",null,"Edytuj dane")),r.a.createElement(h.a,null,r.a.createElement(y.a,{container:!0,justify:"center"},r.a.createElement(F,{orientation:"vertical",color:"primary","aria-label":"vertical contained primary button group",variant:"text"},r.a.createElement(f.a,{variant:"contained",color:"primary",onClick:function(e){return o("email")}},"Zmień e-mail"),r.a.createElement(f.a,{variant:"contained",color:"primary",onClick:function(e){return o("name")}},"Zmień nazwę użytkownika"),r.a.createElement(f.a,{variant:"contained",color:"primary",onClick:function(e){return o("password")}},"Zmień hasło"))),r.a.createElement(P.a,{component:z.a,name:"email",formControlProps:{fullWidth:!0},labelText:"Adres e-mail",inputProps:{endAdornment:r.a.createElement(i.a,{position:"end"},r.a.createElement(s.a,{className:x.inputIconsColor}))}})),r.a.createElement(E.a,{className:x.cardFooter},r.a.createElement(f.a,{simple:!0,color:"primary",size:"lg",onClick:function(){n()},disabled:l},"Zmień dane"),l&&r.a.createElement(Z.a,null)))})):r.a.createElement(r.a.Fragment,null),"name"==n?r.a.createElement(P.c,{initialValues:{name:""},validationSchema:S.b().shape({name:S.d().min(2,"Too Short!").max(50,"Too Long!").required(a)}),onSubmit:function(e,a){setTimeout((function(){a.setSubmitting(!0),j.b.put("/user/update/",{username:e.name}).then((function(e){c("Pomyślnie zmieniono dane",{variant:"success"}),a.setStatus("Pomyslnie zmieniono dane"),a.setSubmitting(!1)})).catch((function(e){e.response;c("Nazwa użytkownika jest już zajęta",{variant:"error"}),a.setSubmitting(!1),a.setValues({name:""},!1),a.setTouched({name:!1},!1),a.setFieldError("name","Nazwa jest w użyciu lub jest nieprawidłowa.")}))}),400)}},(function(e){e.values;var a=e.errors,t=e.touched,n=(e.handleChange,e.handleBlur,e.handleSubmit),l=e.isSubmitting;return r.a.createElement("form",{className:x.form},console.log(t,a),r.a.createElement(v.a,{color:"primary",className:x.cardHeader},r.a.createElement("h4",null,"Edytuj dane")),r.a.createElement(h.a,null,r.a.createElement(y.a,{container:!0,justify:"center"},r.a.createElement(F,{orientation:"vertical",color:"primary","aria-label":"vertical contained primary button group",variant:"text"},r.a.createElement(f.a,{variant:"contained",color:"primary",onClick:function(e){return o("email")}},"Zmień e-mail"),r.a.createElement(f.a,{variant:"contained",color:"primary",onClick:function(e){return o("name")}},"Zmień nazwę użytkownika"),r.a.createElement(f.a,{variant:"contained",color:"primary",onClick:function(e){return o("password")}},"Zmień hasło"))),r.a.createElement(P.a,{component:z.a,name:"name",formControlProps:{fullWidth:!0},labelText:"Nazwa użytkownika",inputProps:{endAdornment:r.a.createElement(i.a,{position:"end"},r.a.createElement(s.a,{className:x.inputIconsColor}))}})),r.a.createElement(E.a,{className:x.cardFooter},r.a.createElement(f.a,{simple:!0,color:"primary",size:"lg",onClick:function(){n()},disabled:l},"Zmień dane"),l&&r.a.createElement(Z.a,null)))})):r.a.createElement(r.a.Fragment,null),"password"==n?r.a.createElement(P.c,{initialValues:{password:"",passwordConfirm:"",oldPassword:""},validationSchema:S.b().shape({password:S.d().min(8,"Too Short!").max(50,"Too Long!").required("Pole wymagane").oneOf([S.c("passwordConfirm")],"Hasła są różne"),oldPassword:S.d().min(8,"Too Short!").max(50,"Too Long!").required("Pole wymagane"),passwordConfirm:S.d().oneOf([S.c("password")],"Hasła są różne").required("Pole wymagane")}),onSubmit:function(e,a){setTimeout((function(){a.setSubmitting(!0),j.b.put("/user/update/",{password:e.password,oldpassword:e.oldPassword}).then((function(e){c("Pomyślnie zmieniono dane",{variant:"success"}),a.setStatus("Pomyslnie zmieniono hasło"),a.setSubmitting(!1)})).catch((function(e){c("Nie udało się zmienić hasła, spróbuj ponownie",{variant:"error"}),a.setStatus("Podano nieprawidłowe aktualne hasło"),console.log("chngpass error",e.response);e.response;a.setSubmitting(!1),a.setValues({password:"",oldPassword:"",passwordConfirm:""},!1),a.setTouched({password:!1,oldPassword:!1,passwordConfirm:!1},!1),a.setFieldError("oldPassword","Podano nieprawidłowe stare hasło")}))}),400)}},(function(e){e.values;var a=e.errors,t=e.touched,n=(e.handleChange,e.handleBlur,e.handleSubmit),l=e.isSubmitting;return r.a.createElement("form",{className:x.form},console.log(t,a),r.a.createElement(v.a,{color:"primary",className:x.cardHeader},r.a.createElement("h4",null,"Edytuj dane")),r.a.createElement(h.a,null,r.a.createElement(y.a,{container:!0,justify:"center"},r.a.createElement(F,{orientation:"vertical",color:"primary","aria-label":"vertical contained primary button group",variant:"text"},r.a.createElement(f.a,{variant:"contained",color:"primary",onClick:function(e){return o("email")}},"Zmień e-mail"),r.a.createElement(f.a,{variant:"contained",color:"primary",onClick:function(e){return o("name")}},"Zmień nazwę użytkownika"),r.a.createElement(f.a,{variant:"contained",color:"primary",onClick:function(e){return o("password")}},"Zmień hasło"))),r.a.createElement(P.a,{component:z.a,name:"password",formControlProps:{fullWidth:!0},labelText:"Hasło",inputProps:{type:"password",endAdornment:r.a.createElement(i.a,{position:"end"},r.a.createElement(m.a,{className:x.inputIconsColor}))}}),r.a.createElement(P.a,{component:z.a,name:"passwordConfirm",formControlProps:{fullWidth:!0},labelText:"Powtórz hasło",inputProps:{type:"password",endAdornment:r.a.createElement(i.a,{position:"end"},r.a.createElement(m.a,{className:x.inputIconsColor}))}}),r.a.createElement(P.a,{component:z.a,name:"oldPassword",formControlProps:{fullWidth:!0},labelText:"Podaj stare hasło",inputProps:{type:"password",endAdornment:r.a.createElement(i.a,{position:"end"},r.a.createElement(m.a,{className:x.inputIconsColor}))}})),r.a.createElement(E.a,{className:x.cardFooter},r.a.createElement(f.a,{simple:!0,color:"primary",size:"lg",onClick:function(){n()},disabled:l},"Zmień dane"),l&&r.a.createElement(Z.a,null)))})):r.a.createElement(r.a.Fragment,null)))))))}},465:function(e,a,t){"use strict";var n=t(45),r=t(159);Object.defineProperty(a,"__esModule",{value:!0}),a.default=void 0;var o=r(t(1)),i=(0,n(t(160)).default)(o.createElement("path",{d:"M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"}),"People");a.default=i},545:function(e,a,t){"use strict";a.a=t.p+"29a2f630b088eabfaa8f98afec0658ab.png"},560:function(e,a,t){"use strict";t.d(a,"a",(function(){return s}));var n=t(1),r=t.n(n),o=t(448),i=t(456),l=Object(o.a)((function(e){return{root:{display:"flex",alignItems:"center"},wrapper:{margin:e.spacing(1),position:"relative"}}}));function s(){var e=l();return r.a.createElement("div",{className:e.root},r.a.createElement("div",{className:e.wrapper},r.a.createElement(i.a,{size:20,className:e.buttonProgress,style:{color:"purple"}})))}}}]);
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[13],{
+
+/***/ "./djsr/frontend/src/components/LoadingForButtons.js":
+/*!***********************************************************!*\
+  !*** ./djsr/frontend/src/components/LoadingForButtons.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LoadingScreenB; });
+/* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/esm/Grid/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/CircularProgress */ "./node_modules/@material-ui/core/esm/CircularProgress/index.js");
+
+
+
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["makeStyles"])(function (theme) {
+  return {
+    root: {
+      display: 'flex',
+      alignItems: 'center'
+    },
+    wrapper: {
+      margin: theme.spacing(1),
+      position: 'relative'
+    }
+  };
+});
+function LoadingScreenB() {
+  var classes = useStyles();
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: classes.root
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: classes.wrapper
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    size: 20,
+    className: classes.buttonProgress,
+    style: {
+      'color': 'purple'
+    }
+  })));
+}
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/MaterialUiPasswordReset.js":
+/*!*****************************************************************!*\
+  !*** ./djsr/frontend/src/components/MaterialUiPasswordReset.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/InputAdornment */ "./node_modules/@material-ui/core/esm/InputAdornment/index.js");
+/* harmony import */ var _material_ui_core_Icon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Icon */ "./node_modules/@material-ui/core/esm/Icon/index.js");
+/* harmony import */ var _material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/icons/Email */ "./node_modules/@material-ui/icons/Email.js");
+/* harmony import */ var _material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/icons/People */ "./node_modules/@material-ui/icons/People.js");
+/* harmony import */ var _material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/icons/Lock */ "./node_modules/@material-ui/icons/Lock.js");
+/* harmony import */ var _material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _material_ui_components_Header_Header_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./material_ui_components/Header/Header.js */ "./djsr/frontend/src/components/material_ui_components/Header/Header.js");
+/* harmony import */ var _material_ui_components_Header_HeaderLinks_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./material_ui_components/Header/HeaderLinks.js */ "./djsr/frontend/src/components/material_ui_components/Header/HeaderLinks.js");
+/* harmony import */ var _material_ui_components_Footer_Footer_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./material_ui_components/Footer/Footer.js */ "./djsr/frontend/src/components/material_ui_components/Footer/Footer.js");
+/* harmony import */ var _material_ui_components_Grid_GridContainer_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./material_ui_components/Grid/GridContainer.js */ "./djsr/frontend/src/components/material_ui_components/Grid/GridContainer.js");
+/* harmony import */ var _material_ui_components_Grid_GridItem_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./material_ui_components/Grid/GridItem.js */ "./djsr/frontend/src/components/material_ui_components/Grid/GridItem.js");
+/* harmony import */ var _material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ././material_ui_components/CustomButtons/Button.js */ "./djsr/frontend/src/components/material_ui_components/CustomButtons/Button.js");
+/* harmony import */ var _material_ui_components_Card_Card_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./material_ui_components/Card/Card.js */ "./djsr/frontend/src/components/material_ui_components/Card/Card.js");
+/* harmony import */ var _material_ui_components_Card_CardBody_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./material_ui_components/Card/CardBody.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardBody.js");
+/* harmony import */ var _material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./material_ui_components/Card/CardHeader.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardHeader.js");
+/* harmony import */ var _material_ui_components_Card_CardFooter_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./material_ui_components/Card/CardFooter.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardFooter.js");
+/* harmony import */ var _material_ui_components_CustomInput_CustomInput_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./material_ui_components/CustomInput/CustomInput.js */ "./djsr/frontend/src/components/material_ui_components/CustomInput/CustomInput.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _assets_jss_material_kit_react_views_loginPage_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./assets/jss/material-kit-react/views/loginPage.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react/views/loginPage.js");
+/* harmony import */ var _img_genspr_parralax_bg_png__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./img/genspr-parralax-bg.png */ "./djsr/frontend/src/components/img/genspr-parralax-bg.png");
+/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
+/* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
+/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
+/* harmony import */ var _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./MaterialFormikField */ "./djsr/frontend/src/components/MaterialFormikField.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_25___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_25__);
+/* harmony import */ var notistack__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! notistack */ "./node_modules/notistack/dist/notistack.esm.js");
+/* harmony import */ var _LoadingForButtons__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./LoadingForButtons */ "./djsr/frontend/src/components/LoadingForButtons.js");
+var _this = undefined;
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])(_assets_jss_material_kit_react_views_loginPage_js__WEBPACK_IMPORTED_MODULE_19__["default"]);
+
+var MaterialUiPasswordReset = function MaterialUiPasswordReset(props) {
+  var FRS = "Pole wymagane";
+  var user = props.appState.user;
+
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState("password"),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      editView = _React$useState2[0],
+      setEditView = _React$useState2[1];
+
+  var _useSnackbar = Object(notistack__WEBPACK_IMPORTED_MODULE_26__["useSnackbar"])(),
+      enqueueSnackbar = _useSnackbar.enqueueSnackbar,
+      closeSnackbar = _useSnackbar.closeSnackbar;
+
+  var strongToken = Object(react_router__WEBPACK_IMPORTED_MODULE_18__["useParams"])().token;
+  console.log(strongToken);
+
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState("cardHidden"),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      cardAnimaton = _React$useState4[0],
+      setCardAnimation = _React$useState4[1];
+
+  setTimeout(function () {
+    setCardAnimation("");
+  }, 700);
+  var classes = useStyles();
+
+  var rest = _extends({}, props);
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.pageHeader,
+    style: {
+      backgroundImage: "url(" + _img_genspr_parralax_bg_png__WEBPACK_IMPORTED_MODULE_20__["default"] + ")",
+      backgroundSize: "cover",
+      backgroundPosition: "top center"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.container
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridContainer_js__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    justify: "center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridItem_js__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    xs: 12,
+    sm: 12,
+    md: 4
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_Card_js__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    className: classes[cardAnimaton]
+  }, editView == "password" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Formik"], {
+    initialValues: {
+      password: "",
+      passwordConfirm: ""
+    },
+    validationSchema: yup__WEBPACK_IMPORTED_MODULE_21__["object"]().shape({
+      password: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().min(8, "Too Short!").max(50, "Too Long!").required("Pole wymagane").oneOf([yup__WEBPACK_IMPORTED_MODULE_21__["ref"]("passwordConfirm")], "Hasła są różne"),
+      passwordConfirm: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().oneOf([yup__WEBPACK_IMPORTED_MODULE_21__["ref"]("password")], "Hasła są różne").required("Pole wymagane")
+    }),
+    onSubmit: function onSubmit(values, helpers) {
+      setTimeout(function () {
+        helpers.setSubmitting(true);
+        _axiosAPI__WEBPACK_IMPORTED_MODULE_22__["axiosInstanceNoAuth"].post("/user/passreset/".concat(strongToken, "/$"), {
+          password: values.password
+        }).then(function (response) {
+          enqueueSnackbar("Gotowe! Teraz aktywuj konto przy pomocy linku otrzymanego na adres e-mail", {
+            variant: 'success'
+          });
+          helpers.setStatus("Pomyslnie zmieniono hasło");
+          helpers.setSubmitting(false);
+        })["catch"](function (error) {
+          var errResponse = error.response;
+          enqueueSnackbar("Nieprawidłowy adres e-mail", {
+            variant: 'error'
+          });
+          helpers.setSubmitting(false);
+
+          _this.setState({
+            locked: false
+          });
+
+          helpers.setValues({
+            password: "",
+            passwordConfirm: ""
+          }, false);
+          helpers.setTouched({
+            password: false,
+            passwordConfirm: false
+          }, false);
+          helpers.setFieldError("oldPassword", "Podano nieprawidłowe stare hasło");
+        });
+      }, 400);
+    }
+  }, function (_ref) {
+    var values = _ref.values,
+        errors = _ref.errors,
+        touched = _ref.touched,
+        handleChange = _ref.handleChange,
+        handleBlur = _ref.handleBlur,
+        handleSubmit = _ref.handleSubmit,
+        isSubmitting = _ref.isSubmitting;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      className: classes.form
+    }, console.log(touched, errors), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      color: "primary",
+      className: classes.cardHeader
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Wprowad\u017A nowe has\u0142o")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardBody_js__WEBPACK_IMPORTED_MODULE_14__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
+      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__["default"],
+      name: "password",
+      formControlProps: {
+        fullWidth: true
+      },
+      labelText: "Has\u0142o",
+      inputProps: {
+        type: "password",
+        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          position: "end"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6___default.a, {
+          className: classes.inputIconsColor
+        }))
+      }
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
+      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__["default"],
+      name: "passwordConfirm",
+      formControlProps: {
+        fullWidth: true
+      },
+      labelText: "Powt\xF3rz has\u0142o",
+      inputProps: {
+        type: "password",
+        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          position: "end"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6___default.a, {
+          className: classes.inputIconsColor
+        }))
+      }
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardFooter_js__WEBPACK_IMPORTED_MODULE_16__["default"], {
+      className: classes.cardFooter
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      simple: true,
+      color: "primary",
+      size: "lg",
+      onClick: function onClick() {
+        handleSubmit();
+      },
+      disabled: isSubmitting
+    }, "Zmie\u0144 has\u0142o"), isSubmitting && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoadingForButtons__WEBPACK_IMPORTED_MODULE_27__["default"], null)));
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null)))))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (MaterialUiPasswordReset);
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/img/genspr-parralax-bg.png":
+/*!*****************************************************************!*\
+  !*** ./djsr/frontend/src/components/img/genspr-parralax-bg.png ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "8ae80ee488d6ec36fd62f67865d06356.png");
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/icons/Delete.js":
+/*!***************************************************!*\
+  !*** ./node_modules/@material-ui/icons/Delete.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var React = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/React.createElement("path", {
+  d: "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+}), 'Delete');
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/icons/Favorite.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/@material-ui/icons/Favorite.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var React = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/React.createElement("path", {
+  d: "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+}), 'Favorite');
+
+exports.default = _default;
+
+/***/ })
+
+}]);
+//# sourceMappingURL=13.main.js.map
