@@ -39,7 +39,7 @@ export const taskParser = (task) => {
   }
   else if(task.type=="1")
   {
-    newTask.currentAnswers={correctans:newTask.correctans,wronganswers:newTask.wronganswers,answersIndexes:[{}]}
+    newTask.currentAnswers={correctans:[{}],wronganswers:[{}],answersIndexes:[]}
   }
 
   newTask.maxPoints = JSON.parse(newTask.points)
