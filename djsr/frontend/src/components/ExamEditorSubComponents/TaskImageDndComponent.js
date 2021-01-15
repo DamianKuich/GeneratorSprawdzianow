@@ -6,6 +6,7 @@ import {
   GridItem,
   swap,
 } from "react-grid-dnd";
+import AuthImage from "./AuthImage";
 
 const Thumb = (props) => {
   const { image } = props;
@@ -32,12 +33,18 @@ const Thumb = (props) => {
         setThumb(false);
     }
   }, [image]);
-  return (
+  return (!Number.isInteger(image)?
     <img
       onDragStart={(e) => {
         e.preventDefault();
       }}
       src={thumb || ""}
+      style={{ maxWidth: "100%", maxHeight: "100%" }}
+    /> : <AuthImage
+      onDragStart={(e) => {
+        e.preventDefault();
+      }}
+      src={image}
       style={{ maxWidth: "100%", maxHeight: "100%" }}
     />
   );
