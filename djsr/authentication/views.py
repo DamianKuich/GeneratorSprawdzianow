@@ -97,7 +97,7 @@ class CustomUserCreate(APIView):
 
 class PasswordSendResetView(APIView):
     model = PasswordSendReset.objects.all()
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
     serializer_class = PasswordSendResetSerializer
 
     def post(self, request):
@@ -133,7 +133,7 @@ class PasswordSendResetView(APIView):
 
 
 class PasswordResetView(APIView):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
 
     def post(self, request, **kwargs):
         if True:
@@ -159,7 +159,7 @@ class PasswordResetView(APIView):
 
 
 class HelloWorldView(APIView):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
 
     def get(self, request, *args, **kwargs):
         token = kwargs.pop('token')
@@ -860,23 +860,23 @@ class AddTask(APIView):
                 if priv!=None:my_task.private = priv
                 if pkt!=None: my_task.points = pkt
                 my_task.author = user
-                # if skills!=None:
-                #     for skillid in skills.split(','):
-                #         skil = Skill.objects.filter(id=skillid)
-                #         my_task.skill.set(skil)
-                # if file!=None:
-                #     if not Image.objects.filter(name="", image=file, user_id=user.id).exists():
-                #         image = Image.objects.create(name="", image=file, user_id=user.id)
-                #         image.save()
-                #         # imag = Image.objects.filter(name="", image=file, user_id=user.id)
-                #         image_data = open("media/" + str(image.image), "rb").read()
-                #         cos = bytes(image_data)
-                #         img = ImageDB.objects.create(image=cos)
-                #         img.save()
-                #         image.name = str(img.id)
-                #         image.save()
-                #         img = Image.objects.filter(name=str(img.id))
-                #         my_task.image.set(img)
+                if skills!=None:
+                    for skillid in skills.split(','):
+                        skil = Skill.objects.filter(id=skillid)
+                        my_task.skill.set(skil)
+                if file!=None:
+                    if not Image.objects.filter(name="", image=file, user_id=user.id).exists():
+                        image = Image.objects.create(name="", image=file, user_id=user.id)
+                        image.save()
+                        # imag = Image.objects.filter(name="", image=file, user_id=user.id)
+                        image_data = open("media/" + str(image.image), "rb").read()
+                        cos = bytes(image_data)
+                        img = ImageDB.objects.create(image=cos)
+                        img.save()
+                        image.name = str(img.id)
+                        image.save()
+                        img = Image.objects.filter(name=str(img.id))
+                        my_task.image.set(img)
                 my_task.save()
                 print('tutaj')
                 tasko = Task.objects.filter(text=text)
