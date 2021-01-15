@@ -3837,19 +3837,6 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "openPDFinNewTab", function (type) {
-      if (!!_this.state.downloadingPDF) {
-        _this.props.enqueueSnackbar("Masz już PDF'a w kolejce do pobrania, prosimy poczekać", {
-          variant: "info"
-        });
-
-        return;
-      }
-
-      _this.setState(function (state) {
-        state.downloadingPDF = true;
-        return state;
-      });
-
       var pdfBaseUrl = "";
       var pdfNameSuffix = "";
 
@@ -3859,30 +3846,19 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
           break;
 
         case "answers":
-          pdfBaseUrl = "/user/answerspdf/";
+          pdfBaseUrl = '/user/answerspdf/';
           pdfNameSuffix = "- arkusz odpowiedzi";
           break;
 
-        case "answersKeys":
-          pdfBaseUrl = "/user/answerskeypdf/";
+        case 'answersKeys':
+          pdfBaseUrl = '/user/answerskeypdf/';
           pdfNameSuffix = "- klucz odpowiedzi";
           break;
-
-        default:
-          _this.setState(function (state) {
-            state.downloadingPDF = false;
-            return state;
-          });
-
-          return;
       }
-
-      _this.props.enqueueSnackbar("Generowanie PDF, może to potrwać 2 minuty.");
 
       _axiosAPI__WEBPACK_IMPORTED_MODULE_6__["default"].get(pdfBaseUrl + _this.state.exam.id, {
         method: "GET",
-        responseType: "blob",
-        timeout: 120000
+        responseType: "blob"
       }).then(function (response) {
         // console.log("pdf response" ,response.data)
         var pdfBlob = new Blob([response.data], {
@@ -3899,23 +3875,8 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
         };
         a.href = fileURL;
         a.download = _this.state.exam.name + pdfNameSuffix;
-
-        _this.setState(function (state) {
-          state.downloadingPDF = false;
-          return state;
-        });
-
         a.click();
         URL.revokeObjectURL(fileURL); // window.open(fileURL);
-      })["catch"](function (e) {
-        _this.props.enqueueSnackbar("Nie udało się pobrać PDF, spróbuj ponownie później", {
-          variant: "error"
-        });
-
-        _this.setState(function (state) {
-          state.downloadingPDF = false;
-          return state;
-        });
       });
     });
 
@@ -4101,9 +4062,6 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleSideMenuTabChange", function (event, newValue) {
       // if (newValue === "generatePDF") this.generatedPDFV3(this.state.exam);
-      // if (this.state.downloadingPDF===false){
-      //   this.props.enqueueSnackbar("Masz już PDF'a do pobrania w kolejce, prosimy poczekać.",{variant:"info"})
-      // }
       if (newValue === "generatePDF") {
         _this.updateStateNoSave(function (state) {
           // state.anchorEl = event.currentTarget;
@@ -4199,7 +4157,25 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
         updatePageIndexes: this.updatePageIndexes,
         updateStateAndSaveExam: this.updateStateAndSaveExam,
         updateStateNoSave: this.updateStateNoSave
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomModal_CustomModal__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Menu__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        id: "simple-menu",
+        anchorEl: anchorEl // keepMounted
+        ,
+        open: Boolean(anchorEl),
+        onClose: this.handleCloseMenu
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_10__["default"], {
+        onClick: function onClick() {
+          window.open("".concat(window.location.origin, "/api/user/testpdf/") + _this2.state.exam.id, "_blank");
+        }
+      }, "Sprawdzian"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_10__["default"], {
+        onClick: function onClick() {
+          window.open("".concat(window.location.origin, "/api/user/answerspdf/") + _this2.state.exam.id, "_blank");
+        }
+      }, "Karta Odpowiedzi"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_10__["default"], {
+        onClick: function onClick() {
+          window.open("".concat(window.location.origin, "/api/user/answerskeypdf/") + _this2.state.exam.id, "_blank");
+        }
+      }, "Klucz"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomModal_CustomModal__WEBPACK_IMPORTED_MODULE_11__["default"], {
         open: !!this.state.downloadModal // dialogTitle={}
         // fullWidth={true}
         // maxWidth={"lg"}
