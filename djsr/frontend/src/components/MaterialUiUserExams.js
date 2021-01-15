@@ -73,6 +73,7 @@ import Loading from "./LoadingScreen"
 import LoadingScreenB from "./LoadingForButtons"
 import InputAdornment from '@material-ui/core/InputAdornment';
 import ButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxHeight: 200,
@@ -161,6 +162,7 @@ const useStylesAlert = makeStyles((theme) => ({
         groups: '',
         autoGenSkills:[],
         checked: [],
+        hiddenSections: [],
         otwCount: null,
         zamkCount: null,
         autoGeneStep: '1',
@@ -174,6 +176,8 @@ const useStylesAlert = makeStyles((theme) => ({
         
       };
       this.handleToggle = this.handleToggle.bind(this);
+      this.handleToggleAll = this.handleToggleAll.bind(this);
+      this.hideSection = this.hideSection.bind(this);
     }
   
     updateExams = () => {
@@ -221,6 +225,48 @@ const useStylesAlert = makeStyles((theme) => ({
   
 
     handleToggle = (value,otw,zamk) => () => {
+      this.setState({ autoGenSkills: this.state.autoGenSkills.concat(value) })
+      const currentIndex = this.state.checked.indexOf(value);
+      const newChecked = [...this.state.checked];
+
+      
+      
+      if (currentIndex === -1) {
+        newChecked.push(value);
+        let sumOtw = +otw + +this.state.otwCount
+        let sumZamk = +zamk + +this.state.zamkCount
+        this.setState({otwCount: sumOtw,zamkCount:sumZamk})
+      } else {
+        newChecked.splice(currentIndex, 1);
+        let sumOtw = +this.state.otwCount - +otw 
+        let sumZamk = +this.state.zamkCount - +zamk 
+        this.setState({otwCount: sumOtw,zamkCount:sumZamk})
+      }
+  
+      this.setState({ checked: newChecked });
+    };
+
+    
+    hideSection = (section) => () => {
+      if(!this.state.hiddenSections.includes(section.id)){
+        const currentIndex = section.id;
+        const newHiddenSections = [...this.state.hiddenSections];
+        newHiddenSections.push(currentIndex);
+        this.setState({ hiddenSections: newHiddenSections });
+        
+      }
+      else{
+          let indexToRemove = this.state.hiddenSections.indexOf(section.id)
+          const newHiddenSections = [...this.state.hiddenSections];
+          newHiddenSections.splice(indexToRemove);
+          this.setState({ hiddenSections: newHiddenSections });
+
+      }
+
+    };
+
+    
+    handleToggleAll = (section) => () => {
       this.setState({ autoGenSkills: this.state.autoGenSkills.concat(value) })
       const currentIndex = this.state.checked.indexOf(value);
       const newChecked = [...this.state.checked];
@@ -523,10 +569,10 @@ const useStylesAlert = makeStyles((theme) => ({
         <TextField fullWidth
           id="level"
           select
-          label="Poziom trudności"
+          label="Stopień zaawansowania"
           value={this.state.level}
           onChange={(event) => this.setState({ level: event.target.value })}
-          helperText="Wybierz poziom trudności"
+          helperText="Wybierz stopień zaawansowania"
         >
           
             
@@ -741,22 +787,24 @@ const useStylesAlert = makeStyles((theme) => ({
                       return (
                         <>
                           <ListItem
-                          // onClick={() => {
-                          //   this.toggleCollapse("section-" + section.id);
-                          // }}
+                          button onClick={this.hideSection(section)}
                           >
                           
                             <ListItemText
                               primary={<h3>{section.Section}</h3>}
                               secondary={"Dostępnych zadań: " + section.sectionTaskCount}
+                              
                           
                             />
+                            {(this.state.hiddenSections.indexOf(section.id) !== -1) ? <ExpandLess /> : <ExpandMore />}
                               <ListItemSecondaryAction>
                             
                             </ListItemSecondaryAction>
                           </ListItem>
-                       
+
+                          <Collapse in={(this.state.hiddenSections.includes(section.id))} timeout="auto" unmountOnExit>
                             <List component="div" disablePadding>
+                            
                               {section.skill.map((skill) => {
                                 return (
                                   <ListItem button
@@ -783,7 +831,7 @@ const useStylesAlert = makeStyles((theme) => ({
                                 );
                               })}
                             </List>
-                        
+                          </Collapse>
                          
                         </>
                       );
