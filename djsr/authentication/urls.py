@@ -1,8 +1,13 @@
 from django.urls import path, include
 
 from rest_framework_simplejwt import views as jwt_views
-from .views import *
-
+from .views import AddImageToTaskViewSet, AddImageViewSet, ImageViewSet, SkillViewSet, SectionViewSet, \
+    CustomUserCreate, HelloWorldView, \
+    LogoutAndBlacklistRefreshTokenForUserView, TaskViewSet, TestKeyAnswersviewSet, \
+    UserRetrieveUpdateAPIView, ReturnUserInfo, PasswordSendResetView, PasswordResetView, AllTestsJSONViewSet, \
+    OneTestJSONViewSet, MakeTestViewSet, MakeTestCopyViewSet, LatexToSvgView, GetRandomTasksViewSet, \
+    SkilltoSections, AddTask, AddSkill, AddSection, AddAnswers, DeleteTestViewSet, TestTasksiewSet,\
+    TestAnswersviewSet, SkilltoSectionsAutoGene, GetSkillsFromfile
 # TODO resend activation token
 urlpatterns = [
     path('user/addtask/', AddTask.as_view(), name="AddTask"),
