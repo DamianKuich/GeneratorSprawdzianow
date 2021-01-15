@@ -276,7 +276,7 @@ const useStylesAlert = makeStyles((theme) => ({
 
       if (!exams ) {
         return (
-          <Loading  message={"Ładowanie edytora kolekcji sprawdzianów"} ></Loading>
+          <Loading  message={"Ładowanie kolekcji sprawdzianów"} ></Loading>
         );
       }
       return (
@@ -634,7 +634,7 @@ const useStylesAlert = makeStyles((theme) => ({
                              
                               
                             });
-                        }, 400);
+                        }, 1000);
                       }}
                     >
                       {({
@@ -655,8 +655,59 @@ const useStylesAlert = makeStyles((theme) => ({
           
          open={this.state.open} onClose={() => this.setState({ open: !this.state.open,checked:[],autoGeneStep:"1" })}>
         <DialogTitle  id="form-dialog-title"><Typography variant="h5" align="center">Wygeneruj sprawdzian automatycznie</Typography></DialogTitle>
+
+
        
         <DialogContent>
+
+
+
+                      
+        <Field
+                component={MaterialFormikField}
+                name={"password"}
+                formControlProps={{
+                  fullWidth: true,
+                }}
+                labelText="Hasło"
+                inputProps={{
+                  type: "password",
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <LockIcon className={classes.inputIconsColor} />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            <Field
+                component={MaterialFormikField}
+                name={"passwordConfirm"}
+                formControlProps={{
+                  fullWidth: true,
+                }}
+                labelText="Powtórz hasło"
+                inputProps={{
+                  type: "password",
+                  endAdornment: (
+                    <InputAdornment position="end">/{this.state.zamkCount}</InputAdornment>
+                  ),
+                }}
+              />
+
+            <Field
+                component={MaterialFormikField}
+                name={"oldPassword"}
+                formControlProps={{
+                  fullWidth: true,
+                }}
+                labelText="Podaj stare hasło"
+                inputProps={{
+                  type: "password",
+                  endAdornment: (
+                    <InputAdornment position="end">/{this.state.otwCount}</InputAdornment>
+                  ),
+                }}
+              />
         <Box p={1}>
         <TextField  fullWidth
          onChange={(event) => this.setState({ generatedName: event.target.value })}
