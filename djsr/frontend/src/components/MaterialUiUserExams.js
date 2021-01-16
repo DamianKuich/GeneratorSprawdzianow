@@ -73,6 +73,7 @@ import Loading from "./LoadingScreen"
 import LoadingScreenB from "./LoadingForButtons"
 import InputAdornment from '@material-ui/core/InputAdornment';
 import ButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxHeight: 200,
@@ -161,6 +162,7 @@ const useStylesAlert = makeStyles((theme) => ({
         groups: '',
         autoGenSkills:[],
         checked: [],
+        hiddenSections: [],
         otwCount: null,
         zamkCount: null,
         autoGeneStep: '1',
@@ -174,6 +176,8 @@ const useStylesAlert = makeStyles((theme) => ({
         
       };
       this.handleToggle = this.handleToggle.bind(this);
+      this.handleToggleAll = this.handleToggleAll.bind(this);
+      this.hideSection = this.hideSection.bind(this);
     }
   
     updateExams = () => {
@@ -241,6 +245,48 @@ const useStylesAlert = makeStyles((theme) => ({
   
       this.setState({ checked: newChecked });
     };
+
+    
+    hideSection = (section) => () => {
+      if(!this.state.hiddenSections.includes(section.id)){
+        const currentIndex = section.id;
+        const newHiddenSections = [...this.state.hiddenSections];
+        newHiddenSections.push(currentIndex);
+        this.setState({ hiddenSections: newHiddenSections });
+        
+      }
+      else{
+          let indexToRemove = this.state.hiddenSections.indexOf(section.id)
+          const newHiddenSections = [...this.state.hiddenSections];
+          newHiddenSections.splice(indexToRemove);
+          this.setState({ hiddenSections: newHiddenSections });
+
+      }
+
+    };
+
+    
+    handleToggleAll = (section) => () => {
+      this.setState({ autoGenSkills: this.state.autoGenSkills.concat(value) })
+      const currentIndex = this.state.checked.indexOf(value);
+      const newChecked = [...this.state.checked];
+
+      
+      
+      if (currentIndex === -1) {
+        newChecked.push(value);
+        let sumOtw = +otw + +this.state.otwCount
+        let sumZamk = +zamk + +this.state.zamkCount
+        this.setState({otwCount: sumOtw,zamkCount:sumZamk})
+      } else {
+        newChecked.splice(currentIndex, 1);
+        let sumOtw = +this.state.otwCount - +otw 
+        let sumZamk = +this.state.zamkCount - +zamk 
+        this.setState({otwCount: sumOtw,zamkCount:sumZamk})
+      }
+  
+      this.setState({ checked: newChecked });
+    };
     // componentWillMount() {
     //
     // }
@@ -276,7 +322,7 @@ const useStylesAlert = makeStyles((theme) => ({
 
       if (!exams ) {
         return (
-          <Loading  message={"Ładowanie edytora kolekcji sprawdzianów"} ></Loading>
+          <Loading  message={"Ładowanie kolekcji sprawdzianów"} ></Loading>
         );
       }
       return (
@@ -512,7 +558,7 @@ const useStylesAlert = makeStyles((theme) => ({
         
           titlestyle={{textAlign: "center"}}
           
-         open={this.state.open} onClose={() => this.setState({ open: !this.state.open,checked:[],autoGeneStep:"1" })}>
+         open={this.state.open} onClose={() => this.setState({ open: !this.state.open,checked:[],autoGeneStep:"1" ,otwCount:null,zamkCount:null})}>
         <DialogTitle  id="form-dialog-title"><Typography variant="h5" align="center">Wygeneruj sprawdzian automatycznie</Typography></DialogTitle>
        
         <DialogContent>
@@ -523,10 +569,10 @@ const useStylesAlert = makeStyles((theme) => ({
         <TextField fullWidth
           id="level"
           select
-          label="Poziom trudności"
+          label="Stopień zaawansowania"
           value={this.state.level}
           onChange={(event) => this.setState({ level: event.target.value })}
-          helperText="Wybierz poziom trudności"
+          helperText="Wybierz stopień zaawansowania"
         >
           
             
@@ -597,97 +643,143 @@ const useStylesAlert = makeStyles((theme) => ({
               )}
 
 {this.state.autoGeneStep=="2" ? (
-                      <Formik
-                      onSubmit={(values, helpers) => {
-                        setTimeout(() => {
-                          helpers.setSubmitting(true);
-                          axiosInstance
-                            .post("/user/maketest/", {
-                              name: values.name,
-                              tasks: "",
-                            })
-                            .then((response) => {
-                              console.log("UE create response", response);
-                              this.addExam(response.data[0]);
-                              this.props.enqueueSnackbar("Utworzyłeś nowy sprawdzian", { 
-                                variant: 'success',
-                            })
+                       <Formik
+                       initialValues={{
+                         examName: "",
+                         ileOtw: "0",
+                         groups: "",
+                         ileZamk: "0",
+                         
+                       }}
+                       validationSchema={Yup.object().shape({
+                         examName: Yup.string()
+                           .min(2, "Nazwa za krotka")
+                           .max(50, "Nazwa za dluga")
+                           .required("Pole wymagane"),
+                           groups: Yup.string()
+                          
+                           .required("Pole wymagane"),
+                           ileOtw: Yup.string()
+                          
+                           .required("Pole wymagane"),
+                           ileZamk: Yup.string()
+                           
+                           .required("Pole wymagane"),
+                       })}
+                       onSubmit={(values, helpers) => {
+                         setTimeout(() => {
+                           helpers.setSubmitting(true);
+                           axiosInstance
+                             .post("/user/maketest/", {
+                               examName: values.examName,
+                               tasks: "",
+                             })
+                             .then((response) => {
+                               console.log("UE create response", response);
+                               this.addExam(response.data[0]);
+                               this.props.enqueueSnackbar("Utworzyłeś nowy sprawdzian", { 
+                                 variant: 'success',
+                             })
+                               
+                               helpers.setSubmitting(false);
+                               //this.props.history.push("/editor/");
+                             })
+                             .catch((error) => {
+                               // console.log("login error", error.response);
+                               const errResponse = error.response;
+                               helpers.setSubmitting(false);
+                               this.props.enqueueSnackbar("Nazwa zajęta", { 
+                                 variant: 'error',
+                             })
                               
-                              helpers.setSubmitting(false);
-                              //this.props.history.push("/editor/");
-                            })
-                            .catch((error) => {
-                              // console.log("login error", error.response);
-                              const errResponse = error.response;
-                              helpers.setSubmitting(false);
-                              this.props.enqueueSnackbar("Nazwa zajęta", { 
-                                variant: 'error',
-                            })
-                             
-                              helpers.setTouched(
-                                {
-                                  name: false,
-                                },
-                                false
-                              );
+                               helpers.setTouched(
+                                 {
+                                   examName: false,
+                                 },
+                                 false
+                               );
+                               
                               
-                             
-                              
-                            });
-                        }, 400);
-                      }}
-                    >
-                      {({
-                        values,
-                        errors,
-                        touched,
-                        handleChange,
-                        handleBlur,
-                        handleSubmit,
-                        isSubmitting,
-                      }) => (
-                        <Form >
+                               
+                             });
+                         }, 400);
+                       }}
+                     >
+                       {({
+                         values,
+                         errors,
+                         touched,
+                         handleChange,
+                         handleBlur,
+                         handleSubmit,
+                         isSubmitting,
+                       }) => (
+                         <Form onSubmit={handleSubmit}>
+                           
          <Dialog 
          
          fullWidth={true}
         
           titlestyle={{textAlign: "center"}}
           
-         open={this.state.open} onClose={() => this.setState({ open: !this.state.open,checked:[],autoGeneStep:"1" })}>
+         open={this.state.open} onClose={() => this.setState({ open: !this.state.open,checked:[],autoGeneStep:"1",otwCount:null,zamkCount:null })}>
         <DialogTitle  id="form-dialog-title"><Typography variant="h5" align="center">Wygeneruj sprawdzian automatycznie</Typography></DialogTitle>
+
+
        
         <DialogContent>
-        <Box p={1}>
-        <TextField  fullWidth
-         onChange={(event) => this.setState({ generatedName: event.target.value })}
-        id="examName" label="Nazwa sprawdzianu" />
-            </Box>
 
-            <Box p={1}>
-   
-   <TextField  fullWidth
-    onChange={(event) => this.setState({ groups: event.target.value })}
-   id="groups" label="Ilość grup" />
-       </Box>
-        <Box p={1}>
-        <TextField  fullWidth
-         onChange={(event) => this.setState({ ileotw: event.target.value })}
-        id="ileotw" label="Ile zadań otwartych"
-        InputProps={{
-          endAdornment: <InputAdornment position="end">/{this.state.otwCount}</InputAdornment>,
-        }}
-        />
-            </Box>
-        <Box p={1}>
-        <TextField  fullWidth
-         onChange={(event) => this.setState({ ilezamk: event.target.value })}
-        id="ilezamk" label="Ile zadań zamkniętych" 
-        
-        InputProps={{
-          endAdornment: <InputAdornment position="end">/{this.state.zamkCount}</InputAdornment>,
-        }}
-        />
-            </Box>
+
+
+                      
+        <Field
+                component={MaterialFormikField}
+                name={"examName"}
+                formControlProps={{
+                  fullWidth: true,
+                }}
+                labelText="Nazwa sprawdzianu"
+               
+              />
+                     <Field
+                component={MaterialFormikField}
+                name={"groups"}
+                formControlProps={{
+                  fullWidth: true,
+                }}
+                labelText="Ilość grup"
+
+               
+              />
+                     <Field
+                component={MaterialFormikField}
+                name={"ileOtw"}
+                formControlProps={{
+                  fullWidth: true,
+                }}
+                labelText="Ile zadań otwartych"
+                inputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">/{this.state.otwCount}</InputAdornment>
+                  ),
+                }}
+               
+              />
+                     <Field
+                component={MaterialFormikField}
+                name={"ileZamk"}
+                formControlProps={{
+                  fullWidth: true,
+                }}
+                labelText="Ile zadań zamkniętych"
+                inputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">/{this.state.zamkCount}</InputAdornment>
+                  ),
+                }}
+               
+              />
+
             <Box p={1}>
                   <List>
                     {sections.map((section) => {
@@ -695,22 +787,24 @@ const useStylesAlert = makeStyles((theme) => ({
                       return (
                         <>
                           <ListItem
-                          // onClick={() => {
-                          //   this.toggleCollapse("section-" + section.id);
-                          // }}
+                          button onClick={this.hideSection(section)}
                           >
                           
                             <ListItemText
                               primary={<h3>{section.Section}</h3>}
                               secondary={"Dostępnych zadań: " + section.sectionTaskCount}
+                              
                           
                             />
+                            {(this.state.hiddenSections.indexOf(section.id) !== -1) ? <ExpandLess /> : <ExpandMore />}
                               <ListItemSecondaryAction>
                             
                             </ListItemSecondaryAction>
                           </ListItem>
-                       
+
+                          <Collapse in={(this.state.hiddenSections.includes(section.id))} timeout="auto" unmountOnExit>
                             <List component="div" disablePadding>
+                            
                               {section.skill.map((skill) => {
                                 return (
                                   <ListItem button
@@ -737,7 +831,7 @@ const useStylesAlert = makeStyles((theme) => ({
                                 );
                               })}
                             </List>
-                        
+                          </Collapse>
                          
                         </>
                       );
@@ -764,11 +858,11 @@ const useStylesAlert = makeStyles((theme) => ({
               this.setState({isGenerating: true  })
                axiosInstance
                 .post(`/user/getrandomtasks/`, {
-                ileotw: this.state.ileotw,
-                ilezamk: this.state.ilezamk,
+                ileotw: values.ileOtw,
+                ilezamk: values.ileZamk,
                 level:  this.state.level,
                 skills: this.state.checked.join(', '),
-                groups: this.state.groups,
+                groups: values.groups,
               })
                 .then((response) => {
 
@@ -779,7 +873,7 @@ const useStylesAlert = makeStyles((theme) => ({
                       let randomtasks = JSON.stringify(taskParser(group))
                       ++key
                       axiosInstance.post(`/user/maketest/`, {
-                        name:this.state.generatedName + ' Grupa '+ key,
+                        name: values.examName + ' Grupa '+ key,
                         tasks:randomtasks
                         
                       }).then((response)=>{

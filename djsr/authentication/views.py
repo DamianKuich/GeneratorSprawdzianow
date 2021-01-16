@@ -97,7 +97,7 @@ class CustomUserCreate(APIView):
 
 class PasswordSendResetView(APIView):
     model = PasswordSendReset.objects.all()
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
     serializer_class = PasswordSendResetSerializer
 
     def post(self, request):
@@ -133,7 +133,7 @@ class PasswordSendResetView(APIView):
 
 
 class PasswordResetView(APIView):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
 
     def post(self, request, **kwargs):
         if True:
@@ -159,7 +159,7 @@ class PasswordResetView(APIView):
 
 
 class HelloWorldView(APIView):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
 
     def get(self, request, *args, **kwargs):
         token = kwargs.pop('token')
@@ -193,7 +193,7 @@ class ReturnUserInfo(APIView):
 
 
 class LogoutAndBlacklistRefreshTokenForUserView(APIView):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
     authentication_classes = ()
 
     def post(self, request, format='json'):
@@ -570,23 +570,20 @@ class SkilltoSections(APIView):
     serializer_class = SectionSerializerv2
 
     def get(self, request, format=None):
-        s = Sectionv2.objects.all()
-        s.delete()
-        sec = Section.objects.all()
-        serializer = SectionSerializer(sec, many=True)
-        for section in sec:
-            name = section.nasza_nazwa()
+        for section in Section.objects.only("Section").iterator():
+            name = section.Section
             id = section.id
-            sec2 = Sectionv2.objects.create(id = id,Section=name)
-            sec2.save()
-        ss = Sectionv2.objects.all()
-        seco = SectionSerializerv2(ss, many=True)
-        for s in ss:
-            s2 = Section.objects.get(Section=s.Section)
-            fields = ('Skill')
-            skil = Skill.objects.filter(section=s2.id).only(fields)
-            s.skilll.set(skil)
-            s.save()
+            try:
+                if not Sectionv2.objects.filter(id=id, Section=name).exists():
+                    sec2 = Sectionv2.objects.create(id=id, Section=name)
+                    skil = Skill.objects.filter(section=id).only("id")
+                    sec2.skilll.set(skil)
+                    sec2.save()
+            except Sectionv2.DoesNotExist:
+                sec2 = Sectionv2.objects.create(id=id, Section=name)
+                skil = Skill.objects.filter(section=id).only("id")
+                sec2.skilll.set(skil)
+                sec2.save()
         seco = Sectionv2.objects.all()
         seria = SectionSerializerv2(seco, many=True).data
         connection.close()
@@ -678,18 +675,18 @@ def aktDB(level):
         try:
             if not Sectionv2.objects.filter(id=id, Section=name).exists():
                 sec2 = Sectionv2.objects.create(id=id, Section=name)
+                skil = Skill.objects.filter(section=id).only("id")
+                sec2.skilll.set(skil)
                 sec2.save()
         except Sectionv2.DoesNotExist:
             sec2 = Sectionv2.objects.create(id=id, Section=name)
+            skil = Skill.objects.filter(section=id).only("id")
+            sec2.skilll.set(skil)
             sec2.save()
-    for s in Sectionv2.objects.only("skilll","Section").iterator():
-        s2 = Section.objects.get(Section=s.Section).id
-        skil = Skill.objects.filter(section=s2).only("id")
-        s.skilll.set(skil)
-        s.save()
     seco = Sectionv2.objects.all()
-    seria = SectionSerializerv2(seco, many=True)
-    for x in seria.data:
+    seria = SectionSerializerv2(seco, many=True).data
+    connection.close()
+    for x in seria:
         sum = 0
         dousu = []
         for y in (x['skilll']):
@@ -860,23 +857,23 @@ class AddTask(APIView):
                 if priv!=None:my_task.private = priv
                 if pkt!=None: my_task.points = pkt
                 my_task.author = user
-                # if skills!=None:
-                #     for skillid in skills.split(','):
-                #         skil = Skill.objects.filter(id=skillid)
-                #         my_task.skill.set(skil)
-                # if file!=None:
-                #     if not Image.objects.filter(name="", image=file, user_id=user.id).exists():
-                #         image = Image.objects.create(name="", image=file, user_id=user.id)
-                #         image.save()
-                #         # imag = Image.objects.filter(name="", image=file, user_id=user.id)
-                #         image_data = open("media/" + str(image.image), "rb").read()
-                #         cos = bytes(image_data)
-                #         img = ImageDB.objects.create(image=cos)
-                #         img.save()
-                #         image.name = str(img.id)
-                #         image.save()
-                #         img = Image.objects.filter(name=str(img.id))
-                #         my_task.image.set(img)
+                if skills!=None:
+                    for skillid in skills.split(','):
+                        skil = Skill.objects.filter(id=skillid)
+                        my_task.skill.set(skil)
+                if file!=None:
+                    if not Image.objects.filter(name="", image=file, user_id=user.id).exists():
+                        image = Image.objects.create(name="", image=file, user_id=user.id)
+                        image.save()
+                        # imag = Image.objects.filter(name="", image=file, user_id=user.id)
+                        image_data = open("media/" + str(image.image), "rb").read()
+                        cos = bytes(image_data)
+                        img = ImageDB.objects.create(image=cos)
+                        img.save()
+                        image.name = str(img.id)
+                        image.save()
+                        img = Image.objects.filter(name=str(img.id))
+                        my_task.image.set(img)
                 my_task.save()
                 print('tutaj')
                 tasko = Task.objects.filter(text=text)

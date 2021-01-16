@@ -8,7 +8,6 @@ from .views import AddImageToTaskViewSet, AddImageViewSet, ImageViewSet, SkillVi
     OneTestJSONViewSet, MakeTestViewSet, MakeTestCopyViewSet, LatexToSvgView, GetRandomTasksViewSet, \
     SkilltoSections, AddTask, AddSkill, AddSection, AddAnswers, DeleteTestViewSet, TestTasksiewSet,\
     TestAnswersviewSet, SkilltoSectionsAutoGene, GetSkillsFromfile
-
 # TODO resend activation token
 urlpatterns = [
     path('user/addtask/', AddTask.as_view(), name="AddTask"),
