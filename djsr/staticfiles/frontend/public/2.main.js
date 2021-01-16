@@ -1,1 +1,467 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{1523:function(e,t,n){"use strict";var a=n(5),o=n(2),i=n(1),r=(n(0),n(6)),c=n(18),l=n(7),s=n(350),d=n(49),u=Object(d.a)(i.createElement("path",{d:"M20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4C12.76,4 13.5,4.11 14.2, 4.31L15.77,2.74C14.61,2.26 13.34,2 12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0, 0 22,12M7.91,10.08L6.5,11.5L11,16L21,6L19.59,4.58L11,13.17L7.91,10.08Z"}),"SuccessOutlined"),p=Object(d.a)(i.createElement("path",{d:"M12 5.99L19.53 19H4.47L12 5.99M12 2L1 21h22L12 2zm1 14h-2v2h2v-2zm0-6h-2v4h2v-4z"}),"ReportProblemOutlined"),m=Object(d.a)(i.createElement("path",{d:"M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"}),"ErrorOutline"),f=Object(d.a)(i.createElement("path",{d:"M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20, 12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10, 10 0 0,0 12,2M11,17H13V11H11V17Z"}),"InfoOutlined"),b=Object(d.a)(i.createElement("path",{d:"M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"}),"Close"),g=n(446),h=n(10),v={success:i.createElement(u,{fontSize:"inherit"}),warning:i.createElement(p,{fontSize:"inherit"}),error:i.createElement(m,{fontSize:"inherit"}),info:i.createElement(f,{fontSize:"inherit"})},O=i.createElement(b,{fontSize:"small"}),E=i.forwardRef((function(e,t){var n=e.action,c=e.children,l=e.classes,d=e.className,u=e.closeText,p=void 0===u?"Close":u,m=e.color,f=e.icon,b=e.iconMapping,E=void 0===b?v:b,j=e.onClose,x=e.role,y=void 0===x?"alert":x,C=e.severity,w=void 0===C?"success":C,L=e.variant,k=void 0===L?"standard":L,M=Object(a.a)(e,["action","children","classes","className","closeText","color","icon","iconMapping","onClose","role","severity","variant"]);return i.createElement(s.a,Object(o.a)({role:y,square:!0,elevation:0,className:Object(r.a)(l.root,l["".concat(k).concat(Object(h.a)(m||w))],d),ref:t},M),!1!==f?i.createElement("div",{className:l.icon},f||E[w]||v[w]):null,i.createElement("div",{className:l.message},c),null!=n?i.createElement("div",{className:l.action},n):null,null==n&&j?i.createElement("div",{className:l.action},i.createElement(g.a,{size:"small","aria-label":p,title:p,color:"inherit",onClick:j},O)):null)}));t.a=Object(l.a)((function(e){var t="light"===e.palette.type?c.a:c.e,n="light"===e.palette.type?c.e:c.a;return{root:Object(o.a)({},e.typography.body2,{borderRadius:e.shape.borderRadius,backgroundColor:"transparent",display:"flex",padding:"6px 16px"}),standardSuccess:{color:t(e.palette.success.main,.6),backgroundColor:n(e.palette.success.main,.9),"& $icon":{color:e.palette.success.main}},standardInfo:{color:t(e.palette.info.main,.6),backgroundColor:n(e.palette.info.main,.9),"& $icon":{color:e.palette.info.main}},standardWarning:{color:t(e.palette.warning.main,.6),backgroundColor:n(e.palette.warning.main,.9),"& $icon":{color:e.palette.warning.main}},standardError:{color:t(e.palette.error.main,.6),backgroundColor:n(e.palette.error.main,.9),"& $icon":{color:e.palette.error.main}},outlinedSuccess:{color:t(e.palette.success.main,.6),border:"1px solid ".concat(e.palette.success.main),"& $icon":{color:e.palette.success.main}},outlinedInfo:{color:t(e.palette.info.main,.6),border:"1px solid ".concat(e.palette.info.main),"& $icon":{color:e.palette.info.main}},outlinedWarning:{color:t(e.palette.warning.main,.6),border:"1px solid ".concat(e.palette.warning.main),"& $icon":{color:e.palette.warning.main}},outlinedError:{color:t(e.palette.error.main,.6),border:"1px solid ".concat(e.palette.error.main),"& $icon":{color:e.palette.error.main}},filledSuccess:{color:"#fff",fontWeight:e.typography.fontWeightMedium,backgroundColor:e.palette.success.main},filledInfo:{color:"#fff",fontWeight:e.typography.fontWeightMedium,backgroundColor:e.palette.info.main},filledWarning:{color:"#fff",fontWeight:e.typography.fontWeightMedium,backgroundColor:e.palette.warning.main},filledError:{color:"#fff",fontWeight:e.typography.fontWeightMedium,backgroundColor:e.palette.error.main},icon:{marginRight:12,padding:"7px 0",display:"flex",fontSize:22,opacity:.9},message:{padding:"8px 0"},action:{display:"flex",alignItems:"center",marginLeft:"auto",paddingLeft:16,marginRight:-8}}}),{name:"MuiAlert"})(E)},1531:function(e,t,n){"use strict";var a=n(5),o=n(21),i=n(2),r=n(1),c=(n(0),n(6)),l=n(7),s=n(34),d=n(501),u=n(30),p=n(10),m=n(50),f=n(500),b=n(350),g=n(18),h=r.forwardRef((function(e,t){var n=e.action,o=e.classes,l=e.className,s=e.message,d=e.role,u=void 0===d?"alert":d,p=Object(a.a)(e,["action","classes","className","message","role"]);return r.createElement(b.a,Object(i.a)({role:u,square:!0,elevation:6,className:Object(c.a)(o.root,l),ref:t},p),r.createElement("div",{className:o.message},s),n?r.createElement("div",{className:o.action},n):null)})),v=Object(l.a)((function(e){var t="light"===e.palette.type?.8:.98,n=Object(g.b)(e.palette.background.default,t);return{root:Object(i.a)({},e.typography.body2,Object(o.a)({color:e.palette.getContrastText(n),backgroundColor:n,display:"flex",alignItems:"center",flexWrap:"wrap",padding:"6px 16px",borderRadius:e.shape.borderRadius,flexGrow:1},e.breakpoints.up("sm"),{flexGrow:"initial",minWidth:288})),message:{padding:"8px 0"},action:{display:"flex",alignItems:"center",marginLeft:"auto",paddingLeft:16,marginRight:-8}}}),{name:"MuiSnackbarContent"})(h),O=r.forwardRef((function(e,t){var n=e.action,o=e.anchorOrigin,l=(o=void 0===o?{vertical:"bottom",horizontal:"center"}:o).vertical,b=o.horizontal,g=e.autoHideDuration,h=void 0===g?null:g,O=e.children,E=e.classes,j=e.className,x=e.ClickAwayListenerProps,y=e.ContentProps,C=e.disableWindowBlurListener,w=void 0!==C&&C,L=e.message,k=e.onClose,M=e.onEnter,S=e.onEntered,z=e.onEntering,N=e.onExit,T=e.onExited,R=e.onExiting,A=e.onMouseEnter,W=e.onMouseLeave,I=e.open,P=e.resumeHideDuration,H=e.TransitionComponent,$=void 0===H?f.a:H,D=e.transitionDuration,B=void 0===D?{enter:s.b.enteringScreen,exit:s.b.leavingScreen}:D,V=e.TransitionProps,q=Object(a.a)(e,["action","anchorOrigin","autoHideDuration","children","classes","className","ClickAwayListenerProps","ContentProps","disableWindowBlurListener","message","onClose","onEnter","onEntered","onEntering","onExit","onExited","onExiting","onMouseEnter","onMouseLeave","open","resumeHideDuration","TransitionComponent","transitionDuration","TransitionProps"]),G=r.useRef(),J=r.useState(!0),Z=J[0],X=J[1],F=Object(u.a)((function(){k&&k.apply(void 0,arguments)})),K=Object(u.a)((function(e){k&&null!=e&&(clearTimeout(G.current),G.current=setTimeout((function(){F(null,"timeout")}),e))}));r.useEffect((function(){return I&&K(h),function(){clearTimeout(G.current)}}),[I,h,K]);var Q=function(){clearTimeout(G.current)},U=r.useCallback((function(){null!=h&&K(null!=P?P:.5*h)}),[h,P,K]);return r.useEffect((function(){if(!w&&I)return window.addEventListener("focus",U),window.addEventListener("blur",Q),function(){window.removeEventListener("focus",U),window.removeEventListener("blur",Q)}}),[w,U,I]),!I&&Z?null:r.createElement(d.a,Object(i.a)({onClickAway:function(e){k&&k(e,"clickaway")}},x),r.createElement("div",Object(i.a)({className:Object(c.a)(E.root,E["anchorOrigin".concat(Object(p.a)(l)).concat(Object(p.a)(b))],j),onMouseEnter:function(e){A&&A(e),Q()},onMouseLeave:function(e){W&&W(e),U()},ref:t},q),r.createElement($,Object(i.a)({appear:!0,in:I,onEnter:Object(m.a)((function(){X(!1)}),M),onEntered:S,onEntering:z,onExit:N,onExited:Object(m.a)((function(){X(!0)}),T),onExiting:R,timeout:B,direction:"top"===l?"down":"up"},V),O||r.createElement(v,Object(i.a)({message:L,action:n},y)))))}));t.a=Object(l.a)((function(e){var t={top:8},n={bottom:8},a={justifyContent:"flex-end"},r={justifyContent:"flex-start"},c={top:24},l={bottom:24},s={right:24},d={left:24},u={left:"50%",right:"auto",transform:"translateX(-50%)"};return{root:{zIndex:e.zIndex.snackbar,position:"fixed",display:"flex",left:8,right:8,justifyContent:"center",alignItems:"center"},anchorOriginTopCenter:Object(i.a)({},t,Object(o.a)({},e.breakpoints.up("sm"),Object(i.a)({},c,u))),anchorOriginBottomCenter:Object(i.a)({},n,Object(o.a)({},e.breakpoints.up("sm"),Object(i.a)({},l,u))),anchorOriginTopRight:Object(i.a)({},t,a,Object(o.a)({},e.breakpoints.up("sm"),Object(i.a)({left:"auto"},c,s))),anchorOriginBottomRight:Object(i.a)({},n,a,Object(o.a)({},e.breakpoints.up("sm"),Object(i.a)({left:"auto"},l,s))),anchorOriginTopLeft:Object(i.a)({},t,r,Object(o.a)({},e.breakpoints.up("sm"),Object(i.a)({right:"auto"},c,d))),anchorOriginBottomLeft:Object(i.a)({},n,r,Object(o.a)({},e.breakpoints.up("sm"),Object(i.a)({right:"auto"},l,d)))}}),{flip:!1,name:"MuiSnackbar"})(O)},772:function(e,t,n){"use strict";var a=n(2),o=n(5),i=n(1),r=(n(0),n(6)),c=n(130),l=n(7),s=n(67),d=i.forwardRef((function(e,t){var n=e.children,l=e.classes,d=e.className,u=e.component,p=void 0===u?"div":u,m=e.disablePointerEvents,f=void 0!==m&&m,b=e.disableTypography,g=void 0!==b&&b,h=e.position,v=e.variant,O=Object(o.a)(e,["children","classes","className","component","disablePointerEvents","disableTypography","position","variant"]),E=Object(s.b)()||{},j=v;return v&&E.variant,E&&!j&&(j=E.variant),i.createElement(s.a.Provider,{value:null},i.createElement(p,Object(a.a)({className:Object(r.a)(l.root,d,f&&l.disablePointerEvents,E.hiddenLabel&&l.hiddenLabel,"filled"===j&&l.filled,{start:l.positionStart,end:l.positionEnd}[h],"dense"===E.margin&&l.marginDense),ref:t},O),"string"!=typeof n||g?n:i.createElement(c.a,{color:"textSecondary"},n)))}));t.a=Object(l.a)({root:{display:"flex",height:"0.01em",maxHeight:"2em",alignItems:"center",whiteSpace:"nowrap"},filled:{"&$positionStart:not($hiddenLabel)":{marginTop:16}},positionStart:{marginRight:8},positionEnd:{marginLeft:8},disablePointerEvents:{pointerEvents:"none"},hiddenLabel:{},marginDense:{}},{name:"MuiInputAdornment"})(d)}}]);
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[2],{
+
+/***/ "./djsr/frontend/src/components/material_ui_components/Card/Card.js":
+/*!**************************************************************************!*\
+  !*** ./djsr/frontend/src/components/material_ui_components/Card/Card.js ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Card; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _assets_jss_material_kit_react_components_cardStyle_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../assets/jss/material-kit-react/components/cardStyle.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react/components/cardStyle.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+ // nodejs library that concatenates classes
+
+ // nodejs library to set properties for components
+
+ // @material-ui/core components
+
+ // @material-ui/icons
+// core components
+// import styles from "../../assets/jss/material-kit-react/components/cardStyle.js";
+
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["makeStyles"])(_assets_jss_material_kit_react_components_cardStyle_js__WEBPACK_IMPORTED_MODULE_4__["default"]);
+function Card(props) {
+  var _classNames;
+
+  var classes = useStyles();
+
+  var className = props.className,
+      children = props.children,
+      plain = props.plain,
+      carousel = props.carousel,
+      rest = _objectWithoutProperties(props, ["className", "children", "plain", "carousel"]);
+
+  var cardClasses = classnames__WEBPACK_IMPORTED_MODULE_1___default()((_classNames = {}, _defineProperty(_classNames, classes.card, true), _defineProperty(_classNames, classes.cardPlain, plain), _defineProperty(_classNames, classes.cardCarousel, carousel), _defineProperty(_classNames, className, className !== undefined), _classNames));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _extends({
+    className: cardClasses
+  }, rest), children);
+}
+Card.propTypes = {
+  className: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  plain: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
+  carousel: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
+  children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node
+};
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/material_ui_components/Footer/Footer.js":
+/*!******************************************************************************!*\
+  !*** ./djsr/frontend/src/components/material_ui_components/Footer/Footer.js ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Footer; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_icons_Favorite__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/icons/Favorite */ "./node_modules/@material-ui/icons/Favorite.js");
+/* harmony import */ var _material_ui_icons_Favorite__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Favorite__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _assets_jss_material_kit_react_components_footerStyle_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../assets/jss/material-kit-react/components/footerStyle.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react/components/footerStyle.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+/*eslint-disable*/
+ // nodejs library to set properties for components
+
+ // nodejs library that concatenates classes
+
+ // material-ui core components
+
+
+ // @material-ui/icons
+
+
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__["makeStyles"])(_assets_jss_material_kit_react_components_footerStyle_js__WEBPACK_IMPORTED_MODULE_6__["default"]);
+function Footer(props) {
+  var _classNames, _classNames2;
+
+  var classes = useStyles();
+  var whiteFont = props.whiteFont;
+  var footerClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()((_classNames = {}, _defineProperty(_classNames, classes.footer, true), _defineProperty(_classNames, classes.footerWhiteFont, whiteFont), _classNames));
+  var aClasses = classnames__WEBPACK_IMPORTED_MODULE_2___default()((_classNames2 = {}, _defineProperty(_classNames2, classes.a, true), _defineProperty(_classNames2, classes.footerWhiteFont, whiteFont), _classNames2));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", {
+    className: footerClasses
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.container
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.left
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["List"], {
+    className: classes.list
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["ListItem"], {
+    className: classes.inlineBlock
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://www.creative-tim.com/?ref=mkr-footer",
+    className: classes.block,
+    target: "_blank"
+  }, "Creative Tim")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["ListItem"], {
+    className: classes.inlineBlock
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://www.creative-tim.com/presentation?ref=mkr-footer",
+    className: classes.block,
+    target: "_blank"
+  }, "About us")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["ListItem"], {
+    className: classes.inlineBlock
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "http://blog.creative-tim.com/?ref=mkr-footer",
+    className: classes.block,
+    target: "_blank"
+  }, "Blog")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["ListItem"], {
+    className: classes.inlineBlock
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://www.creative-tim.com/license?ref=mkr-footer",
+    className: classes.block,
+    target: "_blank"
+  }, "Licenses")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.right
+  }, "\xA9 ", 1900 + new Date().getYear(), " , made with", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Favorite__WEBPACK_IMPORTED_MODULE_5___default.a, {
+    className: classes.icon
+  }), " by", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://www.creative-tim.com?ref=mkr-footer",
+    className: aClasses,
+    target: "_blank"
+  }, "Creative Tim"), " ", "for a better web.")));
+}
+Footer.propTypes = {
+  whiteFont: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool
+};
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/material_ui_components/Grid/GridContainer.js":
+/*!***********************************************************************************!*\
+  !*** ./djsr/frontend/src/components/material_ui_components/Grid/GridContainer.js ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GridContainer; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/esm/Grid/index.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+ // nodejs library to set properties for components
+
+ // @material-ui/core components
+
+
+
+var styles = {
+  grid: {
+    marginRight: "-15px",
+    marginLeft: "-15px",
+    width: "auto"
+  }
+};
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["makeStyles"])(styles);
+function GridContainer(props) {
+  var classes = useStyles();
+
+  var children = props.children,
+      className = props.className,
+      rest = _objectWithoutProperties(props, ["children", "className"]);
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({
+    container: true
+  }, rest, {
+    className: classes.grid + " " + className
+  }), children);
+}
+GridContainer.defaultProps = {
+  className: ""
+};
+GridContainer.propTypes = {
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
+};
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/material_ui_components/Grid/GridItem.js":
+/*!******************************************************************************!*\
+  !*** ./djsr/frontend/src/components/material_ui_components/Grid/GridItem.js ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GridItem; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/esm/Grid/index.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+ // nodejs library to set properties for components
+
+ // @material-ui/core components
+
+
+
+var styles = {
+  grid: {
+    position: "relative",
+    width: "100%",
+    minHeight: "1px",
+    paddingRight: "15px",
+    paddingLeft: "15px",
+    flexBasis: "auto"
+  }
+};
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["makeStyles"])(styles);
+function GridItem(props) {
+  var classes = useStyles();
+
+  var children = props.children,
+      className = props.className,
+      rest = _objectWithoutProperties(props, ["children", "className"]);
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({
+    item: true
+  }, rest, {
+    className: classes.grid + " " + className
+  }), children);
+}
+GridItem.defaultProps = {
+  className: ""
+};
+GridItem.propTypes = {
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
+};
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/material_ui_components/Header/HeaderLinks.js":
+/*!***********************************************************************************!*\
+  !*** ./djsr/frontend/src/components/material_ui_components/Header/HeaderLinks.js ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return HeaderLinks; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/icons/Delete */ "./node_modules/@material-ui/icons/Delete.js");
+/* harmony import */ var _material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/IconButton */ "./node_modules/@material-ui/core/esm/IconButton/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_List__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/List */ "./node_modules/@material-ui/core/esm/List/index.js");
+/* harmony import */ var _material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/ListItem */ "./node_modules/@material-ui/core/esm/ListItem/index.js");
+/* harmony import */ var _material_ui_core_Tooltip__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/Tooltip */ "./node_modules/@material-ui/core/esm/Tooltip/index.js");
+/* harmony import */ var _material_ui_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/icons */ "./node_modules/@material-ui/icons/esm/index.js");
+/* harmony import */ var _CustomDropdown_CustomDropdown_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../CustomDropdown/CustomDropdown.js */ "./djsr/frontend/src/components/material_ui_components/CustomDropdown/CustomDropdown.js");
+/* harmony import */ var _CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../CustomButtons/Button.js */ "./djsr/frontend/src/components/material_ui_components/CustomButtons/Button.js");
+/* harmony import */ var _assets_jss_material_kit_react_components_headerLinksStyle_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../assets/jss/material-kit-react/components/headerLinksStyle.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react/components/headerLinksStyle.js");
+/*eslint-disable*/
+
+
+ // react components for routing our app without refresh
+
+ // @material-ui/core components
+
+
+
+
+ // @material-ui/icons
+
+ // core components
+
+
+
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__["makeStyles"])(_assets_jss_material_kit_react_components_headerLinksStyle_js__WEBPACK_IMPORTED_MODULE_11__["default"]);
+function HeaderLinks(props) {
+  var classes = useStyles();
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_List__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    className: classes.list
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    className: classes.listItem
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CustomDropdown_CustomDropdown_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    noLiPadding: true,
+    buttonText: "Components",
+    buttonProps: {
+      className: classes.navLink,
+      color: "transparent"
+    },
+    buttonIcon: _material_ui_icons__WEBPACK_IMPORTED_MODULE_8__["Apps"],
+    dropdownList: [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+      to: "/",
+      className: classes.dropdownLink
+    }, "All components"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      href: "https://creativetimofficial.github.io/material-kit-react/#/documentation?ref=mkr-navbar",
+      target: "_blank",
+      className: classes.dropdownLink
+    }, "Documentation")]
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    className: classes.listItem
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    href: "https://www.creative-tim.com/product/material-kit-react?ref=mkr-navbar",
+    color: "transparent",
+    target: "_blank",
+    className: classes.navLink
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons__WEBPACK_IMPORTED_MODULE_8__["CloudDownload"], {
+    className: classes.icons
+  }), " Download")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    className: classes.listItem
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Tooltip__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    id: "instagram-twitter",
+    title: "Follow us on twitter",
+    placement: window.innerWidth > 959 ? "top" : "left",
+    classes: {
+      tooltip: classes.tooltip
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    href: "https://twitter.com/CreativeTim?ref=creativetim",
+    target: "_blank",
+    color: "transparent",
+    className: classes.navLink
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: classes.socialIcons + " fab fa-twitter"
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    className: classes.listItem
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Tooltip__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    id: "instagram-facebook",
+    title: "Follow us on facebook",
+    placement: window.innerWidth > 959 ? "top" : "left",
+    classes: {
+      tooltip: classes.tooltip
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    color: "transparent",
+    href: "https://www.facebook.com/CreativeTim?ref=creativetim",
+    target: "_blank",
+    className: classes.navLink
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: classes.socialIcons + " fab fa-facebook"
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    className: classes.listItem
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Tooltip__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    id: "instagram-tooltip",
+    title: "Follow us on instagram",
+    placement: window.innerWidth > 959 ? "top" : "left",
+    classes: {
+      tooltip: classes.tooltip
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    color: "transparent",
+    href: "https://www.instagram.com/CreativeTimOfficial?ref=creativetim",
+    target: "_blank",
+    className: classes.navLink
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: classes.socialIcons + " fab fa-instagram"
+  })))));
+}
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/icons/Email.js":
+/*!**************************************************!*\
+  !*** ./node_modules/@material-ui/icons/Email.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var React = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/React.createElement("path", {
+  d: "M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+}), 'Email');
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/icons/Lock.js":
+/*!*************************************************!*\
+  !*** ./node_modules/@material-ui/icons/Lock.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime/helpers/interopRequireWildcard.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var React = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/React.createElement("path", {
+  d: "M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"
+}), 'Lock');
+
+exports.default = _default;
+
+/***/ })
+
+}]);
+//# sourceMappingURL=2.main.js.map
