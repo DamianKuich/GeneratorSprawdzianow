@@ -353,14 +353,14 @@ var AuthImage = function AuthImage(props) {
   return !!blob ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       width: "100%",
-      height: "5cm"
+      height: "100%"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", _extends({
     src: blob
   }, rest))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       width: "100%",
-      height: "5cm"
+      height: "100%"
     }
   });
 };
@@ -1021,9 +1021,7 @@ var ExamPageWithOverlay = function ExamPageWithOverlay(props) {
       index++;
     }
 
-    console.log("cacl end", index, current, limit, tablica.map(function (xdd) {
-      return xdd.height || 0;
-    }));
+    console.log("cacl end", index, current, limit);
     return index - 1;
   };
 
@@ -1057,8 +1055,11 @@ var ExamPageWithOverlay = function ExamPageWithOverlay(props) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       style: {
         // flex: "1",
-        height: "100%" // overflow:"hidden"
-
+        height: "100%"
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: {
+        height: "100%"
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TaskDragAndDropWithPagination__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({}, props, {
       DroppableProps: {
@@ -1068,7 +1069,7 @@ var ExamPageWithOverlay = function ExamPageWithOverlay(props) {
       endIndex: endIndex,
       pageIndex: pageIndex,
       examTasks: examTasks
-    })));
+    }))));
   })), endIndex < tasksLength - 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ExamPageWithOverlay, _extends({}, props, {
     startIndex: endIndex + 1,
     pageIndex: pageIndex + 1
@@ -1126,7 +1127,7 @@ var ExamPages = function ExamPages(props) {
       pushTaskAtIndex = props.pushTaskAtIndex;
   var examTasks = exam.tasks;
   var maxPoints = examTasks.length > 1 ? examTasks.map(function (task) {
-    return (task || {}).maxPoints || 0;
+    return task.maxPoints;
   }).reduce(function (a, b) {
     return a + b;
   }) : examTasks.length > 0 ? examTasks[0].maxPoints : 0;
@@ -2932,12 +2933,11 @@ var TaskWithOverlay = function TaskWithOverlay(props) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(TaskWithOverlay, function (prev, next) {
-  // const toCompare=["task","index","draggableIndex","editorTaskIndex","editorTaskPart"]
-  // const prevProps=pick(prev,toCompare)
-  // const nextProps=pick(next,toCompare)
-  // console.log("rerender",prev,prevProps,nextProps,isEqual(prevProps,nextProps));
-  // return isEqual(prevProps,nextProps);
-  return false;
+  var toCompare = ["task", "index", "draggableIndex", "editorTaskIndex", "editorTaskPart"];
+  var prevProps = Object(lodash_object__WEBPACK_IMPORTED_MODULE_19__["pick"])(prev, toCompare);
+  var nextProps = Object(lodash_object__WEBPACK_IMPORTED_MODULE_19__["pick"])(next, toCompare);
+  console.log("rerender", prev, prevProps, nextProps, Object(lodash_lang__WEBPACK_IMPORTED_MODULE_20__["isEqual"])(prevProps, nextProps));
+  return Object(lodash_lang__WEBPACK_IMPORTED_MODULE_20__["isEqual"])(prevProps, nextProps);
 }));
 
 /***/ }),

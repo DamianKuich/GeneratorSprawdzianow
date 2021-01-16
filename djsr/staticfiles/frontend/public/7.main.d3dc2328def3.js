@@ -1021,9 +1021,7 @@ var ExamPageWithOverlay = function ExamPageWithOverlay(props) {
       index++;
     }
 
-    console.log("cacl end", index, current, limit, tablica.map(function (xdd) {
-      return xdd.height || 0;
-    }));
+    console.log("cacl end", index, current, limit);
     return index - 1;
   };
 
@@ -1057,8 +1055,11 @@ var ExamPageWithOverlay = function ExamPageWithOverlay(props) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       style: {
         // flex: "1",
-        height: "100%" // overflow:"hidden"
-
+        height: "100%"
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: {
+        height: "100%"
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TaskDragAndDropWithPagination__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({}, props, {
       DroppableProps: {
@@ -1068,7 +1069,7 @@ var ExamPageWithOverlay = function ExamPageWithOverlay(props) {
       endIndex: endIndex,
       pageIndex: pageIndex,
       examTasks: examTasks
-    })));
+    }))));
   })), endIndex < tasksLength - 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ExamPageWithOverlay, _extends({}, props, {
     startIndex: endIndex + 1,
     pageIndex: pageIndex + 1

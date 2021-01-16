@@ -286,6 +286,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
+/* harmony import */ var _ImageCache__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ImageCache */ "./djsr/frontend/src/components/ExamEditorSubComponents/ImageCache.js");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -307,9 +308,15 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 
 
+
 var AuthImage = function AuthImage(props) {
   var src = props.src,
       rest = _objectWithoutProperties(props, ["src"]);
+
+  var _useContext = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_ImageCache__WEBPACK_IMPORTED_MODULE_2__["ImageCacheContext"]),
+      _useContext2 = _slicedToArray(_useContext, 2),
+      images = _useContext2[0],
+      setImages = _useContext2[1];
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
       _useState2 = _slicedToArray(_useState, 2),
@@ -317,8 +324,12 @@ var AuthImage = function AuthImage(props) {
       setBlob = _useState2[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    if (!!blob) {
-      URL.revokeObjectURL(blob);
+    // if (!!blob) {
+    //     URL.revokeObjectURL(blob);
+    // }
+    if (!!images[src]) {
+      setBlob(images[src]);
+      return function () {};
     }
 
     _axiosAPI__WEBPACK_IMPORTED_MODULE_1__["default"].get("/user/image/".concat(src), {
@@ -327,18 +338,31 @@ var AuthImage = function AuthImage(props) {
     }).then(function (response) {
       var imgBlob = new Blob([response.data]);
       var imgUrl = URL.createObjectURL(imgBlob);
+      setImages(function (imgCache) {
+        imgCache[src] = imgUrl;
+        return imgCache;
+      });
       setBlob(imgUrl);
     });
     return function () {
-      if (!!blob) {
-        console.log("revoking img", src);
-        URL.revokeObjectURL(blob);
+      if (!!blob) {// console.log("revoking img",src)
+        // URL.revokeObjectURL(blob);
       }
     };
   }, [src]);
-  return !!blob ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", _extends({
+  return !!blob ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      width: "100%",
+      height: "5cm"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", _extends({
     src: blob
-  }, rest)) : null;
+  }, rest))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      width: "100%",
+      height: "5cm"
+    }
+  });
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (AuthImage);
@@ -997,7 +1021,9 @@ var ExamPageWithOverlay = function ExamPageWithOverlay(props) {
       index++;
     }
 
-    console.log("cacl end", index, current, limit);
+    console.log("cacl end", index, current, limit, tablica.map(function (xdd) {
+      return xdd.height || 0;
+    }));
     return index - 1;
   };
 
@@ -1031,11 +1057,8 @@ var ExamPageWithOverlay = function ExamPageWithOverlay(props) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       style: {
         // flex: "1",
-        height: "100%"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      style: {
-        height: "100%"
+        height: "100%" // overflow:"hidden"
+
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TaskDragAndDropWithPagination__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({}, props, {
       DroppableProps: {
@@ -1045,7 +1068,7 @@ var ExamPageWithOverlay = function ExamPageWithOverlay(props) {
       endIndex: endIndex,
       pageIndex: pageIndex,
       examTasks: examTasks
-    }))));
+    })));
   })), endIndex < tasksLength - 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ExamPageWithOverlay, _extends({}, props, {
     startIndex: endIndex + 1,
     pageIndex: pageIndex + 1
@@ -1103,7 +1126,7 @@ var ExamPages = function ExamPages(props) {
       pushTaskAtIndex = props.pushTaskAtIndex;
   var examTasks = exam.tasks;
   var maxPoints = examTasks.length > 1 ? examTasks.map(function (task) {
-    return task.maxPoints;
+    return (task || {}).maxPoints || 0;
   }).reduce(function (a, b) {
     return a + b;
   }) : examTasks.length > 0 ? examTasks[0].maxPoints : 0;
@@ -1250,6 +1273,46 @@ var FirstPageHeader = function FirstPageHeader(props) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (FirstPageHeader);
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/ExamEditorSubComponents/ImageCache.js":
+/*!****************************************************************************!*\
+  !*** ./djsr/frontend/src/components/ExamEditorSubComponents/ImageCache.js ***!
+  \****************************************************************************/
+/*! exports provided: ImageCacheContext, ImageCacheProvider */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ImageCacheContext", function() { return ImageCacheContext; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ImageCacheProvider", function() { return ImageCacheProvider; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+var ImageCacheContext = /*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["createContext"])();
+var ImageCacheProvider = function ImageCacheProvider(props) {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      images = _useState2[0],
+      setImages = _useState2[1];
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ImageCacheContext.Provider, {
+    value: [images, setImages]
+  }, props.children);
+};
 
 /***/ }),
 
@@ -2869,11 +2932,12 @@ var TaskWithOverlay = function TaskWithOverlay(props) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(TaskWithOverlay, function (prev, next) {
-  var toCompare = ["task", "index", "draggableIndex", "editorTaskIndex", "editorTaskPart"];
-  var prevProps = Object(lodash_object__WEBPACK_IMPORTED_MODULE_19__["pick"])(prev, toCompare);
-  var nextProps = Object(lodash_object__WEBPACK_IMPORTED_MODULE_19__["pick"])(next, toCompare);
-  console.log("rerender", prev, prevProps, nextProps, Object(lodash_lang__WEBPACK_IMPORTED_MODULE_20__["isEqual"])(prevProps, nextProps));
-  return Object(lodash_lang__WEBPACK_IMPORTED_MODULE_20__["isEqual"])(prevProps, nextProps);
+  // const toCompare=["task","index","draggableIndex","editorTaskIndex","editorTaskPart"]
+  // const prevProps=pick(prev,toCompare)
+  // const nextProps=pick(next,toCompare)
+  // console.log("rerender",prev,prevProps,nextProps,isEqual(prevProps,nextProps));
+  // return isEqual(prevProps,nextProps);
+  return false;
 }));
 
 /***/ }),
@@ -3640,6 +3704,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/esm/Box/index.js");
 /* harmony import */ var _LoadingScreen__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./LoadingScreen */ "./djsr/frontend/src/components/LoadingScreen.js");
 /* harmony import */ var notistack__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! notistack */ "./node_modules/notistack/dist/notistack.esm.js");
+/* harmony import */ var _ExamEditorSubComponents_ImageCache__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./ExamEditorSubComponents/ImageCache */ "./djsr/frontend/src/components/ExamEditorSubComponents/ImageCache.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -3679,6 +3744,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -4192,7 +4258,7 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
       var isExamSaved = this.state.saved;
       var anchorEl = this.state.anchorEl; // console.log("editorTask", editorTask);
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_1__["DragDropContext"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ExamEditorSubComponents_ImageCache__WEBPACK_IMPORTED_MODULE_16__["ImageCacheProvider"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_1__["DragDropContext"], {
         onDragEnd: this.dragEnd
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
@@ -4275,7 +4341,7 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
         onClick: function onClick() {
           _this2.openPDFinNewTab("answersKeys");
         }
-      }, "Klucz Odpowiedzi"))));
+      }, "Klucz Odpowiedzi")))));
     }
   }]);
 

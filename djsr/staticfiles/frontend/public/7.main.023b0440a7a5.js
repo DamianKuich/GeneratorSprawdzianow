@@ -1057,8 +1057,8 @@ var ExamPageWithOverlay = function ExamPageWithOverlay(props) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       style: {
         // flex: "1",
-        height: "100%" // overflow:"hidden"
-
+        height: "100%",
+        overflow: "hidden"
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TaskDragAndDropWithPagination__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({}, props, {
       DroppableProps: {
