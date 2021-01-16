@@ -20,7 +20,7 @@ const ExamPages = (props) => {
   const examTasks = exam.tasks;
   const maxPoints =
     examTasks.length > 1
-      ? examTasks.map((task) => task.maxPoints).reduce((a, b) => a + b)
+      ? examTasks.map((task) => (task|| {}).maxPoints|| 0).reduce((a, b) => a + b)
       : examTasks.length > 0
       ? examTasks[0].maxPoints
       : 0;

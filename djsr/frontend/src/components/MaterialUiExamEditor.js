@@ -14,6 +14,7 @@ import Button from "./material_ui_components/CustomButtons/Button";
 import Box from "@material-ui/core/Box";
 import LoadingScreen from "./LoadingScreen";
 import { withSnackbar } from "notistack";
+import {ImageCacheProvider} from "./ExamEditorSubComponents/ImageCache";
 
 //todo po skasowaniu tresci zadania "zapomina" zdjecie
 //todo zajrzec do draganddropahndlera
@@ -184,8 +185,11 @@ class ExamEditor extends Component {
   };
 
   openPDFinNewTab = (type) => {
-    if (!!this.state.downloadingPDF){
-      this.props.enqueueSnackbar("Masz już PDF'a w kolejce do pobrania, prosimy poczekać",{variant:"info"})
+    if (!!this.state.downloadingPDF) {
+      this.props.enqueueSnackbar(
+        "Masz już PDF'a w kolejce do pobrania, prosimy poczekać",
+        { variant: "info" }
+      );
       return;
     }
     this.setState((state) => {
@@ -213,7 +217,7 @@ class ExamEditor extends Component {
         });
         return;
     }
-    this.props.enqueueSnackbar("Generowanie PDF, może to potrwać 2 minuty.")
+    this.props.enqueueSnackbar("Generowanie PDF, może to potrwać 2 minuty.");
     axiosInstance
       .get(pdfBaseUrl + this.state.exam.id, {
         method: "GET",
@@ -232,7 +236,7 @@ class ExamEditor extends Component {
         a.style = { display: "none" };
         a.href = fileURL;
         a.download = this.state.exam.name + pdfNameSuffix;
-       this.setState((state) => {
+        this.setState((state) => {
           state.downloadingPDF = false;
           return state;
         });
@@ -487,116 +491,118 @@ class ExamEditor extends Component {
     const anchorEl = this.state.anchorEl;
     // console.log("editorTask", editorTask);
     return (
-      <DragDropContext onDragEnd={this.dragEnd}>
-        <div
-          style={{
-            width: "100%",
-            minHeight: "100vh",
-            display: "flex",
-            flexFlow: "row nowrap",
-          }}
-        >
-          <ExamEditorSidePanel
-            exam={exam}
-            saved={isExamSaved}
-            currentTabId={sideMenuCollapseId}
-            handleTabChange={this.handleSideMenuTabChange}
-            setTaskSearchResult={this.setSearchedTasks}
-            taskSearchResult={searchedTasks}
-            updateTask={this.updateTaskToEdit}
-            selectedTaskToEdit={this.state.editorTask}
-          />
-          <ExamPages
-            exam={exam}
-            setTaskToEdit={this.setTaskToEdit}
-            removeTask={this.removeTask}
-            setTaskToEditWithPart={this.setTaskOnPageEditor}
-            editorTaskIndex={this.state.editorTaskIndex}
-            editorTaskPart={this.state.editorTaskPart}
-            updateTaskText={this.updateTaskText}
-            pushTaskAtIndex={this.pushTaskAtIndex}
-            updateTaskHeight={this.updateTaskHeight}
-            updatePageIndexes={this.updatePageIndexes}
-            updateStateAndSaveExam={this.updateStateAndSaveExam}
-            updateStateNoSave={this.updateStateNoSave}
-          />
-        </div>
-        <Dialog
-          open={!!this.state.downloadModal}
-          // dialogTitle={}
-          // fullWidth={true}
-          // maxWidth={"lg"}
+      <ImageCacheProvider>
+        <DragDropContext onDragEnd={this.dragEnd}>
+          <div
+            style={{
+              width: "100%",
+              minHeight: "100vh",
+              display: "flex",
+              flexFlow: "row nowrap",
+            }}
+          >
+            <ExamEditorSidePanel
+              exam={exam}
+              saved={isExamSaved}
+              currentTabId={sideMenuCollapseId}
+              handleTabChange={this.handleSideMenuTabChange}
+              setTaskSearchResult={this.setSearchedTasks}
+              taskSearchResult={searchedTasks}
+              updateTask={this.updateTaskToEdit}
+              selectedTaskToEdit={this.state.editorTask}
+            />
+            <ExamPages
+              exam={exam}
+              setTaskToEdit={this.setTaskToEdit}
+              removeTask={this.removeTask}
+              setTaskToEditWithPart={this.setTaskOnPageEditor}
+              editorTaskIndex={this.state.editorTaskIndex}
+              editorTaskPart={this.state.editorTaskPart}
+              updateTaskText={this.updateTaskText}
+              pushTaskAtIndex={this.pushTaskAtIndex}
+              updateTaskHeight={this.updateTaskHeight}
+              updatePageIndexes={this.updatePageIndexes}
+              updateStateAndSaveExam={this.updateStateAndSaveExam}
+              updateStateNoSave={this.updateStateNoSave}
+            />
+          </div>
+          <Dialog
+            open={!!this.state.downloadModal}
+            // dialogTitle={}
+            // fullWidth={true}
+            // maxWidth={"lg"}
 
-          onClose={() => {
-            this.setState((state) => {
-              state.downloadModal = false;
-              return false;
-            });
-          }}
-          dialogActionsChildren={[
-            <Button
-              color={"primary"}
-              onClick={() => {
-                this.setState((state) => {
-                  state.downloadModal = false;
-                  return false;
-                });
-              }}
-            >
-              Zamknij
-            </Button>,
-          ]}
-        >
-          <Box display={"flex"} flexDirection={"column"}>
-            {/*<Button*/}
-            {/*  color={"primary"}*/}
-            {/*  onClick={() => {*/}
-            {/*    this.props.enqueueSnackbar("Successfully fetched the data.");*/}
-            {/*  }}*/}
-            {/*>*/}
-            {/*  Sprawdzian*/}
-            {/*</Button>*/}
-            <Button
-              color={"primary"}
-              onClick={() => {
-                this.openPDFinNewTab("exam");
-              }}
-            >
-              Sprawdzian
-            </Button>
-            <Button
-              color={"primary"}
-              // onClick={() => {
-              //   window.open(
-              //     `${window.location.origin}/api/user/answerspdf/` +
-              //       this.state.exam.id,
-              //     "_blank"
-              //   );
-              // }}
-              onClick={() => {
-                this.openPDFinNewTab("answers");
-              }}
-            >
-              Arkusz odpowiedzi
-            </Button>
-            <Button
-              color={"primary"}
-              // onClick={() => {
-              //   window.open(
-              //     `${window.location.origin}/api/user/answerskeypdf/` +
-              //       this.state.exam.id,
-              //     "_blank"
-              //   );
-              // }}
-              onClick={() => {
-                this.openPDFinNewTab("answersKeys");
-              }}
-            >
-              Klucz Odpowiedzi
-            </Button>
-          </Box>
-        </Dialog>
-      </DragDropContext>
+            onClose={() => {
+              this.setState((state) => {
+                state.downloadModal = false;
+                return false;
+              });
+            }}
+            dialogActionsChildren={[
+              <Button
+                color={"primary"}
+                onClick={() => {
+                  this.setState((state) => {
+                    state.downloadModal = false;
+                    return false;
+                  });
+                }}
+              >
+                Zamknij
+              </Button>,
+            ]}
+          >
+            <Box display={"flex"} flexDirection={"column"}>
+              {/*<Button*/}
+              {/*  color={"primary"}*/}
+              {/*  onClick={() => {*/}
+              {/*    this.props.enqueueSnackbar("Successfully fetched the data.");*/}
+              {/*  }}*/}
+              {/*>*/}
+              {/*  Sprawdzian*/}
+              {/*</Button>*/}
+              <Button
+                color={"primary"}
+                onClick={() => {
+                  this.openPDFinNewTab("exam");
+                }}
+              >
+                Sprawdzian
+              </Button>
+              <Button
+                color={"primary"}
+                // onClick={() => {
+                //   window.open(
+                //     `${window.location.origin}/api/user/answerspdf/` +
+                //       this.state.exam.id,
+                //     "_blank"
+                //   );
+                // }}
+                onClick={() => {
+                  this.openPDFinNewTab("answers");
+                }}
+              >
+                Arkusz odpowiedzi
+              </Button>
+              <Button
+                color={"primary"}
+                // onClick={() => {
+                //   window.open(
+                //     `${window.location.origin}/api/user/answerskeypdf/` +
+                //       this.state.exam.id,
+                //     "_blank"
+                //   );
+                // }}
+                onClick={() => {
+                  this.openPDFinNewTab("answersKeys");
+                }}
+              >
+                Klucz Odpowiedzi
+              </Button>
+            </Box>
+          </Dialog>
+        </DragDropContext>
+      </ImageCacheProvider>
     );
   }
 }
