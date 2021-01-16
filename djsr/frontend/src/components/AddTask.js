@@ -438,7 +438,7 @@ class AddTask extends Component {
                           state.defaultValue = "";
                           state.onFinish = (newValue) => {
                             setFieldValue("corrans", [
-                              ...values.wrongans,
+                              ...values.corrans,
                               newValue,
                             ]);
                             this.setState({ openDialog: false });
