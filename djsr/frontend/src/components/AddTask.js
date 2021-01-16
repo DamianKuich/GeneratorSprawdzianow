@@ -19,6 +19,12 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import DialogContentText from "@material-ui/core/DialogContentText";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import Latex from "react-latex";
+import AnswerDialog from "./ExamEditorSubComponents/AnswerDialog";
+import EditIcon from "@material-ui/icons/Edit";
+import * as Yup from "yup";
+import InputAdornment from "@material-ui/core/InputAdornment";
 class AddTask extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +33,8 @@ class AddTask extends Component {
       collapseId: null,
       results: null,
       addTaskResponse: null,
+      openDialog: false,
+      defaultValue: null,
     };
   }
 
@@ -78,7 +86,39 @@ class AddTask extends Component {
           // display="flex" justifyContent="center"
         >
           <Formik
-            initialValues={{ skills: [] }}
+            initialValues={{
+              text: "",
+              skills: [],
+              wrongans: [],
+              corrans: [],
+              points: 1,
+              level: 1,
+              type: 1,
+              private: 1,
+                timetosolve:1
+            }}
+            validationSchema={Yup.object().shape({
+              text: Yup.string().min(1, "Brak treści").required("Brak treści"),
+              skills: Yup.array()
+                .min(1, "Proszę podać conajmniej 1 umiejętność")
+                .required("Proszę podać conajmniej 1 umiejętność"),
+              wrongans: Yup.array()
+                .min(1, "Proszę podać conajmniej 1 nieprawidłową odpowiedź")
+                .required("Proszę podać conajmniej 1 nieprawidłową odpowiedź"),
+              corrans: Yup.array()
+                .min(1, "Proszę podać conajmniej 1 prawidłową odpowiedź")
+                .required("Proszę podać conajmniej 1 prawidłową odpowiedź"),
+              points: Yup.number()
+                .required("Pole wymagane")
+                .positive("Proszę podać dodatnią wartość")
+                .integer("Wartość musi być liczbą całkowitą")
+                .max(100, "Maksymalna liczba punktów to 100"),
+              timetosolve: Yup.number()
+                .required("Pole wymagane")
+                .positive("Proszę podać dodatnią wartość")
+                .integer("Wartość musi być liczbą całkowitą")
+                .max(100, "Maksymalna czas na rozwiązanie to 120 minut"),
+            })}
             onSubmit={(values, helpers) => {
               setTimeout(() => {
                 // console.log("start 1");
@@ -98,11 +138,12 @@ class AddTask extends Component {
                 taskData["text"] = values.text;
                 // taskData["answer_id"] = 1;
                 taskData["type"] = values.type;
-                taskData["level"] = values.poziom;
+                taskData["level"] = values.level;
                 taskData["points"] = values.points;
                 taskData["private"] = values.private;
-                taskData["wrong_answers"] = values.wrongans;
-                taskData["correct_answers"] = values.corrans;
+                taskData["timetosolve"]=values.timetosolve;
+                taskData["wrong_answers"] = values.wrongans.join(";");
+                taskData["correct_answers"] = values.corrans.join(";");
                 console.log("ddtask", taskData);
                 axiosInstance
                   .post("/user/addtask/", taskData)
@@ -113,39 +154,6 @@ class AddTask extends Component {
                     // return response;
                     this.props.onTaskAdd(response.data[0]);
                   });
-                // .then((answerset) => {
-                //     console.log("ansset",answerset)
-                //     let newtaskdata = {...taskData,"answer_id":answerset.data[0].id}
-                //         // taskData["answer_id"] = answerset.id
-                //     // newtaskdata["answer_id"]=answerset.data.id
-                //   axiosInstance
-                //     .post("/user/addtask/", newtaskdata)
-                //     .then((response) => {
-                //       helpers.setSubmitting(false);
-                //       console.log("response", response);
-                //       this.props.onTaskAdd(response.data[0])
-                //       // this.setState({ addTaskResponse: response.data });
-                //     });
-                // });
-                // console.log("values",values);
-                // console.log("skillsy",result.join(","));
-                // axiosInstance
-                //   .post("/user/addtask/", taskData)
-                //   .then((response) => {
-                //     helpers.setSubmitting(false);
-                //     console.log("response", response);
-                //     // this.setState({
-                //     //   results: response.data,
-                //     // });
-                //     // console.log("parsed Twat",tasksParser(response.data));
-                //     // this.props.updateData(tasksParser(response.data));
-                //     this.setState({ addTaskResponse: response.data });
-                //   });
-                //   .catch((error) => {
-                //     // console.log("login error", error.response);
-                //     const errResponse = error.response;
-                //     helpers.setSubmitting(false);
-                //   });
               }, 200);
             }}
           >
@@ -183,6 +191,7 @@ class AddTask extends Component {
                   setFieldValue(valueName, newValue);
                 }
               };
+              console.log("TaskAddVal",values)
               return (
                 <>
                   <Form onSubmit={handleSubmit}>
@@ -243,6 +252,7 @@ class AddTask extends Component {
                         );
                       })}
                     </List>
+                      {errors.skills && <div style={{color:"red"}}>{errors.skills}</div>}
                     <Field
                       component={MaterialFormikField}
                       name={"text"}
@@ -271,32 +281,191 @@ class AddTask extends Component {
                     />
                     <Field
                       component={MaterialFormikField}
-                      name={"wrongans"}
+                      name={"timetosolve"}
+                      type={"number"}
                       formControlProps={{
                         fullWidth: true,
                       }}
                       inputProps={{
                         onChange: handleChange,
-                        multiline: true,
-                        rows: 3,
-                        rowsMax: 10,
+                        startAdornment: (
+                          <InputAdornment
+                          // position="end"
+                          >
+                            Minuty:
+                          </InputAdornment>
+                        ),
                       }}
-                      labelText="zleodp"
+                      labelText="Czas na rozwiązanie"
                     />
-                    <Field
-                      component={MaterialFormikField}
-                      name={"corrans"}
-                      formControlProps={{
-                        fullWidth: true,
+                    {/*<Field*/}
+                    {/*  component={MaterialFormikField}*/}
+                    {/*  name={"wrongans"}*/}
+                    {/*  formControlProps={{*/}
+                    {/*    fullWidth: true,*/}
+                    {/*  }}*/}
+                    {/*  inputProps={{*/}
+                    {/*    onChange: handleChange,*/}
+                    {/*    multiline: true,*/}
+                    {/*    rows: 3,*/}
+                    {/*    rowsMax: 10,*/}
+                    {/*  }}*/}
+                    {/*  labelText="zleodp"*/}
+                    {/*/>*/}
+                    <Box>Nieprawidłowe odpowiedzi</Box>
+                    {values.wrongans.length > 0 ? (
+                      <Box>
+                        {values.wrongans.map((wrongAns, ansIndex) => {
+                          return (
+                            <Box>
+                              <DeleteForeverIcon
+                                onClick={() => {
+                                  console.log("remAns", ansIndex);
+                                  let newValues = [...values.wrongans];
+                                  newValues = newValues.filter(
+                                    (_, arrIndex) => {
+                                      return ansIndex !== arrIndex;
+                                    }
+                                  );
+                                  setFieldValue(`wrongans`, newValues);
+                                }}
+                              />
+                              <EditIcon
+                                onClick={() => {
+                                  this.setState((state) => {
+                                    state.openDialog = true;
+                                    state.defaultValue = wrongAns;
+                                    state.onFinish = (newValue) => {
+                                      setFieldValue(
+                                        `wrongans.${ansIndex}`,
+                                        newValue
+                                      );
+                                      this.setState({ openDialog: false });
+                                    };
+                                    state.onCancel = () => {
+                                      this.setState({ openDialog: false });
+                                    };
+                                    return state;
+                                  });
+                                }}
+                              />
+                              <Latex>{wrongAns}</Latex>
+                            </Box>
+                          );
+                        })}
+                      </Box>
+                    ) : (
+                      <Box>Brak nieprawidłowych odpowiedzi</Box>
+                    )}
+                    {!!errors.wrongans && (
+                      <div style={{ color: "red" }}>{errors.wrongans}</div>
+                    )}
+                    <Button
+                      color={"primary"}
+                      onClick={() => {
+                        this.setState((state) => {
+                          state.openDialog = true;
+                          state.defaultValue = "";
+                          state.onFinish = (newValue) => {
+                            setFieldValue("wrongans", [
+                              ...values.wrongans,
+                              newValue,
+                            ]);
+                            this.setState({ openDialog: false });
+                          };
+                          state.onCancel = () => {
+                            this.setState({ openDialog: false });
+                          };
+                          return state;
+                        });
                       }}
-                      inputProps={{
-                        onChange: handleChange,
-                        multiline: true,
-                        rows: 3,
-                        rowsMax: 10,
+                    >
+                      Dodaj nieprawidłową odpowiedź
+                    </Button>
+                    <Box>Prawidłowe odpowiedzi</Box>
+                    {values.corrans.length > 0 ? (
+                      <Box>
+                        {values.corrans.map((corrAns, ansIndex) => {
+                          return (
+                            <Box>
+                              <DeleteForeverIcon
+                                onClick={() => {
+                                  console.log("remAns", ansIndex);
+                                  let newValues = [...values.corrans];
+                                  newValues = newValues.filter(
+                                    (_, arrIndex) => {
+                                      return ansIndex !== arrIndex;
+                                    }
+                                  );
+                                  setFieldValue(`corrans`, newValues);
+                                }}
+                              />
+                              <EditIcon
+                                onClick={() => {
+                                  this.setState((state) => {
+                                    state.openDialog = true;
+                                    state.defaultValue = corrAns;
+                                    state.onFinish = (newValue) => {
+                                      setFieldValue(
+                                        `corrans.${ansIndex}`,
+                                        newValue
+                                      );
+                                      this.setState({ openDialog: false });
+                                    };
+                                    state.onCancel = () => {
+                                      this.setState({ openDialog: false });
+                                    };
+                                    return state;
+                                  });
+                                }}
+                              />
+                              <Latex>{corrAns}</Latex>
+                            </Box>
+                          );
+                        })}
+                      </Box>
+                    ) : (
+                      <Box>Brak prawidłowych odpowiedzi</Box>
+                    )}
+                    {!!errors.corrans && (
+                      <div style={{ color: "red" }}>{errors.corrans}</div>
+                    )}
+                    <Button
+                      color={"primary"}
+                      onClick={() => {
+                        this.setState((state) => {
+                          state.openDialog = true;
+                          state.defaultValue = "";
+                          state.onFinish = (newValue) => {
+                            setFieldValue("corrans", [
+                              ...values.wrongans,
+                              newValue,
+                            ]);
+                            this.setState({ openDialog: false });
+                          };
+                          state.onCancel = () => {
+                            this.setState({ openDialog: false });
+                          };
+                          return state;
+                        });
                       }}
-                      labelText="prawodp"
-                    />
+                    >
+                      Dodaj prawidłową odpowiedź
+                    </Button>
+                    {/*<Field*/}
+                    {/*  component={MaterialFormikField}*/}
+                    {/*  name={"corrans"}*/}
+                    {/*  formControlProps={{*/}
+                    {/*    fullWidth: true,*/}
+                    {/*  }}*/}
+                    {/*  inputProps={{*/}
+                    {/*    onChange: handleChange,*/}
+                    {/*    multiline: true,*/}
+                    {/*    rows: 3,*/}
+                    {/*    rowsMax: 10,*/}
+                    {/*  }}*/}
+                    {/*  labelText="prawodp"*/}
+                    {/*/>*/}
                     <Box>
                       <FormControl fullWidth>
                         <InputLabel id="poziom">Poziom</InputLabel>
@@ -304,13 +473,13 @@ class AddTask extends Component {
                           labelId="poziom"
                           name={"poziom"}
                           inputProps={{
-                            name: "poziom",
+                            name: "level",
                           }}
                           id="poziom-simple-select"
                           value={values.level}
                           onChange={handleChange}
                         >
-                          <MenuItem value={0}>Nieznany</MenuItem>
+                          {/*<MenuItem value={0}>Nieznany</MenuItem>*/}
                           <MenuItem value={1}>Podstawowy</MenuItem>
                           <MenuItem value={2}>Rosrzerzony</MenuItem>
                         </Select>
@@ -322,7 +491,7 @@ class AddTask extends Component {
                         <Select
                           labelId="type"
                           id="type-simple-select"
-                          value={values.level}
+                          value={values.type}
                           inputProps={{
                             name: "type",
                           }}
@@ -330,8 +499,8 @@ class AddTask extends Component {
                           onChange={handleChange}
                         >
                           <MenuItem value={0}>krtk odp</MenuItem>
-                          <MenuItem value={2}>Otw</MenuItem>
-                          <MenuItem value={2}>Zamkn</MenuItem>
+                          <MenuItem value={1}>Otwarte</MenuItem>
+                          <MenuItem value={2}>Zamknięte</MenuItem>
                         </Select>
                       </FormControl>
                     </Box>
@@ -347,8 +516,8 @@ class AddTask extends Component {
                           }}
                           onChange={handleChange}
                         >
-                          <MenuItem value={0}>publiczne</MenuItem>
-                          <MenuItem value={1}>prywatne</MenuItem>
+                          <MenuItem value={0}>Publiczne</MenuItem>
+                          <MenuItem value={1}>Prywatne</MenuItem>
                         </Select>
                       </FormControl>
                     </Box>
@@ -367,6 +536,12 @@ class AddTask extends Component {
                         Dodaj
                       </Button>
                     </Box>
+                    <AnswerDialog
+                      open={!!this.state.openDialog}
+                      onCancel={this.state.onCancel}
+                      onFinishEdit={this.state.onFinish}
+                      defaultValue={this.state.defaultValue}
+                    />
                   </Form>
                 </>
               );

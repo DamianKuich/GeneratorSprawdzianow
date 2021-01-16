@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{memo} from "react";
 import TaskOverlay from "./TaskOverlay";
 import { Draggable } from "react-beautiful-dnd";
 import Grid from "@material-ui/core/Grid";
@@ -17,6 +17,8 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import EditTaskImages from "./EditTaskImages";
 import EditTaskAnswerSpace from "./EditTaskAnswerSpace";
 import AuthImage from "./AuthImage";
+import {pick} from "lodash/object";
+import {isEqual} from "lodash/lang"
 
 const TaskWithOverlay = (props) => {
   const {
@@ -46,6 +48,7 @@ const TaskWithOverlay = (props) => {
   const imageLayout = getLayoutParams(task.currentAnswers.imageLayout || "");
   const imageWidth = 12 / imageLayout.cols;
   const ansChar = ["A", "B", "C", "D"];
+  console.log("rerenderTask",index)
   return (
     <Draggable
       key={"task-" + task.id + "-" + index}
@@ -212,4 +215,10 @@ const TaskWithOverlay = (props) => {
   );
 };
 
-export default TaskWithOverlay;
+export default memo(TaskWithOverlay,(prev,next)=>{
+  const toCompare=["task","index","draggableIndex","editorTaskIndex","editorTaskPart"]
+  const prevProps=pick(prev,toCompare)
+  const nextProps=pick(next,toCompare)
+  console.log("rerender",prev,prevProps,nextProps,isEqual(prevProps,nextProps));
+  return isEqual(prevProps,nextProps);
+});
