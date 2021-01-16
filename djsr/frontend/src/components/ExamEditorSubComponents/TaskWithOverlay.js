@@ -216,9 +216,10 @@ const TaskWithOverlay = (props) => {
 };
 
 export default memo(TaskWithOverlay,(prev,next)=>{
-  const toCompare=["task","index","draggableIndex","editorTaskIndex","editorTaskPart"]
-  const prevProps=pick(prev,toCompare)
-  const nextProps=pick(next,toCompare)
-  console.log("rerender",prev,prevProps,nextProps,isEqual(prevProps,nextProps));
-  return isEqual(prevProps,nextProps);
+  // const toCompare=["task","index","draggableIndex","editorTaskIndex","editorTaskPart"]
+  // const prevProps=pick(prev,toCompare)
+  // const nextProps=pick(next,toCompare)
+  // console.log("rerender",prev,prevProps,nextProps,isEqual(prevProps,nextProps));
+  // return isEqual(prevProps,nextProps);
+  return false
 });

@@ -39,7 +39,7 @@ const ExamPageWithOverlay = (props) => {
       current = current + (tablica[index].height || 0);
       index++;
     }
-    console.log("cacl end", index, current, limit);
+    console.log("cacl end", index, current, limit ,tablica.map((xdd)=>(xdd.height || 0)));
     return index - 1;
   };
   const endIndex =
@@ -83,9 +83,10 @@ const ExamPageWithOverlay = (props) => {
                 style={{
                   // flex: "1",
                   height: "100%",
+                  // overflow:"hidden"
                 }}
               >
-                <div style={{ height: "100%" }}>
+                {/*<div style={{ height: "100%" }}>*/}
                   <TasksDragAndDrop
                     {...props}
                     DroppableProps={{
@@ -96,7 +97,7 @@ const ExamPageWithOverlay = (props) => {
                     pageIndex={pageIndex}
                     examTasks={examTasks}
                   />
-                </div>
+                {/*</div>*/}
               </div>
             );
           }}
