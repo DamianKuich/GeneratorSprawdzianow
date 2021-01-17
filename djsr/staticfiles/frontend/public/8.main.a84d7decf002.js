@@ -72,13 +72,7 @@ var HomePage = function HomePage(props) {
     className: classes.title
   }, "Gen-Mat"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: classes.subtitle
-  }, "Nowy serwis do generowania sprawdzian\xF3w z matematyki.", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    color: "danger",
-    size: "lg",
-    href: "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim",
-    target: "_blank",
-    rel: "noopener noreferrer"
-  }, "Generuj Sprawdzian"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "\u201CGen-Mat\u201D jest to nowy serwis do generowania sprawdzian\xF3w z matematyki.", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: classnames__WEBPACK_IMPORTED_MODULE_6___default()(classes.main, classes.mainRaised)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: classes.container
@@ -156,8 +150,8 @@ function ProductSection() {
     sm: 12,
     md: 4
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_InfoArea_InfoArea_js__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    title: "Wybierz dzia\u0142y",
-    description: "Wybierz dzia\u0142y i umiej\u0119tno\u015Bci jakie ma maj\u0105 sprawdza\u0107 zadania.",
+    title: "Free Chat",
+    description: "",
     icon: _material_ui_icons_ListAltOutlined__WEBPACK_IMPORTED_MODULE_6___default.a,
     iconColor: "info",
     vertical: true
@@ -166,8 +160,8 @@ function ProductSection() {
     sm: 12,
     md: 4
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_InfoArea_InfoArea_js__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    title: "Dostosuj sprawdzian",
-    description: "",
+    title: "Verified Users",
+    description: "Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough.",
     icon: _material_ui_icons_EditOutlined__WEBPACK_IMPORTED_MODULE_7___default.a,
     iconColor: "success",
     vertical: true
@@ -176,8 +170,8 @@ function ProductSection() {
     sm: 12,
     md: 4
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_InfoArea_InfoArea_js__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    title: "Wydrukuj i rozdaj",
-    description: "",
+    title: "Fingerprint",
+    description: "Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough.",
     icon: _material_ui_icons_PrintOutlined__WEBPACK_IMPORTED_MODULE_8___default.a,
     iconColor: "danger",
     vertical: true
@@ -272,12 +266,6 @@ var ShortDescription = function ShortDescription() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../jss/material-kit-react.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 var infoStyle = {
   infoArea: {
@@ -319,10 +307,7 @@ var infoStyle = {
     color: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["grayColor"],
     overflow: "hidden"
   },
-  title: _objectSpread(_objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"]), {}, {
-    fontSize: "1.125rem",
-    lineHeight: "1.5em"
-  }),
+  title: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"],
   description: {
     color: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["grayColor"],
     overflow: "hidden",
@@ -467,14 +452,10 @@ var productStyle = {
     marginBottom: "1rem",
     marginTop: "30px",
     minHeight: "32px",
-    textDecoration: "none",
-    fontSize: "2.25rem",
-    lineHeight: "1.5em"
+    textDecoration: "none"
   }),
   description: {
-    color: "#999",
-    fontSize: "1.0625rem",
-    lineHeight: "1.55em"
+    color: "#999"
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (productStyle);

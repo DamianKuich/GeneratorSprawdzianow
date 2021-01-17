@@ -78,7 +78,9 @@ var HomePage = function HomePage(props) {
     href: "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim",
     target: "_blank",
     rel: "noopener noreferrer"
-  }, "Generuj Sprawdzian"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fas fa-play"
+  }), "Generuj Sprawdzian"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: classnames__WEBPACK_IMPORTED_MODULE_6___default()(classes.main, classes.mainRaised)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: classes.container

@@ -72,13 +72,7 @@ var HomePage = function HomePage(props) {
     className: classes.title
   }, "Gen-Mat"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: classes.subtitle
-  }, "Nowy serwis do generowania sprawdzian\xF3w z matematyki.", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    color: "danger",
-    size: "lg",
-    href: "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim",
-    target: "_blank",
-    rel: "noopener noreferrer"
-  }, "Generuj Sprawdzian"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "Nowy serwis do generowania sprawdzian\xF3w z matematyki.", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: classnames__WEBPACK_IMPORTED_MODULE_6___default()(classes.main, classes.mainRaised)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: classes.container

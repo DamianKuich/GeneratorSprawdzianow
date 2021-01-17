@@ -5166,12 +5166,6 @@ var customTabsStyle = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../jss/material-kit-react.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 var infoStyle = {
   infoArea: {
@@ -5213,10 +5207,7 @@ var infoStyle = {
     color: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["grayColor"],
     overflow: "hidden"
   },
-  title: _objectSpread(_objectSpread({}, _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"]), {}, {
-    fontSize: "1.125rem",
-    lineHeight: "1.5em"
-  }),
+  title: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["title"],
   description: {
     color: _jss_material_kit_react_js__WEBPACK_IMPORTED_MODULE_0__["grayColor"],
     overflow: "hidden",
@@ -6547,9 +6538,7 @@ var landingPageStyle = {
   subtitle: {
     fontSize: "1.313rem",
     maxWidth: "500px",
-    margin: "10px auto 0",
-    fontFamily: "\"Roboto\",\"Helvetica\",\"Arial\",sans-serif",
-    fontWeight: "300"
+    margin: "10px auto 0"
   },
   main: {
     background: "#FFFFFF",
@@ -6592,14 +6581,10 @@ var productStyle = {
     marginBottom: "1rem",
     marginTop: "30px",
     minHeight: "32px",
-    textDecoration: "none",
-    fontSize: "2.25rem",
-    lineHeight: "1.5em"
+    textDecoration: "none"
   }),
   description: {
-    color: "#999",
-    fontSize: "1.0625rem",
-    lineHeight: "1.55em"
+    color: "#999"
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (productStyle);
