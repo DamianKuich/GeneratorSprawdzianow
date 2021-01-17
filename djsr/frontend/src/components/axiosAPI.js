@@ -29,9 +29,16 @@ axiosInstance.interceptors.response.use(
     if (error.config.url === "/token/obtain/") {
       return Promise.reject(error);
     }
+    if (error.response.status === 401 && error.config.url==="/token/refresh/")
+    {
+        localStorage.removeItem("access_token")
+            localStorage.removeItem("refresh_token")
+            window.location.href=window.location.origin
+        return Promise.reject(error);
+    }
     if (
-      error.response.status === 401 &&
-      error.response.statusText === "Unauthorized"
+      error.response.status === 401
+      // error.response.statusText === "Unauthorized"
     ) {
       const refresh_token = localStorage.getItem("refresh_token");
 
@@ -49,7 +56,10 @@ axiosInstance.interceptors.response.use(
           return axiosInstance(originalRequest);
         })
         .catch((err) => {
-          console.log(err);
+          localStorage.removeItem("access_token")
+            localStorage.removeItem("refresh_token")
+            window.location.href=window.location.origin
+            return Promise.reject(error);
         });
     }
     return Promise.reject(error);
