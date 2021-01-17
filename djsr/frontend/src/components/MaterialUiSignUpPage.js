@@ -89,6 +89,7 @@ const MaterialUiSignUpPage = (props) => {
                     name: Yup.string()
                       .min(2, "Too Short!")
                       .max(50, "Too Long!")
+                        .matches(/!(\s)/,"Nie moźna używać spacji w nazwie użytkownika")
                       .required(FRS),
                     password: Yup.string()
                       .min(8, "Too Short!")
