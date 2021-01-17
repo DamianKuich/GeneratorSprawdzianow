@@ -463,6 +463,8 @@ class ExamEditor extends Component {
         state.downloadModal = true;
         return state;
       });
+    } else if(newValue === "goToExamList"){
+       window.location.href=window.location.origin + "/userexams"
     }
     // window.open(
     //   `${window.location.origin}/api/user/testpdf/` + this.state.exam.id,
