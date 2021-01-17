@@ -193,7 +193,8 @@ var MaterialUiSignUpPage = function MaterialUiSignUpPage(props) {
       passwordConfirm: ""
     },
     validationSchema: yup__WEBPACK_IMPORTED_MODULE_20__["object"]().shape({
-      name: yup__WEBPACK_IMPORTED_MODULE_20__["string"]().min(2, "Too Short!").max(50, "Too Long!").matches(/!(\s)/, "Nie moźna używać spacji w nazwie użytkownika").required(FRS),
+      name: yup__WEBPACK_IMPORTED_MODULE_20__["string"]().min(2, "Too Short!").max(50, "Too Long!") // .matches(/!(\s)/,"Nie moźna używać spacji w nazwie użytkownika")
+      .required(FRS),
       password: yup__WEBPACK_IMPORTED_MODULE_20__["string"]().min(8, "Too Short!").max(50, "Too Long!").required(FRS),
       passwordConfirm: yup__WEBPACK_IMPORTED_MODULE_20__["string"]().oneOf([yup__WEBPACK_IMPORTED_MODULE_20__["ref"]("password")], "Hasła są różne").required(FRS),
       email: yup__WEBPACK_IMPORTED_MODULE_20__["string"]().email("Nieprawidłowy adres e-mail").required(FRS)
