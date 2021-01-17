@@ -6,6 +6,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import Chat from "@material-ui/icons/Chat";
 import VerifiedUser from "@material-ui/icons/VerifiedUser";
 import Fingerprint from "@material-ui/icons/Fingerprint";
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import ListAltOutlinedIcon from '@material-ui/icons/ListAltOutlined';
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import PrintOutlinedIcon from '@material-ui/icons/PrintOutlined';
 // core components
 import GridContainer from "./material_ui_components/Grid/GridContainer.js";
 import GridItem from "./material_ui_components/Grid/GridItem.js";
@@ -35,27 +39,27 @@ export default function ProductSection() {
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
             <InfoArea
-              title="Free Chat"
-              description="Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough."
-              icon={Chat}
+              title="Wybierz działy"
+              description="Wybierz działy i umiejętności jakie ma mają sprawdzać zadania."
+              icon={ListAltOutlinedIcon}
               iconColor="info"
               vertical
             />
           </GridItem>
           <GridItem xs={12} sm={12} md={4}>
             <InfoArea
-              title="Verified Users"
-              description="Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough."
-              icon={VerifiedUser}
+              title="Dostosuj sprawdzian"
+              description=""
+              icon={EditOutlinedIcon}
               iconColor="success"
               vertical
             />
           </GridItem>
           <GridItem xs={12} sm={12} md={4}>
             <InfoArea
-              title="Fingerprint"
-              description="Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough."
-              icon={Fingerprint}
+              title="Wydrukuj i rozdaj"
+              description=""
+              icon={PrintOutlinedIcon}
               iconColor="danger"
               vertical
             />

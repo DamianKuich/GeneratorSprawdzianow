@@ -40,12 +40,15 @@ const HomePage = (props) => {
           <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>Your Story Starts With Us.</h1>
-              <h4>
-                Every landing page needs a small description after the big bold
-                title, that{"'"}s why we added this text here. Add here all the
-                information that can make you or your product create the first
-                impression.
+              <h1 className={classes.title}>Gen-Mat</h1>
+              <h4 className={classes.subtitle}>
+                Nowy serwis do generowania sprawdzianów z matematyki.<br/>
+                {/*  Zalety serwisu:*/}
+                {/*<ul>*/}
+                {/*  <li>wybór zadań z naszej bazy</li>*/}
+                {/*  <li>możliwość dodania własnego zadania</li>*/}
+                {/*  <li>możliwość pobrania sprawdzianu w formacie PDF</li>*/}
+                {/*</ul>*/}
               </h4>
               <br />
               <Button
@@ -55,8 +58,8 @@ const HomePage = (props) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <i className="fas fa-play" />
-                Watch video
+                {/*<i className="fas fa-play" />*/}
+                Generuj Sprawdzian
               </Button>
             </GridItem>
           </GridContainer>
