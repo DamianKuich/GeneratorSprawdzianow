@@ -1523,8 +1523,8 @@ var SideMenuTabSelector = function SideMenuTabSelector(_ref) {
     } // component={<span>elo</span>}
 
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Tab__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    label: "Edycja zadania",
-    value: "taskEdit",
+    label: "Wróć do listy egzaminów",
+    value: "goToExamList",
     disabled: false,
     classes: {
       selected: classes.selected
@@ -4200,6 +4200,8 @@ var ExamEditor = /*#__PURE__*/function (_Component) {
           state.downloadModal = true;
           return state;
         });
+      } else if (newValue === "goToExamList") {
+        window.location.href = window.location.origin + "/userexams";
       } // window.open(
       //   `${window.location.origin}/api/user/testpdf/` + this.state.exam.id,
       //   "_blank"
