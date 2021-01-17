@@ -10,10 +10,14 @@ const productStyle = {
     marginBottom: "1rem",
     marginTop: "30px",
     minHeight: "32px",
-    textDecoration: "none"
+    textDecoration: "none",
+    fontSize:"2.25rem",
+    lineHeight:"1.5em"
   },
   description: {
-    color: "#999"
+    color: "#999",
+    fontSize:"1.0625rem",
+    lineHeight:"1.55em"
   }
 };
 
