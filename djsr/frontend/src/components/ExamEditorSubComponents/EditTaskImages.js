@@ -21,9 +21,11 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import PhotoLibraryIcon from "@material-ui/icons/PhotoLibrary";
 import TaskOverlayButton from "./TaskOverlayButton";
+import { useSnackbar } from "notistack";
 
 const EditTaskImages = (props) => {
   const { task, updateTask } = props;
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const index = props.index || 0;
   const taskImages = task.currentAnswers.image || [];
   const taskImageLayout = task.currentAnswers.imageLayout || "2x1";
@@ -42,12 +44,26 @@ const EditTaskImages = (props) => {
         console.log(result, result.constructor.name);
         if ("ValidationError" === result.constructor.name) {
           console.log("image input error", result);
+          enqueueSnackbar(
+            "Próbujesz dodać plik o niedozwolonym formacie,lub jest za duży (dozwolone formaty: jpg, jpeg, png. Maks rozmiar: 2MB)",
+            { variant: "error", autoHideDuration: 8000 }
+          );
           return;
         }
         imagesToPush.push(result);
       }
-      if (imagesToPush.length > imagesLeftToAdd) {
+      if (imagesLeftToAdd <= 0) {
+        enqueueSnackbar(
+          "Nie możesz dodać więcej obrazków, musisz usunąć obrazek z zadania, aby móc dodać inny!!!",
+          { variant: "error", autoHideDuration: 8000 }
+        );
+        return;
+      } else if (imagesToPush.length > imagesLeftToAdd) {
         //todo 2 much images error
+        enqueueSnackbar(
+          `Próbujesz dodać za dużo obrazków na raz, aktualna ilość jaką możesz dodać to ${imagesLeftToAdd}!`,
+          { variant: "warning", autoHideDuration: 8000 }
+        );
         return;
       }
       setImages(images.concat(imagesToPush));
@@ -67,13 +83,30 @@ const EditTaskImages = (props) => {
           : image;
       })
     );
+
+    if (!newImages.reduce((a, b) => !!a && !!b, true)) {
+      enqueueSnackbar(
+        "Błąd wysyłania zdjęć, odśwież stronę i spróbuj ponownie później",
+        {
+          variant: "error",
+          autoHideDuration: 8000,
+        }
+      );
+      setSending(false);
+      setOpen(false);
+      return
+    }
     console.log("sendImages", newImages);
     let updatedTask = { ...task };
     updatedTask.currentAnswers.image = newImages;
     updatedTask.currentAnswers.imageLayout = imageLayout;
     updateTask({ ...updatedTask });
     setSending(false);
-    //TODO komunikat done
+    //DONE komunikat done
+    enqueueSnackbar("Udało się dodać zdjęcia do zadania.", {
+      variant: "success",
+      autoHideDuration: 8000,
+    });
     setOpen(false);
   };
   const removeImage = (index) => {
@@ -102,7 +135,7 @@ const EditTaskImages = (props) => {
         maxWidth={"lg"}
         onClose={(event, reason) => {
           setOpen(false);
-          console.log("dClose",event, reason);
+          console.log("dClose", event, reason);
         }}
         dialogActionsChildren={[
           <Button
