@@ -36,6 +36,9 @@ const useStyles = makeStyles(styles);
 const MaterialUiPasswordReset = (props) => {
   const FRS = "Pole wymagane";
   const user = props.appState.user;
+  if (!!user) {
+    props.history.push("/");
+  }
   const [editView, setEditView] = React.useState("password");
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const strongToken = useParams().token;

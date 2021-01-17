@@ -13,7 +13,7 @@ import axiosInstance from "./axiosAPI";
 import axiosInstanceNoAuth from "./axiosAPI"
 import Box from '@material-ui/core/Box'
 import { Form, Formik,Field } from "formik";
-import * as Yup from "yup";
+import * as Yup from "yup"; 
 import FormikMdInput from "./FormikMDInput";
 import { Link } from "react-router-dom";
 import { makeStyles,withStyles } from '@material-ui/core/styles';
@@ -110,7 +110,7 @@ const bgStyles = {
       backgroundImage: `url(${image})`,
       
       minHeight: 1000,
-      maxWidth: 1885
+  
 
      
      
@@ -333,7 +333,7 @@ const useStylesAlert = makeStyles((theme) => ({
         <Paper  style={bgStyles.paperContainer}>
    
           <Box
-          p={12}
+          p={18}
           >
 
               <Grid  
@@ -486,7 +486,7 @@ const useStylesAlert = makeStyles((theme) => ({
                 </Card>
                 </Grid>
                 </Box>
-                <p></p>
+               
             {exams.map((exam) => {
               return (
                 
@@ -494,7 +494,6 @@ const useStylesAlert = makeStyles((theme) => ({
                 alignItems="center"
                 justify="center"
                 container
-                spacing={3}
                 direction="column"
                 
                 

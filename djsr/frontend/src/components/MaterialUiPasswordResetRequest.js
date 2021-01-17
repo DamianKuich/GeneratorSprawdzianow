@@ -34,6 +34,9 @@ const useStyles = makeStyles(styles);
 const MaterialUiPasswordResetRequest = (props) => {
   const FRS = "Pole wymagane";
   const user = props.appState.user;
+  if (!!user) {
+    props.history.push("/");
+  }
   const [editView, setEditView] = React.useState("email");
   const [notification, setNotification] = React.useState({isOpen: false, message:'',type:''})
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();

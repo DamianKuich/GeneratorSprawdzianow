@@ -92,7 +92,7 @@ const MaterialUiNavbar = (props) => {
       rightLinks={<HeaderLinks {...props} />}
       
       color="transparent"
-      changeColorOnScroll={{ height: 250, color: "white" }}
+      changeColorOnScroll={{ height: 25, color: "white" }}
     >
  
     </Header>

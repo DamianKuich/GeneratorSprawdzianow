@@ -20,11 +20,12 @@ const UserAccountManager = lazy(() => import("./MaterialUiManageAccount"));
 const PasswordReset = lazy(() => import("./MaterialUiPasswordReset"));
 const ExamEditor = lazy(() => import("./MaterialUiExamEditor"));
 const UserExams = lazy(() => import("./MaterialUiUserExams"));
+const LoggedOut = lazy(() => import("./LoggedOut"));
 const PasswordResetRequest = lazy(() =>
   import("./MaterialUiPasswordResetRequest")
 );
 const HomePage = lazy(() => import("./HomePage"));
-const Fenerator = lazy(() => import("./MaterialUiFenerator.js"));
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -72,6 +73,7 @@ class App extends Component {
         axiosInstance.defaults.headers["Authorization"] = null;
         this.setState({ user: false });
         this.props.history.push("/");
+        
       })
       .catch((error) => {
         console.log("logout error", error);
@@ -160,12 +162,12 @@ class App extends Component {
                     render={(props) => <ExamEditor {...props} {...global} />}
                   />
                   <Route
-                    path={"/fenerator/:id/"}
-                    render={(props) => <Fenerator {...props} {...global} />}
-                  />
-                  <Route
                     path={"/userexams/"}
                     render={(props) => <UserExams {...props} {...global} />}
+                  />
+                  <Route
+                    path={"/loggedout"}
+                    render={(props) => <LoggedOut {...props} {...global} />}
                   />
                   <Route
                     path={"/"}
