@@ -51,14 +51,14 @@ def generatePdf(tasks, name="Sprawdzian"):
                             # with tag('div'):
                             try:
                                 with tag('span'):
-                                    doc.stag("img", src='data:image/*;base64,' + img, style="display:inline-block;")
+                                    doc.stag("img", src='data:image/*;base64,' + img, style='display:inline-block;max-height: 5cm; max-width: 100%; margin: 0px auto;')
                             except:
                                 text("error")
                         elif task['layout'] == "1x2":
                             with tag('div'):
                                 try:
                                     with tag('span'):
-                                        doc.stag("img", src='data:image/*;base64,' + img)
+                                        doc.stag("img", src='data:image/*;base64,' + img,style='max-height: 5cm; max-width: 100%; margin: 0px auto;')
                                 except:
                                     text("error")
                         else:
