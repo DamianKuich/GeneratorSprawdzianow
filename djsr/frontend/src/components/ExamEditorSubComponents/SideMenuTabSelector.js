@@ -35,8 +35,8 @@ const SideMenuTabSelector = ({ handleTabChange, currentTabId, ...props }) => {
           // component={<span>elo</span>}
         />
         <Tab
-          label={"Edycja zadania"}
-          value={"taskEdit"}
+          label={"Wróć do listy egzaminów"}
+          value={"goToExamList"}
           disabled={false}
           classes={{
             selected: classes.selected,
