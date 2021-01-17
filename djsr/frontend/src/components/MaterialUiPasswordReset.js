@@ -74,8 +74,8 @@ const MaterialUiPasswordReset = (props) => {
         }}
         validationSchema={Yup.object().shape({
             password: Yup.string()
-              .min(8, "Too Short!")
-              .max(50, "Too Long!")
+              .min(8, "Hasło musi zawierać co najmniej 8 znaków!")
+              .max(50, "Hasło może zawierać maksymalnie 50 znaków!")
               .required("Pole wymagane")
               .oneOf(
                 [Yup.ref("passwordConfirm")],

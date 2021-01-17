@@ -88,9 +88,8 @@ const bgStyles = {
         }}
         validationSchema={Yup.object().shape({
           email: Yup.string()
-            .min(2, "Too Short!")
-            .max(50, "Too Long!")
-            .required(FRS),
+          .email("Nieprawidłowy adres e-mail")
+          .required("Pole wymagane"),
         })}
         onSubmit={(values, helpers) => {
             setTimeout(() => {
@@ -229,8 +228,8 @@ const bgStyles = {
         }}
         validationSchema={Yup.object().shape({
           name: Yup.string()
-            .min(2, "Too Short!")
-            .max(50, "Too Long!")
+            .min(2, "Nazwa użytkownika musi się składać z minimum 2 znaków!")
+            .max(50, "Hasło może zawierać maksymalnie 50 znaków!")
             .required(FRS),
         })}
         onSubmit={(values, helpers) => {
@@ -372,16 +371,16 @@ const bgStyles = {
         }}
         validationSchema={Yup.object().shape({
             password: Yup.string()
-              .min(8, "Too Short!")
-              .max(50, "Too Long!")
+              .min(8, "Hasło musi zawierać co najmniej 8 znaków!")
+              .max(50, "Hasło może zawierać maksymalnie 50 znaków!")
               .required("Pole wymagane")
               .oneOf(
                 [Yup.ref("passwordConfirm")],
                 "Hasła są różne"
               ),
             oldPassword: Yup.string()
-              .min(8, "Too Short!")
-              .max(50, "Too Long!")
+              .min(8, "Hasło musi zawierać co najmniej 8 znaków!")
+              .max(50, "Hasło może zawierać maksymalnie 50 znaków!")
               .required("Pole wymagane"),
             passwordConfirm: Yup.string()
               .oneOf([Yup.ref("password")], "Hasła są różne")

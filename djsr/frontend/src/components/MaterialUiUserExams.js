@@ -73,7 +73,9 @@ import Loading from "./LoadingScreen"
 import LoadingScreenB from "./LoadingForButtons"
 import InputAdornment from '@material-ui/core/InputAdornment';
 import ButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-
+import AppBar from '@material-ui/core/AppBar';
+import CloseIcon from '@material-ui/icons/Close';
+import Toolbar from '@material-ui/core/Toolbar';
 const useStyles = makeStyles((theme) => ({
   root: {
     maxHeight: 200,
@@ -552,14 +554,18 @@ const useStylesAlert = makeStyles((theme) => ({
          {this.state.autoGeneStep=="1" ? (
            
          <Dialog 
-         
+         disableBackdropClick={true}
          fullWidth={true}
         
           titlestyle={{textAlign: "center"}}
           
-         open={this.state.open} onClose={() => this.setState({ open: !this.state.open,checked:[],autoGeneStep:"1" ,otwCount:null,zamkCount:null})}>
-        <DialogTitle  id="form-dialog-title"><Typography variant="h5" align="center">Wygeneruj sprawdzian automatycznie</Typography></DialogTitle>
-       
+         open={this.state.open} >
+        <DialogTitle  id="form-dialog-title">
+        <IconButton disabled={this.state.isGathering} onClick={() => this.setState({ open: !this.state.open,checked:[],autoGeneStep:"1",otwCount:null,zamkCount:null })} edge="start" color="inherit" oaria-label="close">
+              <CloseIcon />
+            </IconButton> 
+          <Typography variant="h5" align="center">Wygeneruj sprawdzian automatycznie</Typography></DialogTitle>
+          
         <DialogContent>
 
  
@@ -716,13 +722,17 @@ const useStylesAlert = makeStyles((theme) => ({
                          <Form onSubmit={handleSubmit}>
                            
          <Dialog 
-         
+         disableBackdropClick={true}
          fullWidth={true}
         
           titlestyle={{textAlign: "center"}}
           
-         open={this.state.open} onClose={() => this.setState({ open: !this.state.open,checked:[],autoGeneStep:"1",otwCount:null,zamkCount:null })}>
-        <DialogTitle  id="form-dialog-title"><Typography variant="h5" align="center">Wygeneruj sprawdzian automatycznie</Typography></DialogTitle>
+         open={this.state.open} >
+        <DialogTitle  id="form-dialog-title">
+        <IconButton disabled={this.state.isGenerating} onClick={() => this.setState({ open: !this.state.open,checked:[],autoGeneStep:"1",otwCount:null,zamkCount:null })} edge="start" color="inherit" oaria-label="close">
+              <CloseIcon />
+            </IconButton> 
+          <Typography variant="h5" align="center">Wygeneruj sprawdzian automatycznie</Typography></DialogTitle>
 
 
        

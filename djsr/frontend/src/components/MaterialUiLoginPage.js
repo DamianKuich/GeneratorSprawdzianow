@@ -86,12 +86,12 @@ const MaterialUiLoginPage = (props) => {
                   }}
                   validationSchema={Yup.object().shape({
                     password: Yup.string()
-                      .min(8, "Minimum 8 znaków")
-                      .max(50, "Przekroczono maksymalną ilość znaków!")
+                      .min(8, "Hasło musi zawierać co najmniej 8 znaków!")
+                      .max(50, "Hasło może zawierać maksymalnie 50 znaków!")
                       .required(FRS),
                     name: Yup.string()
-                      .min(2, "Minimum 8 znaków!")
-                      .max(50, "Przekroczono maksymalną ilość znaków!")
+                      .min(2, "Hasło musi zawierać co najmniej 8 znaków!")
+                      .max(50, "Hasło może zawierać maksymalnie 50 znaków!")
                       .required(FRS),
                   })}
                   onSubmit={(values, helpers) => {
