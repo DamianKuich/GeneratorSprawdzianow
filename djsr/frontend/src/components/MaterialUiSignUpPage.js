@@ -87,13 +87,13 @@ const MaterialUiSignUpPage = (props) => {
                   }}
                   validationSchema={Yup.object().shape({
                     name: Yup.string()
-                      .min(2, "Too Short!")
-                      .max(50, "Too Long!")
+                      .min(2, "Nazwa użytkownika musi się składać z minimum 2 znaków!")
+                      .max(50, "Hasło może zawierać maksymalnie 50 znaków!")
                         // .matches(/!(\s)/,"Nie moźna używać spacji w nazwie użytkownika")
                       .required(FRS),
                     password: Yup.string()
-                      .min(8, "Too Short!")
-                      .max(50, "Too Long!")
+                      .min(8, "Hasło musi zawierać co najmniej 8 znaków!")
+                      .max(50, "Hasło może zawierać maksymalnie 50 znaków!")
                       .required(FRS),
                     passwordConfirm: Yup.string()
                       .oneOf([Yup.ref("password")], "Hasła są różne")

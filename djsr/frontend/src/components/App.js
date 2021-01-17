@@ -20,7 +20,7 @@ const UserAccountManager = lazy(() => import("./MaterialUiManageAccount"));
 const PasswordReset = lazy(() => import("./MaterialUiPasswordReset"));
 const ExamEditor = lazy(() => import("./MaterialUiExamEditor"));
 const UserExams = lazy(() => import("./MaterialUiUserExams"));
-const LoggedOut = lazy(() => import("./LoggedOut"));
+
 const PasswordResetRequest = lazy(() =>
   import("./MaterialUiPasswordResetRequest")
 );
@@ -164,10 +164,6 @@ class App extends Component {
                   <Route
                     path={"/userexams/"}
                     render={(props) => <UserExams {...props} {...global} />}
-                  />
-                  <Route
-                    path={"/loggedout"}
-                    render={(props) => <LoggedOut {...props} {...global} />}
                   />
                   <Route
                     path={"/"}
