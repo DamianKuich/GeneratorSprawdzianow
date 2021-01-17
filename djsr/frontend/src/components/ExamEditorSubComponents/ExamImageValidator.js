@@ -5,6 +5,7 @@ const MAX_FILE_SIZE = 2 * 1024 * 1024;
 const SUPPORTED_FORMATS = [
       "image/jpg",
       "image/jpeg",
+    "image/png",
     ];
 
 export const imageValidationSchema= yup
