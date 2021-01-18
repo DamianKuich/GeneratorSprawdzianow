@@ -89,6 +89,14 @@ class MaterialUiTaskSearch extends Component {
                   result.push(key);
                 }
               }
+              if (!!this.props.allSkillsByDefault && result.length===0){
+                sections.map((section)=>{
+                  return section.skill.map((skill)=>{
+                    result.push(skill.id)
+                    return skill
+                  })
+                })
+              }
               // console.log("values",values);
               // console.log("skillsy",result.join(","));
               axiosInstance
