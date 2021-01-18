@@ -7,7 +7,7 @@ from .views import AddImageToTaskViewSet, AddImageViewSet, ImageViewSet, SkillVi
     UserRetrieveUpdateAPIView, ReturnUserInfo, PasswordSendResetView, PasswordResetView, AllTestsJSONViewSet, \
     OneTestJSONViewSet, MakeTestViewSet, MakeTestCopyViewSet, LatexToSvgView, GetRandomTasksViewSet, \
     SkilltoSections, AddTask, AddSkill, AddSection, AddAnswers, DeleteTestViewSet, TestTasksiewSet,\
-    TestAnswersviewSet, SkilltoSectionsAutoGene, GetSkillsFromfile
+    TestAnswersviewSet, SkilltoSectionsAutoGene, GetSkillsFromfile, OneTaskViewSet
 # TODO resend activation token
 urlpatterns = [
     path('user/addtask/', AddTask.as_view(), name="AddTask"),
@@ -44,4 +44,5 @@ urlpatterns = [
     path('user/testpdf/<id>', TestTasksiewSet.as_view(), name='testpdf'),
     path('user/answerspdf/<id>', TestAnswersviewSet.as_view(), name='testpdf'),
     path('user/answerskeypdf/<id>', TestKeyAnswersviewSet.as_view(), name='testpdf'),
+    path('user/onetask/', OneTaskViewSet.as_view(), name='testpdf'),
 ]

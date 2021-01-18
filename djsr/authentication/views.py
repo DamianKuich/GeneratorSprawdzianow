@@ -14,7 +14,7 @@ from rest_framework import status, permissions
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.tokens import RefreshToken, OutstandingToken, BlacklistedToken
 from rest_framework_simplejwt.backends import TokenBackend
 from rest_framework_simplejwt.exceptions import TokenBackendError
 from rest_framework_jwt.settings import api_settings
@@ -1106,4 +1106,15 @@ class TestKeyAnswersviewSet(APIView):
         connection.close()
         return HttpResponse(pdf, content_type="application/pdf")
 
+class OneTaskViewSet(APIView):
 
+    permission_classes = (IsAuthenticated,)
+    serializer_class = TaskSerializer
+    def post(self, request, format=None):
+        author_id = CustomUser.objects.get(id=request.user.id)
+        if request.data:
+            taskid = int(request.data['id'])
+            task = Task.objects.filter(skill=taskid, author=author_id)
+            serializer = TaskSerializer(task, many=True).data
+            connection.close()
+            return Response(serializer)
