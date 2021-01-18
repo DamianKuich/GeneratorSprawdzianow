@@ -35,8 +35,8 @@ const HomePage = (props) => {
   };
   return (
     <div>
-      {/*<Paper style={bgStyles.paperContainer}>*/}
-        <Parallax filter image={parallaxBgImage} >
+      <Paper style={bgStyles.paperContainer}>
+       <Parallax  >
           <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
@@ -64,8 +64,8 @@ const HomePage = (props) => {
             </GridItem>
           </GridContainer>
         </div>
-        </Parallax>
-      {/*</Paper>*/}
+      </Parallax> 
+      </Paper>
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
             <ProductSection/>
