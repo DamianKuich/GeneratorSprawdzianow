@@ -24,7 +24,7 @@ export default function LoadingScreenB() {
     <div className={classes.root}>
         <div className={classes.wrapper}>
 
-            <CircularProgress size={20} className={classes.buttonProgress} style={{
+            <CircularProgress mt={5} size={20} className={classes.buttonProgress} style={{
                 'color': 'purple',
 
             }}/>

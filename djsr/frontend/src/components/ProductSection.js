@@ -25,13 +25,16 @@ export default function ProductSection() {
     <div className={classes.section}>
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={8}>
-          <h2 className={classes.title}>Let{"'"}s talk product</h2>
+          <h2 className={classes.title}>Gen-Mat</h2>
           <h5 className={classes.description}>
-            This is the paragraph where you can write more details about your
-            product. Keep you user engaged by providing meaningful information.
-            Remember that by this time, the user is curious, otherwise he wouldn
-            {"'"}t scroll to get here. Add a button if you want the user to see
-            more.
+            Gen-Mat to nowy serwis pozwalający na generację sprawdzianów
+            Utwórz sprawdzian, a następnie utwórz sprawdziań korzystając z puli dostępnych zadań lub dodaj swoje własne zadania
+            Załóż konto już teraz!
+
+
+
+
+
           </h5>
         </GridItem>
       </GridContainer>
@@ -40,7 +43,7 @@ export default function ProductSection() {
           <GridItem xs={12} sm={12} md={4}>
             <InfoArea
               title="Wybierz działy"
-              description="Wybierz działy i umiejętności jakie ma mają sprawdzać zadania."
+              description="Wybierz działy, z których chcesz utworzyć sprawdzian."
               icon={ListAltOutlinedIcon}
               iconColor="info"
               vertical
@@ -49,7 +52,7 @@ export default function ProductSection() {
           <GridItem xs={12} sm={12} md={4}>
             <InfoArea
               title="Dostosuj sprawdzian"
-              description=""
+              description="Dodaj wybrane zadania, otwarte lub zamknięte"
               icon={EditOutlinedIcon}
               iconColor="success"
               vertical
@@ -57,7 +60,7 @@ export default function ProductSection() {
           </GridItem>
           <GridItem xs={12} sm={12} md={4}>
             <InfoArea
-              title="Wydrukuj i rozdaj"
+              title="Wydrukuj i sprawdzaj"
               description=""
               icon={PrintOutlinedIcon}
               iconColor="danger"
