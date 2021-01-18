@@ -11,11 +11,13 @@ import parallaxBgImage from "./img/genspr-parralax-bg.png";
 import ShortDescription from "./ShortDescription";
 import image from "./img/genesprDark.png";
 import ProductSection from "./ProductSection";
-
+import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 const useStyles = makeStyles(styles);
 
 const HomePage = (props) => {
   const classes = useStyles();
+
   const { ...rest } = props;
 
   const bgStyles = {
@@ -51,16 +53,19 @@ const HomePage = (props) => {
                 {/*</ul>*/}
               </h4>
               <br />
+             
               <Button
+              
                 color="danger"
                 size="lg"
-                // href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
-                // target="_blank"
-                // rel="noopener noreferrer"
+                
               >
-                {/*<i className="fas fa-play" />*/}
+                 <Link to={"/userexams/" } style={{ textDecoration: 'none' ,color: '#FFF'}}>
+
                 Generuj Sprawdzian
+                </Link>
               </Button>
+              
             </GridItem>
           </GridContainer>
         </div>
