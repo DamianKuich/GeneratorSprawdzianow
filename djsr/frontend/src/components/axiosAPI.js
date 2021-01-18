@@ -1,8 +1,7 @@
 import axios from "axios";
 
-
 export const axiosInstanceNoAuth = axios.create({
-  baseURL: window.location.origin+"/api/",
+  baseURL: window.location.origin + "/api/",
   timeout: 30000,
   headers: {
     "Content-Type": "application/json",
@@ -11,7 +10,7 @@ export const axiosInstanceNoAuth = axios.create({
 });
 
 export const axiosInstance = axios.create({
-  baseURL: window.location.origin+"/api/",
+  baseURL: window.location.origin + "/api/",
   timeout: 30000,
   headers: {
     Authorization: "JWT " + localStorage.getItem("access_token"),
@@ -23,18 +22,19 @@ export const axiosInstance = axios.create({
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-
     const originalRequest = error.config;
     console.log("AxiosError", error.config, error.response);
     if (error.config.url === "/token/obtain/") {
       return Promise.reject(error);
     }
-    if (error.response.status === 401 && error.config.url==="/token/refresh/")
-    {
-        localStorage.removeItem("access_token")
-            localStorage.removeItem("refresh_token")
-            window.location.href=window.location.origin
-        return Promise.reject(error);
+    if (
+      (error.response.status === 401 || error.response.status === 400) &&
+      error.config.url === "/token/refresh/"
+    ) {
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
+      window.location.href = window.location.origin + "/loggedout";
+      return Promise.reject(error);
     }
     if (
       error.response.status === 401
@@ -56,10 +56,7 @@ axiosInstance.interceptors.response.use(
           return axiosInstance(originalRequest);
         })
         .catch((err) => {
-          localStorage.removeItem("access_token")
-            localStorage.removeItem("refresh_token")
-            window.location.href=window.location.origin
-            return Promise.reject(error);
+          return Promise.reject(err);
         });
     }
     return Promise.reject(error);

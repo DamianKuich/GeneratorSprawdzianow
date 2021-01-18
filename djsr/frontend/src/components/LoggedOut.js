@@ -155,7 +155,7 @@ class AccountActivation extends Component {
                                 color="warning"
                                 style={signupPageStyle.cardHeader}
                               >
-                                <h4>Wylogowałeś się</h4>
+                                <h4>Zostałeś wylogowany</h4>
                               </CardHeader>
       
                   
