@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { axiosInstanceNoAuth } from "./axiosAPI";
 import Box from "@material-ui/core/Box";
 import List from "@material-ui/core/List";
@@ -11,12 +11,31 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import { Form, getIn } from "formik";
 import TaskList from "./ExamCollectionSubComponents/TaskList";
 import { flatten } from "lodash/array";
+import image from "./img/genesprDark.png";
+import Container from "@material-ui/core/Container";
+import Paper from "@material-ui/core/Paper";
 
 const MaterialUiTaskCollection = (props) => {
   const [page, setPage] = useState(1);
   const [sections, setSections] = useState(null);
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [collapse, setCollapse] = useState(null);
+
+  const bgStyles = {
+    paperContainer: {
+      backgroundImage: `url(${image})`,
+
+      minHeight: 1000,
+    },
+    examCardContainer: {
+      width: 700,
+      backgroundColor: "#FEFEFA",
+    },
+
+    cardTitle: {
+      textAlign: "center",
+    },
+  };
   const setSkill = useCallback((index, value) => {
     setSelectedSkills((prev) => {
       let next = [...prev];
@@ -74,87 +93,107 @@ const MaterialUiTaskCollection = (props) => {
     };
     fetchSections();
   }, []);
-  const allPossibleSkills =!!sections && flatten(
-    sections.map((section) => {
-      return section.skill.map((skill) => {
-        return skill.id;
+  const selectedSkillsIds = useMemo(() => {
+    return selectedSkills
+      .map((value, index) => {
+        return !!value ? index : false;
+      })
+      .filter((value) => {
+        return !!value;
       });
-    })
-  );
-  let selectedAllSkills = [];
-  for (let index in allPossibleSkills) {
-    selectedAllSkills[index] = true;
-  }
+  }, [selectedSkills]);
+  const allPossibleSkills = useMemo(() => {
+    return (
+      !!sections &&
+      flatten(
+        sections.map((section) => {
+          return section.skill.map((skill) => {
+            return skill.id;
+          });
+        })
+      )
+    );
+  }, [sections]);
 
-  const skills = selectedSkills.length > 0 ? selectedSkills : selectedAllSkills;
+  // console.log(
+  //   "selectedSkills",
+  //   selectedSkills,
+  //   allPossibleSkills,
+  //   selectedSkillsIds
+  // );
+  const skills =
+    selectedSkillsIds.length > 0 ? selectedSkillsIds : allPossibleSkills;
   if (sections === null) {
-    return <Box>ładowanie</Box>;
+    return <Box mt={10}>ładowanie</Box>;
   } else if (sections === false) {
-    return <Box>Przepraszamy wystąpił błąd, odświerz strone</Box>;
+    return <Box mt={10}>Przepraszamy wystąpił błąd, odświerz strone</Box>;
   }
   return (
     <Box mt={10}>
-      <Box>
-        <List>
-          {sections.map((section) => {
-            return (
-              <>
-                <ListItem>
-                  <ListItemSecondaryAction>
-                    <Checkbox
-                      edge="start"
-                      checked={sectionBooleanValue(section)}
-                      onChange={() => {
-                        handleSectionChange(section);
+      <Container fixed>
+        <Paper>
+          <List>
+            {sections.map((section) => {
+              return (
+                <>
+                  <ListItem>
+                    <ListItemSecondaryAction>
+                      <Checkbox
+                        edge="start"
+                        checked={sectionBooleanValue(section)}
+                        onChange={() => {
+                          handleSectionChange(section);
+                        }}
+                      />
+                    </ListItemSecondaryAction>
+                    <ListItemText
+                      primary={section.Section}
+                      onClick={() => {
+                        setCollapse("section-" + section.id);
                       }}
                     />
-                  </ListItemSecondaryAction>
-                  <ListItemText
-                    primary={section.Section}
-                    onClick={() => {
-                      setCollapse("section-" + section.id);
-                    }}
-                  />
-                </ListItem>
-                <Collapse
-                  in={"section-" + section.id === collapse}
-                  unmountOnExit
-                >
-                  <List component="div" disablePadding>
-                    {section.skill.map((skill) => {
-                      return (
-                        <ListItem
-                          onClick={() => {
-                            // handleChange("skills." + skill.id);
-                            setSkill(skill.id, !selectedSkills[skill.id]);
-                            setPage(1);
-                          }}
-                        >
-                          <ListItemIcon>
-                            <Checkbox
-                              edge="start"
-                              // checked={!!getIn(values, "skills." + skill.id)}
-                              checked={!!selectedSkills[skill.id]}
-                              tabIndex={-1}
-                              disableRipple
+                  </ListItem>
+                  <Collapse
+                    in={"section-" + section.id === collapse}
+                    unmountOnExit
+                  >
+                    <List component="div" disablePadding>
+                      {section.skill.map((skill) => {
+                        return (
+                          <ListItem
+                            onClick={() => {
+                              // handleChange("skills." + skill.id);
+                              setSkill(skill.id, !selectedSkills[skill.id]);
+                              setPage(1);
+                            }}
+                          >
+                            <ListItemIcon>
+                              <Checkbox
+                                edge="start"
+                                // checked={!!getIn(values, "skills." + skill.id)}
+                                checked={!!selectedSkills[skill.id]}
+                                tabIndex={-1}
+                                disableRipple
+                              />
+                            </ListItemIcon>
+                            <ListItemText
+                              // id={labelId}
+                              primary={skill.Skill}
                             />
-                          </ListItemIcon>
-                          <ListItemText
-                            // id={labelId}
-                            primary={skill.Skill}
-                          />
-                        </ListItem>
-                      );
-                    })}
-                  </List>
-                </Collapse>
-                {/*{console.log("values", values, values.skills.keys())}*/}
-              </>
-            );
-          })}
-        </List>
-      </Box>
-      <TaskList skills={skills} page={page} />
+                          </ListItem>
+                        );
+                      })}
+                    </List>
+                  </Collapse>
+                  {/*{console.log("values", values, values.skills.keys())}*/}
+                </>
+              );
+            })}
+          </List>
+        </Paper>
+          <TaskList skills={skills} page={page} setPage={setPage}/>
+      </Container>
+
     </Box>
   );
 };
