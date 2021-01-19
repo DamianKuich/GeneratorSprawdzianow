@@ -1,1 +1,319 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[13],{1656:function(e,t,o){"use strict";var r=o(2),a=o(4),n=o(1),i=(o(66),o(0),o(6)),c=o(10),l=o(20),d=o(7);o(458).a.styles;var s=n.forwardRef((function(e,t){var o=e.children,l=e.classes,d=e.className,s=e.color,u=void 0===s?"default":s,p=e.component,m=void 0===p?"div":p,b=e.disabled,h=void 0!==b&&b,v=e.disableElevation,f=void 0!==v&&v,g=e.disableFocusRipple,O=void 0!==g&&g,T=e.disableRipple,y=void 0!==T&&T,j=e.fullWidth,x=void 0!==j&&j,R=e.orientation,w=void 0===R?"horizontal":R,z=e.size,C=void 0===z?"medium":z,E=e.variant,M=void 0===E?"outlined":E,L=Object(a.a)(e,["children","classes","className","color","component","disabled","disableElevation","disableFocusRipple","disableRipple","fullWidth","orientation","size","variant"]),P=Object(i.a)(l.grouped,l["grouped".concat(Object(c.a)(w))],l["grouped".concat(Object(c.a)(M))],l["grouped".concat(Object(c.a)(M)).concat(Object(c.a)(w))],l["grouped".concat(Object(c.a)(M)).concat("default"!==u?Object(c.a)(u):"")],h&&l.disabled);return n.createElement(m,Object(r.a)({role:"group",className:Object(i.a)(l.root,d,x&&l.fullWidth,f&&l.disableElevation,"contained"===M&&l.contained,"vertical"===w&&l.vertical),ref:t},L),n.Children.map(o,(function(e){return n.isValidElement(e)?n.cloneElement(e,{className:Object(i.a)(P,e.props.className),color:e.props.color||u,disabled:e.props.disabled||h,disableElevation:e.props.disableElevation||f,disableFocusRipple:O,disableRipple:y,fullWidth:x,size:e.props.size||C,variant:e.props.variant||M}):null})))}));t.a=Object(d.a)((function(e){return{root:{display:"inline-flex",borderRadius:e.shape.borderRadius},contained:{boxShadow:e.shadows[2]},disableElevation:{boxShadow:"none"},disabled:{},fullWidth:{width:"100%"},vertical:{flexDirection:"column"},grouped:{minWidth:40},groupedHorizontal:{"&:not(:first-child)":{borderTopLeftRadius:0,borderBottomLeftRadius:0},"&:not(:last-child)":{borderTopRightRadius:0,borderBottomRightRadius:0}},groupedVertical:{"&:not(:first-child)":{borderTopRightRadius:0,borderTopLeftRadius:0},"&:not(:last-child)":{borderBottomRightRadius:0,borderBottomLeftRadius:0}},groupedText:{},groupedTextHorizontal:{"&:not(:last-child)":{borderRight:"1px solid ".concat("light"===e.palette.type?"rgba(0, 0, 0, 0.23)":"rgba(255, 255, 255, 0.23)")}},groupedTextVertical:{"&:not(:last-child)":{borderBottom:"1px solid ".concat("light"===e.palette.type?"rgba(0, 0, 0, 0.23)":"rgba(255, 255, 255, 0.23)")}},groupedTextPrimary:{"&:not(:last-child)":{borderColor:Object(l.c)(e.palette.primary.main,.5)}},groupedTextSecondary:{"&:not(:last-child)":{borderColor:Object(l.c)(e.palette.secondary.main,.5)}},groupedOutlined:{},groupedOutlinedHorizontal:{"&:not(:first-child)":{marginLeft:-1},"&:not(:last-child)":{borderRightColor:"transparent"}},groupedOutlinedVertical:{"&:not(:first-child)":{marginTop:-1},"&:not(:last-child)":{borderBottomColor:"transparent"}},groupedOutlinedPrimary:{"&:hover":{borderColor:e.palette.primary.main}},groupedOutlinedSecondary:{"&:hover":{borderColor:e.palette.secondary.main}},groupedContained:{boxShadow:"none"},groupedContainedHorizontal:{"&:not(:last-child)":{borderRight:"1px solid ".concat(e.palette.grey[400]),"&$disabled":{borderRight:"1px solid ".concat(e.palette.action.disabled)}}},groupedContainedVertical:{"&:not(:last-child)":{borderBottom:"1px solid ".concat(e.palette.grey[400]),"&$disabled":{borderBottom:"1px solid ".concat(e.palette.action.disabled)}}},groupedContainedPrimary:{"&:not(:last-child)":{borderColor:e.palette.primary.dark}},groupedContainedSecondary:{"&:not(:last-child)":{borderColor:e.palette.secondary.dark}}}}),{name:"MuiButtonGroup"})(s)},475:function(e,t,o){"use strict";var r=o(34),a=o(104);Object.defineProperty(t,"__esModule",{value:!0}),t.default=void 0;var n=a(o(1)),i=(0,r(o(105)).default)(n.createElement("path",{d:"M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"}),"People");t.default=i},577:function(e,t,o){"use strict";var r=o(34),a=o(104);Object.defineProperty(t,"__esModule",{value:!0}),t.default=void 0;var n=a(o(1)),i=(0,r(o(105)).default)(n.createElement("path",{d:"M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"}),"Favorite");t.default=i},601:function(e,t,o){"use strict";var r=o(34),a=o(104);Object.defineProperty(t,"__esModule",{value:!0}),t.default=void 0;var n=a(o(1)),i=(0,r(o(105)).default)(n.createElement("path",{d:"M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"}),"Lock");t.default=i},662:function(e,t,o){"use strict";var r=o(2),a=o(42),n=o(4),i=o(14),c=o(1),l=o(13),d=(o(0),o(6)),s=o(159),u=o(20),p=o(7),m=o(10),b=o(516),h=o(515),v=o(12),f=o(180),g=o(43),O=o(116),T=o(84),y=o(21);function j(e){return Math.round(1e5*e)/1e5}var x=!1,R=null;var w=c.forwardRef((function(e,t){var o=e.arrow,i=void 0!==o&&o,u=e.children,p=e.classes,j=e.disableFocusListener,w=void 0!==j&&j,z=e.disableHoverListener,C=void 0!==z&&z,E=e.disableTouchListener,M=void 0!==E&&E,L=e.enterDelay,P=void 0===L?100:L,B=e.enterNextDelay,S=void 0===B?0:B,V=e.enterTouchDelay,k=void 0===V?700:V,F=e.id,N=e.interactive,D=void 0!==N&&N,H=e.leaveDelay,W=void 0===H?0:H,A=e.leaveTouchDelay,$=void 0===A?1500:A,_=e.onClose,I=e.onOpen,J=e.open,G=e.placement,q=void 0===G?"bottom":G,K=e.PopperComponent,Q=void 0===K?h.a:K,U=e.PopperProps,X=e.title,Y=e.TransitionComponent,Z=void 0===Y?b.a:Y,ee=e.TransitionProps,te=Object(n.a)(e,["arrow","children","classes","disableFocusListener","disableHoverListener","disableTouchListener","enterDelay","enterNextDelay","enterTouchDelay","id","interactive","leaveDelay","leaveTouchDelay","onClose","onOpen","open","placement","PopperComponent","PopperProps","title","TransitionComponent","TransitionProps"]),oe=Object(y.a)(),re=c.useState(),ae=re[0],ne=re[1],ie=c.useState(null),ce=ie[0],le=ie[1],de=c.useRef(!1),se=c.useRef(),ue=c.useRef(),pe=c.useRef(),me=c.useRef(),be=Object(T.a)({controlled:J,default:!1,name:"Tooltip",state:"open"}),he=Object(a.a)(be,2),ve=he[0],fe=he[1],ge=ve,Oe=Object(f.a)(F);c.useEffect((function(){return function(){clearTimeout(se.current),clearTimeout(ue.current),clearTimeout(pe.current),clearTimeout(me.current)}}),[]);var Te=function(e){clearTimeout(R),x=!0,fe(!0),I&&I(e)},ye=function(){var e=!(arguments.length>0&&void 0!==arguments[0])||arguments[0];return function(t){var o=u.props;"mouseover"===t.type&&o.onMouseOver&&e&&o.onMouseOver(t),de.current&&"touchstart"!==t.type||(ae&&ae.removeAttribute("title"),clearTimeout(ue.current),clearTimeout(pe.current),P||x&&S?(t.persist(),ue.current=setTimeout((function(){Te(t)}),x?S:P)):Te(t))}},je=Object(O.a)(),xe=je.isFocusVisible,Re=je.onBlurVisible,we=je.ref,ze=c.useState(!1),Ce=ze[0],Ee=ze[1],Me=function(){Ce&&(Ee(!1),Re())},Le=function(){var e=!(arguments.length>0&&void 0!==arguments[0])||arguments[0];return function(t){ae||ne(t.currentTarget),xe(t)&&(Ee(!0),ye()(t));var o=u.props;o.onFocus&&e&&o.onFocus(t)}},Pe=function(e){clearTimeout(R),R=setTimeout((function(){x=!1}),800+W),fe(!1),_&&_(e),clearTimeout(se.current),se.current=setTimeout((function(){de.current=!1}),oe.transitions.duration.shortest)},Be=function(){var e=!(arguments.length>0&&void 0!==arguments[0])||arguments[0];return function(t){var o=u.props;"blur"===t.type&&(o.onBlur&&e&&o.onBlur(t),Me()),"mouseleave"===t.type&&o.onMouseLeave&&t.currentTarget===ae&&o.onMouseLeave(t),clearTimeout(ue.current),clearTimeout(pe.current),t.persist(),pe.current=setTimeout((function(){Pe(t)}),W)}},Se=function(e){de.current=!0;var t=u.props;t.onTouchStart&&t.onTouchStart(e)},Ve=Object(v.a)(ne,t),ke=Object(v.a)(we,Ve),Fe=c.useCallback((function(e){Object(g.a)(ke,l.findDOMNode(e))}),[ke]),Ne=Object(v.a)(u.ref,Fe);""===X&&(ge=!1);var De=!ge&&!C,He=Object(r.a)({"aria-describedby":ge?Oe:null,title:De&&"string"==typeof X?X:null},te,u.props,{className:Object(d.a)(te.className,u.props.className),onTouchStart:Se,ref:Ne}),We={};M||(He.onTouchStart=function(e){Se(e),clearTimeout(pe.current),clearTimeout(se.current),clearTimeout(me.current),e.persist(),me.current=setTimeout((function(){ye()(e)}),k)},He.onTouchEnd=function(e){u.props.onTouchEnd&&u.props.onTouchEnd(e),clearTimeout(me.current),clearTimeout(pe.current),e.persist(),pe.current=setTimeout((function(){Pe(e)}),$)}),C||(He.onMouseOver=ye(),He.onMouseLeave=Be(),D&&(We.onMouseOver=ye(!1),We.onMouseLeave=Be(!1))),w||(He.onFocus=Le(),He.onBlur=Be(),D&&(We.onFocus=Le(!1),We.onBlur=Be(!1)));var Ae=c.useMemo((function(){return Object(s.a)({popperOptions:{modifiers:{arrow:{enabled:Boolean(ce),element:ce}}}},U)}),[ce,U]);return c.createElement(c.Fragment,null,c.cloneElement(u,He),c.createElement(Q,Object(r.a)({className:Object(d.a)(p.popper,D&&p.popperInteractive,i&&p.popperArrow),placement:q,anchorEl:ae,open:!!ae&&ge,id:He["aria-describedby"],transition:!0},We,Ae),(function(e){var t=e.placement,o=e.TransitionProps;return c.createElement(Z,Object(r.a)({timeout:oe.transitions.duration.shorter},o,ee),c.createElement("div",{className:Object(d.a)(p.tooltip,p["tooltipPlacement".concat(Object(m.a)(t.split("-")[0]))],de.current&&p.touch,i&&p.tooltipArrow)},X,i?c.createElement("span",{className:p.arrow,ref:le}):null))})))}));t.a=Object(p.a)((function(e){return{popper:{zIndex:e.zIndex.tooltip,pointerEvents:"none"},popperInteractive:{pointerEvents:"auto"},popperArrow:{'&[x-placement*="bottom"] $arrow':{top:0,left:0,marginTop:"-0.71em",marginLeft:4,marginRight:4,"&::before":{transformOrigin:"0 100%"}},'&[x-placement*="top"] $arrow':{bottom:0,left:0,marginBottom:"-0.71em",marginLeft:4,marginRight:4,"&::before":{transformOrigin:"100% 0"}},'&[x-placement*="right"] $arrow':{left:0,marginLeft:"-0.71em",height:"1em",width:"0.71em",marginTop:4,marginBottom:4,"&::before":{transformOrigin:"100% 100%"}},'&[x-placement*="left"] $arrow':{right:0,marginRight:"-0.71em",height:"1em",width:"0.71em",marginTop:4,marginBottom:4,"&::before":{transformOrigin:"0 0"}}},tooltip:{backgroundColor:Object(u.c)(e.palette.grey[700],.9),borderRadius:e.shape.borderRadius,color:e.palette.common.white,fontFamily:e.typography.fontFamily,padding:"4px 8px",fontSize:e.typography.pxToRem(10),lineHeight:"".concat(j(1.4),"em"),maxWidth:300,wordWrap:"break-word",fontWeight:e.typography.fontWeightMedium},tooltipArrow:{position:"relative",margin:"0"},arrow:{overflow:"hidden",position:"absolute",width:"1em",height:"0.71em",boxSizing:"border-box",color:Object(u.c)(e.palette.grey[700],.9),"&::before":{content:'""',margin:"auto",display:"block",width:"100%",height:"100%",backgroundColor:"currentColor",transform:"rotate(45deg)"}},touch:{padding:"8px 16px",fontSize:e.typography.pxToRem(14),lineHeight:"".concat(j(16/14),"em"),fontWeight:e.typography.fontWeightRegular},tooltipPlacementLeft:Object(i.a)({transformOrigin:"right center",margin:"0 24px "},e.breakpoints.up("sm"),{margin:"0 14px"}),tooltipPlacementRight:Object(i.a)({transformOrigin:"left center",margin:"0 24px"},e.breakpoints.up("sm"),{margin:"0 14px"}),tooltipPlacementTop:Object(i.a)({transformOrigin:"center bottom",margin:"24px 0"},e.breakpoints.up("sm"),{margin:"14px 0"}),tooltipPlacementBottom:Object(i.a)({transformOrigin:"center top",margin:"24px 0"},e.breakpoints.up("sm"),{margin:"14px 0"})}}),{name:"MuiTooltip",flip:!1})(w)},685:function(e,t,o){"use strict";var r=o(1),a=o(54);t.a=Object(a.a)(r.createElement("path",{d:"M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"}),"Apps")},686:function(e,t,o){"use strict";var r=o(1),a=o(54);t.a=Object(a.a)(r.createElement("path",{d:"M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"}),"CloudDownload")}}]);
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[13],{
+
+/***/ "./djsr/frontend/src/components/LoadingForButtons.js":
+/*!***********************************************************!*\
+  !*** ./djsr/frontend/src/components/LoadingForButtons.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LoadingScreenB; });
+/* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/esm/Grid/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/CircularProgress */ "./node_modules/@material-ui/core/esm/CircularProgress/index.js");
+
+
+
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["makeStyles"])(function (theme) {
+  return {
+    root: {
+      display: 'flex',
+      alignItems: 'center'
+    },
+    wrapper: {
+      margin: theme.spacing(1),
+      position: 'relative'
+    }
+  };
+});
+function LoadingScreenB() {
+  var classes = useStyles();
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: classes.root
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: classes.wrapper
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_CircularProgress__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    mt: 5,
+    size: 20,
+    className: classes.buttonProgress,
+    style: {
+      'color': 'purple'
+    }
+  })));
+}
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/MaterialUiPasswordResetRequest.js":
+/*!************************************************************************!*\
+  !*** ./djsr/frontend/src/components/MaterialUiPasswordResetRequest.js ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/InputAdornment */ "./node_modules/@material-ui/core/esm/InputAdornment/index.js");
+/* harmony import */ var _material_ui_core_Icon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Icon */ "./node_modules/@material-ui/core/esm/Icon/index.js");
+/* harmony import */ var _material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/icons/Email */ "./node_modules/@material-ui/icons/Email.js");
+/* harmony import */ var _material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Email__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/icons/People */ "./node_modules/@material-ui/icons/People.js");
+/* harmony import */ var _material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/icons/Lock */ "./node_modules/@material-ui/icons/Lock.js");
+/* harmony import */ var _material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Lock__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _material_ui_components_Header_Header_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./material_ui_components/Header/Header.js */ "./djsr/frontend/src/components/material_ui_components/Header/Header.js");
+/* harmony import */ var _material_ui_components_Header_HeaderLinks_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./material_ui_components/Header/HeaderLinks.js */ "./djsr/frontend/src/components/material_ui_components/Header/HeaderLinks.js");
+/* harmony import */ var _material_ui_components_Footer_Footer_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./material_ui_components/Footer/Footer.js */ "./djsr/frontend/src/components/material_ui_components/Footer/Footer.js");
+/* harmony import */ var _material_ui_components_Grid_GridContainer_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./material_ui_components/Grid/GridContainer.js */ "./djsr/frontend/src/components/material_ui_components/Grid/GridContainer.js");
+/* harmony import */ var _material_ui_components_Grid_GridItem_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./material_ui_components/Grid/GridItem.js */ "./djsr/frontend/src/components/material_ui_components/Grid/GridItem.js");
+/* harmony import */ var _material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ././material_ui_components/CustomButtons/Button.js */ "./djsr/frontend/src/components/material_ui_components/CustomButtons/Button.js");
+/* harmony import */ var _material_ui_components_Card_Card_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./material_ui_components/Card/Card.js */ "./djsr/frontend/src/components/material_ui_components/Card/Card.js");
+/* harmony import */ var _material_ui_components_Card_CardBody_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./material_ui_components/Card/CardBody.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardBody.js");
+/* harmony import */ var _material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./material_ui_components/Card/CardHeader.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardHeader.js");
+/* harmony import */ var _material_ui_components_Card_CardFooter_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./material_ui_components/Card/CardFooter.js */ "./djsr/frontend/src/components/material_ui_components/Card/CardFooter.js");
+/* harmony import */ var _material_ui_components_CustomInput_CustomInput_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./material_ui_components/CustomInput/CustomInput.js */ "./djsr/frontend/src/components/material_ui_components/CustomInput/CustomInput.js");
+/* harmony import */ var _assets_jss_material_kit_react_views_loginPage_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./assets/jss/material-kit-react/views/loginPage.js */ "./djsr/frontend/src/components/assets/jss/material-kit-react/views/loginPage.js");
+/* harmony import */ var _Notification__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./Notification */ "./djsr/frontend/src/components/Notification.js");
+/* harmony import */ var _img_genspr_parralax_bg_png__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./img/genspr-parralax-bg.png */ "./djsr/frontend/src/components/img/genspr-parralax-bg.png");
+/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! yup */ "./node_modules/yup/es/index.js");
+/* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
+/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
+/* harmony import */ var _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./MaterialFormikField */ "./djsr/frontend/src/components/MaterialFormikField.js");
+/* harmony import */ var notistack__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! notistack */ "./node_modules/notistack/dist/notistack.esm.js");
+/* harmony import */ var _LoadingForButtons__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./LoadingForButtons */ "./djsr/frontend/src/components/LoadingForButtons.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])(_assets_jss_material_kit_react_views_loginPage_js__WEBPACK_IMPORTED_MODULE_18__["default"]);
+
+var MaterialUiPasswordResetRequest = function MaterialUiPasswordResetRequest(props) {
+  var FRS = "Pole wymagane";
+  var user = props.appState.user;
+
+  if (!!user) {
+    props.history.push("/");
+  }
+
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState("email"),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      editView = _React$useState2[0],
+      setEditView = _React$useState2[1];
+
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState({
+    isOpen: false,
+    message: '',
+    type: ''
+  }),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      notification = _React$useState4[0],
+      setNotification = _React$useState4[1];
+
+  var _useSnackbar = Object(notistack__WEBPACK_IMPORTED_MODULE_25__["useSnackbar"])(),
+      enqueueSnackbar = _useSnackbar.enqueueSnackbar,
+      closeSnackbar = _useSnackbar.closeSnackbar;
+
+  var _React$useState5 = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState("cardHidden"),
+      _React$useState6 = _slicedToArray(_React$useState5, 2),
+      cardAnimaton = _React$useState6[0],
+      setCardAnimation = _React$useState6[1];
+
+  setTimeout(function () {
+    setCardAnimation("");
+  }, 700);
+  var classes = useStyles();
+
+  var rest = _extends({}, props);
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.pageHeader,
+    style: {
+      backgroundImage: "url(" + _img_genspr_parralax_bg_png__WEBPACK_IMPORTED_MODULE_20__["default"] + ")",
+      backgroundSize: "cover",
+      backgroundPosition: "top center"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.container
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridContainer_js__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    justify: "center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Grid_GridItem_js__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    xs: 12,
+    sm: 12,
+    md: 4
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_Card_js__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    className: classes[cardAnimaton]
+  }, editView == "email" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Formik"], {
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+      passwordConfirm: ""
+    },
+    validationSchema: yup__WEBPACK_IMPORTED_MODULE_21__["object"]().shape({
+      email: yup__WEBPACK_IMPORTED_MODULE_21__["string"]().email("Nieprawidłowy adres e-mail").required(FRS)
+    }),
+    onSubmit: function onSubmit(values, helpers) {
+      setTimeout(function () {
+        helpers.setSubmitting(true);
+        _axiosAPI__WEBPACK_IMPORTED_MODULE_22__["axiosInstanceNoAuth"].post("/user/resetsend/", {
+          email: values.email
+        }).then(function (response) {
+          enqueueSnackbar("Gotowe! Teraz aktywuj konto przy pomocy linku otrzymanego na adres e-mail", {
+            variant: 'success'
+          });
+          helpers.setSubmitting(false);
+        })["catch"](function (error) {
+          // console.log("login error", error.response);
+          var errResponse = error.response;
+          enqueueSnackbar("Nieprawidłowy adres e-mail", {
+            variant: 'error'
+          });
+          helpers.setSubmitting(false);
+          helpers.setValues({
+            email: ""
+          }, false);
+          helpers.setTouched({
+            email: false
+          }, false);
+          helpers.setFieldError("general", "brak maila");
+        });
+      }, 5000);
+    }
+  }, function (_ref) {
+    var values = _ref.values,
+        errors = _ref.errors,
+        touched = _ref.touched,
+        handleChange = _ref.handleChange,
+        handleBlur = _ref.handleBlur,
+        handleSubmit = _ref.handleSubmit,
+        isSubmitting = _ref.isSubmitting;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      className: classes.form
+    }, console.log(touched, errors), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardHeader_js__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      color: "primary",
+      className: classes.cardHeader
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Przypomnij has\u0142o")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardBody_js__WEBPACK_IMPORTED_MODULE_14__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_23__["Field"], {
+      component: _MaterialFormikField__WEBPACK_IMPORTED_MODULE_24__["default"],
+      name: "email",
+      formControlProps: {
+        fullWidth: true
+      },
+      labelText: "E-mail",
+      inputProps: {
+        endAdornment: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          position: "end"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_People__WEBPACK_IMPORTED_MODULE_5___default.a, {
+          className: classes.inputIconsColor
+        }))
+      }
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_Card_CardFooter_js__WEBPACK_IMPORTED_MODULE_16__["default"], {
+      className: classes.cardFooter
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_components_CustomButtons_Button_js__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      simple: true,
+      color: "primary",
+      size: "lg",
+      onClick: function onClick() {
+        handleSubmit();
+      },
+      disabled: isSubmitting
+    }, "Przypomnij has\u0142o"), isSubmitting && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoadingForButtons__WEBPACK_IMPORTED_MODULE_26__["default"], null)));
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null)))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Notification__WEBPACK_IMPORTED_MODULE_19__["default"], {
+    notification: notification,
+    setNotification: setNotification
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (MaterialUiPasswordResetRequest);
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/Notification.js":
+/*!******************************************************!*\
+  !*** ./djsr/frontend/src/components/Notification.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Notification; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+/* harmony import */ var _material_ui_lab__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/lab */ "./node_modules/@material-ui/lab/esm/index.js");
+
+
+
+function Notification(props) {
+  var notification = props.notification,
+      setNotification = props.setNotification;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["Snackbar"], {
+    open: notification.isOpen,
+    autoHideDuration: 30
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_lab__WEBPACK_IMPORTED_MODULE_2__["Alert"], {
+    severity: notification.type
+  }, notification.message));
+}
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/img/genspr-parralax-bg.png":
+/*!*****************************************************************!*\
+  !*** ./djsr/frontend/src/components/img/genspr-parralax-bg.png ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "8ae80ee488d6ec36fd62f67865d06356.png");
+
+/***/ })
+
+}]);
+//# sourceMappingURL=13.main.js.map
