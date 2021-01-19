@@ -9,6 +9,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import AddTask from "./AddTask";
 import LoadingScreen from "./LoadingScreen";
 import { SnackbarProvider } from "notistack";
+import MaterialUiTaskCollection from "./MaterialUITaskCollection";
 const Login = lazy(() => import("./MaterialUiLoginPage"));
 // import Login from "./MaterialUiLoginPage"
 const Signup = lazy(() => import("./MaterialUiSignUpPage"));
@@ -114,6 +115,11 @@ class App extends Component {
                     exact
                     path={"/login/"}
                     render={(props) => <Login {...global} {...props} />}
+                  />
+                  <Route
+                    exact
+                    path={"/mytasks/"}
+                    render={(props) => <MaterialUiTaskCollection {...global} {...props} />}
                   />
                   <Route
                     exact
