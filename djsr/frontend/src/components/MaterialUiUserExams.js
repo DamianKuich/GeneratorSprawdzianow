@@ -162,8 +162,9 @@ const useStylesAlert = makeStyles((theme) => ({
         level: '',
         skills: '', 
         groups: '',
-        autoGenSkills:[],
+    
         checked: [],
+        fullyChecked: [],
         hiddenSections: [],
         otwCount: null,
         zamkCount: null,
@@ -180,6 +181,7 @@ const useStylesAlert = makeStyles((theme) => ({
       this.handleToggle = this.handleToggle.bind(this);
       this.handleToggleAll = this.handleToggleAll.bind(this);
       this.hideSection = this.hideSection.bind(this);
+
     }
   
     updateExams = () => {
@@ -226,8 +228,7 @@ const useStylesAlert = makeStyles((theme) => ({
     };
   
 
-    handleToggle = (value,otw,zamk) => () => {
-      this.setState({ autoGenSkills: this.state.autoGenSkills.concat(value) })
+    handleToggle = (value,otw,zamk,sectionID) => () => {
       const currentIndex = this.state.checked.indexOf(value);
       const newChecked = [...this.state.checked];
 
@@ -243,10 +244,16 @@ const useStylesAlert = makeStyles((theme) => ({
         let sumOtw = +this.state.otwCount - +otw 
         let sumZamk = +this.state.zamkCount - +zamk 
         this.setState({otwCount: sumOtw,zamkCount:sumZamk})
+        const newCheckedMain = this.state.fullyChecked;
+        const currentIndexMain = this.state.fullyChecked.indexOf(sectionID);
+        newCheckedMain.splice(currentIndexMain, 1);
+        this.setState({ fullyChecked: newCheckedMain });
       }
   
       this.setState({ checked: newChecked });
     };
+
+    
 
     
     hideSection = (section) => () => {
@@ -269,25 +276,57 @@ const useStylesAlert = makeStyles((theme) => ({
 
     
     handleToggleAll = (section) => () => {
-      this.setState({ autoGenSkills: this.state.autoGenSkills.concat(value) })
-      const currentIndex = this.state.checked.indexOf(value);
-      const newChecked = [...this.state.checked];
+      const currentIndex = this.state.fullyChecked.indexOf(section.id);
+      const newChecked = [...this.state.fullyChecked];
 
       
       
       if (currentIndex === -1) {
-        newChecked.push(value);
-        let sumOtw = +otw + +this.state.otwCount
-        let sumZamk = +zamk + +this.state.zamkCount
-        this.setState({otwCount: sumOtw,zamkCount:sumZamk})
-      } else {
-        newChecked.splice(currentIndex, 1);
-        let sumOtw = +this.state.otwCount - +otw 
-        let sumZamk = +this.state.zamkCount - +zamk 
-        this.setState({otwCount: sumOtw,zamkCount:sumZamk})
-      }
+        newChecked.push(section.id);
+        {section.skill.map((skill) => {
+          
+          let currentIndex2 = this.state.checked.indexOf(skill.id);
+          let newChecked2 = this.state.checked
   
-      this.setState({ checked: newChecked });
+
+
+          if (currentIndex2 === -1) {
+            newChecked2.push(skill.id);
+            let sumOtw = +skill.taskCountOtw + +this.state.otwCount
+            let sumZamk = +skill.taskCountZamk + +this.state.zamkCount
+            this.setState({otwCount: sumOtw,zamkCount:sumZamk})
+          } 
+      
+          this.setState({ checked: newChecked2 });
+
+          
+        }
+        );
+        
+        
+      }} else {
+        newChecked.splice(currentIndex, 1);
+        {section.skill.map((skill) => {
+          
+          const currentIndex2 = this.state.checked.indexOf(skill.id);
+          const newChecked2 = this.state.checked
+
+
+          if (currentIndex2 !== -1) {
+            newChecked2.splice(currentIndex2, 1);
+            let sumOtw = +this.state.otwCount - +skill.taskCountOtw 
+            let sumZamk = +this.state.zamkCount - +skill.taskCountZamk 
+            this.setState({otwCount: sumOtw,zamkCount:sumZamk})
+          } 
+      
+          this.setState({ checked: newChecked2 });
+        }
+        );
+        
+        
+      }}
+  
+      this.setState({ fullyChecked: newChecked });
     };
     // componentWillMount() {
     //
@@ -813,12 +852,34 @@ const useStylesAlert = makeStyles((theme) => ({
 
                           <Collapse in={(this.state.hiddenSections.includes(section.id))} timeout="auto" unmountOnExit>
                             <List component="div" disablePadding>
+
+
+                            <ListItem button
+                                  key={section.id}
+                                  onClick={this.handleToggleAll(section)}
+                                  
+                                  >
+                                    <ListItemIcon>
+                                      <Checkbox
+                                        edge="start"
+                                        checked={this.state.fullyChecked.indexOf(section.id) !== -1}
+                                        tabIndex={-1}
+                                      
+                                      />
+                                    </ListItemIcon>
+                                    <ListItemText 
+                                     
+                                      primary={<b>Zaznacz wszystkie</b>}
+                                    />
+                                 
+                             
+                                  </ListItem>
                             
                               {section.skill.map((skill) => {
                                 return (
                                   <ListItem button
                                   key={skill.id}
-                                  onClick={this.handleToggle(skill.id,skill.taskCountOtw,skill.taskCountZamk)}
+                                  onClick={this.handleToggle(skill.id,skill.taskCountOtw,skill.taskCountZamk,section.id)}
                                   
                                   >
                                     <ListItemIcon>

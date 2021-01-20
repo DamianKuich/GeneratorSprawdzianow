@@ -85,7 +85,7 @@ const MaterialUiPasswordResetRequest = (props) => {
                 email: values.email,
               })
               .then((response) => {
-                enqueueSnackbar("Gotowe! Teraz aktywuj konto przy pomocy linku otrzymanego na adres e-mail", { 
+                enqueueSnackbar("Gotowe! Teraz zmień hasło przy pomocy linku otrzymanego na adres e-mail", { 
                   variant: 'success',
               });
 
