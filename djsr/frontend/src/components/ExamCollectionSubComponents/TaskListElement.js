@@ -86,11 +86,11 @@ const TaskListElement = (props) => {
               .positive("Proszę podać dodatnią wartość")
               .integer("Wartość musi być liczbą całkowitą")
               .max(100, "Maksymalna liczba punktów to 100"),
-            timetosolve: Yup.number()
-              .required("Pole wymagane")
-              .positive("Proszę podać dodatnią wartość")
-              .integer("Wartość musi być liczbą całkowitą")
-              .max(100, "Maksymalna czas na rozwiązanie to 120 minut"),
+            // timetosolve: Yup.number()
+            //   .required("Pole wymagane")
+            //   .positive("Proszę podać dodatnią wartość")
+            //   .integer("Wartość musi być liczbą całkowitą")
+            //   .max(100, "Maksymalna czas na rozwiązanie to 120 minut"),
           })}
           onSubmit={(values, helpers) => {
             setTimeout(() => {
@@ -114,7 +114,7 @@ const TaskListElement = (props) => {
               taskData["level"] = values.level;
               taskData["points"] = values.points;
               taskData["private"] = values.private;
-              taskData["timetosolve"] = values.timetosolve;
+              // taskData["timetosolve"] = values.timetosolve;
               taskData["wrong_answers"] = values.wrongans.join(";");
               taskData["correct_answers"] = values.corrans.join(";");
               taskData["id"]=task.id;
@@ -288,25 +288,25 @@ const TaskListElement = (props) => {
                     }}
                     labelText="Maksymalna ilość punktów"
                   />
-                  <Field
-                    component={MaterialFormikField}
-                    name={"timetosolve"}
-                    type={"number"}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      onChange: handleChange,
-                      startAdornment: (
-                        <InputAdornment
-                        // position="end"
-                        >
-                          Minuty:
-                        </InputAdornment>
-                      ),
-                    }}
-                    labelText="Czas na rozwiązanie"
-                  />
+                  {/*<Field*/}
+                  {/*  component={MaterialFormikField}*/}
+                  {/*  name={"timetosolve"}*/}
+                  {/*  type={"number"}*/}
+                  {/*  formControlProps={{*/}
+                  {/*    fullWidth: true,*/}
+                  {/*  }}*/}
+                  {/*  inputProps={{*/}
+                  {/*    onChange: handleChange,*/}
+                  {/*    startAdornment: (*/}
+                  {/*      <InputAdornment*/}
+                  {/*      // position="end"*/}
+                  {/*      >*/}
+                  {/*        Minuty:*/}
+                  {/*      </InputAdornment>*/}
+                  {/*    ),*/}
+                  {/*  }}*/}
+                  {/*  labelText="Czas na rozwiązanie"*/}
+                  {/*/>*/}
                   {/*<Field*/}
                   {/*  component={MaterialFormikField}*/}
                   {/*  name={"wrongans"}*/}
