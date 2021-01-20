@@ -95,7 +95,7 @@ const MaterialUiPasswordReset = (props) => {
               })
                 .then((response) => {
 
-                  enqueueSnackbar("Gotowe! Teraz aktywuj konto przy pomocy linku otrzymanego na adres e-mail", { 
+                  enqueueSnackbar("Hasło zmienione!", { 
                     variant: 'success',
                 });
                   helpers.setStatus("Pomyslnie zmieniono hasło");
@@ -105,7 +105,7 @@ const MaterialUiPasswordReset = (props) => {
                 .catch((error) => {
                   
                   const errResponse = error.response;
-                  enqueueSnackbar("Nieprawidłowy adres e-mail", { 
+                  enqueueSnackbar("Coś poszło nie tak!", { 
                     variant: 'error',
                 });
                   helpers.setSubmitting(false);

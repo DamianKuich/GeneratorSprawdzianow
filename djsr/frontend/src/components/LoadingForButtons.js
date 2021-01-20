@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     wrapper: {
       margin: theme.spacing(1),
       position: 'relative',
+      padding: '6px'
     },
 
   }));
@@ -24,7 +25,7 @@ export default function LoadingScreenB() {
     <div className={classes.root}>
         <div className={classes.wrapper}>
 
-            <CircularProgress mt={5} size={20} className={classes.buttonProgress} style={{
+            <CircularProgress  size={20} className={classes.buttonProgress} style={{
                 'color': 'purple',
 
             }}/>
