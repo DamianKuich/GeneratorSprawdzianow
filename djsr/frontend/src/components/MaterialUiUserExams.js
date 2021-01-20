@@ -283,21 +283,25 @@ const useStylesAlert = makeStyles((theme) => ({
       
       if (currentIndex === -1) {
         newChecked.push(section.id);
+        let sumaOtwTemp = this.state.otwCount
+        let sumaZamkTemp = this.state.zamkCount
         {section.skill.map((skill) => {
           
           let currentIndex2 = this.state.checked.indexOf(skill.id);
           let newChecked2 = this.state.checked
+          
   
 
 
           if (currentIndex2 === -1) {
             newChecked2.push(skill.id);
-            let sumOtw = +skill.taskCountOtw + +this.state.otwCount
-            let sumZamk = +skill.taskCountZamk + +this.state.zamkCount
-            this.setState({otwCount: sumOtw,zamkCount:sumZamk})
+            sumaOtwTemp = +skill.taskCountOtw + +sumaOtwTemp
+            sumaZamkTemp = +skill.taskCountZamk + +sumaZamkTemp
+            
           } 
       
           this.setState({ checked: newChecked2 });
+          this.setState({otwCount: sumaOtwTemp,zamkCount:sumaZamkTemp})
 
           
         }
@@ -306,6 +310,8 @@ const useStylesAlert = makeStyles((theme) => ({
         
       }} else {
         newChecked.splice(currentIndex, 1);
+        let sumaOtwTemp = this.state.otwCount
+        let sumaZamkTemp = this.state.zamkCount
         {section.skill.map((skill) => {
           
           const currentIndex2 = this.state.checked.indexOf(skill.id);
@@ -314,12 +320,13 @@ const useStylesAlert = makeStyles((theme) => ({
 
           if (currentIndex2 !== -1) {
             newChecked2.splice(currentIndex2, 1);
-            let sumOtw = +this.state.otwCount - +skill.taskCountOtw 
-            let sumZamk = +this.state.zamkCount - +skill.taskCountZamk 
-            this.setState({otwCount: sumOtw,zamkCount:sumZamk})
+            sumaOtwTemp = +sumaOtwTemp - +skill.taskCountOtw 
+            sumaZamkTemp = +sumaZamkTemp - +skill.taskCountZamk 
+
           } 
       
           this.setState({ checked: newChecked2 });
+          this.setState({otwCount: sumaOtwTemp,zamkCount:sumaZamkTemp})
         }
         );
         
