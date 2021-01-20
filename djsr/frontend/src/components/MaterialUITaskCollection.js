@@ -129,7 +129,7 @@ const MaterialUiTaskCollection = (props) => {
     return <Box mt={10}>Przepraszamy wystąpił błąd, odświerz strone</Box>;
   }
   return (
-    <Box mt={10}>
+    <Box pt={13} style={{backgroundImage: `url(${image})`,minHeight:"100vh"}}>
       <Container fixed>
         <Paper>
           <List>
@@ -191,9 +191,8 @@ const MaterialUiTaskCollection = (props) => {
             })}
           </List>
         </Paper>
-          <TaskList skills={skills} page={page} setPage={setPage}/>
+        <TaskList skills={skills} page={page} setPage={setPage} />
       </Container>
-
     </Box>
   );
 };

@@ -48,11 +48,12 @@ const TaskListElement = (props) => {
       .catch((error) => {
         setSections(false);
       });
-  });
+  },[]);
   let simpleSkills=[];
   for (const skl of task.skill){
       simpleSkills[skl.id]=true
   }
+  console.log("simpleSkills",simpleSkills)
 
   return (
     <>
@@ -60,7 +61,7 @@ const TaskListElement = (props) => {
         <Formik
           initialValues={{
             text: task.text,
-            skills: simpleSkills,
+            skills: [...simpleSkills],
             wrongans: [...task.wronganswers],
             corrans: [...task.correctans],
             points: task.points,

@@ -66,6 +66,9 @@ const HeaderLinks = (props) => {
               <Link to="/myaccount" className={classes.dropdownLink}>
                 Zarządzaj kontem
               </Link>,
+                <Link to="/mytasks" className={classes.dropdownLink}>
+                Moje zadania
+              </Link>,
                 <span className={classes.dropdownLink} onClick={userLogout}>Wyloguj</span>
             ]}
           />
