@@ -14,6 +14,7 @@ import { flatten } from "lodash/array";
 import image from "./img/genesprDark.png";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
+import "./styles/katex.css";
 
 const MaterialUiTaskCollection = (props) => {
   const [page, setPage] = useState(1);
