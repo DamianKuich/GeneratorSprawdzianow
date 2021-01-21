@@ -48,7 +48,10 @@
   "scripts": {
     "dev": "webpack --config webpack.config.js",
     "pro": "webpack --config webpack.prod.js",
-    "test": "test"
+    "test": "test",
+    "docz:dev": "docz dev",
+    "docz:build": "docz build",
+    "docz:serve": "docz build && docz serve"
   },
   "author": "",
   "license": "ISC",
