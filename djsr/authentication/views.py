@@ -756,9 +756,9 @@ class AddTask(APIView):
                                                   private=int(request.data['private']),
                                                   points=int(request.data['points']),
                                                   author=user)
-                    for skillid in skills.split(','):
-                        skil = Skill.objects.filter(id=skillid)
-                        my_task.skill.set(skil)
+                    # for skillid in skills.split(','):
+                    #     skil = Skill.objects.filter(id=skillid)
+                    my_task.skill.set(skills.split(','))
                     if file!=None:
                         if not Image.objects.filter(name="", image=file, user_id=user.id).exists():
                             image = Image.objects.create(name="", image=file, user_id=user.id)
@@ -838,9 +838,9 @@ class AddTask(APIView):
             if text!=None:
                 if Task.objects.filter(text = text).exists():
                     pom = Task.objects.get(text = text).id
-                    if pom != id:
+                    if int(pom) != int(id):
                         return Response(data={"error": "Zadanie o podanej treści już istnieje!"},status=status.HTTP_400_BAD_REQUEST)
-                    elif pom == id:
+                    elif int(pom) == int(id):
                         my_task.text = text
                 else:
                     my_task.text = text
@@ -851,10 +851,10 @@ class AddTask(APIView):
             if priv!=None:my_task.private = priv
             if pkt!=None: my_task.points = pkt
             my_task.author = user
+            my_task.save()
             if skills!=None:
-                for skillid in skills.split(','):
-                    skil = Skill.objects.filter(id=skillid)
-                    my_task.skill.set(skil)
+                my_task.skill.set(skills.split(','))
+                my_task.save()
             if file!=None:
                 if not Image.objects.filter(name="", image=file, user_id=user.id).exists():
                     image = Image.objects.create(name="", image=file, user_id=user.id)
@@ -869,9 +869,8 @@ class AddTask(APIView):
                     img = Image.objects.filter(name=str(img.id))
                     my_task.image.set(img)
             my_task.save()
-            print('tutaj')
-            tasko = Task.objects.filter(text=text)
-            serializer = TaskSerializer(tasko, many=True).data
+            tas = Task.objects.filter(id=id)
+            serializer = TaskSerializer(tas, many=True).data
             aktDB(1)
             aktDB(2)
             connection.close()
