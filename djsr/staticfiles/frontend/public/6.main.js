@@ -274,6 +274,101 @@ var AddTaskWithDropdownMenu = function AddTaskWithDropdownMenu(_ref) {
 
 /***/ }),
 
+/***/ "./djsr/frontend/src/components/ExamEditorSubComponents/AuthImage.js":
+/*!***************************************************************************!*\
+  !*** ./djsr/frontend/src/components/ExamEditorSubComponents/AuthImage.js ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _axiosAPI__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../axiosAPI */ "./djsr/frontend/src/components/axiosAPI.js");
+/* harmony import */ var _ImageCache__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ImageCache */ "./djsr/frontend/src/components/ExamEditorSubComponents/ImageCache.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
+
+
+
+var AuthImage = function AuthImage(props) {
+  var src = props.src,
+      rest = _objectWithoutProperties(props, ["src"]);
+
+  var _useContext = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_ImageCache__WEBPACK_IMPORTED_MODULE_2__["ImageCacheContext"]),
+      _useContext2 = _slicedToArray(_useContext, 2),
+      images = _useContext2[0],
+      setImages = _useContext2[1];
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      blob = _useState2[0],
+      setBlob = _useState2[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    // if (!!blob) {
+    //     URL.revokeObjectURL(blob);
+    // }
+    if (!!images[src]) {
+      setBlob(images[src]);
+      return function () {};
+    }
+
+    _axiosAPI__WEBPACK_IMPORTED_MODULE_1__["default"].get("/user/image/".concat(src), {
+      method: "GET",
+      responseType: "blob"
+    }).then(function (response) {
+      var imgBlob = new Blob([response.data]);
+      var imgUrl = URL.createObjectURL(imgBlob);
+      setImages(function (imgCache) {
+        imgCache[src] = imgUrl;
+        return imgCache;
+      });
+      setBlob(imgUrl);
+    });
+    return function () {
+      if (!!blob) {// console.log("revoking img",src)
+        // URL.revokeObjectURL(blob);
+      }
+    };
+  }, [src]);
+  return !!blob ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      width: "100%",
+      height: "5cm"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", _extends({
+    src: blob
+  }, rest))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      width: "100%",
+      height: "5cm"
+    }
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (AuthImage);
+
+/***/ }),
+
 /***/ "./djsr/frontend/src/components/ExamEditorSubComponents/CollapseMenuContainer.js":
 /*!***************************************************************************************!*\
   !*** ./djsr/frontend/src/components/ExamEditorSubComponents/CollapseMenuContainer.js ***!
@@ -1223,6 +1318,46 @@ var FirstPageHeader = function FirstPageHeader(props) {
 
 /***/ }),
 
+/***/ "./djsr/frontend/src/components/ExamEditorSubComponents/ImageCache.js":
+/*!****************************************************************************!*\
+  !*** ./djsr/frontend/src/components/ExamEditorSubComponents/ImageCache.js ***!
+  \****************************************************************************/
+/*! exports provided: ImageCacheContext, ImageCacheProvider */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ImageCacheContext", function() { return ImageCacheContext; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ImageCacheProvider", function() { return ImageCacheProvider; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+var ImageCacheContext = /*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["createContext"])();
+var ImageCacheProvider = function ImageCacheProvider(props) {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      images = _useState2[0],
+      setImages = _useState2[1];
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ImageCacheContext.Provider, {
+    value: [images, setImages]
+  }, props.children);
+};
+
+/***/ }),
+
 /***/ "./djsr/frontend/src/components/ExamEditorSubComponents/OverlayBorder.js":
 /*!*******************************************************************************!*\
   !*** ./djsr/frontend/src/components/ExamEditorSubComponents/OverlayBorder.js ***!
@@ -1998,6 +2133,254 @@ var TaskEditorCollapseMenu = function TaskEditorCollapseMenu(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (TaskEditorCollapseMenu);
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/ExamEditorSubComponents/TaskImageDndComponent.js":
+/*!***************************************************************************************!*\
+  !*** ./djsr/frontend/src/components/ExamEditorSubComponents/TaskImageDndComponent.js ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_grid_dnd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-grid-dnd */ "./node_modules/react-grid-dnd/esm/index.js");
+/* harmony import */ var _AuthImage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AuthImage */ "./djsr/frontend/src/components/ExamEditorSubComponents/AuthImage.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+var Thumb = function Thumb(props) {
+  var image = props.image;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      thumb = _useState2[0],
+      setThumb = _useState2[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    // if (!image) return null;
+    // if (Number.isInteger(image)){
+    //
+    // }
+    switch (true) {
+      case Number.isInteger(image):
+        console.log("thumb is int", image);
+        setThumb("".concat(window.location.origin, "/api/user/image/").concat(image));
+        break;
+
+      case Object.getPrototypeOf(image || {}) === File.prototype:
+        console.log("thumb is file", image);
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+          setThumb(reader.result);
+        };
+
+        reader.readAsDataURL(image);
+
+      default:
+        console.log("thumb is default", image);
+        setThumb(false);
+    }
+  }, [image]);
+  return !Number.isInteger(image) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    onDragStart: function onDragStart(e) {
+      e.preventDefault();
+    },
+    src: thumb || "",
+    style: {
+      maxWidth: "100%",
+      maxHeight: "100%"
+    }
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AuthImage__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    onDragStart: function onDragStart(e) {
+      e.preventDefault();
+    },
+    src: image,
+    style: {
+      maxWidth: "100%",
+      maxHeight: "100%"
+    }
+  });
+};
+
+var TaskImageDndComponent = function TaskImageDndComponent(props) {
+  console.log("imgdnd ", props);
+  var image = props.image,
+      itemKey = props.itemKey,
+      removeImage = props.removeImage;
+  var isFile = !Number.isInteger(image);
+  var key = Number.isInteger(image) ? image : image.name || "XD";
+  console.log("imageKey", key);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_grid_dnd__WEBPACK_IMPORTED_MODULE_2__["GridItem"], {
+    key: key || "XD"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    // style={{
+    //     width: "100%",
+    //     height: "100%",
+    //     // backgroundColor: "blue"
+    //     // display: "flex",
+    //     // flexWrap: "wrap",
+    //     // alignContent: "center",
+    //     // margin: "10px",
+    //     // position: "relative"
+    // }}
+    style: {
+      width: "100%",
+      height: "100%",
+      display: "flex"
+    } // className="w-100 h-100 d-flex"
+
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _defineProperty({
+    style: {// cursor: "pointer",
+      // border:
+      //     "2px solid black",
+      // backgroundColor:
+      //     "white",
+      // position: "absolute"
+    }
+  }, "style", {
+    width: "100%",
+    height: "100%",
+    padding: "5px"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      width: "100%",
+      height: "100%",
+      display: "flex",
+      flexWrap: "wrap",
+      alignContent: "center",
+      // padding: "10px",
+      border: "1px solid",
+      justifyContent: "center"
+    } // className="w-100 h-100 d-flex border bg-light"
+
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      position: "absolute",
+      top: "0px",
+      right: "0px",
+      height: "30px",
+      width: "30px",
+      zIndex: "3",
+      margin: "6px",
+      color: "red"
+    },
+    onClick: function onClick() {
+      removeImage(itemKey);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "X")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Thumb, {
+    image: image
+  }))))));
+};
+
+TaskImageDndComponent.propTypes = {};
+/* harmony default export */ __webpack_exports__["default"] = (TaskImageDndComponent);
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/ExamEditorSubComponents/TaskImageDndPush.js":
+/*!**********************************************************************************!*\
+  !*** ./djsr/frontend/src/components/ExamEditorSubComponents/TaskImageDndPush.js ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_grid_dnd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-grid-dnd */ "./node_modules/react-grid-dnd/esm/index.js");
+/* harmony import */ var react_dropzone__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dropzone */ "./node_modules/react-dropzone/dist/es/index.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+var TaskImageDndPush = function TaskImageDndPush(props) {
+  var onDrop = props.onDrop; // const onDrop = useCallback((acceptedFiles) => {
+  //   console.log(acceptedFiles);
+  // }, []);
+
+  var _useDropzone = Object(react_dropzone__WEBPACK_IMPORTED_MODULE_2__["useDropzone"])({
+    onDrop: onDrop
+  }),
+      getRootProps = _useDropzone.getRootProps,
+      getInputProps = _useDropzone.getInputProps,
+      isDragActive = _useDropzone.isDragActive;
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    key: "pushxd"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    // style={{
+    //     width: "100%",
+    //     height: "100%",
+    //     // backgroundColor: "blue"
+    //     // display: "flex",
+    //     // flexWrap: "wrap",
+    //     // alignContent: "center",
+    //     // margin: "10px",
+    //     // position: "relative"
+    // }}
+    style: {
+      width: "100%",
+      height: "100%",
+      display: "flex"
+    } // className="w-100 h-100 d-flex"
+
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", _defineProperty({
+    style: {// cursor: "pointer",
+      // border:
+      //     "2px solid black",
+      // backgroundColor:
+      //     "white",
+      // position: "absolute"
+    }
+  }, "style", {
+    width: "100%",
+    height: "100%",
+    padding: "5px"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      width: "100%",
+      height: "100%",
+      display: "flex",
+      flexWrap: "wrap",
+      alignContent: "center",
+      // padding: "10px",
+      border: "1px solid",
+      justifyContent: "center"
+    } // className="w-100 h-100 d-flex border bg-light"
+
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", getRootProps(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", getInputProps()), isDragActive ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Upu\u015B\u0107 zdj\u0119cia tutaj") :
+  /*#__PURE__*/
+  // <p>Drag 'n' drop some files here, or click to select files</p>
+  react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Przyci\u0105gnij zdj\u0119cia tutaj, albo kliknij tutaj, aby wybra\u0107 zdj\u0119cia"))))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (TaskImageDndPush);
 
 /***/ }),
 
@@ -6730,6 +7113,63 @@ CardHeader.propTypes = {
   plain: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
   children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node
 };
+
+/***/ }),
+
+/***/ "./djsr/frontend/src/components/material_ui_components/CustomRadio/CustomRadio.js":
+/*!****************************************************************************************!*\
+  !*** ./djsr/frontend/src/components/material_ui_components/CustomRadio/CustomRadio.js ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "./node_modules/@material-ui/core/esm/FormControlLabel/index.js");
+/* harmony import */ var _material_ui_core_Radio__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Radio */ "./node_modules/@material-ui/core/esm/Radio/index.js");
+/* harmony import */ var _assets_jss_material_kit_react_customCheckboxRadioSwitch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../assets/jss/material-kit-react/customCheckboxRadioSwitch */ "./djsr/frontend/src/components/assets/jss/material-kit-react/customCheckboxRadioSwitch.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/icons */ "./node_modules/@material-ui/icons/esm/index.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+
+
+
+
+
+var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__["makeStyles"])(_assets_jss_material_kit_react_customCheckboxRadioSwitch__WEBPACK_IMPORTED_MODULE_3__["default"]);
+
+var CustomRadio = function CustomRadio(props) {
+  var labelProps = props.labelProps,
+      radioProps = props.radioProps;
+  var classes = useStyles(); // const disabled=labelProps;
+  // const disabledClass= (disabled)? {}:{};
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({
+    control: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Radio__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({
+      icon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons__WEBPACK_IMPORTED_MODULE_5__["FiberManualRecord"], {
+        className: classes.radioUnchecked
+      }),
+      checkedIcon: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons__WEBPACK_IMPORTED_MODULE_5__["FiberManualRecord"], {
+        className: classes.radioChecked
+      }),
+      classes: {
+        checked: classes.radio,
+        root: classes.radioRoot
+      }
+    }, radioProps)),
+    classes: {
+      label: classes.label,
+      root: classes.labelRoot,
+      disabled: classes.disabledCheckboxAndRadio
+    }
+  }, labelProps));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (CustomRadio);
 
 /***/ }),
 
